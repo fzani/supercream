@@ -1,0 +1,5 @@
+﻿Dependencies
+------------
+1). ASP.net 3.5 Redistributable
+2). Ajax Control Toolkit
+3). J# Redistributable
