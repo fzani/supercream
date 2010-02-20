@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DB71EFBB-AB70-4482-B750-8F8E5BAAED09}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SP.Data</RootNamespace>
+    <AssemblyName>SP.Data</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractLTSDAO.cs" />
+    <Compile Include="DAO\AccountDAO.cs" />
+    <Compile Include="DAO\AddressDAO.cs" />
+    <Compile Include="DAO\ContactDetailDAO.cs" />
+    <Compile Include="DAO\AutoGen.cs" />
+    <Compile Include="DAO\OrderNotesStatusDAO.cs" />
+    <Compile Include="DAO\SpecialInvoiceHeaderDAO.cs" />
+    <Compile Include="DAO\SpecialInvoiceLineDAO.cs" />
+    <Compile Include="DAO\VanDAO.cs" />
+    <Compile Include="DAO\OutletStoreDAO.cs" />
+    <Compile Include="DAO\CustomerDAO.cs" />
+    <Compile Include="DAO\DeliveryItemDAO.cs" />
+    <Compile Include="DAO\FoundationFacilityDAO.cs" />
+    <Compile Include="DAO\InvoiceHeaderDAO.cs" />
+    <Compile Include="DAO\InvoiceItemDAO.cs" />
+    <Compile Include="DAO\NoteDAO.cs" />
+    <Compile Include="DAO\OrderHeaderDAO.cs" />
+    <Compile Include="DAO\OrderLineDAO.cs" />
+    <Compile Include="DAO\OutletDAO.cs" />
+    <Compile Include="DAO\PhoneDAO.cs" />
+    <Compile Include="DAO\PhoneNoTypeDAO.cs" />
+    <Compile Include="DAO\PriceListHeaderDAO.cs" />
+    <Compile Include="DAO\PriceListItemDAO.cs" />
+    <Compile Include="DAO\ProductDAO.cs" />
+    <Compile Include="DAO\ProformaInvoiceDAO.cs" />
+    <Compile Include="DAO\TermsDAO.cs" />
+    <Compile Include="DAO\VatCodeDAO.cs" />
+    <Compile Include="GlobalSuppresions.cs" />
+    <Compile Include="LTSDaoFactory.cs" />
+    <Compile Include="LTSDataContext.cs" />
+    <Compile Include="LTSDataContextManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SQL\CreateDatabase.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SP.Core\SP.Core.csproj">
+      <Project>{0D1CED41-AD5C-44C5-BCD6-A251C702396E}</Project>
+      <Name>SP.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!--
+  <Import Project="..\ExternalTools\StyleCop\v4.3\Microsoft.StyleCop.Targets" />
+ 
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+ 
+  <Import Project="..\ExternalTools\FxCop\Dtv.CodeAnalysis.Rules.targets" />
+  -->
+</Project>
