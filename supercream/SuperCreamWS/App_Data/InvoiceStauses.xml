@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<OrderStatuses>
+  <Status ID = "-1" LongName = "-- No Item Selected --" />
+  <Status ID = "2" LongName = "Invoices" />
+  <Status ID = "3" LongName = "Invoices Printed" />
+</OrderStatuses>

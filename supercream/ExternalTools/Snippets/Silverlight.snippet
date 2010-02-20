@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Silverlight DependencyProperty with Change Handler</Title>
+			<Shortcut>sldpeh</Shortcut>
+			<Description>Code snippet for a property using DependencyProperty as the backing store and providing a callback handler for property changed event</Description>
+			<Author>Mike Hanson</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>type</ID>
+					<ToolTip>Property Type</ToolTip>
+					<Default>string</Default>
+				</Literal>
+				<Literal>
+					<ID>property</ID>
+					<ToolTip>Property Name</ToolTip>
+					<Default>MyProperty</Default>
+				</Literal>
+				<Literal>
+					<ID>ownerClass</ID>
+					<Function>ClassName()</Function>
+					<ToolTip>The owning class of this Property.  Typically the class that it is declared in.</ToolTip>
+					<Default>ownerClassPlaceHolder</Default>
+				</Literal>
+				<Literal>
+					<ID>defaultValue</ID>
+					<ToolTip>The default value for this property.</ToolTip>
+					<Default>null</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="csharp">
+				<![CDATA[
+				
+#region $property$ property
+
+/// <summary>
+/// Gets or sets the value of the $property$ property
+/// </summary>
+public $type$ $property$
+{
+    get
+	{
+		return ($type$)this.GetValue($property$Property);
+	}
+	
+    set
+	{
+		this.SetValue($property$Property, value);
+	}
+}
+
+/// <summary>
+/// <see cref="DependencyProperty" /> backing field for $property$ property
+/// </summary>
+[SuppressMessage("Microsoft.StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Dependency properties cannot be implemented as Properties")]
+public static readonly DependencyProperty $property$Property = 
+    DependencyProperty.Register("$property$", 
+                                typeof($type$), 
+                                typeof($ownerClass$), 
+                                new PropertyMetadata($defaultValue$,
+                                    new PropertyChangedCallback(On$property$Changed)));
+									
+/// <summary>
+/// Callback handler for changes to $property$ property
+/// </summary>
+private static void On$property$Changed(object sender, DependencyPropertyChangedEventArgs args)
+{
+    // Get reference to self
+    $ownerClass$ source = ($ownerClass$)sender;
+
+    // Add Handling Code
+    $type$ newValue = ($type$)args.NewValue;
+	
+	//// TODO: Add change handling code
+}
+
+#endregion
+$end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Silverlight DependencyProperty</Title>
+			<Shortcut>sldp</Shortcut>
+			<Description>Code snippet for a property using DependencyProperty as the backing store, does not provide a callback handler</Description>
+			<Author>Mike Hanson</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>type</ID>
+					<ToolTip>Property Type</ToolTip>
+					<Default>string</Default>
+				</Literal>
+				<Literal>
+					<ID>property</ID>
+					<ToolTip>Property Name</ToolTip>
+					<Default>MyProperty</Default>
+				</Literal>
+				<Literal>
+					<ID>ownerClass</ID>
+					<Function>ClassName()</Function>
+					<ToolTip>The owning class of this Property.  Typically the class that it is declared in.</ToolTip>
+					<Default>ownerClassPlaceHolder</Default>
+				</Literal>
+				<Literal>
+					<ID>defaultValue</ID>
+					<ToolTip>The default value for this property.</ToolTip>
+					<Default>null</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="csharp">
+				<![CDATA[
+
+#region $property$ property
+
+/// <summary>
+/// Gets or sets the value of the $property$ property
+/// </summary>
+public $type$ $property$
+{
+    get
+	{
+		return ($type$)this.GetValue($property$Property);
+	}
+	
+    set
+	{
+		this.SetValue($property$Property, value);
+	}
+}
+
+/// <summary>
+/// <see cref="DependencyProperty" /> backing field for $property$ property
+/// </summary>
+[SuppressMessage("Microsoft.StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Dependency properties cannot be implemented as Properties")]
+public static readonly DependencyProperty $property$Property = 
+    DependencyProperty.Register("$property$", 
+                                typeof($type$), 
+                                typeof($ownerClass$), 
+                                new PropertyMetadata($defaultValue$));
+
+#endregion
+$end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Silverlight Attached DependencyProperty</Title>
+			<Shortcut>sldpat</Shortcut>
+			<Description>Code snippet for an attached property using DependencyProperty as the backing store</Description>
+			<Author>Mike Hanson</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>type</ID>
+					<ToolTip>Property Type</ToolTip>
+					<Default>string</Default>
+				</Literal>
+				<Literal>
+					<ID>property</ID>
+					<ToolTip>Property Name</ToolTip>
+					<Default>MyProperty</Default>
+				</Literal>
+				<Literal>
+					<ID>ownerClass</ID>
+					<Function>ClassName()</Function>
+					<ToolTip>The owning class of this Property.  Typically the class that it is declared in.</ToolTip>
+					<Default>ownerClassPlaceHolder</Default>
+				</Literal>
+				<Literal>
+					<ID>defaultValue</ID>
+					<ToolTip>The default value for this property.</ToolTip>
+					<Default>null</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="csharp">
+				<![CDATA[
+
+#region $property$ property
+
+/// <summary>
+/// Gets or sets the value of the attached $property$ property
+/// </summary>
+public $type$ $property$
+{
+    get
+	{
+		return ($type$)this.GetValue($property$Property);
+	}
+	
+    set
+	{
+		this.SetValue($property$Property, value);
+	}
+}
+
+/// <summary>
+/// <see cref="DependencyProperty" /> backing field for attached $property$ property
+/// </summary>
+[SuppressMessage("Microsoft.StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Dependency properties cannot be implemented as Properties")]
+public static readonly DependencyProperty $property$Property = 
+    DependencyProperty.RegisterAttached("$property$", 
+                                typeof($type$), 
+                                typeof($ownerClass$), 
+                                new PropertyMetadata($defaultValue$));
+
+#endregion
+$end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Presentation Model Property</Title>
+			<Shortcut>pmprop</Shortcut>
+			<Description>Code snippet for a property on a Presentation Model that implements INotifyPropertyChanged</Description>
+			<Author>Mike Hanson</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>type</ID>
+					<ToolTip>Property Type</ToolTip>
+					<Default>string</Default>
+				</Literal>
+				<Literal>
+					<ID>backingField</ID>
+					<ToolTip>Name to use for the backing field of the property</ToolTip>
+					<Default>myProperty</Default>
+				</Literal>
+				<Literal>
+					<ID>property</ID>
+					<ToolTip>Name of the property</ToolTip>
+					<Default>MyProperty</Default>
+				</Literal>
+				<Literal>
+					<ID>description</ID>
+					<ToolTip>Tooltip to be displayed by views using the presentation model</ToolTip>
+					<Default>MyProperty</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="csharp">
+				<![CDATA[ 
+ #region $property$ property
+ 
+ /// <summary>
+ /// Backing field for the $property$ property
+ /// </summary>
+ private $type$ $backingField$;
+ 
+/// <summary>
+/// Gets or sets the value of the $property$ property
+/// </summary>
+[Display(AutoGenerateField = true, Name = "$property$", Prompt = "$property$", Description = "$description$")]
+public $type$ $property$
+{
+	get
+	{
+		return this.$backingField$;
+	}
+	
+	set
+	{
+		if(this.$backingField$ != value)
+		{
+			this.$backingField$ = value;
+			this.RaisePropertyChanged("$property$");
+		}
+	}
+}
+
+#endregion
+$end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Presentation Model Property No Display</Title>
+			<Shortcut>pmpropnd</Shortcut>
+			<Description>Code snippet for a property on a Presentation Model that implements INotifyPropertyChanged but is not displayed by the user interface</Description>
+			<Author>Mike Hanson</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>type</ID>
+					<ToolTip>Property Type</ToolTip>
+					<Default>string</Default>
+				</Literal>
+				<Literal>
+					<ID>backingField</ID>
+					<ToolTip>Name to use for the backing field of the property</ToolTip>
+					<Default>myProperty</Default>
+				</Literal>
+				<Literal>
+					<ID>property</ID>
+					<ToolTip>Name of the property</ToolTip>
+					<Default>MyProperty</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="csharp">
+				<![CDATA[ 
+ #region $property$ property
+ 
+ /// <summary>
+ /// Backing field for the $property$ property
+ /// </summary>
+ private $type$ $backingField$;
+ 
+/// <summary>
+/// Gets or sets the value of the $property$ property
+/// </summary>
+[Display(AutoGenerateField = false)]
+public $type$ $property$
+{
+	get
+	{
+		return this.$backingField$;
+	}
+	
+	set
+	{
+		if(this.$backingField$ != value)
+		{
+			this.$backingField$ = value;
+			this.RaisePropertyChanged("$property$");
+		}
+	}
+}
+
+#endregion
+$end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+
+
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Suppress StyleCop SA1401 Message on dependency properties</Title>
+			<Shortcut>supsa1401</Shortcut>
+			<Description>Code snippet for a SuppressMessage attribute that can be applied to dependency property definitions to prevent "Field must be private" errors</Description>
+			<Author>Mike Hanson</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="csharp">
+				<![CDATA[[SuppressMessage("Microsoft.StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Dependency properties cannot be implemented as Properties")]]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+	
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Save Changes</Title>
+			<Shortcut>pmsavechanges</Shortcut>
+			<Description>Inserts the code to save an entity using the a service reference</Description>
+			<Author>Mike Hanson</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>serviceName</ID>
+					<ToolTip>Name of the service to be called, only the name is needed ServiceClient is appended for you</ToolTip>
+					<Default>[obect]</Default>
+				</Literal>
+				<Literal>
+					<ID>entityType</ID>
+					<ToolTip>Type of the entity that is being saved</ToolTip>
+					<Default>[type]</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="csharp">
+				<![CDATA[ 
+			using(Service<$serviceName$ServiceClient> serviceClient = ServiceFactory.GetService<$serviceName$ServiceClient>())
+			{
+				serviceClient.Proxy.Save$entityType$Completed += (ps, pe) =>
+				{
+					if(AppHelper.IsSuccessfulResult(pe))
+					{
+						this.SuccessVisibility = Visibility.Visible;
+						this.FormVisibility = Visibility.Collapsed;
+					}
+				};
+
+				serviceClient.Proxy.Save$entityType$Async(new $entityType$
+				{
+					// TODO: set properties of the entity being saved
+				});
+			}
+$end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+	
+	
+</CodeSnippets>
+
