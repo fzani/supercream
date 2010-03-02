@@ -93,6 +93,11 @@ public partial class Controls_AllocateToVansControl : System.Web.UI.UserControl
 
     #region Object Data Source Events
 
+    protected void VanCountObjectDataSource_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
+    {
+        e.InputParameters[0] = this.SelectedDateCalendar.SelectedDate;
+    }
+
     protected void VanAllocatedFromObjectDataSource_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
     {
         e.InputParameters[0] = this.SelectedDateCalendar.SelectedDate;
@@ -125,5 +130,5 @@ public partial class Controls_AllocateToVansControl : System.Web.UI.UserControl
         this.ErrorMessageEventHandler(this, arg);
     }
 
-    #endregion    
+    #endregion        
 }

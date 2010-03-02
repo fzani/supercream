@@ -64,19 +64,36 @@ namespace SP.Data.LTS
         public List<OrderHeader> InvoicesByDateAndVan(DateTime deliveryDate, int vanId)
         {
             return (from oh in db.OrderHeader
-                     join ons in db.OrderNotesStatus on oh.ID equals ons.OrderID
-                     where (((oh.OrderStatus == 2) || (oh.OrderStatus == 3)) // Invoice or Invoice printed
-                        && oh.DeliveryDate == deliveryDate 
-                        && ons.VanID == vanId)
+                    join ons in db.OrderNotesStatus on oh.ID equals ons.OrderID
+                    where (((oh.OrderStatus == 2) || (oh.OrderStatus == 3)) // Invoice or Invoice printed
+                       && oh.DeliveryDate == deliveryDate
+                       && ons.VanID == vanId)
                     select oh).ToList<OrderHeader>();
         }
 
         public void UpdateVanForInvoice(int orderID, int vanID)
-        {           
+        {
             string sql;
 
-            sql = String.Format("UPDATE OrderNotesStatus SET VanId = {0} WHERE OrderID = {1}", vanID.ToString(), orderID.ToString());                       
+            sql = String.Format("UPDATE OrderNotesStatus SET VanId = {0} WHERE OrderID = {1}", vanID.ToString(), orderID.ToString());
             db.ExecuteCommand(sql);
+        }
+
+        public List<VanInvoiceCount> GetVanInvoiceCount(DateTime deliveryDate)
+        {
+            var query = (from oh in db.OrderHeader
+                        join ons in db.OrderNotesStatus
+                            on oh.ID equals ons.OrderID
+                        join v in db.Van
+                            on ons.VanID equals v.ID
+                        where oh.DeliveryDate == deliveryDate
+                        group v by v.Description into result                       
+                        select new VanInvoiceCount
+                        {
+                            VanDescription = result.Key,
+                            InvoiceCount = result.Count()
+                        }).ToList<VanInvoiceCount>();
+            return query;
         }
     }
 }

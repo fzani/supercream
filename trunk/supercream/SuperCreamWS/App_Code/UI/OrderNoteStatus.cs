@@ -93,11 +93,19 @@ public class OrderNotesStatusUI : IDisposable
         }
     }
 
+    public List<VanInvoiceCount> GetInvoiceCounts(DateTime deliveryDate)
+    {
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return _proxy.GetVanInvoiceCount(deliveryDate);
+        }
+    }
+
     public void UpdateVanForInvoice(int orderID, int vanId)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-           _proxy.UpdateVanForInvoice(orderID, vanId);
+            _proxy.UpdateVanForInvoice(orderID, vanId);
         }
 
     }

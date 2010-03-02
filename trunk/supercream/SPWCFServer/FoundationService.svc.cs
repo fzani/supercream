@@ -1281,6 +1281,20 @@ namespace SPWCFServer
             }
         }
 
+        public List<VanInvoiceCount> GetVanInvoiceCount(DateTime deliveryDate)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.VanInvoiceCount> vanInvoiceCountList = mgr.GetVanInvoiceCount(deliveryDate);
+                return ObjectExtension.CloneList<SP.Core.Domain.VanInvoiceCount, SPWCFServer.VanInvoiceCount>(vanInvoiceCountList).ToList<VanInvoiceCount>();
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public void UpdateVanForInvoice(int orderID, int vanID)
         {
             try
@@ -2291,7 +2305,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion                           
+        #endregion                                            
     }
 }
 

@@ -20,5 +20,6 @@ namespace SP.Core.DataInterfaces
        void UpdatePaymentCompleted(int orderID, bool invoicePaymentComplete);
        List<OrderHeader> InvoicesByDateAndVan(DateTime deliveryDate, int vanId);
        void UpdateVanForInvoice(int orderID, int vanID);
+       List<VanInvoiceCount> GetVanInvoiceCount(DateTime deliveryDate);
    }
 }

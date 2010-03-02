@@ -643,7 +643,7 @@ namespace SP.Worker
         {
             IDaoFactory factory = new LTSDaoFactory();
             IOrderNotesStatusDao orderNotesStatusDao = factory.GetOrderNotesStatusDao();
-             return orderNotesStatusDao.InvoicesByDateAndVan(deliveryDate, vanId);
+            return orderNotesStatusDao.InvoicesByDateAndVan(deliveryDate, vanId);
         }
 
         public void UpdateVanForInvoice(int orderID, int vanID)
@@ -651,7 +651,14 @@ namespace SP.Worker
             IDaoFactory factory = new LTSDaoFactory();
             IOrderNotesStatusDao orderNotesStatusDao = factory.GetOrderNotesStatusDao();
             orderNotesStatusDao.UpdateVanForInvoice(orderID, vanID);
-        } 
+        }
+
+        public List<VanInvoiceCount> GetVanInvoiceCount(DateTime deliveryDate)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderNotesStatusDao orderNotesStatusDao = factory.GetOrderNotesStatusDao();
+            return orderNotesStatusDao.GetVanInvoiceCount(deliveryDate);
+        }
 
         #endregion
 
@@ -1191,7 +1198,6 @@ namespace SP.Worker
             return vanDao.Update(newVan, origVan);
         }
 
-        #endregion                        
-
-     }
+        #endregion
+    }
 }
