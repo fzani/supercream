@@ -52,7 +52,7 @@ public class OrderNotesStatusUI : IDisposable
             updatedOrderNotesStatus.InvoiceProformaPrinted = newOrderNotesStatus.InvoiceProformaPrinted;
             updatedOrderNotesStatus.InvoiceReprinted = newOrderNotesStatus.InvoiceReprinted;
             updatedOrderNotesStatus.OrderID = newOrderNotesStatus.OrderID;
-            updatedOrderNotesStatus.OutletStoreID = newOrderNotesStatus.OutletStoreID;           
+            updatedOrderNotesStatus.OutletStoreID = newOrderNotesStatus.OutletStoreID;
             updatedOrderNotesStatus.PicklistDateGenerated = newOrderNotesStatus.PicklistDateGenerated;
             updatedOrderNotesStatus.PicklistGenerated = newOrderNotesStatus.PicklistGenerated;
             updatedOrderNotesStatus.VanID = newOrderNotesStatus.VanID;
@@ -82,6 +82,14 @@ public class OrderNotesStatusUI : IDisposable
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
             return _proxy.OrderNoteStatusByOrderIDExists(orderID);
+        }
+    }
+
+    public List<OrderHeader> GetInvoicesByVanAndDate(DateTime deliveryDate, int vanId)
+    {
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return _proxy.InvoicesByDateAndVan(deliveryDate, vanId);
         }
     }
 

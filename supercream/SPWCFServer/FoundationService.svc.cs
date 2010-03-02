@@ -1267,6 +1267,20 @@ namespace SPWCFServer
             }
         }
 
+        public List<OrderHeader> InvoicesByDateAndVan(DateTime deliveryDate, int vanId)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.OrderHeader> orderNotesStatusList = mgr.InvoicesByDateAndVan(deliveryDate, vanId);
+                return ObjectExtension.CloneList<SP.Core.Domain.OrderHeader, SPWCFServer.OrderHeader>(orderNotesStatusList).ToList<OrderHeader>();
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         #endregion
 
         #region IOutlet Members
@@ -2264,7 +2278,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion
+        #endregion          
     }
 }
 

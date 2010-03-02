@@ -43,7 +43,7 @@ namespace SP.Data.LTS
             }
             else
             {
-                 sql = String.Format("UPDATE OrderNotesStatus SET InvoicePaymentComplete = {0} WHERE OrderID = {1}", 0, orderID.ToString());
+                sql = String.Format("UPDATE OrderNotesStatus SET InvoicePaymentComplete = {0} WHERE OrderID = {1}", 0, orderID.ToString());
             }
             db.ExecuteCommand(sql);
         }
@@ -59,6 +59,16 @@ namespace SP.Data.LTS
                      join ons in db.OrderNotesStatus on oh.ID equals ons.OrderID
                      where ((oh.ID == orderID) && (oh.OrderStatus == orderStatus))
                      select ons).SingleOrDefault<OrderNotesStatus>() == null) ? false : true;
+        }
+
+        public List<OrderHeader> InvoicesByDateAndVan(DateTime deliveryDate, int vanId)
+        {
+            return (from oh in db.OrderHeader
+                     join ons in db.OrderNotesStatus on oh.ID equals ons.OrderID
+                     where (((oh.OrderStatus == 2) || (oh.OrderStatus == 3)) // Invoice or Invoice printed
+                        && oh.DeliveryDate == deliveryDate 
+                        && ons.VanID == vanId)
+                    select oh).ToList<OrderHeader>();
         }
     }
 }

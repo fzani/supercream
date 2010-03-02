@@ -18,6 +18,7 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
+    
     <asp:UpdatePanel ID="AlocateToVans" runat="server" UpdateMode="Conditional">
         <Triggers>
         </Triggers>

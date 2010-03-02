@@ -8,6 +8,12 @@
       <xsd:import schemaLocation="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Linq" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IFoundationService_SaveVan_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveVan" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_SaveVan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveVanResponse" />
+  </wsdl:message>
   <wsdl:message name="IFoundationService_GetVan_InputMessage">
     <wsdl:part name="parameters" element="tns:GetVan" />
   </wsdl:message>
@@ -31,6 +37,12 @@
   </wsdl:message>
   <wsdl:message name="IFoundationService_DeleteVan_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteVanResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_UpdatePriceListItem_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePriceListItem" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_UpdatePriceListItem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePriceListItemResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_SaveProduct_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveProduct" />
@@ -242,12 +254,6 @@
   <wsdl:message name="IFoundationService_VatCodeExists_OutputMessage">
     <wsdl:part name="parameters" element="tns:VatCodeExistsResponse" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_SaveVan_InputMessage">
-    <wsdl:part name="parameters" element="tns:SaveVan" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_SaveVan_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SaveVanResponse" />
-  </wsdl:message>
   <wsdl:message name="IFoundationService_UpdateOutletStore_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateOutletStore" />
   </wsdl:message>
@@ -392,6 +398,12 @@
   <wsdl:message name="IFoundationService_UpdatePaymentCompleted_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePaymentCompletedResponse" />
   </wsdl:message>
+  <wsdl:message name="IFoundationService_InvoicesByDateAndVan_InputMessage">
+    <wsdl:part name="parameters" element="tns:InvoicesByDateAndVan" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_InvoicesByDateAndVan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InvoicesByDateAndVanResponse" />
+  </wsdl:message>
   <wsdl:message name="IFoundationService_DeletePriceListHeader_InputMessage">
     <wsdl:part name="parameters" element="tns:DeletePriceListHeader" />
   </wsdl:message>
@@ -457,12 +469,6 @@
   </wsdl:message>
   <wsdl:message name="IFoundationService_SavePriceListItem_OutputMessage">
     <wsdl:part name="parameters" element="tns:SavePriceListItemResponse" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_UpdatePriceListItem_InputMessage">
-    <wsdl:part name="parameters" element="tns:UpdatePriceListItem" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_UpdatePriceListItem_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UpdatePriceListItemResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_SaveAccount_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveAccount" />
@@ -681,6 +687,10 @@
     <wsdl:part name="parameters" element="tns:GetOutletStoreByIDResponse" />
   </wsdl:message>
   <wsdl:portType name="IFoundationService">
+    <wsdl:operation name="SaveVan">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveVan" message="tns:IFoundationService_SaveVan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveVanResponse" message="tns:IFoundationService_SaveVan_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetVan">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetVan" message="tns:IFoundationService_GetVan_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetVanResponse" message="tns:IFoundationService_GetVan_OutputMessage" />
@@ -696,6 +706,10 @@
     <wsdl:operation name="DeleteVan">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/DeleteVan" message="tns:IFoundationService_DeleteVan_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/DeleteVanResponse" message="tns:IFoundationService_DeleteVan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePriceListItem">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdatePriceListItem" message="tns:IFoundationService_UpdatePriceListItem_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/UpdatePriceListItemResponse" message="tns:IFoundationService_UpdatePriceListItem_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SaveProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveProduct" message="tns:IFoundationService_SaveProduct_InputMessage" />
@@ -837,10 +851,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/VatCodeExists" message="tns:IFoundationService_VatCodeExists_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/VatCodeExistsResponse" message="tns:IFoundationService_VatCodeExists_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SaveVan">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveVan" message="tns:IFoundationService_SaveVan_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveVanResponse" message="tns:IFoundationService_SaveVan_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="UpdateOutletStore">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdateOutletStore" message="tns:IFoundationService_UpdateOutletStore_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/UpdateOutletStoreResponse" message="tns:IFoundationService_UpdateOutletStore_OutputMessage" />
@@ -937,6 +947,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdatePaymentCompleted" message="tns:IFoundationService_UpdatePaymentCompleted_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/UpdatePaymentCompletedResponse" message="tns:IFoundationService_UpdatePaymentCompleted_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="InvoicesByDateAndVan">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/InvoicesByDateAndVan" message="tns:IFoundationService_InvoicesByDateAndVan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/InvoicesByDateAndVanResponse" message="tns:IFoundationService_InvoicesByDateAndVan_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DeletePriceListHeader">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/DeletePriceListHeader" message="tns:IFoundationService_DeletePriceListHeader_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/DeletePriceListHeaderResponse" message="tns:IFoundationService_DeletePriceListHeader_OutputMessage" />
@@ -980,10 +994,6 @@
     <wsdl:operation name="SavePriceListItem">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SavePriceListItem" message="tns:IFoundationService_SavePriceListItem_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SavePriceListItemResponse" message="tns:IFoundationService_SavePriceListItem_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="UpdatePriceListItem">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdatePriceListItem" message="tns:IFoundationService_UpdatePriceListItem_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/UpdatePriceListItemResponse" message="tns:IFoundationService_UpdatePriceListItem_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SaveAccount">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveAccount" message="tns:IFoundationService_SaveAccount_InputMessage" />
@@ -1132,6 +1142,15 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IFoundationService" type="tns:IFoundationService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveVan">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/SaveVan" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetVan">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/GetVan" style="document" />
       <wsdl:input>
@@ -1161,6 +1180,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteVan">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/DeleteVan" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePriceListItem">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/UpdatePriceListItem" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1483,15 +1511,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SaveVan">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/SaveVan" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="UpdateOutletStore">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/UpdateOutletStore" style="document" />
       <wsdl:input>
@@ -1708,6 +1727,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="InvoicesByDateAndVan">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/InvoicesByDateAndVan" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="DeletePriceListHeader">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/DeletePriceListHeader" style="document" />
       <wsdl:input>
@@ -1800,15 +1828,6 @@
     </wsdl:operation>
     <wsdl:operation name="SavePriceListItem">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/SavePriceListItem" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="UpdatePriceListItem">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/UpdatePriceListItem" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
