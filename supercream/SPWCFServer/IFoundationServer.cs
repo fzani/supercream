@@ -278,6 +278,10 @@ namespace SPWCFServer
         [ReferencePreservingDataContractFormat]
         List<OrderHeader> InvoicesByDateAndVan(DateTime deliveryDate, int vanId);
 
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        void UpdateVanForInvoice(int orderID, int vanID);
+
         #endregion
 
         #region PriceListHeader

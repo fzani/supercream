@@ -98,6 +98,7 @@ namespace SP.Core.ManagerInterfaces
         OrderNotesStatus SaveOrderNotesStatus(OrderNotesStatus ordernotesstatus);
         OrderNotesStatus UpdateOrderNotesStatus(OrderNotesStatus newOrderNotesStatus, OrderNotesStatus origOrderNotesStatus);
         List<OrderHeader> InvoicesByDateAndVan(DateTime deliveryDate, int vanId);
+        void UpdateVanForInvoice(int orderID, int vanID);
         #endregion
 
         #region OutletStores

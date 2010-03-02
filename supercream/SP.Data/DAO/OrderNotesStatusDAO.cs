@@ -70,5 +70,13 @@ namespace SP.Data.LTS
                         && ons.VanID == vanId)
                     select oh).ToList<OrderHeader>();
         }
+
+        public void UpdateVanForInvoice(int orderID, int vanID)
+        {           
+            string sql;
+
+            sql = String.Format("UPDATE OrderNotesStatus SET VanId = {0} WHERE OrderID = {1}", vanID.ToString(), orderID.ToString());                       
+            db.ExecuteCommand(sql);
+        }
     }
 }

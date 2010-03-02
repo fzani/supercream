@@ -644,7 +644,14 @@ namespace SP.Worker
             IDaoFactory factory = new LTSDaoFactory();
             IOrderNotesStatusDao orderNotesStatusDao = factory.GetOrderNotesStatusDao();
              return orderNotesStatusDao.InvoicesByDateAndVan(deliveryDate, vanId);
-        }        
+        }
+
+        public void UpdateVanForInvoice(int orderID, int vanID)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderNotesStatusDao orderNotesStatusDao = factory.GetOrderNotesStatusDao();
+            orderNotesStatusDao.UpdateVanForInvoice(orderID, vanID);
+        } 
 
         #endregion
 
@@ -1184,6 +1191,7 @@ namespace SP.Worker
             return vanDao.Update(newVan, origVan);
         }
 
-        #endregion                    
-    }
+        #endregion                        
+
+     }
 }

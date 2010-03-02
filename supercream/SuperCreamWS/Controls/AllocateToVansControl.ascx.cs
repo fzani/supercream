@@ -53,11 +53,16 @@ public partial class Controls_AllocateToVansControl : System.Web.UI.UserControl
         }
 
         if (VanAllocatedFromListBox.SelectedItem != null)
-        {
+        {                             
+            OrderNotesStatusUI status = new OrderNotesStatusUI();
+            status.UpdateVanForInvoice(Convert.ToInt32(VanAllocatedFromListBox.SelectedItem.Value), 
+                Convert.ToInt32(this.VanAllocatedTo.SelectedValue.ToString()));
+
             VanAllocatedToListBox.Items.Add(VanAllocatedFromListBox.SelectedItem);
             ListItem listItem = VanAllocatedToListBox.SelectedItem;
             listItem.Selected = false;
-            VanAllocatedFromListBox.Items.Remove(listItem);          
+
+            VanAllocatedFromListBox.Items.Remove(listItem);   
         }
     }
 
@@ -71,9 +76,14 @@ public partial class Controls_AllocateToVansControl : System.Web.UI.UserControl
 
         if (VanAllocatedToListBox.SelectedItem != null)
         {
+            OrderNotesStatusUI status = new OrderNotesStatusUI();
+            status.UpdateVanForInvoice(Convert.ToInt32(VanAllocatedToListBox.SelectedItem.Value),
+                Convert.ToInt32(this.VanAllocatedFrom.SelectedValue.ToString()));
+
             VanAllocatedFromListBox.Items.Add(VanAllocatedToListBox.SelectedItem);
             ListItem listItem = VanAllocatedFromListBox.SelectedItem;
             listItem.Selected = false;
+            
             VanAllocatedToListBox.Items.Remove(listItem);
         }
        
