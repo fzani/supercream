@@ -282,6 +282,10 @@ namespace SPWCFServer
         [ReferencePreservingDataContractFormat]
         void UpdateVanForInvoice(int orderID, int vanID);
 
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<VanInvoiceCount> GetVanInvoiceCount(DateTime deliveryDate);
+
         #endregion
 
         #region PriceListHeader
@@ -2858,6 +2862,16 @@ namespace SPWCFServer
                 _MaximumReccomendedParcelCount = value;
             }
         }
+    }
+
+    [DataContract]
+    public class VanInvoiceCount
+    {
+        [DataMember]
+        public string VanDescription { get; set; }
+
+        [DataMember]
+        public int InvoiceCount { get; set; }
     }
 
     #endregion

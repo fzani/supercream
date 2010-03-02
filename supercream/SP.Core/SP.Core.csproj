@@ -91,6 +91,7 @@
     <Compile Include="Domain\BaseEntity.cs" />
     <Compile Include="Domain\ContactDetailDTO.cs" />
     <Compile Include="Domain\AutoGenDTO.cs" />
+    <Compile Include="Domain\VanInvoiceCount.cs" />
     <Compile Include="Domain\InvoicesWithStatus.cs" />
     <Compile Include="Domain\OrderNotesStatusDTO.cs" />
     <Compile Include="Domain\SpeciaInvoiceHeaderDTO.cs" />

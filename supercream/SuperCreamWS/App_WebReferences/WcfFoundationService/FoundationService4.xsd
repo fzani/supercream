@@ -350,6 +350,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfOrderNotesStatus" nillable="true" type="tns:ArrayOfOrderNotesStatus" />
+  <xs:complexType name="ArrayOfVanInvoiceCount">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VanInvoiceCount" nillable="true" type="tns:VanInvoiceCount" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVanInvoiceCount" nillable="true" type="tns:ArrayOfVanInvoiceCount" />
+  <xs:complexType name="VanInvoiceCount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="InvoiceCount" type="xs:int" />
+      <xs:element minOccurs="0" name="VanDescription" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VanInvoiceCount" nillable="true" type="tns:VanInvoiceCount" />
   <xs:complexType name="ArrayOfPriceListHeader">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="PriceListHeader" nillable="true" type="tns:PriceListHeader" />
