@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Summary description for Address
+/// Summary description for Address.
 /// </summary>
 namespace SP.Web.DTO
 {
