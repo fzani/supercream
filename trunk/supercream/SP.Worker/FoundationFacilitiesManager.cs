@@ -639,6 +639,13 @@ namespace SP.Worker
             return orderNotesStatusDao.Update(newOrderNotesStatus, origOrderNotesStatus);
         }
 
+        public List<OrderHeader> InvoicesByDateAndVan(DateTime deliveryDate, int vanId)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderNotesStatusDao orderNotesStatusDao = factory.GetOrderNotesStatusDao();
+             return orderNotesStatusDao.InvoicesByDateAndVan(deliveryDate, vanId);
+        }        
+
         #endregion
 
         #region IOutletStore Related Functions
@@ -1177,6 +1184,6 @@ namespace SP.Worker
             return vanDao.Update(newVan, origVan);
         }
 
-        #endregion
+        #endregion                    
     }
 }

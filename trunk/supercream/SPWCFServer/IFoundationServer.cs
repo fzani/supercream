@@ -274,6 +274,10 @@ namespace SPWCFServer
         [ReferencePreservingDataContractFormat]
         void UpdatePaymentCompleted(int orderID, bool invoicePaymentComplete);
 
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<OrderHeader> InvoicesByDateAndVan(DateTime deliveryDate, int vanId);
+
         #endregion
 
         #region PriceListHeader

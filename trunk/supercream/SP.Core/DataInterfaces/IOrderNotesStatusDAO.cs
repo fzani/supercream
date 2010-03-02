@@ -18,5 +18,6 @@ namespace SP.Core.DataInterfaces
        bool OrderStatusByOrderIDExists(int orderID);
        bool OrderStatusByOrderIDAndOrderStatusExists(int orderID, int orderStatus);
        void UpdatePaymentCompleted(int orderID, bool invoicePaymentComplete);
+       List<OrderHeader> InvoicesByDateAndVan(DateTime deliveryDate, int vanId);
    }
 }
