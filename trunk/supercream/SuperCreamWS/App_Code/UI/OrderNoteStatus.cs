@@ -93,6 +93,15 @@ public class OrderNotesStatusUI : IDisposable
         }
     }
 
+    public void UpdateVanForInvoice(int orderID, int vanId)
+    {
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+           _proxy.UpdateVanForInvoice(orderID, vanId);
+        }
+
+    }
+
     public void DeleteOrderNote(int id)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())

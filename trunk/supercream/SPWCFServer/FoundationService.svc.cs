@@ -1281,6 +1281,19 @@ namespace SPWCFServer
             }
         }
 
+        public void UpdateVanForInvoice(int orderID, int vanID)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                mgr.UpdateVanForInvoice(orderID, vanID);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         #endregion
 
         #region IOutlet Members
@@ -2278,7 +2291,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion          
+        #endregion                           
     }
 }
 
