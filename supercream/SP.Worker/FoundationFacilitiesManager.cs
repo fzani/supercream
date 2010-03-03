@@ -231,7 +231,7 @@ namespace SP.Worker
         {
             IDaoFactory factory = new LTSDaoFactory();
             ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
-            return creditNoteDao.GetByID(id);
+            return creditNoteDao.GetById(id);
         }
 
         public List<CreditNote> GetAllCreditNotes()

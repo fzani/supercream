@@ -389,6 +389,87 @@ namespace SPWCFServer
 
         #endregion
 
+        #region CreditNote
+
+        public void DeleteCreditNote(CreditNote creditNote)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                mgr.DeleteCreditNote(ObjectExtension.CloneProperties<SPWCFServer.CreditNote, SP.Core.Domain.CreditNote>(creditNote));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete, it is likely that there are dependent items still linked to it");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public List<CreditNote> GetAllCreditNotes()
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.CreditNote> creditNoteList = mgr.GetAllCreditNotes();
+                return ObjectExtension.CloneList<SP.Core.Domain.CreditNote, SPWCFServer.CreditNote>(creditNoteList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public CreditNote GetCreditNote(int id)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.CreditNote creditNote = mgr.GetCreditNote(id);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.CreditNote, SPWCFServer.CreditNote>(creditNote);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public CreditNote SaveCreditNote(CreditNote creditNote)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.CreditNote coreCreditNote =
+                   ObjectExtension.CloneProperties<SPWCFServer.CreditNote, SP.Core.Domain.CreditNote>(creditNote);
+                coreCreditNote = mgr.SaveCreditNote(coreCreditNote);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.CreditNote, SPWCFServer.CreditNote>(coreCreditNote);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public CreditNote UpdateCreditNote(CreditNote newCreditNote, CreditNote origCreditNote)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+
+                return ObjectExtension.CloneProperties<SP.Core.Domain.CreditNote, SPWCFServer.CreditNote>
+                   (mgr.UpdateCreditNote(ObjectExtension.CloneProperties<SPWCFServer.CreditNote, SP.Core.Domain.CreditNote>(newCreditNote),
+                      ObjectExtension.CloneProperties<SPWCFServer.CreditNote, SP.Core.Domain.CreditNote>(origCreditNote)));
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        #endregion
+
         #region ICustomer Members
 
         public void DeleteCustomer(int customerID)
@@ -2305,7 +2386,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion                                            
+        #endregion
     }
 }
 
