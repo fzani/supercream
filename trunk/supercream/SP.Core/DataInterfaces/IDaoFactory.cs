@@ -16,6 +16,7 @@ namespace SP.Core.DataInterfaces
         IPriceListItemDao GetPriceListItemDao();
         IAccountDao GetAccountDao();
         IContactDetailDao GetContactDetailDao();
+        ICreditNoteDao GetCreditNoteDao();
         ICustomerDao GetCustomerDao();
         IDeliveryItemDao GetDeliveryItemDao();
         IFoundationFacilityDao GetFoundationFacilityDao();
