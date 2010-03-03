@@ -32,7 +32,6 @@ public class ContactDetailUI : IDisposable
 
     #endregion
 
-
     #region Contact Related Functions
 
     public ContactDetail GetContactDetail(int id)
