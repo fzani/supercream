@@ -1222,6 +1222,84 @@ namespace SPWCFServer
     }
 
     [DataContract]
+    public class CreditNoteDetails
+    {
+        private int _OrderID;
+        private string _OrderNo;
+        private string _InvoiceNo;
+        private DateTime _DateCreated;
+        private string _CustomerName;
+
+        [DataMember]
+        public int OrderID
+        {
+            get
+            {
+                return _OrderID;
+            }
+            set
+            {
+                _OrderID = value;
+            }
+        }
+
+        [DataMember]
+        public string OrderNo
+        {
+            get
+            {
+                return _OrderNo;
+            }
+
+            set
+            {
+                _OrderNo = value;
+            }
+        }
+
+        [DataMember]
+        public string InvoiceNo
+        {
+            get
+            {
+                return _InvoiceNo;
+            }
+            set
+            {
+                _InvoiceNo = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime DateCreated
+        {
+            get
+            {
+                return _DateCreated;
+            }
+            set
+            {
+                _DateCreated = value;
+            }
+        }
+
+        [DataMember]
+        public string CustomerName
+        {
+            get
+            {
+                return
+                    _CustomerName;
+            }
+
+            set
+            {
+                _CustomerName = value;
+            }
+        }
+    }
+
+    [DataContract]
     public class FoundationFacility
     {
         private int _id;

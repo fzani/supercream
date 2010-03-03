@@ -28,5 +28,11 @@ namespace SP.Data.LTS
       {
          return db.CreditNote.Single<CreditNote>(q => q.ID == id);
       }
+
+      public List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
+      {
+          return null;
+      }
+
    }
 }
