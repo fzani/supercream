@@ -137,6 +137,10 @@ namespace SPWCFServer
         [ReferencePreservingDataContractFormat]
         CreditNote UpdateCreditNote(CreditNote newCreditNote, CreditNote origCreditNote);
 
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<CreditNoteDetails> SearchCreditNotes(int orderId, string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo);
+
         #endregion
 
         #region Contacts

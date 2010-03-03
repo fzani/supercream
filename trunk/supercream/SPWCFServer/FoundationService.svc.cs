@@ -468,6 +468,20 @@ namespace SPWCFServer
             }
         }
 
+        public List<CreditNoteDetails> SearchCreditNotes(int orderId, string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.CreditNoteDetails> creditNoteList = mgr.SearchCreditNotes(orderId, orderNo, invoiceNo, customerName, dateFrom, dateTo);
+                return ObjectExtension.CloneList<SP.Core.Domain.CreditNoteDetails, SPWCFServer.CreditNoteDetails>(creditNoteList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         #endregion
 
         #region ICustomer Members
@@ -2386,7 +2400,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion
+        #endregion             
     }
 }
 

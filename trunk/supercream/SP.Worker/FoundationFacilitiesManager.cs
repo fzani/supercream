@@ -255,6 +255,13 @@ namespace SP.Worker
             return creditNoteDao.Update(newCreditNote, origCreditNote);
         }
 
+        public List<CreditNoteDetails> SearchCreditNotes(int orderId, string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
+            return creditNoteDao.SearchCreditNotes(orderId, orderNo, invoiceNo, customerName, dateFrom, dateTo);
+        }
+
         #endregion 
 
         #region ICustomer Related Functions
@@ -1237,6 +1244,6 @@ namespace SP.Worker
             return vanDao.Update(newVan, origVan);
         }
 
-        #endregion
+        #endregion       
     }
 }
