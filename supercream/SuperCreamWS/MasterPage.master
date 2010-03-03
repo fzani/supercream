@@ -86,7 +86,7 @@
                     </li>
                     <li><strong>Credit Notes</strong>
                         <br />
-                        <a id="A4" href="~/DeliveryNotes/DeliveryNotes.aspx" runat="server">Credit Notes</a>
+                        <a id="A4" href="~/CreditNote/CreditNote.aspx" runat="server">Credit Notes</a>
                     </li>
                     <li><a href="#"><strong>Pick Lists</strong>
                         <br />

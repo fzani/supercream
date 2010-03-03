@@ -36,6 +36,13 @@ namespace SP.Data.LTS
         {
         }
 
+        public System.Data.Linq.Table<CreditNote> CreditNote
+        {
+            get
+            {
+                return this.GetTable<CreditNote>();
+            }
+        }
 
         public System.Data.Linq.Table<PriceListItem> PriceListItem
         {

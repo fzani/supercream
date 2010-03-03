@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataInterfaces\IAutoGen.cs" />
+    <Compile Include="DataInterfaces\ICreditNoteDAO.cs" />
     <Compile Include="DataInterfaces\IOrderNotesStatusDAO.cs" />
     <Compile Include="DataInterfaces\IProformaInvoiceDao.cs" />
     <Compile Include="DataInterfaces\IPriceListHeaderDao.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Domain\BaseEntity.cs" />
     <Compile Include="Domain\ContactDetailDTO.cs" />
     <Compile Include="Domain\AutoGenDTO.cs" />
+    <Compile Include="Domain\CreditNote.cs" />
     <Compile Include="Domain\VanInvoiceCount.cs" />
     <Compile Include="Domain\InvoicesWithStatus.cs" />
     <Compile Include="Domain\OrderNotesStatusDTO.cs" />

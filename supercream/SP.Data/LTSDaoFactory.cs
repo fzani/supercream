@@ -23,6 +23,11 @@ namespace SP.Data.LTS
             return new AutoGenDao();
         }
 
+        public ICreditNoteDao GetCreditNoteDao()
+        {
+            return new CreditNoteDao();
+        }
+
         public IOrderLineDao GetOrderLineDao()
         {
             return new OrderLineDao();

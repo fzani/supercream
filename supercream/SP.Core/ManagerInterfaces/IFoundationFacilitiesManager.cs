@@ -40,6 +40,14 @@ namespace SP.Core.ManagerInterfaces
         ContactDetail UpdateContactDetail(ContactDetail newContactDetail, ContactDetail origContactDetail);
         #endregion
 
+        #region CreditNote
+        void DeleteCreditNote(CreditNote creditnote);
+        CreditNote GetCreditNote(int id);
+        List<CreditNote> GetAllCreditNotes();
+        CreditNote SaveCreditNote(CreditNote creditnote);
+        CreditNote UpdateCreditNote(CreditNote newCreditNote, CreditNote origCreditNote);
+        #endregion 
+
         #region Customer
         bool CustomerExistsByName(string name);
         bool CustomerExistsWithNameLike(string name);

@@ -218,6 +218,45 @@ namespace SP.Worker
         }
         #endregion
 
+        #region CreditNote
+        public void DeleteCreditNote(CreditNote creditnote)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
+
+            creditNoteDao.Delete(creditnote);
+        }
+
+        public CreditNote GetCreditNote(int id)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
+            return creditNoteDao.GetByID(id);
+        }
+
+        public List<CreditNote> GetAllCreditNotes()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
+            return creditNoteDao.GetAll();
+        }
+
+        public CreditNote SaveCreditNote(CreditNote creditnote)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
+            return creditNoteDao.Save(creditnote);
+        }
+
+        public CreditNote UpdateCreditNote(CreditNote newCreditNote, CreditNote origCreditNote)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
+            return creditNoteDao.Update(newCreditNote, origCreditNote);
+        }
+
+        #endregion 
+
         #region ICustomer Related Functions
         /***************************************************************************************************************
          * Customer Related Functions
