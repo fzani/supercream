@@ -29,10 +29,63 @@ namespace SP.Data.LTS
          return db.CreditNote.Single<CreditNote>(q => q.ID == id);
       }
 
-      public List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
+      public List<CreditNoteDetails> SearchCreditNotes(int orderId, string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
       {
-          return null;
+          var creditNotes = (from o in db.OrderHeader
+                              join ons in db.OrderNotesStatus on o.ID equals ons.OrderID
+                              join cr in db.CreditNote on o.ID equals cr.OrderID
+                              join c in db.Customer on o.CustomerID equals c.ID                             
+                              select new CreditNoteDetails
+                              {
+                                  OrderID = o.ID,
+                                  OrderNo = o.AlphaID,
+                                  InvoiceNo = o.InvoiceNo,
+                                  CustomerName = c.Name,
+                                  DateCreated = cr.DateCreated,                                  
+                              });
+
+          return FilterCreditNotes(creditNotes,
+                  orderNo,
+                  invoiceNo,
+                  customerName,
+                  dateFrom,
+                  dateTo).ToList<CreditNoteDetails>();
       }
 
+      private static IQueryable<CreditNoteDetails> FilterCreditNotes(IQueryable<CreditNoteDetails> creditNotes,
+         string orderNo,
+         string invoiceNo,
+         string customerName,
+         DateTime dateFrom,
+         DateTime dateTo)
+      {
+          IQueryable<CreditNoteDetails> filteredCreditNotes = creditNotes;
+          if (!String.IsNullOrEmpty(orderNo))
+          {
+              filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.OrderNo.Contains(orderNo));
+          }
+
+          if (!String.IsNullOrEmpty(invoiceNo))
+          {
+              filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.InvoiceNo.Contains(invoiceNo));
+          }
+
+          if (!String.IsNullOrEmpty(customerName))
+          {
+              filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.CustomerName.Contains(customerName));
+          }
+
+          if (dateFrom != DateTime.MinValue)
+          {
+              filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.DateCreated >= dateFrom);
+          }
+
+          if (dateTo != DateTime.MinValue)
+          {
+              filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.DateCreated >= dateTo);
+          }
+         
+          return filteredCreditNotes;
+      }
    }
 }
