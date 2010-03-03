@@ -198,7 +198,7 @@ namespace SP.Data.LTS
 
             if (dateTo != DateTime.MinValue)
             {
-                filteredInvoices = filteredInvoices.Where<InvoiceWithStatus>(q => q.OrderDate >= dateTo);
+                filteredInvoices = filteredInvoices.Where<InvoiceWithStatus>(q => q.OrderDate <= dateTo);
             }
 
             if (orderStatus == 2)
