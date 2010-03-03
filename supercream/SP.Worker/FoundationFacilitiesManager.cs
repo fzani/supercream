@@ -255,11 +255,11 @@ namespace SP.Worker
             return creditNoteDao.Update(newCreditNote, origCreditNote);
         }
 
-        public List<CreditNoteDetails> SearchCreditNotes(int orderId, string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
+        public List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
         {
             IDaoFactory factory = new LTSDaoFactory();
             ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
-            return creditNoteDao.SearchCreditNotes(orderId, orderNo, invoiceNo, customerName, dateFrom, dateTo);
+            return creditNoteDao.SearchCreditNotes(orderNo, invoiceNo, customerName, dateFrom, dateTo);
         }
 
         #endregion 

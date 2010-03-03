@@ -468,12 +468,12 @@ namespace SPWCFServer
             }
         }
 
-        public List<CreditNoteDetails> SearchCreditNotes(int orderId, string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
+        public List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
         {
             try
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
-                List<SP.Core.Domain.CreditNoteDetails> creditNoteList = mgr.SearchCreditNotes(orderId, orderNo, invoiceNo, customerName, dateFrom, dateTo);
+                List<SP.Core.Domain.CreditNoteDetails> creditNoteList = mgr.SearchCreditNotes(orderNo, invoiceNo, customerName, dateFrom, dateTo);
                 return ObjectExtension.CloneList<SP.Core.Domain.CreditNoteDetails, SPWCFServer.CreditNoteDetails>(creditNoteList);
             }
             catch (Exception ex)

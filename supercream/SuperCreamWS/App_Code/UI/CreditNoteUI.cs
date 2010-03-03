@@ -51,14 +51,13 @@ public class CreditNoteUI : IDisposable
         return _proxy.UpdateCreditNote(newCreditNote, origCreditNote);
     }
 
-    public List<InvoiceWithStatus> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom,
+    public List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom,
        DateTime dateTo)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            // return _proxy.SearchContactDetails(orderNo, invoiceNo, customerName, dateFrom,
-               // dateTo);
-            return null;
+            return _proxy.SearchCreditNotes(orderNo, invoiceNo, customerName, dateFrom,
+                 dateTo);
         }
     }
 

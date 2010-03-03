@@ -46,7 +46,7 @@ namespace SP.Core.ManagerInterfaces
         List<CreditNote> GetAllCreditNotes();
         CreditNote SaveCreditNote(CreditNote creditnote);
         CreditNote UpdateCreditNote(CreditNote newCreditNote, CreditNote origCreditNote);
-        List<CreditNoteDetails> SearchCreditNotes(int orderId, string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo);
+        List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo);
         #endregion 
 
         #region Customer

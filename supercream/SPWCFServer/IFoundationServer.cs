@@ -139,7 +139,7 @@ namespace SPWCFServer
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
-        List<CreditNoteDetails> SearchCreditNotes(int orderId, string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo);
+        List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo);
 
         #endregion
 
