@@ -8,11 +8,25 @@ namespace SP.Core.Domain
     [Serializable]
     public class CreditNoteDetails
     {
+        private int _CreditNoteID;        
         private int _OrderID;
         private string _OrderNo;
         private string _InvoiceNo;
         private DateTime _DateCreated;
         private string _CustomerName;
+
+        public int CreditNoteID
+        {
+            get 
+            { 
+                return _CreditNoteID; 
+            }
+
+            set 
+            { 
+                _CreditNoteID = value; 
+            }
+        }
 
         public int OrderID
         {

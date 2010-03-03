@@ -11,6 +11,12 @@ public partial class Controls_CreditNoteSearch : System.Web.UI.UserControl
     EventHandler<EventArgs> ChangeState;    
     #endregion
 
+    #region Public Events
+
+    public event CreditNoteEventHandler CreditNoteEventHandler;
+
+    #endregion
+
     #region Page Load Event
 
     protected void Page_Load(object sender, EventArgs e)
@@ -40,7 +46,7 @@ public partial class Controls_CreditNoteSearch : System.Web.UI.UserControl
 
     #endregion
 
-    #region Gneral Event Handlers
+    #region General Event Handlers
 
     protected void SearchButton_Click(object sender, EventArgs e)
     {
@@ -51,6 +57,22 @@ public partial class Controls_CreditNoteSearch : System.Web.UI.UserControl
     {
         Util.ClearControls(CreditNoteSearchCriteriaPanel);
         DataBind();
+    }
+
+    #endregion
+
+    #region CreditNote Grid Event Handelrs
+
+    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "EditCreditNote")
+        {
+            int creditNoteID = Convert.ToInt32(e.CommandArgument);
+            if (this.CreditNoteEventHandler != null)
+            {
+                this.CreditNoteEventHandler(this, new CreditNoteEventArgs { CreditNoteID = creditNoteID });
+            }
+        }
     }
 
     #endregion

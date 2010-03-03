@@ -1228,11 +1228,26 @@ namespace SPWCFServer
     [DataContract]
     public class CreditNoteDetails
     {
+        private int _CreditNoteID;
         private int _OrderID;
         private string _OrderNo;
         private string _InvoiceNo;
         private DateTime _DateCreated;
         private string _CustomerName;
+
+        [DataMember]
+        public int CreditNoteID
+        {
+            get
+            {
+                return _CreditNoteID;
+            }
+
+            set
+            {
+                _CreditNoteID = value;
+            }
+        }
 
         [DataMember]
         public int OrderID
