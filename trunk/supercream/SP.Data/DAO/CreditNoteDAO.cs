@@ -29,7 +29,7 @@ namespace SP.Data.LTS
          return db.CreditNote.Single<CreditNote>(q => q.ID == id);
       }
 
-      public List<CreditNoteDetails> SearchCreditNotes(int orderId, string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
+      public List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
       {
           var creditNotes = (from o in db.OrderHeader
                               join ons in db.OrderNotesStatus on o.ID equals ons.OrderID

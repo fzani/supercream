@@ -1574,7 +1574,6 @@
   <xs:element name="SearchCreditNotes">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="orderId" type="xs:int" />
         <xs:element minOccurs="0" name="orderNo" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="invoiceNo" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="customerName" nillable="true" type="xs:string" />

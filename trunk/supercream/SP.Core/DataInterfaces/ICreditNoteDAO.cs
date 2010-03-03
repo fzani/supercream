@@ -14,8 +14,7 @@ namespace SP.Core.DataInterfaces
 {
    public interface ICreditNoteDao : IDao<CreditNote, int>
    {
-       List<CreditNoteDetails> SearchCreditNotes(
-           int orderId, 
+       List<CreditNoteDetails> SearchCreditNotes(          
            string orderNo, string invoiceNo, 
            string customerName, 
            DateTime dateFrom, 
