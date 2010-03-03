@@ -25,7 +25,7 @@ public partial class Controls_CreditNoteSearch : System.Web.UI.UserControl
     protected void ObjectDataSource1_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
     {
         e.InputParameters[0] = OrderNoSearchTextBox.Text;
-        e.InputParameters[1] = String.Empty;
+        e.InputParameters[1] = InvoiceNoSearchTextBox.Text;
         e.InputParameters[2] = CustomerNameSearchTextBox.Text;
         if (!String.IsNullOrEmpty(DateFromTextBox.Text))
             e.InputParameters[3] = Convert.ToDateTime(DateFromTextBox.Text);

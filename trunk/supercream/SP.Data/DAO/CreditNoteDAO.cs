@@ -82,7 +82,7 @@ namespace SP.Data.LTS
 
           if (dateTo != DateTime.MinValue)
           {
-              filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.DateCreated >= dateTo);
+              filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.DateCreated <= dateTo);
           }
          
           return filteredCreditNotes;
