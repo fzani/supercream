@@ -115,6 +115,31 @@ namespace SPWCFServer
 
         #endregion
 
+        #region CreditNote
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        void DeleteCreditNote(CreditNote creditNote);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<CreditNote> GetAllCreditNotes();
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        CreditNote GetCreditNote(int id);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        CreditNote SaveCreditNote(CreditNote creditNote);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        CreditNote UpdateCreditNote(CreditNote newCreditNote, CreditNote origCreditNote);
+
+        #endregion
+
+
         #region Contacts
 
         [OperationContract]
@@ -1117,6 +1142,67 @@ namespace SPWCFServer
                     phone.ContactDetailID = ID;
                     phone.ContactDetail = this;
                 }
+            }
+        }
+    }
+
+    [DataContract]
+    public class CreditNote
+    {
+        private int _ID;
+        private int _OrderID;
+        private decimal _CreditAmount;
+        private string _Reason;
+
+        [DataMember]
+        public int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+
+        [DataMember]
+        public int OrderID
+        {
+            get
+            {
+                return _OrderID;
+            }
+            set
+            {
+                _OrderID = value;
+            }
+        }
+
+        [DataMember]
+        public decimal CreditAmount
+        {
+            get
+            {
+                return _CreditAmount;
+            }
+            set
+            {
+                _CreditAmount = value;
+            }
+        }
+
+        [DataMember]
+        public string Reason
+        {
+            get
+            {
+                return _Reason;
+            }
+            set
+            {
+                _Reason = value;
             }
         }
     }
