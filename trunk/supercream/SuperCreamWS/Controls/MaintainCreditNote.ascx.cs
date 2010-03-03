@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Controls_NewCreditNote : System.Web.UI.UserControl
+public partial class Controls_MaintainCreditNote : System.Web.UI.UserControl
 {
     #region Private Member Variables
 
@@ -29,7 +29,7 @@ public partial class Controls_NewCreditNote : System.Web.UI.UserControl
             this.ChangeState(this, new EventArgs());
         }
 
-        this.NewCreditNoteSearch.CreditNoteEventHandler += new CreditNoteEventHandler(CreditNoteSearch_CreditNoteEventHandler);
+        this.CreditNoteSearch.CreditNoteEventHandler += new CreditNoteEventHandler(CreditNoteSearch_CreditNoteEventHandler);
     }
 
     #endregion
@@ -64,15 +64,14 @@ public partial class Controls_NewCreditNote : System.Web.UI.UserControl
     private void InitialiseCreditNoteState(object sender, EventArgs args)
     {
         this.SaveCreditNoteControl.Visible = false;
-        this.NewCreditNoteSearch.Visible = true;
+        this.CreditNoteSearch.Visible = true;
     }
 
     private void SaveCreditNoteState(object sender, EventArgs args)
     {
         this.SaveCreditNoteControl.Visible = true;
-        this.NewCreditNoteSearch.Visible = false;
+        this.CreditNoteSearch.Visible = false;
     }
 
     #endregion
-
 }

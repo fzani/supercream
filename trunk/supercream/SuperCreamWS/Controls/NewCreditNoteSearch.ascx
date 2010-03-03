@@ -1,9 +1,9 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="CreditNoteSearch.ascx.cs"
-    Inherits="Controls_CreditNoteSearch" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="NewCreditNoteSearch.ascx.cs"
+    Inherits="Controls_NewCreditNoteSearch" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <div class="FormInput">
     <fieldset id="Fieldset3">
-        <asp:Panel ID="CreditNoteSearchCriteriaPanel" DefaultButton="SearchButton" runat="server">
+        <asp:Panel ID="InvoiceSearchCriteriaPanel" DefaultButton="SearchButton" runat="server">
             <legend>
                 <h3>
                     Search Invoices</h3>
@@ -79,17 +79,20 @@
                                         Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
                                         OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
                                 </td>
-                            </tr>                           
+                            </tr>
+                            <tr>
+                                <td>
+                                    Invoices/InvoicesPrinted
+                                </td>                               
+                            </tr>
                             <tr>
                                 <td>
                                 </td>
                                 <td>
-                                    <asp:Button ID="SearchButton" Text="Search" CausesValidation="false" 
-                                        runat="server" onclick="SearchButton_Click"
-                                         />
-                                    <asp:Button ID="ClearButton" Text="Clear Search" CausesValidation="false" 
-                                        runat="server" onclick="ClearButton_Click"
-                                        />
+                                    <asp:Button ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
+                                        OnClick="SearchButton_Click" />
+                                    <asp:Button ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
+                                        OnClick="ClearButton_Click" />
                                 </td>
                             </tr>
                         </table>
@@ -97,33 +100,69 @@
                 </tr>
             </table>
         </asp:Panel>
-        <asp:Panel ID="CreditNoteSelectionGrid" runat="server">
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
-                Width="98%" DataSourceID="CreditNotesObjectDataSource" 
-                onrowcommand="GridView1_RowCommand">
+        <asp:Panel ID="InvoiceHeaderSearchGridPanel" runat="server">
+            <asp:GridView ID="InvoiceGridView" DataKeyNames="ID" runat="server" Width="98%" AllowPaging="True"
+                DataSourceID="InvoiceObjectDataSource" AutoGenerateColumns="False" OnRowDataBound="InvoiceGridView_RowDataBound"
+                OnRowCommand="InvoiceGridView_RowCommand">
+                <EmptyDataTemplate>
+                    <h3>
+                        No records Found</h3>
+                </EmptyDataTemplate>
                 <Columns>
-                    <asp:BoundField DataField="OrderNo" ItemStyle-Width="20%" HeaderText="Order No" SortExpression="OrderNo" />
-                    <asp:BoundField DataField="InvoiceNo" ItemStyle-Width="20%" HeaderText="Invoice No" SortExpression="InvoiceNo" />
-                    <asp:BoundField DataField="CustomerName" ItemStyle-Width="20%" Visible HeaderText="Customer Name" SortExpression="CustomerName" />
-                    <asp:BoundField DataField="DateCreated" ItemStyle-Width="20%" HeaderText="Date Created" SortExpression="DateCreated" />
-                    <asp:BoundField DataField="CreditNoteID" Visible="false" HeaderText="CreditNoteID" SortExpression="CreditNoteID" />
-                     <asp:TemplateField ItemStyle-Width="20%">
+                    <asp:TemplateField ItemStyle-Width="15%" ShowHeader="False">
                         <ItemTemplate>
-                            <asp:Button ID="EditCreditNoteButton" runat="server" CommandArgument='<%# Bind("CreditNoteID") %>'
-                                CommandName="EditCreditNote" ControlStyle-CssClass="button" ItemStyle-Width="20%"
-                                Text="Select" />
+                            <asp:Button ID="SelectButton" runat="server" CausesValidation="false" CommandName="Select"
+                                CommandArgument='<%# Bind("ID") %>' Text="Select" />
                         </ItemTemplate>
+                        <ItemStyle Width="15%" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Order No." ItemStyle-Width="25%" SortExpression="AlphaID">
+                        <ItemTemplate>
+                            <asp:Label ID="Label2" runat="server" Text='<%# Bind("AlphaID") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("AlphaID") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemStyle Width="20%" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Invoice No." ItemStyle-Width="25%" SortExpression="InvoiceNo">
+                        <ItemTemplate>
+                            <asp:Label ID="InvoiceLabel" runat="server" Text='<%# Bind("InvoiceNo") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="InvoiceTextBox" runat="server" Text='<%# Bind("InvoiceNo") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemStyle Width="20%" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Customer Name" ItemStyle-Width="40%" SortExpression="CustomerID">
+                        <ItemTemplate>
+                            <asp:Label ID="CustomerNameLabel" runat="server" Text='<%# Bind("CustomerID") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CustomerID") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemStyle Width="40%" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Order Date" SortExpression="OrderDate">
+                        <ItemTemplate>
+                            <asp:Label ID="Label3" runat="server" ItemStyle-Width="20%" Text='<%# DataBinder.Eval(Container.DataItem, "OrderDate", "{0:d}") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox3" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "OrderDate", "{0:d}") %>'></asp:TextBox>
+                        </EditItemTemplate>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-            <asp:ObjectDataSource ID="CreditNotesObjectDataSource" runat="server" OnSelecting="ObjectDataSource1_Selecting"
-                SelectMethod="SearchCreditNotes" TypeName="CreditNoteUI">
-                <SelectParameters>                   
-                    <asp:Parameter Name="orderNo" Type="String" />
+            <asp:ObjectDataSource ID="InvoiceObjectDataSource" runat="server" SelectMethod="GetOrderHeadersSearchWithPrintedStatuses"
+                TypeName="OrderHeaderUI" OnSelecting="InvoiceObjectDataSource_Selecting">
+                <SelectParameters>
+                    <asp:Parameter Name="orderHeader" Type="String" />
                     <asp:Parameter Name="invoiceNo" Type="String" />
                     <asp:Parameter Name="customerName" Type="String" />
                     <asp:Parameter Name="dateFrom" Type="DateTime" />
                     <asp:Parameter Name="dateTo" Type="DateTime" />
+                    <asp:Parameter Name="actualOrderStatus" Type="Int16" />
+                    <asp:Parameter Name="printedOrderStatus" Type="Int16" />
                 </SelectParameters>
             </asp:ObjectDataSource>
         </asp:Panel>

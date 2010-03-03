@@ -37,6 +37,7 @@ namespace SP.Data.LTS
                               join c in db.Customer on o.CustomerID equals c.ID                             
                               select new CreditNoteDetails
                               {
+                                  CreditNoteID = cr.ID,
                                   OrderID = o.ID,
                                   OrderNo = o.AlphaID,
                                   InvoiceNo = o.InvoiceNo,
