@@ -139,7 +139,6 @@ namespace SPWCFServer
 
         #endregion
 
-
         #region Contacts
 
         [OperationContract]
@@ -1153,6 +1152,7 @@ namespace SPWCFServer
         private int _OrderID;
         private decimal _CreditAmount;
         private string _Reason;
+        private DateTime _DateCreated;
 
         [DataMember]
         public int ID
@@ -1203,6 +1203,20 @@ namespace SPWCFServer
             set
             {
                 _Reason = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime DateCreated
+        {
+            get
+            {
+                return _DateCreated;
+            }
+
+            set
+            {
+                _DateCreated = value;
             }
         }
     }

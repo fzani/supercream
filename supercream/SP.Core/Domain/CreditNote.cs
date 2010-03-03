@@ -17,6 +17,7 @@ namespace SP.Core.Domain
         private int _OrderID;
         private decimal _CreditAmount;
         private string _Reason;
+        private DateTime _DateCreated;
 
         public override int ID
         {
@@ -63,6 +64,20 @@ namespace SP.Core.Domain
             set
             {
                 _Reason = value;
+            }
+        }
+
+
+        public DateTime DateCreated
+        {
+            get 
+            { 
+                return _DateCreated; 
+            }
+
+            set 
+            { 
+                _DateCreated = value; 
             }
         }
     }
