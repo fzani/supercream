@@ -17,11 +17,25 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
 
     #region Private Properties
 
-    private InvoiceCreditNoteDetails invoiceCreditNoteDetails;
+    private InvoiceCreditNoteDetails invoiceCreditNoteDetails;   
 
     #endregion
 
     #region Public Properies
+
+    public bool? IsNewCreditNote
+    {
+        get
+        {
+            return ViewState["IsNewCreditNote"] as bool?;
+        }
+
+        set
+        {
+            ViewState["IsNewCreditNote"] = value;         
+        }
+
+    }
 
     public int? OrderID
     {
@@ -31,13 +45,10 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
         }
 
         set
-        {
-            if (value != null)
-            {
-                ViewState["OrderID"] = value;
-                this.SetCreditNoteForOrderSaveStatuses();
-                this.CreditNoteID = null;
-            }
+        {                      
+            ViewState["OrderID"] = value;           
+            this.SetCreditNoteForOrderSaveStatuses();
+            this.IsNewCreditNote = true;
         }
     }
 
@@ -49,13 +60,10 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
         }
 
         set
-        {
-            if (value != null)
-            {
-                ViewState["CreditNoteID"] = value;
-                this.SetCreditNoteForCreditNoteSaveStatuses();
-                this.OrderID = null;
-            }
+        {           
+            ViewState["CreditNoteID"] = value;          
+            this.SetCreditNoteForCreditNoteSaveStatuses();
+            this.IsNewCreditNote = false;
         }
     }
 
@@ -82,15 +90,19 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
 
     private void SetCreditNoteForCreditNoteSaveStatuses()
     {
-        ////CreditNoteUI creditNoteUI = new CreditNoteUI();
-        ////invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(OrderID.Value);
+        CreditNoteUI creditNoteUI = new CreditNoteUI();
+        CreditNote creditNote = creditNoteUI.GetCreditNote(CreditNoteID.Value);
+        invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(creditNote.OrderID);
 
-        ////decimal totalInvoiceAmount = invoiceCreditNoteDetails.TotalInvoiceAmount;
-        ////decimal invoiceAmountCredited = invoiceCreditNoteDetails.TotalAmountCredited;
+        decimal totalInvoiceAmount = invoiceCreditNoteDetails.TotalInvoiceAmount;
+        decimal invoiceAmountCredited = invoiceCreditNoteDetails.TotalAmountCredited;
 
-        ////this.TotalInvoiceAmountLabel.Text = totalInvoiceAmount.ToString("c");
-        ////this.InvoiceAmountCreditedLabel.Text = invoiceAmountCredited.ToString("c");
-        ////this.AmountAvailableToBeCreditedLabel.Text = (totalInvoiceAmount - invoiceAmountCredited).ToString("c");
+        this.TotalInvoiceAmountLabel.Text = totalInvoiceAmount.ToString("c");
+        this.InvoiceAmountCreditedLabel.Text = invoiceAmountCredited.ToString("c");
+        this.AmountAvailableToBeCreditedLabel.Text = (totalInvoiceAmount - invoiceAmountCredited).ToString("c");
+
+        this.AmountToCreditTextBox.Text = creditNote.CreditAmount.ToString("c");
+        this.ReasonTextBox.Text = creditNote.Reason;
     }
 
     #endregion
@@ -106,14 +118,29 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
                 throw new ApplicationException("Cannot credit for more than the invoicable amount");
 
             CreditNoteUI ui = new CreditNoteUI();
-            ui.SaveCreditNote(new CreditNote
+            if (this.IsNewCreditNote.Value)
             {
-                ID = -1,
-                OrderID = this.OrderID.Value,
-                CreditAmount = creditAmout,
-                DateCreated = DateTime.Now,
-                Reason = this.ReasonTextBox.Text
-            });
+                ui.SaveCreditNote(new CreditNote
+                {
+                    ID = -1,
+                    OrderID = this.OrderID.Value,
+                    CreditAmount = creditAmout,
+                    DateCreated = DateTime.Now,
+                    Reason = this.ReasonTextBox.Text
+                });
+            }
+            else
+            {
+                CreditNote creditNote = ui.GetCreditNote(CreditNoteID.Value);
+                ui.UpdateCreditNotes(new CreditNote
+                {
+                    ID = CreditNoteID.Value,
+                    OrderID = creditNote.OrderID,
+                    CreditAmount = creditAmout,
+                    DateCreated = DateTime.Now,
+                    Reason = this.ReasonTextBox.Text
+                });
+            }
 
             if (this.CompletedEventHandler != null)
             {
