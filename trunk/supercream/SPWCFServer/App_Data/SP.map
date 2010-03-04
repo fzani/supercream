@@ -58,6 +58,7 @@
       <Column Name="CreditAmount" Member="CreditAmount" Storage="_CreditAmount" DbType="Decimal(18,2)" />
       <Column Name="Reason" Member="Reason" Storage="_Reason" DbType="NVarChar(MAX)" UpdateCheck="Never" />
       <Column Name="DateCreated" Member="DateCreated" Storage="_DateCreated" DbType="DateTime" UpdateCheck="Never" />
+      <Column Name="Reference" Member="Reference" Storage="_Reference" DbType="NVarChar(255)" UpdateCheck="Never" />
       <Association Name="FK_CreditNote_OrderHeader" Member="OrderHeader" Storage="_OrderHeader" ThisKey="OrderID" OtherKey="ID" IsForeignKey="true" />
     </Type>
   </Table>

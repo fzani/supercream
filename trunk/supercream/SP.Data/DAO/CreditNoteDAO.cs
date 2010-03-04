@@ -29,6 +29,16 @@ namespace SP.Data.LTS
             return db.CreditNote.Single<CreditNote>(q => q.ID == id);
         }
 
+        public bool ReferenceExists(string referenceNo)
+        {
+            return (db.CreditNote.Where<CreditNote>(q => q.Reference == referenceNo).FirstOrDefault() != null) ? true : false;
+        }
+
+        public CreditNote GetByReferenceId(string referenceNo)
+        {
+            return db.CreditNote.Where<CreditNote>(q => q.Reference == referenceNo).SingleOrDefault<CreditNote>();
+        }
+
         public List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
         {
             var creditNotes = (from o in db.OrderHeader
@@ -43,6 +53,7 @@ namespace SP.Data.LTS
                                    InvoiceNo = o.InvoiceNo,
                                    CustomerName = c.Name,
                                    DateCreated = cr.DateCreated,
+                                   Reference = cr.Reference
                                });
 
             return FilterCreditNotes(creditNotes,
@@ -50,7 +61,7 @@ namespace SP.Data.LTS
                     invoiceNo,
                     customerName,
                     dateFrom,
-                    dateTo).ToList<CreditNoteDetails>();
+                    dateTo).OrderByDescending(q => q.DateCreated).ToList<CreditNoteDetails>();
         }
 
         private static IQueryable<CreditNoteDetails> FilterCreditNotes(IQueryable<CreditNoteDetails> creditNotes,
@@ -112,6 +123,6 @@ namespace SP.Data.LTS
                 TotalAmountCredited = creditTotal,
                 Balance = (invoiceTotal - creditTotal)
             };
-        }
-    }
+        }            
+   }
 }

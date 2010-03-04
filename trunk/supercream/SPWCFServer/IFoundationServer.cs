@@ -1161,6 +1161,7 @@ namespace SPWCFServer
         private decimal _CreditAmount;
         private string _Reason;
         private DateTime _DateCreated;
+        private string _Reference;
 
         [DataMember]
         public int ID
@@ -1227,6 +1228,20 @@ namespace SPWCFServer
                 _DateCreated = value;
             }
         }
+
+        [DataMember]
+        public string Reference
+        {
+            get
+            {
+                return _Reference;
+            }
+
+            set
+            {
+                _Reference = value;
+            }
+        }
     }
 
     [DataContract]
@@ -1238,6 +1253,7 @@ namespace SPWCFServer
         private string _InvoiceNo;
         private DateTime _DateCreated;
         private string _CustomerName;
+        private string _Reference;
 
         [DataMember]
         public int CreditNoteID
@@ -1318,6 +1334,20 @@ namespace SPWCFServer
             set
             {
                 _CustomerName = value;
+            }
+        }
+
+        [DataMember]
+        public string Reference
+        {
+            get
+            {
+                return _Reference;
+            }
+
+            set
+            {
+                _Reference = value;
             }
         }
     }

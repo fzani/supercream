@@ -83,6 +83,14 @@ public class CreditNoteUI : IDisposable
         }
     }
 
+    public void Delete(CreditNote creditNote)
+    {
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            _proxy.DeleteCreditNote(creditNote);
+        }
+    }
+
     #endregion
 
     #region Destructor Related Functions

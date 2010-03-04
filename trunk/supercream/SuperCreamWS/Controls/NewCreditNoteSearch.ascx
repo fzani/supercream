@@ -101,6 +101,8 @@
             </table>
         </asp:Panel>
         <asp:Panel ID="InvoiceHeaderSearchGridPanel" runat="server">
+            <h2>
+                Invoices</h2>
             <asp:GridView ID="InvoiceGridView" DataKeyNames="ID" runat="server" Width="98%" AllowPaging="True"
                 DataSourceID="InvoiceObjectDataSource" AutoGenerateColumns="False" OnRowDataBound="InvoiceGridView_RowDataBound"
                 OnRowCommand="InvoiceGridView_RowCommand">
