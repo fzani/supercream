@@ -28,6 +28,9 @@ public partial class CreditNote_CreditNote : System.Web.UI.Page
         this.NewCreditNote.ErrorMessageEventHandler += new ErrorMessageEventHandler(NewCreditNote_ErrorMessageEventHandler);
         this.NewCreditNote.CompletedEventHandler += new CompletedEventHandler(NewCreditNote_CompletedEventHandler);
 
+        this.MaintainCreditNote.CancelEventHandler += new CancelEventHandler(NewCreditNote_CancelEventHandler);
+        this.MaintainCreditNote.ErrorMessageEventHandler += new ErrorMessageEventHandler(NewCreditNote_ErrorMessageEventHandler);
+        this.MaintainCreditNote.CompletedEventHandler += new CompletedEventHandler(NewCreditNote_CompletedEventHandler);
     }
       
     #endregion
@@ -92,8 +95,8 @@ public partial class CreditNote_CreditNote : System.Web.UI.Page
 
     public void MaintainCreditNoteState(object sender, EventArgs args)
     {
-        this.NewCreditNote.Visible = true;
-        this.MaintainCreditNote.Visible = false;
+        this.NewCreditNote.Visible = false;
+        this.MaintainCreditNote.Visible = true;
     }
 
     #endregion

@@ -32,8 +32,30 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
 
         set
         {
-            ViewState["OrderID"] = value;
-            this.SetCreditNoteSaveStatuses();
+            if (value != null)
+            {
+                ViewState["OrderID"] = value;
+                this.SetCreditNoteForOrderSaveStatuses();
+                this.CreditNoteID = null;
+            }
+        }
+    }
+
+    public int? CreditNoteID
+    {
+        get
+        {
+            return ViewState["CreditNoteID"] as int?;
+        }
+
+        set
+        {
+            if (value != null)
+            {
+                ViewState["CreditNoteID"] = value;
+                this.SetCreditNoteForCreditNoteSaveStatuses();
+                this.OrderID = null;
+            }
         }
     }
 
@@ -45,7 +67,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
     {
     }
 
-    private void SetCreditNoteSaveStatuses()
+    private void SetCreditNoteForOrderSaveStatuses()
     {
         CreditNoteUI creditNoteUI = new CreditNoteUI();
         invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(OrderID.Value);
@@ -56,6 +78,19 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
         this.TotalInvoiceAmountLabel.Text = totalInvoiceAmount.ToString("c");
         this.InvoiceAmountCreditedLabel.Text = invoiceAmountCredited.ToString("c");
         this.AmountAvailableToBeCreditedLabel.Text = (totalInvoiceAmount - invoiceAmountCredited).ToString("c");
+    }
+
+    private void SetCreditNoteForCreditNoteSaveStatuses()
+    {
+        ////CreditNoteUI creditNoteUI = new CreditNoteUI();
+        ////invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(OrderID.Value);
+
+        ////decimal totalInvoiceAmount = invoiceCreditNoteDetails.TotalInvoiceAmount;
+        ////decimal invoiceAmountCredited = invoiceCreditNoteDetails.TotalAmountCredited;
+
+        ////this.TotalInvoiceAmountLabel.Text = totalInvoiceAmount.ToString("c");
+        ////this.InvoiceAmountCreditedLabel.Text = invoiceAmountCredited.ToString("c");
+        ////this.AmountAvailableToBeCreditedLabel.Text = (totalInvoiceAmount - invoiceAmountCredited).ToString("c");
     }
 
     #endregion
