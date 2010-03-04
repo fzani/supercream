@@ -11,10 +11,10 @@
             </legend>
             <table style="width: 100%">
                 <tr>
-                    <td style="width: 25%">
+                    <td style="width: 30%">
                         Total Invoice Amount
                     </td>
-                    <td style="width: 75%">
+                    <td style="width: 70%">
                         <asp:Label ID="TotalInvoiceAmountLabel" runat="server" />
                     </td>
                 </tr>
@@ -24,6 +24,14 @@
                     </td>
                     <td>
                         <asp:Label ID="InvoiceAmountCreditedLabel" runat="server" />
+                    </td>
+                </tr>
+                 <tr>
+                    <td>
+                        Invoice Amount available to be credited
+                    </td>
+                    <td>
+                        <asp:Label ID="AmountAvailableToBeCreditedLabel" runat="server" />
                     </td>
                 </tr>
                 <tr>
@@ -45,7 +53,7 @@
                         Reason
                     </td>
                     <td>
-                        <asp:TextBox ID="ReasonTextBox" Width="60%" Rows="6" TextMode="MultiLine" runat="server" />
+                        <asp:TextBox ID="ReasonTextBox" Width="90%" Rows="6" TextMode="MultiLine" runat="server" />
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="SaveCreditNoteGroup"
                             ControlToValidate="ReasonTextBox" ErrorMessage="Reason is a required field"
                             InitialValue="" Text="Required" runat="server" />                 

@@ -51,7 +51,10 @@ public partial class Controls_NewCreditNote : System.Web.UI.UserControl
     private void Completed_InvoiceEventHandler(object sender, EventArgs e)
     {
         if(this.CompletedEventHandler != null)
-        {
+        {            
+            this.ChangeState += new EventHandler<EventArgs>(this.InitialiseCreditNoteState);
+            this.ChangeState(this, new EventArgs());
+
             this.CompletedEventHandler(this, new EventArgs());
         }
     }

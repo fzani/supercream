@@ -62,12 +62,16 @@ public partial class CreditNote_CreditNote : System.Web.UI.Page
     {
         this.ChangeState += new EventHandler<EventArgs>(this.NewCreditNoteState);
         this.ChangeState(this, new EventArgs());
+
+        this.DataBind();
     }
     
     protected void MaintainCreditNoteButton_Click(object sender, EventArgs e)
     {
         this.ChangeState += new EventHandler<EventArgs>(this.MaintainCreditNoteState);
         this.ChangeState(this, new EventArgs());
+
+        this.DataBind();
     }
 
     #endregion
