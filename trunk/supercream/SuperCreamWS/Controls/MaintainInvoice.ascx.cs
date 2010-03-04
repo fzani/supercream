@@ -15,7 +15,9 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
     #endregion
 
     #region Public Event Handlers
+  
     public event ErrorMessageEventHandler ErrorMessageEventHandler;
+    
     #endregion
 
     #region Page Load event

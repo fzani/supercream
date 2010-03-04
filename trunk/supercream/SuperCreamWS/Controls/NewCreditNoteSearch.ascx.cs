@@ -68,7 +68,7 @@ public partial class Controls_NewCreditNoteSearch : System.Web.UI.UserControl
 
             if (this.InvoiceEventHandler != null)
             {
-                this.InvoiceEventHandler(this, new InvoiceEventEventArgs { InvoiceID = id });
+                this.InvoiceEventHandler(this, new InvoiceEventEventArgs { OrderID = id });
             }
         }
     }

@@ -21,14 +21,34 @@ public partial class CreditNote_CreditNote : System.Web.UI.Page
             this.ChangeState += new EventHandler<EventArgs>(PageLoadState);
             this.ChangeState(this, new EventArgs());
         }
+
+        this.ErrorViewControl.Visible = false;
       
         this.NewCreditNote.CancelEventHandler += new CancelEventHandler(NewCreditNote_CancelEventHandler);
+        this.NewCreditNote.ErrorMessageEventHandler += new ErrorMessageEventHandler(NewCreditNote_ErrorMessageEventHandler);
+        this.NewCreditNote.CompletedEventHandler += new CompletedEventHandler(NewCreditNote_CompletedEventHandler);
 
-    } 
-
+    }
+      
     #endregion
 
     #region General Event Handlers
+
+    void NewCreditNote_ErrorMessageEventHandler(object sender, ErrorMessageEventArgs e)
+    {
+        foreach (string errorMessage in e.ErrorMessages)
+            ErrorViewControl.AddError(errorMessage);
+        ErrorViewControl.Visible = true;
+        ErrorViewControl.DataBind();
+    }
+
+    void NewCreditNote_CompletedEventHandler(object sender, EventArgs e)
+    {
+        Util.ClearControls(this.NewCreditNote);
+
+        this.ChangeState += new EventHandler<EventArgs>(this.PageLoadState);
+        this.ChangeState(this, new EventArgs());
+    }
 
     void NewCreditNote_CancelEventHandler(object sender, EventArgs e)
     {

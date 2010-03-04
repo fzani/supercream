@@ -15,7 +15,9 @@ public partial class Controls_NewCreditNote : System.Web.UI.UserControl
 
     #region Public Events
 
+    public event ErrorMessageEventHandler ErrorMessageEventHandler;
     public event CancelEventHandler CancelEventHandler;
+    public event CompletedEventHandler CompletedEventHandler;
 
     #endregion
 
@@ -30,15 +32,33 @@ public partial class Controls_NewCreditNote : System.Web.UI.UserControl
         }
 
         this.NewCreditNoteSearch.InvoiceEventHandler += new InvoiceEventHandler(NewCreditNoteSearch_InvoiceEventHandler);
+        this.SaveCreditNoteControl.CompletedEventHandler += new CompletedEventHandler(Completed_InvoiceEventHandler);
+        this.SaveCreditNoteControl.ErrorMessageEventHandler += new ErrorMessageEventHandler(SaveCreditNoteControl_ErrorMessageEventHandler);
     }
 
     #endregion
 
     #region Call Back Handlers
 
-    void NewCreditNoteSearch_InvoiceEventHandler(object sender, InvoiceEventEventArgs e)
+    private void SaveCreditNoteControl_ErrorMessageEventHandler(object sender, ErrorMessageEventArgs e)
     {
-        this.SaveCreditNoteControl.InvoiceID = e.InvoiceID;
+        if (this.ErrorMessageEventHandler != null)
+        {
+            this.ErrorMessageEventHandler(sender, e);
+        }
+    }
+
+    private void Completed_InvoiceEventHandler(object sender, EventArgs e)
+    {
+        if(this.CompletedEventHandler != null)
+        {
+            this.CompletedEventHandler(this, new EventArgs());
+        }
+    }
+
+    private void NewCreditNoteSearch_InvoiceEventHandler(object sender, InvoiceEventEventArgs e)
+    {
+        this.SaveCreditNoteControl.OrderID = e.OrderID;
 
         this.ChangeState += new EventHandler<EventArgs>(this.SaveCreditNoteState);
         this.ChangeState(this, new EventArgs());

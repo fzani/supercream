@@ -18,7 +18,7 @@ public class InvoiceEventEventArgs : EventArgs
     {
     }
 
-    public int InvoiceID { get; set; }   
+    public int OrderID { get; set; }   
 }
 
 

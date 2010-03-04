@@ -69,7 +69,7 @@ public class CreditNoteUI : IDisposable
         }
     }
 
-    InvoiceCreditNoteDetails GetInvoiceCreditNoteDetails(int orderId)
+    public InvoiceCreditNoteDetails GetInvoiceCreditNoteDetails(int orderId)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
