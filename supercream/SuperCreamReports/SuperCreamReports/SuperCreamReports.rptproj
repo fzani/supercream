@@ -9,16 +9,44 @@
   </DataSources>
   <Reports>
     <ProjectItem>
-      <Name>OrderReport3.rdl</Name>
-      <FullPath>OrderReport3.rdl</FullPath>
+      <Name>DailyReportForLedger.rdl</Name>
+      <FullPath>DailyReportForLedger.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>VanLoad.rdl</Name>
-      <FullPath>VanLoad.rdl</FullPath>
+      <Name>Top10CustomerBySales.rdl</Name>
+      <FullPath>Top10CustomerBySales.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Report2.rdl</Name>
-      <FullPath>Report2.rdl</FullPath>
+      <Name>Top10VatExempt.rdl</Name>
+      <FullPath>Top10VatExempt.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>TopCustomerBySales.rdl</Name>
+      <FullPath>TopCustomerBySales.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>TopSalesByProductQuantity.rdl</Name>
+      <FullPath>TopSalesByProductQuantity.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>TopSalesByProductSales.rdl</Name>
+      <FullPath>TopSalesByProductSales.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VanLoadOverAllocations.rdl</Name>
+      <FullPath>VanLoadOverAllocations.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VanLoadOverPeriod.rdl</Name>
+      <FullPath>VanLoadOverPeriod.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>PickList.rdl</Name>
+      <FullPath>PickList.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>CustomerReport.rdl</Name>
+      <FullPath>CustomerReport.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
