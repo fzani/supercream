@@ -41,6 +41,7 @@ namespace SP.Core.ManagerInterfaces
         #endregion
 
         #region CreditNote
+        InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID);
         void DeleteCreditNote(CreditNote creditnote);
         CreditNote GetCreditNote(int id);
         List<CreditNote> GetAllCreditNotes();

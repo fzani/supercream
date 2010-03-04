@@ -8,6 +8,12 @@
       <xsd:import schemaLocation="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Linq" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IFoundationService_GetAllTerms_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTerms" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetAllTerms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTermsResponse" />
+  </wsdl:message>
   <wsdl:message name="IFoundationService_DeleteTerm_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteTerm" />
   </wsdl:message>
@@ -85,6 +91,12 @@
   </wsdl:message>
   <wsdl:message name="IFoundationService_DeleteVan_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteVanResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetPriceListHeaderByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPriceListHeaderByID" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetPriceListHeaderByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPriceListHeaderByIDResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_SavePriceListHeader_InputMessage">
     <wsdl:part name="parameters" element="tns:SavePriceListHeader" />
@@ -296,11 +308,11 @@
   <wsdl:message name="IFoundationService_UpdateTerm_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateTermResponse" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_GetAllTerms_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllTerms" />
+  <wsdl:message name="IFoundationService_SaveFoundationFacility_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveFoundationFacility" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_GetAllTerms_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllTermsResponse" />
+  <wsdl:message name="IFoundationService_SaveFoundationFacility_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveFoundationFacilityResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_FoundationFacilityExists_InputMessage">
     <wsdl:part name="parameters" element="tns:FoundationFacilityExists" />
@@ -512,12 +524,6 @@
   <wsdl:message name="IFoundationService_GetAllPriceListHeaders_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllPriceListHeadersResponse" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_GetPriceListHeaderByID_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetPriceListHeaderByID" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_GetPriceListHeaderByID_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetPriceListHeaderByIDResponse" />
-  </wsdl:message>
   <wsdl:message name="IFoundationService_SaveAccount_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveAccount" />
   </wsdl:message>
@@ -698,6 +704,12 @@
   <wsdl:message name="IFoundationService_SearchCreditNotes_OutputMessage">
     <wsdl:part name="parameters" element="tns:SearchCreditNotesResponse" />
   </wsdl:message>
+  <wsdl:message name="IFoundationService_GetInvoiceCreditDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvoiceCreditDetails" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetInvoiceCreditDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvoiceCreditDetailsResponse" />
+  </wsdl:message>
   <wsdl:message name="IFoundationService_DeleteContactDetail_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteContactDetail" />
   </wsdl:message>
@@ -728,13 +740,11 @@
   <wsdl:message name="IFoundationService_UpdateContactDetail_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateContactDetailResponse" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_SaveFoundationFacility_InputMessage">
-    <wsdl:part name="parameters" element="tns:SaveFoundationFacility" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_SaveFoundationFacility_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SaveFoundationFacilityResponse" />
-  </wsdl:message>
   <wsdl:portType name="IFoundationService">
+    <wsdl:operation name="GetAllTerms">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetAllTerms" message="tns:IFoundationService_GetAllTerms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetAllTermsResponse" message="tns:IFoundationService_GetAllTerms_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DeleteTerm">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/DeleteTerm" message="tns:IFoundationService_DeleteTerm_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/DeleteTermResponse" message="tns:IFoundationService_DeleteTerm_OutputMessage" />
@@ -786,6 +796,10 @@
     <wsdl:operation name="DeleteVan">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/DeleteVan" message="tns:IFoundationService_DeleteVan_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/DeleteVanResponse" message="tns:IFoundationService_DeleteVan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPriceListHeaderByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetPriceListHeaderByID" message="tns:IFoundationService_GetPriceListHeaderByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetPriceListHeaderByIDResponse" message="tns:IFoundationService_GetPriceListHeaderByID_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SavePriceListHeader">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SavePriceListHeader" message="tns:IFoundationService_SavePriceListHeader_InputMessage" />
@@ -927,9 +941,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdateTerm" message="tns:IFoundationService_UpdateTerm_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/UpdateTermResponse" message="tns:IFoundationService_UpdateTerm_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetAllTerms">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetAllTerms" message="tns:IFoundationService_GetAllTerms_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetAllTermsResponse" message="tns:IFoundationService_GetAllTerms_OutputMessage" />
+    <wsdl:operation name="SaveFoundationFacility">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveFoundationFacility" message="tns:IFoundationService_SaveFoundationFacility_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveFoundationFacilityResponse" message="tns:IFoundationService_SaveFoundationFacility_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="FoundationFacilityExists">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/FoundationFacilityExists" message="tns:IFoundationService_FoundationFacilityExists_InputMessage" />
@@ -1071,10 +1085,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetAllPriceListHeaders" message="tns:IFoundationService_GetAllPriceListHeaders_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetAllPriceListHeadersResponse" message="tns:IFoundationService_GetAllPriceListHeaders_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetPriceListHeaderByID">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetPriceListHeaderByID" message="tns:IFoundationService_GetPriceListHeaderByID_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetPriceListHeaderByIDResponse" message="tns:IFoundationService_GetPriceListHeaderByID_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="SaveAccount">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveAccount" message="tns:IFoundationService_SaveAccount_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveAccountResponse" message="tns:IFoundationService_SaveAccount_OutputMessage" />
@@ -1195,6 +1205,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SearchCreditNotes" message="tns:IFoundationService_SearchCreditNotes_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SearchCreditNotesResponse" message="tns:IFoundationService_SearchCreditNotes_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetInvoiceCreditDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetInvoiceCreditDetails" message="tns:IFoundationService_GetInvoiceCreditDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetInvoiceCreditDetailsResponse" message="tns:IFoundationService_GetInvoiceCreditDetails_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DeleteContactDetail">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/DeleteContactDetail" message="tns:IFoundationService_DeleteContactDetail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/DeleteContactDetailResponse" message="tns:IFoundationService_DeleteContactDetail_OutputMessage" />
@@ -1215,13 +1229,18 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdateContactDetail" message="tns:IFoundationService_UpdateContactDetail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/UpdateContactDetailResponse" message="tns:IFoundationService_UpdateContactDetail_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SaveFoundationFacility">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveFoundationFacility" message="tns:IFoundationService_SaveFoundationFacility_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveFoundationFacilityResponse" message="tns:IFoundationService_SaveFoundationFacility_OutputMessage" />
-    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IFoundationService" type="tns:IFoundationService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllTerms">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetAllTerms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="DeleteTerm">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/DeleteTerm" style="document" />
       <wsdl:input>
@@ -1332,6 +1351,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteVan">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/DeleteVan" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPriceListHeaderByID">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetPriceListHeaderByID" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1654,8 +1682,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetAllTerms">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetAllTerms" style="document" />
+    <wsdl:operation name="SaveFoundationFacility">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/SaveFoundationFacility" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1978,15 +2006,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetPriceListHeaderByID">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetPriceListHeaderByID" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="SaveAccount">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/SaveAccount" style="document" />
       <wsdl:input>
@@ -2257,6 +2276,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetInvoiceCreditDetails">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetInvoiceCreditDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="DeleteContactDetail">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/DeleteContactDetail" style="document" />
       <wsdl:input>
@@ -2295,15 +2323,6 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateContactDetail">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/UpdateContactDetail" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SaveFoundationFacility">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/SaveFoundationFacility" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -13,80 +13,98 @@ using SP.Core.DataInterfaces;
 
 namespace SP.Data.LTS
 {
-   public class CreditNoteDao : AbstractLTSDao<CreditNote, int>, ICreditNoteDao
-   {
-      public CreditNoteDao()
-      {
-      }
+    public class CreditNoteDao : AbstractLTSDao<CreditNote, int>, ICreditNoteDao
+    {
+        public CreditNoteDao()
+        {
+        }
 
-      public CreditNoteDao(LTSDataContext ctx)
-         : base(ctx)
-      {
-      }
+        public CreditNoteDao(LTSDataContext ctx)
+            : base(ctx)
+        {
+        }
 
-      public override CreditNote GetById(int id)
-      {
-         return db.CreditNote.Single<CreditNote>(q => q.ID == id);
-      }
+        public override CreditNote GetById(int id)
+        {
+            return db.CreditNote.Single<CreditNote>(q => q.ID == id);
+        }
 
-      public List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
-      {
-          var creditNotes = (from o in db.OrderHeader
-                              join ons in db.OrderNotesStatus on o.ID equals ons.OrderID
-                              join cr in db.CreditNote on o.ID equals cr.OrderID
-                              join c in db.Customer on o.CustomerID equals c.ID                             
-                              select new CreditNoteDetails
-                              {
-                                  CreditNoteID = cr.ID,
-                                  OrderID = o.ID,
-                                  OrderNo = o.AlphaID,
-                                  InvoiceNo = o.InvoiceNo,
-                                  CustomerName = c.Name,
-                                  DateCreated = cr.DateCreated,                                  
-                              });
+        public List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
+        {
+            var creditNotes = (from o in db.OrderHeader
+                               join ons in db.OrderNotesStatus on o.ID equals ons.OrderID
+                               join cr in db.CreditNote on o.ID equals cr.OrderID
+                               join c in db.Customer on o.CustomerID equals c.ID
+                               select new CreditNoteDetails
+                               {
+                                   CreditNoteID = cr.ID,
+                                   OrderID = o.ID,
+                                   OrderNo = o.AlphaID,
+                                   InvoiceNo = o.InvoiceNo,
+                                   CustomerName = c.Name,
+                                   DateCreated = cr.DateCreated,
+                               });
 
-          return FilterCreditNotes(creditNotes,
-                  orderNo,
-                  invoiceNo,
-                  customerName,
-                  dateFrom,
-                  dateTo).ToList<CreditNoteDetails>();
-      }
+            return FilterCreditNotes(creditNotes,
+                    orderNo,
+                    invoiceNo,
+                    customerName,
+                    dateFrom,
+                    dateTo).ToList<CreditNoteDetails>();
+        }
 
-      private static IQueryable<CreditNoteDetails> FilterCreditNotes(IQueryable<CreditNoteDetails> creditNotes,
-         string orderNo,
-         string invoiceNo,
-         string customerName,
-         DateTime dateFrom,
-         DateTime dateTo)
-      {
-          IQueryable<CreditNoteDetails> filteredCreditNotes = creditNotes;
-          if (!String.IsNullOrEmpty(orderNo))
-          {
-              filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.OrderNo.Contains(orderNo));
-          }
+        private static IQueryable<CreditNoteDetails> FilterCreditNotes(IQueryable<CreditNoteDetails> creditNotes,
+           string orderNo,
+           string invoiceNo,
+           string customerName,
+           DateTime dateFrom,
+           DateTime dateTo)
+        {
+            IQueryable<CreditNoteDetails> filteredCreditNotes = creditNotes;
+            if (!String.IsNullOrEmpty(orderNo))
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.OrderNo.Contains(orderNo));
+            }
 
-          if (!String.IsNullOrEmpty(invoiceNo))
-          {
-              filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.InvoiceNo.Contains(invoiceNo));
-          }
+            if (!String.IsNullOrEmpty(invoiceNo))
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.InvoiceNo.Contains(invoiceNo));
+            }
 
-          if (!String.IsNullOrEmpty(customerName))
-          {
-              filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.CustomerName.Contains(customerName));
-          }
+            if (!String.IsNullOrEmpty(customerName))
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.CustomerName.Contains(customerName));
+            }
 
-          if (dateFrom != DateTime.MinValue)
-          {
-              filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.DateCreated >= dateFrom);
-          }
+            if (dateFrom != DateTime.MinValue)
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.DateCreated >= dateFrom);
+            }
 
-          if (dateTo != DateTime.MinValue)
-          {
-              filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.DateCreated <= dateTo);
-          }
-         
-          return filteredCreditNotes;
-      }
-   }
+            if (dateTo != DateTime.MinValue)
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.DateCreated <= dateTo);
+            }
+
+            return filteredCreditNotes;
+        }
+
+        public InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderNo)
+        {
+            var invoiceTotal = Math.Round((from o in db.OrderHeader
+                                           join ol in db.OrderLine on o.ID equals ol.OrderID
+                                           select ol.Price * ol.NoOfUnits).Sum(), 2);
+            var creditTotal = Math.Round((from o in db.CreditNote
+                                          where o.OrderID == orderNo
+                                          select o.CreditAmount).Sum(), 2);
+
+            return new InvoiceCreditNoteDetails
+            {
+                OrderID = orderNo,
+                TotalInvoiceAmount = invoiceTotal,
+                TotalAmountCredited = creditTotal,
+                Balance = (invoiceTotal - creditTotal)
+            };
+        }
+    }
 }

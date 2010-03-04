@@ -17,9 +17,8 @@ public partial class Controls_NewCreditNoteSearch : System.Web.UI.UserControl
     #endregion
 
     #region Public Events
-
-    public event CancelEventHandler CancelEventHandler;
-    public event CreditNoteEventHandler CreditNoteEventHandler;
+   
+    public event InvoiceEventHandler InvoiceEventHandler;
 
     #endregion
 
@@ -44,6 +43,7 @@ public partial class Controls_NewCreditNoteSearch : System.Web.UI.UserControl
     #endregion
 
     #region Data Grid Events
+    
     protected void InvoiceGridView_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
@@ -66,77 +66,13 @@ public partial class Controls_NewCreditNoteSearch : System.Web.UI.UserControl
         {
             int id = Convert.ToInt32(e.CommandArgument);
 
-            OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
-            OrderHeader orderHeader = orderHeaderUI.GetById(id);
-
-            ////OrderID = orderHeader.ID;
-            ////OrderHeaderNoLabel.Text = orderHeader.AlphaID;
-
-            ////int customerID = orderHeader.CustomerID;
-
-            ////CustomerUI customerUI = new CustomerUI();
-            ////Customer customer = customerUI.GetByID(customerID);
-
-            ////List<Account> accounts = customer.Account;
-
-            ////Action<Account> accountAction =
-            ////    new Action<Account>(a => AccountDropDownList.Items.Add(new ListItem(a.AlphaID.ToString(), a.ID.ToString())));
-
-            ////    AccountDropDownList.Items.Clear();
-            ////    AccountDropDownList.Items.Add(new ListItem("-- No Item Selected --", "-1"));
-            ////    customer.Account.ForEach(accountAction);
-
-            ////    ChangeState += new EventHandler<EventArgs>(SelectedOrderState);
-            ////    ChangeState(this, e);
-
-            ////    List<OutletStore> outletStore = customer.OutletStore;
-
-            ////    Action<OutletStore> outletStoreAction =
-            ////        new Action<OutletStore>(a => DeliveryDropDownList.Items.Add(new ListItem(a.Name.ToString(), a.ID.ToString())));
-
-            ////    DeliveryDropDownList.Items.Clear();
-            ////    DeliveryDropDownList.Items.Add(new ListItem("-- No Item Selected --", "-1"));
-            ////    customer.OutletStore.ForEach(outletStoreAction);
-
-            ////    OrderNotesStatusUI orderNotesStatusUI = new OrderNotesStatusUI();
-            ////    if (orderNotesStatusUI.OrderNoteExistsByOrderID(OrderID.Value))
-            ////    {
-            ////        ConfirmInvoice.Visible = false;
-            ////        ChangeInvoiceDetailsButton.Visible = true;
-            ////        CancelInvoiceButton.Visible = true;
-
-            ////        // Now Select Account using Create OrderNotes record ...
-            ////        OrderNotesStatus orderNoteStatus = orderNotesStatusUI.GetOrderNotesStatusByOrderID(OrderID.Value);
-            ////        OrderNoteStatusID = orderNoteStatus.ID;
-            ////        if (orderNoteStatus.InvoicePrinted)
-            ////        {
-            ////            PrintInvoiceButton.Visible = false;
-            ////            RePrintInvoiceButton.Visible = true;
-            ////        }
-            ////        else
-            ////        {
-            ////            PrintInvoiceButton.Visible = true;
-            ////            RePrintInvoiceButton.Visible = false;
-            ////        }
-
-            ////        AccountDropDownList.SelectedValue = orderNoteStatus.AccountID.ToString();
-            ////        DeliveryDropDownList.SelectedValue = orderNoteStatus.OutletStoreID.ToString();
-            ////        DeliveryVanDropDownList.SelectedValue = orderNoteStatus.VanID.ToString();
-
-            ////        PopulateInvoice(e);
-            ////    }
-            ////    else
-            ////    {
-            ////        ConfirmInvoice.Visible = true;
-            ////        ChangeInvoiceDetailsButton.Visible = false;
-            ////        PrintInvoiceButton.Visible = false;
-            ////        RePrintInvoiceButton.Visible = false;
-            ////        CancelInvoiceButton.Visible = false;
-            ////    }
-
-            ////    DataBind();
+            if (this.InvoiceEventHandler != null)
+            {
+                this.InvoiceEventHandler(this, new InvoiceEventEventArgs { InvoiceID = id });
+            }
         }
     }
+
     #endregion
 
     #region Object Data Source Events

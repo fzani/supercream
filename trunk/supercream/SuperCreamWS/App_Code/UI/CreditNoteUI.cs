@@ -63,7 +63,18 @@ public class CreditNoteUI : IDisposable
 
     public List<CreditNote> GetAllCreditNotes()
     {
-        return _proxy.GetAllCreditNotes();
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return _proxy.GetAllCreditNotes();
+        }
+    }
+
+    InvoiceCreditNoteDetails GetInvoiceCreditNoteDetails(int orderId)
+    {
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return _proxy.GetInvoiceCreditDetails(orderId);
+        }
     }
 
     #endregion

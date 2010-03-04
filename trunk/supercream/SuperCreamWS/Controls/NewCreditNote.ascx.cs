@@ -29,15 +29,17 @@ public partial class Controls_NewCreditNote : System.Web.UI.UserControl
             this.ChangeState(this, new EventArgs());
         }
 
-        this.NewCreditNoteSearch.CreditNoteEventHandler += new CreditNoteEventHandler(CreditNoteSearch_CreditNoteEventHandler);
+        this.NewCreditNoteSearch.InvoiceEventHandler += new InvoiceEventHandler(NewCreditNoteSearch_InvoiceEventHandler);
     }
 
     #endregion
 
     #region Call Back Handlers
 
-    private void CreditNoteSearch_CreditNoteEventHandler(object sender, CreditNoteEventArgs e)
+    void NewCreditNoteSearch_InvoiceEventHandler(object sender, InvoiceEventEventArgs e)
     {
+        this.SaveCreditNoteControl.InvoiceID = e.InvoiceID;
+
         this.ChangeState += new EventHandler<EventArgs>(this.SaveCreditNoteState);
         this.ChangeState(this, new EventArgs());
     }
