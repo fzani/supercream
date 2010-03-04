@@ -43,7 +43,10 @@ public class CreditNoteUI : IDisposable
 
     public CreditNote SaveCreditNote(CreditNote contactDetail)
     {
-        return _proxy.SaveCreditNote(contactDetail);
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return _proxy.SaveCreditNote(contactDetail);
+        }
     }
     public CreditNote UpdateCreditNotes(CreditNote newCreditNote)
     {

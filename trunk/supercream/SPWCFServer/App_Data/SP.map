@@ -52,8 +52,8 @@
     </Type>
   </Table>
   <Table Name="dbo.CreditNote" Member="CreditNote">
-    <Type Name="CreditNote">
-      <Column Name="ID" Member="ID" Storage="_ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
+    <Type Name="CreditNote">      
+      <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
       <Column Name="OrderID" Member="OrderID" Storage="_OrderID" DbType="Int" />
       <Column Name="CreditAmount" Member="CreditAmount" Storage="_CreditAmount" DbType="Decimal(18,2)" />
       <Column Name="Reason" Member="Reason" Storage="_Reason" DbType="NVarChar(MAX)" UpdateCheck="Never" />
