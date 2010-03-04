@@ -94,9 +94,16 @@ namespace SP.Data.LTS
             var invoiceTotal = Math.Round((from o in db.OrderHeader
                                            join ol in db.OrderLine on o.ID equals ol.OrderID
                                            select ol.Price * ol.NoOfUnits).Sum(), 2);
-            var creditTotal = Math.Round((from o in db.CreditNote
+
+            decimal creditTotal = new decimal(0.0);
+            
+            var creditNotes = db.CreditNote.Where(q => q.OrderID == orderNo).DefaultIfEmpty<CreditNote>();           
+            if (creditNotes.First() != null)
+            {
+                creditTotal = Math.Round((from o in db.CreditNote
                                           where o.OrderID == orderNo
                                           select o.CreditAmount).Sum(), 2);
+            }
 
             return new InvoiceCreditNoteDetails
             {
