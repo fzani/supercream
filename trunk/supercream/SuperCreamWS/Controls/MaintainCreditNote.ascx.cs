@@ -16,6 +16,8 @@ public partial class Controls_MaintainCreditNote : System.Web.UI.UserControl
     #region Public Events
 
     public event CancelEventHandler CancelEventHandler;
+    public event ErrorMessageEventHandler ErrorMessageEventHandler;
+    public event CompletedEventHandler CompletedEventHandler;
 
     #endregion
 
@@ -29,17 +31,40 @@ public partial class Controls_MaintainCreditNote : System.Web.UI.UserControl
             this.ChangeState(this, new EventArgs());
         }
 
-        this.CreditNoteSearch.CreditNoteEventHandler += new CreditNoteEventHandler(CreditNoteSearch_CreditNoteEventHandler);
+        this.CreditNoteSearch.CreditNoteEventHandler += new CreditNoteEventHandler(CreditNoteSearch_CreditNoteEventHandler);      
+        this.SaveCreditNoteControl.CompletedEventHandler += new CompletedEventHandler(Completed_InvoiceEventHandler);
+        this.SaveCreditNoteControl.ErrorMessageEventHandler += new ErrorMessageEventHandler(SaveCreditNoteControl_ErrorMessageEventHandler);
     }
 
     #endregion
 
     #region Call Back Handlers
 
+    private void SaveCreditNoteControl_ErrorMessageEventHandler(object sender, ErrorMessageEventArgs e)
+    {
+        if (this.ErrorMessageEventHandler != null)
+        {
+            this.ErrorMessageEventHandler(sender, e);
+        }
+    }
+
+    private void Completed_InvoiceEventHandler(object sender, EventArgs e)
+    {
+        if (this.CompletedEventHandler != null)
+        {
+            this.ChangeState += new EventHandler<EventArgs>(this.InitialiseCreditNoteState);
+            this.ChangeState(this, new EventArgs());
+
+            this.CompletedEventHandler(this, new EventArgs());
+        }
+    }
+
     private void CreditNoteSearch_CreditNoteEventHandler(object sender, CreditNoteEventArgs e)
     {
         this.ChangeState += new EventHandler<EventArgs>(this.SaveCreditNoteState);
         this.ChangeState(this, new EventArgs());
+
+        this.SaveCreditNoteControl.CreditNoteID = e.CreditNoteID;
     }
 
     #endregion
