@@ -391,6 +391,20 @@ namespace SPWCFServer
 
         #region CreditNote
 
+        public InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.InvoiceCreditNoteDetails invoiceDetails = mgr.GetInvoiceCreditDetails(orderID);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.InvoiceCreditNoteDetails, SPWCFServer.InvoiceCreditNoteDetails>(invoiceDetails);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }    
+
         public void DeleteCreditNote(CreditNote creditNote)
         {
             try
@@ -2400,7 +2414,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion             
+        #endregion                                 
     }
 }
 

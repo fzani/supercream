@@ -19,5 +19,7 @@ namespace SP.Core.DataInterfaces
            string customerName, 
            DateTime dateFrom, 
            DateTime dateTo);
+
+       InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID);       
    }
 }

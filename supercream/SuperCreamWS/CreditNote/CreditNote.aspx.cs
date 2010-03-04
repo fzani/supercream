@@ -18,11 +18,10 @@ public partial class CreditNote_CreditNote : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            this.ChangeState += new EventHandler<EventArgs>(PageLoadState);
+            this.ChangeState(this, new EventArgs());
         }
-
-        this.ChangeState += new EventHandler<EventArgs>(PageLoadState);
-        this.ChangeState(this, new EventArgs());
-
+      
         this.NewCreditNote.CancelEventHandler += new CancelEventHandler(NewCreditNote_CancelEventHandler);
 
     } 

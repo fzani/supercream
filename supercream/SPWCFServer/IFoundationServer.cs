@@ -141,6 +141,10 @@ namespace SPWCFServer
         [ReferencePreservingDataContractFormat]
         List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo);
 
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID);       
+
         #endregion
 
         #region Contacts
@@ -1491,6 +1495,22 @@ namespace SPWCFServer
             get { return _InvoiceNo; }
             set { _InvoiceNo = value; }
         }
+    }
+
+    [DataContract]
+    public class InvoiceCreditNoteDetails
+    {
+        [DataMember]
+        public int OrderID { get; set; }
+
+        [DataMember]
+        public decimal TotalInvoiceAmount { get; set; }
+
+        [DataMember]
+        public decimal TotalAmountCredited { get; set; }
+
+        [DataMember]
+        public decimal Balance { get; set; }
     }
 
     [DataContract]
