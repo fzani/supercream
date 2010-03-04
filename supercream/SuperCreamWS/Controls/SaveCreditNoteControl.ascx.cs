@@ -63,6 +63,9 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
         try
         {
             decimal creditAmout = String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ? new decimal(0.0) : Util.ConvertStringToDecimal(this.AmountToCreditTextBox.Text);
+            if ((Convert.ToInt32(this.TotalInvoiceAmountLabel.Text) - Convert.ToInt32(this.AmountToCreditTextBox) - creditAmout) < 0)
+                throw new ApplicationException("Cannot credit for more than the invoicable amount");
+
             CreditNoteUI ui = new CreditNoteUI();
             ui.SaveCreditNote(new CreditNote
             {
