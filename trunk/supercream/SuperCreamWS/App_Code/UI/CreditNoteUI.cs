@@ -50,8 +50,11 @@ public class CreditNoteUI : IDisposable
     }
     public CreditNote UpdateCreditNotes(CreditNote newCreditNote)
     {
-        CreditNote origCreditNote = _proxy.GetCreditNote(newCreditNote.ID);
-        return _proxy.UpdateCreditNote(newCreditNote, origCreditNote);
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            CreditNote origCreditNote = _proxy.GetCreditNote(newCreditNote.ID);
+            return _proxy.UpdateCreditNote(newCreditNote, origCreditNote);
+        }
     }
 
     public List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom,
