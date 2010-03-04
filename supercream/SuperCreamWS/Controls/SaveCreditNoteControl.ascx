@@ -28,6 +28,14 @@
                 </tr>
                  <tr>
                     <td>
+                       Credit Note Reference No.
+                    </td>
+                    <td>
+                        <asp:TextBox ID="CreditNoteReferenceTextBox" Width="50%" MaxLength="20" runat="server" />
+                    </td>
+                </tr>
+                 <tr>
+                    <td>
                         Invoice Amount available to be credited
                     </td>
                     <td>
@@ -65,6 +73,8 @@
                     <td>
                         <asp:Button ID="SaveButton" runat="server" ValidationGroup="SaveCreditNoteGroup"
                             Text="Save" Width="20%" onclick="SaveButton_Click" />
+                        <asp:Button ID="DeleteButton" runat="server" ValidationGroup="SaveCreditNoteGroup"
+                            Text="Delete" Width="20%" onclick="DeleteButton_Click" />
                     </td>
                 </tr>
             </table>

@@ -14,7 +14,8 @@ namespace SP.Core.Domain
         private string _InvoiceNo;
         private DateTime _DateCreated;
         private string _CustomerName;
-
+        private string _Reference;
+    
         public int CreditNoteID
         {
             get 
@@ -88,6 +89,19 @@ namespace SP.Core.Domain
             set
             {
                 _CustomerName = value;
+            }
+        }
+
+        public string Reference
+        {
+            get 
+            { 
+                return _Reference; 
+            }
+
+            set 
+            { 
+                _Reference = value; 
             }
         }
     }

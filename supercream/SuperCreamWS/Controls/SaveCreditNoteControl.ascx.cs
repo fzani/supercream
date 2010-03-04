@@ -17,7 +17,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
 
     #region Private Properties
 
-    private InvoiceCreditNoteDetails invoiceCreditNoteDetails;   
+    private InvoiceCreditNoteDetails invoiceCreditNoteDetails;
 
     #endregion
 
@@ -32,7 +32,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
 
         set
         {
-            ViewState["IsNewCreditNote"] = value;         
+            ViewState["IsNewCreditNote"] = value;
         }
 
     }
@@ -45,10 +45,11 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
         }
 
         set
-        {                      
-            ViewState["OrderID"] = value;           
+        {
+            ViewState["OrderID"] = value;
             this.SetCreditNoteForOrderSaveStatuses();
             this.IsNewCreditNote = true;
+            this.DeleteButton.Visible = false;
         }
     }
 
@@ -60,10 +61,11 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
         }
 
         set
-        {           
-            ViewState["CreditNoteID"] = value;          
+        {
+            ViewState["CreditNoteID"] = value;
             this.SetCreditNoteForCreditNoteSaveStatuses();
             this.IsNewCreditNote = false;
+            this.DeleteButton.Visible = true;
         }
     }
 
@@ -86,6 +88,8 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
         this.TotalInvoiceAmountLabel.Text = totalInvoiceAmount.ToString("c");
         this.InvoiceAmountCreditedLabel.Text = invoiceAmountCredited.ToString("c");
         this.AmountAvailableToBeCreditedLabel.Text = (totalInvoiceAmount - invoiceAmountCredited).ToString("c");
+        AutoGenUI autoGenUI = new AutoGenUI();
+        this.CreditNoteReferenceTextBox.Text = "CRN-" + autoGenUI.Generate().ToString();
     }
 
     private void SetCreditNoteForCreditNoteSaveStatuses()
@@ -103,6 +107,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
 
         this.AmountToCreditTextBox.Text = creditNote.CreditAmount.ToString("c");
         this.ReasonTextBox.Text = creditNote.Reason;
+        this.CreditNoteReferenceTextBox.Text = creditNote.Reference;
     }
 
     #endregion
@@ -126,7 +131,8 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
                     OrderID = this.OrderID.Value,
                     CreditAmount = creditAmout,
                     DateCreated = DateTime.Now,
-                    Reason = this.ReasonTextBox.Text
+                    Reason = this.ReasonTextBox.Text,
+                    Reference = this.CreditNoteReferenceTextBox.Text
                 });
             }
             else
@@ -138,7 +144,8 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
                     OrderID = creditNote.OrderID,
                     CreditAmount = creditAmout,
                     DateCreated = DateTime.Now,
-                    Reason = this.ReasonTextBox.Text
+                    Reason = this.ReasonTextBox.Text,
+                    Reference = this.CreditNoteReferenceTextBox.Text
                 });
             }
 
@@ -158,5 +165,21 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
         }
     }
 
+    protected void DeleteButton_Click(object sender, EventArgs e)
+    {
+        if (CreditNoteID != null)
+        {
+            CreditNoteUI ui = new CreditNoteUI();
+            CreditNote creditNote = ui.GetCreditNote(this.CreditNoteID.Value);
+            ui.Delete(creditNote);
+
+            if (this.CompletedEventHandler != null)
+            {
+                this.CompletedEventHandler(this, new EventArgs());
+            }
+        }
+    }
+
     #endregion
+
 }

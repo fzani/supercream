@@ -253,6 +253,11 @@ namespace SP.Worker
         {
             IDaoFactory factory = new LTSDaoFactory();
             ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
+
+            ICreditNoteDao validateNoteDao = factory.GetCreditNoteDao();
+            if (validateNoteDao.ReferenceExists(creditnote.Reference))
+                throw new ApplicationException("Cannot add credit note Credit Reference is alreasy in use");
+
             return creditNoteDao.Save(creditnote);
         }
 
@@ -260,6 +265,10 @@ namespace SP.Worker
         {
             IDaoFactory factory = new LTSDaoFactory();
             ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
+            ICreditNoteDao validateNoteDao = factory.GetCreditNoteDao();
+            CreditNote originalCreditNote = validateNoteDao.GetByReferenceId(newCreditNote.Reference);
+            if(originalCreditNote.ID != newCreditNote.ID)
+                throw new ApplicationException("Cannot change Credit Reference is alreasy in use");
             return creditNoteDao.Update(newCreditNote, origCreditNote);
         }
 

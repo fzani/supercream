@@ -6,7 +6,7 @@
         <asp:Panel ID="CreditNoteSearchCriteriaPanel" DefaultButton="SearchButton" runat="server">
             <legend>
                 <h3>
-                    Search Invoices</h3>
+                    Search Credit Notes</h3>
             </legend>
             <table class="search">
                 <tr>
@@ -79,17 +79,15 @@
                                         Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
                                         OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
                                 </td>
-                            </tr>                           
+                            </tr>
                             <tr>
                                 <td>
                                 </td>
                                 <td>
-                                    <asp:Button ID="SearchButton" Text="Search" CausesValidation="false" 
-                                        runat="server" onclick="SearchButton_Click"
-                                         />
-                                    <asp:Button ID="ClearButton" Text="Clear Search" CausesValidation="false" 
-                                        runat="server" onclick="ClearButton_Click"
-                                        />
+                                    <asp:Button ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
+                                        OnClick="SearchButton_Click" />
+                                    <asp:Button ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
+                                        OnClick="ClearButton_Click" />
                                 </td>
                             </tr>
                         </table>
@@ -98,28 +96,46 @@
             </table>
         </asp:Panel>
         <asp:Panel ID="CreditNoteSelectionGrid" runat="server">
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
-                Width="98%" DataSourceID="CreditNotesObjectDataSource" 
-                onrowcommand="GridView1_RowCommand">
+            <h2>
+                Credit Notes</h2>
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width="98%"
+                DataSourceID="CreditNotesObjectDataSource" OnRowCommand="GridView1_RowCommand">
                 <Columns>
-                    <asp:BoundField DataField="OrderNo" ItemStyle-Width="20%" HeaderText="Order No" SortExpression="OrderNo" />
-                    <asp:BoundField DataField="InvoiceNo" ItemStyle-Width="20%" HeaderText="Invoice No" SortExpression="InvoiceNo" />
-                    <asp:BoundField DataField="CustomerName" ItemStyle-Width="20%" Visible HeaderText="Customer Name" SortExpression="CustomerName" />
-                    <asp:BoundField DataField="DateCreated" ItemStyle-Width="20%" HeaderText="Date Created" SortExpression="DateCreated" />
-                    <asp:BoundField DataField="CreditNoteID" Visible="false" HeaderText="CreditNoteID" SortExpression="CreditNoteID" />
-                     <asp:TemplateField ItemStyle-Width="20%">
+                    <asp:TemplateField HeaderText="Order No/Reference" SortExpression="OrderNo/Reference">
+                        <ItemTemplate>
+                            <asp:Label ID="Label1" runat="server" Text='<%# Bind("OrderNo") %>'></asp:Label> <br />
+                            <asp:Label ID="Label2" runat="server" Text='<%# Bind("Reference") %>'></asp:Label>
+                        </ItemTemplate>                       
+                        <ItemStyle Width="20%" />
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="InvoiceNo" HeaderText="Invoice No" 
+                        ItemStyle-Width="20%" SortExpression="InvoiceNo">
+                    <ItemStyle Width="20%" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="CustomerName" HeaderText="Customer Name" 
+                        ItemStyle-Width="20%" SortExpression="CustomerName" Visible="">
+                    <ItemStyle Width="20%" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="DateCreated" HeaderText="Date Created" 
+                        ItemStyle-Width="20%" SortExpression="DateCreated">
+                    <ItemStyle Width="20%" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="CreditNoteID" HeaderText="CreditNoteID" 
+                        SortExpression="CreditNoteID" Visible="false" />
+                    <asp:TemplateField ItemStyle-Width="20%">
                         <ItemTemplate>
                             <asp:Button ID="EditCreditNoteButton" runat="server" CommandArgument='<%# Bind("CreditNoteID") %>'
                                 CommandName="EditCreditNote" ControlStyle-CssClass="button" ItemStyle-Width="20%"
                                 Text="Select" />
                         </ItemTemplate>
+                        <ItemStyle Width="20%" />
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
             <asp:ObjectDataSource ID="CreditNotesObjectDataSource" runat="server" OnSelecting="ObjectDataSource1_Selecting"
                 SelectMethod="SearchCreditNotes" TypeName="CreditNoteUI">
-                <SelectParameters>                   
-                    <asp:Parameter Name="orderNo" Type="String" />
+                <SelectParameters>
+                    <asp:Parameter Name="orderNo" Type="String" />                   
                     <asp:Parameter Name="invoiceNo" Type="String" />
                     <asp:Parameter Name="customerName" Type="String" />
                     <asp:Parameter Name="dateFrom" Type="DateTime" />

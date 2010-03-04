@@ -18,6 +18,7 @@ namespace SP.Core.Domain
         private decimal _CreditAmount;
         private string _Reason;
         private DateTime _DateCreated;
+        private string _Reference;
 
         public override int ID
         {
@@ -78,6 +79,19 @@ namespace SP.Core.Domain
             set 
             { 
                 _DateCreated = value; 
+            }
+        }
+
+        public string Reference
+        {
+            get 
+            { 
+                return _Reference; 
+            }
+
+            set 
+            {
+                _Reference = value; 
             }
         }
     }
