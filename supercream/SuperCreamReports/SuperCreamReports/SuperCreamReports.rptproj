@@ -54,6 +54,7 @@
       <Name>Debug</Name>
       <Platform>Win32</Platform>
       <Options>
+        <TargetServerURL>http://localhost/reportserver</TargetServerURL>
         <TargetFolder>SuperCreamReports</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
       </Options>
