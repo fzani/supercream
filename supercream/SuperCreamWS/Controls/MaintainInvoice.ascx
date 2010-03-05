@@ -124,7 +124,7 @@
                         </ItemTemplate>
                         <ItemStyle Width="15%" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Order No." ItemStyle-Width="25%" SortExpression="AlphaID">
+                    <asp:TemplateField HeaderText="Order No." ItemStyle-Width="20%" SortExpression="AlphaID">
                         <ItemTemplate>
                             <asp:Label ID="Label2" runat="server" Text='<%# Bind("AlphaID") %>'></asp:Label>
                         </ItemTemplate>
@@ -133,14 +133,34 @@
                         </EditItemTemplate>
                         <ItemStyle Width="20%" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Invoice No." ItemStyle-Width="25%" SortExpression="InvoiceNo">
+                    <asp:TemplateField HeaderText="Invoice No." ItemStyle-Width="30%" SortExpression="InvoiceNo">
                         <ItemTemplate>
-                            <asp:Label ID="InvoiceLabel" runat="server" Text='<%# Bind("InvoiceNo") %>'></asp:Label>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="width: 80%">
+                                        <asp:Label ID="InvoiceLabel" runat="server" Text='<%# Bind("InvoiceNo") %>'></asp:Label>
+                                    </td>
+                                    <td style="width: 20%">
+                                        <asp:Panel ID="CreditNoteImagePanel" runat="server">
+                                            <asp:Image ID="CreditNoteImage" runat="server" ImageUrl="~/images/16-circle-green.gif" />
+                                        </asp:Panel>
+                                        <asp:Panel CssClass="popupMenu" ID="PopupMenu" runat="server">
+                                            <div style="border: 1px outset black; padding: 2px; background-color: White;">
+                                                <asp:LinkButton ID="LinkButton1" runat="server" CommandName="DisplayCreditNotes"
+                                                    CommandArgument='<%# Bind("ID") %>' Text="Display Credit Notes" /></div>
+                                            </div>
+                                        </asp:Panel>
+                                        <ajaxToolkit:HoverMenuExtender ID="hme2" runat="Server" HoverCssClass="popupHover"
+                                            PopupControlID="PopupMenu" PopupPosition="Right" TargetControlID="CreditNoteImagePanel"
+                                            PopDelay="25" />
+                                    </td>
+                                </tr>
+                            </table>
                         </ItemTemplate>
                         <EditItemTemplate>
                             <asp:TextBox ID="InvoiceTextBox" runat="server" Text='<%# Bind("InvoiceNo") %>'></asp:TextBox>
                         </EditItemTemplate>
-                        <ItemStyle Width="20%" />
+                        <ItemStyle Width="30%" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Customer Name" ItemStyle-Width="40%" SortExpression="CustomerID">
                         <ItemTemplate>
@@ -174,6 +194,36 @@
                 </SelectParameters>
             </asp:ObjectDataSource>
         </asp:Panel>
+      
+        <asp:Button runat="server" ID="hiddenTargetControlForModalPopup" Style="display: none" />
+        <ajaxToolkit:ModalPopupExtender ID="CreditNoteModalPopupExtender" DropShadow="true"
+            runat="server" TargetControlID="hiddenTargetControlForModalPopup" PopupControlID="DisplayActionPanel"
+            CancelControlID="CancelActionPanelButton" BackgroundCssClass="XPopUpBackGround" />
+        <asp:Panel Style="display: none;" ID="DisplayActionPanel" runat="server" DefaultButton="CancelActionPanelButton"
+            CssClass="modalPopup">
+            <div style="width: 800px;">
+                <table style="width: 100%; background-color: #7CAACB;">
+                    <tr>
+                        <td style="font-size: 1.2em; color: White; width: 530px;">
+                            Description
+                        </td>
+                        <td style="font-size: 1.2em; color: White; width: 270px;">
+                            Reason for Action
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="width: 800px;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td colspan="4" style="text-align: center">
+                            <asp:Button ID="CancelActionPanelButton" Width="100%" Text="OK" runat="server" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </asp:Panel>
+        
         <asp:Panel ID="InvoiceEntryPanel" Visible="false" runat="server">
             <table style="width: 100%">
                 <tr>

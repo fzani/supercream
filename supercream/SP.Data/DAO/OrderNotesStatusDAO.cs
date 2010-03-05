@@ -10,6 +10,7 @@ using System.Text;
 
 using SP.Core.Domain;
 using SP.Core.DataInterfaces;
+using System.Data.Linq;
 
 namespace SP.Data.LTS
 {
@@ -94,6 +95,6 @@ namespace SP.Data.LTS
                             InvoiceCount = result.Count()
                         }).ToList<VanInvoiceCount>();
             return query;
-        }
+        }       
     }
 }

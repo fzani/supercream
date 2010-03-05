@@ -249,7 +249,11 @@ namespace SP.Core.Domain
             }
             set
             {
-                _OrderHeader = value;               
+                _OrderHeader = value;
+                if (OrderHeader != null)
+                {
+                    _OrderHeader.OrderNoteStatus = this;
+                }
             }
         }
 

@@ -41,6 +41,8 @@ namespace SP.Core.ManagerInterfaces
         #endregion
 
         #region CreditNote
+
+        bool CreditNoteExistsByOrderId(int orderId);
         InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID);
         void DeleteCreditNote(CreditNote creditnote);
         CreditNote GetCreditNote(int id);

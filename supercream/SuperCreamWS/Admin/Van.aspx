@@ -36,7 +36,7 @@
                                         Width="400px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="AddVan"
                                         ControlToValidate="DescriptionTextBox" ErrorMessage="Description is a required Field"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -50,7 +50,7 @@
                                         TargetControlID="MaximumRecommendedTextBox" FilterType="Numbers" />
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="AddVan"
                                         ControlToValidate="MaximumRecommendedTextBox" ErrorMessage="Description is a required Field"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -112,21 +112,26 @@
                                 <asp:Label ID="Label1" runat="server" Text='<%# Bind("Description") %>'></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox1" runat="server" MaxLength="30" Width="300px" Text='<%# Bind("Description") %>'></asp:TextBox>
+                                <asp:TextBox ID="TextBox1" runat="server" MaxLength="30" Width="94%" Text='<%# Bind("Description") %>'></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="GridViewGroup"
+                                    ControlToValidate="TextBox1" Display="Dynamic" ErrorMessage="Description is a required Field"
+                                    InitialValue="" Text="*" runat="server" />
                             </EditItemTemplate>
                         </asp:TemplateField>
-                        
-                         <asp:TemplateField HeaderText="MaximumReccomendedParcelCount" SortExpression="MaximumReccomendedParcelCount" 
+                        <asp:TemplateField HeaderText="MaximumReccomendedParcelCount" SortExpression="MaximumReccomendedParcelCount"
                             ItemStyle-Width="10%">
                             <ItemTemplate>
                                 <asp:Label ID="MaximumReccomendedParcelCountLabel" runat="server" Text='<%# Bind("MaximumReccomendedParcelCount") %>'></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:TextBox ID="MaximumReccomendedParcelCountTextBox" runat="server" MaxLength="30" Width="60px" Text='<%# Bind("MaximumReccomendedParcelCount") %>'></asp:TextBox>
+                                <asp:TextBox ID="MaximumReccomendedParcelCountTextBox" runat="server" MaxLength="30"
+                                    Width="60px" Text='<%# Bind("MaximumReccomendedParcelCount") %>'></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorUpdate1" Display="Dynamic"
+                                    ValidationGroup="GridViewGroup" ControlToValidate="MaximumReccomendedParcelCountTextBox"
+                                    ErrorMessage="Maximum Recommended Parcel Count is a required Field" InitialValue=""
+                                    Text="*" runat="server" />
                             </EditItemTemplate>
                         </asp:TemplateField>
-                        
-                        
                         <asp:ButtonField ButtonType="Button" ControlStyle-CssClass="button" ValidationGroup="GridViewGroup"
                             CommandName="Delete" Text="Delete">
                             <ControlStyle CssClass="button" />

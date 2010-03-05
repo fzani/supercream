@@ -15,9 +15,9 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
     #endregion
 
     #region Public Event Handlers
-  
+
     public event ErrorMessageEventHandler ErrorMessageEventHandler;
-    
+
     #endregion
 
     #region Page Load event
@@ -248,6 +248,17 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             CustomerUI ui = new CustomerUI();
             Customer customer = ui.GetByID(customerID);
 
+            Image img = e.Row.FindControl("CreditNoteImage") as Image;
+            CreditNoteUI creditNoteUI = new CreditNoteUI();
+            if (creditNoteUI.CreditNoteExists(orderHeader.ID))
+            {
+                img.Visible = true;
+            }
+            else
+            {
+                img.Visible = false;
+            }
+
             Label customerNameLabel = e.Row.FindControl("CustomerNameLabel") as Label;
             customerNameLabel.Text = customer.Name;
         }
@@ -326,9 +337,13 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
                 RePrintInvoiceButton.Visible = false;
                 CancelInvoiceButton.Visible = false;
             }
-
-            DataBind();
         }
+        else if (e.CommandName == "DisplayCreditNotes")
+        {
+           CreditNoteModalPopupExtender.Show();
+        }
+
+        DataBind();
     }
     #endregion
 

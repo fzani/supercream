@@ -22,6 +22,9 @@ public partial class Admin_Van : System.Web.UI.Page
 
             DataBind();
         }
+
+        ErrorViewControl.Visible = false;
+
     }
 
     protected void AddVanButton_Click(object sender, EventArgs e)

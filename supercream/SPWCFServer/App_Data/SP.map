@@ -155,8 +155,7 @@
       <Column Name="InvoiceNo" Member="InvoiceNo" Storage="_InvoiceNo" DbType="varchar(50)" />
       <Association Name="FK_Note_Order" Member="Note" Storage="_Note" ThisKey="ID" OtherKey="ParentNoteID" DeleteRule="NO ACTION" />
       <Association Name="FK_Order_Customer" Member="Customer" Storage="_Customer" ThisKey="CustomerID" OtherKey="ID" IsForeignKey="true" />
-      <Association Name="FK_OrderLine_Order" Member="OrderLine" Storage="_OrderLine" ThisKey="ID" OtherKey="OrderID" DeleteRule="NO ACTION" />
-      <Association Name="FK_OrderNotesStatus_OrderHeader" Member="OrderNotesStatus" Storage="_OrderNotesStatus" ThisKey="ID" OtherKey="OrderID" DeleteRule="NO ACTION" />
+      <Association Name="FK_OrderLine_Order" Member="OrderLine" Storage="_OrderLine" ThisKey="ID" OtherKey="OrderID" DeleteRule="NO ACTION" />     
     </Type>
   </Table>
   <Table Name="dbo.OrderLine" Member="OrderLine">
@@ -174,7 +173,7 @@
       <Association Name="FK_OrderLine_Order" Member="OrderHeader" Storage="_OrderHeader" ThisKey="OrderID" OtherKey="ID" IsForeignKey="true" />
       <Association Name="FK_OrderLine_Product" Member="Product" Storage="_Product" ThisKey="ProductID" OtherKey="ID" IsForeignKey="true" />
     </Type>
-  </Table>
+  </Table> 
   <Table Name="dbo.OrderNotesStatus" Member="OrderNotesStatus">
     <Type Name="OrderNotesStatus">
       <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
@@ -193,8 +192,8 @@
       <Column Name="InvoiceDatePrinted" Member="InvoiceDatePrinted" Storage="_InvoiceDatePrinted" DbType="DateTime" />
       <Column Name="InvoiceDateReprinted" Member="InvoiceDateReprinted" Storage="_InvoiceDateReprinted" DbType="DateTime" />
       <Column Name="PicklistDateGenerated" Member="PicklistDateGenerated" Storage="_PicklistDateGenerated" DbType="DateTime" />
-      <Association Name="FK_OrderNotesStatus_OrderHeader" Member="OrderHeader" Storage="_OrderHeader" ThisKey="OrderID" OtherKey="ID" IsForeignKey="true" />
-      <Association Name="FK_OrderNotesStatus_Van" Member="Van" Storage="_Van" ThisKey="VanID" OtherKey="ID" IsForeignKey="true" />
+      <Column Name="InvoicePaymentComplete" Member="InvoicePaymentComplete" Storage="_InvoicePaymentComplete" DbType="Bit" />     
+      <Association Name="FK_OrderNotesStatus_Van" Member="Van" ThisKey="VanID" OtherKey="ID" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.OutletStore" Member="OutletStore">
