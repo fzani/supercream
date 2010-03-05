@@ -75,6 +75,14 @@ public class CreditNoteUI : IDisposable
         }
     }
 
+    public bool CreditNoteExists(int orderId)
+    { 
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return _proxy.CreditNoteExistsByOrderId(orderId);
+        }
+    }
+
     public InvoiceCreditNoteDetails GetInvoiceCreditNoteDetails(int orderId)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())

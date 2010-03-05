@@ -29,6 +29,11 @@ namespace SP.Data.LTS
             return db.CreditNote.Single<CreditNote>(q => q.ID == id);
         }
 
+        public bool CreditNoteExistsByOrderId(int orderId)
+        {
+            return (db.CreditNote.Where<CreditNote>(q => q.OrderID == orderId).FirstOrDefault() != null) ? true : false;
+        }
+
         public bool ReferenceExists(string referenceNo)
         {
             return (db.CreditNote.Where<CreditNote>(q => q.Reference == referenceNo).FirstOrDefault() != null) ? true : false;

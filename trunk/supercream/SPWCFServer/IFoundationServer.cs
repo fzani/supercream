@@ -119,6 +119,10 @@ namespace SPWCFServer
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
+        bool CreditNoteExistsByOrderId(int orderId);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
         void DeleteCreditNote(CreditNote creditNote);
 
         [OperationContract]
@@ -143,7 +147,7 @@ namespace SPWCFServer
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
-        InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID);       
+        InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID);
 
         #endregion
 

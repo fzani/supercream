@@ -21,6 +21,7 @@ namespace SP.Core.DataInterfaces
            DateTime dateTo);
 
        InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID);
+       bool CreditNoteExistsByOrderId(int orderId);
        bool ReferenceExists(string referenceNo);
        CreditNote GetByReferenceId(string reference);
    }

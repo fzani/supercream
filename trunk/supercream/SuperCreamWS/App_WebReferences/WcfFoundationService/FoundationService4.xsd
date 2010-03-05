@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SPWCFServer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SPWCFServer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Linq" />
-  <xs:complexType name="ArrayOfTerms">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Terms" nillable="true" type="tns:Terms" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfTerms" nillable="true" type="tns:ArrayOfTerms" />
   <xs:complexType name="Terms">
     <xs:sequence>
       <xs:element minOccurs="0" name="Account" nillable="true" type="tns:Account" />
@@ -161,6 +155,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfOutletStore" nillable="true" type="tns:ArrayOfOutletStore" />
+  <xs:complexType name="ArrayOfTerms">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Terms" nillable="true" type="tns:Terms" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTerms" nillable="true" type="tns:ArrayOfTerms" />
   <xs:complexType name="VatCode">
     <xs:sequence>
       <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
@@ -192,6 +192,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfVan" nillable="true" type="tns:ArrayOfVan" />
+  <xs:complexType name="ArrayOfPriceListHeader">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PriceListHeader" nillable="true" type="tns:PriceListHeader" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPriceListHeader" nillable="true" type="tns:ArrayOfPriceListHeader" />
   <xs:complexType name="PriceListHeader">
     <xs:sequence>
       <xs:element minOccurs="0" name="DateEffectiveFrom" type="xs:dateTime" />
@@ -378,12 +384,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="VanInvoiceCount" nillable="true" type="tns:VanInvoiceCount" />
-  <xs:complexType name="ArrayOfPriceListHeader">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="PriceListHeader" nillable="true" type="tns:PriceListHeader" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPriceListHeader" nillable="true" type="tns:ArrayOfPriceListHeader" />
   <xs:complexType name="ArrayOfCustomer">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Customer" nillable="true" type="tns:Customer" />

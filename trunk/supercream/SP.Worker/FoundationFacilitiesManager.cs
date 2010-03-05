@@ -220,6 +220,14 @@ namespace SP.Worker
 
         #region CreditNote
 
+        public bool CreditNoteExistsByOrderId(int orderId)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
+            return creditNoteDao.CreditNoteExistsByOrderId(orderId);
+        }
+   
+
         public InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID)
         {
             IDaoFactory factory = new LTSDaoFactory();
@@ -1262,5 +1270,5 @@ namespace SP.Worker
         }
 
         #endregion
-    }
+   }
 }

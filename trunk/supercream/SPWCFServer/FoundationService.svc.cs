@@ -391,6 +391,19 @@ namespace SPWCFServer
 
         #region CreditNote
 
+        public bool CreditNoteExistsByOrderId(int orderId)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return mgr.CreditNoteExistsByOrderId(orderId);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID)
         {
             try
@@ -403,7 +416,7 @@ namespace SPWCFServer
             {
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
-        }    
+        }
 
         public void DeleteCreditNote(CreditNote creditNote)
         {
@@ -2414,7 +2427,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion                                 
+        #endregion
     }
 }
 
