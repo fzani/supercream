@@ -36,7 +36,7 @@
                                         Width="250px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="AddGroup"
                                         ControlToValidate="CodeTestBox" ErrorMessage="Name is a required field" InitialValue=""
-                                        Text="Required" runat="server" />
+                                        Text="*" runat="server" />
                                 </td>
                                 <td style="width: 40%;">
                                     <asp:CheckBox ID="VatExemptableCode" ValidationGroup="AddGroup" Text="Vat Exemptable Code"
@@ -52,7 +52,7 @@
                                         Width="250px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="AddGroup"
                                         ControlToValidate="DescriptionTextBox" ErrorMessage="Name is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -67,7 +67,7 @@
                                         TargetControlID="PercentageTextBox" FilterType="Custom, Numbers" ValidChars="." />
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ValidationGroup="AddGroup"
                                         ControlToValidate="PercentageTextBox" ErrorMessage="Percentage is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -119,8 +119,8 @@
                                     Text="Edit"></asp:Button>
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:Button ID="UpdateButton" runat="server" ValidationGroup="UpdateGroup" CausesValidation="True" CommandName="Update"
-                                    Text="Update"></asp:Button>
+                                <asp:Button ID="UpdateButton" runat="server" ValidationGroup="UpdateGroup" CausesValidation="True"
+                                    CommandName="Update" Text="Update"></asp:Button>
                                 &nbsp;<asp:Button ID="CancelButton" runat="server" CausesValidation="False" CommandName="Cancel"
                                     Text="Cancel"></asp:Button>
                             </EditItemTemplate>
@@ -132,9 +132,9 @@
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <asp:TextBox ID="VatCodeTextBox" runat="server" MaxLength="3" Width="30px" Text='<%# Bind("Code") %>'></asp:TextBox>
-                                  <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ValidationGroup="UpdateGroup"
-                                        ControlToValidate="VatCodeTextBox" Display="Dynamic" ErrorMessage="VatCode is a required Field"
-                                        InitialValue="" Text="*" runat="server" />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ValidationGroup="UpdateGroup"
+                                    ControlToValidate="VatCodeTextBox" Display="Dynamic" ErrorMessage="VatCode is a required Field"
+                                    InitialValue="" Text="*" runat="server" />
                             </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Description" ItemStyle-Width="30%" SortExpression="Description">
@@ -143,6 +143,9 @@
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox2" runat="server" MaxLength="20" Width="150px" Text='<%# Bind("Description") %>'></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="UpdateGroup"
+                                    ControlToValidate="TextBox2" ErrorMessage="Description is a required Text Box"
+                                    InitialValue="" Text="*" runat="server" />
                             </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Percentage" ItemStyle-Width="20%" SortExpression="PercentageValue">
@@ -153,6 +156,9 @@
                                 <asp:TextBox ID="TextBox3" runat="server" MaxLength="5" Width="50px" Text='<%# Bind("PercentageValue") %>'></asp:TextBox>
                                 <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server"
                                     TargetControlID="TextBox3" FilterType="Custom,Numbers" ValidChars="." />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator99" ValidationGroup="UpdateGroup"
+                                    ControlToValidate="TextBox3" ErrorMessage="Percentage is a required Text Box"
+                                    InitialValue="" Text="*" runat="server" />
                             </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField ItemStyle-Width="10%" ShowHeader="False">
