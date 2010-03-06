@@ -978,6 +978,16 @@ namespace SP.Worker
             IDaoFactory factory = new LTSDaoFactory();
             IProductDao productDao = factory.GetProductDao();
 
+            IProductDao originalProductDao = factory.GetProductDao();
+            if(originalProductDao.ProductCodeExists(newProduct.ProductCode))
+            {
+                Product existingProduct = originalProductDao.GetByProductCode(newProduct.ProductCode);   
+                if(newProduct.ID != existingProduct.ID)
+                {
+                    throw new ApplicationException("Cannot update product code - poduct code already exists for another item");
+                }
+            }
+
             productDao.Update(newProduct, origProduct);
 
             return newProduct;

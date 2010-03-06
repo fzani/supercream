@@ -10,10 +10,12 @@
         <Triggers>
             <asp:PostBackTrigger ControlID="NewProductButton" />
             <asp:PostBackTrigger ControlID="MaintainProductButton" />
+            <asp:PostBackTrigger ControlID="CancelNewProductButton" />
             <asp:PostBackTrigger ControlID="AddProductCodeButton" />
             <asp:PostBackTrigger ControlID="SearchButton" />
             <asp:PostBackTrigger ControlID="ModifyProductCodeButton" />
             <asp:PostBackTrigger ControlID="ProductGridView" />
+            <asp:PostBackTrigger ControlID="ProductCancelButton" />
         </Triggers>
         <ContentTemplate>
             <div class="ErrorOutput">
@@ -57,7 +59,7 @@
             <asp:PostBackTrigger ControlID="NewProductButton" />
         </Triggers>
         <ContentTemplate>
-            <asp:Panel ID="AddProductPanel" runat="server">
+            <asp:Panel ID="AddProductPanel" DefaultButton="AddProductCodeButton" runat="server">
                 <div class="FormInput">
                     <fieldset id="VarInputLegend">
                         <legend>
@@ -72,8 +74,7 @@
                                 <td>
                                     <asp:TextBox ID="CodeTestBox" runat="server" MaxLength="10" Width="130px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="CodeTestBox"
-                                        ErrorMessage="Product Code is a required Text Box" InitialValue="" Text="Required"
-                                        runat="server" />
+                                        ErrorMessage="Product Code is a required Text Box" InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -83,7 +84,7 @@
                                 <td>
                                     <asp:TextBox ID="DescriptionTextBox" runat="server" MaxLength="50" Width="430px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="DescriptionTextBox"
-                                        ErrorMessage="Product Description is a required field" InitialValue="" Text="Required"
+                                        ErrorMessage="Product Description is a required field" InitialValue="" Text="*"
                                         runat="server" />
                                 </td>
                             </tr>
@@ -94,7 +95,7 @@
                                 <td>
                                     <asp:TextBox ID="UnitQuantityTextBox" runat="server" MaxLength="6" Width="50px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ControlToValidate="UnitQuantityTextBox"
-                                        ErrorMessage="Unit Quantity is a required Text Box" InitialValue="" Text="Required"
+                                        ErrorMessage="Unit Quantity is a required Text Box" InitialValue="" Text="*"
                                         runat="server" />
                                     <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server"
                                         TargetControlID="UnitQuantityTextBox" FilterType="Numbers">
@@ -108,8 +109,7 @@
                                 <td>
                                     <asp:TextBox ID="UnitPriceTextBox" runat="server" MaxLength="9" Width="70px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ControlToValidate="UnitPriceTextBox"
-                                        ErrorMessage="Unit Price is a required field" InitialValue="" Text="Required"
-                                        runat="server" />
+                                        ErrorMessage="Unit Price is a required field" InitialValue="" Text="*" runat="server" />
                                     <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server"
                                         TargetControlID="UnitPriceTextBox" FilterType="Custom,Numbers" ValidChars="£,." />
                                 </td>
@@ -121,7 +121,7 @@
                                 <td>
                                     <asp:TextBox ID="RRPTextBox" runat="server" MaxLength="9" Width="70px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ControlToValidate="RRPTextBox"
-                                        ErrorMessage="Unit Quantity is a required Text Box" InitialValue="" Text="Required"
+                                        ErrorMessage="Unit Quantity is a required Text Box" InitialValue="" Text="*"
                                         runat="server" />
                                     <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server"
                                         TargetControlID="RRPTextBox" FilterType="Custom,Numbers" ValidChars="£,." />
@@ -155,7 +155,7 @@
                                     <table class="progressupdate">
                                         <tr>
                                             <td>
-                                                <asp:Button ID="AddProductCodeButton" Text="Add" runat="server" OnClick="AddProductCodeButton_Click1" />
+                                                <asp:Button ID="AddProductCodeButton" Text="Add" runat="server" OnClick="AddProductCodeButton_Click" />
                                                 <asp:Button ID="CancelNewProductButton" CausesValidation="false" Text="Cancel" runat="server"
                                                     OnClick="CancelNewProductCodeButton_Click1" />
                                             </td>
@@ -220,6 +220,13 @@
                                 <asp:GridView ID="ProductGridView" runat="server" DataKeyNames="ID" DataSourceID="ObjectDataSource1"
                                     OnRowCommand="ProductGridView_RowCommand" OnPageIndexChanging="ProductGridView_PageIndexChanging"
                                     OnRowDeleted="ProductGridView_RowDeleted" OnRowDeleting="ProductGridView_RowDeleting">
+                                    <EmptyDataTemplate>
+                                        <div align="center" style="border: solid 1px black; padding: 2px 2px 2px 2px; width: 100%;
+                                            margin-top:10px; text-align: center;">
+                                            Search produced no results
+                                        </div>
+                                    </EmptyDataTemplate>
+                                    
                                     <Columns>
                                         <asp:BoundField DataField="ID" HeaderText="ID" SortExpression="ID" Visible="False" />
                                         <asp:BoundField DataField="ProductCode" HeaderText="Product Code" ItemStyle-Width="20%"
@@ -261,10 +268,11 @@
         <Triggers>
         </Triggers>
         <ContentTemplate>
-            <asp:Panel ID="ModifyProductPanel" Visible="false" runat="server">
+            <asp:Panel ID="ModifyProductPanel" DefaultButton="ModifyProductCodeButton" Visible="false"
+                runat="server">
                 <div class="FormInput">
                     <fieldset id="Fieldset2">
-                        <legend>
+                        <legend>"
                             <h3>
                                 Enter Product</h3>
                         </legend>
@@ -276,8 +284,7 @@
                                 <td>
                                     <asp:TextBox ID="ModifyCodeTextBox" runat="server" MaxLength="10" Width="130px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ControlToValidate="ModifyCodeTextBox"
-                                        ErrorMessage="Product Code is a required Text Box" InitialValue="" Text="Required"
-                                        runat="server" />
+                                        ErrorMessage="Product Code is a required Text Box" InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -287,7 +294,7 @@
                                 <td>
                                     <asp:TextBox ID="ModifyDescriptionTextBox" runat="server" MaxLength="50" Width="430px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ControlToValidate="ModifyDescriptionTextBox"
-                                        ErrorMessage="Product Description is a required field" InitialValue="" Text="Required"
+                                        ErrorMessage="Product Description is a required field" InitialValue="" Text="*"
                                         runat="server" />
                                 </td>
                             </tr>
@@ -298,7 +305,7 @@
                                 <td>
                                     <asp:TextBox ID="ModifyUnitQuantityTextBox" runat="server" MaxLength="6" Width="50px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8" ControlToValidate="ModifyUnitQuantityTextBox"
-                                        ErrorMessage="Unit Quantity is a required Text Box" InitialValue="" Text="Required"
+                                        ErrorMessage="Unit Quantity is a required Text Box" InitialValue="" Text="*"
                                         runat="server" />
                                     <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server"
                                         TargetControlID="ModifyUnitQuantityTextBox" FilterType="Numbers">
@@ -312,8 +319,7 @@
                                 <td>
                                     <asp:TextBox ID="ModifyUnitPriceTextBox" runat="server" MaxLength="9" Width="70px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9" ControlToValidate="ModifyUnitPriceTextBox"
-                                        ErrorMessage="Unit Price is a required field" InitialValue="" Text="Required"
-                                        runat="server" />
+                                        ErrorMessage="Unit Price is a required field" InitialValue="" Text="*" runat="server" />
                                     <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server"
                                         TargetControlID="ModifyUnitPriceTextBox" FilterType="Custom,Numbers" ValidChars="£,." />
                                 </td>
@@ -325,7 +331,7 @@
                                 <td>
                                     <asp:TextBox ID="ModifyRRPTextBox" runat="server" MaxLength="9" Width="70px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator10" ControlToValidate="ModifyRRPTextBox"
-                                        ErrorMessage="Unit Quantity is a required Text Box" InitialValue="" Text="Required"
+                                        ErrorMessage="Unit Quantity is a required Text Box" InitialValue="" Text="*"
                                         runat="server" />
                                     <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender6" runat="server"
                                         TargetControlID="ModifyRRPTextBox" FilterType="Custom,Numbers" ValidChars="£,." />
@@ -360,7 +366,8 @@
                                         <tr>
                                             <td>
                                                 <asp:Button ID="ModifyProductCodeButton" Text="Save" runat="server" OnClick="ModifyProductCodeButton_Click" />
-                                                <asp:Button ID="ProductCancelButton" Text="Cancel" runat="server" OnClick="CancelProductCodeButton_Click" />
+                                                <asp:Button ID="ProductCancelButton" Text="Cancel" runat="server" CausesValidation="false"
+                                                    OnClick="CancelProductCodeButton_Click" />
                                             </td>
                                             <td>
                                                 <div class="progressupdate">
