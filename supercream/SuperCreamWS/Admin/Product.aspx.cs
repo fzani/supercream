@@ -36,9 +36,11 @@ public partial class Product_Admin : System.Web.UI.Page
             List<VatCode> vatCodeList = vatCodeUI.GetAllVatCodes();
 
             VatCodeDropDownList.Items.Clear();
-
             if (vatCodeList.Count > 2)
+            {
                 VatCodeDropDownList.Items.Add(new ListItem("-- Not Selected --", "-1"));
+            }
+
             foreach (VatCode vc in vatCodeList)
             {
                 if (vc.VatExemptible == false)
@@ -54,7 +56,7 @@ public partial class Product_Admin : System.Web.UI.Page
     #endregion
 
     #region Button Events
-    protected void AddProductCodeButton_Click1(object sender, EventArgs e)
+    protected void AddProductCodeButton_Click(object sender, EventArgs e)
     {
         try
         {
@@ -64,7 +66,7 @@ public partial class Product_Admin : System.Web.UI.Page
             using (ProductUI ui = new ProductUI())
             {
                 if (ui.ProductCodeExists(this.CodeTestBox.Text))
-                    throw new ApplicationException("Cannot add Product Product Code Already Exists");
+                    throw new ApplicationException("Cannot add Product - Product Code already exists");
 
                 bool vatExempt = (VatExemptionRadioButtonList.SelectedItem.Text == "Yes") ? true : false;
                 int vatCodeID = Convert.ToInt32(VatCodeDropDownList.SelectedItem.Value);
@@ -94,6 +96,7 @@ public partial class Product_Admin : System.Web.UI.Page
         catch (Exception ex)
         {
             ErrorViewControl.AddError(ex.Message);
+            ErrorViewControl.DataBind();
             ErrorViewControl.Visible = true;
         }
     }
@@ -112,7 +115,7 @@ public partial class Product_Admin : System.Web.UI.Page
                 throw new ApplicationException("Vat Code must be selected");
 
             using (ProductUI ui = new ProductUI())
-            {
+            {                               
                 bool vatExempt = (ModifyVatExemptionRadioButtonList.SelectedItem.Text == "Yes") ? true : false;
                 int vatCodeID = Convert.ToInt32(ModifyVatCodeDropDownList.SelectedItem.Value);
 
@@ -142,11 +145,27 @@ public partial class Product_Admin : System.Web.UI.Page
         {
             ErrorViewControl.AddError(ex.Message);
             ErrorViewControl.Visible = true;
+            ErrorViewControl.DataBind();
         }
     }
 
     protected void NewProductButton_Click(object sender, EventArgs e)
     {
+        VatCodeUI vatCodeUI = new VatCodeUI();
+        List<VatCode> vatCodeList = vatCodeUI.GetAllVatCodes();
+
+        VatCodeDropDownList.Items.Clear();
+        if (vatCodeList.Count > 2)
+        {
+            VatCodeDropDownList.Items.Add(new ListItem("-- Not Selected --", "-1"));
+        }
+
+        foreach (VatCode vc in vatCodeList)
+        {
+            if (vc.VatExemptible == false)
+                VatCodeDropDownList.Items.Add(new ListItem(vc.Code + "     (" + vc.Description + " @" + vc.PercentageValue + "%)", vc.ID.ToString()));
+        }
+
         ChangeState += new EventHandler<EventArgs>(AddNewProductState);
         ChangeState(this, e);
     }
@@ -155,6 +174,9 @@ public partial class Product_Admin : System.Web.UI.Page
     {
         ChangeState += new EventHandler<EventArgs>(SearchProductState);
         ChangeState(this, e);
+
+        ProductGridView.PageIndex = 0;
+        ProductGridView.DataBind();
         DataBind();
     }
 
@@ -165,6 +187,8 @@ public partial class Product_Admin : System.Web.UI.Page
 
         ChangeState += new EventHandler<EventArgs>(CancelProductState);
         ChangeState(this, e);
+
+       // ErrorViewControl.Visible = false;
     }
 
     protected void CancelNewProductCodeButton_Click1(object sender, EventArgs e)
@@ -172,6 +196,8 @@ public partial class Product_Admin : System.Web.UI.Page
         Util.ClearControls(AddProductPanel);
         ChangeState += new EventHandler<EventArgs>(PageLoadState);
         ChangeState(this, e);
+
+        // ErrorViewControl.Visible = false;
     }
 
     #endregion
@@ -366,7 +392,7 @@ public partial class Product_Admin : System.Web.UI.Page
 
     private void CancelProductState(object src, EventArgs mea)
     {
-        Util.ClearControls(ModifyProductPanel);
+        Util.ClearControls(ModifyProductPanel);       
 
         SetupNewProductPanel.Visible = true;
         AddProductPanel.Visible = false;
@@ -423,5 +449,7 @@ public partial class Product_Admin : System.Web.UI.Page
             ErrorViewControl.DataBind();
         }
     }
-    #endregion
+
+    #endregion      
+
 }
