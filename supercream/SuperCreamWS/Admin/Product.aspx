@@ -30,28 +30,35 @@
             <asp:PostBackTrigger ControlID="ProductGridView" />
         </Triggers>
         <ContentTemplate>
-            <asp:Panel ID="SetupNewProductPanel" runat="server" Visible="true">
-                <div class="FormInput">
-                    <fieldset id="Fieldset1">
-                        <legend>
-                            <h3>
-                                Product Maintenance</h3>
-                        </legend>
-                        <table style="width: 100%; text-align: center;">
+            <asp:Panel ID="ProductManagementPanel" Visible="true" runat="server">
+                <div class="FormHeader">
+                    <div class="HeaderContainerPanel">
+                        <table class="ContentHeader" cellpadding="0" cellspacing="0">
                             <tr>
-                                <td>
-                                    <asp:Button ID="NewProductButton" Text="New Product" runat="server" CausesValidation="false"
-                                        OnClick="NewProductButton_Click" />
-                                </td>
-                                <td>
-                                    <asp:Button ID="MaintainProductButton" Text="Modify Existing Product" CausesValidation="false"
-                                        runat="server" OnClick="MaintainProductButton_Click" />
+                                <td class="Right">
+                                    <asp:Panel ID="GeneralPanel" DefaultButton="NewProductButton" runat="server" Width="100%"
+                                        Visible="true">
+                                        <table class="ContentHeader" cellpadding="0">
+                                            <tr>
+                                                <td style="width: 30%; text-align: left;">
+                                                    <span class="RequiredFieldMessage">*</span> <i>indicates a required field</i>
+                                                </td>
+                                                <td class="Right" style="width: 70%;">
+                                                    <asp:LinkButton ID="NewProductButton" Text="New Product" runat="server" CausesValidation="false"
+                                                        OnClick="NewProductButton_Click" />
+                                                    &nbsp; |
+                                                    <asp:LinkButton ID="MaintainProductButton" Text="Modify Existing Product" CausesValidation="false"
+                                                        runat="server" OnClick="MaintainProductButton_Click" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
                                 </td>
                             </tr>
                         </table>
-                    </fieldset>
+                    </div>
                 </div>
-            </asp:Panel>
+            </asp:Panel>          
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:UpdatePanel ID="AddProductUpdatePanel" runat="server" UpdateMode="Conditional">
@@ -209,7 +216,7 @@
                                     <td>
                                     </td>
                                     <td>
-                                        <asp:Button ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
+                                        <asp:LinkButton ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
                                             OnClick="SearchButton_Click" />
                                     </td>
                                 </tr>
@@ -222,11 +229,10 @@
                                     OnRowDeleted="ProductGridView_RowDeleted" OnRowDeleting="ProductGridView_RowDeleting">
                                     <EmptyDataTemplate>
                                         <div align="center" style="border: solid 1px black; padding: 2px 2px 2px 2px; width: 100%;
-                                            margin-top:10px; text-align: center;">
+                                            margin-top: 10px; text-align: center;">
                                             Search produced no results
                                         </div>
                                     </EmptyDataTemplate>
-                                    
                                     <Columns>
                                         <asp:BoundField DataField="ID" HeaderText="ID" SortExpression="ID" Visible="False" />
                                         <asp:BoundField DataField="ProductCode" HeaderText="Product Code" ItemStyle-Width="20%"
@@ -272,7 +278,7 @@
                 runat="server">
                 <div class="FormInput">
                     <fieldset id="Fieldset2">
-                        <legend>"
+                        <legend>
                             <h3>
                                 Enter Product</h3>
                         </legend>

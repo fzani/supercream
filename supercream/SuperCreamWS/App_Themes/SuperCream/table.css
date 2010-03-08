@@ -197,3 +197,10 @@ input.button
     background: #8EB50C url(../../images/button-bg.jpg) repeat-x 0 0;
     border: none;
 }
+
+table.ContentHeader
+{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
