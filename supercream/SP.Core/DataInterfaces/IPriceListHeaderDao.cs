@@ -7,6 +7,6 @@ namespace SP.Core.DataInterfaces
 {
     public interface IPriceListHeaderDao : IDao<PriceListHeader, int>
     {
-        
+        bool PriceListExists(string priceListName);
     }
 }

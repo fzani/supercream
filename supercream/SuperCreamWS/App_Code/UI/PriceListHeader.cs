@@ -65,7 +65,10 @@ public class PriceListHeaderUI : IDisposable
 
     public PriceListHeader SavePriceListHeader(PriceListHeader priceListHeader)
     {
-        return _proxy.SavePriceListHeader(priceListHeader);
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return _proxy.SavePriceListHeader(priceListHeader);
+        }
     }
 
     #region IDisposable Members

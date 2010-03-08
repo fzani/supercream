@@ -226,7 +226,7 @@ namespace SP.Worker
             ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
             return creditNoteDao.CreditNoteExistsByOrderId(orderId);
         }
-   
+
 
         public InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID)
         {
@@ -275,7 +275,7 @@ namespace SP.Worker
             ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
             ICreditNoteDao validateNoteDao = factory.GetCreditNoteDao();
             CreditNote originalCreditNote = validateNoteDao.GetByReferenceId(newCreditNote.Reference);
-            if(originalCreditNote.ID != newCreditNote.ID)
+            if (originalCreditNote.ID != newCreditNote.ID)
                 throw new ApplicationException("Cannot change Credit Reference is alreasy in use");
             return creditNoteDao.Update(newCreditNote, origCreditNote);
         }
@@ -850,6 +850,9 @@ namespace SP.Worker
             IDaoFactory factory = new LTSDaoFactory();
             IPriceListHeaderDao ffDao = factory.GetPriceListHeaderDao();
 
+            if (ffDao.PriceListExists(priceListHeader.PriceListName))
+                throw new ApplicationException("Cannot add Price list header already exists");
+
             return ffDao.Save(priceListHeader);
         }
 
@@ -865,7 +868,7 @@ namespace SP.Worker
             IDaoFactory factory = new LTSDaoFactory();
             IPriceListHeaderDao ffDao = factory.GetPriceListHeaderDao();
 
-            return ffDao.GetAll();
+            return ffDao.GetAll().OrderBy(q => q.PriceListName).ToList<PriceListHeader>();
         }
         #endregion
 
@@ -979,10 +982,10 @@ namespace SP.Worker
             IProductDao productDao = factory.GetProductDao();
 
             IProductDao originalProductDao = factory.GetProductDao();
-            if(originalProductDao.ProductCodeExists(newProduct.ProductCode))
+            if (originalProductDao.ProductCodeExists(newProduct.ProductCode))
             {
-                Product existingProduct = originalProductDao.GetByProductCode(newProduct.ProductCode);   
-                if(newProduct.ID != existingProduct.ID)
+                Product existingProduct = originalProductDao.GetByProductCode(newProduct.ProductCode);
+                if (newProduct.ID != existingProduct.ID)
                 {
                     throw new ApplicationException("Cannot update product code - poduct code already exists for another item");
                 }
@@ -1280,5 +1283,5 @@ namespace SP.Worker
         }
 
         #endregion
-   }
+    }
 }
