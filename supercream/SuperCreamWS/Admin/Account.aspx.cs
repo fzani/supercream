@@ -50,6 +50,10 @@ public partial class Admin_Account : System.Web.UI.Page
 
             ForTheAttentionOfDropDownList.Items.Add(new ListItem("-- Not Selected --", "-1"));
         }
+        else
+        {
+            ErrorViewControl.Visible = false;
+        }
     }
 
     protected void AddAccountButton_Click(object sender, EventArgs e)
