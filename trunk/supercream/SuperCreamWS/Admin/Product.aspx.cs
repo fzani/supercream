@@ -360,8 +360,7 @@ public partial class Product_Admin : System.Web.UI.Page
     private void PageLoadState(object src, EventArgs mea)
     {
         Util.ClearFields(this.Page);
-
-        SetupNewProductPanel.Visible = true;
+        
         AddProductPanel.Visible = false;
         ModifyProductPanel.Visible = false;
         VatExemptionRadioButtonList.SelectedIndex = 1;
@@ -373,8 +372,7 @@ public partial class Product_Admin : System.Web.UI.Page
     private void AddNewProductState(object src, EventArgs mea)
     {
         Util.ClearFields(this.Page);
-
-        SetupNewProductPanel.Visible = true;
+       
         AddProductPanel.Visible = true;
         ModifyProductPanel.Visible = false;
         GridViewPanel.Visible = false;
@@ -383,8 +381,7 @@ public partial class Product_Admin : System.Web.UI.Page
     private void ModifyProductState(object src, EventArgs mea)
     {
         Util.ClearFields(this.Page);
-
-        SetupNewProductPanel.Visible = true;
+      
         AddProductPanel.Visible = false;
         ModifyProductPanel.Visible = true;
         GridViewPanel.Visible = false;
@@ -393,8 +390,7 @@ public partial class Product_Admin : System.Web.UI.Page
     private void CancelProductState(object src, EventArgs mea)
     {
         Util.ClearControls(ModifyProductPanel);       
-
-        SetupNewProductPanel.Visible = true;
+       
         AddProductPanel.Visible = false;
         ModifyProductPanel.Visible = false;
         VatExemptionRadioButtonList.SelectedIndex = 1;
@@ -406,8 +402,7 @@ public partial class Product_Admin : System.Web.UI.Page
     private void SelectProductState(object src, EventArgs mea)
     {
         Util.ClearFields(this.Page);
-
-        SetupNewProductPanel.Visible = true;
+      
         AddProductPanel.Visible = false;
         GridViewPanel.Visible = true;
         ProductGridView.PageIndex = 0;
@@ -418,8 +413,7 @@ public partial class Product_Admin : System.Web.UI.Page
     private void SearchProductState(object src, EventArgs mea)
     {
         Util.ClearControls(ModifyProductPanel);
-
-        SetupNewProductPanel.Visible = true;
+       
         AddProductPanel.Visible = false;
         ModifyProductPanel.Visible = false;
         VatExemptionRadioButtonList.SelectedIndex = 1;

@@ -10,6 +10,27 @@
             <div class="ErrorOutput">
                 <Alterax:ErrorView ID="ErrorViewControl" Visible="false" runat="server" />
             </div>
+            <asp:Panel ID="YourCompanyManagementPanel" Visible="true" runat="server">
+                <div class="FormHeader">
+                    <div class="HeaderContainerPanel">
+                        <table class="ContentHeader" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td class="Right">
+                                    <asp:Panel ID="GeneralPanel" runat="server" Width="100%" Visible="true">
+                                        <table class="ContentHeader" cellpadding="0">
+                                            <tr>
+                                                <td style="width: 30%; text-align: left;">
+                                                    <span class="RequiredFieldMessage">*</span> <i>indicates a required field</i>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </asp:Panel>
             <div class="FormInput">
                 <asp:Panel ID="NewFoundationFacilityPanel" DefaultButton="SaveCompanyDetailsButton"
                     runat="server">
@@ -26,7 +47,7 @@
                                 <td>
                                     <asp:TextBox ID="CompanyNameTextBox" TabIndex="1" runat="server" MaxLength="40" Width="400px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8" ControlToValidate="CompanyNameTextBox"
-                                        ErrorMessage="Company Name is a required rfield" InitialValue="" Text="Required"
+                                        ErrorMessage="Company Name is a required field" InitialValue="" Text="*"
                                         runat="server" />
                                 </td>
                             </tr>
@@ -38,7 +59,7 @@
                                     <asp:TextBox ID="VatRegistrationNumberTextBox" runat="server" TabIndex="2" MaxLength="20"
                                         Width="400px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" Display="Dynamic" ControlToValidate="VatRegistrationNumberTextBox"
-                                        ErrorMessage="Vat Registration Number is a required field" InitialValue="" Text="Required"
+                                        ErrorMessage="Vat Registration Number is a required field" InitialValue="" Text="*"
                                         runat="server" />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" Display="Dynamic"
                                         ControlToValidate="VatRegistrationNumberTextBox" ValidationExpression="^([GB])*(([1-9]\d{8})|([1-9]\d{11}))$"
@@ -54,7 +75,7 @@
                                         Width="400px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ControlToValidate="OfficePhoneNumber1TextBox"
                                         ErrorMessage="Office Phone Number 1 is a required field" InitialValue="" Display="Dynamic"
-                                        Text="Required" runat="server" TabIndex="3" />
+                                        Text="*" runat="server" TabIndex="3" />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="OfficePhoneNumber1TextBox"
                                         ErrorMessage="Invalid UK phone number" Text="Format Error" Display="Dynamic"
                                         ValidationExpression="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$"></asp:RegularExpressionValidator>
@@ -79,7 +100,7 @@
                                         <asp:TextBox ID="AddressLine1TextBox" runat="server" MaxLength="45" Width="400px"
                                             TabIndex="5"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ControlToValidate="AddressLine1TextBox"
-                                            ErrorMessage="Address Line 1 is a required field" InitialValue="" Text="Required"
+                                            ErrorMessage="Address Line 1 is a required field" InitialValue="" Text="*"
                                             runat="server" />
                                     </td>
                                 </tr>
@@ -99,7 +120,7 @@
                                     <td>
                                         <asp:TextBox ID="TownTextBox" runat="server" MaxLength="30" Width="400px" TabIndex="7"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ControlToValidate="TownTextBox"
-                                            ErrorMessage="Town is a required rfield" InitialValue="" Text="Required" runat="server" />
+                                            ErrorMessage="Town is a required rfield" InitialValue="" Text="*" runat="server" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -109,7 +130,7 @@
                                     <td>
                                         <asp:TextBox ID="CountyTextBox" runat="server" MaxLength="30" Width="400px" TabIndex="8"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ControlToValidate="CountyTextBox"
-                                            ErrorMessage="County is a required rfield" InitialValue="" Text="Required" runat="server" />
+                                            ErrorMessage="County is a required rfield" InitialValue="" Text="*" runat="server" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -119,7 +140,7 @@
                                     <td>
                                         <asp:TextBox ID="PostCodeTextBox" runat="server" MaxLength="8" Width="100px" TabIndex="9"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ControlToValidate="PostCodeTextBox"
-                                            ErrorMessage="Post Code is a required rfield" Text="Required" runat="server" />
+                                            ErrorMessage="Post Code is a required rfield" Text="*" runat="server" />
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidatorPostCodeTextBox" ValidationExpression="^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) {0,1}[0-9][A-Za-z]{2})$"
                                             ControlToValidate="PostCodeTextBox" Text="Format Error" ErrorMessage="Invalid UK phone number"
                                             Display="Dynamic" runat="server" />
@@ -132,7 +153,7 @@
                                     <td>
                                         <asp:TextBox ID="EMailTextBox" runat="server" MaxLength="40" Width="300px" TabIndex="10"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="EMailTextBox"
-                                            ErrorMessage="EMail is a required field" Text="Required" Display="Dynamic" runat="server" />
+                                            ErrorMessage="EMail is a required field" Text="*" Display="Dynamic" runat="server" />
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator2" ValidationExpression=".+@[^\.].*\.[a-z]{2,}"
                                             ControlToValidate="EMailTextBox" Text="Format Error" ErrorMessage="Invalid EMail Address"
                                             Display="Dynamic" runat="server" />

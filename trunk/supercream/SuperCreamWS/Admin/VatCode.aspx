@@ -19,6 +19,27 @@
     </asp:UpdatePanel>
     <asp:UpdatePanel ID="AddVatCodeUpdatePanel" runat="server" UpdateMode="Always">
         <ContentTemplate>
+            <asp:Panel ID="VatCodeManagementPanel" Visible="true" runat="server">
+                <div class="FormHeader">
+                    <div class="HeaderContainerPanel">
+                        <table class="ContentHeader" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td class="Right">
+                                    <asp:Panel ID="GeneralPanel" runat="server" Width="100%" Visible="true">
+                                        <table class="ContentHeader" cellpadding="0">
+                                            <tr>
+                                                <td style="width: 30%; text-align: left;">
+                                                    <span class="RequiredFieldMessage">*</span> <i>indicates a required field</i>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </asp:Panel>
             <div class="FormInput">
                 <asp:Panel ID="AddPanel" runat="server" DefaultButton="AddVatCodeButton">
                     <fieldset id="VarInputLegend">
@@ -115,8 +136,8 @@
                     <Columns>
                         <asp:TemplateField ItemStyle-Width="30%" ShowHeader="False">
                             <ItemTemplate>
-                                <asp:Button ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit"
-                                    Text="Edit"></asp:Button>
+                                <asp:LinkButton ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit"
+                                    Text="Edit"></asp:LinkButton>
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <asp:Button ID="UpdateButton" runat="server" ValidationGroup="UpdateGroup" CausesValidation="True"
