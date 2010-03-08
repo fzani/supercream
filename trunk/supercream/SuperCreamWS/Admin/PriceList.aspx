@@ -20,6 +20,8 @@
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:UpdatePanel ID="SetupNewPriceListUpdatePanel" runat="server" UpdateMode="Conditional">
+        <Triggers>
+        </Triggers>
         <ContentTemplate>
             <asp:Panel ID="SetupNewPriceListPanel" Visible="true" runat="server">
                 <div class="FormHeader">
@@ -55,6 +57,7 @@
         <Triggers>
             <asp:PostBackTrigger ControlID="NewPriceListButton" />
             <asp:PostBackTrigger ControlID="MaintainPriceListButton" />
+            <asp:PostBackTrigger ControlID="CancelNewPriceListButton" />            
         </Triggers>
         <ContentTemplate>
             <asp:Panel ID="NewPriceListPanel" DefaultButton="AddPriceListButton" Visible="false"
@@ -75,7 +78,7 @@
                                         MaxLength="50" Width="500px" EnableViewState="False"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="NewPriceListGroup"
                                         ControlToValidate="NameTextBox" ErrorMessage="Price List Name is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -85,7 +88,7 @@
                                     <table class="progressupdate">
                                         <tr>
                                             <td>
-                                                <asp:Button ID="CreatePriceListButton" Text="Create New Price List" ValidationGroup="NewPriceListGroup"
+                                                <asp:LinkButton ID="CreatePriceListButton" Text="Create New Price List" ValidationGroup="NewPriceListGroup"
                                                     runat="server" OnClick="AddPriceListButton_Click" />
                                             </td>
                                             <td>
@@ -142,10 +145,7 @@
                                         AlternateText="Click to show calendar" />
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="NewOutletGroup"
                                         ControlToValidate="DateEffectiveFromTextBox" ErrorMessage="Date Effective From is required"
-                                        InitialValue="" Text="Required" runat="server" />
-                                    <asp:RequiredFieldValidator ID="StartDateRequiredFieldValidator" runat="server" ControlToValidate="DateEffectiveFromTextBox"
-                                        Display="Dynamic" ErrorMessage="Start Date is a required field" SetFocusOnError="True"
-                                        ValidationGroup="AddLeaveGroup">*</asp:RequiredFieldValidator>
+                                        InitialValue="" Text="*" runat="server" />
                                     <ajaxToolkit:CalendarExtender ID="calendarButtonExtender" Format="dd/MM/yyyy" runat="server"
                                         TargetControlID="DateEffectiveFromTextBox" PopupButtonID="Image1" />
                                     <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" TargetControlID="DateEffectiveFromTextBox"
@@ -164,10 +164,7 @@
                                         AlternateText="Click to show calendar" />
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="NewOutletGroup"
                                         ControlToValidate="DateEffectiveToTextBox" ErrorMessage="Date Effective From is required"
-                                        InitialValue="" Text="Required" runat="server" />
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="DateEffectiveToTextBox"
-                                        Display="Dynamic" ErrorMessage="Start Date is a required field" SetFocusOnError="True"
-                                        ValidationGroup="AddLeaveGroup">*</asp:RequiredFieldValidator>
+                                        InitialValue="" Text="*" runat="server" />
                                     <ajaxToolkit:CalendarExtender ID="CalendarExtender1" Format="dd/MM/yyyy" runat="server"
                                         TargetControlID="DateEffectiveToTextBox" PopupButtonID="Image2" />
                                     <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender2" runat="server" TargetControlID="DateEffectiveToTextBox"
@@ -176,17 +173,16 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="1">
-                                    <table class="progressupdate">
-                                        <tr>
-                                            <td>
-                                                <asp:Button ID="AddPriceListButton" Text="Add PriceList" ValidationGroup="NewOutletGroup"
-                                                    runat="server" OnClick="CreatePriceListButton_Click" />
-                                            </td>
-                                        </tr>
-                                    </table>
+                                <td colspan="2">
+                                    <div style="display: inline">
+                                        <asp:Button ID="AddPriceListButton" Text="Add PriceList" Width="48%" ValidationGroup="NewOutletGroup"
+                                            runat="server" OnClick="CreatePriceListButton_Click" />
+                                        &nbsp;
+                                        <asp:Button ID="CancelNewPriceListButton" Width="49%" Text="Cancel" CausesValidation="false"
+                                            runat="server" OnClick="CancelNewPriceListButton_Click" />
+                                    </div>
                                 </td>
-                                <td colspan="3">
+                                <td colspan="2">
                                     <div class="progressupdate">
                                         <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="EnterPriceListUpdatePanel"
                                             DisplayAfter="1">
@@ -259,7 +255,7 @@
                                                                 ValidationGroup="NewOutletGroup"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ControlToValidate="PriceListNameTextBox"
                                                                 ValidationGroup="NewOutletGroup" ErrorMessage="Price List Name is a required field"
-                                                                InitialValue="" Text="Required" runat="server" />
+                                                                InitialValue="" Text="*" runat="server" />
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -273,10 +269,7 @@
                                                                 AlternateText="Click to show calendar" />
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="NewOutletGroup"
                                                                 ControlToValidate="DateEffectiveFromTextBox" ErrorMessage="Date Effective From is required"
-                                                                InitialValue="" Text="Required" runat="server" />
-                                                            <asp:RequiredFieldValidator ID="StartDateRequiredFieldValidator" runat="server" ControlToValidate="DateEffectiveFromTextBox"
-                                                                Display="Dynamic" ErrorMessage="Start Date is a required field" SetFocusOnError="True"
-                                                                ValidationGroup="AddLeaveGroup">*</asp:RequiredFieldValidator>
+                                                                InitialValue="" Text="*" runat="server" />
                                                             <ajaxToolkit:CalendarExtender ID="calendarButtonExtender" Format="dd/MM/yyyy" runat="server"
                                                                 TargetControlID="DateEffectiveFromTextBox" PopupButtonID="Image1" />
                                                             <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" TargetControlID="DateEffectiveFromTextBox"
@@ -294,11 +287,8 @@
                                                             <asp:Image runat="Server" Style="vertical-align: middle;" ID="Image2" ImageUrl="~/images/Calendar_scheduleHS.png"
                                                                 AlternateText="Click to show calendar" />
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="NewOutletGroup"
-                                                                ControlToValidate="DateEffectiveToTextBox" ErrorMessage="Date Effective From is required"
-                                                                InitialValue="" Text="Required" runat="server" />
-                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="DateEffectiveToTextBox"
-                                                                Display="Dynamic" ErrorMessage="Start Date is a required field" SetFocusOnError="True"
-                                                                ValidationGroup="AddLeaveGroup">*</asp:RequiredFieldValidator>
+                                                                ControlToValidate="DateEffectiveToTextBox" Display="Dynamic" ErrorMessage="Date Effective From is required"
+                                                                InitialValue="" Text="*" runat="server" />
                                                             <ajaxToolkit:CalendarExtender ID="CalendarExtender1" Format="dd/MM/yyyy" runat="server"
                                                                 TargetControlID="DateEffectiveToTextBox" PopupButtonID="Image2" />
                                                             <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender2" runat="server" TargetControlID="DateEffectiveToTextBox"
@@ -309,14 +299,14 @@
                                                 </table>
                                             </fieldset>
                                             <p>
-                                                <asp:Button ID="OkButton" runat="server" Text="Update" ValidationGroup="GridViewPanel"
+                                                <asp:Button ID="OkButton" runat="server" Text="Update" ValidationGroup="NewOutletGroup"
                                                     CssClass="button" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
                                                     OnClick="PriceListHeaderDataList_UpdateCommand" />
-                                                <asp:Button ID="DeleteButton" runat="server" Text="Delete" ValidationGroup="GridViewPanel"
+                                                <asp:Button ID="DeleteButton" runat="server" Text="Delete" ValidationGroup="NewOutletGroup"
                                                     CommandArgument='<%# Bind("ID") %>' OnClick="PriceListHeaderDataList_DeleteCommand"
                                                     CssClass="button" />
-                                                <asp:Button ID="CancelButton" Text="Cancel" runat="server" ValidationGroup="GridViewPanel"
-                                                    CssClass="button" />
+                                                <asp:Button ID="CancelButton" Text="Cancel" runat="server" CausesValidation="false"
+                                                    ValidationGroup="NewOutletGroup" CssClass="button" />
                                             </p>
                                         </asp:Panel>
                                     </ItemTemplate>
@@ -416,8 +406,7 @@
                                         <asp:TextBox ID="DiscountTextBox" runat="server" Width="40px" MaxLength="5" AutoPostBack="True"
                                             OnTextChanged="DiscountTextBox_TextChanged"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ControlToValidate="DiscountTextBox"
-                                            ErrorMessage="Unit Price is a required field" InitialValue="" Text="Required"
-                                            runat="server" />
+                                            ErrorMessage="Unit Price is a required field" InitialValue="" Text="*" runat="server" />
                                         <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server"
                                             TargetControlID="DiscountTextBox" FilterType="Custom,Numbers" ValidChars="." />
                                         %

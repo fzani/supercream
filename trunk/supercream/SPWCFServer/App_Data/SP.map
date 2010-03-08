@@ -228,7 +228,7 @@
   <Table Name="dbo.PriceListHeader" Member="PriceListHeader">
     <Type Name="PriceListHeader">
       <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
-      <Column Name="PriceListName" Member="_PriceListName" Storage="_PriceListName" DbType="varchar(50)" />
+      <Column Name="PriceListName" Member="PriceListName" Storage="_PriceListName" DbType="varchar(50)" />
       <Column Name="DateEffectiveFrom" Member="DateEffectiveFrom" Storage="_DateEffectiveFrom" DbType="DateTime" />
       <Column Name="DateEffectiveTo" Member="DateEffectiveTo" Storage="_DateEffectiveTo" DbType="DateTime" />
       <Association Name="FK_PriceList_Customer" Member="Customer" Storage="_Customer" ThisKey="ID" OtherKey="PriceListItemID" IsForeignKey="true" />

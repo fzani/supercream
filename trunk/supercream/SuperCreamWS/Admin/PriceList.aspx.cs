@@ -68,6 +68,8 @@ public partial class Admin_PriceList : System.Web.UI.Page
         }
         else
             ErrorViewControl.Visible = false;
+
+        DataBind();
     }
     #endregion
 
@@ -116,6 +118,7 @@ public partial class Admin_PriceList : System.Web.UI.Page
         {
             ErrorViewControl.AddError(ex.Message);
             ErrorViewControl.Visible = true;
+            DataBind();
         }
     }
 
@@ -134,7 +137,16 @@ public partial class Admin_PriceList : System.Web.UI.Page
         {
             ErrorViewControl.AddError(ex.Message);
             ErrorViewControl.Visible = true;
+            DataBind();
         }
+    }
+
+    protected void CancelNewPriceListButton_Click(object sender, EventArgs e)
+    {
+        ChangeState += new EventHandler<EventArgs>(PageLoadState);
+        ChangeState(this, e);
+
+        DataBind();
     }
 
     protected void AddPriceListButton_Click(object sender, EventArgs e)
@@ -588,5 +600,5 @@ public partial class Admin_PriceList : System.Web.UI.Page
 
     #endregion
 
-    #endregion  
+    #endregion
 }
