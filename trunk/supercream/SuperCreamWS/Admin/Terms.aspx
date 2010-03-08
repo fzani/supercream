@@ -18,6 +18,27 @@
     </asp:UpdatePanel>
     <asp:UpdatePanel ID="AddTermsUpdatePanel" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
+            <asp:Panel ID="TermsManagementPanel" Visible="true" runat="server">
+                <div class="FormHeader">
+                    <div class="HeaderContainerPanel">
+                        <table class="ContentHeader" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td class="Right">
+                                    <asp:Panel ID="GeneralPanel" runat="server" Width="100%" Visible="true">
+                                        <table class="ContentHeader" cellpadding="0">
+                                            <tr>
+                                                <td style="width: 30%; text-align: left;">
+                                                    <span class="RequiredFieldMessage">*</span> <i>indicates a required field</i>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </asp:Panel>
             <div class="FormInput">
                 <asp:Panel ID="AddPanel" runat="server" DefaultButton="AddTermsButton">
                     <fieldset id="VarInputLegend">
@@ -82,8 +103,8 @@
                     <Columns>
                         <asp:TemplateField ShowHeader="False" ItemStyle-Width="27%">
                             <ItemTemplate>
-                                <asp:Button ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit"
-                                    Text="Edit"></asp:Button>
+                                <asp:LinkButton ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit"
+                                    Text="Edit"></asp:LinkButton>
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <asp:Button ID="UpdateButton" runat="server" CausesValidation="True" ValidationGroup="GridViewGroup"
