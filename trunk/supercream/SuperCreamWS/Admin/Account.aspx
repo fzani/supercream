@@ -23,7 +23,29 @@
             <asp:PostBackTrigger ControlID="CustomerDropDownList" />
         </Triggers>
         <ContentTemplate>
-            <asp:Panel ID="SetupAccountPanel" Visible="true" runat="server">
+            <asp:Panel ID="AccountManagementPanel" Visible="true" runat="server">
+                <div class="FormHeader">
+                    <div class="HeaderContainerPanel">
+                        <table class="ContentHeader" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td class="Right">
+                                    <asp:Panel ID="GeneralPanel" runat="server" Width="100%" Visible="true">
+                                        <table class="ContentHeader" cellpadding="0">
+                                            <tr>
+                                                <td style="width: 30%; text-align: left;">
+                                                    <span class="RequiredFieldMessage">*</span> <i>indicates a required field</i>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </asp:Panel>
+            <asp:Panel ID="SetupAccountPanel" DefaultButton="AddAccountButton" Visible="true"
+                runat="server">
                 <div class="FormInput">
                     <fieldset id="Fieldset2">
                         <legend>
@@ -125,12 +147,11 @@
                                         Text="*" runat="server" />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidatorPostCodeTextBox" Display="Dynamic"
                                         ValidationExpression="^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) {0,1}[0-9][A-Za-z]{2})$"
-                                        ControlToValidate="InvoicePostCodeTextBox" Text="E" ErrorMessage="Invalid UK phone number"
+                                        ControlToValidate="InvoicePostCodeTextBox" Text="*" ErrorMessage="Invalid UK phone number"
                                         runat="server" />
                                 </td>
                             </tr>
                             <tr>
-                                
                                 <td>
                                     City/Town
                                 </td>
@@ -173,12 +194,6 @@
                                         Text="*" runat="server" />
                                 </td>
                                 <td colspan="2">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                </td>
-                                <td>
                                     <table class="progressupdate">
                                         <tr>
                                             <td>
@@ -262,8 +277,8 @@
                                 <asp:TemplateField ItemStyle-Width="15%">
                                     <ItemTemplate>
                                         <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
-                                        <asp:Button ID="UpdateGridButton" Text="Select" CommandName="Select" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
-                                            ValidationGroup="GridViewGroup" runat="server"></asp:Button>
+                                        <asp:LinkButton ID="UpdateGridButton" Text="Select" CommandName="Select" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
+                                            ValidationGroup="GridViewGroup" runat="server"></asp:LinkButton>
                                         <ajaxtoolkit:ModalPopupExtender ID="PopupControlExtender1" DropShadow="true" runat="server"
                                             TargetControlID="btnTrigger" PopupControlID="PanelMessage" CancelControlID="CancelButton"
                                             BackgroundCssClass="XPopUpBackGround" />
@@ -281,6 +296,9 @@
                                                         </td>
                                                         <td>
                                                             <asp:TextBox ID="CompanyToInvoiceToTextBox" runat="server" Width="200px" MaxLength="50"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" Display="Dynamic" ValidationGroup="GridViewPanel"
+                                                                ControlToValidate="CompanyToInvoiceToTextBox" InitialValue="" ErrorMessage="Invoice to is a required Field"
+                                                                Text="*" runat="server" />
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -291,7 +309,7 @@
                                                             <asp:DropDownList ID="ForTheAttentionOfDropDownList" DataValueField="ID" DataTextField="FirstName"
                                                                 runat="server" ValidationGroup="AddGroup" Width="200px">
                                                             </asp:DropDownList>
-                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator9" ValidationGroup="AddGroup"
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator9" ValidationGroup="GridViewPanel"
                                                                 ControlToValidate="ForTheAttentionOfDropDownList" InitialValue="-1" ErrorMessage="For the Attention must be selected"
                                                                 Text="*" runat="server" />
                                                         </td>
@@ -304,6 +322,9 @@
                                                             <asp:DropDownList ID="PaymentTermsDropDownList" runat="server" ValidationGroup="GridViewPanel"
                                                                 Width="350px">
                                                             </asp:DropDownList>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="GridViewPanel"
+                                                                ControlToValidate="PaymentTermsDropDownList" Display="Dynamic" InitialValue="-1"
+                                                                ErrorMessage="You must select Payment Terms" Text="*" runat="server" />
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -313,6 +334,9 @@
                                                         <td>
                                                             <asp:TextBox ID="AccountNoTextBox" runat="server" ValidationGroup="GridViewPanel"
                                                                 MaxLength="15" Width="350px"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="GridViewPanel"
+                                                                ControlToValidate="AccountNoTextBox" InitialValue="" Display="Dynamic" ErrorMessage="Account No is a required field"
+                                                                Text="*" runat="server" />
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -322,6 +346,9 @@
                                                         <td>
                                                             <asp:TextBox ID="InvoiceAddressLine1TextBox" Width="350px" MaxLength="40" ValidationGroup="GridViewPanel"
                                                                 runat="server"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" Display="Dynamic" ValidationGroup="GridViewPanel"
+                                                                ControlToValidate="InvoiceAddressLine1TextBox" InitialValue="" ErrorMessage="Address line is a required field"
+                                                                Text="*" runat="server" />
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -338,6 +365,9 @@
                                                         </td>
                                                         <td>
                                                             <asp:TextBox ID="InvoiceTownTextBox" Width="350px" MaxLength="25" runat="server"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" Display="Dynamic" ValidationGroup="GridViewPanel"
+                                                                ControlToValidate="InvoiceTownTextBox" InitialValue="" ErrorMessage="City/Town is a required field"
+                                                                Text="*" runat="server" />
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -347,6 +377,9 @@
                                                         <td>
                                                             <asp:TextBox ID="InvoiceCountyTextBox" runat="server" MaxLength="25" ValidationGroup="GridViewPanel"
                                                                 Width="350px"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ValidationGroup="GridViewPanel"
+                                                                ControlToValidate="InvoiceCountyTextBox" Display="Dynamic" InitialValue="" ErrorMessage="County is a required field"
+                                                                Text="*" runat="server" />
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -356,6 +389,13 @@
                                                         <td>
                                                             <asp:TextBox ID="InvoicePostCodeTextBox" runat="server" ValidationGroup="GridViewPanel"
                                                                 MaxLength="8" Width="200px"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" Display="Dynamic" ValidationGroup="GridViewPanel"
+                                                                ControlToValidate="InvoicePostCodeTextBox" InitialValue="" ErrorMessage="Post Code is a required field"
+                                                                Text="*" runat="server" />
+                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidatorPostCodeTextBox" Display="Dynamic"
+                                                                ValidationExpression="^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) {0,1}[0-9][A-Za-z]{2})$"
+                                                                ControlToValidate="InvoicePostCodeTextBox" Text="*" ValidationGroup="GridViewPanel"
+                                                                ErrorMessage="Invalid UK phone number" runat="server" />
                                                         </td>
                                                     </tr>
                                                 </table>
