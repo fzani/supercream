@@ -21,24 +21,32 @@
     </asp:UpdatePanel>
     <asp:UpdatePanel ID="SetupNewPriceListUpdatePanel" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            <asp:Panel ID="SetupNewPriceListPanel" DefaultButton="NewPriceListButton" runat="server">
-                <div class="FormInput">
-                    <fieldset id="Fieldset1">
-                        <legend>
-                            <h3>
-                                PriceList Maintenance</h3>
-                        </legend>
-                        <table style="width: 100%; text-align: center;">
+            <asp:Panel ID="SetupNewPriceListPanel" Visible="true" runat="server">
+                <div class="FormHeader">
+                    <div class="HeaderContainerPanel">
+                        <table class="ContentHeader" cellpadding="0" cellspacing="0">
                             <tr>
-                                <td>
-                                    <asp:Button ID="NewPriceListButton" Text="New PriceList" runat="server" OnClick="AddNewPriceListButton_Click" />
-                                </td>
-                                <td>
-                                    <asp:Button ID="MaintainPriceListButton" Text="Modify PriceList" runat="server" OnClick="MaintainPriceListButton_Click" />
+                                <td class="Right">
+                                    <asp:Panel ID="GeneralPanel" DefaultButton="NewPriceListButton" runat="server" Width="100%"
+                                        Visible="true">
+                                        <table class="ContentHeader" cellpadding="0">
+                                            <tr>
+                                                <td style="width: 30%; text-align: left;">
+                                                    <span class="RequiredFieldMessage">*</span> <i>indicates a required field</i>
+                                                </td>
+                                                <td class="Right" style="width: 70%;">
+                                                    <asp:LinkButton ID="NewPriceListButton" Text="New PriceList" runat="server" OnClick="AddNewPriceListButton_Click" />
+                                                    &nbsp; |
+                                                    <asp:LinkButton ID="MaintainPriceListButton" Text="Modify PriceList" runat="server"
+                                                        OnClick="MaintainPriceListButton_Click" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
                                 </td>
                             </tr>
                         </table>
-                    </fieldset>
+                    </div>
                 </div>
             </asp:Panel>
         </ContentTemplate>
@@ -218,15 +226,15 @@
                                         <asp:Label ID="ID" runat="server" Text='<%# Bind("ID") %>' Visible="false"></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Price List Name" SortExpression="ID" ItemStyle-Width="80%">
+                                <asp:TemplateField HeaderText="Price List Name" SortExpression="ID" ItemStyle-Width="60%">
                                     <ItemTemplate>
                                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("PriceListName") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField ShowHeader="False" ItemStyle-Width="10%">
+                                <asp:TemplateField ShowHeader="False" ItemStyle-Width="20%">
                                     <ItemTemplate>
                                         <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
-                                        <asp:Button ID="ModifyPriceListButtonButton" runat="server" CausesValidation="false"
+                                        <asp:LinkButton ID="ModifyPriceListButtonButton" runat="server" CausesValidation="false"
                                             CommandName="SelectButton" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
                                             Text="Modify Price List Header" />
                                         <ajaxToolkit:ModalPopupExtender ID="PopupControlExtender1" DropShadow="true" runat="server"
@@ -300,22 +308,22 @@
                                                     </tr>
                                                 </table>
                                             </fieldset>
-                                            <p>                                                
-                                                    <asp:Button ID="OkButton" runat="server" Text="Update" ValidationGroup="GridViewPanel"
-                                                        CssClass="button" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
-                                                        OnClick="PriceListHeaderDataList_UpdateCommand" />
-                                                    <asp:Button ID="DeleteButton" runat="server" Text="Delete" ValidationGroup="GridViewPanel"
-                                                        CommandArgument='<%# Bind("ID") %>' OnClick="PriceListHeaderDataList_DeleteCommand"
-                                                        CssClass="button" />
-                                                    <asp:Button ID="CancelButton" Text="Cancel" runat="server" ValidationGroup="GridViewPanel"
-                                                        CssClass="button" />                                               
+                                            <p>
+                                                <asp:Button ID="OkButton" runat="server" Text="Update" ValidationGroup="GridViewPanel"
+                                                    CssClass="button" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
+                                                    OnClick="PriceListHeaderDataList_UpdateCommand" />
+                                                <asp:Button ID="DeleteButton" runat="server" Text="Delete" ValidationGroup="GridViewPanel"
+                                                    CommandArgument='<%# Bind("ID") %>' OnClick="PriceListHeaderDataList_DeleteCommand"
+                                                    CssClass="button" />
+                                                <asp:Button ID="CancelButton" Text="Cancel" runat="server" ValidationGroup="GridViewPanel"
+                                                    CssClass="button" />
                                             </p>
                                         </asp:Panel>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField ShowHeader="False" ItemStyle-Width="10%">
+                                <asp:TemplateField ShowHeader="False" ItemStyle-Width="20%">
                                     <ItemTemplate>
-                                        <asp:Button ID="ModifyButton" runat="server" CausesValidation="false" CommandName="Modify"
+                                        <asp:LinkButton ID="ModifyButton" runat="server" CausesValidation="false" CommandName="Modify"
                                             CommandArgument='<%# Bind("ID") %>' Text="Modify Price List Item" />
                                     </ItemTemplate>
                                     <ControlStyle CssClass="button" />
