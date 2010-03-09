@@ -32,24 +32,33 @@
             <asp:PostBackTrigger ControlID="OutletStoreGridView" />
         </Triggers>
         <ContentTemplate>
-            <asp:Panel ID="CustomerMenuPanel" DefaultButton="NewCustomerButton" runat="server">
-                <div class="FormInput" style="text-align: center;">
-                    <fieldset id="Fieldset1">
-                        <legend>
-                            <h3>
-                                Customer Maintenance</h3>
-                        </legend>
-                        <table style="width: 100%">
+            <asp:Panel ID="CustomerMenuPanel" Visible="true"
+                runat="server">
+                <div class="FormHeader">
+                    <div class="HeaderContainerPanel">
+                        <table class="ContentHeader" cellpadding="0" cellspacing="0">
                             <tr>
-                                <td>
-                                    <asp:Button ID="NewCustomerButton" Text="New Customer" runat="server" OnClick="AddNewCustomerButton_Click" />
-                                </td>
-                                <td>
-                                    <asp:Button ID="MaintainCustomersButton" Text="Modify Customer" runat="server" OnClick="MaintainCustomersButton_Click" />
+                                <td class="Right">
+                                    <asp:Panel ID="GeneralPanel" DefaultButton="NewCustomerButton"  runat="server" Width="100%"
+                                        Visible="true">
+                                        <table class="ContentHeader" cellpadding="0">
+                                            <tr>
+                                                <td style="width: 30%; text-align: left;">
+                                                    <span class="RequiredFieldMessage">*</span> <i>indicates a required field</i>
+                                                </td>
+                                                <td class="Right" style="width: 70%;">
+                                                    <asp:LinkButton ID="NewCustomerButton" Text="New Customer" runat="server" OnClick="AddNewCustomerButton_Click" />
+                                                    &nbsp; |
+                                                    <asp:LinkButton ID="MaintainCustomersButton" Text="Modify Customer" runat="server"
+                                                        OnClick="MaintainCustomersButton_Click" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
                                 </td>
                             </tr>
                         </table>
-                    </fieldset>
+                    </div>
                 </div>
             </asp:Panel>
         </ContentTemplate>
@@ -79,7 +88,7 @@
                                         Width="500px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="NewCustomerGroup"
                                         ControlToValidate="NameTextBox" ErrorMessage="Name is a required Text Box" InitialValue=""
-                                        Text="Required" runat="server" />
+                                        Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -93,7 +102,7 @@
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ValidationGroup="NewCustomerGroup"
                                         ControlToValidate="PriceListDropDownList" InitialValue="-1" ErrorMessage="You must select Price List"
-                                        Text="Required" runat="server" />
+                                        Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -103,7 +112,7 @@
                                     <table class="progressupdate">
                                         <tr>
                                             <td>
-                                                <asp:Button ID="AddCustomerButton" Text="Add Shop Details" ValidationGroup="NewCustomerGroup"
+                                                <asp:LinkButton ID="AddCustomerButton" Text="Add Shop Details" ValidationGroup="NewCustomerGroup"
                                                     runat="server" OnClick="AddCustomerButton_Click" />
                                             </td>
                                             <td>
@@ -163,7 +172,7 @@
                                         MaxLength="40" Width="350px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="NewOutletGroup"
                                         ControlToValidate="ShopNameTextBox" ErrorMessage="Name is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -175,7 +184,7 @@
                                         MaxLength="40" Width="350px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="NewOutletGroup"
                                         ControlToValidate="AddressLine1TextBox" ErrorMessage="Address Line is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -195,7 +204,7 @@
                                         Width="350px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8" ValidationGroup="NewOutletGroup"
                                         ControlToValidate="TownTextBox" ErrorMessage="City/Town is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -207,7 +216,7 @@
                                         Width="350px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9" ValidationGroup="NewOutletGroup"
                                         ControlToValidate="CountyTextBox" ErrorMessage="County is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -219,7 +228,7 @@
                                         MaxLength="8" Width="350px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator10" ValidationGroup="NewOutletGroup"
                                         ControlToValidate="PostCodeTextBox" Display="Dynamic" ErrorMessage="Post Code is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidatorPostCodeTextBox" ValidationGroup="NewOutletGroup"
                                         ValidationExpression="^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) {0,1}[0-9][A-Za-z]{2})$"
                                         ControlToValidate="PostCodeTextBox" Text="Format Error" ErrorMessage="Invalid UK Post Code"
@@ -231,12 +240,11 @@
                                     Map Ref.
                                 </td>
                                 <td colspan="3">
-                                    <asp:TextBox ID="MapReferenceTextBox" runat="server" 
-                                        ValidationGroup="NewOutletGroup"
+                                    <asp:TextBox ID="MapReferenceTextBox" runat="server" ValidationGroup="NewOutletGroup"
                                         MaxLength="8" Width="350px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ValidationGroup="NewOutletGroup"
                                         ControlToValidate="MapReferenceTextBox" Display="Dynamic" ErrorMessage="Map Reference is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -263,7 +271,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <asp:Button ID="AddShopButton" Text="Add Shop" ValidationGroup="NewOutletGroup" runat="server"
+                                                            <asp:LinkButton ID="AddShopButton" Text="Add Shop" ValidationGroup="NewOutletGroup" runat="server"
                                                                 OnClick="AddShopButton_Click" />&nbsp;
                                                         </td>
                                                         <td>
@@ -391,14 +399,13 @@
                                             <RowStyle CssClass="row-a" />
                                             <AlternatingRowStyle CssClass="row-b" />
                                             <Columns>
-                                                <asp:BoundField Visible="false" DataField="ID" HeaderText="ID" SortExpression="Name">                                                    
+                                                <asp:BoundField Visible="false" DataField="ID" HeaderText="ID" SortExpression="Name">
                                                 </asp:BoundField>
-                                                <asp:BoundField ItemStyle-Width="53%" DataField="Name" HeaderText="Name" SortExpression="Name">                                                   
+                                                <asp:BoundField ItemStyle-Width="53%" DataField="Name" HeaderText="Name" SortExpression="Name">
                                                 </asp:BoundField>
                                                 <asp:TemplateField HeaderText="Account No" SortExpression="AccountNo">
                                                     <ItemTemplate>
-                                                        <asp:BulletedList ID="AccountNoBulletedList" runat="server" 
-                                                            BulletStyle="Disc" DisplayMode="Text"
+                                                        <asp:BulletedList ID="AccountNoBulletedList" runat="server" BulletStyle="Disc" DisplayMode="Text"
                                                             DataTextField="AlphaID" DataValueField="ID">
                                                         </asp:BulletedList>
                                                     </ItemTemplate>
@@ -459,7 +466,7 @@
                                         MaxLength="40" Width="350px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ModifyRequiredFieldValidator2" ValidationGroup="NewCustomerGroup"
                                         ControlToValidate="ModifyNameTextBox" ErrorMessage="Name is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -481,7 +488,7 @@
                                                 <table class="progressupdate">
                                                     <tr>
                                                         <td>
-                                                            <asp:Button ID="ModifyShopButtton" Text="Add Shop" runat="server" OnClick="ModifyShopButton_Click" />
+                                                            <asp:LinkButton ID="ModifyShopButtton" Text="Add Shop" runat="server" OnClick="ModifyShopButton_Click" />
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -540,7 +547,7 @@
                                         MaxLength="40" Width="370px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ModifiedRequiredFieldValidator4" ValidationGroup="NewOutletGroup"
                                         ControlToValidate="ModifiedShopNameTextBox" ErrorMessage="Name is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -552,7 +559,7 @@
                                         MaxLength="40" Width="370px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ModifiedRequiredFieldValidator1" ValidationGroup="NewOutletGroup"
                                         ControlToValidate="ModifiedAddressLine1TextBox" ErrorMessage="Address Line is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -572,7 +579,7 @@
                                         MaxLength="40" Width="370px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ModifiedRequiredFieldValidator8" ValidationGroup="NewOutletGroup"
                                         ControlToValidate="ModifiedTownTextBox" ErrorMessage="City/Town is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -584,7 +591,7 @@
                                         MaxLength="40" Width="370px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ModifiedRequiredFieldValidator9" ValidationGroup="NewOutletGroup"
                                         ControlToValidate="ModifiedCountyTextBox" ErrorMessage="County is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -596,7 +603,7 @@
                                         MaxLength="8" Width="60px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ModifiedRequiredFieldValidator10" ValidationGroup="NewOutletGroup"
                                         ControlToValidate="ModifiedPostCodeTextBox" ErrorMessage="Post Code is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -608,7 +615,7 @@
                                         MaxLength="8" Width="60px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ValidationGroup="NewOutletGroup"
                                         ControlToValidate="ModifiedMapReferenceTextBox" ErrorMessage="Map Reference is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -756,7 +763,7 @@
                                                             MaxLength="40" Width="350px"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="NewOutletGroup"
                                                             ControlToValidate="ShopNameTextBox" ErrorMessage="Name is a required Text Box"
-                                                            InitialValue="" Text="Required" runat="server" />
+                                                            InitialValue="" Text="*" runat="server" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -768,7 +775,7 @@
                                                             MaxLength="40" Width="350px"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="NewOutletGroup"
                                                             ControlToValidate="AddressLine1TextBox" ErrorMessage="Address Line is a required Text Box"
-                                                            InitialValue="" Text="Required" runat="server" />
+                                                            InitialValue="" Text="*" runat="server" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -788,7 +795,7 @@
                                                             Width="350px"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator8" ValidationGroup="NewOutletGroup"
                                                             ControlToValidate="TownTextBox" ErrorMessage="City/Town is a required Text Box"
-                                                            InitialValue="" Text="Required" runat="server" />
+                                                            InitialValue="" Text="*" runat="server" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -800,7 +807,7 @@
                                                             Width="350px"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator9" ValidationGroup="NewOutletGroup"
                                                             ControlToValidate="CountyTextBox" ErrorMessage="County is a required Text Box"
-                                                            InitialValue="" Text="Required" runat="server" />
+                                                            InitialValue="" Text="*" runat="server" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -812,7 +819,7 @@
                                                             MaxLength="8" Width="350px"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator10" ValidationGroup="NewOutletGroup"
                                                             ControlToValidate="PostCodeTextBox" ErrorMessage="Post Code is a required Text Box"
-                                                            InitialValue="" Text="Required" runat="server" />
+                                                            InitialValue="" Text="*" runat="server" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -824,7 +831,7 @@
                                                             MaxLength="8" Width="350px"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ValidationGroup="NewOutletGroup"
                                                             ControlToValidate="MapReferenceTextBox" ErrorMessage="Map Reference is a required Text Box"
-                                                            InitialValue="" Text="Required" runat="server" />
+                                                            InitialValue="" Text="*" runat="server" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -909,7 +916,7 @@
                                         MaxLength="40" Width="500px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="CCRequiredFieldValidator2" ValidationGroup="NewCustomerGroup"
                                         ControlToValidate="CustomerContactNameTextBox" ErrorMessage="Name is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -994,7 +1001,7 @@
                                         MaxLength="35" Width="300px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="CCRequiredFieldValidator7" ValidationGroup="NewContactGroup"
                                         ControlToValidate="JobRoleTextBox" ErrorMessage="Name is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -1006,7 +1013,7 @@
                                         Width="300px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="CCRequiredFieldValidator3" ValidationGroup="NewContactGroup"
                                         ControlToValidate="TitleTextBox" ErrorMessage="Name is a required Text Box" InitialValue=""
-                                        Text="Required" runat="server" />
+                                        Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -1027,7 +1034,7 @@
                                         MaxLength="35" Width="300px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="CCRequiredFieldValidator11" ValidationGroup="NewContactGroup"
                                         ControlToValidate="LastNameTextBox" ErrorMessage="Name is a required Text Box"
-                                        InitialValue="" Text="Required" runat="server" />
+                                        InitialValue="" Text="*" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -1039,7 +1046,7 @@
                                         MaxLength="20" Width="300px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="CCRequiredFieldValidator14" ValidationGroup="NewContactGroup"
                                         ControlToValidate="DayTimeTelephoneNoTextBox" ErrorMessage="Day Time Telephone No is Required"
-                                        InitialValue="" Text="Required" Display="Dynamic" runat="server" />
+                                        InitialValue="" Text="*d" Display="Dynamic" runat="server" />
                                     <asp:RegularExpressionValidator ID="CCRegularExpressionValidator" runat="server"
                                         ControlToValidate="DayTimeTelephoneNoTextBox" ErrorMessage="Invalid UK phone number"
                                         Text="Format Error" Display="Dynamic" ValidationExpression="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$">
@@ -1226,7 +1233,7 @@
                                                             MaxLength="35" Width="300px"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="CCDDRequiredFieldValidator4" ValidationGroup="NewContactGroup"
                                                             ControlToValidate="JobRoleTextBox" ErrorMessage="Job Role is a required field"
-                                                            InitialValue="" Text="Required" runat="server" />
+                                                            InitialValue="" Text="*" runat="server" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -1238,7 +1245,7 @@
                                                             Width="300px"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="CCDDRequiredFieldValidator1" ValidationGroup="NewContactGroup"
                                                             ControlToValidate="TitleTextBox" ErrorMessage="Address Line is a required field"
-                                                            InitialValue="" Text="Required" runat="server" />
+                                                            InitialValue="" Text="*" runat="server" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -1259,7 +1266,7 @@
                                                             MaxLength="35" Width="300px"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="CCDDRequiredFieldValidator8" ValidationGroup="NewContactGroup"
                                                             ControlToValidate="LastNameTextBox" ErrorMessage="Last Name is a required field"
-                                                            InitialValue="" Text="Required" runat="server" />
+                                                            InitialValue="" Text="*" runat="server" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -1271,7 +1278,7 @@
                                                             MaxLength="20" Width="300px"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="CCDDRequiredFieldValidator9" ValidationGroup="NewContactGroup"
                                                             ControlToValidate="DayTimeTelephoneNoTextBox" ErrorMessage="Day Time Telephone No is a required field"
-                                                            InitialValue="" Text="Required" runat="server" />
+                                                            InitialValue="" Text="*" runat="server" />
                                                         <asp:RegularExpressionValidator ID="CCRegularExpressionValidator" runat="server"
                                                             ControlToValidate="DayTimeTelephoneNoTextBox" ErrorMessage="Invalid UK phone number"
                                                             Text="Format Error" Display="Dynamic" ValidationExpression="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$" />
