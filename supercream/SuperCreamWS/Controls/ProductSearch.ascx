@@ -31,7 +31,7 @@
                                 <td>
                                 </td>
                                 <td>
-                                    <asp:Button ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
+                                    <asp:LinkButton ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
                                         OnClick="SearchButton_Click" />
                                 </td>
                             </tr>
@@ -54,7 +54,7 @@
                     <asp:BoundField DataField="UnitQty" HeaderText="UnitQty" ItemStyle-Width="10%" SortExpression="UnitQty" />
                     <asp:TemplateField ItemStyle-Width="20%">
                         <ItemTemplate>
-                            <asp:Button ID="AddProductButton" runat="server" CommandArgument='<%# Bind("ID") %>'
+                            <asp:LinkButton ID="AddProductButton" runat="server" CommandArgument='<%# Bind("ID") %>'
                                 CommandName="AddProductToOrder" ControlStyle-CssClass="button" ItemStyle-Width="20%"
                                 Text="Add Product to Order" />
                         </ItemTemplate>
