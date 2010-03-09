@@ -60,7 +60,7 @@ public partial class Admin_PriceList : System.Web.UI.Page
 
             ProductUI pui = new ProductUI();
 
-            ProductListFromListBox.DataSource = pui.GetAllProducts(null, null);
+            ProductListFromListBox.DataSource = pui.GetAllProducts(null, null).OrderBy(q => q.Description);
 
             ChangeState(this, e);
 
@@ -68,8 +68,6 @@ public partial class Admin_PriceList : System.Web.UI.Page
         }
         else
             ErrorViewControl.Visible = false;
-
-        DataBind();
     }
     #endregion
 
@@ -194,6 +192,13 @@ public partial class Admin_PriceList : System.Web.UI.Page
         DataBind();
     }
 
+    protected void CancelPriceListMaintenanceButton_Click(object sender, EventArgs e)
+    {
+        ChangeState += new EventHandler<EventArgs>(this.PageLoadState);
+        ChangeState(this, e);
+        DataBind();
+    }
+
     protected void PriceListHeaderDataList_UpdateCommand(object source, EventArgs e)
     {
         try
@@ -301,8 +306,8 @@ public partial class Admin_PriceList : System.Web.UI.Page
             ui.Delete(PriceListID, Convert.ToInt32(selectedItem.Value));
 
             ProductUI pui = new ProductUI();
-            ProductListToListBox.DataSource = pui.GetProductsInPriceList(PriceListID);
-            ProductListFromListBox.DataSource = pui.GetProductsOutOfPriceList(PriceListID);
+            ProductListToListBox.DataSource = pui.GetProductsInPriceList(PriceListID).OrderBy(q => q.Description);
+            ProductListFromListBox.DataSource = pui.GetProductsOutOfPriceList(PriceListID).OrderBy(q => q.Description);
 
             DataBind();
         }
@@ -457,6 +462,7 @@ public partial class Admin_PriceList : System.Web.UI.Page
         PriceListItemPanel.Visible = false;
         MoveRightProductButton.Visible = false;
         MoveLeftProductButton.Visible = false;
+        CancelPriceListMaintenance.Visible = false;
     }
 
     private void AddPriceListState(object src, EventArgs mea)
@@ -472,6 +478,7 @@ public partial class Admin_PriceList : System.Web.UI.Page
         PriceListItemPanel.Visible = false;
         MoveRightProductButton.Visible = false;
         MoveLeftProductButton.Visible = false;
+        CancelPriceListMaintenance.Visible = false;
     }
 
     private void AddNewPriceListState(object src, EventArgs mea)
@@ -487,6 +494,7 @@ public partial class Admin_PriceList : System.Web.UI.Page
         PriceListItemPanel.Visible = false;
         MoveRightProductButton.Visible = false;
         MoveLeftProductButton.Visible = false;
+        CancelPriceListMaintenance.Visible = false;
     }
 
     private void AddedPriceListState(object src, EventArgs mea)
@@ -503,6 +511,7 @@ public partial class Admin_PriceList : System.Web.UI.Page
         PriceListItemPanel.Visible = false;
         MoveRightProductButton.Visible = false;
         MoveLeftProductButton.Visible = false;
+        CancelPriceListMaintenance.Visible = false;
     }
 
     private void MaintainPriceListState(object src, EventArgs e)
@@ -519,7 +528,7 @@ public partial class Admin_PriceList : System.Web.UI.Page
         PriceListItemPanel.Visible = false;
         MoveRightProductButton.Visible = false;
         MoveLeftProductButton.Visible = false;
-
+        CancelPriceListMaintenance.Visible = false;
     }
 
     private void MoveLeftButtonState(object src, EventArgs mea)
@@ -528,15 +537,14 @@ public partial class Admin_PriceList : System.Web.UI.Page
         SetupPriceListPanel.Visible = false;
         AddPriceListPanel.Visible = true;
         PriceListDataGridPanel.Visible = true;
-        PriceListItemPanel.Visible = true;
+        PriceListDataGridPanel.Visible = false;
 
         SetupNewPriceListPanel.Visible = false;
         EnterPricePanel.Visible = false;
 
-
-
         MoveRightProductButton.Visible = true;
         MoveLeftProductButton.Visible = true;
+        CancelPriceListMaintenance.Visible = true;
         //  Util.ClearControls(this.SetupPriceListPanel);
     }
 
@@ -545,7 +553,7 @@ public partial class Admin_PriceList : System.Web.UI.Page
         NewPriceListPanel.Visible = true;
         EnterPricePanel.Visible = true;
 
-        PriceListDataGridPanel.Visible = true;
+        PriceListDataGridPanel.Visible = false;
         SetupPriceListPanel.Visible = false;
         SetupNewPriceListPanel.Visible = false;
         AddPriceListPanel.Visible = true;
@@ -556,15 +564,17 @@ public partial class Admin_PriceList : System.Web.UI.Page
         DiscountTextBox.Text = "";
         MoveRightProductButton.Visible = false;
         MoveLeftProductButton.Visible = false;
+        CancelPriceListMaintenance.Visible = true;
         // Util.ClearControls(this.SetupPriceListPanel);
     }
 
     private void SelectMaintainPriceListState(object src, EventArgs e)
     {
         SetupNewPriceListPanel.Visible = true;
-        PriceListDataGridPanel.Visible = true;
+        PriceListDataGridPanel.Visible = false;
         AddPriceListPanel.Visible = true;
         PriceListItemPanel.Visible = true;
+        CancelPriceListMaintenance.Visible = true;
 
         NewPriceListPanel.Visible = false;
 
@@ -591,14 +601,15 @@ public partial class Admin_PriceList : System.Web.UI.Page
 
         MoveRightProductButton.Visible = false;
         MoveLeftProductButton.Visible = false;
+        CancelPriceListMaintenance.Visible = false;
     }
 
     private void SearchProductState(object src, EventArgs mea)
     {
         ErrorViewControl.Visible = false;
     }
-
-    #endregion
-
-    #endregion
 }
+
+    #endregion
+
+    #endregion
