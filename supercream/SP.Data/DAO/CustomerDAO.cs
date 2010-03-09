@@ -58,7 +58,7 @@ namespace SP.Data.LTS
                     join ph in db.Phone on cd.ID equals ph.ContactDetailID
                     where ph.Description.Contains(telephoneNo)
                     orderby c.Name
-                    select c).ToList<Customer>();
+                    select c).Distinct().ToList<Customer>();
         }
 
         public List<Customer> GetByNameLike(string name)

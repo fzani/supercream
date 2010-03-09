@@ -51,6 +51,10 @@ public partial class Admin_Customer : System.Web.UI.Page
 
             ChangeState(this, e);
         }
+        else
+        {
+            ErrorViewControl.Visible = false;
+        }
     }
     #endregion
 
@@ -342,6 +346,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         {
             ErrorViewControl.AddError(ex.Message);
             ErrorViewControl.Visible = true;
+            ErrorViewControl.DataBind();
         }
     }
 
@@ -450,7 +455,7 @@ public partial class Admin_Customer : System.Web.UI.Page
                 BulletedList list = e.Row.FindControl("AccountNoBulletedList") as BulletedList;
                 list.DataSource = accounts;
                 list.DataBind();
-            //    DataBind();
+                //    DataBind();
 
             }
         }
@@ -458,66 +463,90 @@ public partial class Admin_Customer : System.Web.UI.Page
 
     protected void CustomerListGridView_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        if (e.CommandName == "ModifyCustomer")
+        try
         {
-            EventArgs ev = new EventArgs();
-            ChangeState += new EventHandler<EventArgs>(EditShopState);
+            if (e.CommandName == "ModifyCustomer")
+            {
+                EventArgs ev = new EventArgs();
+                ChangeState += new EventHandler<EventArgs>(EditShopState);
 
-            int id = Convert.ToInt32(e.CommandArgument);
+                int id = Convert.ToInt32(e.CommandArgument);
 
-            CustomerUI ui = new CustomerUI();
-            Customer c = ui.GetWithOutletStores(id);
+                CustomerUI ui = new CustomerUI();
+                Customer c = ui.GetWithOutletStores(id);
 
-            ModifyCustomerID = id; // Serialise to View State
+                ModifyCustomerID = id; // Serialise to View State
 
-            //foreach(OutletStore 
-            ModifyNameTextBox.Text = c.Name;
+                //foreach(OutletStore 
+                ModifyNameTextBox.Text = c.Name;
 
-            int value = Convert.ToInt32(ModifyPriceListDropDownList.Items.FindByValue(c.PriceListHeaderID.ToString()).Value.ToString());
-            ModifyPriceListDropDownList.SelectedValue = value.ToString();
+                int value = Convert.ToInt32(ModifyPriceListDropDownList.Items.FindByValue(c.PriceListHeaderID.ToString()).Value.ToString());
+                ModifyPriceListDropDownList.SelectedValue = value.ToString();
 
-            ChangeState(this, e);
+                ChangeState(this, e);
 
-            DataBind();
+                DataBind();
 
+            }
+            else if (e.CommandName == "ModifyCustomerContact")
+            {
+                //Int32 index = Convert.ToInt32(e.CommandArgument);
+                //GridViewRow row = this.CustomerListGridView.Rows[index];
+
+                EventArgs ev = new EventArgs();
+                ChangeState += new EventHandler<EventArgs>(ModifyCustomerContact);
+
+                PriceListHeaderUI pui = new PriceListHeaderUI();
+                List<PriceListHeader> headerList = pui.GetAll();
+                foreach (PriceListHeader priceListHeader in headerList)
+                    CustomerContactPriceListDropDownList.Items.Add(new ListItem(priceListHeader.PriceListName, priceListHeader.ID.ToString()));
+
+                int id = Convert.ToInt32(e.CommandArgument);
+                ModifyCustomerID = id;
+
+                CustomerUI ui = new CustomerUI();
+                Customer c = ui.GetWithContactDetails(id);
+
+                int index = Convert.ToInt32(CustomerContactPriceListDropDownList.Items.FindByValue(c.PriceListHeaderID.ToString()).Value.ToString());
+                CustomerContactPriceListDropDownList.SelectedValue = index.ToString();
+
+                CustomerContactNameTextBox.Text = c.Name;
+
+                DataBind();
+
+                ChangeState(this, e);
+
+                //UrlParameterPasser p = new UrlParameterPasser("ModifyCustomerContacts.aspx");
+                //p["ID"] = e.CommandArgument.ToString();
+                //p.PassParameters();
+            }
+            else if (e.CommandName == "DeleteCustomer")
+            {
+                CustomerUI ui = new CustomerUI();
+                ui.DeleteCustomer(Convert.ToInt32(e.CommandArgument.ToString()));
+                DataBind();
+            }
         }
-        else if (e.CommandName == "ModifyCustomerContact")
+        catch (Exception ex)
         {
-            //Int32 index = Convert.ToInt32(e.CommandArgument);
-            //GridViewRow row = this.CustomerListGridView.Rows[index];
+            if (ex.InnerException != null)
+            {
+                ErrorViewControl.AddError(ex.InnerException.Message);
+            }
+            else
+            {
+                if (ex.Message.Contains("SPWCF Service error : The DELETE statement conflicted with the REFERENCE constraint"))
+                {
+                    ErrorViewControl.AddError("Cannot delete customer there are outstanding items attached");
+                }
+                else
+                {
+                    ErrorViewControl.AddError(ex.Message);
+                }
+            }
 
-            EventArgs ev = new EventArgs();
-            ChangeState += new EventHandler<EventArgs>(ModifyCustomerContact);
-
-            PriceListHeaderUI pui = new PriceListHeaderUI();
-            List<PriceListHeader> headerList = pui.GetAll();
-            foreach (PriceListHeader priceListHeader in headerList)
-                CustomerContactPriceListDropDownList.Items.Add(new ListItem(priceListHeader.PriceListName, priceListHeader.ID.ToString()));
-
-            int id = Convert.ToInt32(e.CommandArgument);
-            ModifyCustomerID = id;
-
-            CustomerUI ui = new CustomerUI();
-            Customer c = ui.GetWithContactDetails(id);
-
-            int index = Convert.ToInt32(CustomerContactPriceListDropDownList.Items.FindByValue(c.PriceListHeaderID.ToString()).Value.ToString());
-            CustomerContactPriceListDropDownList.SelectedValue = index.ToString();
-
-            CustomerContactNameTextBox.Text = c.Name;
-
-            DataBind();
-
-            ChangeState(this, e);
-
-            //UrlParameterPasser p = new UrlParameterPasser("ModifyCustomerContacts.aspx");
-            //p["ID"] = e.CommandArgument.ToString();
-            //p.PassParameters();
-        }
-        else if (e.CommandName == "DeleteCustomer")
-        {
-            CustomerUI ui = new CustomerUI();
-            ui.DeleteCustomer(Convert.ToInt32(e.CommandArgument.ToString()));
-            DataBind();
+            ErrorViewControl.Visible = true;
+            ErrorViewControl.DataBind();
         }
     }
     #endregion
@@ -807,8 +836,8 @@ public partial class Admin_Customer : System.Web.UI.Page
             if (!String.IsNullOrEmpty(CustomerNameSearchTextBox.Text)) i++;
             if (!String.IsNullOrEmpty(TelephoneNoSearchTextBox.Text)) i++;
             if (!String.IsNullOrEmpty(AccountNoTextBox.Text)) i++;
-            
-            if(i > 1)
+
+            if (i > 1)
                 throw new ApplicationException("You cannot search on more than one item");
 
             e.InputParameters[0] = CustomerNameSearchTextBox.Text;
@@ -842,7 +871,7 @@ public partial class Admin_Customer : System.Web.UI.Page
 
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
-       
+
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ErrorViewControl.Visible = false;
@@ -863,7 +892,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerPanel.Visible = true;
         AddShopPanel.Visible = true;
 
-        AddCustomerButton.Visible = false;       
+        AddCustomerButton.Visible = false;
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ShopBasketPanel.Visible = false;
@@ -882,7 +911,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerPanel.Visible = true;
 
         ShopBasketPanel.Visible = false;
-        AddShopPanel.Visible = false;       
+        AddShopPanel.Visible = false;
         AddCustomerButton.Visible = true;
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
@@ -901,7 +930,7 @@ public partial class Admin_Customer : System.Web.UI.Page
 
         AddCustomerPanel.Visible = true;
         AddShopPanel.Visible = true;
-       
+
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ShopBasketPanel.Visible = true;
@@ -919,7 +948,7 @@ public partial class Admin_Customer : System.Web.UI.Page
     {
         CustomerMenuPanel.Visible = true;
         AddCustomerPanel.Visible = true;
-        AddShopPanel.Visible = true;      
+        AddShopPanel.Visible = true;
         ShopBasketPanel.Visible = true;
 
 
@@ -946,7 +975,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerPanel.Visible = false;
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
-      
+
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ModifyShopBasketPanel.Visible = true;
@@ -978,7 +1007,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
         ModifyShopBasketPanel.Visible = false;
-       
+
         ErrorViewControl.Visible = false;
         ModifyCustomerPanel.Visible = false;
 
@@ -1005,7 +1034,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         ShopBasketPanel.Visible = false;
 
         AddCustomerContactPanel.Visible = false;
-      
+
         SaveNewCustomerPanel.Visible = false;
 
         ErrorViewControl.Visible = false;
@@ -1025,7 +1054,7 @@ public partial class Admin_Customer : System.Web.UI.Page
 
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
-       
+
         AddCustomerContactPanel.Visible = false;
         AddContactPanel.Visible = false;
 
@@ -1040,7 +1069,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerPanel.Visible = false;
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
-        
+
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ErrorViewControl.Visible = false;
@@ -1070,7 +1099,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerPanel.Visible = false;
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
-      
+
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ErrorViewControl.Visible = false;
@@ -1097,7 +1126,7 @@ public partial class Admin_Customer : System.Web.UI.Page
 
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
-       
+
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ErrorViewControl.Visible = false;
@@ -1122,7 +1151,7 @@ public partial class Admin_Customer : System.Web.UI.Page
 
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
-       
+
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ErrorViewControl.Visible = false;
@@ -1169,4 +1198,15 @@ public partial class Admin_Customer : System.Web.UI.Page
     }
 
     #endregion
+
+    protected void CustomerListGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
+    {
+        if (e.ExceptionHandled == false)
+        {
+            ErrorViewControl.AddError(e.Exception.Message);
+            ErrorViewControl.Visible = true;
+            ErrorViewControl.DataBind();
+            e.ExceptionHandled = true;
+        }
+    }
 }

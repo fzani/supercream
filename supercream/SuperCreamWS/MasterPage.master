@@ -43,15 +43,7 @@
         <!-- content-wrap starts here -->
         <!-- content-wrap starts here -->
         <div id="content-wrap">
-            <div id="sidebar">
-                <h3>
-                    Search Box</h3>
-                <form action="#" class="searchform">
-                <p>
-                    <input name="search_query" class="textbox" type="text" />
-                    <input name="search" class="button" value="Search" type="submit" />
-                </p>
-                </form>
+            <div id="sidebar">               
                 <h3>
                     Admin</h3>
                 <ul class="sidemenu">

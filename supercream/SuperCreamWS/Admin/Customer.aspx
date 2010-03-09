@@ -390,7 +390,7 @@
                                             <td>
                                             </td>
                                             <td>
-                                                <asp:Button ID="SearchButton" Text="Search" runat="server" OnClick="SearchButton_Click" />
+                                                <asp:LinkButton ID="SearchButton" Text="Search" runat="server" OnClick="SearchButton_Click" />
                                             </td>
                                         </tr>
                                     </table>
@@ -399,7 +399,9 @@
                                     <td>
                                         <asp:GridView ID="CustomerListGridView" Width="98%" runat="server" DataKeyNames="ID"
                                             Visible="False" AutoGenerateColumns="False" CssClass="simplegrid" DataSourceID="ObjectDataSource1"
-                                            OnRowCommand="CustomerListGridView_RowCommand" OnRowDataBound="CustomerListGridView_RowDataBound">
+                                            OnRowCommand="CustomerListGridView_RowCommand" 
+                                            OnRowDataBound="CustomerListGridView_RowDataBound" 
+                                            onrowdeleted="CustomerListGridView_RowDeleted">
                                             <RowStyle CssClass="row-a" />
                                             <AlternatingRowStyle CssClass="row-b" />
                                             <Columns>
@@ -417,10 +419,10 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField ShowHeader="False">
                                                     <ItemTemplate>
-                                                        <asp:Button ID="Button1" runat="server" CausesValidation="false" CommandName="ModifyCustomer"
-                                                            Text="Shop Details" Width="100%" CommandArgument='<%# Bind("ID") %>' />
-                                                        <asp:Button ID="Button2" runat="server" CausesValidation="false" CommandName="ModifyCustomerContact"
-                                                            Text="Customer Contacts" Width="100%" CommandArgument='<%# Bind("ID") %>' />
+                                                        <asp:LinkButton ID="Button1" runat="server" CausesValidation="false" CommandName="ModifyCustomer"
+                                                            Text="Shop Details" Width="100%" CommandArgument='<%# Bind("ID") %>' /> <br />
+                                                        <asp:LinkButton ID="Button2" runat="server" CausesValidation="false" CommandName="ModifyCustomerContact"
+                                                            Text="Customer Contacts" Width="100%" CommandArgument='<%# Bind("ID") %>' /> <br />
                                                         <asp:Button ID="Button3" runat="server" CausesValidation="false" CommandName="DeleteCustomer"
                                                             Text="Delete Customer" Width="100%" CommandArgument='<%# Bind("ID") %>' />
                                                     </ItemTemplate>
@@ -512,8 +514,7 @@
                                 </td>
                             </tr>
                         </table>
-                    </fieldset>
-                </asp:Panel>
+                    </fieldset></asp:Panel>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
@@ -867,8 +868,7 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                        </fieldset>
-                                    </asp:Panel>
+                                        </fieldset></asp:Panel>
                                 </SelectedItemTemplate>
                             </asp:DataList>
                         </div>
@@ -883,7 +883,8 @@
                                     </asp:ObjectDataSource>
                                 </td>
                                 <td id="Td1">
-                                    <asp:Button ID="ModifyCustomerSaveButton" Text="Save" runat="server" OnClick="CustomerUpdateButton_Click" />
+                                    <asp:Button ID="ModifyCustomerSaveButton" Text="Update Customer Details" 
+                                        runat="server" OnClick="CustomerUpdateButton_Click" />
                                 </td>
                             </tr>
                         </table>
@@ -963,8 +964,7 @@
                                 </td>
                             </tr>
                         </table>
-                    </fieldset>
-                </asp:Panel>
+                    </fieldset></asp:Panel>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
@@ -1347,8 +1347,7 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                        </fieldset>
-                                    </asp:Panel>
+                                        </fieldset></asp:Panel>
                                 </SelectedItemTemplate>
                             </asp:DataList>
                         </div>
@@ -1363,7 +1362,7 @@
                                     </asp:ObjectDataSource>
                                 </td>
                                 <td id="Td2">
-                                    <asp:Button ID="CustomerContactUpdateButton" Text="Save" runat="server" OnClick="CustomerContactUpdateButton_Click" />
+                                    <asp:Button ID="CustomerContactUpdateButton" Text="Update Customer Details" runat="server" OnClick="CustomerContactUpdateButton_Click" />
                                 </td>
                             </tr>
                         </table>
