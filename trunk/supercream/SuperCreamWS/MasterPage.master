@@ -66,7 +66,7 @@
                         <br />
                         <a id="A10" href="~/Invoices/CompleteInvoices.aspx" runat="server">Complete Invoices</a>
                         <br />
-                        <a id="A1" href="~/Invoices/Invoices.aspx" runat="server">Invoices</a>
+                        <a id="A1" href="~/Invoices/Invoices.aspx" runat="server">Standard Invoices</a>
                         <br />
                         <a id="A2" href="~/Invoices/ProformaInvoices.aspx" runat="server">Proforma Invoices</a>
                         <br />
@@ -90,10 +90,8 @@
                 <ul class="sidemenu">
                     <li><strong>Reports</strong>
                         <br />
-                        <a id="A7" href="~/Ordering/Orders.aspx" runat="server">General Reports</a><br />
-                        <a id="A8" href="~/Ordering/Orders.aspx" runat="server">Pick Lists</a>
-                        <br />
-                        <a id="A9" href="~/Ordering/Orders.aspx" runat="server">Summaries</a> </li>
+                        <a id="A7" href="http://bali/Reports/Pages/Folder.aspx?ItemPath=%2fSuperCreamReports&ViewMode=List" runat="server">General Reports</a><br />
+                         </li>
                 </ul>
                 <h3>
                     Wise Words</h3>
