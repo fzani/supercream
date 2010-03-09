@@ -57,7 +57,7 @@
         <Triggers>
             <asp:PostBackTrigger ControlID="NewPriceListButton" />
             <asp:PostBackTrigger ControlID="MaintainPriceListButton" />
-            <asp:PostBackTrigger ControlID="CancelNewPriceListButton" />            
+            <asp:PostBackTrigger ControlID="CancelNewPriceListButton" />
         </Triggers>
         <ContentTemplate>
             <asp:Panel ID="NewPriceListPanel" DefaultButton="AddPriceListButton" Visible="false"
@@ -253,8 +253,8 @@
                                                         <td>
                                                             <asp:TextBox ID="PriceListNameTextBox" runat="server" MaxLength="50" Width="500px"
                                                                 ValidationGroup="NewOutletGroup"></asp:TextBox>
-                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ControlToValidate="PriceListNameTextBox"
-                                                                ValidationGroup="NewOutletGroup" ErrorMessage="Price List Name is a required field"
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ValidationGroup="NewOutletGroup"
+                                                                ControlToValidate="PriceListNameTextBox" ErrorMessage="Price List Name is a required field"
                                                                 InitialValue="" Text="*" runat="server" />
                                                         </td>
                                                     </tr>
@@ -299,12 +299,10 @@
                                                 </table>
                                             </fieldset>
                                             <p>
-                                                <asp:Button ID="OkButton" runat="server" Text="Update" ValidationGroup="NewOutletGroup"
-                                                    CssClass="button" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
+                                                <asp:Button ID="OkButton" runat="server" Text="Update" CssClass="button" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
                                                     OnClick="PriceListHeaderDataList_UpdateCommand" />
-                                                <asp:Button ID="DeleteButton" runat="server" Text="Delete" ValidationGroup="NewOutletGroup"
-                                                    CommandArgument='<%# Bind("ID") %>' OnClick="PriceListHeaderDataList_DeleteCommand"
-                                                    CssClass="button" />
+                                                <asp:Button ID="DeleteButton" runat="server" Text="Delete" CommandArgument='<%# Bind("ID") %>'
+                                                    OnClick="PriceListHeaderDataList_DeleteCommand" CssClass="button" />
                                                 <asp:Button ID="CancelButton" Text="Cancel" runat="server" CausesValidation="false"
                                                     ValidationGroup="NewOutletGroup" CssClass="button" />
                                             </p>
@@ -414,7 +412,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Check Discount
+                                        Calculate Discount
                                     </td>
                                     <td>
                                         <asp:CheckBox ID="DiscountCheckBox" runat="server"></asp:CheckBox>
@@ -437,6 +435,14 @@
             </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
+    <asp:Panel ID="CancelPriceListMaintenance" runat="server" Visible="false">
+        <div class="FormInput">
+            <fieldset id="Fieldset1">
+                <asp:Button ID="CancelMaintenanceButton" Text="Cancel" runat="server" CausesValidation="false" OnClick="CancelPriceListMaintenanceButton_Click"
+                    Style="margin: 5px 0px 5px 0px;" />
+            </fieldset>
+        </div>
+    </asp:Panel>
     <asp:UpdatePanel ID="PriceListItemDataListUpdatePanel" runat="server" UpdateMode="Conditional">
         <Triggers>
             <asp:PostBackTrigger ControlID="CreatePriceListButton" />
