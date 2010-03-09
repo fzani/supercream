@@ -1113,6 +1113,15 @@ public partial class Admin_Customer : System.Web.UI.Page
 
         SaveNewCustomerPanel.Visible = false;
 
+        if (this.ContactDetailDataList.Items.Count > 0)
+        {
+            ContactDataListPanel.Visible = true;
+        }
+        else
+        {
+            ContactDataListPanel.Visible = false;
+        }
+
         //    Util.ClearFields(this.Page);
     }
 
@@ -1138,6 +1147,15 @@ public partial class Admin_Customer : System.Web.UI.Page
         ContactDataListPanel.Visible = true;
 
         SaveNewCustomerPanel.Visible = false;
+
+        if (this.ContactDetailDataList.Items.Count > 0)
+        {
+            ContactDataListPanel.Visible = true;
+        }
+        else
+        {
+            ContactDataListPanel.Visible = false;
+        }
     }
 
     protected void AddedContactButtonState(object sender, EventArgs e)
@@ -1159,10 +1177,29 @@ public partial class Admin_Customer : System.Web.UI.Page
         ModifyCustomerPanel.Visible = false;
 
         AddCustomerContactPanel.Visible = true;
-        AddContactPanel.Visible = false;
-        ContactDataListPanel.Visible = true;
+        AddContactPanel.Visible = false;       
 
         SaveNewCustomerPanel.Visible = false;
+
+        if (this.ContactDetailDataList.Items.Count > 0)
+        {
+            ContactDataListPanel.Visible = true;
+        }
+        else
+        {
+            ContactDataListPanel.Visible = false;
+        }
+
+        DataBind();
+
+        if (this.ContactDetailDataList.Items.Count > 0)
+        {
+            ContactDataListPanel.Visible = true;
+        }
+        else
+        {
+            ContactDataListPanel.Visible = false;
+        }
     }
 
     protected void CancelAddContactButtonState(object sender, EventArgs e)
@@ -1186,6 +1223,15 @@ public partial class Admin_Customer : System.Web.UI.Page
         ContactDataListPanel.Visible = true;
 
         SaveNewCustomerPanel.Visible = false;
+
+        if (this.ContactDetailDataList.Items.Count > 0)
+        {
+            ContactDataListPanel.Visible = true;
+        }
+        else
+        {
+            ContactDataListPanel.Visible = false;
+        }
 
         Util.ClearControls(AddContactPanel);
     }

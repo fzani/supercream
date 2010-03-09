@@ -943,7 +943,7 @@
                                                 <table class="progressupdate">
                                                     <tr>
                                                         <td>
-                                                            <asp:Button ID="AddNewContactButton" Text="Add Contact" runat="server" OnClick="AddNewContactButton_Click" />
+                                                            <asp:LinkButton ID="AddNewContactButton" Text="Add Contact" runat="server" OnClick="AddNewContactButton_Click" />
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -1087,7 +1087,7 @@
                                 </td>
                                 <td colspan="3">
                                     <asp:TextBox ID="EMailAddressTextBox" runat="server" ValidationGroup="NewContactGroup"
-                                        MaxLength="20" Width="300px"></asp:TextBox>
+                                        MaxLength="40" Width="300px"></asp:TextBox>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="EMailAddressTextBox"
                                         ErrorMessage="Invalid UK phone number" Text="*" Display="Dynamic"
                                         ValidationExpression=".+@[^\.].*\.[a-z]{2,}"></asp:RegularExpressionValidator>
@@ -1106,11 +1106,11 @@
                                 <td colspan="2">
                                     <table class="progressupdate">
                                         <tr>
-                                            <td style="width: 5%;">
+                                            <td style="width: 25%;">
                                                 <asp:Button ID="AddContactButton" Text="Add Contact" ValidationGroup="NewContactGroup"
                                                     runat="server" OnClick="AddContactButton_Click" />
                                             </td>
-                                            <td style="width: 95%;">
+                                            <td style="width: 75%;">
                                                 &nbsp;
                                                 <asp:Button ID="CancelAddContactButton" Text="Cancel" runat="server" OnClick="CancelAddContactButton_Click" />
                                             </td>
@@ -1319,7 +1319,7 @@
                                                     </td>
                                                     <td colspan="3">
                                                         <asp:TextBox ID="EMailAddressTextBox" runat="server" ValidationGroup="NewContactGroup"
-                                                            MaxLength="20" Width="300px"></asp:TextBox>
+                                                            MaxLength="40" Width="300px"></asp:TextBox>
                                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="EMailAddressTextBox"
                                                             ErrorMessage="Invalid UK phone number" Text="*" Display="Dynamic"
                                                             ValidationExpression=".+@[^\.].*\.[a-z]{2,}"></asp:RegularExpressionValidator>
