@@ -16,14 +16,14 @@
                         </td>
                         <td>
                             <asp:DropDownList ID="CustomerDropDownList" AutoPostBack="true" Width="300px" runat="server"
-                               ValidationGroup="AddOrderDetailsGroup"  OnSelectedIndexChanged="CustomerDropDownList_SelectedIndexChanged">
+                                ValidationGroup="AddOrderDetailsGroup" OnSelectedIndexChanged="CustomerDropDownList_SelectedIndexChanged">
                             </asp:DropDownList>
                             <ajaxToolkit:ListSearchExtender ID="ListSearchExtender2" runat="server" TargetControlID="CustomerDropDownList"
                                 PromptCssClass="ListSearchExtenderPrompt" PromptText="Text to Search For" QueryPattern="Contains"
                                 QueryTimeout="2000" />
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator8" ValidationGroup="AddOrderDetailsGroup"
                                 ControlToValidate="CustomerDropDownList" InitialValue="-1" ErrorMessage="You must select Customer"
-                                Text="Required" runat="server" />
+                                Text="*" runat="server" />
                         </td>
                     </tr>
                     <tr>
@@ -31,11 +31,11 @@
                             Order No
                         </td>
                         <td style="width: 75%;">
-                            <asp:TextBox ID="OrderNoTextBox" Width="250px" ValidationGroup="AddOrderDetailsButton" 
+                            <asp:TextBox ID="OrderNoTextBox" Width="250px" ValidationGroup="AddOrderDetailsButton"
                                 MaxLength="20" runat="server"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="AddOrderDetailsGroup"
-                                ControlToValidate="OrderNoTextBox" ErrorMessage="Order No is required" InitialValue=""
-                                Text="Required" runat="server" />
+                                ControlToValidate="OrderNoTextBox" ErrorMessage="Order No is required" Display="Dynamic"
+                                InitialValue="" Text="*" runat="server" />
                         </td>
                     </tr>
                     <tr>
@@ -46,7 +46,7 @@
                             <asp:TextBox ID="OrderDateTextBox" Style="vertical-align: middle;" runat="server"
                                 ValidationGroup="AddOrderDetailsGroup" MaxLength="100" Width="100px"></asp:TextBox>
                             <asp:Image runat="Server" Style="vertical-align: middle;" ID="Image1" ImageUrl="~/images/Calendar_scheduleHS.png"
-                                AlternateText="Click to show calendar" />                          
+                                AlternateText="Click to show calendar" />
                             <asp:RequiredFieldValidator ID="OrderDateRequiredFieldValidator" runat="server" ControlToValidate="OrderDateTextBox"
                                 Display="Dynamic" ErrorMessage="Order Date is a required field" SetFocusOnError="True"
                                 ValidationGroup="AddOrderDetailsGroup">*</asp:RequiredFieldValidator>
@@ -65,15 +65,13 @@
                             <asp:TextBox ID="DeliveryDateTextBox" Style="vertical-align: middle;" runat="server"
                                 ValidationGroup="AddOrderDetailsGroup" MaxLength="100" Width="100px"></asp:TextBox>
                             <asp:Image runat="Server" Style="vertical-align: middle;" ID="Image2" ImageUrl="~/images/Calendar_scheduleHS.png"
-                                AlternateText="Click to show calendar" />                           
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" 
-                                ControlToValidate="DeliveryDateTextBox"
+                                AlternateText="Click to show calendar" />
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="DeliveryDateTextBox"
                                 Display="Dynamic" ErrorMessage="Delivery Date is a required field" SetFocusOnError="True"
                                 ValidationGroup="AddOrderDetailsGroup">*</asp:RequiredFieldValidator>
                             <ajaxToolkit:CalendarExtender ID="CalendarExtender1" Format="dd/MM/yyyy" runat="server"
                                 TargetControlID="DeliveryDateTextBox" PopupButtonID="Image1" />
-                            <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender2" runat="server" 
-                                TargetControlID="DeliveryDateTextBox"
+                            <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender2" runat="server" TargetControlID="DeliveryDateTextBox"
                                 Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
                                 OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
                         </td>
@@ -89,10 +87,11 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <asp:Button ID="AddOrderDetailsButton" runat="server" ValidationGroup="AddOrderDetailsGroup"
+                            <asp:LinkButton ID="AddOrderDetailsButton" runat="server" ValidationGroup="AddOrderDetailsGroup"
                                 Text="Add Order Details" OnClick="AddOrderDetailsButton_Click" />
-                            <asp:Button ID="CancelNewOrderButton" CausesValidation="false" runat="server" Text="Cancel Order Details"
-                                OnClick="CancelNewOrderButton_Click" />
+                            &nbsp | &nbsp;
+                            <asp:LinkButton ID="CancelNewOrderButton" CausesValidation="false" runat="server"
+                                Text="Cancel Order Details" OnClick="CancelNewOrderButton_Click" />
                         </td>
                     </tr>
                 </table>
@@ -161,7 +160,7 @@
                             <asp:TextBox ID="PriceTextBox" MaxLength="7" Width="60px" runat="server" OnTextChanged="PriceTextBox_TextChanged"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ValidationGroup="NewOutletGroup"
                                 ControlToValidate="PriceTextBox" ErrorMessage="Price is required" InitialValue=""
-                                Text="Required" runat="server" />
+                                Text="*" runat="server" />
                             <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server"
                                 TargetControlID="PriceTextBox" FilterType="Custom,Numbers" ValidChars="£." />
                         </td>
@@ -171,10 +170,11 @@
                             <asp:Label ID="PriceListDefined" Visible="false" runat="server"></asp:Label>
                         </td>
                         <td class="emphasise">
-                            <asp:Label ID="TotalPriceLabel" Text="TotalPrice (Ex. Vat)" runat="server"></asp:Label>
+                            <asp:Label ID="TotalPriceLabel" Text="Total Price (Ex. Vat)" runat="server"></asp:Label>
                         </td>
                         <td>
-                            <asp:Label ID="TotalPriceValueLabel" MaxLength="7" Width="60px" runat="server"></asp:Label>
+                            <asp:Label ID="TotalPriceValueLabel" Font-Size="Medium" ForeColor="Red" MaxLength="7"
+                                Width="60px" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>
@@ -311,7 +311,7 @@
                                                         TargetControlID="QtyTextBox" FilterType="Numbers" />
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ValidationGroup="NewPriceListGroup"
                                                         ControlToValidate="QtyTextBox" ErrorMessage="Qty is a required Text Box" InitialValue=""
-                                                        Text="Required" runat="server" />
+                                                        Text="*" runat="server" />
                                                 </td>
                                                 <td>
                                                     No of Units
@@ -322,7 +322,7 @@
                                                         TargetControlID="NoOfUnitsTextBox" FilterType="Numbers" />
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ValidationGroup="NewPriceListGroup"
                                                         ControlToValidate="NoOfUnitsTextBox" ErrorMessage="No of Units is a required Text Box"
-                                                        InitialValue="" Text="Required" runat="server" />
+                                                        InitialValue="" Text="*" runat="server" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -335,7 +335,7 @@
                                                         TargetControlID="DiscountTextBox" FilterType="Custom,Numbers" ValidChars="%." />
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ValidationGroup="NewPriceListGroup"
                                                         ControlToValidate="DiscountTextBox" ErrorMessage="Price List Name is a required Text Box"
-                                                        InitialValue="" Text="Required" runat="server" />
+                                                        InitialValue="" Text="*" runat="server" />
                                                 </td>
                                                 <td>
                                                     Price
@@ -346,7 +346,7 @@
                                                         TargetControlID="PriceTextBox" FilterType="Custom,Numbers" ValidChars="£." />
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="NewPriceListGroup"
                                                         ControlToValidate="PriceTextBox" ErrorMessage="Price List Name is a required Text Box"
-                                                        InitialValue="" Text="Required" runat="server" />
+                                                        InitialValue="" Text="*" runat="server" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -378,11 +378,19 @@
                         <asp:Parameter Name="id" Type="Int32" />
                     </SelectParameters>
                 </asp:ObjectDataSource>
-                <div style="margin: 10px">
-                    <asp:Button ID="CompleteOrderButton" Visible="false" Text="Complete Order" runat="server"
-                        OnClick="CompleteOrderButton_Click" />
-                </div>
             </asp:Panel>
         </fieldset>
+        <asp:Panel ID="CancelPurchaseSearchPanel" Visible="false" runat="server">
+            <fieldset>
+                <table>
+                    <tr>
+                        <td>
+                            <asp:Button ID="CancelPurchaseSearchButton" Text="Complete Order" runat="server"
+                                OnClick="CancelPurchaseSearchButton_Click" />
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </asp:Panel>
     </div>
 </asp:Panel>
