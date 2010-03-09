@@ -784,31 +784,37 @@ namespace SPWCFServer
                 SP.Core.Domain.Customer coreCustomer =
                     ObjectExtension.CloneProperties<SPWCFServer.Customer, SP.Core.Domain.Customer>(customer);
 
-                coreCustomer.OutletStore = ObjectExtension.CloneList<SPWCFServer.OutletStore, SP.Core.Domain.OutletStore>(customer.OutletStore);
-                foreach (SP.Core.Domain.OutletStore os in coreCustomer.OutletStore)
+                if (customer.OutletStore != null)
                 {
-                    os.Customer = coreCustomer;
-                    os.CustomerID = coreCustomer.ID;
+                    coreCustomer.OutletStore = ObjectExtension.CloneList<SPWCFServer.OutletStore, SP.Core.Domain.OutletStore>(customer.OutletStore);
+                    foreach (SP.Core.Domain.OutletStore os in coreCustomer.OutletStore)
+                    {
+                        os.Customer = coreCustomer;
+                        os.CustomerID = coreCustomer.ID;
+                    }
                 }
 
                 coreCustomer = mgr.SaveCustomer(coreCustomer);
                 #endregion
 
                 #region Deal with addresses which are not connnected in LINQ
-                for (int i = 0; i < customer.OutletStore.Count; i++)
+                if (customer.OutletStore != null)
                 {
-                    SP.Core.Domain.Address coreAddress =
-                          ObjectExtension.CloneProperties<SPWCFServer.Address, SP.Core.Domain.Address>(customer.OutletStore[i].Address);
-                    mgr.SaveAddress(coreAddress);
-                    // Need to now update Outlet Store with Address ID now ...
-                    SP.Core.Domain.OutletStore tmpOutletStore = mgr.GetOutletStore(coreCustomer.OutletStore[i].ID);
-                    tmpOutletStore.Address = new SP.Core.Domain.Address();  // Careful - Clone will have assigned Adress to null here 
-                    // and cause potential crash so lets nsure Address is assigned
-                    // to something ... 
-                    SP.Core.Domain.OutletStore newOutletStore = ObjectExtension.Clone<SP.Core.Domain.OutletStore>(tmpOutletStore);
-                    tmpOutletStore.AddressID = coreAddress.ID; // Have also to stuff AddressID back in
-                    // Perform update
-                    coreCustomer.OutletStore[i] = mgr.UpdateOutletStore(tmpOutletStore, newOutletStore);
+                    for (int i = 0; i < customer.OutletStore.Count; i++)
+                    {
+                        SP.Core.Domain.Address coreAddress =
+                              ObjectExtension.CloneProperties<SPWCFServer.Address, SP.Core.Domain.Address>(customer.OutletStore[i].Address);
+                        mgr.SaveAddress(coreAddress);
+                        // Need to now update Outlet Store with Address ID now ...
+                        SP.Core.Domain.OutletStore tmpOutletStore = mgr.GetOutletStore(coreCustomer.OutletStore[i].ID);
+                        tmpOutletStore.Address = new SP.Core.Domain.Address();  // Careful - Clone will have assigned Adress to null here 
+                        // and cause potential crash so lets nsure Address is assigned
+                        // to something ... 
+                        SP.Core.Domain.OutletStore newOutletStore = ObjectExtension.Clone<SP.Core.Domain.OutletStore>(tmpOutletStore);
+                        tmpOutletStore.AddressID = coreAddress.ID; // Have also to stuff AddressID back in
+                        // Perform update
+                        coreCustomer.OutletStore[i] = mgr.UpdateOutletStore(tmpOutletStore, newOutletStore);
+                    }
                 }
                 #endregion
 

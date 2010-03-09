@@ -310,6 +310,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         {
             ErrorViewControl.AddError(ex.Message);
             ErrorViewControl.Visible = true;
+            ErrorViewControl.DataBind();
         }
     }
 
@@ -370,6 +371,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         {
             ErrorViewControl.AddError(ex.Message);
             ErrorViewControl.Visible = true;
+            ErrorViewControl.DataBind();
         }
     }
 
@@ -838,11 +840,9 @@ public partial class Admin_Customer : System.Web.UI.Page
         CustomerMenuPanel.Visible = true;
         AddCustomerPanel.Visible = false;
 
-
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
-
-        CustomerSaveButton.Visible = false;
+       
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ErrorViewControl.Visible = false;
@@ -852,6 +852,8 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerContactPanel.Visible = false;
         AddContactPanel.Visible = false;
         ContactDataListPanel.Visible = false;
+
+        SaveNewCustomerPanel.Visible = false;
     }
 
     #region Adding Customer Panels
@@ -861,9 +863,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerPanel.Visible = true;
         AddShopPanel.Visible = true;
 
-
-        AddCustomerButton.Visible = false;
-        CustomerSaveButton.Visible = false;
+        AddCustomerButton.Visible = false;       
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ShopBasketPanel.Visible = false;
@@ -873,6 +873,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerContactPanel.Visible = false;
         AddContactPanel.Visible = false;
         ContactDataListPanel.Visible = false;
+        SaveNewCustomerPanel.Visible = true;
     }
 
     private void AddNewCustomerState(object src, EventArgs mea)
@@ -881,8 +882,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerPanel.Visible = true;
 
         ShopBasketPanel.Visible = false;
-        AddShopPanel.Visible = false;
-        CustomerSaveButton.Visible = false;
+        AddShopPanel.Visible = false;       
         AddCustomerButton.Visible = true;
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
@@ -892,6 +892,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerContactPanel.Visible = false;
         AddContactPanel.Visible = false;
         ContactDataListPanel.Visible = false;
+        SaveNewCustomerPanel.Visible = false;
     }
 
     private void AddedShopState(object src, EventArgs mea)
@@ -900,8 +901,7 @@ public partial class Admin_Customer : System.Web.UI.Page
 
         AddCustomerPanel.Visible = true;
         AddShopPanel.Visible = true;
-
-        CustomerSaveButton.Visible = true;
+       
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ShopBasketPanel.Visible = true;
@@ -912,14 +912,14 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerContactPanel.Visible = false;
         AddContactPanel.Visible = false;
         ContactDataListPanel.Visible = false;
+        SaveNewCustomerPanel.Visible = true;
     }
 
     protected void DeletedOutletState(object sender, EventArgs e)
     {
         CustomerMenuPanel.Visible = true;
         AddCustomerPanel.Visible = true;
-        AddShopPanel.Visible = true;
-        CustomerSaveButton.Visible = true;
+        AddShopPanel.Visible = true;      
         ShopBasketPanel.Visible = true;
 
 
@@ -932,6 +932,8 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerContactPanel.Visible = false;
         AddContactPanel.Visible = false;
         ContactDataListPanel.Visible = false;
+
+        SaveNewCustomerPanel.Visible = true;
 
         Util.ClearControls(this.AddShopPanel);
 
@@ -944,8 +946,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerPanel.Visible = false;
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
-
-        CustomerSaveButton.Visible = false;
+      
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ModifyShopBasketPanel.Visible = true;
@@ -958,6 +959,8 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerContactPanel.Visible = false;
         AddContactPanel.Visible = false;
         ContactDataListPanel.Visible = false;
+
+        SaveNewCustomerPanel.Visible = false;
 
         Util.ClearControls(AddModifiedShopPanel);
     }
@@ -975,13 +978,14 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
         ModifyShopBasketPanel.Visible = false;
-
-        CustomerSaveButton.Visible = false;
+       
         ErrorViewControl.Visible = false;
         ModifyCustomerPanel.Visible = false;
 
         AddCustomerContactPanel.Visible = false;
         AddContactPanel.Visible = false;
+
+        SaveNewCustomerPanel.Visible = false;
 
         Util.ClearControls(AddCustomerPanel);
     }
@@ -1001,8 +1005,8 @@ public partial class Admin_Customer : System.Web.UI.Page
         ShopBasketPanel.Visible = false;
 
         AddCustomerContactPanel.Visible = false;
-
-        CustomerSaveButton.Visible = false;
+      
+        SaveNewCustomerPanel.Visible = false;
 
         ErrorViewControl.Visible = false;
         AddContactPanel.Visible = false;
@@ -1021,11 +1025,11 @@ public partial class Admin_Customer : System.Web.UI.Page
 
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
-
-        CustomerSaveButton.Visible = false;
-
+       
         AddCustomerContactPanel.Visible = false;
         AddContactPanel.Visible = false;
+
+        SaveNewCustomerPanel.Visible = false;
 
         ErrorViewControl.Visible = false;
     }
@@ -1036,8 +1040,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerPanel.Visible = false;
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
-
-        CustomerSaveButton.Visible = false;
+        
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ErrorViewControl.Visible = false;
@@ -1049,6 +1052,8 @@ public partial class Admin_Customer : System.Web.UI.Page
 
         AddCustomerContactPanel.Visible = false;
         AddContactPanel.Visible = false;
+
+        SaveNewCustomerPanel.Visible = false;
 
         Util.ClearControls(AddModifiedShopPanel);
     }
@@ -1065,8 +1070,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerPanel.Visible = false;
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
-
-        CustomerSaveButton.Visible = false;
+      
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ErrorViewControl.Visible = false;
@@ -1077,6 +1081,8 @@ public partial class Admin_Customer : System.Web.UI.Page
         ModifyCustomerPanel.Visible = false;
         AddContactPanel.Visible = false;
         ContactDataListPanel.Visible = true;
+
+        SaveNewCustomerPanel.Visible = false;
 
         //    Util.ClearFields(this.Page);
     }
@@ -1091,18 +1097,18 @@ public partial class Admin_Customer : System.Web.UI.Page
 
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
-
-        CustomerSaveButton.Visible = false;
+       
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ErrorViewControl.Visible = false;
         ModifyShopBasketPanel.Visible = false;
         ModifyCustomerPanel.Visible = false;
 
-
         AddCustomerContactPanel.Visible = true;
         AddContactPanel.Visible = true;
         ContactDataListPanel.Visible = true;
+
+        SaveNewCustomerPanel.Visible = false;
     }
 
     protected void AddedContactButtonState(object sender, EventArgs e)
@@ -1116,8 +1122,7 @@ public partial class Admin_Customer : System.Web.UI.Page
 
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
-
-        CustomerSaveButton.Visible = false;
+       
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ErrorViewControl.Visible = false;
@@ -1127,6 +1132,8 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerContactPanel.Visible = true;
         AddContactPanel.Visible = false;
         ContactDataListPanel.Visible = true;
+
+        SaveNewCustomerPanel.Visible = false;
     }
 
     protected void CancelAddContactButtonState(object sender, EventArgs e)
@@ -1136,11 +1143,9 @@ public partial class Admin_Customer : System.Web.UI.Page
         CustomerMenuPanel.Visible = true;
         AddCustomerPanel.Visible = false;
 
-
         AddShopPanel.Visible = false;
         ShopBasketPanel.Visible = false;
 
-        CustomerSaveButton.Visible = false;
         CustomerListGridView.Visible = false;
         CustomerListGridViewPanel.Visible = false;
         ErrorViewControl.Visible = false;
@@ -1150,6 +1155,8 @@ public partial class Admin_Customer : System.Web.UI.Page
         AddCustomerContactPanel.Visible = true;
         AddContactPanel.Visible = false;
         ContactDataListPanel.Visible = true;
+
+        SaveNewCustomerPanel.Visible = false;
 
         Util.ClearControls(AddContactPanel);
     }
