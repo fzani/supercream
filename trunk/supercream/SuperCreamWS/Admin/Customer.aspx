@@ -32,14 +32,13 @@
             <asp:PostBackTrigger ControlID="OutletStoreGridView" />
         </Triggers>
         <ContentTemplate>
-            <asp:Panel ID="CustomerMenuPanel" Visible="true"
-                runat="server">
+            <asp:Panel ID="CustomerMenuPanel" Visible="true" runat="server">
                 <div class="FormHeader">
                     <div class="HeaderContainerPanel">
                         <table class="ContentHeader" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="Right">
-                                    <asp:Panel ID="GeneralPanel" DefaultButton="NewCustomerButton"  runat="server" Width="100%"
+                                    <asp:Panel ID="GeneralPanel" DefaultButton="NewCustomerButton" runat="server" Width="100%"
                                         Visible="true">
                                         <table class="ContentHeader" cellpadding="0">
                                             <tr>
@@ -231,7 +230,7 @@
                                         InitialValue="" Text="*" runat="server" />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidatorPostCodeTextBox" ValidationGroup="NewOutletGroup"
                                         ValidationExpression="^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) {0,1}[0-9][A-Za-z]{2})$"
-                                        ControlToValidate="PostCodeTextBox" Text="Format Error" ErrorMessage="Invalid UK Post Code"
+                                        ControlToValidate="PostCodeTextBox" Text="*" ErrorMessage="Invalid UK Post Code"
                                         Display="Dynamic" runat="server" />
                                 </td>
                             </tr>
@@ -271,8 +270,8 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <asp:LinkButton ID="AddShopButton" Text="Add Shop" ValidationGroup="NewOutletGroup" runat="server"
-                                                                OnClick="AddShopButton_Click" />&nbsp;
+                                                            <asp:LinkButton ID="AddShopButton" Text="Add Shop" ValidationGroup="NewOutletGroup"
+                                                                runat="server" OnClick="AddShopButton_Click" />&nbsp;
                                                         </td>
                                                         <td>
                                                             <asp:Button ID="CancelShopButton" CausesValidation="false" runat="server" OnClick="CancelShopButton_Click"
@@ -326,20 +325,25 @@
                                     CommandName="Delete" Text="Delete" />
                             </Columns>
                         </asp:GridView>
-                        <table>
-                            <tr>
-                                <td>
-                                </td>
-                                <td id="CustomerUpdateTD">
-                                    <asp:Button ID="CustomerSaveButton" Text="Save" runat="server" OnClick="CustomerSaveButton_Click" />
-                                </td>
-                            </tr>
-                        </table>
                     </fieldset>
                 </div>
             </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
+    <asp:Panel ID="SaveNewCustomerPanel" runat="server">
+        <div class="FormInput">
+            <fieldset>
+                <table style="width: 100%">
+                    <tr>                       
+                        <td id="CustomerUpdateTD" style="text-align: left;">
+                            <asp:Button ID="CustomerSaveButton" Text="Save Customer Details" Width="25%" runat="server"
+                                OnClick="CustomerSaveButton_Click" />
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div>
+    </asp:Panel>
     <asp:UpdatePanel ID="CustomerListUpdatePanel" runat="server" UpdateMode="Conditional">
         <Triggers>
             <asp:PostBackTrigger ControlID="MaintainCustomersButton" />
@@ -1049,7 +1053,7 @@
                                         InitialValue="" Text="*d" Display="Dynamic" runat="server" />
                                     <asp:RegularExpressionValidator ID="CCRegularExpressionValidator" runat="server"
                                         ControlToValidate="DayTimeTelephoneNoTextBox" ErrorMessage="Invalid UK phone number"
-                                        Text="Format Error" Display="Dynamic" ValidationExpression="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$">
+                                        Text="*" Display="Dynamic" ValidationExpression="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$">
                                     </asp:RegularExpressionValidator>
                                 </td>
                             </tr>
@@ -1062,7 +1066,7 @@
                                         MaxLength="20" Width="300px"></asp:TextBox>
                                     <asp:RegularExpressionValidator ID="CCRegularExpressionValidator1" runat="server"
                                         ControlToValidate="HomePhoneNoTextBox" ErrorMessage="Invalid UK phone number"
-                                        Text="Format Error" Display="Dynamic" ValidationExpression="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$"></asp:RegularExpressionValidator>
+                                        Text="*" Display="Dynamic" ValidationExpression="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$"></asp:RegularExpressionValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -1073,7 +1077,7 @@
                                     <asp:TextBox ID="MobileNoTextBox" runat="server" ValidationGroup="NewContactGroup"
                                         MaxLength="20" Width="300px"></asp:TextBox>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="MobileNoTextBox"
-                                        ErrorMessage="Invalid UK phone number" Text="Format Error" Display="Dynamic"
+                                        ErrorMessage="Invalid UK phone number" Text="*" Display="Dynamic"
                                         ValidationExpression="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$"></asp:RegularExpressionValidator>
                                 </td>
                             </tr>
@@ -1085,7 +1089,7 @@
                                     <asp:TextBox ID="EMailAddressTextBox" runat="server" ValidationGroup="NewContactGroup"
                                         MaxLength="20" Width="300px"></asp:TextBox>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="EMailAddressTextBox"
-                                        ErrorMessage="Invalid UK phone number" Text="Format Error" Display="Dynamic"
+                                        ErrorMessage="Invalid UK phone number" Text="*" Display="Dynamic"
                                         ValidationExpression=".+@[^\.].*\.[a-z]{2,}"></asp:RegularExpressionValidator>
                                 </td>
                             </tr>
@@ -1281,7 +1285,7 @@
                                                             InitialValue="" Text="*" runat="server" />
                                                         <asp:RegularExpressionValidator ID="CCRegularExpressionValidator" runat="server"
                                                             ControlToValidate="DayTimeTelephoneNoTextBox" ErrorMessage="Invalid UK phone number"
-                                                            Text="Format Error" Display="Dynamic" ValidationExpression="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$" />
+                                                            Text="*" Display="Dynamic" ValidationExpression="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -1292,7 +1296,7 @@
                                                         <asp:TextBox ID="HomeTelephoneNoTextBox" runat="server" ValidationGroup="NewContactGroup"
                                                             MaxLength="20" Width="300px"></asp:TextBox>
                                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="HomeTelephoneNoTextBox"
-                                                            ErrorMessage="Invalid UK phone number" Text="Format Error" Display="Dynamic"
+                                                            ErrorMessage="Invalid UK phone number" Text="*" Display="Dynamic"
                                                             ValidationExpression="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$" />
                                                     </td>
                                                 </tr>
@@ -1304,7 +1308,7 @@
                                                         <asp:TextBox ID="MobileTelephoneTextBox" runat="server" ValidationGroup="NewContactGroup"
                                                             MaxLength="20" Width="300px"></asp:TextBox>
                                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="MobileTelephoneTextBox"
-                                                            ErrorMessage="Invalid UK phone number" Text="Format Error" Display="Dynamic"
+                                                            ErrorMessage="Invalid UK phone number" Text="*" Display="Dynamic"
                                                             ValidationExpression="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$">
                                                         </asp:RegularExpressionValidator>
                                                     </td>
@@ -1317,7 +1321,7 @@
                                                         <asp:TextBox ID="EMailAddressTextBox" runat="server" ValidationGroup="NewContactGroup"
                                                             MaxLength="20" Width="300px"></asp:TextBox>
                                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="EMailAddressTextBox"
-                                                            ErrorMessage="Invalid UK phone number" Text="Format Error" Display="Dynamic"
+                                                            ErrorMessage="Invalid UK phone number" Text="*" Display="Dynamic"
                                                             ValidationExpression=".+@[^\.].*\.[a-z]{2,}"></asp:RegularExpressionValidator>
                                                     </td>
                                                 </tr>
