@@ -26,7 +26,7 @@
                 The way forward ...</p>
             <div id="header-links">
                 <p>
-                    <a href="~/Default.aspx" runat="server">Home</a> | <a href="~/Default.aspx" runat="server">
+                    <a href="~/Default.aspx" runat="server">Home</a> | <a href="~/Support.aspx" runat="server">
                         Contact</a> | <a href="~/Default.aspx" runat="server">Site Map</a>
                 </p>
             </div>
@@ -115,7 +115,7 @@
             <!--footer starts here-->
             <div id="footer">
                 <p>
-                    &copy; 2009 <strong>Alterax</strong> | Design by: <a href="http://www.styleshout.com/">
+                    &copy; 2009 - 2010 <strong>Alterax</strong> | Design by: <a href="http://www.styleshout.com/">
                         styleshout</a> | <a href="~/Default.aspx" runat="server">Home</a>&nbsp;|&nbsp;
                     <a href="~/Default.aspx" runat="server">Sitemap</a>&nbsp;|&nbsp; <a href="~/Default.aspx"
                         runat="server">RSS Feed</a>
