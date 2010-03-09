@@ -14,10 +14,12 @@
         </ul>
     </p>
     <blockquote>
-        Bull St,<br />
-        Silverend,<br />
-        Brierley Hill,<br />
-        West Midlands<br />
-        DY5 3RA<br />
+        <p>
+            Bull St,<br />
+            Silverend,<br />
+            Brierley Hill,<br />
+            West Midlands<br />
+            DY5 3RA<br />
+        </p>
     </blockquote>
 </asp:Content>
