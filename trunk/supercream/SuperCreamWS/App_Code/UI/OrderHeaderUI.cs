@@ -59,7 +59,7 @@ public class OrderHeaderUI : IDisposable
         }
     }
 
-    public string UpdateInvoiceNo(int orderNo, string invoiceNo)
+    public string UpdateInvoiceNo(int orderNo, string invoiceNo, SP.Core.Enums.OrderStatus invoiceType)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
@@ -70,7 +70,7 @@ public class OrderHeaderUI : IDisposable
             updatedOrderHeader.CustomerID = origOrderHeader.CustomerID;
             updatedOrderHeader.ID = origOrderHeader.ID;
             updatedOrderHeader.OrderDate = origOrderHeader.OrderDate;
-            updatedOrderHeader.OrderStatus = (short)SP.Core.Enums.OrderStatus.Invoice;
+            updatedOrderHeader.OrderStatus = (short) invoiceType;
             updatedOrderHeader.InvoiceNo = invoiceNo;
             updatedOrderHeader.SpecialInstructions = origOrderHeader.SpecialInstructions;
 

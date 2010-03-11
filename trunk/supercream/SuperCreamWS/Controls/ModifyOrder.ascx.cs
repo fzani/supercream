@@ -7,13 +7,14 @@ using System.Web.UI.WebControls;
 
 using WcfFoundationService;
 using AjaxControlToolkit;
+using SP.Core.Enums;
 
 public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 {
     #region Private Member Variables
     EventHandler<EventArgs> ChangeState;
 
-    decimal priceTotal = 0;  
+    decimal priceTotal = 0;
     #endregion
 
     #region Public Event Handlers
@@ -22,7 +23,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     //   public event CancelEventHandler CancelHandler;
     #endregion
 
-    #region public Accesors
+    #region Public Accesors
     public int? OrderID
     {
         get
@@ -32,6 +33,18 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         set
         {
             ViewState["OrderID"] = value;
+        }
+    }
+
+    public OrderStatus OrderStatus
+    {
+        get
+        {
+            return (ViewState["OrderState"] == null) ? OrderStatus.Order : (OrderStatus)ViewState["OrderState"];
+        }
+        set
+        {
+            ViewState["OrderState"] = value;
         }
     }
 
@@ -303,7 +316,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             else if (orderHeader.OrderStatus == (short)SP.Core.Enums.OrderStatus.ProformaInvoice
                 || orderHeader.OrderStatus == (short)SP.Core.Enums.OrderStatus.PoformaInvoicePrinted)
             {
-                CreateInvoiceButton.Visible = true;
+                CreateInvoiceButton.Visible = false;
                 CreateProformaInvoiceButton.Visible = false;
                 CreateDeliveryNoteButton.Visible = false;
                 ConvertToInvoiceButton.Visible = true;
@@ -333,10 +346,10 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             OrderLine orderLine = e.Row.DataItem as OrderLine;
 
             decimal tempPrice = Math.Round(orderLine.Price * orderLine.NoOfUnits, 2);
-            priceTotal += tempPrice;   
+            priceTotal += tempPrice;
 
             Label orderLinePriceLabel = e.Row.FindControl("OrderLinePriceLabel") as Label;
-            orderLinePriceLabel.Text = String.Format("{0:c}", tempPrice);           
+            orderLinePriceLabel.Text = String.Format("{0:c}", tempPrice);
 
             ProductUI productUI = new ProductUI();
             int? productID = DataBinder.Eval(e.Row.DataItem, "ProductID") as int?;
@@ -595,7 +608,6 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         }
     }
 
-
     protected void Modify_OrderLineDetailsLinkButton_Click(object sender, EventArgs e)
     {
         ChangeState += new EventHandler<EventArgs>(this.ModifyOrderLineState);
@@ -679,11 +691,32 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         AutoGenUI ui = new AutoGenUI();
         invTextBox.Text = "INV-" + (ui.Generate() + 256).ToString();
 
+        this.OrderStatus = OrderStatus.Invoice;
+
+        ModalPopupExtenderInvoice.Show();
+    }
+
+    protected void ShowInvoiceProformaButton_Click(object sender, EventArgs e)
+    {
+        Panel p = OrderHeaderPanel.FindControl("PanelMessage") as Panel;
+        TextBox invTextBox = p.FindControl("InvoiceNoTextBox") as TextBox;
+        AutoGenUI ui = new AutoGenUI();
+        invTextBox.Text = "INV-" + (ui.Generate() + 256).ToString();
+
+        this.OrderStatus = OrderStatus.ProformaInvoice;
+
         ModalPopupExtenderInvoice.Show();
     }
 
     protected void ShowDeliveryButton_Click(object sender, EventArgs e)
     {
+        Panel p = OrderHeaderPanel.FindControl("CreateDeliveryNotePanel") as Panel;
+        TextBox invTextBox = p.FindControl("DeliveryInvoiceNoTextBox") as TextBox;
+        AutoGenUI ui = new AutoGenUI();
+        invTextBox.Text = "INV-" + (ui.Generate() + 256).ToString();
+
+        this.OrderStatus = OrderStatus.DeliveryNote;
+
         ModalPopupExtenderDeliveryNote.Show();
     }
 
@@ -700,16 +733,18 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             if (ui.InvoiceNoExists(InvoiceNoTextBox.Text))
                 throw new ApplicationException("Invoice No is already used by another Order");
 
-            string invoiceNo = ui.UpdateInvoiceNo(OrderID.Value, InvoiceNoTextBox.Text);
+            string invoiceNo = ui.UpdateInvoiceNo(OrderID.Value, InvoiceNoTextBox.Text, OrderStatus);
 
             OrderStatusTypeLabel.Text = "<h3>Status : <i>Invoiced</i></h3";
             OrderStatusNoLabel.Text = "<h3><i>Invoice No: " + invoiceNo + "</i></h3>";
             OrderStatusTypeLabel.Visible = true;
             OrderStatusNoLabel.Visible = true;
 
+
             CreateInvoiceButton.Visible = false;
             CreateProformaInvoiceButton.Visible = false;
             CreateDeliveryNoteButton.Visible = false;
+
 
             ChangeState += new EventHandler<EventArgs>(CompleteOrderState);
             ChangeState(this, e);
@@ -829,7 +864,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     #region Page States
 
     public void PageLoadState(object sender, EventArgs args)
-    {      
+    {
         OrderHeaderSearchGridPanel.Visible = true;
 
         OrderHeaderPanel.Visible = false;
@@ -851,7 +886,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         OrderHeaderPanel.Visible = false;
         OrderSearchPanel.Visible = true;
         ProductSearchPanel.Visible = false;
-        OrderDetailsGridPanel.Visible = false;
+        OrderDetailsGridPanel.Visible = true;
         AddOrderDetailsPanel.Visible = false;
         OrderHeaderSearchGridPanel.Visible = true;
 
@@ -859,7 +894,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         CalculateButton.Visible = true;
 
         CompleteOrderButtonPanel.Visible = false;
-                                                        
+
         this.Visible = false;
     }
 
@@ -880,7 +915,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         CompleteOrderButtonPanel.Visible = false;
 
         // this.Visible = false;
-    }  
+    }
 
     public void InitOrderState(object sender, EventArgs args)
     {
@@ -890,13 +925,13 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 
         OrderHeaderPanel.Visible = false;
         AddOrderDetailsPanel.Visible = false;
-               
+
         ContinueCheckBox.Checked = false;
-        CalculateButton.Visible = false;       
+        CalculateButton.Visible = false;
         AddOrderLineButton.Visible = false;
         OrderDetailsGridPanel.Visible = false;
 
-        CompleteOrderButtonPanel.Visible = false; 
+        CompleteOrderButtonPanel.Visible = false;
 
         SpecialInstructionsCheckBox.Checked = false;
     }
@@ -909,13 +944,13 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         OrderDetailsGridPanel.Visible = true;
 
         OrderSearchPanel.Visible = false;
-        OrderHeaderSearchGridPanel.Visible = false;       
-        AddOrderDetailsPanel.Visible = false;       
+        OrderHeaderSearchGridPanel.Visible = false;
+        AddOrderDetailsPanel.Visible = false;
         OrderHeaderPanel.Visible = false;
         ContinueCheckBox.Checked = false;
-          
+
         AddOrderLineButton.Visible = false;
-       
+
         SpecialInstructionsCheckBox.Checked = false;
     }
 
@@ -926,12 +961,12 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         CalculateButton.Visible = true;
         AddOrderDetailsPanel.Visible = true;
 
-        OrderSearchPanel.Visible = false;               
+        OrderSearchPanel.Visible = false;
         ProductSearchPanel.Visible = false;
-        OrderHeaderPanel.Visible = false;       
+        OrderHeaderPanel.Visible = false;
         ContinueCheckBox.Checked = false;
         OrderDetailsGridPanel.Visible = false;
-       
+
         AddOrderLineButton.Visible = false;
     }
 
@@ -946,9 +981,9 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 
         AddOrderLineButton.Visible = false;
         CalculateButton.Visible = false;
-       
+
         OrderHeaderPanel.Visible = true;
-        CompleteOrderButtonPanel.Visible = true;        
+        CompleteOrderButtonPanel.Visible = true;
     }
 
     public void ModifyOrderLineState(object sender, EventArgs args)
@@ -959,19 +994,19 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         OrderHeaderPanel.Visible = false;
 
         AddOrderDetailsPanel.Visible = false;
-       
+
         ProductSearchPanel.Visible = true;
         OrderDetailsGridPanel.Visible = true;
 
         AddOrderLineButton.Visible = false;
         CalculateButton.Visible = false;
-        CompleteOrderButtonPanel.Visible = true; 
+        CompleteOrderButtonPanel.Visible = true;
     }
 
     public void CompleteOrderState(object sender, EventArgs args)
     {
         OrderHeaderPanel.Visible = false;
-        OrderSearchPanel.Visible = false;
+        OrderSearchPanel.Visible = true;
 
         ProductSearchPanel.Visible = false;
         OrderDetailsGridPanel.Visible = false;
@@ -980,7 +1015,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 
         AddOrderLineButton.Visible = false;
         CalculateButton.Visible = true;
-        CompleteOrderButtonPanel.Visible = false; 
+        CompleteOrderButtonPanel.Visible = false;
     }
     #endregion
 
@@ -1024,5 +1059,5 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             }
         }
     }
-    #endregion   
+    #endregion
 }
