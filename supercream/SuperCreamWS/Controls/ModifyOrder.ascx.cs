@@ -235,6 +235,8 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             OrderDateTextBox.Text = orderHeader.OrderDate.ToShortDateString();
             DeliveryDateTextBox.Text = orderHeader.DeliveryDate.ToShortDateString();
 
+            this.OrderHeaderSpecialInstructionsTextBox.Text = orderHeader.SpecialInstructions;
+
             #region Order Statuses
             if (orderHeader.OrderStatus == (short)SP.Core.Enums.OrderStatus.Invoice)
             {
@@ -590,6 +592,13 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         }
     }
 
+
+    protected void Modify_OrderLineDetailsLinkButton_Click(object sender, EventArgs e)
+    {
+        ChangeState += new EventHandler<EventArgs>(this.ModifyOrderLineState);
+        ChangeState(this, e);
+    }
+
     protected void AddOrderLineButton_Click(object sender, EventArgs e)
     {
         try
@@ -639,7 +648,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 
     protected void CancelProductAddButton_Click(object sender, EventArgs e)
     {
-        ChangeState += new EventHandler<EventArgs>(AddProductLineState);
+        ChangeState += new EventHandler<EventArgs>(this.ModifyOrderLineState);
         ChangeState(this, e);
     }
 
@@ -815,19 +824,39 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     #endregion
 
     #region Page States
+
+    public void PageLoadState(object sender, EventArgs args)
+    {      
+        OrderHeaderSearchGridPanel.Visible = true;
+
+        OrderHeaderPanel.Visible = false;
+        OrderSearchPanel.Visible = true;
+        ProductSearchPanel.Visible = false;
+        OrderDetailsGridPanel.Visible = false;
+        AddOrderDetailsPanel.Visible = false;
+        OrderHeaderSearchGridPanel.Visible = true;
+
+        AddOrderLineButton.Visible = false;
+        CalculateButton.Visible = true;
+
+        CompleteOrderButtonPanel.Visible = false;
+    }
+
     public void InitLoadState(object sender, EventArgs args)
     {
         Util.ClearControls(this);
-        OrderHeaderSearchGridPanel.Visible = true;
-        OrderSearchPanel.Visible = true;
-
         OrderHeaderPanel.Visible = false;
+        OrderSearchPanel.Visible = true;
         ProductSearchPanel.Visible = false;
+        OrderDetailsGridPanel.Visible = false;
+        AddOrderDetailsPanel.Visible = false;
+        OrderHeaderSearchGridPanel.Visible = true;
+
         AddOrderLineButton.Visible = false;
         CalculateButton.Visible = true;
-        AddOrderDetailsPanel.Visible = false;
-        OrderDetailsGridPanel.Visible = false;
 
+        CompleteOrderButtonPanel.Visible = false;
+                                                        
         this.Visible = false;
     }
 
@@ -839,75 +868,67 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 
         OrderHeaderPanel.Visible = true;
         ProductSearchPanel.Visible = true;
+
         AddOrderLineButton.Visible = false;
         CalculateButton.Visible = true;
         AddOrderDetailsPanel.Visible = false;
-        OrderDetailsGridPanel.Visible = true;
+        OrderDetailsGridPanel.Visible = false;
+
+        CompleteOrderButtonPanel.Visible = false;
 
         // this.Visible = false;
-    }
-
-    public void PageLoadState(object sender, EventArgs args)
-    {
-        OrderHeaderSearchGridPanel.Visible = true;
-
-        OrderHeaderPanel.Visible = false;
-        OrderSearchPanel.Visible = true;
-        ProductSearchPanel.Visible = false;
-        OrderDetailsGridPanel.Visible = false;
-        AddOrderDetailsPanel.Visible = false;
-
-        AddOrderLineButton.Visible = false;
-        CalculateButton.Visible = true;
-    }
+    }  
 
     public void InitOrderState(object sender, EventArgs args)
     {
         OrderHeaderSearchGridPanel.Visible = true;
         OrderSearchPanel.Visible = true;
+        ProductSearchPanel.Visible = false;
 
-        AddOrderDetailsPanel.Visible = false;
-        ProductSearchPanel.Visible = true;
         OrderHeaderPanel.Visible = false;
+        AddOrderDetailsPanel.Visible = false;
+               
         ContinueCheckBox.Checked = false;
-        CalculateButton.Visible = true;
-        CompleteOrderButton.Visible = true;
+        CalculateButton.Visible = false;       
         AddOrderLineButton.Visible = false;
         OrderDetailsGridPanel.Visible = false;
+
+        CompleteOrderButtonPanel.Visible = false; 
 
         SpecialInstructionsCheckBox.Checked = false;
     }
 
     public void AddOrderLineOrderState(object sender, EventArgs args)
     {
-        OrderHeaderSearchGridPanel.Visible = true;
-        OrderSearchPanel.Visible = true;
-
-        AddOrderDetailsPanel.Visible = false;
         ProductSearchPanel.Visible = true;
-        OrderHeaderPanel.Visible = false;
-        ContinueCheckBox.Checked = false;
         CalculateButton.Visible = true;
-        CompleteOrderButton.Visible = true;
-        AddOrderLineButton.Visible = false;
+        CompleteOrderButtonPanel.Visible = true;
         OrderDetailsGridPanel.Visible = true;
 
+        OrderSearchPanel.Visible = false;
+        OrderHeaderSearchGridPanel.Visible = false;       
+        AddOrderDetailsPanel.Visible = false;       
+        OrderHeaderPanel.Visible = false;
+        ContinueCheckBox.Checked = false;
+          
+        AddOrderLineButton.Visible = false;
+       
         SpecialInstructionsCheckBox.Checked = false;
     }
 
     public void AddOrderState(object sender, EventArgs args)
     {
-        OrderHeaderSearchGridPanel.Visible = true;
-        OrderSearchPanel.Visible = false;
-
-        AddOrderDetailsPanel.Visible = false;
-        AddOrderDetailsPanel.Visible = true;
-        ProductSearchPanel.Visible = true;
-        OrderHeaderPanel.Visible = true;
-        CompleteOrderButton.Visible = true;
-
-        ContinueCheckBox.Checked = false;
+        OrderHeaderSearchGridPanel.Visible = false;
+        CompleteOrderButtonPanel.Visible = true;
         CalculateButton.Visible = true;
+        AddOrderDetailsPanel.Visible = true;
+
+        OrderSearchPanel.Visible = false;               
+        ProductSearchPanel.Visible = false;
+        OrderHeaderPanel.Visible = false;       
+        ContinueCheckBox.Checked = false;
+        OrderDetailsGridPanel.Visible = false;
+       
         AddOrderLineButton.Visible = false;
     }
 
@@ -917,14 +938,31 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         OrderHeaderSearchGridPanel.Visible = false;
 
         AddOrderDetailsPanel.Visible = false;
+        OrderDetailsGridPanel.Visible = false;
+        ProductSearchPanel.Visible = false;
+
+        AddOrderLineButton.Visible = false;
+        CalculateButton.Visible = false;
+       
+        OrderHeaderPanel.Visible = true;
+        CompleteOrderButtonPanel.Visible = true;        
+    }
+
+    public void ModifyOrderLineState(object sender, EventArgs args)
+    {
+        OrderSearchPanel.Visible = false;
+        OrderHeaderSearchGridPanel.Visible = false;
+
+        OrderHeaderPanel.Visible = false;
+
+        AddOrderDetailsPanel.Visible = false;
+       
+        ProductSearchPanel.Visible = true;
         OrderDetailsGridPanel.Visible = true;
 
         AddOrderLineButton.Visible = false;
-        CalculateButton.Visible = true;
-        CompleteOrderButton.Visible = true;
-
-        OrderHeaderPanel.Visible = true;
-        ProductSearchPanel.Visible = true;
+        CalculateButton.Visible = false;
+        CompleteOrderButtonPanel.Visible = true; 
     }
 
     public void CompleteOrderState(object sender, EventArgs args)
@@ -939,7 +977,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 
         AddOrderLineButton.Visible = false;
         CalculateButton.Visible = true;
-        CompleteOrderButton.Visible = false;
+        CompleteOrderButtonPanel.Visible = false; 
     }
     #endregion
 
@@ -983,5 +1021,5 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             }
         }
     }
-    #endregion
+    #endregion   
 }
