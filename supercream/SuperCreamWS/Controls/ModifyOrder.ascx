@@ -264,11 +264,11 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <asp:LinkButton ID="ConvertToInvoiceButton" Text="Convert to Invoice |" runat="server"
+                            <asp:LinkButton ID="ConvertToInvoiceButton" Text="Convert to Invoice" runat="server"
                                 OnClick="ConvertToInvoiceButton_Click" />
                             <asp:LinkButton ID="CreateInvoiceButton" Text="Create Invoice |" runat="server" OnClick="ShowInvoiceButton_Click" />
                             <asp:LinkButton ID="CreateProformaInvoiceButton" Text="Create Proforma Invoice |"
-                                runat="server" OnClick="CreateProformaInvoiceButton_Click" />
+                                runat="server" OnClick="ShowInvoiceProformaButton_Click" />
                             <asp:LinkButton ID="CreateDeliveryNoteButton" Text="Create Delivery Note" runat="server"
                                 OnClick="ShowDeliveryButton_Click" />
                             <asp:Button ID="btnTrigger1" runat="server" Style="display: none" />
@@ -624,8 +624,7 @@
                             <asp:Button ID="CancelTotalOrderButton" Width="15%" ValidationGroup="ModifyOrderDetailsGroup"
                                 Text="Cancel" runat="server" OnClick="CancelButton_Click" />
                         </div>
-                    </fieldset>
-                </asp:Panel>
+                    </fieldset></asp:Panel>
             </div>
         </fieldset>
     </div>
