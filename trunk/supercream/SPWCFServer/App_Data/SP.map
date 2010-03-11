@@ -193,6 +193,9 @@
       <Column Name="InvoiceDateReprinted" Member="InvoiceDateReprinted" Storage="_InvoiceDateReprinted" DbType="DateTime" />
       <Column Name="PicklistDateGenerated" Member="PicklistDateGenerated" Storage="_PicklistDateGenerated" DbType="DateTime" />
       <Column Name="InvoicePaymentComplete" Member="InvoicePaymentComplete" Storage="_InvoicePaymentComplete" DbType="Bit" />     
+      <Column Name="InvoiceDateCreated" Member="InvoiceDateCreated" Storage="_InvoiceDateCreated" DbType="DateTime" />
+      <Column Name="DeliveryNoteDateCreated" Member="DeliveryNoteDateCreated" Storage="_DeliveryNoteDateCreated" DbType="DateTime" />
+      <Column Name="InvoiceProformaDateCreated" Member="InvoiceProformaDateCreated" Storage="_InvoiceProformaDateCreated" DbType="DateTime" />
       <Association Name="FK_OrderNotesStatus_Van" Member="Van" ThisKey="VanID" OtherKey="ID" IsForeignKey="true" />
     </Type>
   </Table>

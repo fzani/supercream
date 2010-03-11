@@ -37,9 +37,16 @@ public class OrderHeaderUI : IDisposable
 
     public OrderHeader GetById(int id)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        if (id != -1)
         {
-            return _proxy.GetOrderHeader(id);
+            using (_proxy = new WcfFoundationService.FoundationServiceClient())
+            {
+                return _proxy.GetOrderHeader(id);
+            }
+        }
+        else
+        {
+            return null;
         }
     }
 
@@ -70,7 +77,7 @@ public class OrderHeaderUI : IDisposable
             updatedOrderHeader.CustomerID = origOrderHeader.CustomerID;
             updatedOrderHeader.ID = origOrderHeader.ID;
             updatedOrderHeader.OrderDate = origOrderHeader.OrderDate;
-            updatedOrderHeader.OrderStatus = (short) invoiceType;
+            updatedOrderHeader.OrderStatus = (short)invoiceType;
             updatedOrderHeader.InvoiceNo = invoiceNo;
             updatedOrderHeader.SpecialInstructions = origOrderHeader.SpecialInstructions;
 
@@ -142,17 +149,7 @@ public class OrderHeaderUI : IDisposable
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
             OrderHeader origOrderHeader = _proxy.GetOrderHeader(newOrderHeader.ID);
-            OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
-
-            updatedOrderHeader.AlphaID = newOrderHeader.AlphaID;
-            updatedOrderHeader.CustomerID = origOrderHeader.CustomerID;
-            updatedOrderHeader.ID = newOrderHeader.ID;
-            updatedOrderHeader.OrderDate = newOrderHeader.OrderDate;
-            updatedOrderHeader.OrderStatus = (short)newOrderHeader.OrderStatus;
-            updatedOrderHeader.InvoiceNo = newOrderHeader.InvoiceNo;
-            updatedOrderHeader.SpecialInstructions = newOrderHeader.SpecialInstructions;
-
-            _proxy.UpdateOrderHeader(updatedOrderHeader, origOrderHeader);
+            _proxy.UpdateOrderHeader(newOrderHeader, origOrderHeader);
         }
     }
 

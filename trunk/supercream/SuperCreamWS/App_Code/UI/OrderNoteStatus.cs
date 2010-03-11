@@ -41,24 +41,31 @@ public class OrderNotesStatusUI : IDisposable
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
             OrderNotesStatus origOrderNotesStatus = _proxy.GetOrderNotesStatus(newOrderNotesStatus.ID);
-            OrderNotesStatus updatedOrderNotesStatus = origOrderNotesStatus.Clone<OrderNotesStatus>();
-            updatedOrderNotesStatus.InvoiceDatePrinted = newOrderNotesStatus.InvoiceDatePrinted;
-
-            updatedOrderNotesStatus.InvoiceDateReprinted = newOrderNotesStatus.InvoiceDateReprinted;
-            updatedOrderNotesStatus.InvoicePrinted = newOrderNotesStatus.InvoicePrinted;
-            updatedOrderNotesStatus.InvoiceProformaDatePrinted = newOrderNotesStatus.InvoiceProformaDatePrinted;
-            updatedOrderNotesStatus.InvoiceDatePrinted = newOrderNotesStatus.InvoiceDatePrinted;
-            updatedOrderNotesStatus.InvoicePaymentComplete = updatedOrderNotesStatus.InvoicePaymentComplete;
-            updatedOrderNotesStatus.InvoiceProformaPrinted = newOrderNotesStatus.InvoiceProformaPrinted;
-            updatedOrderNotesStatus.InvoiceReprinted = newOrderNotesStatus.InvoiceReprinted;
-            updatedOrderNotesStatus.OrderID = newOrderNotesStatus.OrderID;
-            updatedOrderNotesStatus.OutletStoreID = newOrderNotesStatus.OutletStoreID;
-            updatedOrderNotesStatus.PicklistDateGenerated = newOrderNotesStatus.PicklistDateGenerated;
-            updatedOrderNotesStatus.PicklistGenerated = newOrderNotesStatus.PicklistGenerated;
-            updatedOrderNotesStatus.VanID = newOrderNotesStatus.VanID;
-
+            OrderNotesStatus updatedOrderNotesStatus = new OrderNotesStatus
+            {
+                InvoiceDatePrinted = newOrderNotesStatus.InvoiceDatePrinted,
+                InvoiceDateReprinted = newOrderNotesStatus.InvoiceDateReprinted,
+                InvoicePrinted = newOrderNotesStatus.InvoicePrinted,
+                InvoiceProformaDatePrinted = newOrderNotesStatus.InvoiceProformaDatePrinted,          
+                InvoicePaymentComplete = newOrderNotesStatus.InvoicePaymentComplete,
+                InvoiceProformaPrinted = newOrderNotesStatus.InvoiceProformaPrinted,
+                InvoiceReprinted = newOrderNotesStatus.InvoiceReprinted,
+                OrderID = newOrderNotesStatus.OrderID,
+                OutletStoreID = newOrderNotesStatus.OutletStoreID,
+                PicklistDateGenerated = newOrderNotesStatus.PicklistDateGenerated,
+                PicklistGenerated = newOrderNotesStatus.PicklistGenerated,
+                VanID = newOrderNotesStatus.VanID,
+                DeliveryNoteDateCreated = newOrderNotesStatus.DeliveryNoteDateCreated,
+                InvoiceDateCreated = newOrderNotesStatus.InvoiceDateCreated,
+                InvoiceProformaDateCreated = newOrderNotesStatus.InvoiceProformaDateCreated,
+                DeliveryNoteDatePrinted = newOrderNotesStatus.DeliveryNoteDatePrinted,
+                DeliveryNotePrinted = newOrderNotesStatus.DeliveryNotePrinted,
+                AccountID = newOrderNotesStatus.AccountID,
+                ID = newOrderNotesStatus.ID               
+            };
+            
             _proxy.UpdateOrderNotesStatus(updatedOrderNotesStatus, origOrderNotesStatus);
-        }
+        }       
     }
 
     public OrderNotesStatus GetOrderNotesStatus(int id)

@@ -33,6 +33,10 @@ namespace SP.Core.Domain
         private OrderHeader _OrderHeader;
         private Van _Van;
 
+        private DateTime _InvoiceDateCreated;
+        private DateTime _DeliveryNoteDateCreated;
+        private DateTime _InvoiceProformaDateCreated;
+
         public override int ID
         {
             get
@@ -267,6 +271,45 @@ namespace SP.Core.Domain
             set
             {
                 _Account = value;
+            }
+        }
+
+        public DateTime InvoiceDateCreated
+        {
+            get
+            { 
+                return _InvoiceDateCreated; 
+            }
+            
+            set 
+            { 
+                _InvoiceDateCreated = value; 
+            }
+        }
+
+        public DateTime InvoiceProformaDateCreated
+        {
+            get 
+            { 
+                return _InvoiceProformaDateCreated; 
+            }
+
+            set 
+            { 
+                _InvoiceProformaDateCreated = value; 
+            }
+        }
+
+        public DateTime DeliveryNoteDateCreated
+        {
+            get 
+            { 
+                return _DeliveryNoteDateCreated; 
+            }
+
+            set 
+            { 
+                _DeliveryNoteDateCreated = value; 
             }
         }
     }

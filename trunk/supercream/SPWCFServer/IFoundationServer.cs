@@ -1881,6 +1881,9 @@ namespace SPWCFServer
         private DateTime _PicklistDateGenerated;
         private Account _Account;
         private Van _Van;
+        private DateTime _InvoiceDateCreated;
+        private DateTime _InvoiceProformaDateCreated;
+        private DateTime _DeliveryNoteDateCreated;
 
         [DataMember]
         public int ID
@@ -2113,6 +2116,48 @@ namespace SPWCFServer
             set
             {
                 _PicklistDateGenerated = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime InvoiceDateCreated
+        {
+            get
+            {
+                return _InvoiceDateCreated;
+            }
+
+            set
+            {
+                _InvoiceDateCreated = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime InvoiceProformaDateCreated
+        {
+            get
+            {
+                return _InvoiceProformaDateCreated;
+            }
+
+            set
+            {
+                _InvoiceProformaDateCreated = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime DeliveryNoteDateCreated
+        {
+            get
+            {
+                return _DeliveryNoteDateCreated;
+            }
+
+            set
+            {
+                _DeliveryNoteDateCreated = value;
             }
         }
     }
