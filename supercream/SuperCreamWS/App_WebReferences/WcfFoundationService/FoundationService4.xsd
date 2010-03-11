@@ -324,13 +324,16 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Account" nillable="true" type="tns:Account" />
       <xs:element minOccurs="0" name="AccountID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="DeliveryNoteDateCreated" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DeliveryNoteDatePrinted" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DeliveryNotePrinted" type="xs:boolean" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="InvoiceDateCreated" type="xs:dateTime" />
       <xs:element minOccurs="0" name="InvoiceDatePrinted" type="xs:dateTime" />
       <xs:element minOccurs="0" name="InvoiceDateReprinted" type="xs:dateTime" />
       <xs:element minOccurs="0" name="InvoicePaymentComplete" type="xs:boolean" />
       <xs:element minOccurs="0" name="InvoicePrinted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="InvoiceProformaDateCreated" type="xs:dateTime" />
       <xs:element minOccurs="0" name="InvoiceProformaDatePrinted" type="xs:dateTime" />
       <xs:element minOccurs="0" name="InvoiceProformaPrinted" type="xs:boolean" />
       <xs:element minOccurs="0" name="InvoiceReprinted" type="xs:boolean" />

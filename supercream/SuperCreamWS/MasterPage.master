@@ -65,12 +65,12 @@
                     <li><strong>Invoicing</strong>
                         <br />
                         <a id="A10" href="~/Invoices/CompleteInvoices.aspx" runat="server">Complete Invoices</a>
-                        <br />
-                        <a id="A1" href="~/Invoices/Invoices.aspx" runat="server">Standard Invoices</a>
-                        <br />
+                        <br />                        
                         <a id="A2" href="~/Invoices/ProformaInvoices.aspx" runat="server">Proforma Invoices</a>
                         <br />
                         <a id="A5" href="~/Invoices/SpecialInvoices.aspx" runat="server">Special Invoices</a>
+                        <br />
+                        <a id="A1" href="~/Invoices/Invoices.aspx" runat="server">Standard Invoices</a>                        
                     </li>
                     <li><strong>Delivery Notes</strong>
                         <br />
@@ -79,6 +79,8 @@
                     <li><strong>Credit Notes</strong>
                         <br />
                         <a id="A4" href="~/CreditNote/CreditNote.aspx" runat="server">Credit Notes</a>
+                    
+                    
                     </li>
                     <li><a href="#"><strong>Pick Lists</strong>
                         <br />
@@ -90,8 +92,9 @@
                 <ul class="sidemenu">
                     <li><strong>Reports</strong>
                         <br />
-                        <a id="A7" href="http://bali/Reports/Pages/Folder.aspx?ItemPath=%2fSuperCreamReports&ViewMode=List" runat="server">General Reports</a><br />
-                         </li>
+                        <a id="A7" href="http://bali/Reports/Pages/Folder.aspx?ItemPath=%2fSuperCreamReports&ViewMode=List"
+                            runat="server">General Reports</a><br />
+                    </li>
                 </ul>
                 <h3>
                     Wise Words</h3>
