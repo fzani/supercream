@@ -486,14 +486,13 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Price" SortExpression="Price">
                             <ItemTemplate>
-                                <asp:Label ID="Label4" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Price", "{0:c}") %>
-'></asp:Label>
+                                <asp:Label ID="OrderLinePriceLabel" runat="server"></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Price") %>'></asp:TextBox>
                             </EditItemTemplate>
                             <FooterTemplate>
-                                Total &nbsp;
+                                Ex Vat. Total &nbsp;
                                 <asp:Label ID="priceLabelTotal" runat="server"></asp:Label>
                             </FooterTemplate>
                         </asp:TemplateField>
