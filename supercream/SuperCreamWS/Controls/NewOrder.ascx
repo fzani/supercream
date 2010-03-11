@@ -221,7 +221,8 @@
             </asp:Panel>
             <asp:Panel ID="OrderDetailsGridPanel" runat="server">
                 <asp:GridView ID="OrderDetailsGridView" Width="97%" runat="server" AutoGenerateColumns="False"
-                    DataSourceID="ObjectDataSource1" OnRowDataBound="GridView1_RowDataBound" OnRowCommand="GridView1_RowCommand">
+                    DataSourceID="ObjectDataSource1" OnRowDataBound="GridView1_RowDataBound" OnRowCommand="GridView1_RowCommand"
+                    ShowFooter="true">
                     <Columns>
                         <asp:TemplateField HeaderText="ID" SortExpression="ID" Visible="false">
                             <ItemTemplate>
@@ -254,12 +255,15 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Price" SortExpression="Price">
                             <ItemTemplate>
-                                <asp:Label ID="Label4" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Price", "{0:c}") %>
-'></asp:Label>
+                                <asp:Label ID="OrderLinePriceLabel" runat="server"></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Price") %>'></asp:TextBox>
                             </EditItemTemplate>
+                            <FooterTemplate>
+                                Ex Vat. Total &nbsp;
+                                <asp:Label ID="priceLabelTotal" runat="server"></asp:Label>
+                            </FooterTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="SI" SortExpression="SpecialInstructions">
                             <ItemTemplate>
