@@ -332,7 +332,11 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             GridViewRow drv = e.Row.DataItem as GridViewRow;
             OrderLine orderLine = e.Row.DataItem as OrderLine;
 
-            priceTotal += orderLine.Price;            
+            decimal tempPrice = Math.Round(orderLine.Price * orderLine.NoOfUnits, 2);
+            priceTotal += tempPrice;   
+
+            Label orderLinePriceLabel = e.Row.FindControl("OrderLinePriceLabel") as Label;
+            orderLinePriceLabel.Text = String.Format("{0:c}", tempPrice);           
 
             ProductUI productUI = new ProductUI();
             int? productID = DataBinder.Eval(e.Row.DataItem, "ProductID") as int?;
@@ -349,7 +353,6 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             else
             {
                 img.ImageUrl = "~/images/12-em-check.png";
-
             }
         }
 
