@@ -5,7 +5,7 @@
         <fieldset id="Fieldset3">
             <legend>
                 <h3>
-                    Select Product to Add to Order</h3>
+                    Select Product to add to Order</h3>
             </legend>
             <table class="search">
                 <tr>

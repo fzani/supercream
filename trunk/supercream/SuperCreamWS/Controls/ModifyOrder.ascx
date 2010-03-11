@@ -4,10 +4,14 @@
 <asp:Panel ID="ModifyOrderPanel" Visible="true" runat="server">
     <div class="FormInput">
         <fieldset id="Fieldset3">
+            <legend>
+                <h3>
+                    Modify Orders</h3>
+            </legend>
             <asp:Panel ID="OrderSearchPanel" DefaultButton="SearchButton" Visible="false" runat="server">
                 <legend>
                     <h3>
-                        Order Lines</h3>
+                        Select Order Line</h3>
                 </legend>
                 <table class="search">
                     <tr>
@@ -89,9 +93,10 @@
                                     <td>
                                     </td>
                                     <td>
-                                        <asp:Button ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
+                                        <asp:LinkButton ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
                                             OnClick="SearchButton_Click" />
-                                        <asp:Button ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
+                                        &nbsp; | &nbsp;
+                                        <asp:LinkButton ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
                                             OnClick="ClearButton_Click" />
                                     </td>
                                 </tr>
@@ -111,7 +116,7 @@
                     <Columns>
                         <asp:TemplateField ItemStyle-Width="15%" ShowHeader="False">
                             <ItemTemplate>
-                                <asp:Button ID="SelectButton" runat="server" CausesValidation="false" CommandName="Select"
+                                <asp:LinkButton ID="SelectButton" runat="server" CausesValidation="false" CommandName="Select"
                                     CommandArgument='<%# Bind("ID") %>' Text="Select" />
                             </ItemTemplate>
                         </asp:TemplateField>
@@ -172,7 +177,7 @@
                             Customer Name
                         </td>
                         <td>
-                            <asp:DropDownList ID="CustomerDropDownList" AutoPostBack="true" Width="270px" runat="server"
+                            <asp:DropDownList ID="CustomerDropDownList" AutoPostBack="true" Width="350px" runat="server"
                                 DataValueField="ID" ValidationGroup="ModifyOrderDetailsGroup" DataTextField="Name"
                                 OnSelectedIndexChanged="CustomerDropDownList_SelectedIndexChanged">
                             </asp:DropDownList>
@@ -192,7 +197,7 @@
                             Order No
                         </td>
                         <td style="width: 50%;">
-                            <asp:TextBox ID="OrderNoTextBox" ValidationGroup="ModifyOrderDetailsGroup" Width="250px"
+                            <asp:TextBox ID="OrderNoTextBox" ValidationGroup="ModifyOrderDetailsGroup" Width="355px"
                                 MaxLength="20" runat="server"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ValidationGroup="ModifyOrderDetailsGroup"
                                 ControlToValidate="OrderNoTextBox" ErrorMessage="Order No is required" InitialValue=""
@@ -251,20 +256,20 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <asp:Button ID="CancelOrderDetailsButton" runat="server" ValidationGroup="NewOrderGroup"
-                                Text="Cancel Order Details" OnClick="CancelOrderDetailsButton_Click" />
-                            <asp:Button ID="DeleteOrderButton" CausesValidation="false" runat="server" Text="Delete Order Details"
+                            <asp:LinkButton ID="DeleteOrderButton" CausesValidation="false" runat="server" Text="Delete Order Details |"
                                 OnClick="DeleteOrderButton_Click" />
+                            <asp:LinkButton ID="Modify_OrderLineDetailsLinkButton" Text="Modfy Order Line Details"
+                                runat="server" OnClick="Modify_OrderLineDetailsLinkButton_Click" />
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <asp:Button ID="ConvertToInvoiceButton" Text="Convert to Invoice" runat="server"
+                            <asp:LinkButton ID="ConvertToInvoiceButton" Text="Convert to Invoice |" runat="server"
                                 OnClick="ConvertToInvoiceButton_Click" />
-                            <asp:Button ID="CreateInvoiceButton" Text="Create Invoice" runat="server" OnClick="ShowInvoiceButton_Click" />
-                            <asp:Button ID="CreateProformaInvoiceButton" Text="Create Proforma Invoice" runat="server"
-                                OnClick="CreateProformaInvoiceButton_Click" />
-                            <asp:Button ID="CreateDeliveryNoteButton" Text="Create Delivery Note" runat="server"
+                            <asp:LinkButton ID="CreateInvoiceButton" Text="Create Invoice |" runat="server" OnClick="ShowInvoiceButton_Click" />
+                            <asp:LinkButton ID="CreateProformaInvoiceButton" Text="Create Proforma Invoice |"
+                                runat="server" OnClick="CreateProformaInvoiceButton_Click" />
+                            <asp:LinkButton ID="CreateDeliveryNoteButton" Text="Create Delivery Note" runat="server"
                                 OnClick="ShowDeliveryButton_Click" />
                             <asp:Button ID="btnTrigger1" runat="server" Style="display: none" />
                             <asp:Button ID="btnTrigger2" runat="server" Style="display: none" />
@@ -323,6 +328,8 @@
                 <uc1:ProductSearch ID="ProductSearch" runat="server" />
             </asp:Panel>
             <asp:Panel ID="AddOrderDetailsPanel" Visible="false" runat="server">
+                <h3>
+                    Add Order line detail</h3>
                 <table style="width: 100%">
                     <tr>
                         <td class="emphasise" style="width: 30%">
@@ -396,7 +403,8 @@
                             <asp:Label ID="TotalPriceLabel" Text="TotalPrice (Ex. Vat)" runat="server"></asp:Label>
                         </td>
                         <td>
-                            <asp:Label ID="TotalPriceValueLabel" MaxLength="7" Width="60px" runat="server"></asp:Label>
+                            <asp:Label ID="TotalPriceValueLabel" Font-Size="Medium" ForeColor="Red" MaxLength="7"
+                                Width="60px" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>
@@ -474,7 +482,7 @@
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Discount") %>'></asp:TextBox>
-                            </EditItemTemplate>                           
+                            </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Price" SortExpression="Price">
                             <ItemTemplate>
@@ -606,11 +614,20 @@
                         <asp:Parameter Name="id" Type="Int32" />
                     </SelectParameters>
                 </asp:ObjectDataSource>
-                <div style="margin: 10px">
-                    <asp:Button ID="CompleteOrderButton" ValidationGroup="ModifyOrderDetailsGroup" Visible="false"
-                        Text="Complete Order" runat="server" OnClick="CompleteOrderButton_Click" />
-                </div>
             </asp:Panel>
+            <div class="FormInput">
+                <asp:Panel ID="CompleteOrderButtonPanel" Visible="false" runat="server">
+                    <fieldset>
+                        <div style="margin: 10px">
+                            <asp:Button ID="CompleteOrderButton" Width="15%" ValidationGroup="ModifyOrderDetailsGroup"
+                                Text="Update Order" runat="server" OnClick="CompleteOrderButton_Click" />
+                            &nbsp;
+                            <asp:Button ID="CancelTotalOrderButton" Width="15%" ValidationGroup="ModifyOrderDetailsGroup"
+                                Text="Cancel" runat="server" OnClick="CancelButton_Click" />
+                        </div>
+                    </fieldset>
+                </asp:Panel>
+            </div>
         </fieldset>
     </div>
 </asp:Panel>
