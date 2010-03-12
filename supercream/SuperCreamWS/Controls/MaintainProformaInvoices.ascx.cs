@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-
-using WcfFoundationService;
-using AjaxControlToolkit;
-
-using SP.Utils;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
+using System.Web.UI.WebControls;
+using SP.Utils;
+using WcfFoundationService;
 using Microsoft.Reporting.WebForms;
+using SP.Core.Enums;
 
 public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserControl
 {
@@ -19,7 +16,9 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
     #endregion
 
     #region Public Event Handlers
+
     public event ErrorMessageEventHandler ErrorMessageEventHandler;
+
     #endregion
 
     #region Page Load event
@@ -33,7 +32,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
     }
     #endregion
 
-    #region public Accesors
+    #region Public Accesors
     public int? OrderID
     {
         get
@@ -74,10 +73,11 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
                 ID = -1,
                 AccountID = Convert.ToInt32(AccountDropDownList.SelectedValue),
                 VanID = Convert.ToInt32(DeliveryVanDropDownList.SelectedValue),
-                OutletStoreID = -1,
+                OutletStoreID = Convert.ToInt32(DeliveryDropDownList.SelectedValue),
                 DeliveryNoteDatePrinted = Defaults.MinDateTime,
                 DeliveryNotePrinted = false,
                 InvoiceDatePrinted = Defaults.MinDateTime,
+                InvoicePaymentComplete = false,
                 InvoicePrinted = false,
                 InvoiceDateReprinted = Defaults.MinDateTime,
                 InvoiceProformaDatePrinted = Defaults.MinDateTime,
@@ -85,7 +85,10 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
                 InvoiceReprinted = false,
                 OrderID = OrderID.Value,
                 PicklistDateGenerated = Defaults.MinDateTime,
-                PicklistGenerated = false
+                PicklistGenerated = false,
+                InvoiceDateCreated = Defaults.MinDateTime,
+                InvoiceProformaDateCreated = DateTime.Now,
+                DeliveryNoteDateCreated = Defaults.MinDateTime
             };
 
             OrderNotesStatusUI ui = new OrderNotesStatusUI();
@@ -93,6 +96,8 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
+
+            DataBind();
         }
         catch (Exception ex)
         {
@@ -106,25 +111,12 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
     {
         try
         {
-            OrderNotesStatus status = new OrderNotesStatus
-            {
-                ID = OrderNoteStatusID.Value,
-                AccountID = Convert.ToInt32(AccountDropDownList.SelectedValue),
-                VanID = Convert.ToInt32(DeliveryVanDropDownList.SelectedValue),
-                OutletStoreID = -1,
-                DeliveryNoteDatePrinted = Defaults.MinDateTime,
-                DeliveryNotePrinted = false,
-                InvoiceDatePrinted = Defaults.MinDateTime,
-                InvoicePrinted = false,
-                InvoiceDateReprinted = Defaults.MinDateTime,
-                InvoiceProformaDatePrinted = Defaults.MinDateTime,
-                InvoiceProformaPrinted = false,
-                InvoiceReprinted = false,
-                OrderID = OrderID.Value,
-                PicklistDateGenerated = Defaults.MinDateTime,
-                PicklistGenerated = false
-            };
             OrderNotesStatusUI ui = new OrderNotesStatusUI();
+            OrderNotesStatus status = ui.GetOrderNotesStatus(OrderNoteStatusID.Value);
+            status.AccountID = Convert.ToInt32(AccountDropDownList.SelectedValue);
+            status.VanID = Convert.ToInt32(DeliveryVanDropDownList.SelectedValue);
+            status.OutletStoreID = Convert.ToInt32(DeliveryDropDownList.SelectedValue);
+
             ui.Update(status);
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
@@ -164,9 +156,114 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         }
     }
 
+    protected void CancelSelectInvoiceDetails_Click(object sender, EventArgs e)
+    {
+        ChangeState += new EventHandler<EventArgs>(PageLoadState);
+        ChangeState(this, e);
+
+        DataBind();
+    }
+
     protected void InvoicesPrintedDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
         InvoiceGridView.DataBind();
+    }
+
+    protected void PrintInvoiceButton_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            int orderID = this.OrderID.Value;
+
+            PrintInvoice(orderID);
+
+            OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
+            OrderHeader orderHeader = orderHeaderUI.GetById(orderID);
+            orderHeader.OrderStatus = (short)OrderStatus.PoformaInvoicePrinted;
+            orderHeaderUI.UpdateForInvoice(orderHeader);
+
+            OrderNotesStatusUI ui = new OrderNotesStatusUI();
+            OrderNotesStatus orderNoteStatus = ui.GetOrderNotesStatusByOrderID(orderID);
+            orderNoteStatus.InvoiceProformaDatePrinted = DateTime.Now;
+            orderNoteStatus.InvoiceProformaPrinted = true;
+            ui.Update(orderNoteStatus);
+
+            PrintInvoiceButton.Visible = false;
+            RePrintInvoiceButton.Visible = true;
+
+            //// NewPrinting.Run(@"Report1.rdlc", "\\\\paris\\Samsung CLP-310 Series", ds.Tables[0], "SuperCreamDBDataSet_InvoiceHeader"); 
+            // printReport.Run("InvoicePrint.rdl", dataSets, PageMode.Portrait);
+        }
+        catch (System.Exception ex)
+        {
+            PrintFailedPopupControlExtender.Show();
+            Panel printPanel = FindControl("PrintPanelMessage") as Panel;
+            TextBox errorTextBox = printPanel.FindControl("ErrorTextBox") as TextBox;
+            if (ex.InnerException != null)
+            {
+                errorTextBox.Text = ex.InnerException.Message;
+            }
+            else
+            {
+                errorTextBox.Text = ex.Message;
+            }
+        }
+    }
+
+    protected void RePrintInvoiceButton_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            int orderID = this.OrderID.Value;
+
+            PrintInvoice(orderID);
+
+            OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
+            OrderHeader orderHeader = orderHeaderUI.GetById(orderID);
+            orderHeader.OrderStatus = (short)OrderStatus.PoformaInvoicePrinted;
+            orderHeaderUI.UpdateForInvoice(orderHeader);
+
+            OrderNotesStatusUI ui = new OrderNotesStatusUI();
+            OrderNotesStatus orderNoteStatus = ui.GetOrderNotesStatusByOrderID(orderID);
+            orderNoteStatus.InvoiceProformaDatePrinted = DateTime.Now;
+            orderNoteStatus.InvoiceReprinted = true;
+            ui.Update(orderNoteStatus);
+
+            PrintInvoiceButton.Visible = false;
+            RePrintInvoiceButton.Visible = true;
+
+            //// NewPrinting.Run(@"Report1.rdlc", "\\\\paris\\Samsung CLP-310 Series", ds.Tables[0], "SuperCreamDBDataSet_InvoiceHeader"); 
+            // printReport.Run("InvoicePrint.rdl", dataSets, PageMode.Portrait);
+        }
+        catch (System.Exception ex)
+        {
+            PrintFailedPopupControlExtender.Show();
+            Panel printPanel = FindControl("PrintPanelMessage") as Panel;
+            TextBox errorTextBox = printPanel.FindControl("ErrorTextBox") as TextBox;
+            if (ex.InnerException != null)
+            {
+                errorTextBox.Text = ex.InnerException.Message;
+            }
+            else
+            {
+                errorTextBox.Text = ex.Message;
+            }
+        }
+    }
+
+    private void PrintInvoice(int orderID)
+    {
+        int accountId = Convert.ToInt32(AccountDropDownList.SelectedValue);
+        int outletStoreId = Convert.ToInt32(DeliveryDropDownList.SelectedValue);
+
+        DataSet[] dataSets = new DataSet[5];
+
+        IReportDataSets reportDataSets = new ReportDataSets();
+        ReportDataSource[] reportDataSources = reportDataSets.GetReportDataSets(orderID, accountId, outletStoreId);
+
+        PrintReport printReport = new PrintReport();
+        printReport.Run("InvoicePrint.rdlc", reportDataSources, PageMode.Portrait);
+        OKModalPopupExtender.Show();
     }
 
     protected void ClearButton_Click(object sender, EventArgs e)
@@ -190,6 +287,11 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         DataBind();
     }
 
+    protected void DeliveryDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        DataBind();
+    }
+
     protected void DeliveryVanDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
         InvoiceRepeater.DataBind();
@@ -209,6 +311,54 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             CustomerUI ui = new CustomerUI();
             Customer customer = ui.GetByID(customerID);
 
+            Image confirmedImage = e.Row.FindControl("ConfirmedImage") as Image;
+            OrderNotesStatusUI orderNoteStatusUI = new OrderNotesStatusUI();
+            if (orderNoteStatusUI.OrderNoteExistsByOrderID(orderHeader.ID))
+            {
+                confirmedImage.Visible = true;
+            }
+            else
+            {
+                confirmedImage.Visible = false;
+            }
+
+            Image printedImage = e.Row.FindControl("PrintedImage") as Image;
+            Image rePrintedImage = e.Row.FindControl("RePrintedImage") as Image;
+            if (orderNoteStatusUI.OrderNoteExistsByOrderID(orderHeader.ID))
+            {
+                OrderNotesStatus orderNoteStatus = orderNoteStatusUI.GetOrderNotesStatusByOrderID(orderHeader.ID);
+                if (orderNoteStatusUI.OrderNoteExistsByOrderID(orderHeader.ID))
+                {
+                    if (orderNoteStatus.InvoiceProformaPrinted)
+                    {
+                        printedImage.Visible = true;
+                    }
+                    else
+                    {
+                        printedImage.Visible = false;
+                    }
+
+                    if (orderNoteStatus.InvoiceReprinted)
+                    {
+                        rePrintedImage.Visible = true;
+                    }
+                    else
+                    {
+                        rePrintedImage.Visible = false;
+                    }
+                }
+                else
+                {
+                    rePrintedImage.Visible = false;
+                    printedImage.Visible = false;
+                }
+            }
+            else
+            {
+                rePrintedImage.Visible = false;
+                printedImage.Visible = false;
+            }
+
             Label customerNameLabel = e.Row.FindControl("CustomerNameLabel") as Label;
             customerNameLabel.Text = customer.Name;
         }
@@ -225,6 +375,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
 
             OrderID = orderHeader.ID;
             OrderHeaderNoLabel.Text = orderHeader.AlphaID;
+            InvoiceHeaderNoLabel.Text = orderHeader.InvoiceNo;
 
             int customerID = orderHeader.CustomerID;
 
@@ -242,6 +393,15 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
 
             ChangeState += new EventHandler<EventArgs>(SelectedOrderState);
             ChangeState(this, e);
+
+            List<OutletStore> outletStore = customer.OutletStore;
+
+            Action<OutletStore> outletStoreAction =
+                new Action<OutletStore>(a => DeliveryDropDownList.Items.Add(new ListItem(a.Name.ToString(), a.ID.ToString())));
+
+            DeliveryDropDownList.Items.Clear();
+            DeliveryDropDownList.Items.Add(new ListItem("-- No Item Selected --", "-1"));
+            customer.OutletStore.ForEach(outletStoreAction);
 
             OrderNotesStatusUI orderNotesStatusUI = new OrderNotesStatusUI();
             if (orderNotesStatusUI.OrderNoteExistsByOrderID(OrderID.Value))
@@ -265,6 +425,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
                 }
 
                 AccountDropDownList.SelectedValue = orderNoteStatus.AccountID.ToString();
+                DeliveryDropDownList.SelectedValue = orderNoteStatus.OutletStoreID.ToString();
                 DeliveryVanDropDownList.SelectedValue = orderNoteStatus.VanID.ToString();
 
                 PopulateInvoice(e);
@@ -277,9 +438,13 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
                 RePrintInvoiceButton.Visible = false;
                 CancelInvoiceButton.Visible = false;
             }
-
-            DataBind();
         }
+        else if (e.CommandName == "DisplayCreditNotes")
+        {
+            CreditNoteModalPopupExtender.Show();
+        }
+
+        DataBind();
     }
     #endregion
 
@@ -289,6 +454,9 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         InvoiceEntryPanel.Visible = false;
         DisplayInvoicePanel.Visible = false;
         OrderHeaderDetailsPanel.Visible = false;
+
+        this.InvoiceSearchCriteriaPanel.Visible = true;
+        this.InvoiceHeaderSearchGridPanel.Visible = true;
     }
 
     public void SelectedOrderState(object sender, EventArgs args)
@@ -297,6 +465,9 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         DisplayInvoicePanel.Visible = false;
         InvoiceRepeater.Visible = false;
         OrderHeaderDetailsPanel.Visible = false;
+
+        this.InvoiceSearchCriteriaPanel.Visible = false;
+        this.InvoiceHeaderSearchGridPanel.Visible = false;
     }
 
     public void AccountNotSelected(object sender, EventArgs args)
@@ -305,6 +476,9 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         DisplayInvoicePanel.Visible = false;
         InvoiceRepeater.Visible = false;
         OrderHeaderDetailsPanel.Visible = false;
+
+        this.InvoiceSearchCriteriaPanel.Visible = false;
+        this.InvoiceHeaderSearchGridPanel.Visible = false;
     }
 
     public void AccountSelectedState(object sender, EventArgs args)
@@ -313,6 +487,9 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         DisplayInvoicePanel.Visible = true;
         InvoiceRepeater.Visible = true;
         OrderHeaderDetailsPanel.Visible = true;
+
+        this.InvoiceSearchCriteriaPanel.Visible = false;
+        this.InvoiceHeaderSearchGridPanel.Visible = false;
     }
 
     #endregion
@@ -338,16 +515,16 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         switch (Convert.ToInt32(InvoicesPrintedDropDownList.SelectedValue))
         {
             case -1:
-                e.InputParameters[5] = (short)SP.Core.Enums.OrderStatus.Invoice;
-                e.InputParameters[6] = (short)SP.Core.Enums.OrderStatus.InvoicePrinted;
+                e.InputParameters[5] = (short)SP.Core.Enums.OrderStatus.ProformaInvoice;
+                e.InputParameters[6] = (short)SP.Core.Enums.OrderStatus.PoformaInvoicePrinted;
                 break;
             case (short)SP.Core.Enums.OrderStatus.Invoice:
-                e.InputParameters[5] = (short)SP.Core.Enums.OrderStatus.Invoice;
+                e.InputParameters[5] = (short)SP.Core.Enums.OrderStatus.ProformaInvoice;
                 e.InputParameters[6] = (short)(-1);
                 break;
             case (short)SP.Core.Enums.OrderStatus.InvoicePrinted:
                 e.InputParameters[5] = (short)(-1);
-                e.InputParameters[6] = (short)SP.Core.Enums.OrderStatus.InvoicePrinted;
+                e.InputParameters[6] = (short)SP.Core.Enums.OrderStatus.PoformaInvoicePrinted;
                 break;
         }
     }
@@ -359,6 +536,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
     int totalRowCount = 0;
     Decimal netTotalPrice = 0;
     Decimal vatTotal = 0;
+    Decimal totalUnits = 0;
 
     protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
@@ -385,6 +563,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
 
             Label noOfUnitsLabel = e.Item.FindControl("NoOfUnitsLabel") as Label;
             int noOfUnits = Convert.ToInt32(noOfUnitsLabel.Text);
+            totalUnits += noOfUnits;
 
             Label pricePerUnitLabel = e.Item.FindControl("PricePerUnitLabel") as Label;
             Decimal pricePerUnit = Convert.ToDecimal(pricePerUnitLabel.Text);
@@ -420,7 +599,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         if (e.Item.ItemType == ListItemType.Footer)
         {
             Label totalItemsLabel = e.Item.FindControl("TotalItemsLabel") as Label;
-            totalItemsLabel.Text = totalRowCount.ToString();
+            totalItemsLabel.Text = this.totalUnits.ToString();
 
             Label totalLabel = e.Item.FindControl("TotalLabel") as Label;
             totalLabel.Text = String.Format("{0:c}", Math.Round(netTotalPrice, 2));
@@ -435,7 +614,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             vatLabel.Text += String.Format("{0:c}", Math.Round(vatTotal, 2));
 
             Label netTotalLabel = e.Item.FindControl("NetTotalLabel") as Label;
-            netTotalLabel.Text += String.Format("{0:c}", Math.Round(netTotalPrice - vatTotal, 2));
+            netTotalLabel.Text += String.Format("{0:c}", Math.Round(netTotalPrice + vatTotal, 2));
 
             if (AccountDropDownList.SelectedValue != "")
             {
@@ -458,11 +637,128 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
 
             Label deliveryDateLabel = e.Item.FindControl("DeliveryDateLabel") as Label;
             deliveryDateLabel.Text = orderHeader.DeliveryDate.ToShortDateString();
+
+            netTotalPrice = 0;
+            vatTotal = 0;
+            netTotalPrice = 0;
+            totalRowCount = 0;
         }
     }
     #endregion
 
     #region Util Methods
+
+    private static DataSet GetInvoiceTotalsDS(int orderId)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["SuperCreamDBConnectionString"].ConnectionString;
+        SqlConnection connection = new SqlConnection(connectionString);
+        connection.Open();
+
+        SqlCommand command = new SqlCommand();
+        command.CommandType = System.Data.CommandType.StoredProcedure;
+        command.CommandText = "rptGetOrderTotals";
+        command.Connection = connection;
+
+        SqlParameter orderParameterId = command.Parameters.Add("@OrderID", System.Data.SqlDbType.Int);
+        orderParameterId.Value = orderId;
+
+        DataSet dataSet = new DataSet("InvoiceTotalsSA");
+
+        SqlDataAdapter adapter = new SqlDataAdapter(command);
+        adapter.Fill(dataSet);
+        return dataSet;
+    }
+
+    private static DataSet GetDeliveryAddressLinesDS(int outletStoreId)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["SuperCreamDBConnectionString"].ConnectionString;
+        SqlConnection connection = new SqlConnection(connectionString);
+        connection.Open();
+
+        SqlCommand command = new SqlCommand();
+        command.CommandType = System.Data.CommandType.StoredProcedure;
+        command.CommandText = "rptGetDeliveryAddressLines";
+        command.Connection = connection;
+
+        SqlParameter outletStoreIdParmeter = command.Parameters.Add("@OutletStoreID", System.Data.SqlDbType.Int);
+        outletStoreIdParmeter.Value = outletStoreId;
+
+        DataSet dataSet = new DataSet("DeliveryAddressLinesDS");
+
+        SqlDataAdapter adapter = new SqlDataAdapter(command);
+        adapter.Fill(dataSet);
+        return dataSet;
+    }
+
+    private static DataSet GetInvoiceAddressLinesDS(int accountId)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["SuperCreamDBConnectionString"].ConnectionString;
+        SqlConnection connection = new SqlConnection(connectionString);
+        connection.Open();
+
+        SqlCommand command = new SqlCommand();
+        command.CommandType = System.Data.CommandType.StoredProcedure;
+        command.CommandText = "rptGetAddressLinesForInvoice";
+        command.Connection = connection;
+
+        SqlParameter accountIdParameter = command.Parameters.Add("@AccountID", System.Data.SqlDbType.Int);
+        accountIdParameter.Value = accountId;
+
+        DataSet dataSet = new DataSet("InvoiceAddressLinesDS");
+
+        SqlDataAdapter adapter = new SqlDataAdapter(command);
+        adapter.Fill(dataSet);
+        return dataSet;
+    }
+
+    private static DataSet GetFoundationFacilityAddressLinesDS(int accountId)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["SuperCreamDBConnectionString"].ConnectionString;
+        SqlConnection connection = new SqlConnection(connectionString);
+        connection.Open();
+
+        SqlCommand command = new SqlCommand();
+        command.CommandType = System.Data.CommandType.StoredProcedure;
+        command.CommandText = "rptGetFoundationFacilityAddressLines";
+        command.Connection = connection;
+
+        SqlParameter accountIdParameter = command.Parameters.Add("@AccountID", System.Data.SqlDbType.Int);
+        accountIdParameter.Value = accountId;
+
+        DataSet dataSet = new DataSet("FoundationFacilityAddressLines");
+
+        SqlDataAdapter adapter = new SqlDataAdapter(command);
+        adapter.Fill(dataSet);
+        return dataSet;
+    }
+
+    private static DataSet GetInvoiceHeaderDS(int orderID, int accountNo, int outletStoreId)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["SuperCreamDBConnectionString"].ConnectionString;
+        SqlConnection connection = new SqlConnection(connectionString);
+        connection.Open();
+
+        SqlCommand command = new SqlCommand();
+        command.CommandType = System.Data.CommandType.StoredProcedure;
+        command.CommandText = "rptDetailsGetInvoice";
+        command.Connection = connection;
+
+        SqlParameter orderIDParameter = command.Parameters.Add("@OrderID", System.Data.SqlDbType.Int);
+        orderIDParameter.Value = orderID;
+
+        SqlParameter accountIDParameter = command.Parameters.Add("@AccountID", System.Data.SqlDbType.Int);
+        accountIDParameter.Value = accountNo;
+
+        SqlParameter outletStoreIdParameter = command.Parameters.Add("@OutletStoreID", System.Data.SqlDbType.Int);
+        outletStoreIdParameter.Value = outletStoreId;
+
+        DataSet invoiceHeaderDataSet = new DataSet("InvoiceHeaderSA");
+
+        SqlDataAdapter adapter = new SqlDataAdapter(command);
+        adapter.Fill(invoiceHeaderDataSet);
+        return invoiceHeaderDataSet;
+    }
+
     void PopulateInvoice(EventArgs e)
     {
         ChangeState += new EventHandler<EventArgs>(AccountSelectedState);
@@ -525,46 +821,34 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             OfficePhoneNumber1Label2.Text = ff.OfficePhoneNumber2;
         }
 
+        if (DeliveryDropDownList.SelectedValue != "-1")
+        {
+            OutletStoreUI outletStoreUI = new OutletStoreUI();
+            OutletStore store = outletStoreUI.GetOutletStore(Convert.ToInt32(DeliveryDropDownList.SelectedValue));
+
+            AddressUI addressUI = new AddressUI();
+            Address outletAddress = addressUI.GetByID(store.AddressID);
+
+            DeliveryCompanyNameLabel.Text = store.Name;
+            DeliveryCountyLabel.Text = outletAddress.County;
+            List<string> deliveryAddressLines = SP.Util.Utils.ConvertAddressLinesFromXml(outletAddress.AddressLines);
+            DeliveryCustomerAddressLine1Label.Text = deliveryAddressLines[0];
+            if (deliveryAddressLines.Count > 1)
+            {
+                DeliveryCustomerAddressLine2Label.Text = deliveryAddressLines[1];
+            }
+
+            DeliveryPostCodeLabel.Text = outletAddress.PostCode;
+            DeliveryTownLabel.Text = outletAddress.Town;
+
+            DeliveryMapReferenceLabel.Text = outletAddress.MapReference;
+        }
+
         ChangeState += new EventHandler<EventArgs>(AccountSelectedState);
         ChangeState(this, e);
 
         InvoiceRepeater.Visible = true;
     }
     #endregion
-
-    protected void PrintInvoiceButton_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            int orderID = this.OrderID.Value;
-            int accountId = Convert.ToInt32(AccountDropDownList.SelectedValue);
-            int outletStoreId = 30;
-
-            DataSet[] dataSets = new DataSet[5];
-
-            IReportDataSets reportDataSets = new ReportDataSets();
-            ReportDataSource[] reportDataSources = reportDataSets.GetReportDataSets(orderID, accountId, outletStoreId);
-
-            PrintReport printReport = new PrintReport();
-            printReport.Run("InvoicePrint.rdlc", reportDataSources, PageMode.Portrait);
-            OKModalPopupExtender.Show();
-            //// NewPrinting.Run(@"Report1.rdlc", "\\\\paris\\Samsung CLP-310 Series", ds.Tables[0], "SuperCreamDBDataSet_InvoiceHeader"); 
-            // printReport.Run("InvoicePrint.rdl", dataSets, PageMode.Portrait);
-        }
-        catch (System.Exception ex)
-        {
-            PrintFailedPopupControlExtender.Show();
-            Panel printPanel = FindControl("PrintPanelMessage") as Panel;
-            TextBox errorTextBox = printPanel.FindControl("ErrorTextBox") as TextBox;
-            if (ex.InnerException != null)
-            {
-                errorTextBox.Text = ex.InnerException.Message;
-            }
-            else
-            {
-                errorTextBox.Text = ex.Message;
-            }
-        }
-    }
 }
 

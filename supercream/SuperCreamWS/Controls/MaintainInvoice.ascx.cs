@@ -321,7 +321,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             {
                 img.Visible = false;
             }
-            
+
             Image confirmedImage = e.Row.FindControl("ConfirmedImage") as Image;
             OrderNotesStatusUI orderNoteStatusUI = new OrderNotesStatusUI();
             if (orderNoteStatusUI.OrderNoteExistsByOrderID(orderHeader.ID))
@@ -332,28 +332,36 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             {
                 confirmedImage.Visible = false;
             }
-
-            OrderNotesStatus orderNoteStatus = orderNoteStatusUI.GetOrderNotesStatusByOrderID(orderHeader.ID);
+           
             Image printedImage = e.Row.FindControl("PrintedImage") as Image;
             Image rePrintedImage = e.Row.FindControl("RePrintedImage") as Image;
             if (orderNoteStatusUI.OrderNoteExistsByOrderID(orderHeader.ID))
             {
-                if (orderNoteStatus.InvoicePrinted)
+                OrderNotesStatus orderNoteStatus = orderNoteStatusUI.GetOrderNotesStatusByOrderID(orderHeader.ID);
+                if (orderNoteStatusUI.OrderNoteExistsByOrderID(orderHeader.ID))
                 {
-                    printedImage.Visible = true;
-                }
-                else
-                {
-                    printedImage.Visible = false;
-                }
+                    if (orderNoteStatus.InvoicePrinted)
+                    {
+                        printedImage.Visible = true;
+                    }
+                    else
+                    {
+                        printedImage.Visible = false;
+                    }
 
-                if (orderNoteStatus.InvoiceReprinted)
-                {
-                    rePrintedImage.Visible = true;
+                    if (orderNoteStatus.InvoiceReprinted)
+                    {
+                        rePrintedImage.Visible = true;
+                    }
+                    else
+                    {
+                        rePrintedImage.Visible = false;
+                    }
                 }
                 else
                 {
                     rePrintedImage.Visible = false;
+                    printedImage.Visible = false;
                 }
             }
             else
