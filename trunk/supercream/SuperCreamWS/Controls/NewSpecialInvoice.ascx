@@ -22,7 +22,7 @@
                             QueryTimeout="2000" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator8" ValidationGroup="AddOrderDetailsGroup"
                             ControlToValidate="CustomerDropDownList" InitialValue="-1" ErrorMessage="You must select Customer"
-                            Text="Required" runat="server" />
+                            Text="*" runat="server" />
                     </td>
                 </tr>
                 <tr>
@@ -34,7 +34,7 @@
                             MaxLength="20" runat="server"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="AddOrderDetailsGroup"
                             ControlToValidate="InvoiceNoTextBox" ErrorMessage="Order No is required" InitialValue=""
-                            Text="Required" runat="server" />
+                            Text="*" runat="server" />
                     </td>
                 </tr>
                 <tr>
@@ -86,9 +86,10 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <asp:Button ID="AddOrderLineDetailsButton" runat="server" ValidationGroup="AddOrderDetailsGroup"
+                        <asp:LinkButton ID="AddOrderLineDetailsButton" runat="server" ValidationGroup="AddOrderDetailsGroup"
                             Text="Add Invoice Line Details" OnClick="AddOrderLineDetailsButton_Click" />
-                        <asp:Button CausesValidation="false" runat="server" Text="Cancel Invoice Details"
+                        |
+                        <asp:LinkButton CausesValidation="false" runat="server" Text="Cancel Invoice Details"
                             OnClick="CancelNewOrderButton_Click" />
                     </td>
                 </tr>
@@ -104,7 +105,7 @@
                         <asp:TextBox ID="LineDescriptionTextBox" MaxLength="100" Width="80%" runat="server"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="AddSpecialInvoiceLinesGroup"
                             ControlToValidate="LineDescriptionTextBox" ErrorMessage="Description is required"
-                            InitialValue="" Text="Required" runat="server" />
+                            InitialValue="" Text="*" runat="server" />
                     </td>
                 </tr>
                 <tr>
@@ -117,7 +118,7 @@
                             TargetControlID="QtyPerUnitTextBox" FilterType="Numbers" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ValidationGroup="AddSpecialInvoiceLinesGroup"
                             ControlToValidate="QtyPerUnitTextBox" ErrorMessage="Qty per unit is required"
-                            InitialValue="" Text="Required" runat="server" />
+                            InitialValue="" Text="*" runat="server" />
                     </td>
                 </tr>
                 <tr>
@@ -131,7 +132,7 @@
                             TargetControlID="NoOfUnitsTextBox" FilterType="Numbers" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="AddSpecialInvoiceLinesGroup"
                             ControlToValidate="NoOfUnitsTextBox" ErrorMessage="No of units is required" InitialValue=""
-                            Text="Required" runat="server" />
+                            Text="*" runat="server" />
                     </td>
                 </tr>
                 <tr>
@@ -144,7 +145,7 @@
                             TargetControlID="PricePerUnitsTextBox" FilterType="Custom,Numbers" ValidChars="£." />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ValidationGroup="AddSpecialInvoiceLinesGroup"
                             ControlToValidate="NoOfUnitsTextBox" ErrorMessage="Price per units is required"
-                            InitialValue="" Text="Required" runat="server" />
+                            InitialValue="" Text="*" runat="server" />
                     </td>
                 </tr>
                 <tr>
@@ -178,21 +179,15 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <table>
-                            <tr>
-                                <td>
-                                    <asp:Button ID="AddSpecialInvoiceLineButton" Text="Add" ValidationGroup="AddSpecialInvoiceLinesGroup"
-                                        runat="server" OnClick="AddSpecialInvoiceLineButton_Click" Width="200"></asp:Button>
-                                </td>
-                                <td style="margin-left: 20px">
-                                    <asp:Button ID="CancelSpecialInvoiceLineButton" Text="Cancel" Width="200" runat="server"
-                                        OnClick="CancelSpecialInvoiceLineButton_Click"></asp:Button>
-                                </td>
-                                <td style="margin-left: 20px">
-                                    <asp:Button ID="CalculateButton" Text="Calculate" Width="200" runat="server" OnClick="CalculateButton_Click">
-                                    </asp:Button>
-                                </td>
-                        </table>
+                        
+                        <asp:LinkButton ID="AddSpecialInvoiceLineButton" Text="Add" ValidationGroup="AddSpecialInvoiceLinesGroup"
+                            runat="server" OnClick="AddSpecialInvoiceLineButton_Click" ></asp:LinkButton>
+                        |
+                        <asp:LinkButton ID="CancelSpecialInvoiceLineButton" Text="Cancel |" OnClick="CancelSpecialInvoiceLineButton_Click" CausesValidation="false" runat="server">
+                        </asp:LinkButton>                        
+                        <asp:LinkButton ID="CalculateButton" Text="Calculate"  runat="server"
+                            OnClick="CalculateButton_Click">
+                        </asp:LinkButton>
                     </td>
                 </tr>
             </table>
@@ -203,8 +198,7 @@
             <div align="center">
                 <asp:GridView ID="AddSpecialInvoiceLinesGridViewPanel" runat="server" Width="96%"
                     DataKeyNames="ID" AutoGenerateColumns="False" DataSourceID="ObjectDataSource1"
-                    OnRowDataBound="AddSpecialInvoiceLinesGridViewPanel_RowDataBound" 
-                    OnRowCommand="AddSpecialInvoiceLinesGridViewPanel_RowCommand">
+                    OnRowDataBound="AddSpecialInvoiceLinesGridViewPanel_RowDataBound" OnRowCommand="AddSpecialInvoiceLinesGridViewPanel_RowCommand">
                     <Columns>
                         <asp:TemplateField Visible="false" SortExpression="ID">
                             <ItemTemplate>
@@ -227,8 +221,8 @@
                         <asp:TemplateField ItemStyle-Width="11%">
                             <ItemTemplate>
                                 <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
-                                <asp:Button ID="UpdateGridButton" Text="Select" CommandName="Select" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
-                                    runat="server"></asp:Button>
+                                <asp:LinkButton ID="UpdateGridButton" Text="Select" CommandName="Select" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
+                                    runat="server"></asp:LinkButton>
                                 <ajaxToolkit:ModalPopupExtender ID="InvoiceDetailsPopupControlExtender" DropShadow="true"
                                     runat="server" TargetControlID="btnTrigger" PopupControlID="PanelMessage" CancelControlID="CancelButton"
                                     BackgroundCssClass="XPopUpBackGround" />
@@ -249,7 +243,7 @@
                                                     <asp:TextBox ID="LineDescriptionTextBox" MaxLength="100" Width="80%" runat="server"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="GridViewPanel"
                                                         ControlToValidate="LineDescriptionTextBox" ErrorMessage="Description is required"
-                                                        InitialValue="" Text="Required" runat="server" />
+                                                        InitialValue="" Text="*" runat="server" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -262,7 +256,7 @@
                                                         TargetControlID="QtyPerUnitTextBox" FilterType="Numbers" />
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ValidationGroup="GridViewPanel"
                                                         ControlToValidate="QtyPerUnitTextBox" ErrorMessage="Qty per unit is required"
-                                                        InitialValue="" Text="Required" runat="server" />
+                                                        InitialValue="" Text="*" runat="server" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -275,7 +269,7 @@
                                                         TargetControlID="NoOfUnitsTextBox" FilterType="Numbers" />
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="GridViewPanel"
                                                         ControlToValidate="NoOfUnitsTextBox" ErrorMessage="No of units is required" InitialValue=""
-                                                        Text="Required" runat="server" />
+                                                        Text="*" runat="server" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -288,7 +282,7 @@
                                                         TargetControlID="PricePerUnitsTextBox" FilterType="Custom,Numbers" ValidChars="£." />
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ValidationGroup="GridViewPanel"
                                                         ControlToValidate="PricePerUnitsTextBox" ErrorMessage="Price per units is required"
-                                                        InitialValue="" Text="Required" runat="server" />
+                                                        InitialValue="" Text="*" runat="server" />
                                                 </td>
                                             </tr>
                                             <tr>

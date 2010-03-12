@@ -26,25 +26,32 @@
             <asp:AsyncPostBackTrigger ControlID="NewSpecialInvoice" />
         </Triggers>
         <ContentTemplate>
-            <asp:Panel ID="SpecialInvoiceMenuPanel" DefaultButton="NewInvoiceButton" runat="server">
-                <div class="FormInput" style="text-align: center;">
-                    <fieldset id="Fieldset1">
-                        <legend>
-                            <h3>
-                                Special Invoice Maintenance</h3>
-                        </legend>
-                        <table style="width: 100%">
+            <asp:Panel ID="SpecialInvoiceMenuPanel" runat="server">
+                <div class="FormHeader">
+                    <div class="HeaderContainerPanel">
+                        <table class="ContentHeader" cellpadding="0" cellspacing="0">
                             <tr>
-                                <td>
-                                    <asp:Button ID="NewInvoiceButton" Text="New Special Invoice" runat="server" OnClick="NewInvoiceButton_Click" />
-                                </td>
-                                <td>
-                                    <asp:Button ID="MaintainInvoiceButton" Text="Modify Special Invoices" runat="server"
-                                        OnClick="MaintainInvoiceButton_Click" />
+                                <td class="Right">
+                                    <asp:Panel ID="GeneralPanel" DefaultButton="NewInvoiceButton" runat="server" Width="100%"
+                                        Visible="true">
+                                        <table class="ContentHeader" cellpadding="0">
+                                            <tr>
+                                                <td style="width: 30%; text-align: left;">
+                                                    <span class="RequiredFieldMessage">*</span> <i>indicates a required field</i>
+                                                </td>
+                                                <td class="Right" style="width: 70%;">
+                                                    <asp:LinkButton ID="NewInvoiceButton" Text="New Special Invoice" runat="server" OnClick="NewInvoiceButton_Click" />
+                                                    &nbsp; |
+                                                    <asp:LinkButton ID="MaintainInvoiceButton" Text="Modify Special Invoices" runat="server"
+                                                        OnClick="MaintainInvoiceButton_Click" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
                                 </td>
                             </tr>
                         </table>
-                    </fieldset>
+                    </div>
                 </div>
             </asp:Panel>
         </ContentTemplate>
