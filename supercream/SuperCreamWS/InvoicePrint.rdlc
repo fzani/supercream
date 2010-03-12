@@ -364,7 +364,7 @@
         <ReportItems>
           <Textbox Name="textbox37">
             <Top>2.5cm</Top>
-            <Width>1.25cm</Width>
+            <Width>3.75cm</Width>
             <Style>
               <Format>C</Format>
               <TextAlign>Right</TextAlign>
@@ -381,7 +381,7 @@
           </Textbox>
           <Textbox Name="textbox38">
             <Top>1.75cm</Top>
-            <Width>1.25cm</Width>
+            <Width>3.75cm</Width>
             <Style>
               <Format>C</Format>
               <TextAlign>Right</TextAlign>
@@ -398,7 +398,7 @@
           </Textbox>
           <Textbox Name="textbox39">
             <Top>1cm</Top>
-            <Width>1.25cm</Width>
+            <Width>3.75cm</Width>
             <Style>
               <Format>C</Format>
               <TextAlign>Right</TextAlign>
@@ -499,7 +499,7 @@
           <Textbox Name="textbox28">
             <rd:DefaultName>textbox28</rd:DefaultName>
             <Top>3.5cm</Top>
-            <Width>1.25cm</Width>
+            <Width>2.5cm</Width>
             <Style>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
@@ -510,7 +510,7 @@
             <CanGrow>true</CanGrow>
             <Left>4.75cm</Left>
             <Height>0.63492cm</Height>
-            <Value>=CountRows("SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+            <Value>=Sum(Fields!NoOfUnits.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="textbox27">
             <rd:DefaultName>textbox27</rd:DefaultName>
