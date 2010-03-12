@@ -433,6 +433,21 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
 
     #region Grid View Events
 
+    protected void SpecialInvoicesSearchGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            SpecialInvoiceHeader invoiceHeader = e.Row.DataItem as SpecialInvoiceHeader;
+            CustomerUI customerUI = new CustomerUI();
+            Customer customer = customerUI.GetByID(invoiceHeader.CustomerID);
+            Label customerNameLabel = e.Row.FindControl("CustomerNameLabel") as Label;
+            if (customerNameLabel != null)
+            {
+                customerNameLabel.Text = customer.Name;
+            }
+        }
+    }
+
     protected void SpecialInvoicesSearchGridView_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         if (e.CommandName == "Select")
@@ -520,4 +535,5 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
     #region Private Methods
 
     #endregion
+  
 }
