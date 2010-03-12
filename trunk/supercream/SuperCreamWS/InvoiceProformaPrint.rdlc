@@ -358,13 +358,31 @@
   <Body>
     <ColumnSpacing>1cm</ColumnSpacing>
     <ReportItems>
+      <Textbox Name="textbox10">
+        <rd:DefaultName>textbox10</rd:DefaultName>
+        <Top>0.25cm</Top>
+        <Width>10cm</Width>
+        <Style>
+          <FontSize>12pt</FontSize>
+          <FontWeight>700</FontWeight>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+        <ZIndex>5</ZIndex>
+        <CanGrow>true</CanGrow>
+        <Left>0.25cm</Left>
+        <Height>0.63492cm</Height>
+        <Value>Proforma Invoice</Value>
+      </Textbox>
       <Rectangle Name="rectangle5">
         <Left>0.25cm</Left>
         <ZIndex>4</ZIndex>
         <ReportItems>
           <Textbox Name="textbox37">
             <Top>2.5cm</Top>
-            <Width>1.25cm</Width>
+            <Width>3.75cm</Width>
             <Style>
               <Format>C</Format>
               <TextAlign>Right</TextAlign>
@@ -381,7 +399,7 @@
           </Textbox>
           <Textbox Name="textbox38">
             <Top>1.75cm</Top>
-            <Width>1.25cm</Width>
+            <Width>3.75cm</Width>
             <Style>
               <Format>C</Format>
               <TextAlign>Right</TextAlign>
@@ -398,7 +416,7 @@
           </Textbox>
           <Textbox Name="textbox39">
             <Top>1cm</Top>
-            <Width>1.25cm</Width>
+            <Width>3.75cm</Width>
             <Style>
               <Format>C</Format>
               <TextAlign>Right</TextAlign>
@@ -499,7 +517,7 @@
           <Textbox Name="textbox28">
             <rd:DefaultName>textbox28</rd:DefaultName>
             <Top>3.5cm</Top>
-            <Width>1.25cm</Width>
+            <Width>2.5cm</Width>
             <Style>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
@@ -510,7 +528,7 @@
             <CanGrow>true</CanGrow>
             <Left>4.75cm</Left>
             <Height>0.63492cm</Height>
-            <Value>=CountRows("SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+            <Value>=Sum(Fields!NoOfUnits.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="textbox27">
             <rd:DefaultName>textbox27</rd:DefaultName>
@@ -565,7 +583,7 @@
             <Value>Special Instructions</Value>
           </Textbox>
         </ReportItems>
-        <Top>13.75cm</Top>
+        <Top>14.5cm</Top>
         <Width>15.25cm</Width>
         <Style>
           <BorderStyle>
@@ -577,7 +595,7 @@
       <Table Name="table4">
         <ZIndex>3</ZIndex>
         <DataSetName>SuperCreamDBDataSet_rptDetailsGetInvoice</DataSetName>
-        <Top>12.25cm</Top>
+        <Top>13cm</Top>
         <Width>15.24919cm</Width>
         <Details>
           <TableRows>
@@ -1056,7 +1074,7 @@
             <Value>Delivery Address</Value>
           </Textbox>
         </ReportItems>
-        <Top>8.25cm</Top>
+        <Top>9cm</Top>
         <Width>15.25cm</Width>
         <Style>
           <BorderStyle>
@@ -1406,7 +1424,7 @@
             <Value>Invoice Adress</Value>
           </Textbox>
         </ReportItems>
-        <Top>2.25cm</Top>
+        <Top>3cm</Top>
         <Width>15.25cm</Width>
         <Style>
           <BorderStyle>
@@ -1552,7 +1570,7 @@
             <Value>Date of Order</Value>
           </Textbox>
         </ReportItems>
-        <Top>0.25cm</Top>
+        <Top>1cm</Top>
         <Width>15.25cm</Width>
         <Style>
           <BorderStyle>

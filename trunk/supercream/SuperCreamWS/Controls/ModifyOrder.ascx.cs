@@ -802,6 +802,14 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 
             string invoiceNo = ui.UpdateToInvoice(OrderID.Value);
 
+            OrderNotesStatusUI orderNotesStatusUI = new OrderNotesStatusUI();
+            if (orderNotesStatusUI.OrderNoteExistsByOrderID(OrderID.Value))
+            {
+                OrderNotesStatus orderNotesStatus = orderNotesStatusUI.GetOrderNotesStatusByOrderID(OrderID.Value);
+                orderNotesStatus.InvoiceDateCreated = DateTime.Now;
+                orderNotesStatusUI.Update(orderNotesStatus);
+            }
+
             OrderStatusTypeLabel.Text = "<h3>Status : <i>Invoiced</i></h3";
             OrderStatusNoLabel.Text = "<h3><i>Invoice No: " + invoiceNo + "</i></h3>";
             OrderStatusTypeLabel.Visible = true;

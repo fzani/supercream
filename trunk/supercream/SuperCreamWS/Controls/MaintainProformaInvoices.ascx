@@ -6,7 +6,7 @@
         <asp:Panel ID="InvoiceSearchCriteriaPanel" DefaultButton="SearchButton" runat="server">
             <legend>
                 <h3>
-                    Search Invoices</h3>
+                    Search Proforma Invoices</h3>
             </legend>
             <table class="search">
                 <tr>
@@ -97,9 +97,10 @@
                                 <td>
                                 </td>
                                 <td>
-                                    <asp:Button ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
+                                    <asp:LinkButton ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
                                         OnClick="SearchButton_Click" />
-                                    <asp:Button ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
+                                    |
+                                    <asp:LinkButton ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
                                         OnClick="ClearButton_Click" />
                                 </td>
                             </tr>
@@ -112,19 +113,20 @@
             <asp:GridView ID="InvoiceGridView" DataKeyNames="ID" runat="server" Width="98%" AllowPaging="True"
                 DataSourceID="InvoiceObjectDataSource" AutoGenerateColumns="False" OnRowDataBound="InvoiceGridView_RowDataBound"
                 OnRowCommand="InvoiceGridView_RowCommand">
+                <AlternatingRowStyle BackColor="White" />
                 <EmptyDataTemplate>
                     <h3>
                         No records Found</h3>
                 </EmptyDataTemplate>
                 <Columns>
-                    <asp:TemplateField ItemStyle-Width="15%" ShowHeader="False">
+                    <asp:TemplateField ItemStyle-Width="10%" ShowHeader="False">
                         <ItemTemplate>
-                            <asp:Button ID="SelectButton" runat="server" CausesValidation="false" CommandName="Select"
+                            <asp:LinkButton ID="SelectButton" runat="server" CausesValidation="false" CommandName="Select"
                                 CommandArgument='<%# Bind("ID") %>' Text="Select" />
                         </ItemTemplate>
-                        <ItemStyle Width="15%" />
+                        <ItemStyle Width="10%" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Order No." ItemStyle-Width="25%" SortExpression="AlphaID">
+                    <asp:TemplateField HeaderText="Order No." ItemStyle-Width="20%" SortExpression="AlphaID">
                         <ItemTemplate>
                             <asp:Label ID="Label2" runat="server" Text='<%# Bind("AlphaID") %>'></asp:Label>
                         </ItemTemplate>
@@ -133,7 +135,7 @@
                         </EditItemTemplate>
                         <ItemStyle Width="20%" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Invoice No." ItemStyle-Width="25%" SortExpression="InvoiceNo">
+                    <asp:TemplateField HeaderText="Invoice No." ItemStyle-Width="20%" SortExpression="InvoiceNo">
                         <ItemTemplate>
                             <asp:Label ID="InvoiceLabel" runat="server" Text='<%# Bind("InvoiceNo") %>'></asp:Label>
                         </ItemTemplate>
@@ -142,14 +144,29 @@
                         </EditItemTemplate>
                         <ItemStyle Width="20%" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Customer Name" ItemStyle-Width="40%" SortExpression="CustomerID">
+                    <asp:TemplateField HeaderText="Customer Name" ItemStyle-Width="30%" SortExpression="CustomerID">
                         <ItemTemplate>
-                            <asp:Label ID="CustomerNameLabel" runat="server" Text='<%# Bind("CustomerID") %>'></asp:Label>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <asp:Label ID="CustomerNameLabel" runat="server" Text='<%# Bind("CustomerID") %>'></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Image ID="ConfirmedImage" runat="server" ImageUrl="~/images/ok_16x16.gif" />
+                                        &nbsp; &nbsp;
+                                        <asp:Image ID="PrintedImage" runat="server" Visible="false" ImageUrl="~/images/print.gif" />
+                                        &nbsp;
+                                        <asp:Image ID="RePrintedImage" runat="server" Visible="false" ImageUrl="~/images/print_16x16.gif" />
+                                    </td>
+                                </tr>
+                            </table>
                         </ItemTemplate>
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CustomerID") %>'></asp:TextBox>
                         </EditItemTemplate>
-                        <ItemStyle Width="40%" />
+                        <ItemStyle Width="30%" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Order Date" SortExpression="OrderDate">
                         <ItemTemplate>
@@ -161,6 +178,19 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
+            <table>
+                <tr>
+                    <td style="vertical-align: middle; margin-left: 20px;">
+                        <i>Credit Note = Confirmed = &nbsp;
+                            <asp:Image ID="ConfirmedImage" runat="server" ImageAlign="Middle" ImageUrl="~/images/ok_16x16.gif" />
+                            &nbsp Printed = &nbsp;
+                            <asp:Image ID="PrintedImage" runat="server" ImageAlign="Middle" ImageUrl="~/images/print.gif" />
+                            &nbsp; Reprinted = &nbsp;
+                            <asp:Image ID="RePrintedImage" runat="server" ImageAlign="Middle" ImageUrl="~/images/print_16x16.gif" />
+                        </i>
+                    </td>
+                </tr>
+            </table>
             <asp:ObjectDataSource ID="InvoiceObjectDataSource" runat="server" SelectMethod="GetOrderHeadersSearchWithPrintedStatuses"
                 TypeName="OrderHeaderUI" OnSelecting="InvoiceObjectDataSource_Selecting">
                 <SelectParameters>
@@ -174,7 +204,37 @@
                 </SelectParameters>
             </asp:ObjectDataSource>
         </asp:Panel>
+        <asp:Button runat="server" ID="hiddenTargetControlForModalPopup" Style="display: none" />
+        <ajaxToolkit:ModalPopupExtender ID="CreditNoteModalPopupExtender" DropShadow="true"
+            runat="server" TargetControlID="hiddenTargetControlForModalPopup" PopupControlID="DisplayActionPanel"
+            CancelControlID="CancelActionPanelButton" BackgroundCssClass="XPopUpBackGround" />
+        <asp:Panel Style="display: none;" ID="DisplayActionPanel" runat="server" DefaultButton="CancelActionPanelButton"
+            CssClass="modalPopup">
+            <div style="width: 800px;">
+                <table style="width: 100%; background-color: #7CAACB;">
+                    <tr>
+                        <td style="font-size: 1.2em; color: White; width: 530px;">
+                            Description
+                        </td>
+                        <td style="font-size: 1.2em; color: White; width: 270px;">
+                            Reason for Action
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="width: 800px;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td colspan="4" style="text-align: center">
+                            <asp:Button ID="CancelActionPanelButton" Width="100%" Text="OK" runat="server" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </asp:Panel>
         <asp:Panel ID="InvoiceEntryPanel" Visible="false" runat="server">
+            <h3>
+                Select Invoice Details</h3>
             <table style="width: 100%">
                 <tr>
                     <td colspan="2">
@@ -196,6 +256,32 @@
                 </tr>
                 <tr>
                     <td>
+                        <h2>
+                            <i>Invoice No</i></h2>
+                    </td>
+                    <td>
+                        <h2>
+                            <i>
+                                <asp:Label ID="InvoiceHeaderNoLabel" runat="server"></asp:Label>
+                            </i>
+                        </h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Select Delivery Address
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="DeliveryDropDownList" AutoPostBack="true" Width="250px" ValidationGroup="ModifyInvoiceDetailsGroup"
+                            runat="server" OnSelectedIndexChanged="DeliveryDropDownList_SelectedIndexChanged">
+                        </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ValidationGroup="ModifyInvoiceDetailsGroup"
+                            ControlToValidate="DeliveryDropDownList" InitialValue="-1" ErrorMessage="You must select Delivery"
+                            Text="*" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         Select Account for Invoice
                     </td>
                     <td>
@@ -207,20 +293,27 @@
                             Text="*" runat="server" />
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <asp:LinkButton ID="CancelSelectInvoiceDetails" Text="Cancel Select Details" Width="100%"
+                            runat="server" OnClick="CancelSelectInvoiceDetails_Click" />
+                    </td>
+                </tr>
             </table>
             <asp:Panel ID="OrderHeaderDetailsPanel" Visible="false" runat="server">
                 <table style="width: 100%">
                     <tr>
                         <td colspan="4">
-                            <asp:Button ID="ConfirmInvoice" Text="Confirm Invoice" runat="server" OnClick="ConfirmInvoice_Click" />
+                            <asp:Button ID="ConfirmInvoice" Text="Confirm Proforma Invoice" runat="server" ValidationGroup="ModifyInvoiceDetailsGroup"
+                                OnClick="ConfirmInvoice_Click" />
                             <asp:Button ID="ChangeInvoiceDetailsButton" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 Visible="false" Text="Change Invoice Details" runat="server" OnClick="ChangeInvoiceDetailsButton_Click" />
                             <asp:Button ID="CancelInvoiceButton" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 Visible="false" Text="Cancel Invoice" runat="server" OnClick="CancelInvoiceButton_Click" />
                             <asp:Button ID="PrintInvoiceButton" ValidationGroup="ModifyInvoiceDetailsGroup" Visible="false"
-                                Text="Print Invoice" runat="server" onclick="PrintInvoiceButton_Click" />
+                                Text="Print Invoice" runat="server" OnClick="PrintInvoiceButton_Click" />
                             <asp:Button ID="RePrintInvoiceButton" ValidationGroup="ModifyInvoiceDetailsGroup"
-                                Visible="false" Text="RePrint Invoice" runat="server" />
+                                Visible="false" Text="RePrint Invoice" runat="server" OnClick="RePrintInvoiceButton_Click" />
                             <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
                             <asp:Button ID="btnOKTrigger" runat="server" Style="display: none" />
                             <ajaxToolkit:ModalPopupExtender ID="PrintFailedPopupControlExtender" DropShadow="true"
@@ -248,11 +341,11 @@
                                 TargetControlID="btnOKTrigger" PopupControlID="PrintOKPanel" CancelControlID="OkPrintButton"
                                 BackgroundCssClass="XPopUpBackGround" />
                             <asp:Panel Style="display: none" ID="PrintOKPanel" runat="server" Width="400px" CssClass="modalPopup">
-                                <asp:Label ID="Label5" Text="Printing Document ..." Style="font-weight: bold; margin-left: 20px;"
+                                <asp:Label ID="Label2" Text="Printing Document ..." Style="font-weight: bold; margin-left: 20px;"
                                     runat="server"></asp:Label>
                                 <br />
                                 <br />
-                                <asp:Label ID="Label6" Text="press OK to continue" Style="font-weight: bold; margin-left: 20px;"
+                                <asp:Label ID="Label5" Text="press OK to continue" Style="font-weight: bold; margin-left: 20px;"
                                     runat="server"></asp:Label>
                                 <br />
                                 <center>
@@ -260,6 +353,12 @@
                                         CssClass="button" />
                                 </center>
                             </asp:Panel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <h3>
+                                Proforma Invoice</h3>
                         </td>
                     </tr>
                     <tr>
@@ -301,7 +400,7 @@
                 </table>
             </asp:Panel>
             <asp:Panel ID="DisplayInvoicePanel" Visible="false" runat="server">
-                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                <table style="width: 96%" cellpadding="0" cellspacing="0">
                     <tr>
                         <td style="width: 50%">
                             <table style="width: 100%; border: solid 1px #eaeaea;">
@@ -406,12 +505,57 @@
                             </table>
                         </td>
                     </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table style="width: 100%; border: solid 1px #eaeaea;">
+                                <tr>
+                                    <td style="width: 50%">
+                                        <b>Delivery Address</b>
+                                    </td>
+                                    <td style="width: 50%">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50%">
+                                        <asp:Label ID="DeliveryCompanyNameLabel" runat="server"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="DeliveryCountyLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Label ID="DeliveryCustomerAddressLine1Label" runat="server"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="DeliveryTownLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Label ID="DeliveryCustomerAddressLine2Label" runat="server"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="DeliveryPostCodeLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Map Reference : &nbsp;</b>
+                                        <asp:Label ID="DeliveryMapReferenceLabel" runat="server"></asp:Label>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                 </table>
             </asp:Panel>
             <asp:Repeater ID="InvoiceRepeater" Visible="false" runat="server" DataSourceID="InvoiceLinesObjectDataSource"
                 OnItemDataBound="Repeater1_ItemDataBound">
                 <HeaderTemplate>
-                    <table>
+                    <table style="width: 100%">
                         <tr>
                             <td style="width: 10%">
                                 <b>No Of Units</b>
@@ -479,7 +623,7 @@
                 <FooterTemplate>
                     <tr>
                         <td colspan="7">
-                            <table>
+                            <table style="width: 100%;">
                                 <tr>
                                     <td style="width: 14%">
                                     </td>
