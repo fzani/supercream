@@ -159,7 +159,7 @@
                                         <asp:Image ID="PrintedImage" runat="server" Visible="false" ImageUrl="~/images/print.gif" />
                                         &nbsp;
                                         <asp:Image ID="RePrintedImage" runat="server" Visible="false" ImageUrl="~/images/print_16x16.gif" />
-                                        <asp:Panel ID="CreditNoteImagePanel" runat="server">
+                                        <asp:Panel style="display:inline;" ID="CreditNoteImagePanel" runat="server">
                                             <asp:Image ID="CreditNoteImage" runat="server" ImageUrl="~/images/16-circle-green.gif" />
                                             &nbsp;
                                         </asp:Panel>

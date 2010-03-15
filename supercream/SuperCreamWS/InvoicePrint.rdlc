@@ -1072,7 +1072,6 @@
           <Textbox Name="textbox18">
             <rd:DefaultName>textbox18</rd:DefaultName>
             <Top>5.5cm</Top>
-            <Width>3.75cm</Width>
             <Style>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
@@ -1146,7 +1145,6 @@
             </Style>
             <ZIndex>17</ZIndex>
             <Left>7.5cm</Left>
-            <Height>6.25cm</Height>
           </Line>
           <Textbox Name="textbox17">
             <Top>4.75cm</Top>
@@ -1439,12 +1437,13 @@
           </Textbox>
         </ReportItems>
         <Top>2.25cm</Top>
+        <Width>15.25cm</Width>
         <Style>
           <BorderStyle>
             <Default>Solid</Default>
           </BorderStyle>
         </Style>
-        <Height>6.38492cm</Height>
+        <Height>6.5cm</Height>
       </Rectangle>
       <Rectangle Name="rectangle1">
         <Left>0.25cm</Left>
