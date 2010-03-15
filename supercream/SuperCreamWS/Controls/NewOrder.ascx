@@ -70,7 +70,7 @@
                                 Display="Dynamic" ErrorMessage="Delivery Date is a required field" SetFocusOnError="True"
                                 ValidationGroup="AddOrderDetailsGroup">*</asp:RequiredFieldValidator>
                             <ajaxToolkit:CalendarExtender ID="CalendarExtender1" Format="dd/MM/yyyy" runat="server"
-                                TargetControlID="DeliveryDateTextBox" PopupButtonID="Image1" />
+                                TargetControlID="DeliveryDateTextBox" PopupButtonID="Image2" />
                             <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender2" runat="server" TargetControlID="DeliveryDateTextBox"
                                 Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
                                 OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
