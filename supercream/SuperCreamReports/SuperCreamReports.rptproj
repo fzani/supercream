@@ -25,6 +25,16 @@
       <FullPath>Web.config</FullPath>
       <MimeType>text/plain</MimeType>
     </ResourceProjectItem>
+    <ResourceProjectItem>
+      <Name>InvoiceProformaPrint.rdlc</Name>
+      <FullPath>InvoiceProformaPrint.rdlc</FullPath>
+      <MimeType>text/plain</MimeType>
+    </ResourceProjectItem>
+    <ResourceProjectItem>
+      <Name>InvoicePrint.rdlc</Name>
+      <FullPath>InvoicePrint.rdlc</FullPath>
+      <MimeType>text/plain</MimeType>
+    </ResourceProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
