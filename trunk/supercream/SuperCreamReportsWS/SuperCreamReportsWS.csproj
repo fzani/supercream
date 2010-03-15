@@ -92,6 +92,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="InvoicePrint.rdl" />
     <None Include="SuperCreamDBDataSet.xsc">
       <DependentUpon>SuperCreamDBDataSet.xsd</DependentUpon>
     </None>
