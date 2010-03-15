@@ -487,18 +487,19 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Vat Registration Number: </b>
                                         <asp:Label ID="YourAddressVatRegistrationNo" runat="server"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        Tel:
+                                        <b>Tel:</b>
                                         <asp:Label ID="OfficePhoneNumber1Label1" runat="server"></asp:Label>
                                         or
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
                                         <asp:Label ID="OfficePhoneNumber1Label2" runat="server"></asp:Label>
                                     </td>
                                 </tr>
