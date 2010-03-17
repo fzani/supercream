@@ -31,9 +31,14 @@ namespace SP.Data.LTS
         }
 
         public string GenerateOrderNo()
-        {
-            ////int lastOrder = Convert.ToInt32(db.OrderHeader.Select(q => q.AlphaID.Substring(4, (q.AlphaID.Length - 2))).Max());
+        {          
             return "ORD-" + (Convert.ToInt32(db.OrderHeader.Select(q => q.AlphaID.Substring(4, (q.AlphaID.Length - 4))).Max()) + 1);        
+        }
+
+        public string GenerateInvoiceNo()
+        {
+            List<OrderHeader> invoices =  db.OrderHeader.Where(q => q.InvoiceNo != null && q.InvoiceNo != "").ToList<OrderHeader>();
+            return "INV-" + (Convert.ToInt32(invoices.Select(q => q.InvoiceNo.Substring(4, (q.InvoiceNo.Length - 4))).Max()) + 1).ToString();
         }
 
         public List<OrderHeader> GetOrderHeaderForSearch(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)

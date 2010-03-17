@@ -682,19 +682,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     {
         Util.ClearControls(OrderSearchPanel);
         DataBind();
-    }
-
-    protected void ShowInvoiceButton_Click(object sender, EventArgs e)
-    {
-        Panel p = OrderHeaderPanel.FindControl("PanelMessage") as Panel;
-        TextBox invTextBox = p.FindControl("InvoiceNoTextBox") as TextBox;
-        AutoGenUI ui = new AutoGenUI();
-        invTextBox.Text = "INV-" + (ui.Generate() + 256).ToString();
-
-        this.OrderStatus = OrderStatus.Invoice;
-
-        ModalPopupExtenderInvoice.Show();
-    }
+    } 
 
     protected void ShowInvoiceProformaButton_Click(object sender, EventArgs e)
     {
@@ -723,17 +711,11 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     protected void CreateInvoiceButton_Click(object sender, EventArgs e)
     {
         try
-        {
-            if (String.IsNullOrEmpty(InvoiceNoTextBox.Text))
-            {
-                throw new ApplicationException("Invoice No Cannot be blank");
-            }
+        {                     
+            this.OrderStatus = OrderStatus.Invoice;
+
             OrderHeaderUI ui = new OrderHeaderUI();
-
-            if (ui.InvoiceNoExists(InvoiceNoTextBox.Text))
-                throw new ApplicationException("Invoice No is already used by another Order");
-
-            string invoiceNo = ui.UpdateInvoiceNo(OrderID.Value, InvoiceNoTextBox.Text, OrderStatus);
+            string invoiceNo = ui.CreateInvoice(OrderID.Value, InvoiceNoTextBox.Text, OrderStatus);
 
             OrderStatusTypeLabel.Text = "<h3>Status : <i>Invoiced</i></h3";
             OrderStatusNoLabel.Text = "<h3><i>Invoice No: " + invoiceNo + "</i></h3>";
@@ -744,7 +726,6 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             CreateInvoiceButton.Visible = false;
             CreateProformaInvoiceButton.Visible = false;
             CreateDeliveryNoteButton.Visible = false;
-
 
             ChangeState += new EventHandler<EventArgs>(CompleteOrderState);
             ChangeState(this, e);
