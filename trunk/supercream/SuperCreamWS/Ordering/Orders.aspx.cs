@@ -69,8 +69,8 @@ public partial class Ordering_Orders : System.Web.UI.Page
             ModifyOrder.Reset();
             NewOrder.Reset();
 
-            AutoGenUI ui = new AutoGenUI();
-            NewOrder.AlphaID = "ORD-" + ui.Generate().ToString();
+            ////OrderHeaderUI ui = new OrderHeaderUI();
+            ////NewOrder.AlphaID = ui.GenerateOrderNo();
 
             DataBind();
         }

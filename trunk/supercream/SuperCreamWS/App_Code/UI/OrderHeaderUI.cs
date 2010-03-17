@@ -210,6 +210,14 @@ public class OrderHeaderUI : IDisposable
         }
     }
 
+    public string GenerateOrderNo()
+    {
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return _proxy.GenerateOrderReferenceNo();
+        }
+    }
+
     Decimal CalculateDiscount(Decimal discount, Decimal unitPrice)
     {
         return Math.Round(unitPrice - ((unitPrice / 100) * discount), 2);

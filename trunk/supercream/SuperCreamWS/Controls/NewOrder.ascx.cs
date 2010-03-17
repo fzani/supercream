@@ -46,7 +46,7 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
         set
         {
             ViewState["AlphaID"] = value;
-            OrderNoTextBox.Text = value;
+            OrderNoLabel.Text = value;
         }
     }
 
@@ -172,6 +172,8 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
         AddOrderDetailsPanel.Visible = false;
         ContinueCheckBox.Checked = false;
 
+        OrderNoLabel.Text = "<>";
+
         CalculateButton.Visible = true;
         AddOrderLineButton.Visible = false;
 
@@ -189,8 +191,7 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
             {
                 OrderHeader orderHeader = new OrderHeader
                 {
-                    ID = 1,
-                    AlphaID = OrderNoTextBox.Text,
+                    ID = 1,                   
                     CustomerID = Convert.ToInt32(CustomerDropDownList.SelectedValue),
                     OrderDate = Convert.ToDateTime(OrderDateTextBox.Text),
                     OrderStatus = (short)OrderStatus.Order,
@@ -200,11 +201,12 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
 
                 orderHeader = ui.Save(orderHeader);
                 OrderID = orderHeader.ID;
+                this.OrderNoLabel.Text = orderHeader.AlphaID;
             }
             ChangeState += new EventHandler<EventArgs>(InitOrderState);
             ChangeState(this, e);
             // Set Alpha ID in View State
-            AlphaID = OrderNoTextBox.Text;
+            AlphaID = OrderNoLabel.Text;
         }
         catch (Exception ex)
         {
