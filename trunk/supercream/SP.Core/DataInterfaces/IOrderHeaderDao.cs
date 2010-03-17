@@ -14,5 +14,6 @@ namespace SP.Core.DataInterfaces
         List<OrderHeader> GetOrderHeaderForSearchWithPrintedOrderStatuses(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short actualOrderStatus, short printedOrderStatus);       
         List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus);
         string GenerateOrderNo();
+        string GenerateInvoiceNo();
     }
 }

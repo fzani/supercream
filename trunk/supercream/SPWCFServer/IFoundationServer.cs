@@ -212,6 +212,11 @@ namespace SPWCFServer
         #endregion
 
         #region Order Header
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        OrderHeader CreateInvoice(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
+
         [OperationContract]
         [ReferencePreservingDataContractFormat]
         void DeleteOrderHeader(OrderHeader orderHeader);

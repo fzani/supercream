@@ -263,7 +263,7 @@
                         <td colspan="3">
                             <asp:LinkButton ID="ConvertToInvoiceButton" Text="Convert to Invoice" runat="server"
                                 OnClick="ConvertToInvoiceButton_Click" />
-                            <asp:LinkButton ID="CreateInvoiceButton" Text="Create Invoice |" runat="server" OnClick="ShowInvoiceButton_Click" />
+                            <asp:LinkButton ID="CreateInvoiceButton" Text="Create Invoice |" runat="server" OnClick="CreateInvoiceButton_Click" />
                             <asp:LinkButton ID="CreateProformaInvoiceButton" Text="Create Proforma Invoice |"
                                 runat="server" OnClick="ShowInvoiceProformaButton_Click" />
                             <asp:LinkButton ID="CreateDeliveryNoteButton" Text="Create Delivery Note" runat="server"
