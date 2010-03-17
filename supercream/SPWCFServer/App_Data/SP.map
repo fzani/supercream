@@ -32,8 +32,8 @@
   </Table>
   <Table Name="dbo.AutoGen" Member="AutoGen">
     <Type Name="AutoGen">
-      <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
-      <Column Name="GeneratedValue" Member="GeneratedValue" Storage="_GeneratedValue" DbType="VarChar(50)" />
+      <Column Name="ID" Member="ID" DbType="Int NOT NULL" />
+      <Column Name="Type" Member="Type" Storage="_Type" DbType="VarChar(3) NOT NULL" IsPrimaryKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ContactDetail" Member="ContactDetail">
