@@ -146,13 +146,7 @@ namespace SP.Worker
             IDaoFactory factory = new LTSDaoFactory();
             IAutogenDao autoGenDao = factory.GetAutoGenDao();
 
-            AutoGen autoGen = new AutoGen
-            {
-                ID = -1,
-                GeneratedValue = "Generated Value"
-            };
-
-            return autoGenDao.Save(autoGen).ID;
+            return autoGenDao.Generate("GEN");
         }
         #endregion
 

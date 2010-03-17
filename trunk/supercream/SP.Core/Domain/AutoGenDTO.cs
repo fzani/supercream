@@ -7,8 +7,8 @@ namespace SP.Core.Domain
 {
     [Serializable]
     public class AutoGen : BaseEntity
-    {
-        private string _GeneratedValue;
+    {      
+        private string _Type;
 
         public override int ID
         {
@@ -20,17 +20,17 @@ namespace SP.Core.Domain
             {
                 base.ID = value;
             }
-        }
-
-        public string GeneratedValue
+        }             
+            
+        public string Type
         {
             get
             {
-                return _GeneratedValue;
+                return _Type;
             }
             set
             {
-                _GeneratedValue = value;
+                _Type = value;
             }
         }
     }
