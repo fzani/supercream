@@ -4,6 +4,12 @@
 <asp:Panel ID="NewOrderPanel" Visible="true" runat="server">
     <div class="FormInput">
         <fieldset id="Fieldset3">
+            <div>
+                <h2>
+                    Order No &nbsp;
+                    <asp:Label ID="OrderNoLabel" Width="150px" MaxLength="20" runat="server"></asp:Label>
+                </h2>
+            </div>
             <asp:Panel ID="OrderHeaderPanel" runat="server">
                 <legend>
                     <h3>
@@ -24,18 +30,6 @@
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator8" ValidationGroup="AddOrderDetailsGroup"
                                 ControlToValidate="CustomerDropDownList" InitialValue="-1" ErrorMessage="You must select Customer"
                                 Text="*" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 25%;">
-                            Order No
-                        </td>
-                        <td style="width: 75%;">
-                            <asp:TextBox ID="OrderNoTextBox" Width="250px" ValidationGroup="AddOrderDetailsButton"
-                                MaxLength="20" runat="server"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="AddOrderDetailsGroup"
-                                ControlToValidate="OrderNoTextBox" ErrorMessage="Order No is required" Display="Dynamic"
-                                InitialValue="" Text="*" runat="server" />
                         </td>
                     </tr>
                     <tr>
