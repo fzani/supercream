@@ -502,6 +502,14 @@ namespace SP.Worker
 
         #region OrderHeader
 
+        public string GenerateOrderNo()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
+
+            return orderHeaderDao.GenerateOrderNo();
+        }
+
         public List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
         {
             IDaoFactory factory = new LTSDaoFactory();
@@ -577,6 +585,8 @@ namespace SP.Worker
         {
             IDaoFactory factory = new LTSDaoFactory();
             IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
+
+            orderHeader.AlphaID = this.GenerateOrderNo();
 
             return orderHeaderDao.Save(orderHeader);
         }
@@ -1276,6 +1286,6 @@ namespace SP.Worker
             return vanDao.Update(newVan, origVan);
         }
 
-        #endregion
+        #endregion       
     }
 }
