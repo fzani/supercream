@@ -994,6 +994,25 @@ namespace SPWCFServer
 
         #region OrderHeader
 
+        public string GenerateOrderReferenceNo()
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return mgr.GenerateOrderNo();
+
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete description. It is likely that the description has outstanding Accounts still linked to it");
+            }
+            catch (Exception ex)
+            {
+                // Log full Exception to be done ...
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
         {
 
@@ -1143,8 +1162,10 @@ namespace SPWCFServer
             try
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
-                if (mgr.OrderHeaderExists(orderHeader.AlphaID))
-                    throw new ApplicationException("Cannot add Order - Order Header already exists");
+                ////if (mgr.OrderHeaderExists(orderHeader.AlphaID))
+                ////{
+                ////    throw new ApplicationException("Cannot add Order - Order Header already exists, Cancel Order and Recreate a new Order");
+                ////}
 
                 SP.Core.Domain.OrderHeader coreOrderHeader =
                     ObjectExtension.CloneProperties<SPWCFServer.OrderHeader, SP.Core.Domain.OrderHeader>(orderHeader);

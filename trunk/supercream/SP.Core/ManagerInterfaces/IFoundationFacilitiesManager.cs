@@ -79,6 +79,9 @@ namespace SP.Core.ManagerInterfaces
         #endregion
 
         #region OrderHeader
+
+        string GenerateOrderNo();
+
         List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus);
         bool OrderHeaderExists(string orderNo);
         bool InvoiceNoExists(string invoiceNo);

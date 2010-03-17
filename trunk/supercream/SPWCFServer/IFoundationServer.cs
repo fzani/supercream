@@ -252,6 +252,10 @@ namespace SPWCFServer
         [ReferencePreservingDataContractFormat]
         List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo,
             string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        string GenerateOrderReferenceNo();
         #endregion
 
         #region Order Line

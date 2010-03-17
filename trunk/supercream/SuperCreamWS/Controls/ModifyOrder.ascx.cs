@@ -244,7 +244,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             CustomerDropDownList.DataBind();
             CustomerDropDownList.SelectedValue = customer.ID.ToString();
 
-            OrderNoTextBox.Text = orderHeader.AlphaID;
+            OrderNoHeaderLabel.Text = orderHeader.AlphaID;
             OrderDateTextBox.Text = orderHeader.OrderDate.ToShortDateString();
             DeliveryDateTextBox.Text = orderHeader.DeliveryDate.ToShortDateString();
 
@@ -586,11 +586,11 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
                 ID = this.OrderID.Value,
                 OrderDate = Convert.ToDateTime(this.OrderDateTextBox.Text),
                 OrderStatus = (short)SP.Core.Enums.OrderStatus.Order,
-                AlphaID = this.OrderNoTextBox.Text,
+                AlphaID = this.OrderNoHeaderLabel.Text,
                 SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text
             };
 
-            OrderHeader existingOrderHeader = ui.GetByOrderNo(OrderNoTextBox.Text);
+            OrderHeader existingOrderHeader = ui.GetByOrderNo(OrderNoHeaderLabel.Text);
             if (existingOrderHeader.ID != this.OrderID.Value)
                 throw new ApplicationException("Cannot Modify Order - Order No Exists for an existing Order");
 

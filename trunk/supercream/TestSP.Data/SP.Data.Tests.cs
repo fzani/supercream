@@ -69,5 +69,12 @@ namespace TestSP.Data
          //   Assert.IsNotNull(orderHeaders);
 
         }
+
+        [TestMethod]
+        public void GenerateOrderNo()
+        {
+            OrderHeaderDao dao = new OrderHeaderDao();
+            string n = dao.GenerateOrderNo();
+        }
     }
 }

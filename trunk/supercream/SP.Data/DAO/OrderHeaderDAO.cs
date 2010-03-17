@@ -30,6 +30,12 @@ namespace SP.Data.LTS
             return db.OrderHeader.SingleOrDefault<OrderHeader>(q => q.AlphaID == orderNo);
         }
 
+        public string GenerateOrderNo()
+        {
+            ////int lastOrder = Convert.ToInt32(db.OrderHeader.Select(q => q.AlphaID.Substring(4, (q.AlphaID.Length - 2))).Max());
+            return "ORD-" + (Convert.ToInt32(db.OrderHeader.Select(q => q.AlphaID.Substring(4, (q.AlphaID.Length - 4))).Max()) + 1);        
+        }
+
         public List<OrderHeader> GetOrderHeaderForSearch(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
         {
             using (SqlConnection conn = new SqlConnection(db.Connection.ConnectionString))

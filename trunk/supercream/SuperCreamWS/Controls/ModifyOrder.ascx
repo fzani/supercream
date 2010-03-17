@@ -11,7 +11,7 @@
             <asp:Panel ID="OrderSearchPanel" DefaultButton="SearchButton" Visible="false" runat="server">
                 <legend>
                     <h3>
-                        Select Order Line</h3>
+                        Select Order</h3>
                 </legend>
                 <table class="search">
                     <tr>
@@ -197,11 +197,8 @@
                             Order No
                         </td>
                         <td style="width: 50%;">
-                            <asp:TextBox ID="OrderNoTextBox" ValidationGroup="ModifyOrderDetailsGroup" Width="355px"
-                                MaxLength="20" runat="server"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ValidationGroup="ModifyOrderDetailsGroup"
-                                ControlToValidate="OrderNoTextBox" ErrorMessage="Order No is required" InitialValue=""
-                                Text="*" runat="server" />
+                            <asp:Label ID="OrderNoHeaderLabel"  Width="355px"
+                               runat="server"></asp:Label>                           
                         </td>
                         <td style="width: 28%;">
                             <asp:Label ID="OrderStatusNoLabel" Visible="false" runat="server"></asp:Label>
