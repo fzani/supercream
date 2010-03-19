@@ -206,6 +206,76 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfVan" nillable="true" type="tns:ArrayOfVan" />
+  <xs:complexType name="ArrayOfOrderHeader">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderHeader" nillable="true" type="tns:OrderHeader" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderHeader" nillable="true" type="tns:ArrayOfOrderHeader" />
+  <xs:complexType name="OrderHeader">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AlphaID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AlphaPrefixOrPostFix" type="xs:short" />
+      <xs:element minOccurs="0" name="CustomerID" type="xs:int" />
+      <xs:element minOccurs="0" name="DeliveryDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DeliveryNoteNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="InvoiceNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OrderLine" nillable="true" type="tns:ArrayOfOrderLine" />
+      <xs:element minOccurs="0" name="OrderNotesStatus" nillable="true" type="tns:OrderNotesStatus" />
+      <xs:element minOccurs="0" name="OrderStatus" type="xs:short" />
+      <xs:element minOccurs="0" name="SpecialInstructions" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderHeader" nillable="true" type="tns:OrderHeader" />
+  <xs:complexType name="ArrayOfOrderLine">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderLine" nillable="true" type="tns:OrderLine" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderLine" nillable="true" type="tns:ArrayOfOrderLine" />
+  <xs:complexType name="OrderLine">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Discount" type="xs:float" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="NoOfUnits" type="xs:int" />
+      <xs:element minOccurs="0" name="OrderHeader" nillable="true" type="tns:OrderHeader" />
+      <xs:element minOccurs="0" name="OrderID" type="xs:int" />
+      <xs:element minOccurs="0" name="OrderLineStatus" type="xs:short" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ProductID" type="xs:int" />
+      <xs:element minOccurs="0" name="QtyPerUnit" type="xs:int" />
+      <xs:element minOccurs="0" name="SpecialInstructions" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderLine" nillable="true" type="tns:OrderLine" />
+  <xs:complexType name="OrderNotesStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Account" nillable="true" type="tns:Account" />
+      <xs:element minOccurs="0" name="AccountID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="DeliveryNoteDateCreated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DeliveryNoteDatePrinted" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DeliveryNotePrinted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="InvoiceDateCreated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="InvoiceDatePrinted" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="InvoiceDateReprinted" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="InvoicePaymentComplete" type="xs:boolean" />
+      <xs:element minOccurs="0" name="InvoicePrinted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="InvoiceProformaDateCreated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="InvoiceProformaDatePrinted" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="InvoiceProformaPrinted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="InvoiceReprinted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OrderID" type="xs:int" />
+      <xs:element minOccurs="0" name="OutletStoreID" type="xs:int" />
+      <xs:element minOccurs="0" name="PicklistDateGenerated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PicklistGenerated" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Van" nillable="true" type="tns:Van" />
+      <xs:element minOccurs="0" name="VanID" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderNotesStatus" nillable="true" type="tns:OrderNotesStatus" />
   <xs:complexType name="ArrayOfVanInvoiceCount">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="VanInvoiceCount" nillable="true" type="tns:VanInvoiceCount" />
@@ -296,76 +366,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfSpecialInvoiceLine" nillable="true" type="tns:ArrayOfSpecialInvoiceLine" />
-  <xs:complexType name="OrderHeader">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="AlphaID" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="AlphaPrefixOrPostFix" type="xs:short" />
-      <xs:element minOccurs="0" name="CustomerID" type="xs:int" />
-      <xs:element minOccurs="0" name="DeliveryDate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="DeliveryNoteNo" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="InvoiceNo" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="OrderDate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="OrderLine" nillable="true" type="tns:ArrayOfOrderLine" />
-      <xs:element minOccurs="0" name="OrderNotesStatus" nillable="true" type="tns:OrderNotesStatus" />
-      <xs:element minOccurs="0" name="OrderStatus" type="xs:short" />
-      <xs:element minOccurs="0" name="SpecialInstructions" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="OrderHeader" nillable="true" type="tns:OrderHeader" />
-  <xs:complexType name="ArrayOfOrderLine">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderLine" nillable="true" type="tns:OrderLine" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfOrderLine" nillable="true" type="tns:ArrayOfOrderLine" />
-  <xs:complexType name="OrderLine">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Discount" type="xs:float" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="NoOfUnits" type="xs:int" />
-      <xs:element minOccurs="0" name="OrderHeader" nillable="true" type="tns:OrderHeader" />
-      <xs:element minOccurs="0" name="OrderID" type="xs:int" />
-      <xs:element minOccurs="0" name="OrderLineStatus" type="xs:short" />
-      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
-      <xs:element minOccurs="0" name="ProductID" type="xs:int" />
-      <xs:element minOccurs="0" name="QtyPerUnit" type="xs:int" />
-      <xs:element minOccurs="0" name="SpecialInstructions" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="OrderLine" nillable="true" type="tns:OrderLine" />
-  <xs:complexType name="OrderNotesStatus">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Account" nillable="true" type="tns:Account" />
-      <xs:element minOccurs="0" name="AccountID" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="DeliveryNoteDateCreated" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="DeliveryNoteDatePrinted" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="DeliveryNotePrinted" type="xs:boolean" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="InvoiceDateCreated" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="InvoiceDatePrinted" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="InvoiceDateReprinted" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="InvoicePaymentComplete" type="xs:boolean" />
-      <xs:element minOccurs="0" name="InvoicePrinted" type="xs:boolean" />
-      <xs:element minOccurs="0" name="InvoiceProformaDateCreated" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="InvoiceProformaDatePrinted" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="InvoiceProformaPrinted" type="xs:boolean" />
-      <xs:element minOccurs="0" name="InvoiceReprinted" type="xs:boolean" />
-      <xs:element minOccurs="0" name="OrderID" type="xs:int" />
-      <xs:element minOccurs="0" name="OutletStoreID" type="xs:int" />
-      <xs:element minOccurs="0" name="PicklistDateGenerated" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="PicklistGenerated" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Van" nillable="true" type="tns:Van" />
-      <xs:element minOccurs="0" name="VanID" nillable="true" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="OrderNotesStatus" nillable="true" type="tns:OrderNotesStatus" />
-  <xs:complexType name="ArrayOfOrderHeader">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderHeader" nillable="true" type="tns:OrderHeader" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfOrderHeader" nillable="true" type="tns:ArrayOfOrderHeader" />
   <xs:complexType name="ArrayOfInvoiceWithStatus">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="InvoiceWithStatus" nillable="true" type="tns:InvoiceWithStatus" />

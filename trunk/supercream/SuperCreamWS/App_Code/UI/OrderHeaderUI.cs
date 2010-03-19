@@ -86,6 +86,26 @@ public class OrderHeaderUI : IDisposable
         }
     }
 
+    public string CreateInvoiceProforma(int orderNo, string invoiceNo, SP.Core.Enums.OrderStatus invoiceType)
+    {
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            OrderHeader origOrderHeader = _proxy.GetOrderHeader(orderNo);
+            OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
+
+            updatedOrderHeader.AlphaID = origOrderHeader.AlphaID;
+            updatedOrderHeader.CustomerID = origOrderHeader.CustomerID;
+            updatedOrderHeader.ID = origOrderHeader.ID;
+            updatedOrderHeader.OrderDate = origOrderHeader.OrderDate;
+            updatedOrderHeader.OrderStatus = (short)invoiceType;
+            updatedOrderHeader.InvoiceNo = invoiceNo;
+            updatedOrderHeader.SpecialInstructions = origOrderHeader.SpecialInstructions;
+
+            OrderHeader oh = _proxy.CreateInvoiceProforma(updatedOrderHeader, origOrderHeader);
+            return oh.InvoiceNo;
+        }
+    }
+
     public string CreateDeliveryNote(int orderNo, string invoiceNo, SP.Core.Enums.OrderStatus invoiceType)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
