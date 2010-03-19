@@ -197,7 +197,7 @@
                             Order No
                         </td>
                         <td style="width: 50%;">
-                            <asp:Label ID="OrderNoHeaderLabel"  Width="355px"
+                            <asp:Label ID="OrderNoHeaderLabel"  Width="400px"
                                runat="server"></asp:Label>                           
                         </td>
                         <td style="width: 28%;">
@@ -267,7 +267,7 @@
                             <asp:LinkButton ID="CreateProformaInvoiceButton" Text="Create Proforma Invoice |"
                                 runat="server" OnClick="ShowInvoiceProformaButton_Click" />
                             <asp:LinkButton ID="CreateDeliveryNoteButton" Text="Create Delivery Note" runat="server"
-                                OnClick="ShowDeliveryButton_Click" />
+                                OnClick="CreateDeliveryNoteButton_Click" />
                             <asp:Button ID="btnTrigger1" runat="server" Style="display: none" />
                             <asp:Button ID="btnTrigger2" runat="server" Style="display: none" />
                             <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtenderInvoice" DropShadow="true"

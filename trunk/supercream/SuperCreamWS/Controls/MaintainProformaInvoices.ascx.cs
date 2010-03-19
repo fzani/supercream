@@ -632,11 +632,14 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
                 }
             }
 
-            OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
-            OrderHeader orderHeader = orderHeaderUI.GetById(OrderID.Value);
+            if (OrderID.Value != -1)
+            {
+                OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
+                OrderHeader orderHeader = orderHeaderUI.GetById(OrderID.Value);
 
-            Label deliveryDateLabel = e.Item.FindControl("DeliveryDateLabel") as Label;
-            deliveryDateLabel.Text = orderHeader.DeliveryDate.ToShortDateString();
+                Label deliveryDateLabel = e.Item.FindControl("DeliveryDateLabel") as Label;
+                deliveryDateLabel.Text = orderHeader.DeliveryDate.ToShortDateString();
+            }
 
             netTotalPrice = 0;
             vatTotal = 0;

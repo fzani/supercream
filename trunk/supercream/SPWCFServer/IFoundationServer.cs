@@ -219,6 +219,10 @@ namespace SPWCFServer
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
+        OrderHeader CreateDeliveryNote(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
         void DeleteOrderHeader(OrderHeader orderHeader);
 
         [OperationContract]
@@ -1563,6 +1567,7 @@ namespace SPWCFServer
         private int _CustomerID;
         private short _AlphaPrefixOrPostFix;
         private string _AlphaID;
+        private string _DeliveryNoteNo;
         private string _InvoiceNo;
         private short _OrderStatus;
         private OrderNotesStatus _OrderNotesStatus;
@@ -1594,6 +1599,19 @@ namespace SPWCFServer
             set
             {
                 _InvoiceNo = value;
+            }
+        }
+
+        [DataMember]
+        public string DeliveryNoteNo
+        {
+            get
+            {
+                return _DeliveryNoteNo;
+            }
+            set
+            {
+                _DeliveryNoteNo = value;
             }
         }
 

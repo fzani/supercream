@@ -15,5 +15,6 @@ namespace SP.Core.DataInterfaces
         List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus);
         string GenerateOrderNo();
         string GenerateInvoiceNo();
+        string GenerateDeliveryNoteNo();
     }
 }

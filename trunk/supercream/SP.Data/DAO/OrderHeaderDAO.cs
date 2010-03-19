@@ -41,6 +41,12 @@ namespace SP.Data.LTS
             return "INV-" + (Convert.ToInt32(invoices.Select(q => q.InvoiceNo.Substring(4, (q.InvoiceNo.Length - 4))).Max()) + 1).ToString();
         }
 
+        public string GenerateDeliveryNoteNo()
+        {
+            List<OrderHeader> invoices = db.OrderHeader.Where(q => q.DeliveryNoteNo != null && q.DeliveryNoteNo != "").ToList<OrderHeader>();
+            return "DLV-" + (Convert.ToInt32(invoices.Select(q => q.DeliveryNoteNo.Substring(4, (q.DeliveryNoteNo.Length - 4))).Max()) + 1).ToString();
+        }
+
         public List<OrderHeader> GetOrderHeaderForSearch(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
         {
             using (SqlConnection conn = new SqlConnection(db.Connection.ConnectionString))
