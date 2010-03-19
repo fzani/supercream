@@ -1215,6 +1215,23 @@ namespace SPWCFServer
             }
         }
 
+        public OrderHeader CreateDeliveryNote(OrderHeader newOrderHeader, OrderHeader origOrderHeader)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+
+                return ObjectExtension.CloneProperties<SP.Core.Domain.OrderHeader, SPWCFServer.OrderHeader>
+                    (mgr.CreateDeliveryNote(ObjectExtension.CloneProperties<SPWCFServer.OrderHeader, SP.Core.Domain.OrderHeader>(newOrderHeader),
+                        ObjectExtension.CloneProperties<SPWCFServer.OrderHeader, SP.Core.Domain.OrderHeader>(origOrderHeader)));
+            }
+            catch (Exception ex)
+            {
+                // Log full Exception to be done ...
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         #endregion
 
         #region OrderLine

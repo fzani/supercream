@@ -153,6 +153,7 @@
       <Column Name="OrderStatus" Member="OrderStatus" Storage="_OrderStatus" DbType="smallint" />
       <Column Name="SpecialInstructions" Member="SpecialInstructions" Storage="_SpecialInstructions" DbType="varchar(8000)" />
       <Column Name="InvoiceNo" Member="InvoiceNo" Storage="_InvoiceNo" DbType="varchar(50)" />
+      <Column Name="DeliveryNoteNo" Member="DeliveryNoteNo" Storage="_DeliveryNoteNo" DbType="VarChar(50)" />
       <Association Name="FK_Note_Order" Member="Note" Storage="_Note" ThisKey="ID" OtherKey="ParentNoteID" DeleteRule="NO ACTION" />
       <Association Name="FK_Order_Customer" Member="Customer" Storage="_Customer" ThisKey="CustomerID" OtherKey="ID" IsForeignKey="true" />
       <Association Name="FK_OrderLine_Order" Member="OrderLine" Storage="_OrderLine" ThisKey="ID" OtherKey="OrderID" DeleteRule="NO ACTION" />     

@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SPWCFServer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SPWCFServer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Linq" />
+  <xs:complexType name="SpecialInvoiceLine">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Discount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="NoOfUnits" type="xs:int" />
+      <xs:element minOccurs="0" name="OrderLineStatus" type="xs:short" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="QtyPerUnit" type="xs:int" />
+      <xs:element minOccurs="0" name="SpecialInstructions" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SpecialInvoiceID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SpecialInvoiceLine" nillable="true" type="tns:SpecialInvoiceLine" />
   <xs:complexType name="Terms">
     <xs:sequence>
       <xs:element minOccurs="0" name="Account" nillable="true" type="tns:Account" />
@@ -192,6 +206,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfVan" nillable="true" type="tns:ArrayOfVan" />
+  <xs:complexType name="ArrayOfVanInvoiceCount">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VanInvoiceCount" nillable="true" type="tns:VanInvoiceCount" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVanInvoiceCount" nillable="true" type="tns:ArrayOfVanInvoiceCount" />
+  <xs:complexType name="VanInvoiceCount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="InvoiceCount" type="xs:int" />
+      <xs:element minOccurs="0" name="VanDescription" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VanInvoiceCount" nillable="true" type="tns:VanInvoiceCount" />
   <xs:complexType name="ArrayOfPriceListHeader">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="PriceListHeader" nillable="true" type="tns:PriceListHeader" />
@@ -269,26 +296,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfSpecialInvoiceLine" nillable="true" type="tns:ArrayOfSpecialInvoiceLine" />
-  <xs:complexType name="SpecialInvoiceLine">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Discount" type="xs:decimal" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="NoOfUnits" type="xs:int" />
-      <xs:element minOccurs="0" name="OrderLineStatus" type="xs:short" />
-      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
-      <xs:element minOccurs="0" name="QtyPerUnit" type="xs:int" />
-      <xs:element minOccurs="0" name="SpecialInstructions" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="SpecialInvoiceID" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="SpecialInvoiceLine" nillable="true" type="tns:SpecialInvoiceLine" />
   <xs:complexType name="OrderHeader">
     <xs:sequence>
       <xs:element minOccurs="0" name="AlphaID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="AlphaPrefixOrPostFix" type="xs:short" />
       <xs:element minOccurs="0" name="CustomerID" type="xs:int" />
       <xs:element minOccurs="0" name="DeliveryDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DeliveryNoteNo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="InvoiceNo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OrderDate" type="xs:dateTime" />
@@ -374,19 +388,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfOrderNotesStatus" nillable="true" type="tns:ArrayOfOrderNotesStatus" />
-  <xs:complexType name="ArrayOfVanInvoiceCount">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="VanInvoiceCount" nillable="true" type="tns:VanInvoiceCount" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfVanInvoiceCount" nillable="true" type="tns:ArrayOfVanInvoiceCount" />
-  <xs:complexType name="VanInvoiceCount">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="InvoiceCount" type="xs:int" />
-      <xs:element minOccurs="0" name="VanDescription" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="VanInvoiceCount" nillable="true" type="tns:VanInvoiceCount" />
   <xs:complexType name="ArrayOfCustomer">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Customer" nillable="true" type="tns:Customer" />

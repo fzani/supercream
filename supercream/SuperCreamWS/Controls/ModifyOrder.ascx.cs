@@ -279,13 +279,15 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             }
             else if (orderHeader.OrderStatus == (short)SP.Core.Enums.OrderStatus.DeliveryNote)
             {
-                OrderStatusTypeLabel.Text = "<h3>Status : <i>Delivery Note Produced</i></h3";
+                OrderStatusTypeLabel.Text = "<h3>Status : <i>Note Produced</i></h3";
+                OrderStatusNoLabel.Text = "<h3><i>Delivery Note: " + orderHeader.DeliveryNoteNo + "</i></h3>";
+
                 OrderStatusTypeLabel.Visible = true;
-                OrderStatusNoLabel.Visible = false;
+                OrderStatusNoLabel.Visible = true;
             }
             else if (orderHeader.OrderStatus == (short)SP.Core.Enums.OrderStatus.DeliveryNotePrinted)
             {
-                OrderStatusTypeLabel.Text = "<h3>Status : <i>Delivery Note Produced</i></h3";
+                OrderStatusTypeLabel.Text = "<h3>Status : <i>Note Produced</i></h3";
                 OrderStatusTypeLabel.Visible = true;
                 OrderStatusNoLabel.Visible = false;
             }
@@ -682,7 +684,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     {
         Util.ClearControls(OrderSearchPanel);
         DataBind();
-    } 
+    }
 
     protected void ShowInvoiceProformaButton_Click(object sender, EventArgs e)
     {
@@ -696,22 +698,10 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         ModalPopupExtenderInvoice.Show();
     }
 
-    protected void ShowDeliveryButton_Click(object sender, EventArgs e)
-    {
-        Panel p = OrderHeaderPanel.FindControl("CreateDeliveryNotePanel") as Panel;
-        TextBox invTextBox = p.FindControl("DeliveryInvoiceNoTextBox") as TextBox;
-        AutoGenUI ui = new AutoGenUI();
-        invTextBox.Text = "INV-" + (ui.Generate() + 256).ToString();
-
-        this.OrderStatus = OrderStatus.DeliveryNote;
-
-        ModalPopupExtenderDeliveryNote.Show();
-    }
-
     protected void CreateInvoiceButton_Click(object sender, EventArgs e)
     {
         try
-        {                     
+        {
             this.OrderStatus = OrderStatus.Invoice;
 
             OrderHeaderUI ui = new OrderHeaderUI();
@@ -721,7 +711,6 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             OrderStatusNoLabel.Text = "<h3><i>Invoice No: " + invoiceNo + "</i></h3>";
             OrderStatusTypeLabel.Visible = true;
             OrderStatusNoLabel.Visible = true;
-
 
             CreateInvoiceButton.Visible = false;
             CreateProformaInvoiceButton.Visible = false;
@@ -743,19 +732,13 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     {
         try
         {
-            if (String.IsNullOrEmpty(DeliveryInvoiceNoTextBox.Text))
-            {
-                throw new ApplicationException("Invoice No Cannot be blank");
-            }
+            this.OrderStatus = OrderStatus.DeliveryNote;
+
             OrderHeaderUI ui = new OrderHeaderUI();
-
-            if (ui.InvoiceNoExists(DeliveryInvoiceNoTextBox.Text))
-                throw new ApplicationException("Invoice No is already used by another Order");
-
-            string invoiceNo = ui.UpdateDeliveryNote(OrderID.Value, DeliveryInvoiceNoTextBox.Text);
+            string deliveryNoteNo = ui.CreateDeliveryNote(OrderID.Value, InvoiceNoTextBox.Text, OrderStatus);
 
             OrderStatusTypeLabel.Text = "<h3>Status : <i>Delivery Note Produced</i></h3";
-            OrderStatusNoLabel.Text = "<h3><i>Invoice No: " + invoiceNo + "</i></h3>";
+            OrderStatusNoLabel.Text = "<h3><i>Delivery Note: " + deliveryNoteNo + "</i></h3>";
             OrderStatusTypeLabel.Visible = true;
             OrderStatusNoLabel.Visible = true;
 

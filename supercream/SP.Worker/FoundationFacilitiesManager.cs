@@ -518,6 +518,14 @@ namespace SP.Worker
             return orderHeaderDao.GenerateInvoiceNo();
         }
 
+        public string GenerateDeliveryNoteNo()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
+
+            return orderHeaderDao.GenerateDeliveryNoteNo();
+        } 
+
         public List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
         {
             IDaoFactory factory = new LTSDaoFactory();
@@ -605,6 +613,16 @@ namespace SP.Worker
             IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
            
             newOrderHeader.InvoiceNo = this.GenerateInvoiceNo();
+
+            return orderHeaderDao.Update(newOrderHeader, origOrderHeader);
+        }
+
+        public OrderHeader CreateDeliveryNote(OrderHeader newOrderHeader, OrderHeader origOrderHeader)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
+
+            newOrderHeader.DeliveryNoteNo = this.GenerateDeliveryNoteNo();
 
             return orderHeaderDao.Update(newOrderHeader, origOrderHeader);
         }
