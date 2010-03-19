@@ -684,19 +684,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     {
         Util.ClearControls(OrderSearchPanel);
         DataBind();
-    }
-
-    protected void ShowInvoiceProformaButton_Click(object sender, EventArgs e)
-    {
-        Panel p = OrderHeaderPanel.FindControl("PanelMessage") as Panel;
-        TextBox invTextBox = p.FindControl("InvoiceNoTextBox") as TextBox;
-        AutoGenUI ui = new AutoGenUI();
-        invTextBox.Text = "INV-" + (ui.Generate() + 256).ToString();
-
-        this.OrderStatus = OrderStatus.ProformaInvoice;
-
-        ModalPopupExtenderInvoice.Show();
-    }
+    }   
 
     protected void CreateInvoiceButton_Click(object sender, EventArgs e)
     {
@@ -797,7 +785,32 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 
     protected void CreateProformaInvoiceButton_Click(object sender, EventArgs e)
     {
+        try
+        {
+            this.OrderStatus = OrderStatus.ProformaInvoice;
 
+            OrderHeaderUI ui = new OrderHeaderUI();
+            string invoiceNo = ui.CreateInvoiceProforma(OrderID.Value, InvoiceNoTextBox.Text, OrderStatus);
+
+            OrderStatusTypeLabel.Text = "<h3>Status : <i>Proforma Produced</i></h3";
+            OrderStatusNoLabel.Text = "<h3><i>Invoice No: " + invoiceNo + "</i></h3>";
+            OrderStatusTypeLabel.Visible = true;
+            OrderStatusNoLabel.Visible = false;
+
+            CreateInvoiceButton.Visible = false;
+            CreateProformaInvoiceButton.Visible = false;
+            CreateDeliveryNoteButton.Visible = false;
+
+            ChangeState += new EventHandler<EventArgs>(CompleteOrderState);
+            ChangeState(this, e);
+            DataBind();
+        }
+        catch (Exception ex)
+        {
+            ErrorMessageEventArgs args = new ErrorMessageEventArgs();
+            args.AddErrorMessages(ex.Message);
+            ErrorMessageEventHandler(this, args);
+        }
     }
 
     protected void CalculateButton_Click(object sender, EventArgs e)

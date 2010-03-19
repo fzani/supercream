@@ -617,6 +617,14 @@ namespace SP.Worker
             return orderHeaderDao.Update(newOrderHeader, origOrderHeader);
         }
 
+        public OrderHeader CreateInvoiceProforma(OrderHeader newOrderHeader, OrderHeader origOrderHeader)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();           
+
+            return orderHeaderDao.Update(newOrderHeader, origOrderHeader);
+        }
+
         public OrderHeader CreateDeliveryNote(OrderHeader newOrderHeader, OrderHeader origOrderHeader)
         {
             IDaoFactory factory = new LTSDaoFactory();

@@ -83,6 +83,7 @@ namespace SP.Core.ManagerInterfaces
         string GenerateOrderNo();
 
         OrderHeader CreateInvoice(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
+        OrderHeader CreateInvoiceProforma(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
         OrderHeader CreateDeliveryNote(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
 
         List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus);

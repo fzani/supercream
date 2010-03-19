@@ -219,6 +219,10 @@ namespace SPWCFServer
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
+        OrderHeader CreateInvoiceProforma(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
         OrderHeader CreateDeliveryNote(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
 
         [OperationContract]

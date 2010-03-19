@@ -13,6 +13,7 @@ namespace SP.Core.Enums
         ProformaInvoice = 4,
         PoformaInvoicePrinted = 5,
         DeliveryNote = 6,
-        DeliveryNotePrinted = 7
+        DeliveryNotePrinted = 7,
+        Void = 8
     }
 }
