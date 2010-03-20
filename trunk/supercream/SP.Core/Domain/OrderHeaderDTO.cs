@@ -18,6 +18,7 @@ namespace SP.Core.Domain
         private string _DeliveryNoteNo;        
         private DateTime _DeliveryDate;
         private OrderNotesStatus _OrderNoteStatus;
+        private string _ReasonForVoiding;      
 
         private List<OrderLine> _OrderLine;
 
@@ -160,6 +161,18 @@ namespace SP.Core.Domain
             set 
             {
                 _DeliveryNoteNo = value; 
+            }
+        }
+
+        public string ReasonForVoiding
+        {
+            get 
+            { 
+                return _ReasonForVoiding; 
+            }
+            set 
+            { 
+                _ReasonForVoiding = value; 
             }
         }
 
