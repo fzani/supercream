@@ -332,7 +332,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             {
                 confirmedImage.Visible = false;
             }
-           
+
             Image printedImage = e.Row.FindControl("PrintedImage") as Image;
             Image rePrintedImage = e.Row.FindControl("RePrintedImage") as Image;
             if (orderNoteStatusUI.OrderNoteExistsByOrderID(orderHeader.ID))
@@ -647,7 +647,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             {
                 OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
                 OrderHeader orderHeader = orderHeaderUI.GetById(OrderID.Value);
-
+                
                 Label deliveryDateLabel = e.Item.FindControl("DeliveryDateLabel") as Label;
                 deliveryDateLabel.Text = orderHeader.DeliveryDate.ToShortDateString();
             }
@@ -784,6 +784,16 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
 
         DateOfOrderLabel.Text = orderHeader.OrderDate.ToShortDateString();
         InvoiceLabel.Text = orderHeader.InvoiceNo;
+        
+        if (orderHeader.DeliveryNoteNo != null)
+        {
+            DeliveryNoteHeaderLabel.Text = "/ Delivery Note";
+            DeliveryNoteHeaderLabel.Visible = true;
+        }
+        else
+        {
+            DeliveryNoteHeaderLabel.Visible = false;
+        }
 
         // Get Account Details
         int accountID = Convert.ToInt32(AccountDropDownList.SelectedValue);

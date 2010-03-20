@@ -272,7 +272,7 @@
                 <tr>
                     <td>
                         <h2>
-                            <i>Invoice No</i></h2>
+                            <i>Invoice No</i><asp:Label ID="DeliveryNoteHeaderLabel" Visible="false" runat="server"></asp:Label></h2>
                     </td>
                     <td>
                         <h2>
