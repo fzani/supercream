@@ -186,6 +186,14 @@ public class OrderHeaderUI : IDisposable
         }
     }
 
+    public void VoidOrder(int orderID)
+    {
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            _proxy.VoidOrder(orderID);
+        }
+    }
+
     public void Update(OrderHeader newOrderHeader)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())

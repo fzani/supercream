@@ -612,7 +612,8 @@ namespace SP.Worker
             IDaoFactory factory = new LTSDaoFactory();
             IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
            
-            newOrderHeader.InvoiceNo = this.GenerateInvoiceNo();
+            if(String.IsNullOrEmpty(origOrderHeader.InvoiceNo))
+                newOrderHeader.InvoiceNo = this.GenerateInvoiceNo();
 
             return orderHeaderDao.Update(newOrderHeader, origOrderHeader);
         }
@@ -625,12 +626,28 @@ namespace SP.Worker
             return orderHeaderDao.Update(newOrderHeader, origOrderHeader);
         }
 
+        public void VoidOrder(int orderID)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderHeaderDao origOrderHeaderDao = factory.GetOrderHeaderDao();
+            IOrderHeaderDao newOrderHeaderDao = factory.GetOrderHeaderDao();  
+            IOrderHeaderDao updateOrderHeaderDao = factory.GetOrderHeaderDao();
+
+            OrderHeader originalOrder = origOrderHeaderDao.GetById(orderID);
+            OrderHeader newOrderHeader = newOrderHeaderDao.GetById(orderID);
+           
+            newOrderHeader.OrderStatus = (short) SP.Core.Enums.OrderStatus.Void;
+
+            updateOrderHeaderDao.Update(newOrderHeader, originalOrder);
+        }
+
         public OrderHeader CreateDeliveryNote(OrderHeader newOrderHeader, OrderHeader origOrderHeader)
         {
             IDaoFactory factory = new LTSDaoFactory();
             IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
 
-            newOrderHeader.DeliveryNoteNo = this.GenerateDeliveryNoteNo();
+            if (String.IsNullOrEmpty(origOrderHeader.DeliveryNoteNo))
+                newOrderHeader.DeliveryNoteNo = this.GenerateDeliveryNoteNo();
 
             return orderHeaderDao.Update(newOrderHeader, origOrderHeader);
         }

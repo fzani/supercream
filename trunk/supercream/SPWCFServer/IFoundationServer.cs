@@ -269,6 +269,10 @@ namespace SPWCFServer
         [OperationContract]
         [ReferencePreservingDataContractFormat]
         string GenerateOrderReferenceNo();
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        void VoidOrder(int orderID);
         #endregion
 
         #region Order Line
