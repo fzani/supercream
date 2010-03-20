@@ -225,6 +225,7 @@
       <xs:element minOccurs="0" name="OrderLine" nillable="true" type="tns:ArrayOfOrderLine" />
       <xs:element minOccurs="0" name="OrderNotesStatus" nillable="true" type="tns:OrderNotesStatus" />
       <xs:element minOccurs="0" name="OrderStatus" type="xs:short" />
+      <xs:element minOccurs="0" name="ReasonForVoiding" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SpecialInstructions" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

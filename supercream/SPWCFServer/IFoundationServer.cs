@@ -1578,6 +1578,7 @@ namespace SPWCFServer
         private string _DeliveryNoteNo;
         private string _InvoiceNo;
         private short _OrderStatus;
+        private string _ReasonForVoiding;
         private OrderNotesStatus _OrderNotesStatus;
         private DateTime _OrderDate;
         private DateTime _DeliveryDate;
@@ -1729,6 +1730,19 @@ namespace SPWCFServer
             set
             {
                 _OrderStatus = value;
+            }
+        }
+
+        [DataMember]
+        public string ReasonForVoiding
+        {
+            get
+            {
+                return _ReasonForVoiding;
+            }
+            set
+            {
+                _ReasonForVoiding = value;
             }
         }
 
