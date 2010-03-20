@@ -524,7 +524,7 @@ namespace SP.Worker
             IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
 
             return orderHeaderDao.GenerateDeliveryNoteNo();
-        } 
+        }
 
         public List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
         {
@@ -611,8 +611,8 @@ namespace SP.Worker
         {
             IDaoFactory factory = new LTSDaoFactory();
             IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
-           
-            if(String.IsNullOrEmpty(origOrderHeader.InvoiceNo))
+
+            if (String.IsNullOrEmpty(origOrderHeader.InvoiceNo))
                 newOrderHeader.InvoiceNo = this.GenerateInvoiceNo();
 
             return orderHeaderDao.Update(newOrderHeader, origOrderHeader);
@@ -621,22 +621,23 @@ namespace SP.Worker
         public OrderHeader CreateInvoiceProforma(OrderHeader newOrderHeader, OrderHeader origOrderHeader)
         {
             IDaoFactory factory = new LTSDaoFactory();
-            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();           
+            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
 
             return orderHeaderDao.Update(newOrderHeader, origOrderHeader);
         }
 
-        public void VoidOrder(int orderID)
+        public void VoidOrder(int orderID, string reasonForVoiding)
         {
             IDaoFactory factory = new LTSDaoFactory();
             IOrderHeaderDao origOrderHeaderDao = factory.GetOrderHeaderDao();
-            IOrderHeaderDao newOrderHeaderDao = factory.GetOrderHeaderDao();  
+            IOrderHeaderDao newOrderHeaderDao = factory.GetOrderHeaderDao();
             IOrderHeaderDao updateOrderHeaderDao = factory.GetOrderHeaderDao();
 
             OrderHeader originalOrder = origOrderHeaderDao.GetById(orderID);
             OrderHeader newOrderHeader = newOrderHeaderDao.GetById(orderID);
-           
-            newOrderHeader.OrderStatus = (short) SP.Core.Enums.OrderStatus.Void;
+
+            newOrderHeader.OrderStatus = (short)SP.Core.Enums.OrderStatus.Void;
+            newOrderHeader.ReasonForVoiding = reasonForVoiding;
 
             updateOrderHeaderDao.Update(newOrderHeader, originalOrder);
         }
@@ -1347,6 +1348,6 @@ namespace SP.Worker
             return vanDao.Update(newVan, origVan);
         }
 
-        #endregion       
+        #endregion
     }
 }

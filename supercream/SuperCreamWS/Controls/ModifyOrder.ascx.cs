@@ -438,28 +438,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         ChangeState += new EventHandler<EventArgs>(InitLoadState);
         ChangeState(this, e);
     }
-
-    protected void DeleteOrderButton_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            if (OrderID != -1 || OrderID != null)
-            {
-                OrderHeaderUI ui = new OrderHeaderUI();
-                ui.VoidOrder(OrderID.Value);
-
-                ChangeState += new EventHandler<EventArgs>(InitLoadState);
-                ChangeState(this, e);
-            }
-        }
-        catch (Exception ex)
-        {
-            ErrorMessageEventArgs args = new ErrorMessageEventArgs();
-            args.AddErrorMessages(ex.Message);
-            ErrorMessageEventHandler(this, args);
-        }
-    }
-
+   
     protected void CustomerDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
 
@@ -689,11 +668,9 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     protected void CreateInvoiceButton_Click(object sender, EventArgs e)
     {
         try
-        {
-            this.OrderStatus = OrderStatus.Invoice;
-
+        {          
             OrderHeaderUI ui = new OrderHeaderUI();
-            string invoiceNo = ui.CreateInvoice(OrderID.Value, InvoiceNoTextBox.Text, OrderStatus);
+            string invoiceNo = ui.CreateInvoice(OrderID.Value);
 
             OrderStatusTypeLabel.Text = "<h3>Status : <i>Invoiced</i></h3";
             OrderStatusNoLabel.Text = "<h3><i>Invoice No: " + invoiceNo + "</i></h3>";
@@ -723,7 +700,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             this.OrderStatus = OrderStatus.DeliveryNote;
 
             OrderHeaderUI ui = new OrderHeaderUI();
-            string deliveryNoteNo = ui.CreateDeliveryNote(OrderID.Value, InvoiceNoTextBox.Text, OrderStatus);
+            string deliveryNoteNo = ui.CreateDeliveryNote(OrderID.Value);
 
             OrderStatusTypeLabel.Text = "<h3>Status : <i>Delivery Note Produced</i></h3";
             OrderStatusNoLabel.Text = "<h3><i>Delivery Note: " + deliveryNoteNo + "</i></h3>";
@@ -790,7 +767,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             this.OrderStatus = OrderStatus.ProformaInvoice;
 
             OrderHeaderUI ui = new OrderHeaderUI();
-            string invoiceNo = ui.CreateInvoiceProforma(OrderID.Value, InvoiceNoTextBox.Text, OrderStatus);
+            string invoiceNo = ui.CreateInvoiceProforma(OrderID.Value);
 
             OrderStatusTypeLabel.Text = "<h3>Status : <i>Proforma Produced</i></h3";
             OrderStatusNoLabel.Text = "<h3><i>Invoice No: " + invoiceNo + "</i></h3>";
@@ -817,6 +794,39 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     {
         Calculate();
     }
+
+    #region Voiding an Order
+
+    protected void GetVoidOrderReasonButton_Click(object sender, EventArgs e)
+    {       
+        ReasonForVoidingPopupExtenderInvoice.Show();
+    }
+
+    protected void VoidOrderButton_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Panel p = OrderHeaderPanel.FindControl("ReasonForVoidingPanelMessage") as Panel;
+            TextBox reasonForVoidingTextBox = p.FindControl("ReasonforVoidingTextBox") as TextBox;
+
+            if (OrderID != -1 || OrderID != null)
+            {
+                OrderHeaderUI ui = new OrderHeaderUI();
+                ui.VoidOrder(OrderID.Value, reasonForVoidingTextBox.Text);
+
+                ChangeState += new EventHandler<EventArgs>(InitLoadState);
+                ChangeState(this, e);
+            }
+        }
+        catch (Exception ex)
+        {
+            ErrorMessageEventArgs args = new ErrorMessageEventArgs();
+            args.AddErrorMessages(ex.Message);
+            ErrorMessageEventHandler(this, args);
+        }
+    }
+
+    #endregion
 
     #endregion
 

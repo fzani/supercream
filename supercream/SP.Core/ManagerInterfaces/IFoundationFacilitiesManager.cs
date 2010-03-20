@@ -85,7 +85,7 @@ namespace SP.Core.ManagerInterfaces
         OrderHeader CreateInvoice(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
         OrderHeader CreateInvoiceProforma(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
         OrderHeader CreateDeliveryNote(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
-        void VoidOrder(int orderID);
+        void VoidOrder(int orderID, string reasonForVoiding);
 
         List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus);
         bool OrderHeaderExists(string orderNo);

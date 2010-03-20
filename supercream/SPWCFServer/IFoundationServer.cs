@@ -272,7 +272,7 @@ namespace SPWCFServer
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
-        void VoidOrder(int orderID);
+        void VoidOrder(int orderID, string reasonForVoiding);
         #endregion
 
         #region Order Line
