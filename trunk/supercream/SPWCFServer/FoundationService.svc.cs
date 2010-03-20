@@ -1249,12 +1249,12 @@ namespace SPWCFServer
             }
         }
 
-        public void VoidOrder(int orderID)
+        public void VoidOrder(int orderID, string reasonForVoiding)
         {
             try
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
-                mgr.VoidOrder(orderID);
+                mgr.VoidOrder(orderID, reasonForVoiding);
             }
             catch (Exception ex)
             {

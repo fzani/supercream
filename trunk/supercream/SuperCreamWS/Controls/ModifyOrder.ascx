@@ -197,8 +197,7 @@
                             Order No
                         </td>
                         <td style="width: 50%;">
-                            <asp:Label ID="OrderNoHeaderLabel"  Width="400px"
-                               runat="server"></asp:Label>                           
+                            <asp:Label ID="OrderNoHeaderLabel" Width="400px" runat="server"></asp:Label>
                         </td>
                         <td style="width: 28%;">
                             <asp:Label ID="OrderStatusNoLabel" Visible="false" runat="server"></asp:Label>
@@ -254,7 +253,7 @@
                     <tr>
                         <td colspan="3">
                             <asp:LinkButton ID="DeleteOrderButton" CausesValidation="false" runat="server" Text="Void Order Details |"
-                                OnClick="DeleteOrderButton_Click" />
+                                OnClick="GetVoidOrderReasonButton_Click" />
                             <asp:LinkButton ID="Modify_OrderLineDetailsLinkButton" Text="Modfy Order Line Details"
                                 runat="server" OnClick="Modify_OrderLineDetailsLinkButton_Click" />
                         </td>
@@ -270,28 +269,34 @@
                                 OnClick="CreateDeliveryNoteButton_Click" />
                             <asp:Button ID="btnTrigger1" runat="server" Style="display: none" />
                             <asp:Button ID="btnTrigger2" runat="server" Style="display: none" />
-                            <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtenderInvoice" DropShadow="true"
-                                runat="server" TargetControlID="btnTrigger1" PopupControlID="PanelMessage" CancelControlID="CancelInvoiceButton"
-                                BackgroundCssClass="XPopUpBackGround" />
+                            <ajaxToolkit:ModalPopupExtender ID="ReasonForVoidingPopupExtenderInvoice" DropShadow="true"
+                                runat="server" TargetControlID="btnTrigger1" PopupControlID="ReasonForVoidingPanelMessage"
+                                CancelControlID="CancelReasonorVoidingButton" BackgroundCssClass="XPopUpBackGround" />
                             <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtenderDeliveryNote" DropShadow="true"
                                 runat="server" TargetControlID="btnTrigger2" PopupControlID="CreateDeliveryNotePanel"
                                 CancelControlID="CancelDeliveryNoteButton" BackgroundCssClass="XPopUpBackGround" />
-                            <asp:Panel Style="display: none" DefaultButton="InvoiceUpdateButton" Width="700px"
-                                ID="PanelMessage" runat="server" CssClass="modalPopup">
+                            <asp:Panel Style="display: none" DefaultButton="ReasonforVoidingButton" Width="700px"
+                                ID="ReasonForVoidingPanelMessage" runat="server" CssClass="modalPopup">
                                 <table>
                                     <tr>
-                                        <td>
-                                            Invoice No
+                                        <td style="width: 30%">
+                                            <h3>
+                                                Reason for Voiding Order</h3>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="InvoiceNoTextBox" Width="500px" MaxLength="30" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="ReasonforVoidingTextBox" Width="100%" Height="300px" TextMode="MultiLine"
+                                                runat="server" ValidationGroup="VoidOrderDetailsGroup"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1ReasonForVoiding" Display="Dynamic"
+                                                ValidationGroup="VoidOrderDetailsGroup" ControlToValidate="ReasonforVoidingTextBox"
+                                                InitialValue="" ErrorMessage="Invoice to is a required Field" Text="*" runat="server" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Button ID="InvoiceUpdateButton" CommandArgument='<%# OrderID %>' Text="Save"
-                                                runat="server" OnClick="CreateInvoiceButton_Click" />
-                                            <asp:Button ID="CancelInvoiceButton" Text="Cancel" CausesValidation="false" runat="server" />
+                                            <asp:Button ID="ReasonforVoidingButton" CoommandArgument='<%# OrderID %>' Text="Void Order"
+                                                runat="server" OnClick="VoidOrderButton_Click" ValidationGroup="VoidOrderDetailsGroup" />
+                                            <asp:Button ID="CancelReasonorVoidingButton" Text="Cancel" CausesValidation="false"
+                                                runat="server" />
                                         </td>
                                     </tr>
                                 </table>
@@ -621,7 +626,8 @@
                             <asp:Button ID="CancelTotalOrderButton" Width="15%" ValidationGroup="ModifyOrderDetailsGroup"
                                 Text="Cancel" runat="server" OnClick="CancelButton_Click" />
                         </div>
-                    </fieldset></asp:Panel>
+                    </fieldset>
+                </asp:Panel>
             </div>
         </fieldset>
     </div>

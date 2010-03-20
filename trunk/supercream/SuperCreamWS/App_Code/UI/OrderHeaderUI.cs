@@ -66,60 +66,42 @@ public class OrderHeaderUI : IDisposable
         }
     }
 
-    public string CreateInvoice(int orderNo, string invoiceNo, SP.Core.Enums.OrderStatus invoiceType)
+    public string CreateInvoice(int orderNo)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
             OrderHeader origOrderHeader = _proxy.GetOrderHeader(orderNo);
             OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
 
-            updatedOrderHeader.AlphaID = origOrderHeader.AlphaID;
-            updatedOrderHeader.CustomerID = origOrderHeader.CustomerID;
-            updatedOrderHeader.ID = origOrderHeader.ID;
-            updatedOrderHeader.OrderDate = origOrderHeader.OrderDate;
-            updatedOrderHeader.OrderStatus = (short)invoiceType;
-            updatedOrderHeader.InvoiceNo = invoiceNo;
-            updatedOrderHeader.SpecialInstructions = origOrderHeader.SpecialInstructions;
+            updatedOrderHeader.OrderStatus = (short)SP.Core.Enums.OrderStatus.Invoice;
 
             OrderHeader oh = _proxy.CreateInvoice(updatedOrderHeader, origOrderHeader);
             return oh.InvoiceNo;
         }
     }
 
-    public string CreateInvoiceProforma(int orderNo, string invoiceNo, SP.Core.Enums.OrderStatus invoiceType)
+    public string CreateInvoiceProforma(int orderNo)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
             OrderHeader origOrderHeader = _proxy.GetOrderHeader(orderNo);
             OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
-
-            updatedOrderHeader.AlphaID = origOrderHeader.AlphaID;
-            updatedOrderHeader.CustomerID = origOrderHeader.CustomerID;
-            updatedOrderHeader.ID = origOrderHeader.ID;
-            updatedOrderHeader.OrderDate = origOrderHeader.OrderDate;
-            updatedOrderHeader.OrderStatus = (short)invoiceType;
-            updatedOrderHeader.InvoiceNo = invoiceNo;
-            updatedOrderHeader.SpecialInstructions = origOrderHeader.SpecialInstructions;
+         
+            updatedOrderHeader.OrderStatus = (short)SP.Core.Enums.OrderStatus.ProformaInvoice;          
 
             OrderHeader oh = _proxy.CreateInvoiceProforma(updatedOrderHeader, origOrderHeader);
             return oh.InvoiceNo;
         }
     }
 
-    public string CreateDeliveryNote(int orderNo, string invoiceNo, SP.Core.Enums.OrderStatus invoiceType)
+    public string CreateDeliveryNote(int orderNo)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
             OrderHeader origOrderHeader = _proxy.GetOrderHeader(orderNo);
             OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
 
-            updatedOrderHeader.AlphaID = origOrderHeader.AlphaID;
-            updatedOrderHeader.CustomerID = origOrderHeader.CustomerID;
-            updatedOrderHeader.ID = origOrderHeader.ID;
-            updatedOrderHeader.OrderDate = origOrderHeader.OrderDate;
-            updatedOrderHeader.OrderStatus = (short)invoiceType;
-            updatedOrderHeader.InvoiceNo = invoiceNo;
-            updatedOrderHeader.SpecialInstructions = origOrderHeader.SpecialInstructions;
+            updatedOrderHeader.OrderStatus = (short)SP.Core.Enums.OrderStatus.DeliveryNote;
 
             OrderHeader oh = _proxy.CreateDeliveryNote(updatedOrderHeader, origOrderHeader);
             return oh.DeliveryNoteNo;
@@ -186,11 +168,11 @@ public class OrderHeaderUI : IDisposable
         }
     }
 
-    public void VoidOrder(int orderID)
+    public void VoidOrder(int orderID, string reasonForVoiding)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            _proxy.VoidOrder(orderID);
+            _proxy.VoidOrder(orderID, reasonForVoiding);
         }
     }
 
