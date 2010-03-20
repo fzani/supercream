@@ -253,7 +253,7 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <asp:LinkButton ID="DeleteOrderButton" CausesValidation="false" runat="server" Text="Delete Order Details |"
+                            <asp:LinkButton ID="DeleteOrderButton" CausesValidation="false" runat="server" Text="Void Order Details |"
                                 OnClick="DeleteOrderButton_Click" />
                             <asp:LinkButton ID="Modify_OrderLineDetailsLinkButton" Text="Modfy Order Line Details"
                                 runat="server" OnClick="Modify_OrderLineDetailsLinkButton_Click" />

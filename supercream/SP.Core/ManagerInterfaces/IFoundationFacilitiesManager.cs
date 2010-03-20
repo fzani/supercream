@@ -50,7 +50,7 @@ namespace SP.Core.ManagerInterfaces
         CreditNote SaveCreditNote(CreditNote creditnote);
         CreditNote UpdateCreditNote(CreditNote newCreditNote, CreditNote origCreditNote);
         List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo);
-        #endregion 
+        #endregion
 
         #region Customer
         bool CustomerExistsByName(string name);
@@ -85,6 +85,7 @@ namespace SP.Core.ManagerInterfaces
         OrderHeader CreateInvoice(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
         OrderHeader CreateInvoiceProforma(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
         OrderHeader CreateDeliveryNote(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
+        void VoidOrder(int orderID);
 
         List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus);
         bool OrderHeaderExists(string orderNo);

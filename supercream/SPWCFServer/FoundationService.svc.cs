@@ -1249,6 +1249,20 @@ namespace SPWCFServer
             }
         }
 
+        public void VoidOrder(int orderID)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                mgr.VoidOrder(orderID);
+            }
+            catch (Exception ex)
+            {
+                // Log full Exception to be done ...
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         #endregion
 
         #region OrderLine

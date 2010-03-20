@@ -446,7 +446,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             if (OrderID != -1 || OrderID != null)
             {
                 OrderHeaderUI ui = new OrderHeaderUI();
-                ui.DeleteOrderHeader(OrderID.Value);
+                ui.VoidOrder(OrderID.Value);
 
                 ChangeState += new EventHandler<EventArgs>(InitLoadState);
                 ChangeState(this, e);
@@ -684,7 +684,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     {
         Util.ClearControls(OrderSearchPanel);
         DataBind();
-    }   
+    }
 
     protected void CreateInvoiceButton_Click(object sender, EventArgs e)
     {
