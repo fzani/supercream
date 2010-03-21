@@ -93,8 +93,7 @@ public class ProductUI : IDisposable
             updatedProduct.ProductCode = newProduct.ProductCode;
             updatedProduct.RRPPerItem = newProduct.RRPPerItem;
             updatedProduct.UnitPrice = newProduct.UnitPrice;
-            updatedProduct.UnitQty = newProduct.UnitQty;
-            updatedProduct.VatCodeID = newProduct.VatCodeID;
+            updatedProduct.UnitQty = newProduct.UnitQty;          
             updatedProduct.VatExempt = newProduct.VatExempt;
 
             _proxy.UpdateProduct(updatedProduct, origProduct);

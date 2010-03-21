@@ -58,7 +58,7 @@
                         </table>
                     </div>
                 </div>
-            </asp:Panel>          
+            </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:UpdatePanel ID="AddProductUpdatePanel" runat="server" UpdateMode="Conditional">
@@ -140,19 +140,10 @@
                                 </td>
                                 <td>
                                     <asp:RadioButtonList ID="VatExemptionRadioButtonList" runat="server" RepeatDirection="Horizontal"
-                                        Width="250px" AutoPostBack="True" OnSelectedIndexChanged="VatExemptionRadioButtonList_SelectedIndexChanged">
+                                        Width="250px" AutoPostBack="True">
                                         <asp:ListItem Text="Yes"></asp:ListItem>
                                         <asp:ListItem Text="No" Selected="True"></asp:ListItem>
                                     </asp:RadioButtonList>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Vat Code
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="VatCodeDropDownList" runat="server" Width="300px">
-                                    </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
@@ -349,19 +340,10 @@
                                 </td>
                                 <td>
                                     <asp:RadioButtonList ID="ModifyVatExemptionRadioButtonList" runat="server" RepeatDirection="Horizontal"
-                                        Width="250px" AutoPostBack="True" OnSelectedIndexChanged="ModifiedVatExemptionRadioButtonList_SelectedIndexChanged">
+                                        Width="250px" AutoPostBack="True">
                                         <asp:ListItem Text="Yes"></asp:ListItem>
                                         <asp:ListItem Text="No" Selected="True"></asp:ListItem>
                                     </asp:RadioButtonList>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Vat Code
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="ModifyVatCodeDropDownList" runat="server" Width="300px">
-                                    </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>

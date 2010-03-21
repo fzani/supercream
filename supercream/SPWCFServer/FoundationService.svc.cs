@@ -1906,11 +1906,7 @@ namespace SPWCFServer
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
 
                 SP.Core.Domain.Product codeProduct = mgr.GetProduct(id);
-                Product prod = ObjectExtension.CloneProperties<SP.Core.Domain.Product, SPWCFServer.Product>(codeProduct);
-
-                VatCode cde = ObjectExtension.CloneProperties<SP.Core.Domain.VatCode, SPWCFServer.VatCode>(codeProduct.VatCode);
-                prod.VatCode = cde;
-                return prod;
+                return ObjectExtension.CloneProperties<SP.Core.Domain.Product, SPWCFServer.Product>(codeProduct);
             }
             catch (Exception ex)
             {

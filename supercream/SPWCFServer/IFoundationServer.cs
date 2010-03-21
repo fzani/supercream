@@ -2705,7 +2705,6 @@ namespace SPWCFServer
     [DataContract]
     public class Product
     {
-        private int? _VatCodeID;
         private int _ID;
         private string _ProductCode;
         private string _Description;
@@ -2726,20 +2725,7 @@ namespace SPWCFServer
             {
                 _ID = value;
             }
-        }
-
-        [DataMember]
-        public int? VatCodeID
-        {
-            get
-            {
-                return _VatCodeID;
-            }
-            set
-            {
-                _VatCodeID = value;
-            }
-        }
+        }       
 
         [DataMember]
         public string ProductCode

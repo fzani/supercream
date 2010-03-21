@@ -252,8 +252,7 @@
   </Table>
   <Table Name="dbo.Product" Member="Product">
     <Type Name="Product">
-      <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
-      <Column Name="VatCodeID" Member="VatCodeID" Storage="_VatCodeID" DbType="Int" />
+      <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />      
       <Column Name="ProductCode" Member="ProductCode" Storage="_ProductCode" DbType="VarChar(10)" />
       <Column Name="Description" Member="Description" Storage="_Description" DbType="VarChar(150)" />
       <Column Name="UnitQty" Member="UnitQty" Storage="_UnitQty" DbType="int" />
@@ -262,8 +261,7 @@
       <Column Name="VatExempt" Member="VatExempt" Storage="_VatExempt" DbType="bit" />
 
       <Association Name="FK_OrderLine_Product" Member="OrderLine" Storage="_OrderLine" ThisKey="ID" OtherKey="ProductID" DeleteRule="NO ACTION" />
-      <Association Name="FK_PriceListItem_Product" Member="PriceListItem" Storage="_PriceListItem" ThisKey="ID" OtherKey="ProductID" DeleteRule="NO ACTION" />
-      <Association Name="FK_Product_VatCode" Member="VatCode" Storage="_VatCode" ThisKey="VatCodeID" OtherKey="ID" IsForeignKey="true" />
+      <Association Name="FK_PriceListItem_Product" Member="PriceListItem" Storage="_PriceListItem" ThisKey="ID" OtherKey="ProductID" DeleteRule="NO ACTION" />     
     </Type>
   </Table>
   <Table Name="dbo.SpecialInvoiceHeader" Member="SpecialInvoiceHeader">
