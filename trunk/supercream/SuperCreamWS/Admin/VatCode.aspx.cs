@@ -31,7 +31,9 @@ public partial class Admin_VatCode : System.Web.UI.Page
             DataBind();
         }
         else
+        {
             ErrorViewControl.Visible = false;
+        }
     }
 
     #endregion
@@ -140,6 +142,8 @@ public partial class Admin_VatCode : System.Web.UI.Page
 
     protected void VatCodeGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
+        PopulateDropDownList();
+
         ErrorViewControl.Visible = false;
     }
 

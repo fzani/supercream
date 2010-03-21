@@ -7,8 +7,7 @@ namespace SP.Core.Domain
 {
     [Serializable]
     public class Product : BaseEntity
-    {
-        private int? _VatCodeID;
+    {        
         private string _ProductCode;
         private string _Description;
         private int _UnitQty;
@@ -27,19 +26,7 @@ namespace SP.Core.Domain
             {
                 base.ID = value;
             }
-        }
-
-        public int? VatCodeID
-        {
-            get
-            {
-                return _VatCodeID;
-            }
-            set
-            {
-                _VatCodeID = value;
-            }
-        }
+        }       
 
         public string ProductCode
         {
@@ -81,13 +68,7 @@ namespace SP.Core.Domain
             {
                 _RRPPerItem = value;
             }
-        }
-
-        public VatCode VatCode
-        {
-            get { return _VatCode; }
-            set { _VatCode = value; }
-        }
+        }       
 
         public bool VatExempt
         {

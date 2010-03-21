@@ -337,7 +337,6 @@
       <xs:element minOccurs="0" name="UnitPrice" type="xs:decimal" />
       <xs:element minOccurs="0" name="UnitQty" type="xs:int" />
       <xs:element minOccurs="0" name="VatCode" nillable="true" type="tns:VatCode" />
-      <xs:element minOccurs="0" name="VatCodeID" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="VatExempt" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>

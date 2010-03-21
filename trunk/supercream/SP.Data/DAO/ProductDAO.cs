@@ -16,10 +16,7 @@ namespace SP.Data.LTS
         #region IProduct<Product,int> Members
 
         public override Product GetById(int id)
-        {           
-            DataLoadOptions dlo = new DataLoadOptions();
-            dlo.LoadWith<Product>(p => p.VatCode);
-            db.LoadOptions = dlo;
+        {                       
             return db.Product.Single<Product>(q => q.ID == id);
         }
 
