@@ -75,6 +75,7 @@
     <Compile Include="DataInterfaces\IAccount.cs" />
     <Compile Include="DataInterfaces\ISpecialInvoiceHeaderDAO.cs" />
     <Compile Include="DataInterfaces\ISpecialInvoiceLineDAO.cs" />
+    <Compile Include="DataInterfaces\IStandardVatRateDAO.cs" />
     <Compile Include="DataInterfaces\IVan.cs" />
     <Compile Include="DataInterfaces\IProduct.cs" />
     <Compile Include="DataInterfaces\IOutletStore.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Domain\InvoiceCreditNoteDetails.cs" />
     <Compile Include="Domain\CreditNoteDetails.cs" />
     <Compile Include="Domain\CreditNote.cs" />
+    <Compile Include="Domain\StandardVatRateDTO.cs" />
     <Compile Include="Domain\VanInvoiceCount.cs" />
     <Compile Include="Domain\InvoicesWithStatus.cs" />
     <Compile Include="Domain\OrderNotesStatusDTO.cs" />

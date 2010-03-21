@@ -174,6 +174,14 @@ namespace SP.Core.ManagerInterfaces
 
         #endregion
 
+        #region StandardVatRate
+        void DeleteStandardVatRate(StandardVatRate standardvatrate);
+        StandardVatRate GetStandardVatRate(int id);
+        List<StandardVatRate> GetAllStandardVatRates();
+        StandardVatRate SaveStandardVatRate(StandardVatRate standardvatrate);
+        StandardVatRate UpdateStandardVatRate(StandardVatRate newStandardVatRate, StandardVatRate origStandardVatRate);
+        #endregion 
+
         #region Vat Codes
         void DeleteVatCode(SP.Core.Domain.VatCode cde);
         System.Collections.Generic.List<SP.Core.Domain.VatCode> GetAllVatCodes();

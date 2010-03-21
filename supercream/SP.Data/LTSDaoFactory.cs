@@ -133,6 +133,11 @@ namespace SP.Data.LTS
             return new SpecialInvoiceLineDao();
         }
 
+        public IStandardVatRateDao GetStandardVatRateDao()
+        {
+            return new StandardVatRateDao();
+        }
+
         public ITermsDao GetTermsDao()
         {
             return new TermsDao();

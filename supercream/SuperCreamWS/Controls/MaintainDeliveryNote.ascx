@@ -97,9 +97,9 @@
                                 <td>
                                 </td>
                                 <td>
-                                    <asp:Button ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
+                                    <asp:LinkButton ID="SearchButton" Text="Search | " CausesValidation="false" runat="server"
                                         OnClick="SearchButton_Click" />
-                                    <asp:Button ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
+                                    <asp:LinkButton ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
                                         OnClick="ClearButton_Click" />
                                 </td>
                             </tr>
@@ -119,7 +119,7 @@
                 <Columns>
                     <asp:TemplateField ItemStyle-Width="15%" ShowHeader="False">
                         <ItemTemplate>
-                            <asp:Button ID="SelectButton" runat="server" CausesValidation="false" CommandName="Select"
+                            <asp:LinkButton ID="SelectButton" runat="server" CausesValidation="false" CommandName="Select"
                                 CommandArgument='<%# Bind("ID") %>' Text="Select" />
                         </ItemTemplate>
                         <ItemStyle Width="15%" />
@@ -133,18 +133,27 @@
                         </EditItemTemplate>
                         <ItemStyle Width="20%" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Invoice No." ItemStyle-Width="25%" SortExpression="InvoiceNo">
+                    <asp:TemplateField HeaderText="Delivery Note." ItemStyle-Width="25%" SortExpression="DeliveryNoteNo">
                         <ItemTemplate>
-                            <asp:Label ID="InvoiceLabel" runat="server" Text='<%# Bind("InvoiceNo") %>'></asp:Label>
+                            <asp:Label ID="DeliveryNoteLabel" runat="server" Text='<%# Bind("DeliveryNoteNo") %>'></asp:Label>
                         </ItemTemplate>
                         <EditItemTemplate>
-                            <asp:TextBox ID="InvoiceTextBox" runat="server" Text='<%# Bind("InvoiceNo") %>'></asp:TextBox>
+                            <asp:TextBox ID="DeliveryNoteTextBox" runat="server" Text='<%# Bind("DeliveryNoteNo") %>'></asp:TextBox>
                         </EditItemTemplate>
                         <ItemStyle Width="20%" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Customer Name" ItemStyle-Width="40%" SortExpression="CustomerID">
                         <ItemTemplate>
-                            <asp:Label ID="CustomerNameLabel" runat="server" Text='<%# Bind("CustomerID") %>'></asp:Label>
+                            <table cellpadding="0" cellspacing="0" style="width: 100%">
+                                <tr>
+                                    <td style="width: 95%">
+                                        <asp:Label ID="CustomerNameLabel" runat="server" Text='<%# Bind("CustomerID") %>'></asp:Label>
+                                    </td>
+                                    <td style="width: 5%">
+                                        <asp:Image ID="ConfirmedImage" runat="server" ToolTip="Confirmed" ImageUrl="~/images/ok_16x16.gif" />
+                                    </td>
+                                </tr>
+                            </table>
                         </ItemTemplate>
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CustomerID") %>'></asp:TextBox>
@@ -220,6 +229,14 @@
                             Text="*" runat="server" />
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <asp:LinkButton ID="CancelDeliveryNoteSelectionButton" Text="Cancel Select Details"
+                            OnClick="CancelDeliveryButton_Click" runat="server"></asp:LinkButton>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
             </table>
             <asp:Panel ID="OrderHeaderDetailsPanel" Visible="false" runat="server">
                 <table style="width: 100%">
@@ -234,8 +251,7 @@
                             <asp:Button ID="CreateInvoiceButton" Text="Create Invoice" runat="server" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 OnClick="CreateInvoiceButton_Click" />
                             <asp:Button ID="PrintDeliveryNoteButton" ValidationGroup="ModifyInvoiceDetailsGroup"
-                                Visible="false" Text="Print Delivery Note" runat="server" 
-                                onclick="PrintDeliveryNoteButton_Click" />
+                                Visible="false" Text="Print Delivery Note" runat="server" OnClick="PrintDeliveryNoteButton_Click" />
                             <asp:Button ID="RePrintDeliveryButton" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 Visible="false" Text="RePrint Delivery Note" runat="server" />
                             <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
@@ -287,7 +303,7 @@
                             Payment Terms
                         </td>
                         <td class="emphasise" style="width: 25%">
-                            Invoice No
+                            Delivery Note No.
                         </td>
                         <td class="emphasise" style="width: 25%">
                             Delivery Van
@@ -301,7 +317,7 @@
                             <asp:Label ID="PaymentTermsLabel" runat="server"></asp:Label>
                         </td>
                         <td style="width: 25%">
-                            <asp:Label ID="InvoiceLabel" runat="server"></asp:Label>
+                            <asp:Label ID="DeliveryNoteNoLabel" runat="server"></asp:Label>
                         </td>
                         <td style="width: 25%">
                             <asp:DropDownList ID="DeliveryVanDropDownList" AutoPostBack="true" runat="server"
@@ -405,19 +421,20 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        <b>Vat Registration No.: &nbsp;</b>
                                         <asp:Label ID="YourAddressVatRegistrationNo" runat="server"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        Tel:
+                                        <b>Tel:</b>
                                         <asp:Label ID="OfficePhoneNumber1Label1" runat="server"></asp:Label>
-                                        or
+                                        &nbsp; or &nbsp;
+                                        <asp:Label ID="OfficePhoneNumber1Label2" runat="server"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:Label ID="OfficePhoneNumber1Label2" runat="server"></asp:Label>
                                     </td>
                                 </tr>
                             </table>

@@ -487,6 +487,30 @@ namespace SPWCFServer
 
         #endregion
 
+        #region StandardVatRate
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        void DeleteStandardVatRate(StandardVatRate standardVatRate);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<StandardVatRate> GetAllStandardVatRates();
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        StandardVatRate GetStandardVatRate(int id);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        StandardVatRate SaveStandardVatRate(StandardVatRate standardVatRate);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        StandardVatRate UpdateStandardVatRate(StandardVatRate newStandardVatRate, StandardVatRate origStandardVatRate);
+
+        #endregion
+
         #region Terms
         [OperationContract]
         Terms SaveTerm(Terms code);
@@ -3041,6 +3065,39 @@ namespace SPWCFServer
             set
             {
                 _SpecialInstructions = value;
+            }
+        }
+    }
+
+    [DataContract]
+    public class StandardVatRate
+    {
+        private int _ID;
+        private int _VatCodeID;
+
+        [DataMember]
+        public int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+
+        [DataMember]
+        public int VatCodeID
+        {
+            get
+            {
+                return _VatCodeID;
+            }
+            set
+            {
+                _VatCodeID = value;
             }
         }
     }

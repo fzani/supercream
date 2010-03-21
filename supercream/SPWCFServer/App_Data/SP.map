@@ -295,6 +295,13 @@
       <Association Name="FK_SpecialInvoiceLines_SpecialInvoiceHeader" Member="SpecialInvoiceHeader" Storage="_SpecialInvoiceHeader" ThisKey="SpecialInvoiceID" OtherKey="ID" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.StandardVatRate" Member="StandardVatRate">
+    <Type Name="StandardVatRate">
+      <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
+      <Column Name="VatCodeID" Member="VatCodeID" Storage="_VatCodeID" DbType="Int" />
+      <Association Name="FK_StandardVatRate_VatCode" Member="VatCode" Storage="_VatCode" ThisKey="ID" OtherKey="ID" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Terms" Member="Terms">
     <Type Name="Terms">
       <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />

@@ -33,6 +33,7 @@ namespace SP.Core.DataInterfaces
         IProformaInvoiceDao GetProformaInvoiceDao();
         ISpecialInvoiceHeaderDao GetSpecialInvoiceHeaderDao();
         ISpecialInvoiceLineDao GetSpecialInvoiceLineDao();
+        IStandardVatRateDao GetStandardVatRateDao();
         ITermsDao GetTermsDao();
         IVanDao GetVanDao();
         IVatCodeDao GetVatCodeDao();

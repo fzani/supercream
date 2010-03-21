@@ -69,6 +69,7 @@
     <Compile Include="DAO\OrderNotesStatusDAO.cs" />
     <Compile Include="DAO\SpecialInvoiceHeaderDAO.cs" />
     <Compile Include="DAO\SpecialInvoiceLineDAO.cs" />
+    <Compile Include="DAO\StandardVatRateDAO.cs" />
     <Compile Include="DAO\VanDAO.cs" />
     <Compile Include="DAO\OutletStoreDAO.cs" />
     <Compile Include="DAO\CustomerDAO.cs" />

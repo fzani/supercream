@@ -85,7 +85,11 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
                 InvoiceReprinted = false,
                 OrderID = OrderID.Value,
                 PicklistDateGenerated = Defaults.MinDateTime,
-                PicklistGenerated = false
+                PicklistGenerated = false,
+                DeliveryNoteDateCreated = Defaults.MinDateTime,
+                InvoiceDateCreated = Defaults.MinDateTime,
+                InvoicePaymentComplete = false,
+                InvoiceProformaDateCreated = Defaults.MinDateTime
             };
 
             OrderNotesStatusUI ui = new OrderNotesStatusUI();
@@ -93,6 +97,8 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
+
+            DataBind();
         }
         catch (Exception ex)
         {
@@ -121,7 +127,11 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
                 InvoiceReprinted = false,
                 OrderID = OrderID.Value,
                 PicklistDateGenerated = Defaults.MinDateTime,
-                PicklistGenerated = false
+                PicklistGenerated = false,
+                DeliveryNoteDateCreated = Defaults.MinDateTime,
+                InvoiceDateCreated = Defaults.MinDateTime,
+                InvoicePaymentComplete = false,
+                InvoiceProformaDateCreated = Defaults.MinDateTime
             };
             OrderNotesStatusUI ui = new OrderNotesStatusUI();
             ui.Update(status);
@@ -168,7 +178,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
         try
         {
             OrderHeaderUI ui = new OrderHeaderUI();
-            ui.UpdateToInvoice(OrderID.Value);
+            ui.CreateInvoice(OrderID.Value);
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
@@ -181,6 +191,14 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             args.AddErrorMessages(ex.Message);
             ErrorMessageEventHandler(this, args);
         }
+    }
+
+    protected void CancelDeliveryButton_Click(object sender, EventArgs e)
+    {
+        ChangeState += new EventHandler<EventArgs>(PageLoadState);
+        ChangeState(this, e);
+
+        DataBind();
     }
 
     protected void ClearButton_Click(object sender, EventArgs e)
@@ -262,6 +280,23 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
 
             CustomerUI ui = new CustomerUI();
             Customer customer = ui.GetByID(customerID);
+
+            Image confirmedImage = e.Row.FindControl("ConfirmedImage") as Image;
+            if (confirmedImage != null)
+            {
+                if (orderHeader.ID != -1)
+                {
+                    OrderNotesStatusUI orderNotesStatusUI = new OrderNotesStatusUI();
+                    if (orderNotesStatusUI.OrderNoteExistsByOrderID(orderHeader.ID))
+                    {
+                        confirmedImage.Visible = true;
+                    }
+                    else
+                    {
+                        confirmedImage.Visible = false;
+                    }
+                }
+            }
 
             Label customerNameLabel = e.Row.FindControl("CustomerNameLabel") as Label;
             customerNameLabel.Text = customer.Name;
@@ -353,13 +388,20 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
     #region Page States
     public void PageLoadState(object sender, EventArgs args)
     {
+        DeliveryNoteSearchCriteriaPanel.Visible = true;
+        DeliveryNoteHeaderSearchGridPanel.Visible = true;
+
         DeliveryNoteEntryPanel.Visible = false;
         DisplayDeliveryNotePanel.Visible = false;
         OrderHeaderDetailsPanel.Visible = false;
+        DeliveryNoteRepeater.Visible = false;
     }
 
     public void SelectedOrderState(object sender, EventArgs args)
     {
+        DeliveryNoteSearchCriteriaPanel.Visible = false;
+        DeliveryNoteHeaderSearchGridPanel.Visible = false;
+
         DeliveryNoteEntryPanel.Visible = true;
         DisplayDeliveryNotePanel.Visible = false;
         DeliveryNoteRepeater.Visible = false;
@@ -368,6 +410,9 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
 
     public void DeliveryNotSelected(object sender, EventArgs args)
     {
+        DeliveryNoteSearchCriteriaPanel.Visible = false;
+        DeliveryNoteHeaderSearchGridPanel.Visible = false;
+
         DeliveryNoteEntryPanel.Visible = true;
         DisplayDeliveryNotePanel.Visible = false;
         DeliveryNoteRepeater.Visible = false;
@@ -376,6 +421,9 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
 
     public void DeliverySelectedState(object sender, EventArgs args)
     {
+        DeliveryNoteSearchCriteriaPanel.Visible = false;
+        DeliveryNoteHeaderSearchGridPanel.Visible = false;
+
         DeliveryNoteEntryPanel.Visible = true;
         DisplayDeliveryNotePanel.Visible = true;
         DeliveryNoteRepeater.Visible = true;
@@ -465,11 +513,14 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             Label totalItemsLabel = e.Item.FindControl("TotalItemsLabel") as Label;
             totalItemsLabel.Text = totalRowCount.ToString();
 
-            OrderHeaderUI headerUI = new OrderHeaderUI();
-            OrderHeader orderHeader = headerUI.GetById(OrderID.Value);
+            if (OrderID != -1)
+            {
+                OrderHeaderUI headerUI = new OrderHeaderUI();
+                OrderHeader orderHeader = headerUI.GetById(OrderID.Value);
 
-            Label deliveryDateLabel = e.Item.FindControl("DeliveryDateLabel") as Label;
-            deliveryDateLabel.Text = orderHeader.DeliveryDate.ToShortDateString();
+                Label deliveryDateLabel = e.Item.FindControl("DeliveryDateLabel") as Label;
+                deliveryDateLabel.Text = orderHeader.DeliveryDate.ToShortDateString();
+            }
 
             totalRowCount = 0;
         }
@@ -487,7 +538,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
         OrderHeader orderHeader = orderHeaderUI.GetById(OrderID.Value);
 
         DateOfOrderLabel.Text = orderHeader.OrderDate.ToShortDateString();
-        InvoiceLabel.Text = orderHeader.InvoiceNo;
+        DeliveryNoteNoLabel.Text = orderHeader.DeliveryNoteNo;
 
         // Get Delivery Details
         int outletID = Convert.ToInt32(DeliveryDropDownList.SelectedValue);

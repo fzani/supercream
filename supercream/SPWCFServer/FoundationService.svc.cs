@@ -2338,6 +2338,87 @@ namespace SPWCFServer
 
         #endregion
 
+        #region StandardVatRate
+
+        public void DeleteStandardVatRate(StandardVatRate standardVatRate)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                mgr.DeleteStandardVatRate(ObjectExtension.CloneProperties<SPWCFServer.StandardVatRate, SP.Core.Domain.StandardVatRate>(standardVatRate));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete, it is likely that there are dependent items still linked to it");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public List<StandardVatRate> GetAllStandardVatRates()
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.StandardVatRate> standardVatRateList = mgr.GetAllStandardVatRates();
+                return ObjectExtension.CloneList<SP.Core.Domain.StandardVatRate, SPWCFServer.StandardVatRate>(standardVatRateList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public StandardVatRate GetStandardVatRate(int id)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.StandardVatRate standardVatRate = mgr.GetStandardVatRate(id);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.StandardVatRate, SPWCFServer.StandardVatRate>(standardVatRate);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public StandardVatRate SaveStandardVatRate(StandardVatRate standardVatRate)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.StandardVatRate coreStandardVatRate =
+                   ObjectExtension.CloneProperties<SPWCFServer.StandardVatRate, SP.Core.Domain.StandardVatRate>(standardVatRate);
+                coreStandardVatRate = mgr.SaveStandardVatRate(coreStandardVatRate);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.StandardVatRate, SPWCFServer.StandardVatRate>(coreStandardVatRate);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public StandardVatRate UpdateStandardVatRate(StandardVatRate newStandardVatRate, StandardVatRate origStandardVatRate)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+
+                return ObjectExtension.CloneProperties<SP.Core.Domain.StandardVatRate, SPWCFServer.StandardVatRate>
+                   (mgr.UpdateStandardVatRate(ObjectExtension.CloneProperties<SPWCFServer.StandardVatRate, SP.Core.Domain.StandardVatRate>(newStandardVatRate),
+                      ObjectExtension.CloneProperties<SPWCFServer.StandardVatRate, SP.Core.Domain.StandardVatRate>(origStandardVatRate)));
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        #endregion
+
         #region ITerm Members
 
         public void DeleteTerm(Terms term)
