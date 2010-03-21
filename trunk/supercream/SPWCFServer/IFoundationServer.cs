@@ -490,6 +490,9 @@ namespace SPWCFServer
         #region StandardVatRate
 
         [OperationContract]
+        bool StandardVatRateExists();
+
+        [OperationContract]
         [ReferencePreservingDataContractFormat]
         void DeleteStandardVatRate(StandardVatRate standardVatRate);
 
@@ -499,7 +502,7 @@ namespace SPWCFServer
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
-        StandardVatRate GetStandardVatRate(int id);
+        StandardVatRate GetStandardVatRate();
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]

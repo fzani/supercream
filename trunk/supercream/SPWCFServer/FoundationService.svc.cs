@@ -2340,6 +2340,23 @@ namespace SPWCFServer
 
         #region StandardVatRate
 
+        public bool StandardVatRateExists()
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return mgr.StandardVatRateExists();
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete, it is likely that there are dependent items still linked to it");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public void DeleteStandardVatRate(StandardVatRate standardVatRate)
         {
             try
@@ -2371,12 +2388,12 @@ namespace SPWCFServer
             }
         }
 
-        public StandardVatRate GetStandardVatRate(int id)
+        public StandardVatRate GetStandardVatRate()
         {
             try
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
-                SP.Core.Domain.StandardVatRate standardVatRate = mgr.GetStandardVatRate(id);
+                SP.Core.Domain.StandardVatRate standardVatRate = mgr.GetStandardVatRate();
                 return ObjectExtension.CloneProperties<SP.Core.Domain.StandardVatRate, SPWCFServer.StandardVatRate>(standardVatRate);
             }
             catch (Exception ex)
@@ -2603,6 +2620,7 @@ namespace SPWCFServer
             }
         }
         #endregion
+
     }
 }
 

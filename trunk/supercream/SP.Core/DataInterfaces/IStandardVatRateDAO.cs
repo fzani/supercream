@@ -12,7 +12,9 @@ using SP.Core.Domain;
 
 namespace SP.Core.DataInterfaces
 {
-   public interface IStandardVatRateDao : IDao<StandardVatRate, int>
-   {
-   }
+    public interface IStandardVatRateDao : IDao<StandardVatRate, int>
+    {
+        StandardVatRate Get();
+        bool Exists();
+    }
 }

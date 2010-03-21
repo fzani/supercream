@@ -78,6 +78,10 @@ public partial class Admin_VatCode : System.Web.UI.Page
     {
         if (SelectStandardVatRateDropDownList.SelectedValue != "-1")
         {
+            StandardVatCodeUI ui = new StandardVatCodeUI();
+            ui.SaveStandardVatCode(new StandardVatRate { ID = -1, VatCodeID = Convert.ToInt32(SelectStandardVatRateDropDownList.SelectedItem.Value) });
+
+            PopulateDropDownList();
         }
     }
 
@@ -99,6 +103,8 @@ public partial class Admin_VatCode : System.Web.UI.Page
             ChangeState(this, e);
             DataBind();
         }
+
+        PopulateDropDownList();
     }
 
     protected void VatCodeGridView_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -271,8 +277,35 @@ public partial class Admin_VatCode : System.Web.UI.Page
             );
 
             vatCodeList.ForEach(vatCodeAction);
+
+            StandardVatCodeUI standardVatCodeUI = new StandardVatCodeUI();
+            if (standardVatCodeUI.Exists())
+            {
+                StandardVatRate standardVatRate = standardVatCodeUI.GetStandardVatCode();
+                SelectStandardVatRateDropDownList.SelectedValue = standardVatRate.VatCodeID.ToString();
+            }
+
+            SetDropDownListState();
+
         }
     }
 
     #endregion
+
+    protected void SelectStandardVatRateDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        SetDropDownListState();
+    }
+
+    private void SetDropDownListState()
+    {
+        if (SelectStandardVatRateDropDownList.SelectedValue == "-1")
+        {
+            SaveSelectionButton.Enabled = false;
+        }
+        else
+        {
+            SaveSelectionButton.Enabled = true;
+        }
+    }
 }

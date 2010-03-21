@@ -52,7 +52,7 @@
     </Type>
   </Table>
   <Table Name="dbo.CreditNote" Member="CreditNote">
-    <Type Name="CreditNote">      
+    <Type Name="CreditNote">
       <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
       <Column Name="OrderID" Member="OrderID" Storage="_OrderID" DbType="Int" />
       <Column Name="CreditAmount" Member="CreditAmount" Storage="_CreditAmount" DbType="Decimal(18,2)" />
@@ -157,7 +157,7 @@
       <Column Name="ReasonForVoiding" Member="ReasonForVoiding" Storage="_ReasonForVoiding" DbType="VarChar(MAX)" />
       <Association Name="FK_Note_Order" Member="Note" Storage="_Note" ThisKey="ID" OtherKey="ParentNoteID" DeleteRule="NO ACTION" />
       <Association Name="FK_Order_Customer" Member="Customer" Storage="_Customer" ThisKey="CustomerID" OtherKey="ID" IsForeignKey="true" />
-      <Association Name="FK_OrderLine_Order" Member="OrderLine" Storage="_OrderLine" ThisKey="ID" OtherKey="OrderID" DeleteRule="NO ACTION" />     
+      <Association Name="FK_OrderLine_Order" Member="OrderLine" Storage="_OrderLine" ThisKey="ID" OtherKey="OrderID" DeleteRule="NO ACTION" />
     </Type>
   </Table>
   <Table Name="dbo.OrderLine" Member="OrderLine">
@@ -175,7 +175,7 @@
       <Association Name="FK_OrderLine_Order" Member="OrderHeader" Storage="_OrderHeader" ThisKey="OrderID" OtherKey="ID" IsForeignKey="true" />
       <Association Name="FK_OrderLine_Product" Member="Product" Storage="_Product" ThisKey="ProductID" OtherKey="ID" IsForeignKey="true" />
     </Type>
-  </Table> 
+  </Table>
   <Table Name="dbo.OrderNotesStatus" Member="OrderNotesStatus">
     <Type Name="OrderNotesStatus">
       <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
@@ -194,7 +194,7 @@
       <Column Name="InvoiceDatePrinted" Member="InvoiceDatePrinted" Storage="_InvoiceDatePrinted" DbType="DateTime" />
       <Column Name="InvoiceDateReprinted" Member="InvoiceDateReprinted" Storage="_InvoiceDateReprinted" DbType="DateTime" />
       <Column Name="PicklistDateGenerated" Member="PicklistDateGenerated" Storage="_PicklistDateGenerated" DbType="DateTime" />
-      <Column Name="InvoicePaymentComplete" Member="InvoicePaymentComplete" Storage="_InvoicePaymentComplete" DbType="Bit" />     
+      <Column Name="InvoicePaymentComplete" Member="InvoicePaymentComplete" Storage="_InvoicePaymentComplete" DbType="Bit" />
       <Column Name="InvoiceDateCreated" Member="InvoiceDateCreated" Storage="_InvoiceDateCreated" DbType="DateTime" />
       <Column Name="DeliveryNoteDateCreated" Member="DeliveryNoteDateCreated" Storage="_DeliveryNoteDateCreated" DbType="DateTime" />
       <Column Name="InvoiceProformaDateCreated" Member="InvoiceProformaDateCreated" Storage="_InvoiceProformaDateCreated" DbType="DateTime" />
@@ -299,7 +299,7 @@
     <Type Name="StandardVatRate">
       <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
       <Column Name="VatCodeID" Member="VatCodeID" Storage="_VatCodeID" DbType="Int" />
-      <Association Name="FK_StandardVatRate_VatCode" Member="VatCode" Storage="_VatCode" ThisKey="ID" OtherKey="ID" IsForeignKey="true" />
+      <Association Name="FK_StandardVatRate_VatCode" Member="VatCode" Storage="_VatCode" ThisKey="VatCodeID" OtherKey="ID" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Terms" Member="Terms">
@@ -326,7 +326,7 @@
       <Column Name="PercentageValue" Member="PercentageValue" DbType="real" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="VatExemptible" Member="VatExemptible" DbType="bit" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Version" Member="Version" DbType="rowversion NOT NULL"  IsDbGenerated="true" IsVersion="true" UpdateCheck="Never" />
-      <Association Name="FK_Product_VatCode" Member="Product" Storage="_Product" ThisKey="ID" OtherKey="VatCodeID"  DeleteRule="NO ACTION" />
+      <Association Name="FK_StandardVatRate_VatCode" Member="StandardVatRate" Storage="_StandardVatRate" ThisKey="ID" OtherKey="VatCodeID" DeleteRule="NO ACTION" />
     </Type>
   </Table>
 </Database>

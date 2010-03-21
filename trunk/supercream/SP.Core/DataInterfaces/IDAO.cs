@@ -31,6 +31,7 @@ namespace SP.Core.DataInterfaces
         T GetById(IdT id);
         List<T> GetAll();
         T Save(T entity);
+        T Update(T newEntity);
         T Update(T entity, T originalEntity);
         T Update(T entity, T originalEntity, bool attach);
         void Delete(T entity);

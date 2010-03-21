@@ -60,6 +60,17 @@ namespace SP.Data.LTS
             return entity;
         }
 
+        public virtual T Update(T newEntity)
+        {
+            db.Log = Console.Out;
+
+            ITable tab = db.GetTable(newEntity.GetType());           
+            tab.Attach(newEntity, true);
+               
+            this.CommitChanges();
+            return newEntity;
+        }
+
         public virtual T Update(T newEntity, T originalEntity, bool attach)
         {
             db.Log = Console.Out;

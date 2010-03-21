@@ -10,6 +10,7 @@
         <Triggers>
             <asp:PostBackTrigger ControlID="AddVatCodeButton" />
             <asp:PostBackTrigger ControlID="VatCodeGridView" />
+            <asp:PostBackTrigger ControlID="SaveSelectionButton" />
         </Triggers>
         <ContentTemplate>
             <div class="ErrorOutput">
@@ -123,6 +124,7 @@
     <asp:UpdatePanel ID="SelectVatCodeUpdatePanel" runat="server" UpdateMode="Conditional">
         <Triggers>
             <asp:PostBackTrigger ControlID="AddVatCodeButton" />
+            <asp:PostBackTrigger ControlID="VatCodeGridView" />                  
         </Triggers>
         <ContentTemplate>
             <div class="FormInput">
@@ -130,11 +132,15 @@
                     <div class="RightBox">
                         <b>Select Standard Vat Rate &nbsp;</h>
                             <div class="VatSelection">
-                                <asp:DropDownList ID="SelectStandardVatRateDropDownList" Style="width: 250px" runat="server">
+                                <asp:DropDownList ID="SelectStandardVatRateDropDownList" Style="width: 250px" 
+                                    runat="server" 
+                                    
+                                    onselectedindexchanged="SelectStandardVatRateDropDownList_SelectedIndexChanged" 
+                                    AutoPostBack="True">
                                 </asp:DropDownList>
                                 <br />
-                                <asp:Button ID="SaveSelectionButton" Text="Save Selection" runat="server" 
-                                    Style="margin: 5px 0px 5px 0px;" onclick="SaveSelectionButton_Click" />
+                                <asp:Button ID="SaveSelectionButton" Text="Save Selection" runat="server" Style="margin: 5px 0px 5px 0px;"
+                                    OnClick="SaveSelectionButton_Click" />
                             </div>
                     </div>
                 </fieldset>
@@ -143,7 +149,7 @@
     </asp:UpdatePanel>
     <asp:UpdatePanel ID="VatCodeGridUpdatePanel" runat="server" UpdateMode="Conditional">
         <Triggers>
-            <asp:PostBackTrigger ControlID="AddVatCodeButton" />
+            <asp:PostBackTrigger ControlID="AddVatCodeButton" />            
         </Triggers>
         <ContentTemplate>
             <div class="FormInput">

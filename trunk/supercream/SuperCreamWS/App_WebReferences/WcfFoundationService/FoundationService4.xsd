@@ -15,6 +15,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SpecialInvoiceLine" nillable="true" type="tns:SpecialInvoiceLine" />
+  <xs:complexType name="StandardVatRate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="VatCodeID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StandardVatRate" nillable="true" type="tns:StandardVatRate" />
+  <xs:complexType name="ArrayOfStandardVatRate">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="StandardVatRate" nillable="true" type="tns:StandardVatRate" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStandardVatRate" nillable="true" type="tns:ArrayOfStandardVatRate" />
   <xs:complexType name="Terms">
     <xs:sequence>
       <xs:element minOccurs="0" name="Account" nillable="true" type="tns:Account" />
