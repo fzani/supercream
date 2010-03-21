@@ -11,7 +11,13 @@ using WcfFoundationService;
 
 public partial class Admin_VatCode : System.Web.UI.Page
 {
-    EventHandler<EventArgs> ChangeState;
+    #region private Event Handlers
+
+    private EventHandler<EventArgs> ChangeState;
+
+    #endregion
+
+    #region Page Load Event
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -20,11 +26,17 @@ public partial class Admin_VatCode : System.Web.UI.Page
             ChangeState += new EventHandler<EventArgs>(PageDefaultLoadState);
             ChangeState(this, e);
 
+            PopulateDropDownList();
+
             DataBind();
         }
         else
             ErrorViewControl.Visible = false;
     }
+
+    #endregion
+
+    #region General Event Handlers
 
     protected void AddVatCodeButton_Click(object sender, EventArgs e)
     {
@@ -56,6 +68,22 @@ public partial class Admin_VatCode : System.Web.UI.Page
             ErrorViewControl.Visible = true;
         }
     }
+
+    protected void VatExemptableCode_CheckedChanged(object sender, EventArgs e)
+    {
+        PercentageTextBox.Text = "0";
+    }
+
+    protected void SaveSelectionButton_Click(object sender, EventArgs e)
+    {
+        if (SelectStandardVatRateDropDownList.SelectedValue != "-1")
+        {
+        }
+    }
+
+    #endregion
+
+    #region Grid Event Handlers
 
     protected void VatCodeGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
     {
@@ -109,10 +137,9 @@ public partial class Admin_VatCode : System.Web.UI.Page
         ErrorViewControl.Visible = false;
     }
 
-    protected void VatExemptableCode_CheckedChanged(object sender, EventArgs e)
-    {
-        PercentageTextBox.Text = "0";
-    }
+    #endregion
+
+    #region Object Data Source Events
 
     /***************************************************************************
      * Object Data Source Events
@@ -162,6 +189,10 @@ public partial class Admin_VatCode : System.Web.UI.Page
             HandleException(ex, e);
     }
 
+    #endregion
+
+    #region General Exception Handlers
+
     /**************************************************************************
     * General Exception handlers
     ***************************************************************************/
@@ -183,6 +214,10 @@ public partial class Admin_VatCode : System.Web.UI.Page
         ErrorViewControl.DataBind();
     }
 
+    #endregion
+
+    #region Page States
+
     /***************************************************************************
      * Page Event States
      ***************************************************************************/
@@ -196,4 +231,48 @@ public partial class Admin_VatCode : System.Web.UI.Page
             Util.ClearFields(this.Page);
         }
     }
+
+    #endregion
+
+    #region Private Helpers
+
+    private void PopulateDropDownList()
+    {
+        VatCodeUI vatCodeUI = new VatCodeUI();
+        List<VatCode> vatCodeList = new List<VatCode>();
+
+        SelectStandardVatRateDropDownList.Items.Clear();
+        SelectStandardVatRateDropDownList.Items.Add
+        (
+            new ListItem
+            {
+                Value = "-1",
+                Text = "-- No Item Selected"
+            }
+        );
+
+        vatCodeList = vatCodeUI.GetAllVatCodes()
+            .Where(q => q.PercentageValue != 0)
+            .ToList<VatCode>();
+        if (vatCodeList.Count > 0)
+        {
+            Action<VatCode> vatCodeAction = new Action<VatCode>
+            (
+                q =>
+                {
+                    ListItem item = new ListItem
+                    {
+                        Value = q.ID.ToString(),
+                        Text = q.Description
+                    };
+
+                    SelectStandardVatRateDropDownList.Items.Add(item);
+                }
+            );
+
+            vatCodeList.ForEach(vatCodeAction);
+        }
+    }
+
+    #endregion
 }

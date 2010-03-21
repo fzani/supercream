@@ -71,4 +71,20 @@
     padding: 0x;
 }
 
+.RightBox
+{
+    text-align: right;
+    padding: 5px;
+}
 
+.VatSelection
+{
+    float: right;
+    text-align: left;
+    display: inline;
+}
+
+.SaveSelection
+{
+    margin: 5px 0px 5px 0px;
+}
