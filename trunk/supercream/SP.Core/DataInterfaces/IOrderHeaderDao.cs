@@ -16,5 +16,6 @@ namespace SP.Core.DataInterfaces
         string GenerateOrderNo();
         string GenerateInvoiceNo();
         string GenerateDeliveryNoteNo();
+        string GenerateInvoiceProformaNo();
     }
 }

@@ -16,6 +16,7 @@ namespace SP.Core.Domain
         private short _OrderStatus;
         private string _SpecialInstructions;
         private string _InvoiceNo;
+        private string _InvoiceProformaNo;        
         private string _DeliveryNoteNo;
         private DateTime _DeliveryDate;
         private OrderNotesStatus _OrderNoteStatus;
@@ -182,6 +183,19 @@ namespace SP.Core.Domain
             set
             {
                 _InvoiceNo = value;
+            }
+        }
+
+        public string InvoiceProformaNo
+        {
+            get
+            { 
+                return _InvoiceProformaNo; 
+            }
+
+            set 
+            {
+                _InvoiceProformaNo = value; 
             }
         }
 

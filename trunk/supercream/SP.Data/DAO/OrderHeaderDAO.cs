@@ -41,6 +41,12 @@ namespace SP.Data.LTS
             return "INV-" + (Convert.ToInt32(invoices.Select(q => q.InvoiceNo.Substring(4, (q.InvoiceNo.Length - 4))).Max()) + 1).ToString();
         }
 
+        public string GenerateInvoiceProformaNo()
+        {
+            List<OrderHeader> invoices = db.OrderHeader.Where(q => q.InvoiceProformaNo != null && q.InvoiceProformaNo != "").ToList<OrderHeader>();
+            return "INP-" + (Convert.ToInt32(invoices.Select(q => q.InvoiceProformaNo.Substring(4, (q.InvoiceProformaNo.Length - 4))).Max()) + 1).ToString();
+        }
+
         public string GenerateDeliveryNoteNo()
         {
             List<OrderHeader> invoices = db.OrderHeader.Where(q => q.DeliveryNoteNo != null && q.DeliveryNoteNo != "").ToList<OrderHeader>();

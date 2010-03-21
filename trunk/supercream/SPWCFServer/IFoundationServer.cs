@@ -1606,6 +1606,7 @@ namespace SPWCFServer
         private string _AlphaID;
         private string _DeliveryNoteNo;
         private string _InvoiceNo;
+        private string _InvoiceProformaNo;
         private short _OrderStatus;
         private string _ReasonForVoiding;
         private OrderNotesStatus _OrderNotesStatus;
@@ -1669,6 +1670,20 @@ namespace SPWCFServer
             set
             {
                 _InvoiceNo = value;
+            }
+        }
+
+        [DataMember]
+        public string InvoiceProformaNo
+        {
+            get
+            {
+                return _InvoiceProformaNo;
+            }
+
+            set
+            {
+                _InvoiceProformaNo = value;
             }
         }
 
