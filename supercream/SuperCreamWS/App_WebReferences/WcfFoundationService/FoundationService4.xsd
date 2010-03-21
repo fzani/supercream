@@ -240,6 +240,7 @@
       <xs:element minOccurs="0" name="OrderStatus" type="xs:short" />
       <xs:element minOccurs="0" name="ReasonForVoiding" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SpecialInstructions" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StandardVatCode" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrderHeader" nillable="true" type="tns:OrderHeader" />
