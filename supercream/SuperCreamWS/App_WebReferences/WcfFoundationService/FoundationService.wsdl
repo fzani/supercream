@@ -26,6 +26,42 @@
   <wsdl:message name="IFoundationService_UpdateSpecialInvoiceLine_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateSpecialInvoiceLineResponse" />
   </wsdl:message>
+  <wsdl:message name="IFoundationService_StandardVatRateExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:StandardVatRateExists" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_StandardVatRateExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StandardVatRateExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_DeleteStandardVatRate_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteStandardVatRate" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_DeleteStandardVatRate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteStandardVatRateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetAllStandardVatRates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllStandardVatRates" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetAllStandardVatRates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllStandardVatRatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetStandardVatRate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStandardVatRate" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetStandardVatRate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStandardVatRateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_SaveStandardVatRate_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveStandardVatRate" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_SaveStandardVatRate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveStandardVatRateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_UpdateStandardVatRate_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStandardVatRate" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_UpdateStandardVatRate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStandardVatRateResponse" />
+  </wsdl:message>
   <wsdl:message name="IFoundationService_SaveTerm_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveTerm" />
   </wsdl:message>
@@ -789,6 +825,30 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdateSpecialInvoiceLine" message="tns:IFoundationService_UpdateSpecialInvoiceLine_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/UpdateSpecialInvoiceLineResponse" message="tns:IFoundationService_UpdateSpecialInvoiceLine_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="StandardVatRateExists">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/StandardVatRateExists" message="tns:IFoundationService_StandardVatRateExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/StandardVatRateExistsResponse" message="tns:IFoundationService_StandardVatRateExists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStandardVatRate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/DeleteStandardVatRate" message="tns:IFoundationService_DeleteStandardVatRate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/DeleteStandardVatRateResponse" message="tns:IFoundationService_DeleteStandardVatRate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllStandardVatRates">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetAllStandardVatRates" message="tns:IFoundationService_GetAllStandardVatRates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetAllStandardVatRatesResponse" message="tns:IFoundationService_GetAllStandardVatRates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardVatRate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetStandardVatRate" message="tns:IFoundationService_GetStandardVatRate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetStandardVatRateResponse" message="tns:IFoundationService_GetStandardVatRate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveStandardVatRate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveStandardVatRate" message="tns:IFoundationService_SaveStandardVatRate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveStandardVatRateResponse" message="tns:IFoundationService_SaveStandardVatRate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStandardVatRate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdateStandardVatRate" message="tns:IFoundationService_UpdateStandardVatRate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/UpdateStandardVatRateResponse" message="tns:IFoundationService_UpdateStandardVatRate_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SaveTerm">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveTerm" message="tns:IFoundationService_SaveTerm_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveTermResponse" message="tns:IFoundationService_SaveTerm_OutputMessage" />
@@ -1312,6 +1372,60 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateSpecialInvoiceLine">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/UpdateSpecialInvoiceLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StandardVatRateExists">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/StandardVatRateExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStandardVatRate">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/DeleteStandardVatRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllStandardVatRates">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetAllStandardVatRates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardVatRate">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetStandardVatRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveStandardVatRate">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/SaveStandardVatRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStandardVatRate">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/UpdateStandardVatRate" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

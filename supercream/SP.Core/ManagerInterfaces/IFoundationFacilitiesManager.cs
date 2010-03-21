@@ -175,8 +175,9 @@ namespace SP.Core.ManagerInterfaces
         #endregion
 
         #region StandardVatRate
+        bool StandardVatRateExists();
         void DeleteStandardVatRate(StandardVatRate standardvatrate);
-        StandardVatRate GetStandardVatRate(int id);
+        StandardVatRate GetStandardVatRate();
         List<StandardVatRate> GetAllStandardVatRates();
         StandardVatRate SaveStandardVatRate(StandardVatRate standardvatrate);
         StandardVatRate UpdateStandardVatRate(StandardVatRate newStandardVatRate, StandardVatRate origStandardVatRate);

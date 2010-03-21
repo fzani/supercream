@@ -1201,6 +1201,15 @@ namespace SP.Worker
         #endregion
 
         #region StandardVatRate
+
+        public bool StandardVatRateExists()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IStandardVatRateDao standardVatRateDao = factory.GetStandardVatRateDao();
+
+            return standardVatRateDao.Exists();
+        }
+
         public void DeleteStandardVatRate(StandardVatRate standardvatrate)
         {
             IDaoFactory factory = new LTSDaoFactory();
@@ -1209,11 +1218,11 @@ namespace SP.Worker
             standardVatRateDao.Delete(standardvatrate);
         }
 
-        public StandardVatRate GetStandardVatRate(int id)
+        public StandardVatRate GetStandardVatRate()
         {
             IDaoFactory factory = new LTSDaoFactory();
             IStandardVatRateDao standardVatRateDao = factory.GetStandardVatRateDao();
-            return standardVatRateDao.GetById(id);
+            return standardVatRateDao.Get();
         }
 
         public List<StandardVatRate> GetAllStandardVatRates()
@@ -1227,7 +1236,19 @@ namespace SP.Worker
         {
             IDaoFactory factory = new LTSDaoFactory();
             IStandardVatRateDao standardVatRateDao = factory.GetStandardVatRateDao();
-            return standardVatRateDao.Save(standardvatrate);
+
+            if (standardVatRateDao.Exists())
+            {
+                StandardVatRate originalRate = standardVatRateDao.Get();
+                standardvatrate.ID = originalRate.ID;
+
+                IStandardVatRateDao newVatRateDao = factory.GetStandardVatRateDao();
+                return newVatRateDao.Update(standardvatrate, originalRate);
+            }
+            else
+            {
+                return standardVatRateDao.Save(standardvatrate);
+            }
         }
 
         public StandardVatRate UpdateStandardVatRate(StandardVatRate newStandardVatRate, StandardVatRate origStandardVatRate)
@@ -1237,7 +1258,7 @@ namespace SP.Worker
             return standardVatRateDao.Update(newStandardVatRate, origStandardVatRate);
         }
 
-        #endregion 
+        #endregion
 
         #region ITerm related Functions
 

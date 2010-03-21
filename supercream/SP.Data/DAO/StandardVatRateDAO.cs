@@ -13,20 +13,30 @@ using SP.Core.DataInterfaces;
 
 namespace SP.Data.LTS
 {
-   public class StandardVatRateDao : AbstractLTSDao<StandardVatRate, int>, IStandardVatRateDao
-   {
-      public StandardVatRateDao()
-      {
-      }
+    public class StandardVatRateDao : AbstractLTSDao<StandardVatRate, int>, IStandardVatRateDao
+    {
+        public StandardVatRateDao()
+        {
+        }
 
-      public StandardVatRateDao(LTSDataContext ctx)
-         : base(ctx)
-      {
-      }
+        public StandardVatRateDao(LTSDataContext ctx)
+            : base(ctx)
+        {
+        }
 
-      public override StandardVatRate GetById(int id)
-      {
-         return db.StandardVatRate.Single<StandardVatRate>(q => q.ID == id);
-      }
-   }
+        public override StandardVatRate GetById(int id)
+        {
+            return db.StandardVatRate.Single<StandardVatRate>(q => q.ID == id);
+        }
+
+        public StandardVatRate Get()
+        {
+            return db.StandardVatRate.FirstOrDefault<StandardVatRate>();
+        }
+
+        public bool Exists()
+        {
+            return db.StandardVatRate.FirstOrDefault<StandardVatRate>() == null ? false : true;
+        }
+    }
 }
