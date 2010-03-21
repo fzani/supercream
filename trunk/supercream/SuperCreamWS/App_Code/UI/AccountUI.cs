@@ -22,7 +22,7 @@ public class AccountUI : IDisposable
     private WcfFoundationService.FoundationServiceClient _proxy;
 
     public AccountUI()
-    {
+    {        
         _proxy = new WcfFoundationService.FoundationServiceClient();
     }
 

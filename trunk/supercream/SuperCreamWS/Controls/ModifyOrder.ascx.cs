@@ -566,6 +566,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             {
                 ID = this.OrderID.Value,
                 OrderDate = Convert.ToDateTime(this.OrderDateTextBox.Text),
+                DeliveryDate = Convert.ToDateTime(this.DeliveryDateTextBox.Text),
                 OrderStatus = (short)SP.Core.Enums.OrderStatus.Order,
                 AlphaID = this.OrderNoHeaderLabel.Text,
                 SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text

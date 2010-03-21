@@ -8,6 +8,7 @@ namespace SP.Core.Domain
     [Serializable]
     public class OrderHeader : BaseEntity
     {
+        private int _VatCodeID;
         private int _CustomerID;
         private short _AlphaPrefixOrPostFix;
         private string _AlphaID;
@@ -15,10 +16,12 @@ namespace SP.Core.Domain
         private short _OrderStatus;
         private string _SpecialInstructions;
         private string _InvoiceNo;
-        private string _DeliveryNoteNo;        
+        private string _DeliveryNoteNo;
         private DateTime _DeliveryDate;
         private OrderNotesStatus _OrderNoteStatus;
-        private string _ReasonForVoiding;      
+        private VatCode _VatCode;
+
+        private string _ReasonForVoiding;
 
         private List<OrderLine> _OrderLine;
 
@@ -35,6 +38,36 @@ namespace SP.Core.Domain
             set
             {
                 base.ID = value;
+            }
+        }
+
+        public int VatCodeID
+        {
+            get
+            {
+                return _VatCodeID;
+            }
+
+            set
+            {
+                _VatCodeID = value;
+            }
+        }
+
+        public VatCode VatCode
+        {
+            get
+            {
+                return _VatCode;
+            }
+
+            set
+            {
+                _VatCode = value;
+                if (_VatCode != null)
+                {
+                    VatCode.OrderHeader = this;                   
+                }
             }
         }
 
@@ -123,7 +156,7 @@ namespace SP.Core.Domain
                 {
                     _OrderNoteStatus.OrderID = this.ID;
                     _OrderNoteStatus.OrderHeader = this;
-                    
+
                 }
             }
         }
@@ -154,25 +187,25 @@ namespace SP.Core.Domain
 
         public string DeliveryNoteNo
         {
-            get 
-            { 
-                return _DeliveryNoteNo; 
-            }            
-            set 
+            get
             {
-                _DeliveryNoteNo = value; 
+                return _DeliveryNoteNo;
+            }
+            set
+            {
+                _DeliveryNoteNo = value;
             }
         }
 
         public string ReasonForVoiding
         {
-            get 
-            { 
-                return _ReasonForVoiding; 
+            get
+            {
+                return _ReasonForVoiding;
             }
-            set 
-            { 
-                _ReasonForVoiding = value; 
+            set
+            {
+                _ReasonForVoiding = value;
             }
         }
 

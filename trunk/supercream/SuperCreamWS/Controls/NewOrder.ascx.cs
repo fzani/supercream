@@ -189,6 +189,12 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
         {
             using (OrderHeaderUI ui = new OrderHeaderUI())
             {
+                StandardVatCodeUI standardVatCodeUI = new StandardVatCodeUI();
+                StandardVatRate standardVatRate = standardVatCodeUI.GetStandardVatCode();
+                
+                VatCodeUI vatCodeUI = new VatCodeUI();
+                VatCode vatCode = vatCodeUI.GetByID(standardVatRate.VatCodeID);
+
                 OrderHeader orderHeader = new OrderHeader
                 {
                     ID = 1,                   
@@ -196,7 +202,9 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
                     OrderDate = Convert.ToDateTime(OrderDateTextBox.Text),
                     OrderStatus = (short)OrderStatus.Order,
                     DeliveryDate = Convert.ToDateTime(DeliveryDateTextBox.Text),
-                    SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text
+                    SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text,
+                    VatCode = vatCode,
+                    VatCodeID = vatCode.ID,                   
                 };
 
                 orderHeader = ui.Save(orderHeader);
