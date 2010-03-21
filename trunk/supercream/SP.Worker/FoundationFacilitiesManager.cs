@@ -1200,6 +1200,45 @@ namespace SP.Worker
 
         #endregion
 
+        #region StandardVatRate
+        public void DeleteStandardVatRate(StandardVatRate standardvatrate)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IStandardVatRateDao standardVatRateDao = factory.GetStandardVatRateDao();
+
+            standardVatRateDao.Delete(standardvatrate);
+        }
+
+        public StandardVatRate GetStandardVatRate(int id)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IStandardVatRateDao standardVatRateDao = factory.GetStandardVatRateDao();
+            return standardVatRateDao.GetById(id);
+        }
+
+        public List<StandardVatRate> GetAllStandardVatRates()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IStandardVatRateDao standardVatRateDao = factory.GetStandardVatRateDao();
+            return standardVatRateDao.GetAll();
+        }
+
+        public StandardVatRate SaveStandardVatRate(StandardVatRate standardvatrate)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IStandardVatRateDao standardVatRateDao = factory.GetStandardVatRateDao();
+            return standardVatRateDao.Save(standardvatrate);
+        }
+
+        public StandardVatRate UpdateStandardVatRate(StandardVatRate newStandardVatRate, StandardVatRate origStandardVatRate)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IStandardVatRateDao standardVatRateDao = factory.GetStandardVatRateDao();
+            return standardVatRateDao.Update(newStandardVatRate, origStandardVatRate);
+        }
+
+        #endregion 
+
         #region ITerm related Functions
 
         public void DeleteTerm(Terms term)

@@ -236,6 +236,14 @@ namespace SP.Data.LTS
             }
         }
 
+        public System.Data.Linq.Table<StandardVatRate> StandardVatRate
+        {
+            get
+            {
+                return this.GetTable<StandardVatRate>();
+            }
+        }
+
         public System.Data.Linq.Table<Van> Van
         {
             get
