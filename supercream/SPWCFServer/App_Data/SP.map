@@ -154,6 +154,7 @@
       <Column Name="OrderStatus" Member="OrderStatus" Storage="_OrderStatus" DbType="SmallInt" />
       <Column Name="SpecialInstructions" Member="SpecialInstructions" Storage="_SpecialInstructions" DbType="VarChar(8000)" />
       <Column Name="InvoiceNo" Member="InvoiceNo" Storage="_InvoiceNo" DbType="VarChar(50)" />
+      <Column Name="InvoiceProformaNo" Member="InvoiceProformaNo" Storage="_InvoiceProformaNo" DbType="VarChar(50)" />
       <Column Name="DeliveryNoteNo" Member="DeliveryNoteNo" Storage="_DeliveryNoteNo" DbType="VarChar(50)" />
       <Column Name="ReasonForVoiding" Member="ReasonForVoiding" Storage="_ReasonForVoiding" DbType="VarChar(MAX)" UpdateCheck="Never" />
       <Association Name="FK_CreditNote_OrderHeader" Member="CreditNote" Storage="_CreditNote" ThisKey="ID" OtherKey="OrderID" DeleteRule="NO ACTION" />
