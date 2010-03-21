@@ -95,6 +95,10 @@ namespace SP.Data.LTS
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
+                DataLoadOptions dlo = new DataLoadOptions();
+                dlo.LoadWith<OrderHeader>(o => o.VatCode);
+                db.LoadOptions = dlo;
+
                 return db.Translate<OrderHeader>(reader).ToList<OrderHeader>();
             }
         }

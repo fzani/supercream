@@ -187,6 +187,7 @@ public class OrderHeaderUI : IDisposable
             updatedOrderHeader.CustomerID = origOrderHeader.CustomerID;
             updatedOrderHeader.ID = newOrderHeader.ID;
             updatedOrderHeader.OrderDate = newOrderHeader.OrderDate;
+            updatedOrderHeader.DeliveryDate = newOrderHeader.DeliveryDate;
             updatedOrderHeader.OrderStatus = (short)origOrderHeader.OrderStatus;
             updatedOrderHeader.SpecialInstructions = newOrderHeader.SpecialInstructions;
 
@@ -247,7 +248,8 @@ public class OrderHeaderUI : IDisposable
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.GetOrderHeaderForSearch(orderHeader, invoiceNo, customerName, dateFrom, dateTo, orderStatus);
+            List<OrderHeader> headers = _proxy.GetOrderHeaderForSearch(orderHeader, invoiceNo, customerName, dateFrom, dateTo, orderStatus);
+            return headers;
         }
     }
 

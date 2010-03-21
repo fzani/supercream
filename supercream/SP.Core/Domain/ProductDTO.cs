@@ -12,8 +12,7 @@ namespace SP.Core.Domain
         private string _Description;
         private int _UnitQty;
         private decimal _UnitPrice;
-        private decimal _RRPPerItem;
-        private VatCode _VatCode;
+        private decimal _RRPPerItem;       
         private bool _VatExempt;
 
         public override int ID

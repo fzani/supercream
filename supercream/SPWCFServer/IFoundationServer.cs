@@ -1599,6 +1599,8 @@ namespace SPWCFServer
     public class OrderHeader
     {
         private int _ID;
+        private int _VatCodeID;
+        private VatCode _VatCode;       
         private int _CustomerID;
         private short _AlphaPrefixOrPostFix;
         private string _AlphaID;
@@ -1622,6 +1624,38 @@ namespace SPWCFServer
             set
             {
                 _ID = value;
+            }
+        }
+
+        [DataMember]
+        public int VatCodeID
+        {
+            get
+            {
+                return _VatCodeID;
+            }
+
+            set
+            {
+                _VatCodeID = value;
+            }
+        }
+
+        [DataMember]
+        public VatCode VatCode
+        {
+            get 
+            { 
+                return _VatCode; 
+            }
+            
+            set 
+            {
+                if (value != null)
+                {
+                    VatCodeID = value.ID;
+                    _VatCode = value;
+                }
             }
         }
 

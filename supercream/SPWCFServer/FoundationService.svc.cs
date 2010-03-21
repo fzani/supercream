@@ -1130,9 +1130,17 @@ namespace SPWCFServer
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
 
-                List<SP.Core.Domain.OrderHeader> orderHeader =
+                List<SP.Core.Domain.OrderHeader> orderHeaders =
                     mgr.GetOrderHeaderForSearch(orderNo, invoiceNo, customerName, dateFrom, dateTo, orderStatus).OrderByDescending(o => o.OrderDate).ThenByDescending(o => o.AlphaID).ToList<SP.Core.Domain.OrderHeader>();
-                return ObjectExtension.CloneList<SP.Core.Domain.OrderHeader, SPWCFServer.OrderHeader>(orderHeader);
+
+                List<OrderHeader> returnOrders = new List<OrderHeader>();
+                foreach (SP.Core.Domain.OrderHeader orderHeader in orderHeaders)
+                {
+                    OrderHeader tempOrderHeader = ObjectExtension.CloneProperties<SP.Core.Domain.OrderHeader, OrderHeader>(orderHeader);
+                    tempOrderHeader.VatCode = ObjectExtension.CloneProperties<SP.Core.Domain.VatCode, VatCode>(orderHeader.VatCode);
+                    returnOrders.Add(tempOrderHeader);
+                }
+                return returnOrders;
             }
             catch (Exception ex)
             {
@@ -1162,14 +1170,10 @@ namespace SPWCFServer
             try
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
-                ////if (mgr.OrderHeaderExists(orderHeader.AlphaID))
-                ////{
-                ////    throw new ApplicationException("Cannot add Order - Order Header already exists, Cancel Order and Recreate a new Order");
-                ////}
-
+               
                 SP.Core.Domain.OrderHeader coreOrderHeader =
                     ObjectExtension.CloneProperties<SPWCFServer.OrderHeader, SP.Core.Domain.OrderHeader>(orderHeader);
-
+                              
                 coreOrderHeader = mgr.SaveOrderHeader(coreOrderHeader);
 
                 return ObjectExtension.CloneProperties<SP.Core.Domain.OrderHeader, SPWCFServer.OrderHeader>(coreOrderHeader);
@@ -1386,7 +1390,7 @@ namespace SPWCFServer
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
                 mgr.UpdatePaymentCompleted(orderID, invoicePaymentComplete);
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
                 throw new FaultException("SPWCF Service error : " + "Cannot update payment completed");
             }

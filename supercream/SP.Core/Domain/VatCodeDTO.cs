@@ -16,7 +16,8 @@ namespace SP.Core.Domain
         private string _Description;
         private float _PercentageValue;
         private bool _VatExemptible;
-
+        private OrderHeader _OrderHeader;
+        
         public override int ID
         {
             get
@@ -26,6 +27,19 @@ namespace SP.Core.Domain
             set
             {
                 base.ID = value;
+            }
+        }
+
+        public OrderHeader OrderHeader
+        {
+            get 
+            { 
+                return _OrderHeader; 
+            }
+
+            set 
+            { 
+                _OrderHeader = value;               
             }
         }
 
