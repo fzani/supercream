@@ -116,8 +116,28 @@
                                 </td>
                             </tr>
                         </table>
-                    </fieldset>
-                </asp:Panel>
+                    </fieldset></asp:Panel>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    <asp:UpdatePanel ID="SelectVatCodeUpdatePanel" runat="server" UpdateMode="Conditional">
+        <Triggers>
+            <asp:PostBackTrigger ControlID="AddVatCodeButton" />
+        </Triggers>
+        <ContentTemplate>
+            <div class="FormInput">
+                <fieldset>
+                    <div class="RightBox">
+                        <b>Select Standard Vat Rate &nbsp;</h>
+                            <div class="VatSelection">
+                                <asp:DropDownList ID="SelectStandardVatRateDropDownList" Style="width: 250px" runat="server">
+                                </asp:DropDownList>
+                                <br />
+                                <asp:Button ID="SaveSelectionButton" Text="Save Selection" runat="server" 
+                                    Style="margin: 5px 0px 5px 0px;" onclick="SaveSelectionButton_Click" />
+                            </div>
+                    </div>
+                </fieldset>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
