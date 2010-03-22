@@ -501,7 +501,7 @@ namespace SP.Worker
         #endregion
 
         #region OrderHeader
-        
+
         public List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
         {
             IDaoFactory factory = new LTSDaoFactory();
@@ -620,6 +620,9 @@ namespace SP.Worker
             VatCode vatCode = vatCodeDao.GetById(newOrderHeader.VatCodeID);
             newOrderHeader.VatCode = vatCode;
             origOrderHeader.VatCode = vatCode;
+
+            if (String.IsNullOrEmpty(origOrderHeader.InvoiceProformaNo))
+                newOrderHeader.InvoiceProformaNo = this.GenerateInvoiceProformaNo();
 
             newOrderHeader.LastModifiedDate = DateTime.Now;
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Linq;
 using System.Configuration;
 using System.Collections;
 using System.Collections.Generic;
@@ -86,8 +87,8 @@ public class OrderHeaderUI : IDisposable
         {
             OrderHeader origOrderHeader = _proxy.GetOrderHeader(orderNo);
             OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
-         
-            updatedOrderHeader.OrderStatus = (short)SP.Core.Enums.OrderStatus.ProformaInvoice;          
+
+            updatedOrderHeader.OrderStatus = (short)SP.Core.Enums.OrderStatus.ProformaInvoice;
 
             OrderHeader oh = _proxy.CreateInvoiceProforma(updatedOrderHeader, origOrderHeader);
             return oh.InvoiceNo;
@@ -258,7 +259,23 @@ public class OrderHeaderUI : IDisposable
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.GetOrderHeaderForSearchWithPrintedOrderStatuses(orderHeader, invoiceNo, customerName, dateFrom, dateTo, actualOrderStatus, printedOrderStatus);
+            if (actualOrderStatus == (short)SP.Core.Enums.OrderStatus.ProformaInvoice ||
+                (printedOrderStatus == (short)SP.Core.Enums.OrderStatus.ProformaInvoice) ||
+                (actualOrderStatus == (short)SP.Core.Enums.OrderStatus.Invoice) ||
+                (printedOrderStatus == (short)SP.Core.Enums.OrderStatus.ProformaInvoice) ||
+                (actualOrderStatus == (short)SP.Core.Enums.OrderStatus.DeliveryNote) ||
+                (printedOrderStatus == (short)SP.Core.Enums.OrderStatus.DeliveryNotePrinted)
+                )
+            {
+                var list = _proxy.GetOrderHeaderForSearchWithPrintedOrderStatuses(orderHeader,
+                    invoiceNo, customerName, dateFrom, dateTo, actualOrderStatus, printedOrderStatus)
+                        .OrderByDescending(q => q.LastModifiedDate);
+                return list.ToList<OrderHeader>();
+            }
+            else
+            {
+                return _proxy.GetOrderHeaderForSearchWithPrintedOrderStatuses(orderHeader, invoiceNo, customerName, dateFrom, dateTo, actualOrderStatus, printedOrderStatus);
+            }
         }
     }
 

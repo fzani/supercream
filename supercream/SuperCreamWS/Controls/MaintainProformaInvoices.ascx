@@ -135,13 +135,10 @@
                         </EditItemTemplate>
                         <ItemStyle Width="20%" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Invoice No." ItemStyle-Width="20%" SortExpression="InvoiceNo">
+                    <asp:TemplateField HeaderText="Invoice Proforma No." ItemStyle-Width="20%" SortExpression="InvoiceNo">
                         <ItemTemplate>
-                            <asp:Label ID="InvoiceLabel" runat="server" Text='<%# Bind("InvoiceNo") %>'></asp:Label>
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <asp:TextBox ID="InvoiceTextBox" runat="server" Text='<%# Bind("InvoiceNo") %>'></asp:TextBox>
-                        </EditItemTemplate>
+                            <asp:Label ID="InvoiceProformaLabel" runat="server" Text='<%# Bind("InvoiceProformaNo") %>'></asp:Label>
+                        </ItemTemplate>                       
                         <ItemStyle Width="20%" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Customer Name" ItemStyle-Width="30%" SortExpression="CustomerID">
