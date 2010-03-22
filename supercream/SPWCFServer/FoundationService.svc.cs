@@ -992,7 +992,7 @@ namespace SPWCFServer
         }
         #endregion
 
-        #region OrderHeader       
+        #region OrderHeader
 
         public List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
         {
@@ -1047,7 +1047,9 @@ namespace SPWCFServer
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
 
                 SP.Core.Domain.OrderHeader orderHeader = mgr.GetOrderHeader(id);
-                return ObjectExtension.CloneProperties<SP.Core.Domain.OrderHeader, SPWCFServer.OrderHeader>(orderHeader);
+                OrderHeader order = ObjectExtension.CloneProperties<SP.Core.Domain.OrderHeader, SPWCFServer.OrderHeader>(orderHeader);
+                order.VatCode = ObjectExtension.CloneProperties<SP.Core.Domain.VatCode, SPWCFServer.VatCode>(orderHeader.VatCode);
+                return order;
 
             }
             catch (Exception ex)
@@ -1151,10 +1153,10 @@ namespace SPWCFServer
             try
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
-               
+
                 SP.Core.Domain.OrderHeader coreOrderHeader =
                     ObjectExtension.CloneProperties<SPWCFServer.OrderHeader, SP.Core.Domain.OrderHeader>(orderHeader);
-                              
+
                 coreOrderHeader = mgr.SaveOrderHeader(coreOrderHeader);
 
                 return ObjectExtension.CloneProperties<SP.Core.Domain.OrderHeader, SPWCFServer.OrderHeader>(coreOrderHeader);

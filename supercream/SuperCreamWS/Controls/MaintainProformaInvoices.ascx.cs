@@ -573,8 +573,8 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
 
             if (totalPrice != 0 && (p.VatExempt == false))
             {
-                Decimal vat = (totalPrice / 100) * Convert.ToDecimal(p.VatCode.PercentageValue);
-                vatTotal += vat;
+//                Decimal vat = (totalPrice / 100) * Convert.ToDecimal(p.VatCode.PercentageValue);
+               //  vatTotal += vat;
             }
 
             netPriceLabel.Text = totalPrice.ToString();

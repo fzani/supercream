@@ -2770,8 +2770,7 @@ namespace SPWCFServer
         private string _Description;
         private int _UnitQty;
         private decimal _UnitPrice;
-        private decimal _RRPPerItem;
-        private VatCode _VatCode;
+        private decimal _RRPPerItem;       
         private bool _VatExempt;
 
         [DataMember]
@@ -2832,15 +2831,7 @@ namespace SPWCFServer
             {
                 _RRPPerItem = value;
             }
-        }
-
-        [DataMember]
-        public VatCode VatCode
-        {
-            get { return _VatCode; }
-            set { _VatCode = value; }
-        }
-
+        }       
 
         [DataMember]
         public bool VatExempt
