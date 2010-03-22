@@ -78,9 +78,7 @@ namespace SP.Core.ManagerInterfaces
         FoundationFacility UpdateFoundationFacility(FoundationFacility newFoundationfacility, FoundationFacility origFoundationFacility);
         #endregion
 
-        #region OrderHeader
-
-        string GenerateOrderNo();
+        #region OrderHeader     
 
         OrderHeader CreateInvoice(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
         OrderHeader CreateInvoiceProforma(OrderHeader newOrderHeader, OrderHeader origOrderHeader);

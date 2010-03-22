@@ -501,31 +501,7 @@ namespace SP.Worker
         #endregion
 
         #region OrderHeader
-
-        public string GenerateOrderNo()
-        {
-            IDaoFactory factory = new LTSDaoFactory();
-            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
-
-            return orderHeaderDao.GenerateOrderNo();
-        }
-
-        public string GenerateInvoiceNo()
-        {
-            IDaoFactory factory = new LTSDaoFactory();
-            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
-
-            return orderHeaderDao.GenerateInvoiceNo();
-        }
-
-        public string GenerateDeliveryNoteNo()
-        {
-            IDaoFactory factory = new LTSDaoFactory();
-            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
-
-            return orderHeaderDao.GenerateDeliveryNoteNo();
-        }
-
+        
         public List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
         {
             IDaoFactory factory = new LTSDaoFactory();
@@ -603,7 +579,7 @@ namespace SP.Worker
             IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
 
             orderHeader.AlphaID = this.GenerateOrderNo();
-            
+
             IVatCodeDao vatCodeDao = factory.GetVatCodeDao();
             vatCodeDao.SetDataContext(orderHeaderDao.GetDataContext());
             VatCode vatCode = vatCodeDao.GetById(orderHeader.VatCodeID);
@@ -611,7 +587,7 @@ namespace SP.Worker
             orderHeader.VatCodeID = vatCode.ID;
 
             orderHeader.LastModifiedDate = DateTime.Now;
-            
+
             return orderHeaderDao.Save(orderHeader);
         }
 
@@ -621,7 +597,7 @@ namespace SP.Worker
             IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
 
             if (String.IsNullOrEmpty(origOrderHeader.InvoiceNo))
-                newOrderHeader.InvoiceNo = this.GenerateInvoiceNo();           
+                newOrderHeader.InvoiceNo = this.GenerateInvoiceNo();
 
             IVatCodeDao vatCodeDao = factory.GetVatCodeDao();
             vatCodeDao.SetDataContext(orderHeaderDao.GetDataContext());
@@ -758,7 +734,7 @@ namespace SP.Worker
             vatCodeDao.SetDataContext(orderHeaderDao.GetDataContext());
             VatCode vatCode = vatCodeDao.GetById(orderHeader.VatCodeID);
             orderHeader.VatCode = vatCode;
-           
+
             orderLine.OrderHeader = orderHeader;
 
 
@@ -1467,6 +1443,42 @@ namespace SP.Worker
             IVanDao vanDao = factory.GetVanDao();
 
             return vanDao.Update(newVan, origVan);
+        }
+
+        #endregion
+
+        #region Private Helper Methods
+
+        private string GenerateOrderNo()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
+
+            return orderHeaderDao.GenerateOrderNo();
+        }
+
+        private string GenerateInvoiceNo()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
+
+            return orderHeaderDao.GenerateInvoiceNo();
+        }
+
+        private string GenerateInvoiceProformaNo()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
+
+            return orderHeaderDao.GenerateInvoiceProformaNo();
+        }
+
+        private string GenerateDeliveryNoteNo()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
+
+            return orderHeaderDao.GenerateDeliveryNoteNo();
         }
 
         #endregion

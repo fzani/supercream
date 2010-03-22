@@ -992,26 +992,7 @@ namespace SPWCFServer
         }
         #endregion
 
-        #region OrderHeader
-
-        public string GenerateOrderReferenceNo()
-        {
-            try
-            {
-                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
-                return mgr.GenerateOrderNo();
-
-            }
-            catch (SqlException)
-            {
-                throw new FaultException("SPWCF Service error : " + "Cannot delete description. It is likely that the description has outstanding Accounts still linked to it");
-            }
-            catch (Exception ex)
-            {
-                // Log full Exception to be done ...
-                throw new FaultException("SPWCF Service error : " + ex.Message);
-            }
-        }
+        #region OrderHeader       
 
         public List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
         {
