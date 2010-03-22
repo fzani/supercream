@@ -15,7 +15,7 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
     #region Private Member Variables
     EventHandler<EventArgs> ChangeState;
 
-    decimal priceTotal = 0;  
+    decimal priceTotal = 0;
     #endregion
 
     #region public Event Handlers
@@ -191,21 +191,23 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
             {
                 StandardVatCodeUI standardVatCodeUI = new StandardVatCodeUI();
                 StandardVatRate standardVatRate = standardVatCodeUI.GetStandardVatCode();
-                
+
                 VatCodeUI vatCodeUI = new VatCodeUI();
                 VatCode vatCode = vatCodeUI.GetByID(standardVatRate.VatCodeID);
 
                 OrderHeader orderHeader = new OrderHeader
                 {
-                    ID = 1,                   
+                    ID = 1,
                     CustomerID = Convert.ToInt32(CustomerDropDownList.SelectedValue),
                     OrderDate = Convert.ToDateTime(OrderDateTextBox.Text),
                     OrderStatus = (short)OrderStatus.Order,
                     DeliveryDate = Convert.ToDateTime(DeliveryDateTextBox.Text),
                     SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text,
                     VatCode = vatCode,
-                    VatCodeID = vatCode.ID,                   
+                    VatCodeID = vatCode.ID,
                 };
+
+                ValidateOrder(orderHeader);
 
                 orderHeader = ui.Save(orderHeader);
                 OrderID = orderHeader.ID;
@@ -321,20 +323,11 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
 
             int id = Convert.ToInt32(idLabel.Text);
             float discount;
-            if (!float.TryParse(discountTextBox.Text, out discount))
-                throw new ApplicationException("discount must be a number");
-
             int noOfUnits;
-            if (!int.TryParse(noOfUnitsTextBox.Text, out noOfUnits))
-                throw new ApplicationException("no of units must be a number");
-
             Decimal price;
-            if (!decimal.TryParse(priceTextBox.Text, System.Globalization.NumberStyles.Currency, null, out price))
-                throw new ApplicationException("price must be a number");
-
             int qtyPerUnit;
-            if (!int.TryParse(qtyTextBox.Text, out qtyPerUnit))
-                throw new ApplicationException("qty per unit must be a number");
+
+            ValidateOrderLine(qtyTextBox, noOfUnitsTextBox, discountTextBox, priceTextBox, out discount, out noOfUnits, out price, out qtyPerUnit);
 
             string productName = productNameLabel.Text;
             int productID = Convert.ToInt32(productIDLabel.Text);
@@ -364,7 +357,7 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
             ProductSearchError(this, args);
         }
     }
-
+   
     protected void DeleteButton_Click(object sender, EventArgs e)
     {
         try
@@ -555,7 +548,7 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
             priceTotal += tempPrice;
 
             Label orderLinePriceLabel = e.Row.FindControl("OrderLinePriceLabel") as Label;
-            orderLinePriceLabel.Text = String.Format("{0:c}", tempPrice);       
+            orderLinePriceLabel.Text = String.Format("{0:c}", tempPrice);
 
             ProductUI productUI = new ProductUI();
             int? productID = DataBinder.Eval(e.Row.DataItem, "ProductID") as int?;
@@ -671,5 +664,37 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
             }
         }
     }
+
+    private static void ValidateOrder(OrderHeader order)
+    {
+        if (order.DeliveryDate < order.OrderDate)
+        {
+            throw new ApplicationException("Delivery date cannot be prior to Order Date");
+        }
+
+        if (order.VatCode == null)
+        {
+            throw new ApplicationException("Order has not been assigned valid Vat No.");
+        }
+    }
+
+    private static void ValidateOrderLine(TextBox qtyTextBox, TextBox noOfUnitsTextBox, TextBox discountTextBox, TextBox priceTextBox, out float discount, out int noOfUnits, out Decimal price, out int qtyPerUnit)
+    {
+        if (!float.TryParse(discountTextBox.Text, out discount))
+            throw new ApplicationException("discount must be a number");
+
+
+        if (!int.TryParse(noOfUnitsTextBox.Text, out noOfUnits))
+            throw new ApplicationException("no of units must be a number");
+
+
+        if (!decimal.TryParse(priceTextBox.Text, System.Globalization.NumberStyles.Currency, null, out price))
+            throw new ApplicationException("price must be a number");
+
+
+        if (!int.TryParse(qtyTextBox.Text, out qtyPerUnit))
+            throw new ApplicationException("qty per unit must be a number");
+    }
+
     #endregion
 }
