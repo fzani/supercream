@@ -9,8 +9,16 @@
   </DataSources>
   <Reports>
     <ProjectItem>
+      <Name>CustomerReport.rdl</Name>
+      <FullPath>CustomerReport.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>DailyReportForLedger.rdl</Name>
       <FullPath>DailyReportForLedger.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>PickList.rdl</Name>
+      <FullPath>PickList.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Top10CustomerBySales.rdl</Name>
@@ -41,12 +49,8 @@
       <FullPath>VanLoadOverPeriod.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>PickList.rdl</Name>
-      <FullPath>PickList.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>CustomerReport.rdl</Name>
-      <FullPath>CustomerReport.rdl</FullPath>
+      <Name>VoidOrders.rdl</Name>
+      <FullPath>VoidOrders.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
