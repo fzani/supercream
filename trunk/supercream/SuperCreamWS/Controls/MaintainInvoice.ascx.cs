@@ -140,7 +140,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
             OrderHeader header = orderHeaderUI.GetById(OrderID.Value);
             header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Order;
-            header.InvoiceNo = String.Empty;
+            // header.InvoiceNo = String.Empty;
             orderHeaderUI.UpdateForInvoice(header);
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
@@ -555,127 +555,133 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
     {
         if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
         {
-            totalRowCount++;
-
-            OrderLine line = e.Item.DataItem as OrderLine;
-
-            ProductUI ui = new ProductUI();
-            Product p = ui.GetProductByID(line.ProductID);
-
-            Label descriptionLabel = e.Item.FindControl("DescriptionLabel") as Label;
-            descriptionLabel.Text = p.Description;
-
-            Label rrpLabel = e.Item.FindControl("RRPLabel") as Label;
-            rrpLabel.Text = String.Format("{0:c}", p.RRPPerItem);
-
-            Label noOfUnitsLabel = e.Item.FindControl("NoOfUnitsLabel") as Label;
-            int noOfUnits = Convert.ToInt32(noOfUnitsLabel.Text);
-            totalUnits += noOfUnits;
-
-            Label pricePerUnitLabel = e.Item.FindControl("PricePerUnitLabel") as Label;
-            Decimal pricePerUnit = Convert.ToDecimal(pricePerUnitLabel.Text);
-
-            Label netPriceLabel = e.Item.FindControl("NetPriceLabel") as Label;
-            Decimal totalPrice = Math.Round(pricePerUnit * noOfUnits, 2);
-
-            Label vatExemptibleLabel = e.Item.FindControl("VatExemptibleLabel") as Label;
-            if (p.VatExempt)
+            if (OrderID.Value != -1)
             {
-                nonVatableTotalPrice += totalPrice;
-                vatExemptibleLabel.Text = "Y";
-            }
-            else
-            {
-                vatCodePercentage = p.VatCode.PercentageValue;
-                if (totalPrice != 0)
+                totalRowCount++;
+
+                OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
+                OrderHeader orderHeader = orderHeaderUI.GetById(OrderID.Value);
+
+                OrderLine line = e.Item.DataItem as OrderLine;
+
+                ProductUI ui = new ProductUI();
+                Product p = ui.GetProductByID(line.ProductID);
+
+                Label descriptionLabel = e.Item.FindControl("DescriptionLabel") as Label;
+                descriptionLabel.Text = p.Description;
+
+                Label rrpLabel = e.Item.FindControl("RRPLabel") as Label;
+                rrpLabel.Text = String.Format("{0:c}", p.RRPPerItem);
+
+                Label noOfUnitsLabel = e.Item.FindControl("NoOfUnitsLabel") as Label;
+                int noOfUnits = Convert.ToInt32(noOfUnitsLabel.Text);
+                totalUnits += noOfUnits;
+
+                Label pricePerUnitLabel = e.Item.FindControl("PricePerUnitLabel") as Label;
+                Decimal pricePerUnit = Convert.ToDecimal(pricePerUnitLabel.Text);
+
+                Label netPriceLabel = e.Item.FindControl("NetPriceLabel") as Label;
+                Decimal totalPrice = Math.Round(pricePerUnit * noOfUnits, 2);
+                              
+                Label vatExemptibleLabel = e.Item.FindControl("VatExemptibleLabel") as Label;
+                if (p.VatExempt)
                 {
-                    Decimal vat = (totalPrice / 100) * Convert.ToDecimal(p.VatCode.PercentageValue);
-                    vatTotal += vat;
-                    vatableTotalPrice += totalPrice;
+                    nonVatableTotalPrice += totalPrice;
+                    vatExemptibleLabel.Text = "Y";
                 }
-                vatExemptibleLabel.Text = "N";
-            }
+                else
+                {
+                    vatCodePercentage = orderHeader.VatCode.PercentageValue;
+                    if (totalPrice != 0)
+                    {
+                        Decimal vat = (totalPrice / 100) * Convert.ToDecimal(vatCodePercentage);
+                        vatTotal += vat;
+                        vatableTotalPrice += totalPrice;
+                    }
+                    vatExemptibleLabel.Text = "N";
+                }
+              
+                netPriceLabel.Text = totalPrice.ToString();
 
-            netPriceLabel.Text = totalPrice.ToString();
+                Label specialInstructionsNameLabel = e.Item.FindControl("SpecialInstructionsNameLabel") as Label;
+                TextBox specialInstructionsTextBox = e.Item.FindControl("SpecialInstructionsTextBox") as TextBox;
 
-            Label specialInstructionsNameLabel = e.Item.FindControl("SpecialInstructionsNameLabel") as Label;
-            TextBox specialInstructionsTextBox = e.Item.FindControl("SpecialInstructionsTextBox") as TextBox;
+                if (!String.IsNullOrEmpty(line.SpecialInstructions))
+                {
 
-            if (!String.IsNullOrEmpty(line.SpecialInstructions))
-            {
-
-                specialInstructionsNameLabel.Visible = true;
-                specialInstructionsTextBox.Visible = true;
-                specialInstructionsTextBox.Text = line.SpecialInstructions;
-            }
-            else
-            {
-                specialInstructionsNameLabel.Visible = false;
-                specialInstructionsTextBox.Visible = false;
+                    specialInstructionsNameLabel.Visible = true;
+                    specialInstructionsTextBox.Visible = true;
+                    specialInstructionsTextBox.Text = line.SpecialInstructions;
+                }
+                else
+                {
+                    specialInstructionsNameLabel.Visible = false;
+                    specialInstructionsTextBox.Visible = false;
+                }
             }
         }
         if (e.Item.ItemType == ListItemType.Footer)
         {
-            Label totalItemsLabel = e.Item.FindControl("TotalItemsLabel") as Label;
-            totalItemsLabel.Text = this.totalUnits.ToString();
-
-            Label totalLabel = e.Item.FindControl("TotalLabel") as Label;
-            totalLabel.Text = String.Format("{0:c}", Math.Round(vatableTotalPrice + nonVatableTotalPrice, 2));
-
-            Label deliveryVanLabel = e.Item.FindControl("DeliveryVanLabel") as Label;
-            if (DeliveryVanDropDownList.SelectedValue != "-1")
-                deliveryVanLabel.Text = DeliveryVanDropDownList.SelectedItem.Text;
-            else
-                deliveryVanLabel.Text = "";
-
-            Label vatLabel = e.Item.FindControl("VatLabel") as Label;
-            vatLabel.Text += String.Format("{0:c}", Math.Round(vatTotal, 2));
-
-            Label netTotalLabel = e.Item.FindControl("NetTotalLabel") as Label;
-            netTotalLabel.Text += String.Format("{0:c}", Math.Round(vatableTotalPrice + nonVatableTotalPrice + vatTotal, 2));
-
-            // Vat Analysis
-            Label zeroVatAmountLabel = e.Item.FindControl("ZeroVatAmountLabel") as Label;
-            zeroVatAmountLabel.Text = String.Format("{0:c}", nonVatableTotalPrice);
-
-            Label vatPercentageLabel = e.Item.FindControl("VatPercentageLabel") as Label;
-            vatPercentageLabel.Text = '%' + Math.Round(vatCodePercentage, 2).ToString();
-
-            Label vatAmountLabel = e.Item.FindControl("VatAmountLabel") as Label;
-            vatAmountLabel.Text = String.Format("{0:c}", vatTotal);
-
-            Label vatTotalAmountLabel = e.Item.FindControl("VatTotalAmountLabel") as Label;
-            vatTotalAmountLabel.Text = String.Format("{0:c}", vatableTotalPrice);
-                       
-            if (AccountDropDownList.SelectedValue != "")
-            {
-                if (AccountDropDownList.SelectedIndex != 0)
-                {
-                    int accountID = Convert.ToInt32(AccountDropDownList.SelectedValue);
-                    AccountUI accountUI = new AccountUI();
-                    Account account = accountUI.GetByID(accountID);
-
-                    TermsUI termsUI = new TermsUI();
-                    Terms terms = termsUI.GetByID(account.TermTypeID.Value);
-
-                    Label paymentTermsLabel = e.Item.FindControl("PaymentTermsLabel") as Label;
-                    paymentTermsLabel.Text = terms.Description;
-                }
-            }
-
-            if (OrderID.Value != -1)
+            if (OrderID != -1)
             {
                 OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
                 OrderHeader orderHeader = orderHeaderUI.GetById(OrderID.Value);
 
                 Label deliveryDateLabel = e.Item.FindControl("DeliveryDateLabel") as Label;
                 deliveryDateLabel.Text = orderHeader.DeliveryDate.ToShortDateString();
-            }
 
-            nonVatableTotalPrice = 0;
-            vatTotal = 0;
-            vatableTotalPrice = 0;
-            totalRowCount = 0;
+                Label totalItemsLabel = e.Item.FindControl("TotalItemsLabel") as Label;
+                totalItemsLabel.Text = this.totalUnits.ToString();
+
+                Label totalLabel = e.Item.FindControl("TotalLabel") as Label;
+                totalLabel.Text = String.Format("{0:c}", Math.Round(vatableTotalPrice + nonVatableTotalPrice, 2));
+
+                Label deliveryVanLabel = e.Item.FindControl("DeliveryVanLabel") as Label;
+                if (DeliveryVanDropDownList.SelectedValue != "-1")
+                    deliveryVanLabel.Text = DeliveryVanDropDownList.SelectedItem.Text;
+                else
+                    deliveryVanLabel.Text = "";
+
+                Label vatLabel = e.Item.FindControl("VatLabel") as Label;
+                vatLabel.Text += String.Format("{0:c}", Math.Round(vatTotal, 2));
+
+                Label netTotalLabel = e.Item.FindControl("NetTotalLabel") as Label;
+                netTotalLabel.Text += String.Format("{0:c}", Math.Round(vatableTotalPrice + nonVatableTotalPrice + vatTotal, 2));
+
+                // Vat Analysis
+                Label zeroVatAmountLabel = e.Item.FindControl("ZeroVatAmountLabel") as Label;
+                zeroVatAmountLabel.Text = String.Format("{0:c}", nonVatableTotalPrice);
+
+                Label vatPercentageLabel = e.Item.FindControl("VatPercentageLabel") as Label;
+                vatPercentageLabel.Text = '%' + Math.Round(vatCodePercentage, 2).ToString();
+
+                Label vatAmountLabel = e.Item.FindControl("VatAmountLabel") as Label;
+                vatAmountLabel.Text = String.Format("{0:c}", vatTotal);
+
+                Label vatTotalAmountLabel = e.Item.FindControl("VatTotalAmountLabel") as Label;
+                vatTotalAmountLabel.Text = String.Format("{0:c}", vatableTotalPrice);
+
+                if (AccountDropDownList.SelectedValue != "")
+                {
+                    if (AccountDropDownList.SelectedIndex != 0)
+                    {
+                        int accountID = Convert.ToInt32(AccountDropDownList.SelectedValue);
+                        AccountUI accountUI = new AccountUI();
+                        Account account = accountUI.GetByID(accountID);
+
+                        TermsUI termsUI = new TermsUI();
+                        Terms terms = termsUI.GetByID(account.TermTypeID.Value);
+
+                        Label paymentTermsLabel = e.Item.FindControl("PaymentTermsLabel") as Label;
+                        paymentTermsLabel.Text = terms.Description;
+                    }
+                }
+
+                nonVatableTotalPrice = 0;
+                vatTotal = 0;
+                vatableTotalPrice = 0;
+                totalRowCount = 0;
+            }
         }
     }
     #endregion

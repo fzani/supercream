@@ -681,7 +681,7 @@
                                                     <i>Value</i>
                                                 </td>
                                                 <td>
-                                                    <i>Vat</i>
+                                                    <i>Vatable</i>
                                                 </td>
                                             </tr>
                                             <tr>

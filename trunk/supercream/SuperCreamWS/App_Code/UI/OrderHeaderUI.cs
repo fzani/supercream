@@ -277,15 +277,7 @@ public class OrderHeaderUI : IDisposable
                 return _proxy.GetOrderHeaderForSearchWithPrintedOrderStatuses(orderHeader, invoiceNo, customerName, dateFrom, dateTo, actualOrderStatus, printedOrderStatus);
             }
         }
-    }
-
-    public string GenerateOrderNo()
-    {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
-        {
-            return _proxy.GenerateOrderReferenceNo();
-        }
-    }
+    }    
 
     Decimal CalculateDiscount(Decimal discount, Decimal unitPrice)
     {

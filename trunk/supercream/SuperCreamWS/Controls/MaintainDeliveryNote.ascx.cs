@@ -156,8 +156,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
             OrderHeader header = orderHeaderUI.GetById(OrderID.Value);
-            header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Order;
-            header.InvoiceNo = String.Empty;
+            header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Order;            
             orderHeaderUI.UpdateForInvoice(header);
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
