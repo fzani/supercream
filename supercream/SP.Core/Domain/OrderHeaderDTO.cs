@@ -21,6 +21,7 @@ namespace SP.Core.Domain
         private DateTime _DeliveryDate;
         private OrderNotesStatus _OrderNoteStatus;
         private VatCode _VatCode;
+        private DateTime _LastModifiedDate;
 
         private string _ReasonForVoiding;
 
@@ -237,6 +238,19 @@ namespace SP.Core.Domain
                     orderLine.OrderID = this.ID;
                     orderLine.OrderHeader = this;
                 }
+            }
+        }
+
+        public DateTime LastModifiedDate
+        {
+            get 
+            { 
+                return _LastModifiedDate; 
+            }
+
+            set 
+            { 
+                _LastModifiedDate = value; 
             }
         }
     }

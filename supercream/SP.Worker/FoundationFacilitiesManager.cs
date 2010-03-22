@@ -609,6 +609,8 @@ namespace SP.Worker
             VatCode vatCode = vatCodeDao.GetById(orderHeader.VatCodeID);
             orderHeader.VatCode = vatCode;
             orderHeader.VatCodeID = vatCode.ID;
+
+            orderHeader.LastModifiedDate = DateTime.Now;
             
             return orderHeaderDao.Save(orderHeader);
         }
@@ -627,6 +629,8 @@ namespace SP.Worker
             newOrderHeader.VatCode = vatCode;
             origOrderHeader.VatCode = vatCode;
 
+            newOrderHeader.LastModifiedDate = DateTime.Now;
+
             return orderHeaderDao.Update(newOrderHeader, origOrderHeader);
         }
 
@@ -640,6 +644,8 @@ namespace SP.Worker
             VatCode vatCode = vatCodeDao.GetById(newOrderHeader.VatCodeID);
             newOrderHeader.VatCode = vatCode;
             origOrderHeader.VatCode = vatCode;
+
+            newOrderHeader.LastModifiedDate = DateTime.Now;
 
             return orderHeaderDao.Update(newOrderHeader, origOrderHeader);
         }
@@ -665,6 +671,8 @@ namespace SP.Worker
             newOrderHeader.OrderStatus = (short)SP.Core.Enums.OrderStatus.Void;
             newOrderHeader.ReasonForVoiding = reasonForVoiding;
 
+            newOrderHeader.LastModifiedDate = DateTime.Now;
+
             updateOrderHeaderDao.Update(newOrderHeader, originalOrder);
         }
 
@@ -682,6 +690,8 @@ namespace SP.Worker
             if (String.IsNullOrEmpty(origOrderHeader.DeliveryNoteNo))
                 newOrderHeader.DeliveryNoteNo = this.GenerateDeliveryNoteNo();
 
+            newOrderHeader.LastModifiedDate = DateTime.Now;
+
             return orderHeaderDao.Update(newOrderHeader, origOrderHeader);
         }
 
@@ -695,6 +705,8 @@ namespace SP.Worker
             VatCode vatCode = vatCodeDao.GetById(newOrderHeader.VatCodeID);
             newOrderHeader.VatCode = vatCode;
             origOrderHeader.VatCode = vatCode;
+
+            newOrderHeader.LastModifiedDate = DateTime.Now;
 
             return orderHeaderDao.Update(newOrderHeader, origOrderHeader);
         }
