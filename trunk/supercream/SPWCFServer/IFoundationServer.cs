@@ -1614,6 +1614,7 @@ namespace SPWCFServer
         private DateTime _DeliveryDate;
         private string _SpecialInstructions;
         private List<OrderLine> _OrderLine;
+        private DateTime _LastModifiedDate;
 
         [DataMember]
         public int ID
@@ -1840,6 +1841,20 @@ namespace SPWCFServer
                         orderLine.OrderHeader = this;
                     }
                 }
+            }
+        }
+
+        [DataMember]
+        public DateTime LastModifiedDate
+        {
+            get
+            {
+                return _LastModifiedDate;
+            }
+
+            set
+            {
+                _LastModifiedDate = value;
             }
         }
     }

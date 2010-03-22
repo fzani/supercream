@@ -234,6 +234,8 @@
       <xs:element minOccurs="0" name="DeliveryNoteNo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="InvoiceNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InvoiceProformaNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastModifiedDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="OrderDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="OrderLine" nillable="true" type="tns:ArrayOfOrderLine" />
       <xs:element minOccurs="0" name="OrderNotesStatus" nillable="true" type="tns:OrderNotesStatus" />
@@ -241,7 +243,7 @@
       <xs:element minOccurs="0" name="ReasonForVoiding" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SpecialInstructions" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="VatCode" nillable="true" type="tns:VatCode" />
-      <xs:element minOccurs="0" name="VatCodeID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="VatCodeID" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrderHeader" nillable="true" type="tns:OrderHeader" />
