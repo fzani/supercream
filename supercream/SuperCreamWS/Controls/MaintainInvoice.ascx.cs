@@ -138,7 +138,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             ui.DeleteOrderNote(OrderNoteStatusID.Value);
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
-            OrderHeader header = orderHeaderUI.GetById(OrderID.Value);
+            OrderHeader header = orderHeaderUI.GetWithVatCodeById(OrderID.Value);
             header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Order;          
             orderHeaderUI.UpdateForInvoice(header);
 
