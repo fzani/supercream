@@ -14,7 +14,7 @@
                         <table class="left">
                             <tr>
                                 <td>
-                                    <asp:Label ID="InvoiceNoLabel" Text="Invoice No" runat="server"></asp:Label>
+                                    <asp:Label ID="InvoiceNoLabel" Text="Invoice Proforma No" runat="server"></asp:Label>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="InvoiceNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
@@ -135,11 +135,10 @@
                         </EditItemTemplate>
                         <ItemStyle Width="20%" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Invoice Proforma No." ItemStyle-Width="20%" SortExpression="InvoiceNo">
+                    <asp:TemplateField HeaderText="Invoice Proforma No." ItemStyle-Width="20%" SortExpression="InvoiceProformaNo">
                         <ItemTemplate>
                             <asp:Label ID="InvoiceProformaLabel" runat="server" Text='<%# Bind("InvoiceProformaNo") %>'></asp:Label>
-                        </ItemTemplate>                       
-                        <ItemStyle Width="20%" />
+                        </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Customer Name" ItemStyle-Width="30%" SortExpression="CustomerID">
                         <ItemTemplate>
@@ -156,6 +155,10 @@
                                         <asp:Image ID="PrintedImage" runat="server" Visible="false" ImageUrl="~/images/print.gif" />
                                         &nbsp;
                                         <asp:Image ID="RePrintedImage" runat="server" Visible="false" ImageUrl="~/images/print_16x16.gif" />
+                                        <asp:Panel Style="display: inline;" ID="CreditNoteImagePanel" runat="server">
+                                            <asp:Image ID="CreditNoteImage" runat="server" ImageUrl="~/images/16-circle-green.gif" />
+                                            &nbsp;
+                                        </asp:Panel>
                                     </td>
                                 </tr>
                             </table>
@@ -184,6 +187,8 @@
                             <asp:Image ID="PrintedImage" runat="server" ImageAlign="Middle" ImageUrl="~/images/print.gif" />
                             &nbsp; Reprinted = &nbsp;
                             <asp:Image ID="RePrintedImage" runat="server" ImageAlign="Middle" ImageUrl="~/images/print_16x16.gif" />
+                            &nbsp; Credit =
+                            <asp:Image ID="CreditNoteImage" runat="server" ImageAlign="Middle" ImageUrl="~/images/16-circle-green.gif" />
                         </i>
                     </td>
                 </tr>
@@ -254,12 +259,13 @@
                 <tr>
                     <td>
                         <h2>
-                            <i>Invoice No</i></h2>
+                            <i>Invoice Proforma No</i>
+                        </h2>
                     </td>
                     <td>
                         <h2>
                             <i>
-                                <asp:Label ID="InvoiceHeaderNoLabel" runat="server"></asp:Label>
+                                <asp:Label ID="InvoiceProformaHeaderNoLabel" runat="server"></asp:Label>
                             </i>
                         </h2>
                     </td>
@@ -301,7 +307,7 @@
                 <table style="width: 100%">
                     <tr>
                         <td colspan="4">
-                            <asp:Button ID="ConfirmInvoice" Text="Confirm Proforma Invoice" runat="server" ValidationGroup="ModifyInvoiceDetailsGroup"
+                            <asp:Button ID="ConfirmInvoice" Text="Confirm Invoice" runat="server" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 OnClick="ConfirmInvoice_Click" />
                             <asp:Button ID="ChangeInvoiceDetailsButton" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 Visible="false" Text="Change Invoice Details" runat="server" OnClick="ChangeInvoiceDetailsButton_Click" />
@@ -366,7 +372,8 @@
                             Payment Terms
                         </td>
                         <td class="emphasise" style="width: 25%">
-                            Invoice No
+                            Invoice Proforma No
+                            <asp:Label ID="DeliveryNoteHeaderLabel" Visible="false" runat="server"></asp:Label>
                         </td>
                         <td class="emphasise" style="width: 25%">
                             Delivery Van
@@ -380,7 +387,8 @@
                             <asp:Label ID="PaymentTermsLabel" runat="server"></asp:Label>
                         </td>
                         <td style="width: 25%">
-                            <asp:Label ID="InvoiceLabel" runat="server"></asp:Label>
+                            <asp:Label ID="InvoiceProformaLabel" runat="server"></asp:Label>
+                            <asp:Label ID="DeliveryNoteNoIdentifierLabel" Visible="false" runat="server"></asp:Label>
                         </td>
                         <td style="width: 25%">
                             <asp:DropDownList ID="DeliveryVanDropDownList" AutoPostBack="true" runat="server"
@@ -652,11 +660,51 @@
                                             Width="95%" Height="100px" runat="server">
                                         </asp:TextBox>
                                     </td>
-                                    <td>
-                                        <b>Total</b>
-                                    </td>
-                                    <td>
-                                        <asp:Label ID="TotalLabel" runat="server"></asp:Label>
+                                    <td colspan="2">
+                                        <table cellpadding="0" cellpadding="0" style="border: solid 1px black;">
+                                            <tr>
+                                                <td colspan="3">
+                                                    <b><i>Vat Analysis</i></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <i>Vat Name</i>
+                                                </td>
+                                                <td>
+                                                    <i>Value</i>
+                                                </td>
+                                                <td>
+                                                    <i>Vatable</i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <i>ZERO</i>
+                                                </td>
+                                                <td>
+                                                    <i>
+                                                        <asp:Label ID="ZeroVatAmountLabel" runat="server"></asp:Label></i>
+                                                </td>
+                                                <td>
+                                                    <i>0</i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <i>
+                                                        <asp:Label ID="VatPercentageLabel" runat="server"></asp:Label></i></i>
+                                                </td>
+                                                <td>
+                                                    <i>
+                                                        <asp:Label ID="VatAmountLabel" runat="server"></asp:Label></i>
+                                                </td>
+                                                <td>
+                                                    <i>
+                                                        <asp:Label ID="VatTotalAmountLabel" runat="server"></asp:Label></i></i>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                                 <tr>
@@ -667,20 +715,24 @@
                                         <asp:Label ID="PaymentTermsLabel" runat="server"></asp:Label>
                                     </td>
                                     <td>
+                                        <b>Total</b>
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="TotalLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <b>Total No. Of Units for Delivery</b> &nbsp;
+                                    </td>
+                                    <td colspan="3">
+                                        <asp:Label ID="TotalItemsLabel" runat="server"></asp:Label>
+                                    </td>
+                                    <td>
                                         <b>+VAT</b>
                                     </td>
                                     <td>
                                         <asp:Label ID="VatLabel" runat="server"></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="5">
-                                        <b>Total No. Of Units for Delivery</b> &nbsp;
-                                        <asp:Label ID="TotalItemsLabel" runat="server"></asp:Label>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
                                     </td>
                                 </tr>
                                 <tr>

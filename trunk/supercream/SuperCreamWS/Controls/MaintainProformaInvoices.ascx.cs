@@ -86,8 +86,8 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
                 OrderID = OrderID.Value,
                 PicklistDateGenerated = Defaults.MinDateTime,
                 PicklistGenerated = false,
-                InvoiceDateCreated = Defaults.MinDateTime,
-                InvoiceProformaDateCreated = DateTime.Now,
+                InvoiceDateCreated = DateTime.Now,
+                InvoiceProformaDateCreated = Defaults.MinDateTime,
                 DeliveryNoteDateCreated = Defaults.MinDateTime
             };
 
@@ -138,9 +138,8 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             ui.DeleteOrderNote(OrderNoteStatusID.Value);
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
-            OrderHeader header = orderHeaderUI.GetById(OrderID.Value);
+            OrderHeader header = orderHeaderUI.GetWithVatCodeById(OrderID.Value);
             header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Order;
-            header.InvoiceNo = String.Empty;
             orderHeaderUI.UpdateForInvoice(header);
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
@@ -179,20 +178,17 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
             OrderHeader orderHeader = orderHeaderUI.GetById(orderID);
-            orderHeader.OrderStatus = (short)OrderStatus.PoformaInvoicePrinted;
+            orderHeader.OrderStatus = (short)OrderStatus.InvoicePrinted;
             orderHeaderUI.UpdateForInvoice(orderHeader);
 
             OrderNotesStatusUI ui = new OrderNotesStatusUI();
             OrderNotesStatus orderNoteStatus = ui.GetOrderNotesStatusByOrderID(orderID);
-            orderNoteStatus.InvoiceProformaDatePrinted = DateTime.Now;
-            orderNoteStatus.InvoiceProformaPrinted = true;
+            orderNoteStatus.InvoiceDatePrinted = DateTime.Now;
+            orderNoteStatus.InvoicePrinted = true;
             ui.Update(orderNoteStatus);
 
             PrintInvoiceButton.Visible = false;
             RePrintInvoiceButton.Visible = true;
-
-            //// NewPrinting.Run(@"Report1.rdlc", "\\\\paris\\Samsung CLP-310 Series", ds.Tables[0], "SuperCreamDBDataSet_InvoiceHeader"); 
-            // printReport.Run("InvoicePrint.rdl", dataSets, PageMode.Portrait);
         }
         catch (System.Exception ex)
         {
@@ -220,20 +216,17 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
             OrderHeader orderHeader = orderHeaderUI.GetById(orderID);
-            orderHeader.OrderStatus = (short)OrderStatus.PoformaInvoicePrinted;
+            orderHeader.OrderStatus = (short)OrderStatus.InvoicePrinted;
             orderHeaderUI.UpdateForInvoice(orderHeader);
 
             OrderNotesStatusUI ui = new OrderNotesStatusUI();
             OrderNotesStatus orderNoteStatus = ui.GetOrderNotesStatusByOrderID(orderID);
-            orderNoteStatus.InvoiceProformaDatePrinted = DateTime.Now;
+            orderNoteStatus.InvoiceDateReprinted = DateTime.Now;
             orderNoteStatus.InvoiceReprinted = true;
             ui.Update(orderNoteStatus);
 
             PrintInvoiceButton.Visible = false;
             RePrintInvoiceButton.Visible = true;
-
-            //// NewPrinting.Run(@"Report1.rdlc", "\\\\paris\\Samsung CLP-310 Series", ds.Tables[0], "SuperCreamDBDataSet_InvoiceHeader"); 
-            // printReport.Run("InvoicePrint.rdl", dataSets, PageMode.Portrait);
         }
         catch (System.Exception ex)
         {
@@ -311,6 +304,17 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             CustomerUI ui = new CustomerUI();
             Customer customer = ui.GetByID(customerID);
 
+            Image img = e.Row.FindControl("CreditNoteImage") as Image;
+            CreditNoteUI creditNoteUI = new CreditNoteUI();
+            if (creditNoteUI.CreditNoteExists(orderHeader.ID))
+            {
+                img.Visible = true;
+            }
+            else
+            {
+                img.Visible = false;
+            }
+
             Image confirmedImage = e.Row.FindControl("ConfirmedImage") as Image;
             OrderNotesStatusUI orderNoteStatusUI = new OrderNotesStatusUI();
             if (orderNoteStatusUI.OrderNoteExistsByOrderID(orderHeader.ID))
@@ -329,7 +333,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
                 OrderNotesStatus orderNoteStatus = orderNoteStatusUI.GetOrderNotesStatusByOrderID(orderHeader.ID);
                 if (orderNoteStatusUI.OrderNoteExistsByOrderID(orderHeader.ID))
                 {
-                    if (orderNoteStatus.InvoiceProformaPrinted)
+                    if (orderNoteStatus.InvoicePrinted)
                     {
                         printedImage.Visible = true;
                     }
@@ -375,7 +379,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
 
             OrderID = orderHeader.ID;
             OrderHeaderNoLabel.Text = orderHeader.AlphaID;
-            InvoiceHeaderNoLabel.Text = orderHeader.InvoiceNo;
+            InvoiceProformaHeaderNoLabel.Text = orderHeader.InvoiceProformaNo;
 
             int customerID = orderHeader.CustomerID;
 
@@ -534,117 +538,143 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
     #region Invoice Repeater Event Handlers
 
     int totalRowCount = 0;
-    Decimal netTotalPrice = 0;
+    Decimal vatableTotalPrice = 0;
+    Decimal nonVatableTotalPrice = 0;
     Decimal vatTotal = 0;
     Decimal totalUnits = 0;
+    float vatCodePercentage = 0;
 
     protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
         if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
         {
-            totalRowCount++;
-
-            OrderLine line = e.Item.DataItem as OrderLine;
-
-            ProductUI ui = new ProductUI();
-            Product p = ui.GetProductByID(line.ProductID);
-
-            Label descriptionLabel = e.Item.FindControl("DescriptionLabel") as Label;
-            descriptionLabel.Text = p.Description;
-
-            Label rrpLabel = e.Item.FindControl("RRPLabel") as Label;
-            rrpLabel.Text = String.Format("{0:c}", p.RRPPerItem);
-
-            Label vatExemptibleLabel = e.Item.FindControl("VatExemptibleLabel") as Label;
-            if (p.VatExempt)
-                vatExemptibleLabel.Text = "Y";
-            else
-                vatExemptibleLabel.Text = "N";
-
-            Label noOfUnitsLabel = e.Item.FindControl("NoOfUnitsLabel") as Label;
-            int noOfUnits = Convert.ToInt32(noOfUnitsLabel.Text);
-            totalUnits += noOfUnits;
-
-            Label pricePerUnitLabel = e.Item.FindControl("PricePerUnitLabel") as Label;
-            Decimal pricePerUnit = Convert.ToDecimal(pricePerUnitLabel.Text);
-
-            Label netPriceLabel = e.Item.FindControl("NetPriceLabel") as Label;
-            Decimal totalPrice = Math.Round(pricePerUnit * noOfUnits, 2);
-
-            if (totalPrice != 0 && (p.VatExempt == false))
+            if (OrderID.Value != -1)
             {
-//                Decimal vat = (totalPrice / 100) * Convert.ToDecimal(p.VatCode.PercentageValue);
-               //  vatTotal += vat;
-            }
+                totalRowCount++;
 
-            netPriceLabel.Text = totalPrice.ToString();
-            netTotalPrice += totalPrice;
+                OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
+                OrderHeader orderHeader = orderHeaderUI.GetWithVatCodeById(OrderID.Value);
 
-            Label specialInstructionsNameLabel = e.Item.FindControl("SpecialInstructionsNameLabel") as Label;
-            TextBox specialInstructionsTextBox = e.Item.FindControl("SpecialInstructionsTextBox") as TextBox;
+                OrderLine line = e.Item.DataItem as OrderLine;
 
-            if (!String.IsNullOrEmpty(line.SpecialInstructions))
-            {
+                ProductUI ui = new ProductUI();
+                Product p = ui.GetProductByID(line.ProductID);
 
-                specialInstructionsNameLabel.Visible = true;
-                specialInstructionsTextBox.Visible = true;
-                specialInstructionsTextBox.Text = line.SpecialInstructions;
-            }
-            else
-            {
-                specialInstructionsNameLabel.Visible = false;
-                specialInstructionsTextBox.Visible = false;
+                Label descriptionLabel = e.Item.FindControl("DescriptionLabel") as Label;
+                descriptionLabel.Text = p.Description;
+
+                Label rrpLabel = e.Item.FindControl("RRPLabel") as Label;
+                rrpLabel.Text = String.Format("{0:c}", p.RRPPerItem);
+
+                Label noOfUnitsLabel = e.Item.FindControl("NoOfUnitsLabel") as Label;
+                int noOfUnits = Convert.ToInt32(noOfUnitsLabel.Text);
+                totalUnits += noOfUnits;
+
+                Label pricePerUnitLabel = e.Item.FindControl("PricePerUnitLabel") as Label;
+                Decimal pricePerUnit = Convert.ToDecimal(pricePerUnitLabel.Text);
+
+                Label netPriceLabel = e.Item.FindControl("NetPriceLabel") as Label;
+                Decimal totalPrice = Math.Round(pricePerUnit * noOfUnits, 2);
+
+                Label vatExemptibleLabel = e.Item.FindControl("VatExemptibleLabel") as Label;
+                if (p.VatExempt)
+                {
+                    nonVatableTotalPrice += totalPrice;
+                    vatExemptibleLabel.Text = "Y";
+                }
+                else
+                {
+                    vatCodePercentage = orderHeader.VatCode.PercentageValue;
+                    if (totalPrice != 0)
+                    {
+                        Decimal vat = (totalPrice / 100) * Convert.ToDecimal(vatCodePercentage);
+                        vatTotal += vat;
+                        vatableTotalPrice += totalPrice;
+                    }
+                    vatExemptibleLabel.Text = "N";
+                }
+
+                netPriceLabel.Text = totalPrice.ToString();
+
+                Label specialInstructionsNameLabel = e.Item.FindControl("SpecialInstructionsNameLabel") as Label;
+                TextBox specialInstructionsTextBox = e.Item.FindControl("SpecialInstructionsTextBox") as TextBox;
+
+                if (!String.IsNullOrEmpty(line.SpecialInstructions))
+                {
+
+                    specialInstructionsNameLabel.Visible = true;
+                    specialInstructionsTextBox.Visible = true;
+                    specialInstructionsTextBox.Text = line.SpecialInstructions;
+                }
+                else
+                {
+                    specialInstructionsNameLabel.Visible = false;
+                    specialInstructionsTextBox.Visible = false;
+                }
             }
         }
         if (e.Item.ItemType == ListItemType.Footer)
         {
-            Label totalItemsLabel = e.Item.FindControl("TotalItemsLabel") as Label;
-            totalItemsLabel.Text = this.totalUnits.ToString();
-
-            Label totalLabel = e.Item.FindControl("TotalLabel") as Label;
-            totalLabel.Text = String.Format("{0:c}", Math.Round(netTotalPrice, 2));
-
-            Label deliveryVanLabel = e.Item.FindControl("DeliveryVanLabel") as Label;
-            if (DeliveryVanDropDownList.SelectedValue != "-1")
-                deliveryVanLabel.Text = DeliveryVanDropDownList.SelectedItem.Text;
-            else
-                deliveryVanLabel.Text = "";
-
-            Label vatLabel = e.Item.FindControl("VatLabel") as Label;
-            vatLabel.Text += String.Format("{0:c}", Math.Round(vatTotal, 2));
-
-            Label netTotalLabel = e.Item.FindControl("NetTotalLabel") as Label;
-            netTotalLabel.Text += String.Format("{0:c}", Math.Round(netTotalPrice + vatTotal, 2));
-
-            if (AccountDropDownList.SelectedValue != "")
-            {
-                if (AccountDropDownList.SelectedIndex != 0)
-                {
-                    int accountID = Convert.ToInt32(AccountDropDownList.SelectedValue);
-                    AccountUI accountUI = new AccountUI();
-                    Account account = accountUI.GetByID(accountID);
-
-                    TermsUI termsUI = new TermsUI();
-                    Terms terms = termsUI.GetByID(account.TermTypeID.Value);
-
-                    Label paymentTermsLabel = e.Item.FindControl("PaymentTermsLabel") as Label;
-                    paymentTermsLabel.Text = terms.Description;
-                }
-            }
-
-            if (OrderID.Value != -1)
+            if (OrderID != -1)
             {
                 OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
-                OrderHeader orderHeader = orderHeaderUI.GetById(OrderID.Value);
+                OrderHeader orderHeader = orderHeaderUI.GetWithVatCodeById(OrderID.Value);
 
                 Label deliveryDateLabel = e.Item.FindControl("DeliveryDateLabel") as Label;
                 deliveryDateLabel.Text = orderHeader.DeliveryDate.ToShortDateString();
-            }
 
-            netTotalPrice = 0;
-            vatTotal = 0;
-            netTotalPrice = 0;
-            totalRowCount = 0;
+                Label totalItemsLabel = e.Item.FindControl("TotalItemsLabel") as Label;
+                totalItemsLabel.Text = this.totalUnits.ToString();
+
+                Label totalLabel = e.Item.FindControl("TotalLabel") as Label;
+                totalLabel.Text = String.Format("{0:c}", Math.Round(vatableTotalPrice + nonVatableTotalPrice, 2));
+
+                Label deliveryVanLabel = e.Item.FindControl("DeliveryVanLabel") as Label;
+                if (DeliveryVanDropDownList.SelectedValue != "-1")
+                    deliveryVanLabel.Text = DeliveryVanDropDownList.SelectedItem.Text;
+                else
+                    deliveryVanLabel.Text = "";
+
+                Label vatLabel = e.Item.FindControl("VatLabel") as Label;
+                vatLabel.Text += String.Format("{0:c}", Math.Round(vatTotal, 2));
+
+                Label netTotalLabel = e.Item.FindControl("NetTotalLabel") as Label;
+                netTotalLabel.Text += String.Format("{0:c}", Math.Round(vatableTotalPrice + nonVatableTotalPrice + vatTotal, 2));
+
+                // Vat Analysis
+                Label zeroVatAmountLabel = e.Item.FindControl("ZeroVatAmountLabel") as Label;
+                zeroVatAmountLabel.Text = String.Format("{0:c}", nonVatableTotalPrice);
+
+                Label vatPercentageLabel = e.Item.FindControl("VatPercentageLabel") as Label;
+                vatPercentageLabel.Text = '%' + Math.Round(vatCodePercentage, 2).ToString();
+
+                Label vatAmountLabel = e.Item.FindControl("VatAmountLabel") as Label;
+                vatAmountLabel.Text = String.Format("{0:c}", vatTotal);
+
+                Label vatTotalAmountLabel = e.Item.FindControl("VatTotalAmountLabel") as Label;
+                vatTotalAmountLabel.Text = String.Format("{0:c}", vatableTotalPrice);
+
+                if (AccountDropDownList.SelectedValue != "")
+                {
+                    if (AccountDropDownList.SelectedIndex != 0)
+                    {
+                        int accountID = Convert.ToInt32(AccountDropDownList.SelectedValue);
+                        AccountUI accountUI = new AccountUI();
+                        Account account = accountUI.GetByID(accountID);
+
+                        TermsUI termsUI = new TermsUI();
+                        Terms terms = termsUI.GetByID(account.TermTypeID.Value);
+
+                        Label paymentTermsLabel = e.Item.FindControl("PaymentTermsLabel") as Label;
+                        paymentTermsLabel.Text = terms.Description;
+                    }
+                }
+
+                nonVatableTotalPrice = 0;
+                vatTotal = 0;
+                vatableTotalPrice = 0;
+                totalRowCount = 0;
+            }
         }
     }
     #endregion
@@ -772,7 +802,22 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         OrderHeader orderHeader = orderHeaderUI.GetById(OrderID.Value);
 
         DateOfOrderLabel.Text = orderHeader.OrderDate.ToShortDateString();
-        InvoiceLabel.Text = orderHeader.InvoiceNo;
+        InvoiceProformaLabel.Text = orderHeader.InvoiceProformaNo;
+
+        if (orderHeader.DeliveryNoteNo != null)
+        {
+            DeliveryNoteHeaderLabel.Text = "/ Delivery Note";
+            DeliveryNoteHeaderLabel.Visible = true;
+            DeliveryNoteNoIdentifierLabel.Visible = true;
+            DeliveryNoteNoIdentifierLabel.Text = " / " + orderHeader.DeliveryNoteNo;
+            DeliveryNoteHeaderLabel.DataBind();
+        }
+        else
+        {
+            DeliveryNoteNoIdentifierLabel.Text = String.Empty;
+            DeliveryNoteNoIdentifierLabel.Visible = false;
+            DeliveryNoteHeaderLabel.Visible = false;
+        }
 
         // Get Account Details
         int accountID = Convert.ToInt32(AccountDropDownList.SelectedValue);
