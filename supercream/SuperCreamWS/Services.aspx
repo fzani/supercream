@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainPlaceholder" runat="Server">
     <a name="General Info"></a>
     <h2>
-        Super Cream Ice Cream Specialists</a></h2>
+        Super Cream Ice Cream Specialists</h2>
     <p>
         <ul>
             <li>Impulse Ice Cream Specialists</li>
@@ -22,4 +22,7 @@
             DY5 3RA<br />
         </p>
     </blockquote>
+    <div style="background: #FAFAFA; text-align: center">
+        <asp:Image ImageUrl="~/images/ice-cream-cone-wedding.jpg" runat="server" />
+    </div>
 </asp:Content>
