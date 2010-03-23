@@ -1059,6 +1059,25 @@ namespace SPWCFServer
             }
         }
 
+        public OrderHeader GetOrderHeaderByIdWithVatCode(int id)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+
+                SP.Core.Domain.OrderHeader orderHeader = mgr.GetOrderHeaderWithVatCode(id);
+                OrderHeader order = ObjectExtension.CloneProperties<SP.Core.Domain.OrderHeader, SPWCFServer.OrderHeader>(orderHeader);
+                order.VatCode = ObjectExtension.CloneProperties<SP.Core.Domain.VatCode, SPWCFServer.VatCode>(orderHeader.VatCode);
+                return order;
+
+            }
+            catch (Exception ex)
+            {
+                // Log full Exception to be done ...
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public bool InvoiceNoExists(string invoiceNo)
         {
             try
@@ -2603,7 +2622,6 @@ namespace SPWCFServer
             }
         }
         #endregion
-
     }
 }
 

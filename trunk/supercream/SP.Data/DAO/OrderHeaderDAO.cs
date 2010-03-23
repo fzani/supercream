@@ -16,9 +16,14 @@ namespace SP.Data.LTS
     public class OrderHeaderDao : AbstractLTSDao<OrderHeader, int>, IOrderHeaderDao
     {
         public override OrderHeader GetById(int id)
+        {          
+            return db.OrderHeader.Single<OrderHeader>(q => q.ID == id);
+        }
+
+        public OrderHeader GetOrderHeaderWithVatCode(int id)
         {
             DataLoadOptions dlo = new DataLoadOptions();
-            dlo.LoadWith<OrderHeader>(o => o.VatCode);           
+            dlo.LoadWith<OrderHeader>(o => o.VatCode);
             db.LoadOptions = dlo;
 
             return db.OrderHeader.Single<OrderHeader>(q => q.ID == id);

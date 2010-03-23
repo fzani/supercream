@@ -90,6 +90,7 @@ namespace SP.Core.ManagerInterfaces
         bool InvoiceNoExists(string invoiceNo);
         void DeleteOrderHeader(SP.Core.Domain.OrderHeader orderHeader);
         SP.Core.Domain.OrderHeader GetOrderHeader(int id);
+        SP.Core.Domain.OrderHeader GetOrderHeaderWithVatCode(int id);
         OrderHeader GetOrderHeaderByOrderNo(string orderNo);
         List<OrderHeader> GetOrderHeaderForSearch(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus);
         List<OrderHeader> GetOrderHeaderForSearchWithPrintedOrderStatuses(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short actualOrderStatus, short printedOrderStatus);

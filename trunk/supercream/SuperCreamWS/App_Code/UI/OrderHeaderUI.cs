@@ -51,6 +51,21 @@ public class OrderHeaderUI : IDisposable
         }
     }
 
+    public OrderHeader GetWithVatCodeById(int id)
+    {
+        if (id != -1)
+        {
+            using (_proxy = new WcfFoundationService.FoundationServiceClient())
+            {
+                return _proxy.GetOrderHeaderByIdWithVatCode(id);
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public bool InvoiceNoExists(string invoiceNo)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
@@ -71,7 +86,7 @@ public class OrderHeaderUI : IDisposable
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            OrderHeader origOrderHeader = _proxy.GetOrderHeader(orderNo);
+            OrderHeader origOrderHeader = _proxy.GetOrderHeaderByIdWithVatCode(orderNo);
             OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
 
             updatedOrderHeader.OrderStatus = (short)SP.Core.Enums.OrderStatus.Invoice;
@@ -85,7 +100,7 @@ public class OrderHeaderUI : IDisposable
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            OrderHeader origOrderHeader = _proxy.GetOrderHeader(orderNo);
+            OrderHeader origOrderHeader = _proxy.GetOrderHeaderByIdWithVatCode(orderNo);
             OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
 
             updatedOrderHeader.OrderStatus = (short)SP.Core.Enums.OrderStatus.ProformaInvoice;
@@ -99,7 +114,7 @@ public class OrderHeaderUI : IDisposable
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            OrderHeader origOrderHeader = _proxy.GetOrderHeader(orderNo);
+            OrderHeader origOrderHeader = _proxy.GetOrderHeaderByIdWithVatCode(orderNo);
             OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
 
             updatedOrderHeader.OrderStatus = (short)SP.Core.Enums.OrderStatus.DeliveryNote;
@@ -113,7 +128,7 @@ public class OrderHeaderUI : IDisposable
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            OrderHeader origOrderHeader = _proxy.GetOrderHeader(orderNo);
+            OrderHeader origOrderHeader = _proxy.GetOrderHeaderByIdWithVatCode(orderNo);
             OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
 
             updatedOrderHeader.AlphaID = origOrderHeader.AlphaID;
@@ -133,7 +148,7 @@ public class OrderHeaderUI : IDisposable
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            OrderHeader origOrderHeader = _proxy.GetOrderHeader(orderNo);
+            OrderHeader origOrderHeader = _proxy.GetOrderHeaderByIdWithVatCode(orderNo);
             OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
 
             updatedOrderHeader.AlphaID = origOrderHeader.AlphaID;
@@ -153,7 +168,7 @@ public class OrderHeaderUI : IDisposable
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            OrderHeader origOrderHeader = _proxy.GetOrderHeader(orderNo);
+            OrderHeader origOrderHeader = _proxy.GetOrderHeaderByIdWithVatCode(orderNo);
             OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
 
             updatedOrderHeader.AlphaID = origOrderHeader.AlphaID;
@@ -164,7 +179,7 @@ public class OrderHeaderUI : IDisposable
             updatedOrderHeader.InvoiceNo = origOrderHeader.InvoiceNo;
             updatedOrderHeader.SpecialInstructions = origOrderHeader.SpecialInstructions;
 
-            OrderHeader oh = _proxy.UpdateOrderHeader(updatedOrderHeader, origOrderHeader);
+            OrderHeader oh = _proxy.CreateInvoice(updatedOrderHeader, origOrderHeader);
             return oh.InvoiceNo;
         }
     }
@@ -181,11 +196,11 @@ public class OrderHeaderUI : IDisposable
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            OrderHeader origOrderHeader = _proxy.GetOrderHeader(newOrderHeader.ID);
+            OrderHeader origOrderHeader = _proxy.GetOrderHeaderByIdWithVatCode(newOrderHeader.ID);
             OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
 
             updatedOrderHeader.AlphaID = newOrderHeader.AlphaID;
-            updatedOrderHeader.CustomerID = origOrderHeader.CustomerID;
+            updatedOrderHeader.CustomerID = newOrderHeader.CustomerID;
             updatedOrderHeader.ID = newOrderHeader.ID;
             updatedOrderHeader.OrderDate = newOrderHeader.OrderDate;
             updatedOrderHeader.DeliveryDate = newOrderHeader.DeliveryDate;
@@ -200,7 +215,7 @@ public class OrderHeaderUI : IDisposable
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            OrderHeader origOrderHeader = _proxy.GetOrderHeader(newOrderHeader.ID);
+            OrderHeader origOrderHeader = _proxy.GetOrderHeaderByIdWithVatCode(newOrderHeader.ID);
             _proxy.UpdateOrderHeader(newOrderHeader, origOrderHeader);
         }
     }

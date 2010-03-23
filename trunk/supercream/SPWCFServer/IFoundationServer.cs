@@ -235,6 +235,10 @@ namespace SPWCFServer
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
+        OrderHeader GetOrderHeaderByIdWithVatCode(int id);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
         OrderHeader GetOrderHeaderByOrderNo(string orderNo);
 
         [OperationContract]
