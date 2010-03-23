@@ -139,8 +139,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
             OrderHeader header = orderHeaderUI.GetById(OrderID.Value);
-            header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Order;
-            // header.InvoiceNo = String.Empty;
+            header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Order;          
             orderHeaderUI.UpdateForInvoice(header);
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
@@ -189,10 +188,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             ui.Update(orderNoteStatus);
 
             PrintInvoiceButton.Visible = false;
-            RePrintInvoiceButton.Visible = true;
-
-            //// NewPrinting.Run(@"Report1.rdlc", "\\\\paris\\Samsung CLP-310 Series", ds.Tables[0], "SuperCreamDBDataSet_InvoiceHeader"); 
-            // printReport.Run("InvoicePrint.rdl", dataSets, PageMode.Portrait);
+            RePrintInvoiceButton.Visible = true;           
         }
         catch (System.Exception ex)
         {
@@ -231,9 +227,6 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
 
             PrintInvoiceButton.Visible = false;
             RePrintInvoiceButton.Visible = true;
-
-            //// NewPrinting.Run(@"Report1.rdlc", "\\\\paris\\Samsung CLP-310 Series", ds.Tables[0], "SuperCreamDBDataSet_InvoiceHeader"); 
-            // printReport.Run("InvoicePrint.rdl", dataSets, PageMode.Portrait);
         }
         catch (System.Exception ex)
         {
@@ -560,7 +553,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
                 totalRowCount++;
 
                 OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
-                OrderHeader orderHeader = orderHeaderUI.GetById(OrderID.Value);
+                OrderHeader orderHeader = orderHeaderUI.GetWithVatCodeById(OrderID.Value);
 
                 OrderLine line = e.Item.DataItem as OrderLine;
 
@@ -625,7 +618,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             if (OrderID != -1)
             {
                 OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
-                OrderHeader orderHeader = orderHeaderUI.GetById(OrderID.Value);
+                OrderHeader orderHeader = orderHeaderUI.GetWithVatCodeById(OrderID.Value);
 
                 Label deliveryDateLabel = e.Item.FindControl("DeliveryDateLabel") as Label;
                 deliveryDateLabel.Text = orderHeader.DeliveryDate.ToShortDateString();

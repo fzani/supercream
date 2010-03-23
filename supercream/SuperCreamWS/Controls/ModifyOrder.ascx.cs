@@ -565,6 +565,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             OrderHeader oh = new OrderHeader
             {
                 ID = this.OrderID.Value,
+                CustomerID = Convert.ToInt32(CustomerDropDownList.SelectedValue),
                 OrderDate = Convert.ToDateTime(this.OrderDateTextBox.Text),
                 DeliveryDate = Convert.ToDateTime(this.DeliveryDateTextBox.Text),
                 OrderStatus = (short)SP.Core.Enums.OrderStatus.Order,

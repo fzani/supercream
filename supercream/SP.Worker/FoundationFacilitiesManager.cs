@@ -541,6 +541,14 @@ namespace SP.Worker
             return orderHeaderDao.GetById(id);
         }
 
+        public OrderHeader GetOrderHeaderWithVatCode(int id)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
+
+            return orderHeaderDao.GetOrderHeaderWithVatCode(id);
+        }
+
         public List<OrderHeader> GetAllOrderHeaders()
         {
             IDaoFactory factory = new LTSDaoFactory();
@@ -602,6 +610,7 @@ namespace SP.Worker
             IVatCodeDao vatCodeDao = factory.GetVatCodeDao();
             vatCodeDao.SetDataContext(orderHeaderDao.GetDataContext());
             VatCode vatCode = vatCodeDao.GetById(newOrderHeader.VatCodeID);
+           
             newOrderHeader.VatCode = vatCode;
             origOrderHeader.VatCode = vatCode;
 
@@ -644,6 +653,7 @@ namespace SP.Worker
             IVatCodeDao vatCodeDao = factory.GetVatCodeDao();
             vatCodeDao.SetDataContext(orderHeaderDao.GetDataContext());
             VatCode vatCode = vatCodeDao.GetById(newOrderHeader.VatCodeID);
+          
             newOrderHeader.VatCode = vatCode;
             originalOrder.VatCode = vatCode;
 
@@ -682,6 +692,7 @@ namespace SP.Worker
             IVatCodeDao vatCodeDao = factory.GetVatCodeDao();
             vatCodeDao.SetDataContext(orderHeaderDao.GetDataContext());
             VatCode vatCode = vatCodeDao.GetById(newOrderHeader.VatCodeID);
+
             newOrderHeader.VatCode = vatCode;
             origOrderHeader.VatCode = vatCode;
 

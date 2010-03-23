@@ -7,6 +7,7 @@ namespace SP.Core.DataInterfaces
 {
     public interface IOrderHeaderDao : IDao<OrderHeader, int>
     {
+        OrderHeader GetOrderHeaderWithVatCode(int id);
         bool Exists(string orderNo);
         bool InvoiceNoExists(string invoiceNo);
         OrderHeader GetOrderHeader(string orderNo);
