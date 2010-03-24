@@ -687,6 +687,9 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
                     }
                 }
 
+                TextBox specialInstructionsTextBox = e.Item.FindControl("SpecialInstructionsHeaderTextBox") as TextBox;
+                specialInstructionsTextBox.Text = orderHeader.SpecialInstructions;
+
                 nonVatableTotalPrice = 0;
                 vatTotal = 0;
                 vatableTotalPrice = 0;

@@ -670,6 +670,9 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
                     }
                 }
 
+                TextBox specialInstructionsTextBox = e.Item.FindControl("SpecialInstructionsHeaderTextBox") as TextBox;
+                specialInstructionsTextBox.Text = orderHeader.SpecialInstructions;
+
                 nonVatableTotalPrice = 0;
                 vatTotal = 0;
                 vatableTotalPrice = 0;

@@ -284,7 +284,7 @@
                 <table style="width: 100%">
                     <tr>
                         <td colspan="4">
-                            <asp:Button ID="ConfirmInvoice" Text="Confirm Invoice" runat="server" ValidationGroup="ModifyInvoiceDetailsGroup"
+                            <asp:Button ID="ConfirmInvoice" Text="Confirm Proforma Invoice" runat="server" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 OnClick="ConfirmInvoice_Click" />
                             <asp:Button ID="ChangeInvoiceDetailsButton" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 Visible="false" Text="Change Invoice Details" runat="server" OnClick="ChangeInvoiceDetailsButton_Click" />

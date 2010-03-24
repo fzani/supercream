@@ -11,15 +11,7 @@
             <table class="search">
                 <tr>
                     <td class="right">
-                        <table class="left">
-                            <tr>
-                                <td>
-                                    <asp:Label ID="InvoiceNoLabel" Text="Invoice No" runat="server"></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="InvoiceNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
-                                </td>
-                            </tr>
+                        <table class="left">                           
                             <tr>
                                 <td>
                                     <asp:Label ID="OrderNoLabel" Text="Order No" runat="server"></asp:Label>
