@@ -86,8 +86,8 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
                 OrderID = OrderID.Value,
                 PicklistDateGenerated = Defaults.MinDateTime,
                 PicklistGenerated = false,
-                InvoiceDateCreated = DateTime.Now,
-                InvoiceProformaDateCreated = Defaults.MinDateTime,
+                InvoiceDateCreated = Defaults.MinDateTime,
+                InvoiceProformaDateCreated = DateTime.Now,
                 DeliveryNoteDateCreated = Defaults.MinDateTime
             };
 
@@ -97,6 +97,25 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
 
+            DataBind();
+        }
+        catch (Exception ex)
+        {
+            ErrorMessageEventArgs args = new ErrorMessageEventArgs();
+            args.AddErrorMessages(ex.Message);
+            ErrorMessageEventHandler(this, args);
+        }
+    }
+
+    protected void ConvertToInvoice_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            OrderHeaderUI ui = new OrderHeaderUI();
+            string invoiceNo = ui.CreateInvoice(OrderID.Value);
+
+            ChangeState += new EventHandler<EventArgs>(PageLoadState);
+            ChangeState(this, e);
             DataBind();
         }
         catch (Exception ex)
@@ -178,13 +197,13 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
             OrderHeader orderHeader = orderHeaderUI.GetById(orderID);
-            orderHeader.OrderStatus = (short)OrderStatus.InvoicePrinted;
+            orderHeader.OrderStatus = (short)OrderStatus.PoformaInvoicePrinted;
             orderHeaderUI.UpdateForInvoice(orderHeader);
 
             OrderNotesStatusUI ui = new OrderNotesStatusUI();
             OrderNotesStatus orderNoteStatus = ui.GetOrderNotesStatusByOrderID(orderID);
-            orderNoteStatus.InvoiceDatePrinted = DateTime.Now;
-            orderNoteStatus.InvoicePrinted = true;
+            orderNoteStatus.InvoiceProformaDatePrinted = DateTime.Now;
+            orderNoteStatus.InvoiceProformaPrinted = true;
             ui.Update(orderNoteStatus);
 
             PrintInvoiceButton.Visible = false;
@@ -216,12 +235,12 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
             OrderHeader orderHeader = orderHeaderUI.GetById(orderID);
-            orderHeader.OrderStatus = (short)OrderStatus.InvoicePrinted;
+            orderHeader.OrderStatus = (short)OrderStatus.PoformaInvoicePrinted;
             orderHeaderUI.UpdateForInvoice(orderHeader);
 
             OrderNotesStatusUI ui = new OrderNotesStatusUI();
             OrderNotesStatus orderNoteStatus = ui.GetOrderNotesStatusByOrderID(orderID);
-            orderNoteStatus.InvoiceDateReprinted = DateTime.Now;
+            orderNoteStatus.InvoiceProformaDatePrinted = DateTime.Now;
             orderNoteStatus.InvoiceReprinted = true;
             ui.Update(orderNoteStatus);
 
@@ -255,7 +274,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         ReportDataSource[] reportDataSources = reportDataSets.GetReportDataSets(orderID, accountId, outletStoreId);
 
         PrintReport printReport = new PrintReport();
-        printReport.Run("InvoicePrint.rdlc", reportDataSources, PageMode.Portrait);
+        printReport.Run("InvoiceProformaPrint.rdlc", reportDataSources, PageMode.Portrait);
         OKModalPopupExtender.Show();
     }
 
@@ -411,6 +430,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             if (orderNotesStatusUI.OrderNoteExistsByOrderID(OrderID.Value))
             {
                 ConfirmInvoice.Visible = false;
+                ConvertToInvoiceButton.Visible = true;
                 ChangeInvoiceDetailsButton.Visible = true;
                 CancelInvoiceButton.Visible = true;
 
@@ -437,15 +457,12 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             else
             {
                 ConfirmInvoice.Visible = true;
+                ConvertToInvoiceButton.Visible = false;
                 ChangeInvoiceDetailsButton.Visible = false;
                 PrintInvoiceButton.Visible = false;
                 RePrintInvoiceButton.Visible = false;
                 CancelInvoiceButton.Visible = false;
             }
-        }
-        else if (e.CommandName == "DisplayCreditNotes")
-        {
-            CreditNoteModalPopupExtender.Show();
         }
 
         DataBind();
@@ -457,7 +474,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
     {
         InvoiceEntryPanel.Visible = false;
         DisplayInvoicePanel.Visible = false;
-        OrderHeaderDetailsPanel.Visible = false;
+        OrderHeaderDetailsPanel.Visible = false;      
 
         this.InvoiceSearchCriteriaPanel.Visible = true;
         this.InvoiceHeaderSearchGridPanel.Visible = true;
@@ -468,7 +485,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         InvoiceEntryPanel.Visible = true;
         DisplayInvoicePanel.Visible = false;
         InvoiceRepeater.Visible = false;
-        OrderHeaderDetailsPanel.Visible = false;
+        OrderHeaderDetailsPanel.Visible = false;      
 
         this.InvoiceSearchCriteriaPanel.Visible = false;
         this.InvoiceHeaderSearchGridPanel.Visible = false;
@@ -482,7 +499,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         OrderHeaderDetailsPanel.Visible = false;
 
         this.InvoiceSearchCriteriaPanel.Visible = false;
-        this.InvoiceHeaderSearchGridPanel.Visible = false;
+        this.InvoiceHeaderSearchGridPanel.Visible = false;      
     }
 
     public void AccountSelectedState(object sender, EventArgs args)
@@ -493,7 +510,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         OrderHeaderDetailsPanel.Visible = true;
 
         this.InvoiceSearchCriteriaPanel.Visible = false;
-        this.InvoiceHeaderSearchGridPanel.Visible = false;
+        this.InvoiceHeaderSearchGridPanel.Visible = false;        
     }
 
     #endregion
@@ -503,7 +520,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
     protected void InvoiceObjectDataSource_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
     {
         e.InputParameters[0] = OrderNoSearchTextBox.Text;
-        e.InputParameters[1] = InvoiceNoSearchTextBox.Text;
+        e.InputParameters[1] = String.Empty;
 
         e.InputParameters[2] = CustomerNameSearchTextBox.Text;
         if (!String.IsNullOrEmpty(DateFromTextBox.Text))

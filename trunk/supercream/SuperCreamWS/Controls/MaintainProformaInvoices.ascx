@@ -14,14 +14,6 @@
                         <table class="left">
                             <tr>
                                 <td>
-                                    <asp:Label ID="InvoiceNoLabel" Text="Invoice Proforma No" runat="server"></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="InvoiceNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     <asp:Label ID="OrderNoLabel" Text="Order No" runat="server"></asp:Label>
                                 </td>
                                 <td>
@@ -178,21 +170,6 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-            <table>
-                <tr>
-                    <td style="vertical-align: middle; margin-left: 20px;">
-                        <i>Credit Note = Confirmed = &nbsp;
-                            <asp:Image ID="ConfirmedImage" runat="server" ImageAlign="Middle" ImageUrl="~/images/ok_16x16.gif" />
-                            &nbsp Printed = &nbsp;
-                            <asp:Image ID="PrintedImage" runat="server" ImageAlign="Middle" ImageUrl="~/images/print.gif" />
-                            &nbsp; Reprinted = &nbsp;
-                            <asp:Image ID="RePrintedImage" runat="server" ImageAlign="Middle" ImageUrl="~/images/print_16x16.gif" />
-                            &nbsp; Credit =
-                            <asp:Image ID="CreditNoteImage" runat="server" ImageAlign="Middle" ImageUrl="~/images/16-circle-green.gif" />
-                        </i>
-                    </td>
-                </tr>
-            </table>
             <asp:ObjectDataSource ID="InvoiceObjectDataSource" runat="server" SelectMethod="GetOrderHeadersSearchWithPrintedStatuses"
                 TypeName="OrderHeaderUI" OnSelecting="InvoiceObjectDataSource_Selecting">
                 <SelectParameters>
@@ -311,6 +288,8 @@
                                 OnClick="ConfirmInvoice_Click" />
                             <asp:Button ID="ChangeInvoiceDetailsButton" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 Visible="false" Text="Change Invoice Details" runat="server" OnClick="ChangeInvoiceDetailsButton_Click" />
+                            <asp:Button ID="ConvertToInvoiceButton" Text="Convert to Invoice" runat="server" ValidationGroup="ModifyInvoiceDetailsGroup"
+                                OnClick="ConvertToInvoice_Click" Visible="false" />
                             <asp:Button ID="CancelInvoiceButton" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 Visible="false" Text="Cancel Invoice" runat="server" OnClick="CancelInvoiceButton_Click" />
                             <asp:Button ID="PrintInvoiceButton" ValidationGroup="ModifyInvoiceDetailsGroup" Visible="false"
