@@ -573,7 +573,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
         if (addressLines.Count > 0)
             CustomerAddressLine1Label.Text = addressLines[0];
         if (addressLines.Count > 1)
-            CustomerAddressLine1Label.Text = addressLines[1];
+            CustomerAddressLine2Label.Text = addressLines[1];
 
         TownLabel.Text = outletStore.Address.Town;
         CountyLabel.Text = outletStore.Address.County;
@@ -589,7 +589,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             if (ycAddressLines.Count > 0)
                 YourAddressLine1Label.Text = ycAddressLines[0];
             if (ycAddressLines.Count > 1)
-                YourAddressLine1Label.Text = ycAddressLines[1];
+                YourAddressLine2Label.Text = ycAddressLines[1];
 
             YourAddressTownLabel.Text = ff.Address.Town;
             YourAddressCountyLabel.Text = ff.Address.County;
