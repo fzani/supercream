@@ -117,6 +117,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
                 ID = OrderNoteStatusID.Value,
                 AccountID = Convert.ToInt32(AccountDropDownList.SelectedValue),
                 VanID = Convert.ToInt32(DeliveryVanDropDownList.SelectedValue),
+                OutletStoreID = Convert.ToInt32(this.DeliveryDropDownList.SelectedValue),
                 DeliveryNoteDatePrinted = Defaults.MinDateTime,
                 DeliveryNotePrinted = false,
                 InvoiceDatePrinted = Defaults.MinDateTime,
@@ -155,8 +156,8 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             ui.DeleteOrderNote(OrderNoteStatusID.Value);
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
-            OrderHeader header = orderHeaderUI.GetById(OrderID.Value);
-            header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Order;            
+            OrderHeader header = orderHeaderUI.GetWithVatCodeById(OrderID.Value);
+            header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Order;
             orderHeaderUI.UpdateForInvoice(header);
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
@@ -349,6 +350,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
                 ConfirmDelivery.Visible = false;
                 ChangeDeliveryNoteDetailsButton.Visible = true;
                 CancelDeliveryNoteButton.Visible = true;
+                CreateInvoiceButton.Visible = true;
 
                 // Now Select Delivery using Create OrderNotes record ...
                 OrderNotesStatus orderNoteStatus = orderNotesStatusUI.GetOrderNotesStatusByOrderID(OrderID.Value);
@@ -377,6 +379,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
                 PrintDeliveryNoteButton.Visible = false;
                 RePrintDeliveryButton.Visible = false;
                 CancelDeliveryNoteButton.Visible = false;
+                CreateInvoiceButton.Visible = false;
             }
 
             DataBind();
@@ -436,7 +439,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
     protected void DeliveryNoteObjectDataSource_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
     {
         e.InputParameters[0] = OrderNoSearchTextBox.Text;
-        e.InputParameters[1] = InvoiceNoSearchTextBox.Text;
+        e.InputParameters[1] = String.Empty;
         e.InputParameters[2] = CustomerNameSearchTextBox.Text;
         if (!String.IsNullOrEmpty(DateFromTextBox.Text))
             e.InputParameters[3] = Convert.ToDateTime(DateFromTextBox.Text);
@@ -516,6 +519,9 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             {
                 OrderHeaderUI headerUI = new OrderHeaderUI();
                 OrderHeader orderHeader = headerUI.GetById(OrderID.Value);
+
+                TextBox specialInstructionsTextBox = e.Item.FindControl("SpecialInstructionsHeaderTextBox") as TextBox;
+                specialInstructionsTextBox.Text = orderHeader.SpecialInstructions;
 
                 Label deliveryDateLabel = e.Item.FindControl("DeliveryDateLabel") as Label;
                 deliveryDateLabel.Text = orderHeader.DeliveryDate.ToShortDateString();
