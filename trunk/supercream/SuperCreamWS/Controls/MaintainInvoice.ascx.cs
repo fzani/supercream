@@ -177,7 +177,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             PrintInvoice(orderID);
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
-            OrderHeader orderHeader = orderHeaderUI.GetById(orderID);
+            OrderHeader orderHeader = orderHeaderUI.GetWithVatCodeById(orderID);
             orderHeader.OrderStatus = (short)OrderStatus.InvoicePrinted;
             orderHeaderUI.UpdateForInvoice(orderHeader);
 
@@ -215,7 +215,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             PrintInvoice(orderID);
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
-            OrderHeader orderHeader = orderHeaderUI.GetById(orderID);
+            OrderHeader orderHeader = orderHeaderUI.GetWithVatCodeById(orderID);
             orderHeader.OrderStatus = (short)OrderStatus.InvoicePrinted;
             orderHeaderUI.UpdateForInvoice(orderHeader);
 

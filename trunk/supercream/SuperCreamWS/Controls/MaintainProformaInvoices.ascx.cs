@@ -196,7 +196,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             PrintInvoice(orderID);
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
-            OrderHeader orderHeader = orderHeaderUI.GetById(orderID);
+            OrderHeader orderHeader = orderHeaderUI.GetWithVatCodeById(orderID);
             orderHeader.OrderStatus = (short)OrderStatus.PoformaInvoicePrinted;
             orderHeaderUI.UpdateForInvoice(orderHeader);
 
@@ -234,7 +234,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             PrintInvoice(orderID);
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
-            OrderHeader orderHeader = orderHeaderUI.GetById(orderID);
+            OrderHeader orderHeader = orderHeaderUI.GetWithVatCodeById(orderID);
             orderHeader.OrderStatus = (short)OrderStatus.PoformaInvoicePrinted;
             orderHeaderUI.UpdateForInvoice(orderHeader);
 
