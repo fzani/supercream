@@ -11,6 +11,7 @@ using AjaxControlToolkit;
 using SP.Utils;
 using System.Data;
 using Microsoft.Reporting.WebForms;
+using SP.Core.Enums;
 
 public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
 {
@@ -248,6 +249,19 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             PrintReport printReport = new PrintReport();
             printReport.Run("DeliveryNotePrint.rdlc", reportDataSources, PageMode.Portrait);
             OKModalPopupExtender.Show();
+
+            OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
+            OrderHeader orderHeader = orderHeaderUI.GetWithVatCodeById(orderID);
+            orderHeader.OrderStatus = (short)OrderStatus.DeliveryNotePrinted;
+            orderHeaderUI.UpdateForInvoice(orderHeader);
+
+            OrderNotesStatusUI ui = new OrderNotesStatusUI();
+            OrderNotesStatus orderNoteStatus = ui.GetOrderNotesStatusByOrderID(orderID);
+            orderNoteStatus.DeliveryNoteDatePrinted = DateTime.Now;
+            orderNoteStatus.DeliveryNotePrinted = true;
+            ui.Update(orderNoteStatus);
+
+            PrintDeliveryNoteButton.Visible = true;                  
             //// NewPrinting.Run(@"Report1.rdlc", "\\\\paris\\Samsung CLP-310 Series", ds.Tables[0], "SuperCreamDBDataSet_InvoiceHeader"); 
             // printReport.Run("InvoicePrint.rdl", dataSets, PageMode.Portrait);
         }
@@ -266,7 +280,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             }
         }
     }
-
+   
     #endregion
 
     #region Data Grid Events

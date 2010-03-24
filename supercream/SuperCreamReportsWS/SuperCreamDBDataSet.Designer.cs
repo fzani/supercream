@@ -2660,6 +2660,10 @@ namespace SuperCreamReportsWS {
             
             private global::System.Data.DataColumn columnVanDescription;
             
+            private global::System.Data.DataColumn columnDeliveryNoteNo;
+            
+            private global::System.Data.DataColumn columnInvoiceProformaNo;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public rptDetailsGetDeliveryNote1DataTable() {
                 this.TableName = "rptDetailsGetDeliveryNote1";
@@ -3083,6 +3087,20 @@ namespace SuperCreamReportsWS {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DeliveryNoteNoColumn {
+                get {
+                    return this.columnDeliveryNoteNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn InvoiceProformaNoColumn {
+                get {
+                    return this.columnInvoiceProformaNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3166,7 +3184,9 @@ namespace SuperCreamReportsWS {
                         decimal RRPPerItem, 
                         bool VatExempt, 
                         string PaymentTerms, 
-                        string VanDescription) {
+                        string VanDescription, 
+                        string DeliveryNoteNo, 
+                        string InvoiceProformaNo) {
                 rptDetailsGetDeliveryNote1Row rowrptDetailsGetDeliveryNote1Row = ((rptDetailsGetDeliveryNote1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -3224,7 +3244,9 @@ namespace SuperCreamReportsWS {
                         RRPPerItem,
                         VatExempt,
                         PaymentTerms,
-                        VanDescription};
+                        VanDescription,
+                        DeliveryNoteNo,
+                        InvoiceProformaNo};
                 rowrptDetailsGetDeliveryNote1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowrptDetailsGetDeliveryNote1Row);
                 return rowrptDetailsGetDeliveryNote1Row;
@@ -3306,6 +3328,8 @@ namespace SuperCreamReportsWS {
                 this.columnVatExempt = base.Columns["VatExempt"];
                 this.columnPaymentTerms = base.Columns["PaymentTerms"];
                 this.columnVanDescription = base.Columns["VanDescription"];
+                this.columnDeliveryNoteNo = base.Columns["DeliveryNoteNo"];
+                this.columnInvoiceProformaNo = base.Columns["InvoiceProformaNo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3422,6 +3446,10 @@ namespace SuperCreamReportsWS {
                 base.Columns.Add(this.columnPaymentTerms);
                 this.columnVanDescription = new global::System.Data.DataColumn("VanDescription", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVanDescription);
+                this.columnDeliveryNoteNo = new global::System.Data.DataColumn("DeliveryNoteNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDeliveryNoteNo);
+                this.columnInvoiceProformaNo = new global::System.Data.DataColumn("InvoiceProformaNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInvoiceProformaNo);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -3468,6 +3496,8 @@ namespace SuperCreamReportsWS {
                 this.columnProductCode.MaxLength = 10;
                 this.columnPaymentTerms.MaxLength = 128;
                 this.columnVanDescription.MaxLength = 150;
+                this.columnDeliveryNoteNo.MaxLength = 50;
+                this.columnInvoiceProformaNo.MaxLength = 50;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3927,6 +3957,10 @@ namespace SuperCreamReportsWS {
             
             private global::System.Data.DataColumn columnVanDescription;
             
+            private global::System.Data.DataColumn columnDeliveryNoteNo;
+            
+            private global::System.Data.DataColumn columnInvoiceProformaNo;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public rptDetailsGetInvoiceDataTable() {
                 this.TableName = "rptDetailsGetInvoice";
@@ -4343,6 +4377,20 @@ namespace SuperCreamReportsWS {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DeliveryNoteNoColumn {
+                get {
+                    return this.columnDeliveryNoteNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn InvoiceProformaNoColumn {
+                get {
+                    return this.columnInvoiceProformaNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4425,7 +4473,9 @@ namespace SuperCreamReportsWS {
                         decimal RRPPerItem, 
                         bool VatExempt, 
                         string PaymentTerms, 
-                        string VanDescription) {
+                        string VanDescription, 
+                        string DeliveryNoteNo, 
+                        string InvoiceProformaNo) {
                 rptDetailsGetInvoiceRow rowrptDetailsGetInvoiceRow = ((rptDetailsGetInvoiceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -4482,7 +4532,9 @@ namespace SuperCreamReportsWS {
                         RRPPerItem,
                         VatExempt,
                         PaymentTerms,
-                        VanDescription};
+                        VanDescription,
+                        DeliveryNoteNo,
+                        InvoiceProformaNo};
                 rowrptDetailsGetInvoiceRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowrptDetailsGetInvoiceRow);
                 return rowrptDetailsGetInvoiceRow;
@@ -4563,6 +4615,8 @@ namespace SuperCreamReportsWS {
                 this.columnVatExempt = base.Columns["VatExempt"];
                 this.columnPaymentTerms = base.Columns["PaymentTerms"];
                 this.columnVanDescription = base.Columns["VanDescription"];
+                this.columnDeliveryNoteNo = base.Columns["DeliveryNoteNo"];
+                this.columnInvoiceProformaNo = base.Columns["InvoiceProformaNo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4677,6 +4731,10 @@ namespace SuperCreamReportsWS {
                 base.Columns.Add(this.columnPaymentTerms);
                 this.columnVanDescription = new global::System.Data.DataColumn("VanDescription", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVanDescription);
+                this.columnDeliveryNoteNo = new global::System.Data.DataColumn("DeliveryNoteNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDeliveryNoteNo);
+                this.columnInvoiceProformaNo = new global::System.Data.DataColumn("InvoiceProformaNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInvoiceProformaNo);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -4722,6 +4780,8 @@ namespace SuperCreamReportsWS {
                 this.columnProductCode.MaxLength = 10;
                 this.columnPaymentTerms.MaxLength = 128;
                 this.columnVanDescription.MaxLength = 150;
+                this.columnDeliveryNoteNo.MaxLength = 50;
+                this.columnInvoiceProformaNo.MaxLength = 50;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7525,6 +7585,38 @@ namespace SuperCreamReportsWS {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string DeliveryNoteNo {
+                get {
+                    try {
+                        return ((string)(this[this.tablerptDetailsGetDeliveryNote1.DeliveryNoteNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DeliveryNoteNo\' in table \'rptDetailsGetDeliveryNote1\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tablerptDetailsGetDeliveryNote1.DeliveryNoteNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string InvoiceProformaNo {
+                get {
+                    try {
+                        return ((string)(this[this.tablerptDetailsGetDeliveryNote1.InvoiceProformaNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'InvoiceProformaNo\' in table \'rptDetailsGetDeliveryNote1\' is" +
+                                " DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablerptDetailsGetDeliveryNote1.InvoiceProformaNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsCustomerIDNull() {
                 return this.IsNull(this.tablerptDetailsGetDeliveryNote1.CustomerIDColumn);
             }
@@ -8072,6 +8164,26 @@ namespace SuperCreamReportsWS {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetVanDescriptionNull() {
                 this[this.tablerptDetailsGetDeliveryNote1.VanDescriptionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDeliveryNoteNoNull() {
+                return this.IsNull(this.tablerptDetailsGetDeliveryNote1.DeliveryNoteNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDeliveryNoteNoNull() {
+                this[this.tablerptDetailsGetDeliveryNote1.DeliveryNoteNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsInvoiceProformaNoNull() {
+                return this.IsNull(this.tablerptDetailsGetDeliveryNote1.InvoiceProformaNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetInvoiceProformaNoNull() {
+                this[this.tablerptDetailsGetDeliveryNote1.InvoiceProformaNoColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -8979,6 +9091,37 @@ namespace SuperCreamReportsWS {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string DeliveryNoteNo {
+                get {
+                    try {
+                        return ((string)(this[this.tablerptDetailsGetInvoice.DeliveryNoteNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DeliveryNoteNo\' in table \'rptDetailsGetInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablerptDetailsGetInvoice.DeliveryNoteNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string InvoiceProformaNo {
+                get {
+                    try {
+                        return ((string)(this[this.tablerptDetailsGetInvoice.InvoiceProformaNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'InvoiceProformaNo\' in table \'rptDetailsGetInvoice\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tablerptDetailsGetInvoice.InvoiceProformaNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsCustomerIDNull() {
                 return this.IsNull(this.tablerptDetailsGetInvoice.CustomerIDColumn);
             }
@@ -9516,6 +9659,26 @@ namespace SuperCreamReportsWS {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetVanDescriptionNull() {
                 this[this.tablerptDetailsGetInvoice.VanDescriptionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDeliveryNoteNoNull() {
+                return this.IsNull(this.tablerptDetailsGetInvoice.DeliveryNoteNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDeliveryNoteNoNull() {
+                this[this.tablerptDetailsGetInvoice.DeliveryNoteNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsInvoiceProformaNoNull() {
+                return this.IsNull(this.tablerptDetailsGetInvoice.InvoiceProformaNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetInvoiceProformaNoNull() {
+                this[this.tablerptDetailsGetInvoice.InvoiceProformaNoColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -11063,6 +11226,8 @@ namespace SuperCreamReportsWS.SuperCreamDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("VatExempt", "VatExempt");
             tableMapping.ColumnMappings.Add("PaymentTerms", "PaymentTerms");
             tableMapping.ColumnMappings.Add("VanDescription", "VanDescription");
+            tableMapping.ColumnMappings.Add("DeliveryNoteNo", "DeliveryNoteNo");
+            tableMapping.ColumnMappings.Add("InvoiceProformaNo", "InvoiceProformaNo");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -11485,6 +11650,8 @@ namespace SuperCreamReportsWS.SuperCreamDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("VatExempt", "VatExempt");
             tableMapping.ColumnMappings.Add("PaymentTerms", "PaymentTerms");
             tableMapping.ColumnMappings.Add("VanDescription", "VanDescription");
+            tableMapping.ColumnMappings.Add("DeliveryNoteNo", "DeliveryNoteNo");
+            tableMapping.ColumnMappings.Add("InvoiceProformaNo", "InvoiceProformaNo");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
