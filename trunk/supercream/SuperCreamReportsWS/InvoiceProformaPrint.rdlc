@@ -354,27 +354,10 @@
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
-  <Width>15.75cm</Width>
+  <Width>15.78968cm</Width>
   <Body>
     <ColumnSpacing>1cm</ColumnSpacing>
     <ReportItems>
-      <Textbox Name="textbox10">
-        <rd:DefaultName>textbox10</rd:DefaultName>
-        <Width>10cm</Width>
-        <Style>
-          <FontSize>12pt</FontSize>
-          <FontWeight>700</FontWeight>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-        <ZIndex>5</ZIndex>
-        <CanGrow>true</CanGrow>
-        <Left>0.25cm</Left>
-        <Height>0.63492cm</Height>
-        <Value>Proforma Invoice</Value>
-      </Textbox>
       <Rectangle Name="rectangle5">
         <Left>0.25cm</Left>
         <ZIndex>4</ZIndex>
@@ -582,7 +565,7 @@
             <Value>Special Instructions</Value>
           </Textbox>
         </ReportItems>
-        <Top>14.75cm</Top>
+        <Top>14.5cm</Top>
         <Width>15.25cm</Width>
         <Style>
           <BorderStyle>
@@ -594,7 +577,7 @@
       <Table Name="table4">
         <ZIndex>3</ZIndex>
         <DataSetName>SuperCreamDBDataSet_rptDetailsGetInvoice</DataSetName>
-        <Top>13.25cm</Top>
+        <Top>13cm</Top>
         <Width>15.24919cm</Width>
         <Details>
           <TableRows>
@@ -1073,7 +1056,7 @@
             <Value>Delivery Address</Value>
           </Textbox>
         </ReportItems>
-        <Top>9.25cm</Top>
+        <Top>9cm</Top>
         <Width>15.25cm</Width>
         <Style>
           <BorderStyle>
@@ -1089,7 +1072,7 @@
           <Textbox Name="textbox18">
             <rd:DefaultName>textbox18</rd:DefaultName>
             <Top>5.5cm</Top>
-            <Width>3.5cm</Width>
+            <Width>3.75cm</Width>
             <Style>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
@@ -1102,7 +1085,7 @@
             <Height>0.63492cm</Height>
             <Value>=First(Fields!CompanyVatRegistrationNumber.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
-          <Textbox Name="textbox40">
+          <Textbox Name="textbox10">
             <Top>5.5cm</Top>
             <Width>3cm</Width>
             <Style>
@@ -1163,6 +1146,7 @@
             </Style>
             <ZIndex>17</ZIndex>
             <Left>7.5cm</Left>
+            <Height>6.25cm</Height>
           </Line>
           <Textbox Name="textbox17">
             <Top>4.75cm</Top>
@@ -1454,14 +1438,13 @@
             <Value>Invoice Adress</Value>
           </Textbox>
         </ReportItems>
-        <Top>2.75cm</Top>
-        <Width>15.25cm</Width>
+        <Top>2.25cm</Top>
         <Style>
           <BorderStyle>
             <Default>Solid</Default>
           </BorderStyle>
         </Style>
-        <Height>6.25cm</Height>
+        <Height>6.38492cm</Height>
       </Rectangle>
       <Rectangle Name="rectangle1">
         <Left>0.25cm</Left>
@@ -1600,7 +1583,7 @@
             <Value>Date of Order</Value>
           </Textbox>
         </ReportItems>
-        <Top>0.75cm</Top>
+        <Top>0.25cm</Top>
         <Width>15.25cm</Width>
         <Style>
           <BorderStyle>

@@ -293,9 +293,9 @@
                             <asp:Button ID="CancelInvoiceButton" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 Visible="false" Text="Cancel Invoice" runat="server" OnClick="CancelInvoiceButton_Click" />
                             <asp:Button ID="PrintInvoiceButton" ValidationGroup="ModifyInvoiceDetailsGroup" Visible="false"
-                                Text="Print Invoice" runat="server" OnClick="PrintInvoiceButton_Click" />
+                                Text="Print Proforma Invoice" runat="server" OnClick="PrintInvoiceButton_Click" />
                             <asp:Button ID="RePrintInvoiceButton" ValidationGroup="ModifyInvoiceDetailsGroup"
-                                Visible="false" Text="RePrint Invoice" runat="server" OnClick="RePrintInvoiceButton_Click" />
+                                Visible="false" Text="RePrint Proforma Invoice" runat="server" OnClick="RePrintInvoiceButton_Click" />
                             <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
                             <asp:Button ID="btnOKTrigger" runat="server" Style="display: none" />
                             <ajaxToolkit:ModalPopupExtender ID="PrintFailedPopupControlExtender" DropShadow="true"
