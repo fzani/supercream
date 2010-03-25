@@ -106,9 +106,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="InvoiceProformaPrint.rdlc" />
     <EmbeddedResource Include="DeliveryNotePrint.rdlc" />
     <EmbeddedResource Include="InvoicePrint.rdlc" />
-    <EmbeddedResource Include="InvoiceProformaPrint.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
