@@ -2302,6 +2302,12 @@ namespace SuperCreamReportsWS {
             
             private global::System.Data.DataColumn columnNetTotal;
             
+            private global::System.Data.DataColumn columnNonVatableTotal;
+            
+            private global::System.Data.DataColumn columnVatableTotal;
+            
+            private global::System.Data.DataColumn columnPercentageValue;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public rptGetOrderTotalsDataTable() {
                 this.TableName = "rptGetOrderTotals";
@@ -2354,6 +2360,27 @@ namespace SuperCreamReportsWS {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NonVatableTotalColumn {
+                get {
+                    return this.columnNonVatableTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn VatableTotalColumn {
+                get {
+                    return this.columnVatableTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PercentageValueColumn {
+                get {
+                    return this.columnPercentageValue;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2382,12 +2409,15 @@ namespace SuperCreamReportsWS {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public rptGetOrderTotalsRow AddrptGetOrderTotalsRow(decimal Total, decimal VatTotal, decimal NetTotal) {
+            public rptGetOrderTotalsRow AddrptGetOrderTotalsRow(decimal Total, decimal VatTotal, decimal NetTotal, decimal NonVatableTotal, decimal VatableTotal, string PercentageValue) {
                 rptGetOrderTotalsRow rowrptGetOrderTotalsRow = ((rptGetOrderTotalsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Total,
                         VatTotal,
-                        NetTotal};
+                        NetTotal,
+                        NonVatableTotal,
+                        VatableTotal,
+                        PercentageValue};
                 rowrptGetOrderTotalsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowrptGetOrderTotalsRow);
                 return rowrptGetOrderTotalsRow;
@@ -2410,6 +2440,9 @@ namespace SuperCreamReportsWS {
                 this.columnTotal = base.Columns["Total"];
                 this.columnVatTotal = base.Columns["VatTotal"];
                 this.columnNetTotal = base.Columns["NetTotal"];
+                this.columnNonVatableTotal = base.Columns["NonVatableTotal"];
+                this.columnVatableTotal = base.Columns["VatableTotal"];
+                this.columnPercentageValue = base.Columns["PercentageValue"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2420,9 +2453,19 @@ namespace SuperCreamReportsWS {
                 base.Columns.Add(this.columnVatTotal);
                 this.columnNetTotal = new global::System.Data.DataColumn("NetTotal", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNetTotal);
+                this.columnNonVatableTotal = new global::System.Data.DataColumn("NonVatableTotal", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNonVatableTotal);
+                this.columnVatableTotal = new global::System.Data.DataColumn("VatableTotal", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVatableTotal);
+                this.columnPercentageValue = new global::System.Data.DataColumn("PercentageValue", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPercentageValue);
                 this.columnTotal.ReadOnly = true;
                 this.columnVatTotal.ReadOnly = true;
                 this.columnNetTotal.ReadOnly = true;
+                this.columnNonVatableTotal.ReadOnly = true;
+                this.columnVatableTotal.ReadOnly = true;
+                this.columnPercentageValue.ReadOnly = true;
+                this.columnPercentageValue.MaxLength = 10;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6658,6 +6701,51 @@ namespace SuperCreamReportsWS {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal NonVatableTotal {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablerptGetOrderTotals.NonVatableTotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NonVatableTotal\' in table \'rptGetOrderTotals\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablerptGetOrderTotals.NonVatableTotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal VatableTotal {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablerptGetOrderTotals.VatableTotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'VatableTotal\' in table \'rptGetOrderTotals\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablerptGetOrderTotals.VatableTotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PercentageValue {
+                get {
+                    try {
+                        return ((string)(this[this.tablerptGetOrderTotals.PercentageValueColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PercentageValue\' in table \'rptGetOrderTotals\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablerptGetOrderTotals.PercentageValueColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsTotalNull() {
                 return this.IsNull(this.tablerptGetOrderTotals.TotalColumn);
             }
@@ -6685,6 +6773,36 @@ namespace SuperCreamReportsWS {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetNetTotalNull() {
                 this[this.tablerptGetOrderTotals.NetTotalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNonVatableTotalNull() {
+                return this.IsNull(this.tablerptGetOrderTotals.NonVatableTotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNonVatableTotalNull() {
+                this[this.tablerptGetOrderTotals.NonVatableTotalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsVatableTotalNull() {
+                return this.IsNull(this.tablerptGetOrderTotals.VatableTotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetVatableTotalNull() {
+                this[this.tablerptGetOrderTotals.VatableTotalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPercentageValueNull() {
+                return this.IsNull(this.tablerptGetOrderTotals.PercentageValueColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPercentageValueNull() {
+                this[this.tablerptGetOrderTotals.PercentageValueColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -11000,6 +11118,9 @@ namespace SuperCreamReportsWS.SuperCreamDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("Total", "Total");
             tableMapping.ColumnMappings.Add("VatTotal", "VatTotal");
             tableMapping.ColumnMappings.Add("NetTotal", "NetTotal");
+            tableMapping.ColumnMappings.Add("NonVatableTotal", "NonVatableTotal");
+            tableMapping.ColumnMappings.Add("VatableTotal", "VatableTotal");
+            tableMapping.ColumnMappings.Add("PercentageValue", "PercentageValue");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
