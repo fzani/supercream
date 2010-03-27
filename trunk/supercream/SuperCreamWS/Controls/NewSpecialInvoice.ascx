@@ -27,18 +27,6 @@
                 </tr>
                 <tr>
                     <td style="width: 30%;">
-                        Invoice No
-                    </td>
-                    <td style="width: 70%;">
-                        <asp:TextBox ID="InvoiceNoTextBox" Width="250px" ValidationGroup="AddOrderDetailsButton"
-                            MaxLength="20" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="AddOrderDetailsGroup"
-                            ControlToValidate="InvoiceNoTextBox" ErrorMessage="Order No is required" InitialValue=""
-                            Text="*" runat="server" />
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 30%;">
                         Date of Order
                     </td>
                     <td style="width: 70%;">
@@ -96,6 +84,9 @@
             </table>
         </asp:Panel>
         <asp:Panel ID="AddSpecialInvoiceLineDetailsPanel" Visible="false" runat="server">
+            <h2>
+                Special Invoice No:&nbsp;
+                <asp:Label ID="SpecialInvoiceLabel" runat="server"></asp:Label></h2>
             <table style="width: 100%">
                 <tr>
                     <td class="emphasise" style="width: 15%">
@@ -179,14 +170,13 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        
                         <asp:LinkButton ID="AddSpecialInvoiceLineButton" Text="Add" ValidationGroup="AddSpecialInvoiceLinesGroup"
-                            runat="server" OnClick="AddSpecialInvoiceLineButton_Click" ></asp:LinkButton>
+                            runat="server" OnClick="AddSpecialInvoiceLineButton_Click"></asp:LinkButton>
                         |
-                        <asp:LinkButton ID="CancelSpecialInvoiceLineButton" Text="Cancel |" OnClick="CancelSpecialInvoiceLineButton_Click" CausesValidation="false" runat="server">
-                        </asp:LinkButton>                        
-                        <asp:LinkButton ID="CalculateButton" Text="Calculate"  runat="server"
-                            OnClick="CalculateButton_Click">
+                        <asp:LinkButton ID="CancelSpecialInvoiceLineButton" Text="Cancel |" OnClick="CancelSpecialInvoiceLineButton_Click"
+                            CausesValidation="false" runat="server">
+                        </asp:LinkButton>
+                        <asp:LinkButton ID="CalculateButton" Text="Calculate" runat="server" OnClick="CalculateButton_Click">
                         </asp:LinkButton>
                     </td>
                 </tr>

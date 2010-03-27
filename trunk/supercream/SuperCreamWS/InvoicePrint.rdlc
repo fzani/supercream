@@ -378,6 +378,22 @@
   <Body>
     <ColumnSpacing>1cm</ColumnSpacing>
     <ReportItems>
+      <Textbox Name="textbox51">
+        <rd:DefaultName>textbox51</rd:DefaultName>
+        <Width>6.24339cm</Width>
+        <Style>
+          <FontWeight>700</FontWeight>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+        <ZIndex>5</ZIndex>
+        <CanGrow>true</CanGrow>
+        <Left>0.25cm</Left>
+        <Height>0.5cm</Height>
+        <Value>Super Cream Invoice</Value>
+      </Textbox>
       <Rectangle Name="rectangle5">
         <Left>0.25cm</Left>
         <ZIndex>4</ZIndex>
@@ -768,7 +784,7 @@
             <Value>Special Instructions</Value>
           </Textbox>
         </ReportItems>
-        <Top>14.5cm</Top>
+        <Top>15cm</Top>
         <Width>15.25cm</Width>
         <Style>
           <BorderStyle>
@@ -780,7 +796,7 @@
       <Table Name="table4">
         <ZIndex>3</ZIndex>
         <DataSetName>SuperCreamDBDataSet_rptDetailsGetInvoice</DataSetName>
-        <Top>13cm</Top>
+        <Top>13.5cm</Top>
         <Width>15.24919cm</Width>
         <Details>
           <TableRows>
@@ -1259,7 +1275,7 @@
             <Value>Delivery Address</Value>
           </Textbox>
         </ReportItems>
-        <Top>9cm</Top>
+        <Top>9.5cm</Top>
         <Width>15.25cm</Width>
         <Style>
           <BorderStyle>
@@ -1640,7 +1656,7 @@
             <Value>Invoice Adress</Value>
           </Textbox>
         </ReportItems>
-        <Top>2.25cm</Top>
+        <Top>2.75cm</Top>
         <Width>15.25cm</Width>
         <Style>
           <BorderStyle>
@@ -1822,7 +1838,7 @@
             <Value>Date of Order</Value>
           </Textbox>
         </ReportItems>
-        <Top>0.25cm</Top>
+        <Top>0.75cm</Top>
         <Width>15.25cm</Width>
         <Style>
           <BorderStyle>
@@ -1832,7 +1848,7 @@
         <Height>1.75cm</Height>
       </Rectangle>
     </ReportItems>
-    <Height>20.68729cm</Height>
+    <Height>21.25cm</Height>
   </Body>
   <Language>en-GB</Language>
   <TopMargin>2.5cm</TopMargin>

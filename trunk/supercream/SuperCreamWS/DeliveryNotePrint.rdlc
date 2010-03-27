@@ -366,6 +366,23 @@
   <Body>
     <ColumnSpacing>1cm</ColumnSpacing>
     <ReportItems>
+      <Textbox Name="textbox6">
+        <rd:DefaultName>textbox6</rd:DefaultName>
+        <Top>0.25cm</Top>
+        <Width>5.2381cm</Width>
+        <Style>
+          <FontWeight>700</FontWeight>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+        <ZIndex>4</ZIndex>
+        <CanGrow>true</CanGrow>
+        <Left>0.25cm</Left>
+        <Height>0.74074cm</Height>
+        <Value>Super Cream Delivery Note</Value>
+      </Textbox>
       <Rectangle Name="rectangle5">
         <Left>0.25cm</Left>
         <ZIndex>3</ZIndex>
@@ -473,7 +490,7 @@
             <Value>Special Instructions</Value>
           </Textbox>
         </ReportItems>
-        <Top>9cm</Top>
+        <Top>9.75cm</Top>
         <Width>15.25cm</Width>
         <Style>
           <BorderStyle>
@@ -485,7 +502,7 @@
       <Table Name="table4">
         <ZIndex>2</ZIndex>
         <DataSetName>SuperCreamDBDataSet_rptDetailsGetInvoice</DataSetName>
-        <Top>7.5cm</Top>
+        <Top>8.25cm</Top>
         <Width>15.25cm</Width>
         <Details>
           <TableRows>
@@ -963,7 +980,7 @@
             <Value>=First(Fields!OutletStorePostCode.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
         </ReportItems>
-        <Top>2.25cm</Top>
+        <Top>3cm</Top>
         <Width>15.25cm</Width>
         <Style>
           <BorderStyle>
@@ -1074,7 +1091,7 @@
             <Value>Date of Order</Value>
           </Textbox>
         </ReportItems>
-        <Top>0.25cm</Top>
+        <Top>1cm</Top>
         <Width>15.25cm</Width>
         <Style>
           <BorderStyle>
