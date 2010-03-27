@@ -1191,6 +1191,9 @@ namespace SP.Worker
         {
             IDaoFactory factory = new LTSDaoFactory();
             ISpecialInvoiceHeaderDao specialInvoiceHeaderDao = factory.GetSpecialInvoiceHeaderDao();
+
+            specialinvoiceheader.InvoiceNo = specialInvoiceHeaderDao.GenerateSpecialInvoiceNo();
+
             return specialInvoiceHeaderDao.Save(specialinvoiceheader);
         }
 

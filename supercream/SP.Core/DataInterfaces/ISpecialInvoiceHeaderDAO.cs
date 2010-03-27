@@ -20,5 +20,7 @@ namespace SP.Core.DataInterfaces
            DateTime dateFrom,
            DateTime dateTo,
            short orderStatus);
+
+        string GenerateSpecialInvoiceNo();
     }
 }

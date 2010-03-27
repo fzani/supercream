@@ -63,14 +63,7 @@ public partial class Invoices_SpecialInvoices : System.Web.UI.Page
         try
         {
             this.ChangeState += new EventHandler<EventArgs>(EnterNewProductState);
-            this.ChangeState(this, e);
-            //NewOrder.ProductID = null;
-            //NewOrder.OrderID = null;
-            //ModifyOrder.Reset();
-            //NewOrder.Reset();
-
-            AutoGenUI ui = new AutoGenUI();
-            this.NewSpecialInvoice.InvoiceNo = "INV-SP-" + ui.Generate().ToString();
+            this.ChangeState(this, e);           
 
             DataBind();
         }

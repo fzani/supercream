@@ -29,6 +29,11 @@ namespace SP.Data.LTS
             return db.SpecialInvoiceHeader.Single<SpecialInvoiceHeader>(q => q.ID == id);
         }
 
+        public string GenerateSpecialInvoiceNo()
+        {
+            return "INV-SP-" + (Convert.ToInt32(db.SpecialInvoiceHeader.Select(q => q.InvoiceNo.Substring(7, (q.InvoiceNo.Length - 7))).Max()) + 1);
+        }
+
         public List<SpecialInvoiceHeader> GetSpecialHeaders(string orderNo,
            string invoiceNo,
            string customerName,
@@ -43,7 +48,7 @@ namespace SP.Data.LTS
                 dateFrom,
                 dateTo,
                 orderStatus)
-                    .OrderByDescending(q => q.OrderDate)                
+                    .OrderByDescending(q => q.OrderDate)
                     .ToList<SpecialInvoiceHeader>();
         }
 
@@ -76,7 +81,7 @@ namespace SP.Data.LTS
             if (!String.IsNullOrEmpty(invoiceNo))
             {
                 filteredInvoices = filteredInvoices.Where<SpecialInvoiceHeader>(q => q.InvoiceNo.Contains(invoiceNo));
-            }          
+            }
 
             if (dateFrom != DateTime.MinValue)
             {

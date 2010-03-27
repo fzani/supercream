@@ -43,18 +43,7 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
             ViewState["SpecialInvoiceID"] = value;
         }
     }
-
-    public string InvoiceNo
-    {
-        get
-        {
-            return this.InvoiceNoTextBox.Text;
-        }
-        set
-        {
-            this.InvoiceNoTextBox.Text = value;
-        }
-    }
+   
     #endregion
 
     #region Page Load Event
@@ -191,12 +180,13 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
                 OrderStatus = (short)SP.Core.Enums.OrderStatus.Invoice,
                 OrderDate = Convert.ToDateTime(OrderDateTextBox.Text),
                 DeliveryDate = Convert.ToDateTime(DeliveryDateTextBox.Text),
-                SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text,
-                InvoiceNo = this.InvoiceNoTextBox.Text
+                SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text,              
             };
 
             specialInvoiceHeader = ui.Save(specialInvoiceHeader);
             SpecialInvoiceID = specialInvoiceHeader.ID;
+
+            SpecialInvoiceLabel.Text = specialInvoiceHeader.InvoiceNo;
 
             this.ChangeState += new EventHandler<EventArgs>(OrderLineState);
             this.ChangeState(this, e);
