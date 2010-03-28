@@ -180,7 +180,9 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
                 OrderStatus = (short)SP.Core.Enums.OrderStatus.Invoice,
                 OrderDate = Convert.ToDateTime(OrderDateTextBox.Text),
                 DeliveryDate = Convert.ToDateTime(DeliveryDateTextBox.Text),
-                SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text,              
+                SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text,
+                DatePrinted = SP.Utils.Defaults.MinDateTime,
+                DateReprinted = SP.Utils.Defaults.MinDateTime
             };
 
             specialInvoiceHeader = ui.Save(specialInvoiceHeader);

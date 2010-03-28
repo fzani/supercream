@@ -2863,6 +2863,8 @@ namespace SPWCFServer
         private short _OrderStatus;
         private string _SpecialInstructions;
         private string _InvoiceNo;
+        private DateTime _DatePrinted;
+        private DateTime _DateReprinted;
 
         [DataMember]
         public int ID
@@ -2939,6 +2941,34 @@ namespace SPWCFServer
             set
             {
                 _DeliveryDate = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime DatePrinted
+        {
+            get
+            {
+                return _DatePrinted;
+            }
+
+            set
+            {
+                _DatePrinted = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime DateReprinted
+        {
+            get
+            {
+                return _DateReprinted;
+            }
+
+            set
+            {
+                _DateReprinted = value;
             }
         }
 
