@@ -12,7 +12,7 @@ namespace SP.Core.Domain
 {
     [Serializable]
     public class SpecialInvoiceHeader : BaseEntity
-    {       
+    {
         private int _CustomerID;
         private short _AlphaPrefixOrPostFix;
         private string _AlphaID;
@@ -21,6 +21,8 @@ namespace SP.Core.Domain
         private short _OrderStatus;
         private string _SpecialInstructions;
         private string _InvoiceNo;
+        private DateTime _DatePrinted;
+        private DateTime _DateReprinted;
 
         public override int ID
         {
@@ -91,6 +93,32 @@ namespace SP.Core.Domain
             set
             {
                 _DeliveryDate = value;
+            }
+        }
+
+        public DateTime DatePrinted
+        {
+            get
+            {
+                return _DatePrinted;
+            }
+
+            set
+            {
+                _DatePrinted = value;
+            }
+        }
+
+        public DateTime DateReprinted
+        {
+            get
+            {
+                return _DateReprinted;
+            }
+
+            set
+            {
+                _DateReprinted = value;
             }
         }
 

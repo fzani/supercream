@@ -16,9 +16,10 @@ namespace SP.Core.Domain
         private short _OrderStatus;
         private string _SpecialInstructions;
         private string _InvoiceNo;
-        private string _InvoiceProformaNo;        
+        private string _InvoiceProformaNo;
         private string _DeliveryNoteNo;
-        private DateTime _DeliveryDate;
+        private DateTime _DeliveryDate;       
+      
         private OrderNotesStatus _OrderNoteStatus;
         private VatCode _VatCode;
         private DateTime _LastModifiedDate;
@@ -68,7 +69,7 @@ namespace SP.Core.Domain
                 _VatCode = value;
                 if (_VatCode != null)
                 {
-                    VatCode.OrderHeader = this;                   
+                    VatCode.OrderHeader = this;
                 }
             }
         }
@@ -190,13 +191,13 @@ namespace SP.Core.Domain
         public string InvoiceProformaNo
         {
             get
-            { 
-                return _InvoiceProformaNo; 
+            {
+                return _InvoiceProformaNo;
             }
 
-            set 
+            set
             {
-                _InvoiceProformaNo = value; 
+                _InvoiceProformaNo = value;
             }
         }
 
@@ -218,6 +219,7 @@ namespace SP.Core.Domain
             {
                 return _ReasonForVoiding;
             }
+
             set
             {
                 _ReasonForVoiding = value;
@@ -243,14 +245,14 @@ namespace SP.Core.Domain
 
         public DateTime LastModifiedDate
         {
-            get 
-            { 
-                return _LastModifiedDate; 
+            get
+            {
+                return _LastModifiedDate;
             }
 
-            set 
-            { 
-                _LastModifiedDate = value; 
+            set
+            {
+                _LastModifiedDate = value;
             }
         }
     }
