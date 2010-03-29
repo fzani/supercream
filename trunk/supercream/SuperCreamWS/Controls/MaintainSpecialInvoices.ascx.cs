@@ -90,7 +90,7 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
             decimal discount = 0;
 
             if (this.DiscountTextBox.Text.Length != 0)
-                discount = Convert.ToDecimal(this.DiscountTextBox.Text);
+                discount = Convert.ToDecimal(this.DiscountTextBox.Text);           
 
             SpecialInvoiceLineUI ui = new SpecialInvoiceLineUI();
             SpecialInvoiceLine specialInvoiceLine = new SpecialInvoiceLine
@@ -108,6 +108,9 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
             };
 
             specialInvoiceLine = ui.Save(specialInvoiceLine);
+
+            UpdateSpecialInvoiceHeader();
+
             this.ChangeState += new EventHandler<EventArgs>(OrderSelectedState);
             this.ChangeState(this, e);
 
@@ -122,7 +125,7 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
                 this.ModifySpecialInvoiceError(this, args);
             }
         }
-    }
+    }   
 
     protected void CancelSpecialInvoiceLineButton_Click(object sender, EventArgs e)
     {
@@ -262,6 +265,8 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
 
             ui.Update(specialInvoiceLine);
 
+            UpdateSpecialInvoiceHeader();
+
             DataBind();
         }
         catch (Exception ex)
@@ -367,7 +372,8 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
                 OrderDate = Convert.ToDateTime(OrderDateTextBox.Text),
                 DeliveryDate = Convert.ToDateTime(DeliveryDateTextBox.Text),
                 SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text,
-                InvoiceNo = this.InvoiceNoTextBox.Text
+                InvoiceNo = this.InvoiceNoTextBox.Text,
+                DateModified = DateTime.Now
             };
 
             ui.Update(specialInvoiceHeader);
@@ -533,6 +539,16 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
     #endregion
 
     #region Private Methods
+
+    private void UpdateSpecialInvoiceHeader()
+    {
+        SpecialInvoiceHeaderUI headerUI = new SpecialInvoiceHeaderUI();
+        SpecialInvoiceHeader header = headerUI.GetById(this.SpecialInvoiceID);
+
+        header.DateModified = DateTime.Now;
+
+        headerUI.Update(header);
+    }
 
     #endregion
   
