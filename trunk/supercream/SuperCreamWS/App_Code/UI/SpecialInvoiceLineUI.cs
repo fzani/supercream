@@ -50,6 +50,7 @@ public class SpecialInvoiceLineUI : IDisposable
         {
             SpecialInvoiceLine origSpecialInvoiceLine = _proxy.GetSpecialInvoiceLine(newSpecialInvoiceLine.ID);
             SpecialInvoiceLine updatedSpecialInvoiceLine = origSpecialInvoiceLine.Clone<SpecialInvoiceLine>();
+            updatedSpecialInvoiceLine.Description = newSpecialInvoiceLine.Description;
             updatedSpecialInvoiceLine.Discount = newSpecialInvoiceLine.Discount;
             updatedSpecialInvoiceLine.NoOfUnits = newSpecialInvoiceLine.NoOfUnits;
 

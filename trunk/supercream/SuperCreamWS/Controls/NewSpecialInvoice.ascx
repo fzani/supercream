@@ -146,7 +146,7 @@
                     <td>
                         <asp:TextBox ID="DiscountTextBox" runat="server"></asp:TextBox>
                         <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server"
-                            TargetControlID="DiscountTextBox" FilterType="Custom,Numbers" ValidChars="%." />
+                            TargetControlID="DiscountTextBox" FilterType="Custom,Numbers" ValidChars="." />
                     </td>
                 </tr>
                 <tr>
@@ -309,11 +309,10 @@
                                     <p>
                                         <center>
                                             <asp:Button ID="OkButton" runat="server" Text="Update" OnClick="InvoiceLineUpdateButton_Click"
-                                                ValidationGroup="GridViewPanel" CssClass="button" />
-                                            <asp:Button ID="DeleteButton" runat="server" OnClick="InvoiceLineDeleteButton_Click"
-                                                Text="Delete" ValidationGroup="GridViewPanel" CssClass="button" />
-                                            <asp:Button ID="CancelButton" Text="Cancel" runat="server" ValidationGroup="GridViewPanel"
                                                 CssClass="button" />
+                                            <asp:Button ID="DeleteButton" runat="server" OnClick="InvoiceLineDeleteButton_Click"
+                                                Text="Delete" CssClass="button" />
+                                            <asp:Button ID="CancelButton" Text="Cancel" runat="server" CssClass="button" />
                                         </center>
                                     </p>
                                 </asp:Panel>

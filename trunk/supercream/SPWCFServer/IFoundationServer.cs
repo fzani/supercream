@@ -268,7 +268,7 @@ namespace SPWCFServer
         [OperationContract]
         [ReferencePreservingDataContractFormat]
         List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo,
-            string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus);      
+            string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus);
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
@@ -1600,7 +1600,7 @@ namespace SPWCFServer
     {
         private int _ID;
         private int _VatCodeID;
-        private VatCode _VatCode;       
+        private VatCode _VatCode;
         private int _CustomerID;
         private short _AlphaPrefixOrPostFix;
         private string _AlphaID;
@@ -1646,12 +1646,12 @@ namespace SPWCFServer
         [DataMember]
         public VatCode VatCode
         {
-            get 
-            { 
-                return _VatCode; 
+            get
+            {
+                return _VatCode;
             }
-            
-            set 
+
+            set
             {
                 if (value != null)
                 {
@@ -2774,7 +2774,7 @@ namespace SPWCFServer
         private string _Description;
         private int _UnitQty;
         private decimal _UnitPrice;
-        private decimal _RRPPerItem;       
+        private decimal _RRPPerItem;
         private bool _VatExempt;
 
         [DataMember]
@@ -2788,7 +2788,7 @@ namespace SPWCFServer
             {
                 _ID = value;
             }
-        }       
+        }
 
         [DataMember]
         public string ProductCode
@@ -2835,7 +2835,7 @@ namespace SPWCFServer
             {
                 _RRPPerItem = value;
             }
-        }       
+        }
 
         [DataMember]
         public bool VatExempt
@@ -2865,6 +2865,8 @@ namespace SPWCFServer
         private string _InvoiceNo;
         private DateTime _DatePrinted;
         private DateTime _DateReprinted;
+        private DateTime _DateCreated;
+        private DateTime _DateModified;
 
         [DataMember]
         public int ID
@@ -3008,6 +3010,33 @@ namespace SPWCFServer
             set
             {
                 _InvoiceNo = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime DateCreated
+        {
+            get
+            {
+                return _DateCreated;
+            }
+
+            set
+            {
+                _DateCreated = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime DateModified
+        {
+            get
+            {
+                return _DateModified;
+            }
+            set
+            {
+                _DateModified = value;
             }
         }
     }

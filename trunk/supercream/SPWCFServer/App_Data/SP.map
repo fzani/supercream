@@ -282,6 +282,8 @@
       <Column Name="InvoiceNo" Member="InvoiceNo" Storage="_InvoiceNo" DbType="VarChar(50)" />
       <Column Name="DatePrinted" Member="DatePrinted" Storage="_DatePrinted" DbType="DateTime" />
       <Column Name="DateReprinted" Member="DateReprinted" Storage="_DateReprinted" DbType="DateTime" />
+      <Column Name="DateCreated" Member="DateCreated" Storage="_DateCreated" DbType="DateTime" />
+      <Column Name="DateModified" Member="DateModified" Storage="_DateModified" DbType="DateTime" />
       <Association Name="FK_SpecialInvoiceHeader_Customer" Member="Customer" Storage="_Customer" ThisKey="CustomerID" OtherKey="ID" IsForeignKey="true" />
       <Association Name="FK_SpecialInvoiceLines_SpecialInvoiceHeader" Member="SpecialInvoiceLine" Storage="_SpecialInvoiceLine" ThisKey="ID" OtherKey="SpecialInvoiceID" DeleteRule="NO ACTION" />
     </Type>
