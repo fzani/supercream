@@ -162,7 +162,6 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
         }
     }
 
-
     protected void AddOrderLineDetailsButton_Click(object sender, EventArgs e)
     {
         try
@@ -182,7 +181,9 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
                 DeliveryDate = Convert.ToDateTime(DeliveryDateTextBox.Text),
                 SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text,
                 DatePrinted = SP.Utils.Defaults.MinDateTime,
-                DateReprinted = SP.Utils.Defaults.MinDateTime
+                DateReprinted = SP.Utils.Defaults.MinDateTime,
+                DateCreated = DateTime.Now,
+                DateModified = DateTime.Now               
             };
 
             specialInvoiceHeader = ui.Save(specialInvoiceHeader);
@@ -278,8 +279,7 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
     {
         try
         {
-            SpecialInvoiceHeaderUI ui = new SpecialInvoiceHeaderUI();
-            ui.DeleteSpecialInvoice(this.SpecialInvoiceID);
+            SpecialInvoiceHeaderUI ui = new SpecialInvoiceHeaderUI();        
 
             this.ChangeState += new EventHandler<EventArgs>(CancelOrderState);
             this.ChangeState(this, e);
@@ -421,17 +421,18 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
         SpecialInvoiceHeaderPanel.Visible = true;
         AddSpecialInvoiceLineDetailsPanel.Visible = false;
         SpecialInvoiceLinesGridViewPanel.Visible = false;
-        CancelSpecialInvoiceLineButton.Visible = true;
+        CancelSpecialInvoiceLineButton.Visible = true;       
     }
 
     public void CancelOrderState(object sender, EventArgs args)
     {
         Util.ClearControls(this);
+        PriceChargeTextBox.Text = String.Empty;
 
         SpecialInvoiceHeaderPanel.Visible = true;
         AddSpecialInvoiceLineDetailsPanel.Visible = false;
         SpecialInvoiceLinesGridViewPanel.Visible = false;
-        CancelSpecialInvoiceLineButton.Visible = true;
+        CancelSpecialInvoiceLineButton.Visible = true;      
     }
 
     public void OrderLineState(object sender, EventArgs args)
@@ -439,7 +440,7 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
         SpecialInvoiceHeaderPanel.Visible = false;
         AddSpecialInvoiceLineDetailsPanel.Visible = true;
         SpecialInvoiceLinesGridViewPanel.Visible = false;
-        CancelSpecialInvoiceLineButton.Visible = true;
+        CancelSpecialInvoiceLineButton.Visible = true;       
     }
 
     public void OrderLineAddedState(object sender, EventArgs args)
@@ -448,7 +449,7 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
         AddSpecialInvoiceLineDetailsPanel.Visible = true;
         SpecialInvoiceLinesGridViewPanel.Visible = true;
         CancelSpecialInvoiceLineButton.Visible = false;
-        Util.ClearControls(AddSpecialInvoiceLineDetailsPanel);
+        Util.ClearControls(AddSpecialInvoiceLineDetailsPanel);       
     }
 
     #endregion

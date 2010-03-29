@@ -23,6 +23,8 @@ namespace SP.Core.Domain
         private string _InvoiceNo;
         private DateTime _DatePrinted;
         private DateTime _DateReprinted;
+        private DateTime _DateCreated;
+        private DateTime _DateModified;
 
         public override int ID
         {
@@ -109,16 +111,28 @@ namespace SP.Core.Domain
             }
         }
 
-        public DateTime DateReprinted
+        public DateTime DateCreated
         {
             get
             {
-                return _DateReprinted;
+                return _DateCreated;
             }
 
             set
             {
-                _DateReprinted = value;
+                _DateCreated = value;
+            }
+        }
+
+        public DateTime DateModified
+        {
+            get
+            {
+                return _DateModified;
+            }
+            set
+            {
+                _DateModified = value;
             }
         }
 

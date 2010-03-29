@@ -103,9 +103,8 @@
             </asp:Panel>
             <asp:Panel ID="SpecialInvoicesSearchGridPanel" runat="server">
                 <asp:GridView ID="SpecialInvoicesSearchGridView" Width="98%" runat="server" AutoGenerateColumns="False"
-                    DataSourceID="ObjectDataSource1" 
-                    OnRowCommand="SpecialInvoicesSearchGridView_RowCommand" 
-                    onrowdatabound="SpecialInvoicesSearchGridView_RowDataBound">
+                    DataSourceID="ObjectDataSource1" OnRowCommand="SpecialInvoicesSearchGridView_RowCommand"
+                    OnRowDataBound="SpecialInvoicesSearchGridView_RowDataBound">
                     <Columns>
                         <asp:TemplateField ItemStyle-Width="20%" ShowHeader="False">
                             <ItemTemplate>
@@ -118,17 +117,17 @@
                             ItemStyle-Width="15%">
                             <ItemStyle Width="15%" />
                         </asp:BoundField>
-                         <asp:TemplateField ItemStyle-Width="45%" HeaderText="Customer Name" ShowHeader="False">
+                        <asp:TemplateField ItemStyle-Width="45%" HeaderText="Customer Name" ShowHeader="False">
                             <ItemTemplate>
                                 <asp:Label ID="CustomerNameLabel" runat="server" />
                             </ItemTemplate>
                             <ItemStyle Width="45%" />
                         </asp:TemplateField>
-                        <asp:BoundField DataField="DeliveryDate" HeaderText="DeliveryDate" SortExpression="DeliveryDate"
+                        <asp:BoundField DataField="OrderDate" HeaderText="Invoice Date" SortExpression="OrderDate"
                             DataFormatString="{0:d}" ItemStyle-Width="25%">
                             <ItemStyle Width="15%" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="OrderDate" HeaderText="Invoice Date" SortExpression="OrderDate"
+                        <asp:BoundField DataField="DeliveryDate" HeaderText="DeliveryDate" SortExpression="DeliveryDate"
                             DataFormatString="{0:d}" ItemStyle-Width="25%">
                             <ItemStyle Width="15%" />
                         </asp:BoundField>
@@ -321,17 +320,15 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">                            
+                        <td colspan="2">
                             <asp:LinkButton ID="AddSpecialInvoiceLineButton" Text="Add |" ValidationGroup="AddSpecialInvoiceLinesGroup"
                                 runat="server" OnClick="AddSpecialInvoiceLineButton_Click"></asp:LinkButton>
                             <asp:LinkButton ID="CancelSpecialInvoiceLineButton" Text="Cancel |" runat="server"
                                 OnClick="CancelSpecialInvoiceLineButton_Click1"></asp:LinkButton>
                             <asp:LinkButton ID="CalculateButton" Text="Calculate" runat="server" OnClick="CalculateButton_Click1">
                             </asp:LinkButton>
-                            </table>
-                        </td>
-                    </tr>
                 </table>
+                </td> </tr> </table>
             </asp:Panel>
             <asp:Panel ID="SpecialInvoiceLinesGridViewPanel" runat="server">
                 <fieldset id="Fieldset1">
@@ -486,7 +483,8 @@
                             </td>
                         </tr>
                     </table>
-                </fieldset></asp:Panel>
+                </fieldset>
+            </asp:Panel>
         </fieldset>
     </div>
 </asp:Panel>

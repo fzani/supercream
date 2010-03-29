@@ -65,7 +65,7 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
 
     #endregion
 
-    #region General event handlers
+    #region General Event handlers
 
     protected void SearchButton_Click(object sender, EventArgs e)
     {
