@@ -49,7 +49,7 @@ namespace SP.Data.LTS
                 dateFrom,
                 dateTo,
                 orderStatus)
-                    .OrderByDescending(q => q.OrderDate)
+                    .OrderByDescending(q => q.DateModified)
                     .ToList<SpecialInvoiceHeader>();
         }
 

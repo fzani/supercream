@@ -16,7 +16,7 @@ namespace SP.Data.LTS
     public class OrderHeaderDao : AbstractLTSDao<OrderHeader, int>, IOrderHeaderDao
     {
         public override OrderHeader GetById(int id)
-        {          
+        {
             return db.OrderHeader.Single<OrderHeader>(q => q.ID == id);
         }
 
@@ -40,26 +40,30 @@ namespace SP.Data.LTS
         }
 
         public string GenerateOrderNo()
-        {          
-            return "ORD-" + (Convert.ToInt32(db.OrderHeader.Select(q => q.AlphaID.Substring(4, (q.AlphaID.Length - 4))).Max()) + 1);        
+        {
+            int maxOrderNo = (int)db.OrderHeader.Select(q => Convert.ToInt32(q.AlphaID.Substring(4, q.AlphaID.Length - 4))).Max();
+            return "ORD-" + (maxOrderNo + 1).ToString();
         }
 
         public string GenerateInvoiceNo()
         {
-            List<OrderHeader> invoices =  db.OrderHeader.Where(q => q.InvoiceNo != null && q.InvoiceNo != "").ToList<OrderHeader>();
-            return "INV-" + (Convert.ToInt32(invoices.Select(q => q.InvoiceNo.Substring(4, (q.InvoiceNo.Length - 4))).Max()) + 1).ToString();
+            List<OrderHeader> invoices = db.OrderHeader.Where(q => q.InvoiceNo != null && q.InvoiceNo != "").ToList<OrderHeader>();
+            int maxInvoiceNo = (int)invoices.Select(q => Convert.ToInt32(q.InvoiceNo.Substring(4, q.InvoiceNo.Length - 4))).Max();
+            return "INV-" + (maxInvoiceNo + 1).ToString();
         }
 
         public string GenerateInvoiceProformaNo()
         {
             List<OrderHeader> invoices = db.OrderHeader.Where(q => q.InvoiceProformaNo != null && q.InvoiceProformaNo != "").ToList<OrderHeader>();
-            return "INP-" + (Convert.ToInt32(invoices.Select(q => q.InvoiceProformaNo.Substring(4, (q.InvoiceProformaNo.Length - 4))).Max()) + 1).ToString();
+            int maxInvoiceNo = (int)invoices.Select(q => Convert.ToInt32(q.InvoiceProformaNo.Substring(4, q.InvoiceProformaNo.Length - 4))).Max();
+            return "INP-" + (maxInvoiceNo + 1).ToString();
         }
 
         public string GenerateDeliveryNoteNo()
         {
-            List<OrderHeader> invoices = db.OrderHeader.Where(q => q.DeliveryNoteNo != null && q.DeliveryNoteNo != "").ToList<OrderHeader>();
-            return "DLV-" + (Convert.ToInt32(invoices.Select(q => q.DeliveryNoteNo.Substring(4, (q.DeliveryNoteNo.Length - 4))).Max()) + 1).ToString();
+            List<OrderHeader> deliveryNotes = db.OrderHeader.Where(q => q.DeliveryNoteNo != null && q.DeliveryNoteNo != "").ToList<OrderHeader>();
+            int maxDeliveryNote = (int)deliveryNotes.Select(q => Convert.ToInt32(q.DeliveryNoteNo.Substring(4, q.DeliveryNoteNo.Length - 4))).Max();
+            return "DLV-" + (maxDeliveryNote + 1).ToString();
         }
 
         public List<OrderHeader> GetOrderHeaderForSearch(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
