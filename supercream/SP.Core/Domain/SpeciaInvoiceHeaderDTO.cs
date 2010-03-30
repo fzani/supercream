@@ -14,6 +14,8 @@ namespace SP.Core.Domain
     public class SpecialInvoiceHeader : BaseEntity
     {
         private int _CustomerID;
+        private int _AccountID;
+        private int _OutletStoreID;
         private short _AlphaPrefixOrPostFix;
         private string _AlphaID;
         private DateTime _OrderDate;
@@ -35,6 +37,32 @@ namespace SP.Core.Domain
             set
             {
                 base.ID = value;
+            }
+        }
+
+        public int AccountID
+        {
+            get
+            {
+                return _AccountID;
+            }
+
+            set
+            {
+                _AccountID = value;
+            }
+        }
+
+        public int OutletStoreID
+        {
+            get
+            {
+                return _OutletStoreID;
+            }
+
+            set
+            {
+                _OutletStoreID = value;
             }
         }
 

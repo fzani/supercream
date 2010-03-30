@@ -42,6 +42,8 @@ public class SpecialInvoiceHeaderUI : IDisposable
 
             updatedSpecialInvoice.AlphaID = newSpecialInvoice.AlphaID;
             updatedSpecialInvoice.CustomerID = newSpecialInvoice.CustomerID;
+            updatedSpecialInvoice.AccountID = newSpecialInvoice.AccountID;
+            updatedSpecialInvoice.OutletStoreID = newSpecialInvoice.OutletStoreID;
             updatedSpecialInvoice.ID = newSpecialInvoice.ID;
             updatedSpecialInvoice.OrderDate = newSpecialInvoice.OrderDate;
             updatedSpecialInvoice.DeliveryDate = newSpecialInvoice.DeliveryDate;

@@ -2856,6 +2856,8 @@ namespace SPWCFServer
     {
         private int _ID;
         private int _CustomerID;
+        private int _AccountID;
+        private int _OutletStoreID;
         private short _AlphaPrefixOrPostFix;
         private string _AlphaID;
         private DateTime _OrderDate;
@@ -2891,6 +2893,34 @@ namespace SPWCFServer
             set
             {
                 _CustomerID = value;
+            }
+        }
+
+        [DataMember]
+        public int AccountID
+        {
+            get
+            {
+                return _AccountID;
+            }
+
+            set
+            {
+                _AccountID = value;
+            }
+        }
+
+        [DataMember]
+        public int OutletStoreID
+        {
+            get
+            {
+                return _OutletStoreID;
+            }
+
+            set
+            {
+                _OutletStoreID = value;
             }
         }
 

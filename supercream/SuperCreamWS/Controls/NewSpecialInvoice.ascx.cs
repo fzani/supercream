@@ -43,7 +43,7 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
             ViewState["SpecialInvoiceID"] = value;
         }
     }
-   
+
     #endregion
 
     #region Page Load Event
@@ -60,6 +60,9 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
             {
                 CustomerDropDownList.Items.Add(new ListItem(cs.Account + " " + cs.Name, cs.ID.ToString()));
             }
+
+            AccountDropDownList.Items.Add(new ListItem("-- Not Selected --", "-1"));
+            OutletStoreDropDownList.Items.Add(new ListItem("-- Not Selected --", "-1"));
 
             this.ChangeState += new EventHandler<EventArgs>(this.InitialiseState);
             this.ChangeState(this, e);
@@ -82,7 +85,38 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
 
     protected void CustomerDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
+        if (CustomerDropDownList.SelectedIndex != -1)
+        {
+            InitialiseDropDownLists();
 
+            AccountUI accountUI = new AccountUI();
+            List<Account> accounts = accountUI.GetAllAccountsByCustomerID(Convert.ToInt32(CustomerDropDownList.SelectedValue));
+            foreach (Account account in accounts)
+            {
+                AccountDropDownList.Items.Add(new ListItem(account.AlphaID, account.ID.ToString()));
+            }
+
+
+            CustomerUI customerUI = new CustomerUI();
+            List<OutletStore> outletStores = customerUI.GetOutletStoresByCustomerID(Convert.ToInt32(CustomerDropDownList.SelectedValue));
+            foreach (OutletStore outletStore in outletStores)
+            {
+                OutletStoreDropDownList.Items.Add(new ListItem(outletStore.Name, outletStore.ID.ToString()));
+            }
+        }
+        else
+        {
+            InitialiseDropDownLists();
+        }
+    }
+
+    private void InitialiseDropDownLists()
+    {
+        AccountDropDownList.Items.Clear();
+        OutletStoreDropDownList.Items.Clear();
+
+        AccountDropDownList.Items.Add(new ListItem("-- Not Selected --", "-1"));
+        OutletStoreDropDownList.Items.Add(new ListItem("-- Not Selected --", "-1"));
     }
 
     protected void InvoiceLineUpdateButton_Click(object sender, EventArgs e)
@@ -174,7 +208,9 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
             SpecialInvoiceHeader specialInvoiceHeader = new SpecialInvoiceHeader
             {
                 ID = -1,
-                CustomerID = customer.ID,
+                CustomerID = customer.ID,     
+                AccountID = Convert.ToInt32(this.AccountDropDownList.SelectedValue),
+                OutletStoreID = Convert.ToInt32(this.OutletStoreDropDownList.SelectedValue),
                 AlphaPrefixOrPostFix = 0,
                 OrderStatus = (short)SP.Core.Enums.OrderStatus.Invoice,
                 OrderDate = Convert.ToDateTime(OrderDateTextBox.Text),
@@ -183,7 +219,7 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
                 DatePrinted = SP.Utils.Defaults.MinDateTime,
                 DateReprinted = SP.Utils.Defaults.MinDateTime,
                 DateCreated = DateTime.Now,
-                DateModified = DateTime.Now               
+                DateModified = DateTime.Now
             };
 
             specialInvoiceHeader = ui.Save(specialInvoiceHeader);
@@ -279,7 +315,7 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
     {
         try
         {
-            SpecialInvoiceHeaderUI ui = new SpecialInvoiceHeaderUI();        
+            SpecialInvoiceHeaderUI ui = new SpecialInvoiceHeaderUI();
 
             this.ChangeState += new EventHandler<EventArgs>(CancelOrderState);
             this.ChangeState(this, e);
@@ -421,7 +457,7 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
         SpecialInvoiceHeaderPanel.Visible = true;
         AddSpecialInvoiceLineDetailsPanel.Visible = false;
         SpecialInvoiceLinesGridViewPanel.Visible = false;
-        CancelSpecialInvoiceLineButton.Visible = true;       
+        CancelSpecialInvoiceLineButton.Visible = true;
     }
 
     public void CancelOrderState(object sender, EventArgs args)
@@ -432,7 +468,7 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
         SpecialInvoiceHeaderPanel.Visible = true;
         AddSpecialInvoiceLineDetailsPanel.Visible = false;
         SpecialInvoiceLinesGridViewPanel.Visible = false;
-        CancelSpecialInvoiceLineButton.Visible = true;      
+        CancelSpecialInvoiceLineButton.Visible = true;
     }
 
     public void OrderLineState(object sender, EventArgs args)
@@ -440,7 +476,7 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
         SpecialInvoiceHeaderPanel.Visible = false;
         AddSpecialInvoiceLineDetailsPanel.Visible = true;
         SpecialInvoiceLinesGridViewPanel.Visible = false;
-        CancelSpecialInvoiceLineButton.Visible = true;       
+        CancelSpecialInvoiceLineButton.Visible = true;
     }
 
     public void OrderLineAddedState(object sender, EventArgs args)
@@ -449,7 +485,7 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
         AddSpecialInvoiceLineDetailsPanel.Visible = true;
         SpecialInvoiceLinesGridViewPanel.Visible = true;
         CancelSpecialInvoiceLineButton.Visible = false;
-        Util.ClearControls(AddSpecialInvoiceLineDetailsPanel);       
+        Util.ClearControls(AddSpecialInvoiceLineDetailsPanel);
     }
 
     #endregion

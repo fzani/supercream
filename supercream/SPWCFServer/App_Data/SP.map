@@ -8,12 +8,12 @@
       <Column Name="CustomerID" Member="CustomerID" Storage="_CustomerID" DbType="Int" />
       <Column Name="TermTypeID" Member="TermTypeID" Storage="_TermTypeID" DbType="Int" />
       <Column Name="AlphaID" Member="AlphaID" Storage="_AlphaID" DbType="VarChar(20)" />
-      <Column Name="CompanyToInvoiceTo" Member="CompanyToInvoiceTo" Storage="_CompanyToInvoiceTo" DbType="VarChar(128)" />
-
+      <Column Name="CompanyToInvoiceTo" Member="CompanyToInvoiceTo" Storage="_CompanyToInvoiceTo" DbType="VarChar(128)" />      
       <Association Name="FK_Account_Address" Member="Address" Storage="_Address" ThisKey="InvoiceAddressID" OtherKey="ID" IsForeignKey="true" />
       <Association Name="FK_Account_Customer" Member="Customer" Storage="_Customer" ThisKey="CustomerID" OtherKey="ID" IsForeignKey="true" />
       <Association Name="FK_Account_Terms" Member="Terms" Storage="_Terms" ThisKey="TermTypeID" OtherKey="ID" IsForeignKey="true" />
       <Association Name="FK_Invoice_Account" Member="InvoiceHeader" Storage="_InvoiceHeader" ThisKey="ID" OtherKey="AccountID" DeleteRule="NO ACTION" />
+      <Association Name="FK_SpecialInvoiceHeader_Account" Member="SpecialInvoiceHeader" Storage="_SpecialInvoiceHeader" ThisKey="ID" OtherKey="AccountID" DeleteRule="NO ACTION" />
     </Type>
   </Table>
   <Table Name="dbo.Address" Member="Address">
@@ -215,9 +215,9 @@
       <Column Name="OpeningHoursNotes" Member="OpeningHoursNotes" Storage="_OpeningHoursNotes" DbType="VarChar(512)" />
       <Column Name="Note" Member="Note" Storage="_Note" DbType="VarChar(8000)" />
       <Association Name="FK_OutletStore_Customer" Member="Customer" Storage="_Customer" ThisKey="CustomerID" OtherKey="ID" IsForeignKey="true" />
+      <Association Name="FK_SpecialInvoiceHeader_OutletStore" Member="SpecialInvoiceHeader" Storage="_SpecialInvoiceHeader" ThisKey="ID" OtherKey="OutletStoreID" DeleteRule="NO ACTION" />
     </Type>
   </Table>
-
   <Table Name="dbo.Phone" Member="Phone">
     <Type Name="Phone">
       <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
@@ -273,6 +273,8 @@
     <Type Name="SpecialInvoiceHeader">
       <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
       <Column Name="CustomerID" Member="CustomerID" Storage="_CustomerID" DbType="Int" />
+      <Column Name="AccountID" Member="AccountID" Storage="_AccountID" DbType="Int" />
+      <Column Name="OutletStoreID" Member="OutletStoreID" Storage="_OutletStoreID" DbType="Int" />
       <Column Name="AlphaPrefixOrPostFix" Member="AlphaPrefixOrPostFix" Storage="_AlphaPrefixOrPostFix" DbType="SmallInt" />
       <Column Name="AlphaID" Member="AlphaID" Storage="_AlphaID" DbType="VarChar(20)" />
       <Column Name="OrderDate" Member="OrderDate" Storage="_OrderDate" DbType="DateTime" />
@@ -284,7 +286,9 @@
       <Column Name="DateReprinted" Member="DateReprinted" Storage="_DateReprinted" DbType="DateTime" />
       <Column Name="DateCreated" Member="DateCreated" Storage="_DateCreated" DbType="DateTime" />
       <Column Name="DateModified" Member="DateModified" Storage="_DateModified" DbType="DateTime" />
+      <Association Name="FK_SpecialInvoiceHeader_Account" Member="Account" Storage="_Account" ThisKey="AccountID" OtherKey="ID" IsForeignKey="true" />
       <Association Name="FK_SpecialInvoiceHeader_Customer" Member="Customer" Storage="_Customer" ThisKey="CustomerID" OtherKey="ID" IsForeignKey="true" />
+      <Association Name="FK_SpecialInvoiceHeader_OutletStore" Member="OutletStore" Storage="_OutletStore" ThisKey="OutletStoreID" OtherKey="ID" IsForeignKey="true" />
       <Association Name="FK_SpecialInvoiceLines_SpecialInvoiceHeader" Member="SpecialInvoiceLine" Storage="_SpecialInvoiceLine" ThisKey="ID" OtherKey="SpecialInvoiceID" DeleteRule="NO ACTION" />
     </Type>
   </Table>

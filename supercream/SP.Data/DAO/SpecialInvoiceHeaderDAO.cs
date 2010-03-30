@@ -31,8 +31,15 @@ namespace SP.Data.LTS
 
         public string GenerateSpecialInvoiceNo()
         {
-            int maxInvoiceNo = (int)db.SpecialInvoiceHeader.Select(q => Convert.ToInt32(q.InvoiceNo.Substring(7, q.InvoiceNo.Length - 7))).Max();
-            return "INV-SP-" + (maxInvoiceNo + 1).ToString();
+            if (db.SpecialInvoiceHeader.FirstOrDefault() == null)
+            {
+                return "INV-SP-1";
+            }
+            else
+            {
+                int maxInvoiceNo = (int)db.SpecialInvoiceHeader.Select(q => Convert.ToInt32(q.InvoiceNo.Substring(7, q.InvoiceNo.Length - 7))).Max();
+                return "INV-SP-" + (maxInvoiceNo + 1).ToString();
+            }
         }
 
         public List<SpecialInvoiceHeader> GetSpecialHeaders(string orderNo,

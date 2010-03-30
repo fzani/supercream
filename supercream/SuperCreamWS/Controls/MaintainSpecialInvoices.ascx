@@ -40,10 +40,7 @@
                                             AlternateText="Click to show calendar" />
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="NewOutletGroup"
                                             ControlToValidate="DateFromTextBox" ErrorMessage="Date Effective From is required"
-                                            InitialValue="" Text="*" runat="server" />
-                                        <asp:RequiredFieldValidator ID="StartDateRequiredFieldValidator" runat="server" ControlToValidate="DateFromTextBox"
-                                            Display="Dynamic" ErrorMessage="Start Date is a required field" SetFocusOnError="True"
-                                            ValidationGroup="AddLeaveGroup">*</asp:RequiredFieldValidator>
+                                            InitialValue="" Text="*" runat="server" />                                      
                                         <ajaxToolkit:CalendarExtender ID="calendarButtonExtender" Format="dd/MM/yyyy" runat="server"
                                             TargetControlID="DateFromTextBox" PopupButtonID="Image1" />
                                         <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" TargetControlID="DateFromTextBox"
@@ -62,10 +59,7 @@
                                             AlternateText="Click to show calendar" />
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="NewOutletGroup"
                                             ControlToValidate="DateToTextBox" ErrorMessage="Date Effective From is required"
-                                            InitialValue="" Text="*" runat="server" />
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="DateToTextBox"
-                                            Display="Dynamic" ErrorMessage="Start Date is a required field" SetFocusOnError="True"
-                                            ValidationGroup="AddLeaveGroup">*</asp:RequiredFieldValidator>
+                                            InitialValue="" Text="*" runat="server" />                                       
                                         <ajaxToolkit:CalendarExtender ID="CalendarExtender1" Format="dd/MM/yyyy" runat="server"
                                             TargetControlID="DateToTextBox" PopupButtonID="Image2" />
                                         <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender2" runat="server" TargetControlID="DateToTextBox"
@@ -78,8 +72,10 @@
                                         Order Status
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="OrderStatusDropDownList" runat="server" Width="250px" DataSourceID="OrderStatusXmlDataSource"
-                                            DataTextField="LongName" AutoPostBack="true" DataValueField="ID" OnSelectedIndexChanged="OrderStatusDropDownList_SelectedIndexChanged">
+                                        <asp:DropDownList ID="OrderStatusDropDownList" runat="server" Width="250px" 
+                                        DataSourceID="OrderStatusXmlDataSource"
+                                            DataTextField="LongName" AutoPostBack="true" DataValueField="ID" 
+                                            OnSelectedIndexChanged="OrderStatusDropDownList_SelectedIndexChanged">
                                         </asp:DropDownList>
                                         <asp:XmlDataSource ID="OrderStatusXmlDataSource" runat="server" DataFile="~/App_Data/InvoiceStauses.xml">
                                         </asp:XmlDataSource>
@@ -171,6 +167,38 @@
                     </tr>
                     <tr>
                         <td style="width: 30%;">
+                            Account
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="AccountDropDownList" AutoPostBack="true" Width="400px" runat="server"
+                                ValidationGroup="AddOrderDetailsGroup">
+                            </asp:DropDownList>
+                            <ajaxToolkit:ListSearchExtender ID="ListSearchExtender1" runat="server" TargetControlID="AccountDropDownList"
+                                PromptCssClass="ListSearchExtenderPrompt" PromptText="Text to Search For" QueryPattern="Contains"
+                                QueryTimeout="2000" />
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" ValidationGroup="AddOrderDetailsGroup"
+                                ControlToValidate="AccountDropDownList" InitialValue="-1" ErrorMessage="You must select Account"
+                                Text="*" runat="server" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%;">
+                            Outlet Store
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="OutletStoreDropDownList" AutoPostBack="true" Width="400px" runat="server"
+                                ValidationGroup="AddOrderDetailsGroup">
+                            </asp:DropDownList>
+                            <ajaxToolkit:ListSearchExtender ID="ListSearchExtender3" runat="server" TargetControlID="OutletStoreDropDownList"
+                                PromptCssClass="ListSearchExtenderPrompt" PromptText="Text to Search For" QueryPattern="Contains"
+                                QueryTimeout="2000" />
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator12" ValidationGroup="AddOrderDetailsGroup"
+                                ControlToValidate="OutletStoreDropDownList" InitialValue="-1" ErrorMessage="You must select Outlet Store"
+                                Text="*" runat="server" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%;">
                             Invoice No
                         </td>
                         <td style="width: 70%;">
@@ -194,7 +222,7 @@
                                 Display="Dynamic" ErrorMessage="Order Date is a required field" SetFocusOnError="True"
                                 ValidationGroup="AddOrderDetailsGroup">*</asp:RequiredFieldValidator>
                             <ajaxToolkit:CalendarExtender ID="CalendarExtender2" Format="dd/MM/yyyy" runat="server"
-                                TargetControlID="OrderDateTextBox" PopupButtonID="Image1" />
+                                TargetControlID="OrderDateTextBox" PopupButtonID="Image3" />
                             <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender3" runat="server" TargetControlID="OrderDateTextBox"
                                 Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
                                 OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
@@ -213,7 +241,7 @@
                                 Display="Dynamic" ErrorMessage="Delivery Date is a required field" SetFocusOnError="True"
                                 ValidationGroup="AddOrderDetailsGroup">*</asp:RequiredFieldValidator>
                             <ajaxToolkit:CalendarExtender ID="CalendarExtender3" Format="dd/MM/yyyy" runat="server"
-                                TargetControlID="DeliveryDateTextBox" PopupButtonID="Image1" />
+                                TargetControlID="DeliveryDateTextBox" PopupButtonID="Image4" />
                             <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender4" runat="server" TargetControlID="DeliveryDateTextBox"
                                 Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
                                 OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />

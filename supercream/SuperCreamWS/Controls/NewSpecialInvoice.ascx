@@ -25,6 +25,38 @@
                             Text="*" runat="server" />
                     </td>
                 </tr>
+                 <tr>
+                        <td style="width: 30%;">
+                            Account
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="AccountDropDownList" AutoPostBack="true" Width="400px" runat="server"
+                                ValidationGroup="AddOrderDetailsGroup">
+                            </asp:DropDownList>
+                            <ajaxToolkit:ListSearchExtender ID="ListSearchExtender1" runat="server" TargetControlID="AccountDropDownList"
+                                PromptCssClass="ListSearchExtenderPrompt" PromptText="Text to Search For" QueryPattern="Contains"
+                                QueryTimeout="2000" />
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" ValidationGroup="AddOrderDetailsGroup"
+                                ControlToValidate="AccountDropDownList" InitialValue="-1" ErrorMessage="You must select Account"
+                                Text="*" runat="server" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%;">
+                            Outlet Store
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="OutletStoreDropDownList" AutoPostBack="true" Width="400px" runat="server"
+                                ValidationGroup="AddOrderDetailsGroup">
+                            </asp:DropDownList>
+                            <ajaxToolkit:ListSearchExtender ID="ListSearchExtender3" runat="server" TargetControlID="OutletStoreDropDownList"
+                                PromptCssClass="ListSearchExtenderPrompt" PromptText="Text to Search For" QueryPattern="Contains"
+                                QueryTimeout="2000" />
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator12" ValidationGroup="AddOrderDetailsGroup"
+                                ControlToValidate="OutletStoreDropDownList" InitialValue="-1" ErrorMessage="You must select Outlet Store"
+                                Text="*" runat="server" />
+                        </td>
+                    </tr>
                 <tr>
                     <td style="width: 30%;">
                         Date of Order
@@ -57,7 +89,7 @@
                             Display="Dynamic" ErrorMessage="Delivery Date is a required field" SetFocusOnError="True"
                             ValidationGroup="AddOrderDetailsGroup">*</asp:RequiredFieldValidator>
                         <ajaxToolkit:CalendarExtender ID="CalendarExtender1" Format="dd/MM/yyyy" runat="server"
-                            TargetControlID="DeliveryDateTextBox" PopupButtonID="Image1" />
+                            TargetControlID="DeliveryDateTextBox" PopupButtonID="Image2" />
                         <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender2" runat="server" TargetControlID="DeliveryDateTextBox"
                             Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
                             OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
