@@ -36,6 +36,9 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
                 this.CustomerDropDownList.Items.Add(new ListItem(cs.Account + " " + cs.Name, cs.ID.ToString()));
             }
 
+            AccountDropDownList.Items.Add(new ListItem("-- Not Selected --", "-1"));
+            OutletStoreDropDownList.Items.Add(new ListItem("-- Not Selected --", "-1"));
+
             this.ChangeState += new EventHandler<EventArgs>(this.InitialiseState);
             this.ChangeState(this, e);
         }
@@ -171,7 +174,42 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
 
     protected void CustomerDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
+        if (CustomerDropDownList.SelectedIndex != -1)
+        {
+            PopulateDropDownLists();
+        }
+        else
+        {
+            InitialiseDropDownLists();
+        }
+    }
 
+    private void PopulateDropDownLists()
+    {
+        InitialiseDropDownLists();
+
+        AccountUI accountUI = new AccountUI();
+        List<Account> accounts = accountUI.GetAllAccountsByCustomerID(Convert.ToInt32(CustomerDropDownList.SelectedValue));
+        foreach (Account account in accounts)
+        {
+            AccountDropDownList.Items.Add(new ListItem(account.AlphaID, account.ID.ToString()));
+        }
+
+        CustomerUI customerUI = new CustomerUI();
+        List<OutletStore> outletStores = customerUI.GetOutletStoresByCustomerID(Convert.ToInt32(CustomerDropDownList.SelectedValue));
+        foreach (OutletStore outletStore in outletStores)
+        {
+            OutletStoreDropDownList.Items.Add(new ListItem(outletStore.Name, outletStore.ID.ToString()));
+        }
+    }
+
+    private void InitialiseDropDownLists()
+    {
+        AccountDropDownList.Items.Clear();
+        OutletStoreDropDownList.Items.Clear();
+
+        AccountDropDownList.Items.Add(new ListItem("-- Not Selected --", "-1"));
+        OutletStoreDropDownList.Items.Add(new ListItem("-- Not Selected --", "-1"));
     }
 
     protected void CancelSpecialInvoiceLineButton_Click1(object sender, EventArgs e)
@@ -367,6 +405,8 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
             {
                 ID = this.SpecialInvoiceID,
                 CustomerID = customer.ID,
+                AccountID = Convert.ToInt32(this.AccountDropDownList.SelectedValue),
+                OutletStoreID = Convert.ToInt32(this.OutletStoreDropDownList.SelectedValue),
                 AlphaPrefixOrPostFix = 0,
                 OrderStatus = (short)SP.Core.Enums.OrderStatus.Invoice,
                 OrderDate = Convert.ToDateTime(OrderDateTextBox.Text),
@@ -463,6 +503,11 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
             SpecialInvoiceHeader specialInvoiceHeader = ui.GetById(SpecialInvoiceID);
 
             CustomerDropDownList.SelectedValue = specialInvoiceHeader.CustomerID.ToString();
+
+            this.PopulateDropDownLists();
+
+            AccountDropDownList.SelectedValue = specialInvoiceHeader.AccountID.ToString();
+            OutletStoreDropDownList.SelectedValue = specialInvoiceHeader.OutletStoreID.ToString();
             InvoiceHeaderNoTextBox.Text = specialInvoiceHeader.InvoiceNo;
             OrderDateTextBox.Text = specialInvoiceHeader.OrderDate.ToShortDateString();
             DeliveryDateTextBox.Text = specialInvoiceHeader.DeliveryDate.ToShortDateString();
