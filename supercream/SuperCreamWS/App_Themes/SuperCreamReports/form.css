@@ -1,0 +1,123 @@
+
+/* CSS Document */
+
+/* search form */
+.searchform
+{
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 5px 0 15px 0;
+    width: 190px;
+}
+.searchform p
+{
+    margin: 0;
+    padding: 0;
+}
+.searchform input.textbox
+{
+    width: 120px;
+    color: #777;
+    height: 18px;
+    padding: 2px;
+    margin-left: 5px;
+    border: 1px solid #E5E5E5;
+    vertical-align: top;
+}
+.searchform input.button
+{
+    width: 60px;
+    height: 24px;
+    padding: 2px 5px;
+    margin-left: 5px;
+    vertical-align: top;
+}
+
+div.FormInput
+{
+    margin: 10px;
+    padding: 0 5px;
+    border: 1px solid #f2f2f2;
+    background-color: #FAFAFA;
+}
+
+div.DataList
+{
+    margin: 0px 10px 0px 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border: 1px solid #f2f2f2;
+    background-color: #FAFAFA;
+}
+
+div.ErrorOutput
+{
+    margin: 10px;
+    padding: 0 5px;
+    border: none;
+    background-color: #FFFFFF;
+    color: #CC0000;
+}
+
+div.mError
+{
+    color: #CC0000;
+    padding-left: 10px;
+    border: solid 1px #CC0000;
+    border-color: #CC0000;
+}
+div.mError h3
+{
+    color: #CC0000;
+}
+
+div.progressupdate
+{
+    text-align: right;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px -20px 0px;
+}
+
+tr.PagerStyle
+{
+    text-align: left;
+}
+
+/* Modal - popup screen */
+.XPopUpBackGround
+{
+    background: #ffffff;
+    filter: alpha(opacity=30) !important;
+    opacity: 0.1 !important;
+    z-index: 1 !important;
+}
+.modalPopup
+{
+    background-color: #EFEFEF;
+    border-width: 3px;
+    border-style: solid;
+    border-color: Gray;
+    padding: 3px;
+    z-index: 10001;
+}
+
+legend
+{
+    margin: 0px 0px 0px px;
+    padding: 0px 0px 0px 0px;
+}
+
+.FormHeader
+{
+    margin: 0px 0px 0px 10px;
+    padding: 0px 0px 0p 0px;
+}
+
+.FormHeader h3
+{
+	background: #FFF url(../../images/square_blueS.gif) no-repeat 3px 50%;
+	padding-left: 20px;
+}
+

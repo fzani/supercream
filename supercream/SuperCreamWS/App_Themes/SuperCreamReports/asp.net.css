@@ -1,0 +1,90 @@
+﻿.MyCalendar .ajax__calendar_container
+{
+    border: 1px solid #646464;
+    background-color: white;
+    color: black;
+    width: 300px;
+}
+.MyCalendar .ajax__calendar_body
+{
+    width: 100%;
+}
+.MyCalendar .ajax__calendar_other .ajax__calendar_day, .MyCalendar .ajax__calendar_other .ajax__calendar_year
+{
+    color: black;
+}
+.MyCalendar .ajax__calendar_hover .ajax__calendar_day, .MyCalendar .ajax__calendar_hover .ajax__calendar_month, .MyCalendar .ajax__calendar_hover .ajax__calendar_year
+{
+    color: black;
+}
+.MyCalendar .ajax__calendar_active .ajax__calendar_day, .MyCalendar .ajax__calendar_active .ajax__calendar_month, .MyCalendar .ajax__calendar_active .ajax__calendar_year
+{
+    color: black;
+    font-weight: bold;
+}
+
+.ListSearchExtenderPrompt
+{
+    text-align: left;
+    font-style: italic;
+    color: Gray;
+    background-color: white;
+}
+
+.EmphGreen
+{
+    color: #666666;
+    font-size: 1.2em;
+}
+
+.emphasise
+{
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.RequiredFieldMessage
+{
+    color: Red;
+}
+
+.HeaderContainerPanel
+{
+    border-top: solid 1px #E5E5E5;
+    text-align: right;
+    color: #7F99A9;
+    margin: 10px;
+    padding: 0 5px;
+    border-bottom: solid 1px #E5E5E5;
+    margin: 0px;
+}
+
+.HeaderContainerPanel table td tr
+{
+    margin: 0px;
+    padding: 0x;
+}
+
+.HeaderContainerPanel table tr td
+{
+    margin: 0px;
+    padding: 0x;
+}
+
+.RightBox
+{
+    text-align: right;
+    padding: 5px;
+}
+
+.VatSelection
+{
+    float: right;
+    text-align: left;
+    display: inline;
+}
+
+.SaveSelection
+{
+    margin: 5px 0px 5px 0px;
+}
