@@ -7,5 +7,23 @@
     
      
     
+    <rsweb:ReportViewer ID="SpecialInvoiceReportViewer" style="width:100%;" runat="server" 
+        Font-Names="Verdana" Font-Size="8pt" Height="400px" Width="400px">
+        <LocalReport ReportPath="SpecialInvoice.rdlc">
+            <DataSources>
+                <rsweb:ReportDataSource DataSourceId="SpecialInvoiceObjectDataSource" 
+                    Name="SuperCreamDBDataSet_rptGetSpecialInvoiceDetails" />
+            </DataSources>
+        </LocalReport>
+    </rsweb:ReportViewer>
+    
+     
+    
+    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" 
+        SelectMethod="GetData" TypeName="SuperCreamDBDataSetTableAdapters.">
+    </asp:ObjectDataSource>
+    
+     
+    
 </asp:Content>
 
