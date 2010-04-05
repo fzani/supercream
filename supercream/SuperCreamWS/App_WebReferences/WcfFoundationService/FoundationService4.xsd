@@ -12,6 +12,7 @@
       <xs:element minOccurs="0" name="QtyPerUnit" type="xs:int" />
       <xs:element minOccurs="0" name="SpecialInstructions" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SpecialInvoiceID" type="xs:int" />
+      <xs:element minOccurs="0" name="VatExempt" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SpecialInvoiceLine" nillable="true" type="tns:SpecialInvoiceLine" />
@@ -379,6 +380,7 @@
       <xs:element minOccurs="0" name="OrderStatus" type="xs:short" />
       <xs:element minOccurs="0" name="OutletStoreID" type="xs:int" />
       <xs:element minOccurs="0" name="SpecialInstructions" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VatCodeID" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SpecialInvoiceHeader" nillable="true" type="tns:SpecialInvoiceHeader" />

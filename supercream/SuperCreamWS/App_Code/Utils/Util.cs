@@ -54,6 +54,8 @@ public class Util
             ((TextBox)theControl).Text = String.Empty;
         else if (theControl is System.Web.UI.WebControls.DropDownList && ((DropDownList)theControl).SelectedIndex > -1)
             ((DropDownList)theControl).SelectedIndex = 0;
+        else if (theControl is System.Web.UI.WebControls.CheckBox)
+            ((CheckBox)theControl).Checked = false;
         //else if (theControl is System.Web.UI.WebControls.CheckBox)
         //    ((CheckBox)theControl).Checked = false;
 

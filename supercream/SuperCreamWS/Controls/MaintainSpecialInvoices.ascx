@@ -40,7 +40,7 @@
                                             AlternateText="Click to show calendar" />
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="NewOutletGroup"
                                             ControlToValidate="DateFromTextBox" ErrorMessage="Date Effective From is required"
-                                            InitialValue="" Text="*" runat="server" />                                      
+                                            InitialValue="" Text="*" runat="server" />
                                         <ajaxToolkit:CalendarExtender ID="calendarButtonExtender" Format="dd/MM/yyyy" runat="server"
                                             TargetControlID="DateFromTextBox" PopupButtonID="Image1" />
                                         <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" TargetControlID="DateFromTextBox"
@@ -59,7 +59,7 @@
                                             AlternateText="Click to show calendar" />
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="NewOutletGroup"
                                             ControlToValidate="DateToTextBox" ErrorMessage="Date Effective From is required"
-                                            InitialValue="" Text="*" runat="server" />                                       
+                                            InitialValue="" Text="*" runat="server" />
                                         <ajaxToolkit:CalendarExtender ID="CalendarExtender1" Format="dd/MM/yyyy" runat="server"
                                             TargetControlID="DateToTextBox" PopupButtonID="Image2" />
                                         <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender2" runat="server" TargetControlID="DateToTextBox"
@@ -72,10 +72,8 @@
                                         Order Status
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="OrderStatusDropDownList" runat="server" Width="250px" 
-                                        DataSourceID="OrderStatusXmlDataSource"
-                                            DataTextField="LongName" AutoPostBack="true" DataValueField="ID" 
-                                            OnSelectedIndexChanged="OrderStatusDropDownList_SelectedIndexChanged">
+                                        <asp:DropDownList ID="OrderStatusDropDownList" runat="server" Width="250px" DataSourceID="OrderStatusXmlDataSource"
+                                            DataTextField="LongName" AutoPostBack="true" DataValueField="ID" OnSelectedIndexChanged="OrderStatusDropDownList_SelectedIndexChanged">
                                         </asp:DropDownList>
                                         <asp:XmlDataSource ID="OrderStatusXmlDataSource" runat="server" DataFile="~/App_Data/InvoiceStauses.xml">
                                         </asp:XmlDataSource>
@@ -186,8 +184,8 @@
                             Outlet Store
                         </td>
                         <td>
-                            <asp:DropDownList ID="OutletStoreDropDownList" AutoPostBack="true" Width="400px" runat="server"
-                                ValidationGroup="AddOrderDetailsGroup">
+                            <asp:DropDownList ID="OutletStoreDropDownList" AutoPostBack="true" Width="400px"
+                                runat="server" ValidationGroup="AddOrderDetailsGroup">
                             </asp:DropDownList>
                             <ajaxToolkit:ListSearchExtender ID="ListSearchExtender3" runat="server" TargetControlID="OutletStoreDropDownList"
                                 PromptCssClass="ListSearchExtenderPrompt" PromptText="Text to Search For" QueryPattern="Contains"
@@ -337,6 +335,14 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class="emphasise">
+                            <i>Vat Exempt</i>
+                        </td>
+                        <td>
+                            <asp:CheckBox ID="VatExemptCheckBox" runat="server"></asp:CheckBox>
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="emphasise" colspan="2">
                             Special Instructions
                         </td>
@@ -466,6 +472,14 @@
                                                         </td>
                                                         <td>
                                                             <asp:Label ID="PriceChargeTextBox" runat="server"></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="emphasise">
+                                                            <i>Vat Exempt</i>
+                                                        </td>
+                                                        <td>
+                                                            <asp:CheckBox ID="VatExemptCheckBox" runat="server"></asp:CheckBox>
                                                         </td>
                                                     </tr>
                                                     <tr>

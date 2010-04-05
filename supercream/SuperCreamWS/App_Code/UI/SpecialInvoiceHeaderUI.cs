@@ -42,14 +42,15 @@ public class SpecialInvoiceHeaderUI : IDisposable
 
             updatedSpecialInvoice.AlphaID = newSpecialInvoice.AlphaID;
             updatedSpecialInvoice.CustomerID = newSpecialInvoice.CustomerID;
+            updatedSpecialInvoice.VatCodeID = newSpecialInvoice.VatCodeID;
             updatedSpecialInvoice.AccountID = newSpecialInvoice.AccountID;
             updatedSpecialInvoice.OutletStoreID = newSpecialInvoice.OutletStoreID;
             updatedSpecialInvoice.ID = newSpecialInvoice.ID;
             updatedSpecialInvoice.OrderDate = newSpecialInvoice.OrderDate;
             updatedSpecialInvoice.DeliveryDate = newSpecialInvoice.DeliveryDate;
             updatedSpecialInvoice.OrderStatus = (short)originalSpecialInvoice.OrderStatus;
-            updatedSpecialInvoice.SpecialInstructions = newSpecialInvoice.SpecialInstructions;
-            updatedSpecialInvoice.DateModified = newSpecialInvoice.DateModified;
+            updatedSpecialInvoice.SpecialInstructions = newSpecialInvoice.SpecialInstructions;           
+            updatedSpecialInvoice.DateModified = newSpecialInvoice.DateModified;          
 
             _proxy.UpdateSpecialInvoiceHeader(updatedSpecialInvoice, originalSpecialInvoice);
         }

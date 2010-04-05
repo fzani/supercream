@@ -25,38 +25,38 @@
                             Text="*" runat="server" />
                     </td>
                 </tr>
-                 <tr>
-                        <td style="width: 30%;">
-                            Account
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="AccountDropDownList" AutoPostBack="true" Width="400px" runat="server"
-                                ValidationGroup="AddOrderDetailsGroup">
-                            </asp:DropDownList>
-                            <ajaxToolkit:ListSearchExtender ID="ListSearchExtender1" runat="server" TargetControlID="AccountDropDownList"
-                                PromptCssClass="ListSearchExtenderPrompt" PromptText="Text to Search For" QueryPattern="Contains"
-                                QueryTimeout="2000" />
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" ValidationGroup="AddOrderDetailsGroup"
-                                ControlToValidate="AccountDropDownList" InitialValue="-1" ErrorMessage="You must select Account"
-                                Text="*" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 30%;">
-                            Outlet Store
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="OutletStoreDropDownList" AutoPostBack="true" Width="400px" runat="server"
-                                ValidationGroup="AddOrderDetailsGroup">
-                            </asp:DropDownList>
-                            <ajaxToolkit:ListSearchExtender ID="ListSearchExtender3" runat="server" TargetControlID="OutletStoreDropDownList"
-                                PromptCssClass="ListSearchExtenderPrompt" PromptText="Text to Search For" QueryPattern="Contains"
-                                QueryTimeout="2000" />
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator12" ValidationGroup="AddOrderDetailsGroup"
-                                ControlToValidate="OutletStoreDropDownList" InitialValue="-1" ErrorMessage="You must select Outlet Store"
-                                Text="*" runat="server" />
-                        </td>
-                    </tr>
+                <tr>
+                    <td style="width: 30%;">
+                        Account
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="AccountDropDownList" AutoPostBack="true" Width="400px" runat="server"
+                            ValidationGroup="AddOrderDetailsGroup">
+                        </asp:DropDownList>
+                        <ajaxToolkit:ListSearchExtender ID="ListSearchExtender1" runat="server" TargetControlID="AccountDropDownList"
+                            PromptCssClass="ListSearchExtenderPrompt" PromptText="Text to Search For" QueryPattern="Contains"
+                            QueryTimeout="2000" />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator11" ValidationGroup="AddOrderDetailsGroup"
+                            ControlToValidate="AccountDropDownList" InitialValue="-1" ErrorMessage="You must select Account"
+                            Text="*" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">
+                        Outlet Store
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="OutletStoreDropDownList" AutoPostBack="true" Width="400px"
+                            runat="server" ValidationGroup="AddOrderDetailsGroup">
+                        </asp:DropDownList>
+                        <ajaxToolkit:ListSearchExtender ID="ListSearchExtender3" runat="server" TargetControlID="OutletStoreDropDownList"
+                            PromptCssClass="ListSearchExtenderPrompt" PromptText="Text to Search For" QueryPattern="Contains"
+                            QueryTimeout="2000" />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator12" ValidationGroup="AddOrderDetailsGroup"
+                            ControlToValidate="OutletStoreDropDownList" InitialValue="-1" ErrorMessage="You must select Outlet Store"
+                            Text="*" runat="server" />
+                    </td>
+                </tr>
                 <tr>
                     <td style="width: 30%;">
                         Date of Order
@@ -187,6 +187,14 @@
                     </td>
                     <td>
                         <asp:Label ID="PriceChargeTextBox" runat="server"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="emphasise">
+                        <i>Vat Exempt</i>
+                    </td>
+                    <td>
+                        <asp:CheckBox ID="VatExemptCheckBox" runat="server"></asp:CheckBox>
                     </td>
                 </tr>
                 <tr>
@@ -323,6 +331,14 @@
                                                 </td>
                                                 <td>
                                                     <asp:Label ID="PriceChargeTextBox" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="emphasise">
+                                                    <i>Vat Exempt</i>
+                                                </td>
+                                                <td>
+                                                    <asp:CheckBox ID="VatExemptCheckBox" runat="server"></asp:CheckBox>
                                                 </td>
                                             </tr>
                                             <tr>

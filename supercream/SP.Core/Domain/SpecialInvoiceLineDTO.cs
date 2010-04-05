@@ -21,6 +21,7 @@ namespace SP.Core.Domain
         private decimal _Discount;
         private decimal _Price;
         private string _SpecialInstructions;
+        private bool _VatExempt;
 
         public override int ID
         {
@@ -127,6 +128,19 @@ namespace SP.Core.Domain
             set
             {
                 _SpecialInstructions = value;
+            }
+        }
+
+        public bool VatExempt
+        {
+            get
+            {
+                return _VatExempt;
+            }
+
+            set
+            {
+                _VatExempt = value;
             }
         }
     }
