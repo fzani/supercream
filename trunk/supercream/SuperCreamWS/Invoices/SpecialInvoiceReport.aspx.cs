@@ -11,15 +11,18 @@ public partial class Invoices_SpecialInvoiceReport : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            IReportDataSets reportDataSet = new SpecialInvoiceReportDataSets();
+            IReportDataSets IReportDataSet = new SpecialInvoiceReportDataSets();
             int specialInvoiceId = 304;
             int accountId = 404;
             int outletStoreId = 200;
 
-            Microsoft.Reporting.WebForms.ReportDataSource[] reportDataSets = reportDataSet.GetReportDataSets(specialInvoiceId, accountId, outletStoreId);
+            Microsoft.Reporting.WebForms.ReportDataSource[] reportDataSets = IReportDataSet.GetReportDataSets(specialInvoiceId, accountId, outletStoreId);
          
             SpecialInvoiceReportViewer.LocalReport.DataSources.Clear();
-            SpecialInvoiceReportViewer.LocalReport.DataSources.Add(reportDataSets[0]);
+            foreach (Microsoft.Reporting.WebForms.ReportDataSource reportDataSet in reportDataSets)
+            {
+                SpecialInvoiceReportViewer.LocalReport.DataSources.Add(reportDataSet);
+            }           
             //if (reportDataSets.Tables[0].Rows.Count == 0)
             //{
             //    lblMessage.Text = "Sorry, no products under this category!";
