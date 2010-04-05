@@ -28,9 +28,9 @@ public class SpecialInvoiceReportDataSets : IReportDataSets
     {
         DataSet dsInvoiceTotals = GetInvoiceTotalsDS(specialInvoiceId);
         DataSet dsInvoiceDetails = GetInvoiceDetailsDS(specialInvoiceId, accountId, outletStoreId);
-        //DataSet dsInvoiceAddressLines = GetInvoiceAddressLinesDS(accountId);
-        //DataSet dsDeliveryAddressLines = GetDeliveryAddressLinesDS(outletStoreId);
-        //DataSet dsFoundationAddressLines = GetFoundationFacilityAddressLinesDS(outletStoreId);
+        DataSet dsInvoiceAddressLines = GetInvoiceAddressLinesDS(accountId);
+        DataSet dsDeliveryAddressLines = GetDeliveryAddressLinesDS(outletStoreId);
+        DataSet dsFoundationAddressLines = GetFoundationFacilityAddressLinesDS(outletStoreId);
 
         ReportDataSource[] reportDataSources = new ReportDataSource[5];
 
@@ -38,21 +38,21 @@ public class SpecialInvoiceReportDataSets : IReportDataSets
            ReportDataSource("SuperCreamDBDataSet_rptGetSpecialInvoiceDetails",
              dsInvoiceDetails.Tables[0]);
 
-        //reportDataSources[0] = new
-        //    ReportDataSource("SuperCreamDBDataSet_rptGetOrderTotals",
-        //        dsInvoiceTotals.Tables[0]);      
+        reportDataSources[1] = new
+            ReportDataSource("SuperCreamDBDataSet_rptGetSpecialInvoiceTotals",
+                dsInvoiceTotals.Tables[0]);
 
-        //reportDataSources[2] = new
-        //    ReportDataSource("SuperCreamDBDataSet_rptGetAddressLinesForInvoice",
-        //        dsInvoiceAddressLines.Tables[0]);
+        reportDataSources[2] = new
+            ReportDataSource("SuperCreamDBDataSet_rptGetAddressLinesForInvoice",
+                dsInvoiceAddressLines.Tables[0]);
 
-        //reportDataSources[3] = new
-        //    ReportDataSource("SuperCreamDBDataSet_rptGetDeliveryAddressLines",
-        //        dsDeliveryAddressLines.Tables[0]);
+        reportDataSources[3] = new
+            ReportDataSource("SuperCreamDBDataSet_rptGetDeliveryAddressLines",
+                dsDeliveryAddressLines.Tables[0]);
 
-        //reportDataSources[4] = new
-        //    ReportDataSource("SuperCreamDBDataSet_rptGetFoundationFacilityAddressLines",
-        //        dsFoundationAddressLines.Tables[0]);
+        reportDataSources[4] = new
+            ReportDataSource("SuperCreamDBDataSet_rptGetFoundationFacilityAddressLines",
+                dsFoundationAddressLines.Tables[0]);
 
         return reportDataSources;
     }
@@ -69,10 +69,10 @@ public class SpecialInvoiceReportDataSets : IReportDataSets
 
         SqlCommand command = new SqlCommand();
         command.CommandType = System.Data.CommandType.StoredProcedure;
-        command.CommandText = "rptGetOrderTotals";
+        command.CommandText = "rptGetSpecialInvoiceTotals";
         command.Connection = connection;
 
-        SqlParameter orderParameterId = command.Parameters.Add("@OrderID", System.Data.SqlDbType.Int);
+        SqlParameter orderParameterId = command.Parameters.Add("@SpecialInvoiceID", System.Data.SqlDbType.Int);
         orderParameterId.Value = orderId;
 
         DataSet dataSet = new DataSet("InvoiceTotalsSA");
