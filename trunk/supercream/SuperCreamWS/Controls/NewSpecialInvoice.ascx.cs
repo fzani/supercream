@@ -136,6 +136,7 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
             int noOfUnits = Convert.ToInt32((messagePanel.FindControl("NoOfUnitsTextBox") as TextBox).Text);
             decimal price = Util.ConvertStringToDecimal((messagePanel.FindControl("PricePerUnitsTextBox") as TextBox).Text);
             decimal discount = Convert.ToDecimal((messagePanel.FindControl("DiscountTextBox") as TextBox).Text);
+            bool vatExempt = (messagePanel.FindControl("VatExemptCheckBox") as CheckBox).Checked;
 
             string specialInstructions = (messagePanel.FindControl("SpecialInstructionsTextBox") as TextBox).Text;
 
@@ -149,7 +150,8 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
                 SpecialInstructions = specialInstructions,
                 Discount = discount,
                 OrderLineStatus = (short)SP.Core.Enums.OrderStatus.Invoice,
-                SpecialInvoiceID = this.SpecialInvoiceID
+                SpecialInvoiceID = this.SpecialInvoiceID,
+                VatExempt = vatExempt
             };
 
             ui.Update(specialInvoiceLine);
@@ -203,6 +205,9 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
             CustomerUI customerUI = new CustomerUI();
             Customer customer = customerUI.GetByID(Convert.ToInt32(CustomerDropDownList.SelectedValue));
 
+            StandardVatCodeUI standardVatCodeUI = new StandardVatCodeUI();
+            StandardVatRate standardVatRate = standardVatCodeUI.GetStandardVatCode();
+
             SpecialInvoiceHeaderUI ui = new SpecialInvoiceHeaderUI();
 
             SpecialInvoiceHeader specialInvoiceHeader = new SpecialInvoiceHeader
@@ -219,7 +224,8 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
                 DatePrinted = SP.Utils.Defaults.MinDateTime,
                 DateReprinted = SP.Utils.Defaults.MinDateTime,
                 DateCreated = DateTime.Now,
-                DateModified = DateTime.Now
+                DateModified = DateTime.Now,
+                VatCodeID = standardVatRate.VatCodeID                
             };
 
             specialInvoiceHeader = ui.Save(specialInvoiceHeader);
@@ -355,7 +361,8 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
                 QtyPerUnit = Convert.ToInt32(this.QtyPerUnitTextBox.Text),
                 SpecialInstructions = this.SpecialInstructionsTextBox.Text,
                 OrderLineStatus = Convert.ToInt16(SP.Core.Enums.OrderLineStatus.Open),
-                SpecialInvoiceID = this.SpecialInvoiceID
+                SpecialInvoiceID = this.SpecialInvoiceID,
+                VatExempt = this.VatExemptCheckBox.Checked
 
             };
 
@@ -418,6 +425,8 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
             discountTextBox.Text = specialInvoiceLine.Discount.ToString();
             TextBox specialInstructionsTextBox = messagePanel.FindControl("SpecialInstructionsTextBox") as TextBox;
             specialInstructionsTextBox.Text = specialInvoiceLine.SpecialInstructions;
+            CheckBox vatExemptCheckBox = messagePanel.FindControl("VatExemptCheckBox") as CheckBox;
+            vatExemptCheckBox.Checked = specialInvoiceLine.VatExempt;
 
             ModalPopupExtender extender = row.FindControl("InvoiceDetailsPopupControlExtender") as ModalPopupExtender;
             extender.Show();

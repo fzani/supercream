@@ -2858,6 +2858,7 @@ namespace SPWCFServer
         private int _CustomerID;
         private int _AccountID;
         private int _OutletStoreID;
+        private int _VatCodeID;
         private short _AlphaPrefixOrPostFix;
         private string _AlphaID;
         private DateTime _OrderDate;
@@ -2921,6 +2922,20 @@ namespace SPWCFServer
             set
             {
                 _OutletStoreID = value;
+            }
+        }
+
+        [DataMember]
+        public int VatCodeID
+        {
+            get
+            {
+                return _VatCodeID;
+            }
+
+            set
+            {
+                _VatCodeID = value;
             }
         }
 
@@ -3083,6 +3098,7 @@ namespace SPWCFServer
         private decimal _Discount;
         private decimal _Price;
         private string _SpecialInstructions;
+        private bool _VatExempt;
 
         [DataMember]
         public int ID
@@ -3198,6 +3214,20 @@ namespace SPWCFServer
             set
             {
                 _SpecialInstructions = value;
+            }
+        }
+
+        [DataMember]
+        public bool VatExempt
+        {
+            get
+            {
+                return _VatExempt;
+            }
+
+            set
+            {
+                _VatExempt = value;
             }
         }
     }

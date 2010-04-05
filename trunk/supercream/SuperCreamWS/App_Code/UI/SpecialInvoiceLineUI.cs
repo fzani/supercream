@@ -60,6 +60,7 @@ public class SpecialInvoiceLineUI : IDisposable
             updatedSpecialInvoiceLine.Price = newSpecialInvoiceLine.Price;
             updatedSpecialInvoiceLine.QtyPerUnit = newSpecialInvoiceLine.QtyPerUnit;
             updatedSpecialInvoiceLine.SpecialInstructions = newSpecialInvoiceLine.SpecialInstructions;
+            updatedSpecialInvoiceLine.VatExempt = newSpecialInvoiceLine.VatExempt;
 
             _proxy.UpdateSpecialInvoiceLine(updatedSpecialInvoiceLine, origSpecialInvoiceLine);
         }

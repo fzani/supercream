@@ -16,6 +16,7 @@ namespace SP.Core.Domain
         private int _CustomerID;
         private int _AccountID;
         private int _OutletStoreID;
+        private int _VatCodeID;       
         private short _AlphaPrefixOrPostFix;
         private string _AlphaID;
         private DateTime _OrderDate;
@@ -75,6 +76,19 @@ namespace SP.Core.Domain
             set
             {
                 _CustomerID = value;
+            }
+        }
+
+        public int VatCodeID
+        {
+            get 
+            { 
+                return _VatCodeID; 
+            }
+            
+            set 
+            { 
+                _VatCodeID = value; 
             }
         }
 
