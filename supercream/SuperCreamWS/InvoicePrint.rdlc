@@ -12,13 +12,13 @@
   <InteractiveHeight>11in</InteractiveHeight>
   <rd:DrawGrid>true</rd:DrawGrid>
   <InteractiveWidth>8.5in</InteractiveWidth>
-  <rd:GridSpacing>0.25cm</rd:GridSpacing>
+  <rd:GridSpacing>0.1cm</rd:GridSpacing>
   <rd:SnapToGrid>true</rd:SnapToGrid>
-  <RightMargin>2.5cm</RightMargin>
-  <LeftMargin>2.5cm</LeftMargin>
-  <BottomMargin>2.5cm</BottomMargin>
+  <RightMargin>0.2cm</RightMargin>
+  <LeftMargin>0.2cm</LeftMargin>
+  <BottomMargin>0.2cm</BottomMargin>
   <rd:ReportID>4a61d46d-dcfb-45b7-8191-63a23270e129</rd:ReportID>
-  <PageWidth>21cm</PageWidth>
+  <PageWidth>8.27in</PageWidth>
   <DataSets>
     <DataSet Name="SuperCreamDBDataSet_rptGetOrderTotals">
       <Fields>
@@ -374,29 +374,171 @@
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
-  <Width>15.78968cm</Width>
+  <Code />
+  <Width>20.5cm</Width>
   <Body>
     <ColumnSpacing>1cm</ColumnSpacing>
     <ReportItems>
-      <Textbox Name="textbox51">
-        <rd:DefaultName>textbox51</rd:DefaultName>
-        <Width>6.24339cm</Width>
-        <Style>
-          <FontWeight>700</FontWeight>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
+      <Rectangle Name="rectangle7">
+        <Left>10.5cm</Left>
         <ZIndex>5</ZIndex>
-        <CanGrow>true</CanGrow>
-        <Left>0.25cm</Left>
-        <Height>0.5cm</Height>
-        <Value>Super Cream Invoice</Value>
-      </Textbox>
-      <Rectangle Name="rectangle5">
-        <Left>0.25cm</Left>
+        <ReportItems>
+          <Textbox Name="textbox15">
+            <Top>2.4cm</Top>
+            <Width>0.4cm</Width>
+            <ZIndex>10</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>4.6cm</Left>
+            <Height>0.4cm</Height>
+            <Value>or</Value>
+          </Textbox>
+          <Textbox Name="textbox18">
+            <rd:DefaultName>textbox18</rd:DefaultName>
+            <Top>2.8cm</Top>
+            <Width>3.75cm</Width>
+            <ZIndex>9</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>3.5cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!CompanyVatRegistrationNumber.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+          </Textbox>
+          <Textbox Name="textbox10">
+            <Top>2.8cm</Top>
+            <Width>3cm</Width>
+            <ZIndex>8</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.5cm</Left>
+            <Height>0.4cm</Height>
+            <Value>Vat Reg. Number</Value>
+          </Textbox>
+          <Table Name="table2">
+            <ZIndex>7</ZIndex>
+            <DataSetName>SuperCreamDBDataSet_rptGetFoundationFacilityAddressLines</DataSetName>
+            <Top>0.5cm</Top>
+            <Width>6.5cm</Width>
+            <Details>
+              <TableRows>
+                <TableRow>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="AddressLine_2">
+                          <rd:DefaultName>AddressLine_2</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!AddressLine.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                  <Height>0.4cm</Height>
+                </TableRow>
+              </TableRows>
+            </Details>
+            <TableColumns>
+              <TableColumn>
+                <Width>6.5cm</Width>
+              </TableColumn>
+            </TableColumns>
+            <Height>0.4cm</Height>
+            <Left>0.45cm</Left>
+          </Table>
+          <Textbox Name="textbox17">
+            <Top>2.4cm</Top>
+            <Width>3.6cm</Width>
+            <ZIndex>6</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>5cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!CompanyOfficePhoneNumber2.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+          </Textbox>
+          <Textbox Name="CompanyOfficePhoneNumber1">
+            <rd:DefaultName>CompanyOfficePhoneNumber1</rd:DefaultName>
+            <Top>2.4cm</Top>
+            <Width>2.9cm</Width>
+            <ZIndex>5</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>1.7cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!CompanyOfficePhoneNumber1.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+          </Textbox>
+          <Textbox Name="textbox14">
+            <rd:DefaultName>textbox14</rd:DefaultName>
+            <Top>2.4cm</Top>
+            <Width>1cm</Width>
+            <ZIndex>4</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.45cm</Left>
+            <Height>0.4cm</Height>
+            <Value>Tel</Value>
+          </Textbox>
+          <Textbox Name="textbox13">
+            <Top>2cm</Top>
+            <Width>6cm</Width>
+            <ZIndex>3</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.45cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!CompanyPostCode.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+          </Textbox>
+          <Textbox Name="textbox12">
+            <Top>1.5cm</Top>
+            <Width>6.5cm</Width>
+            <ZIndex>2</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.45cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!CompanyCounty.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+          </Textbox>
+          <Textbox Name="textbox11">
+            <Top>1cm</Top>
+            <Width>6.75cm</Width>
+            <ZIndex>1</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.45cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!CompanyTown.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+          </Textbox>
+          <Textbox Name="textbox9">
+            <Top>0.15cm</Top>
+            <Width>6.125cm</Width>
+            <Style>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <CanGrow>true</CanGrow>
+            <Left>0.45cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!CompanyName.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+          </Textbox>
+        </ReportItems>
+        <Top>1.6cm</Top>
+        <Width>9.8cm</Width>
+        <Height>3.5cm</Height>
+      </Rectangle>
+      <Rectangle Name="rectangle6">
+        <Left>0.2cm</Left>
         <ZIndex>4</ZIndex>
+        <ReportItems>
+          <Textbox Name="textbox51">
+            <rd:DefaultName>textbox51</rd:DefaultName>
+            <Top>0.2cm</Top>
+            <Width>7cm</Width>
+            <Style>
+              <FontSize>16pt</FontSize>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <CanGrow>true</CanGrow>
+            <Left>0.1cm</Left>
+            <Height>0.7cm</Height>
+            <Value>Super Cream Invoice</Value>
+          </Textbox>
+        </ReportItems>
+        <Top>1.6cm</Top>
+        <Width>10.1cm</Width>
+        <Height>3.5cm</Height>
+      </Rectangle>
+      <Rectangle Name="rectangle5">
+        <Left>0.3cm</Left>
+        <ZIndex>3</ZIndex>
         <ReportItems>
           <Textbox Name="textbox50">
             <rd:DefaultName>textbox50</rd:DefaultName>
@@ -409,177 +551,137 @@
               </BorderStyle>
               <FontStyle>Italic</FontStyle>
               <FontWeight>600</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <ZIndex>13</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>8.25cm</Left>
-            <Height>0.5cm</Height>
+            <Left>11.8cm</Left>
+            <Height>0.4cm</Height>
             <Value>Vat Analysis</Value>
           </Textbox>
           <Rectangle Name="rectangle3">
-            <Left>7.75cm</Left>
+            <Left>11.3cm</Left>
             <ZIndex>12</ZIndex>
             <ReportItems>
               <Textbox Name="textbox49">
-                <Top>2cm</Top>
+                <Top>1.75cm</Top>
                 <Width>1.25cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <Format>C</Format>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
                 <ZIndex>8</ZIndex>
                 <CanGrow>true</CanGrow>
                 <Left>5.5cm</Left>
-                <Height>0.63492cm</Height>
+                <Height>0.4cm</Height>
                 <Value>=Sum(Fields!VatTotal.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
               </Textbox>
               <Textbox Name="textbox48">
-                <Top>2cm</Top>
+                <Top>1.75cm</Top>
                 <Width>1.25cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <Format>C</Format>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
                 <ZIndex>7</ZIndex>
                 <CanGrow>true</CanGrow>
                 <Left>4cm</Left>
-                <Height>0.63492cm</Height>
+                <Height>0.4cm</Height>
                 <Value>=Sum(Fields!VatableTotal.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
               </Textbox>
               <Textbox Name="textbox47">
-                <Top>2cm</Top>
+                <Top>1.75cm</Top>
                 <Width>3.5cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
                 <ZIndex>6</ZIndex>
                 <CanGrow>true</CanGrow>
                 <Left>0.25cm</Left>
-                <Height>0.63492cm</Height>
+                <Height>0.4cm</Height>
                 <Value>="Vat Applied " &amp; "@" &amp; First(Fields!PercentageValue.Value, "SuperCreamDBDataSet_rptGetOrderTotals") &amp; "%"</Value>
               </Textbox>
               <Textbox Name="textbox46">
-                <Top>1.25cm</Top>
+                <Top>1cm</Top>
                 <Width>1.5cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <Format>C</Format>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
                 <ZIndex>5</ZIndex>
                 <CanGrow>true</CanGrow>
                 <Left>5.5cm</Left>
-                <Height>0.63492cm</Height>
+                <Height>0.4cm</Height>
                 <Value>0</Value>
               </Textbox>
               <Textbox Name="textbox45">
-                <Top>1.25cm</Top>
+                <Top>1cm</Top>
                 <Width>1.25cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <Format>C</Format>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
                 <ZIndex>4</ZIndex>
                 <CanGrow>true</CanGrow>
                 <Left>4cm</Left>
-                <Height>0.63492cm</Height>
+                <Height>0.4cm</Height>
                 <Value>=Sum(Fields!NonVatableTotal.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
               </Textbox>
               <Textbox Name="textbox44">
-                <Top>1.25cm</Top>
+                <Top>1cm</Top>
                 <Width>2cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
                 <ZIndex>3</ZIndex>
                 <CanGrow>true</CanGrow>
                 <Left>0.25cm</Left>
-                <Height>0.63492cm</Height>
+                <Height>0.4cm</Height>
                 <Value>ZER0</Value>
               </Textbox>
               <Textbox Name="textbox43">
-                <Top>0.5cm</Top>
+                <Top>0.25cm</Top>
                 <Width>1.5cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
                 <ZIndex>2</ZIndex>
                 <CanGrow>true</CanGrow>
                 <Left>5.5cm</Left>
-                <Height>0.63492cm</Height>
+                <Height>0.4cm</Height>
                 <Value>Vatable</Value>
               </Textbox>
               <Textbox Name="textbox42">
-                <Top>0.5cm</Top>
+                <Top>0.25cm</Top>
                 <Width>1.25cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
                 <ZIndex>1</ZIndex>
                 <CanGrow>true</CanGrow>
                 <Left>4cm</Left>
-                <Height>0.63492cm</Height>
+                <Height>0.4cm</Height>
                 <Value>Value</Value>
               </Textbox>
               <Textbox Name="textbox41">
-                <Top>0.5cm</Top>
+                <Top>0.25cm</Top>
                 <Width>2cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
                 <CanGrow>true</CanGrow>
                 <Left>0.25cm</Left>
-                <Height>0.63492cm</Height>
+                <Height>0.4cm</Height>
                 <Value>Vat Name</Value>
               </Textbox>
             </ReportItems>
-            <Top>0.5cm</Top>
+            <Top>1cm</Top>
             <Width>7.25cm</Width>
             <Style>
               <BorderStyle>
                 <Default>Solid</Default>
               </BorderStyle>
             </Style>
-            <Height>2.75cm</Height>
+            <Height>2.25cm</Height>
           </Rectangle>
           <Textbox Name="textbox37">
             <Top>5cm</Top>
@@ -587,15 +689,11 @@
             <Style>
               <Format>C</Format>
               <TextAlign>Right</TextAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <ZIndex>11</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>10.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>13.79999cm</Left>
+            <Height>0.4cm</Height>
             <Value>=Sum(Fields!NetTotal.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
           </Textbox>
           <Textbox Name="textbox38">
@@ -604,15 +702,11 @@
             <Style>
               <Format>C</Format>
               <TextAlign>Right</TextAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <ZIndex>10</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>10.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>13.79999cm</Left>
+            <Height>0.4cm</Height>
             <Value>=Sum(Fields!VatTotal.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
           </Textbox>
           <Textbox Name="textbox39">
@@ -621,15 +715,11 @@
             <Style>
               <Format>C</Format>
               <TextAlign>Right</TextAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <ZIndex>9</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>10.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>13.79999cm</Left>
+            <Height>0.4cm</Height>
             <Value>=Sum(Fields!Total.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
           </Textbox>
           <Textbox Name="textbox36">
@@ -637,15 +727,11 @@
             <Width>1.75cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <ZIndex>8</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>8cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>11.55cm</Left>
+            <Height>0.4cm</Height>
             <Value>Total</Value>
           </Textbox>
           <Textbox Name="textbox33">
@@ -653,15 +739,11 @@
             <Width>1.25cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <ZIndex>7</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>8cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>11.55cm</Left>
+            <Height>0.4cm</Height>
             <Value>Vat</Value>
           </Textbox>
           <Textbox Name="textbox30">
@@ -670,15 +752,11 @@
             <Width>1.75cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <ZIndex>6</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>8cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>11.55cm</Left>
+            <Height>0.4cm</Height>
             <Value>Net Total</Value>
           </Textbox>
           <Textbox Name="DeliveryDate">
@@ -687,15 +765,11 @@
             <Width>2.53968cm</Width>
             <Style>
               <Format>d</Format>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <ZIndex>5</ZIndex>
             <CanGrow>true</CanGrow>
             <Left>4.75cm</Left>
-            <Height>0.63492cm</Height>
+            <Height>0.4cm</Height>
             <Value>=First(Fields!DeliveryDate.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="textbox29">
@@ -704,31 +778,21 @@
             <Width>2.53968cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <ZIndex>4</ZIndex>
             <CanGrow>true</CanGrow>
             <Left>0.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Height>0.4cm</Height>
             <Value>Delivery Date</Value>
           </Textbox>
           <Textbox Name="textbox28">
             <rd:DefaultName>textbox28</rd:DefaultName>
             <Top>4.25cm</Top>
             <Width>2.5cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
             <ZIndex>3</ZIndex>
             <CanGrow>true</CanGrow>
             <Left>4.75cm</Left>
-            <Height>0.63492cm</Height>
+            <Height>0.4cm</Height>
             <Value>=Sum(Fields!NoOfUnits.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="textbox27">
@@ -737,21 +801,17 @@
             <Width>4.25cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <ZIndex>2</ZIndex>
             <CanGrow>true</CanGrow>
             <Left>0.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Height>0.4cm</Height>
             <Value>Total Units for Delivery</Value>
           </Textbox>
           <Textbox Name="SpecialInstructions">
             <rd:DefaultName>SpecialInstructions</rd:DefaultName>
-            <Top>1.25cm</Top>
-            <Width>6.5cm</Width>
+            <Top>1cm</Top>
+            <Width>8.95cm</Width>
             <Style>
               <BorderStyle>
                 <Default>Solid</Default>
@@ -769,35 +829,31 @@
           </Textbox>
           <Textbox Name="textbox26">
             <rd:DefaultName>textbox26</rd:DefaultName>
-            <Top>0.5cm</Top>
+            <Top>0.25cm</Top>
             <Width>3.75cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <CanGrow>true</CanGrow>
             <Left>0.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Height>0.4cm</Height>
             <Value>Special Instructions</Value>
           </Textbox>
         </ReportItems>
-        <Top>15cm</Top>
-        <Width>15.25cm</Width>
+        <Top>21.3cm</Top>
+        <Width>19.8cm</Width>
         <Style>
           <BorderStyle>
             <Default>Solid</Default>
           </BorderStyle>
         </Style>
-        <Height>6cm</Height>
+        <Height>5.75cm</Height>
       </Rectangle>
       <Table Name="table4">
-        <ZIndex>3</ZIndex>
+        <ZIndex>2</ZIndex>
         <DataSetName>SuperCreamDBDataSet_rptDetailsGetInvoice</DataSetName>
-        <Top>13.5cm</Top>
-        <Width>15.24919cm</Width>
+        <Top>9cm</Top>
+        <Width>19.95cm</Width>
         <Details>
           <TableRows>
             <TableRow>
@@ -812,10 +868,6 @@
                           <Bottom>Solid</Bottom>
                         </BorderStyle>
                         <TextAlign>Center</TextAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!NoOfUnits.Value</Value>
@@ -831,10 +883,6 @@
                           <Top>Solid</Top>
                           <Bottom>Solid</Bottom>
                         </BorderStyle>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!ProductDescription.Value</Value>
@@ -851,10 +899,6 @@
                           <Bottom>Solid</Bottom>
                         </BorderStyle>
                         <TextAlign>Center</TextAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!QtyPerUnit.Value</Value>
@@ -872,10 +916,6 @@
                         </BorderStyle>
                         <Format>C</Format>
                         <TextAlign>Center</TextAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!Price.Value</Value>
@@ -893,10 +933,6 @@
                         </BorderStyle>
                         <Format>C</Format>
                         <TextAlign>Right</TextAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!RRPPerItem.Value</Value>
@@ -912,10 +948,6 @@
                           <Top>Solid</Top>
                           <Bottom>Solid</Bottom>
                         </BorderStyle>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>=iif(Fields!VatExempt.Value, "Y", "N")</Value>
@@ -933,10 +965,6 @@
                         </BorderStyle>
                         <Format>C</Format>
                         <TextAlign>Center</TextAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>=Round(Fields!NoOfUnits.Value * Fields!Price.Value,2)</Value>
@@ -944,7 +972,7 @@
                   </ReportItems>
                 </TableCell>
               </TableCells>
-              <Height>0.63492cm</Height>
+              <Height>0.4cm</Height>
             </TableRow>
           </TableRows>
         </Details>
@@ -967,10 +995,6 @@
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
                         <TextAlign>Left</TextAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>No Of Units</Value>
@@ -986,10 +1010,6 @@
                           <Default>Solid</Default>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>Prod. Description</Value>
@@ -1005,10 +1025,6 @@
                           <Default>Solid</Default>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>Qty per unit</Value>
@@ -1024,10 +1040,6 @@
                           <Default>Solid</Default>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>Price per unit</Value>
@@ -1043,10 +1055,6 @@
                           <Default>Solid</Default>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>RRP </Value>
@@ -1062,10 +1070,6 @@
                           <Default>Solid</Default>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>Vat Exempt</Value>
@@ -1081,10 +1085,6 @@
                           <Default>Solid</Default>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>Net Price</Value>
@@ -1092,124 +1092,96 @@
                   </ReportItems>
                 </TableCell>
               </TableCells>
-              <Height>0.63492cm</Height>
+              <Height>0.4cm</Height>
             </TableRow>
           </TableRows>
         </Header>
         <TableColumns>
           <TableColumn>
-            <Width>2.1cm</Width>
+            <Width>2.74736cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>3.25cm</Width>
+            <Width>4.25187cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>2.21371cm</Width>
+            <Width>2.89612cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>2.5cm</Width>
+            <Width>3.27067cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>1.25cm</Width>
+            <Width>1.63533cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>2.21371cm</Width>
+            <Width>2.89612cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>1.72177cm</Width>
+            <Width>2.25253cm</Width>
           </TableColumn>
         </TableColumns>
-        <Height>1.26984cm</Height>
+        <Height>0.8cm</Height>
         <Left>0.25cm</Left>
       </Table>
-      <Rectangle Name="rectangle4">
+      <Rectangle Name="rectangle2">
         <Left>0.25cm</Left>
-        <ZIndex>2</ZIndex>
+        <ZIndex>1</ZIndex>
         <ReportItems>
-          <Textbox Name="textbox21">
-            <Top>2.75cm</Top>
-            <Width>6.5cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>7</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>8.25cm</Left>
-            <Height>0.63492cm</Height>
-            <Value>=First(Fields!OutletStorePostCode.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
-          </Textbox>
-          <Textbox Name="textbox20">
-            <Top>2.00992cm</Top>
-            <Width>6.5cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>6</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>8.25cm</Left>
-            <Height>0.63492cm</Height>
-            <Value>=First(Fields!OutletStoreCounty.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
-          </Textbox>
-          <Textbox Name="OutletStoreTown">
-            <rd:DefaultName>OutletStoreTown</rd:DefaultName>
-            <Top>1.25cm</Top>
-            <Width>6.5cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>5</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>8.25cm</Left>
-            <Height>0.63492cm</Height>
-            <Value>=First(Fields!OutletStoreTown.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
-          </Textbox>
           <Textbox Name="OutletStoreMapReference">
             <rd:DefaultName>OutletStoreMapReference</rd:DefaultName>
-            <Top>2.75cm</Top>
+            <Top>2.6cm</Top>
             <Width>2.53968cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>4</ZIndex>
+            <ZIndex>16</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>4cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>13.5cm</Left>
+            <Height>0.4cm</Height>
             <Value>=First(Fields!OutletStoreMapReference.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="textbox19">
             <rd:DefaultName>textbox19</rd:DefaultName>
-            <Top>2.75cm</Top>
-            <Width>3.5cm</Width>
+            <Top>2.6cm</Top>
+            <Width>2.7cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
-            <ZIndex>3</ZIndex>
+            <ZIndex>15</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>0.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>10.8cm</Left>
+            <Height>0.4cm</Height>
             <Value>Map Reference</Value>
           </Textbox>
+          <Textbox Name="textbox21">
+            <Top>2.2cm</Top>
+            <Width>5cm</Width>
+            <ZIndex>14</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>10.8cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!OutletStorePostCode.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+          </Textbox>
+          <Textbox Name="textbox20">
+            <Top>1.8cm</Top>
+            <Width>4.9cm</Width>
+            <ZIndex>13</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>10.8cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!OutletStoreCounty.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+          </Textbox>
+          <Textbox Name="OutletStoreTown">
+            <rd:DefaultName>OutletStoreTown</rd:DefaultName>
+            <Top>1.4cm</Top>
+            <Width>6.5cm</Width>
+            <ZIndex>12</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>10.8cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!OutletStoreTown.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+          </Textbox>
           <Table Name="table3">
-            <ZIndex>2</ZIndex>
+            <ZIndex>11</ZIndex>
             <DataSetName>SuperCreamDBDataSet_rptGetDeliveryAddressLines</DataSetName>
-            <Top>2cm</Top>
-            <Width>7.25cm</Width>
+            <Top>1cm</Top>
+            <Width>6.7cm</Width>
             <Details>
               <TableRows>
                 <TableRow>
@@ -1218,394 +1190,104 @@
                       <ReportItems>
                         <Textbox Name="AddressLine_1">
                           <rd:DefaultName>AddressLine_1</rd:DefaultName>
-                          <Style>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
                           <CanGrow>true</CanGrow>
                           <Value>=Fields!AddressLine.Value</Value>
                         </Textbox>
                       </ReportItems>
                     </TableCell>
                   </TableCells>
-                  <Height>0.63492cm</Height>
+                  <Height>0.4cm</Height>
                 </TableRow>
               </TableRows>
             </Details>
             <TableColumns>
               <TableColumn>
-                <Width>7.25cm</Width>
+                <Width>6.7cm</Width>
               </TableColumn>
             </TableColumns>
-            <Height>0.63492cm</Height>
-            <Left>0.25cm</Left>
+            <Height>0.4cm</Height>
+            <Left>10.8cm</Left>
           </Table>
-          <Textbox Name="OutletStoreName">
-            <rd:DefaultName>OutletStoreName</rd:DefaultName>
-            <Top>1.25cm</Top>
-            <Width>5.25cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>1</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>0.25cm</Left>
-            <Height>0.63492cm</Height>
-            <Value>=First(Fields!OutletStoreName.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
-          </Textbox>
-          <Textbox Name="textbox16">
-            <rd:DefaultName>textbox16</rd:DefaultName>
-            <Top>0.25cm</Top>
-            <Width>3.5cm</Width>
-            <Style>
-              <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <CanGrow>true</CanGrow>
-            <Left>0.25cm</Left>
-            <Height>0.75cm</Height>
-            <Value>Delivery Address</Value>
-          </Textbox>
-        </ReportItems>
-        <Top>9.5cm</Top>
-        <Width>15.25cm</Width>
-        <Style>
-          <BorderStyle>
-            <Default>Solid</Default>
-          </BorderStyle>
-        </Style>
-        <Height>3.75cm</Height>
-      </Rectangle>
-      <Rectangle Name="rectangle2">
-        <Left>0.25cm</Left>
-        <ZIndex>1</ZIndex>
-        <ReportItems>
-          <Textbox Name="textbox18">
-            <rd:DefaultName>textbox18</rd:DefaultName>
-            <Top>5.5cm</Top>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>20</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>11.5cm</Left>
-            <Height>0.63492cm</Height>
-            <Value>=First(Fields!CompanyVatRegistrationNumber.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
-          </Textbox>
-          <Textbox Name="textbox10">
-            <Top>5.5cm</Top>
-            <Width>3cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>19</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>8.25cm</Left>
-            <Height>0.63492cm</Height>
-            <Value>Vat Reg. Number</Value>
-          </Textbox>
-          <Table Name="table2">
-            <ZIndex>18</ZIndex>
-            <DataSetName>SuperCreamDBDataSet_rptGetFoundationFacilityAddressLines</DataSetName>
-            <Top>1cm</Top>
-            <Width>6.5cm</Width>
-            <Details>
-              <TableRows>
-                <TableRow>
-                  <TableCells>
-                    <TableCell>
-                      <ReportItems>
-                        <Textbox Name="AddressLine_2">
-                          <rd:DefaultName>AddressLine_2</rd:DefaultName>
-                          <Style>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                          <CanGrow>true</CanGrow>
-                          <Value>=Fields!AddressLine.Value</Value>
-                        </Textbox>
-                      </ReportItems>
-                    </TableCell>
-                  </TableCells>
-                  <Height>0.63492cm</Height>
-                </TableRow>
-              </TableRows>
-            </Details>
-            <TableColumns>
-              <TableColumn>
-                <Width>6.5cm</Width>
-              </TableColumn>
-            </TableColumns>
-            <Height>0.63492cm</Height>
-            <Left>8.25cm</Left>
-          </Table>
-          <Line Name="line1">
-            <Width>0cm</Width>
-            <Style>
-              <BorderStyle>
-                <Default>Solid</Default>
-              </BorderStyle>
-            </Style>
-            <ZIndex>17</ZIndex>
-            <Left>7.5cm</Left>
-            <Height>6.25cm</Height>
-          </Line>
-          <Textbox Name="textbox17">
-            <Top>4.75cm</Top>
-            <Width>4.5cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>16</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>9.5cm</Left>
-            <Height>0.63492cm</Height>
-            <Value>=First(Fields!CompanyOfficePhoneNumber2.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
-          </Textbox>
-          <Textbox Name="CompanyOfficePhoneNumber1">
-            <rd:DefaultName>CompanyOfficePhoneNumber1</rd:DefaultName>
-            <Top>4cm</Top>
-            <Width>4.5cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>15</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>9.5cm</Left>
-            <Height>0.63492cm</Height>
-            <Value>=First(Fields!CompanyOfficePhoneNumber1.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
-          </Textbox>
-          <Textbox Name="textbox15">
-            <Top>4.75cm</Top>
-            <Width>1cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>14</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>8.25cm</Left>
-            <Height>0.63492cm</Height>
-            <Value>or</Value>
-          </Textbox>
-          <Textbox Name="textbox14">
-            <rd:DefaultName>textbox14</rd:DefaultName>
-            <Top>4cm</Top>
-            <Width>1cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>13</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>8.25cm</Left>
-            <Height>0.63492cm</Height>
-            <Value>Tel</Value>
-          </Textbox>
-          <Textbox Name="textbox13">
-            <Top>3.25cm</Top>
-            <Width>6cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>12</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>8.25cm</Left>
-            <Height>0.63492cm</Height>
-            <Value>=First(Fields!CompanyPostCode.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
-          </Textbox>
-          <Textbox Name="textbox12">
-            <Top>2.5cm</Top>
-            <Width>6.5cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>11</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>8.25cm</Left>
-            <Height>0.63492cm</Height>
-            <Value>=First(Fields!CompanyCounty.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
-          </Textbox>
-          <Textbox Name="textbox11">
-            <Top>1.75cm</Top>
-            <Width>6.75cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>10</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>8.25cm</Left>
-            <Height>0.63492cm</Height>
-            <Value>=First(Fields!CompanyTown.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
-          </Textbox>
-          <Textbox Name="textbox9">
-            <Top>0.25cm</Top>
-            <Width>6.125cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>9</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>8.25cm</Left>
-            <Height>0.63492cm</Height>
-            <Value>=First(Fields!CompanyName.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
-          </Textbox>
           <Textbox Name="AccountPhoneNumber">
             <rd:DefaultName>AccountPhoneNumber</rd:DefaultName>
-            <Top>4.75cm</Top>
+            <Top>2.8cm</Top>
             <Width>3cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>8</ZIndex>
+            <ZIndex>10</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>4.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>3.7cm</Left>
+            <Height>0.4cm</Height>
             <Value>=First(Fields!AccountPhoneNumber.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="textbox8">
             <rd:DefaultName>textbox8</rd:DefaultName>
-            <Top>4.75cm</Top>
+            <Top>2.7cm</Top>
             <Width>2.53968cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
-            <ZIndex>7</ZIndex>
+            <ZIndex>9</ZIndex>
             <CanGrow>true</CanGrow>
             <Left>0.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Height>0.4cm</Height>
             <Value>Tel No</Value>
           </Textbox>
           <Textbox Name="textbox7">
             <rd:DefaultName>textbox7</rd:DefaultName>
-            <Top>4cm</Top>
+            <Top>2.3cm</Top>
             <Width>2.75cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>6</ZIndex>
+            <ZIndex>8</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>4.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>3.7cm</Left>
+            <Height>0.4cm</Height>
             <Value>=First(Fields!FirstName.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice") &amp; " " &amp; First(Fields!LastName.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="textbox6">
             <rd:DefaultName>textbox6</rd:DefaultName>
-            <Top>4cm</Top>
+            <Top>2.3cm</Top>
             <Width>3.5cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
-            <ZIndex>5</ZIndex>
+            <ZIndex>7</ZIndex>
             <CanGrow>true</CanGrow>
             <Left>0.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Height>0.4cm</Height>
             <Value>For the attention of </Value>
           </Textbox>
           <Textbox Name="InvoiceAddressPostCode">
             <rd:DefaultName>InvoiceAddressPostCode</rd:DefaultName>
-            <Top>3.25cm</Top>
+            <Top>1.9cm</Top>
             <Width>5.5cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>4</ZIndex>
+            <ZIndex>6</ZIndex>
             <CanGrow>true</CanGrow>
             <Left>0.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Height>0.4cm</Height>
             <Value>=First(Fields!InvoiceAddressPostCode.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="InvoiceAddressCounty">
             <rd:DefaultName>InvoiceAddressCounty</rd:DefaultName>
-            <Top>2.5cm</Top>
+            <Top>1.5cm</Top>
             <Width>6.75cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>3</ZIndex>
+            <ZIndex>5</ZIndex>
             <CanGrow>true</CanGrow>
             <Left>0.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Height>0.4cm</Height>
             <Value>=First(Fields!InvoiceAddressCounty.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="InvoiceAddressTown">
             <rd:DefaultName>InvoiceAddressTown</rd:DefaultName>
-            <Top>1.75cm</Top>
+            <Top>1.1cm</Top>
             <Width>7cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-            <ZIndex>2</ZIndex>
+            <ZIndex>4</ZIndex>
             <CanGrow>true</CanGrow>
             <Left>0.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Height>0.4cm</Height>
             <Value>=First(Fields!InvoiceAddressTown.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Table Name="table1">
-            <ZIndex>1</ZIndex>
+            <ZIndex>3</ZIndex>
             <DataSetName>SuperCreamDBDataSet_rptGetAddressLinesForInvoice</DataSetName>
-            <Top>1cm</Top>
+            <Top>0.7cm</Top>
             <Width>6.75cm</Width>
             <Details>
               <TableRows>
@@ -1615,19 +1297,13 @@
                       <ReportItems>
                         <Textbox Name="AddressLine">
                           <rd:DefaultName>AddressLine</rd:DefaultName>
-                          <Style>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
                           <CanGrow>true</CanGrow>
                           <Value>=Fields!AddressLine.Value</Value>
                         </Textbox>
                       </ReportItems>
                     </TableCell>
                   </TableCells>
-                  <Height>0.63492cm</Height>
+                  <Height>0.4cm</Height>
                 </TableRow>
               </TableRows>
             </Details>
@@ -1636,7 +1312,7 @@
                 <Width>6.75cm</Width>
               </TableColumn>
             </TableColumns>
-            <Height>0.63492cm</Height>
+            <Height>0.4cm</Height>
             <Left>0.25cm</Left>
           </Table>
           <Textbox Name="textbox5">
@@ -1645,212 +1321,184 @@
             <Width>3cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
+            <ZIndex>2</ZIndex>
             <CanGrow>true</CanGrow>
             <Left>0.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Height>0.4cm</Height>
             <Value>Invoice Adress</Value>
           </Textbox>
+          <Textbox Name="textbox16">
+            <rd:DefaultName>textbox16</rd:DefaultName>
+            <Top>0.2cm</Top>
+            <Width>3.5cm</Width>
+            <Style>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <ZIndex>1</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>10.8cm</Left>
+            <Height>0.4cm</Height>
+            <Value>Delivery Address</Value>
+          </Textbox>
+          <Textbox Name="OutletStoreName">
+            <rd:DefaultName>OutletStoreName</rd:DefaultName>
+            <Top>0.6cm</Top>
+            <Width>5.25cm</Width>
+            <CanGrow>true</CanGrow>
+            <Left>10.8cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!OutletStoreName.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+          </Textbox>
         </ReportItems>
-        <Top>2.75cm</Top>
-        <Width>15.25cm</Width>
+        <Top>5.3cm</Top>
+        <Width>20.05cm</Width>
         <Style>
           <BorderStyle>
             <Default>Solid</Default>
           </BorderStyle>
         </Style>
-        <Height>6.38492cm</Height>
+        <Height>3.5cm</Height>
       </Rectangle>
       <Rectangle Name="rectangle1">
-        <Left>0.25cm</Left>
+        <Left>0.2cm</Left>
         <ReportItems>
           <Textbox Name="textbox40">
             <Visibility>
               <Hidden>=iif(First(Fields!DeliveryNoteNo.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice") Is Nothing, true, false)</Hidden>
             </Visibility>
-            <Top>1cm</Top>
+            <Top>0.7cm</Top>
             <Width>2.5cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
             <ZIndex>9</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>8.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>12.1cm</Left>
+            <Height>0.4cm</Height>
             <Value>="/ " &amp; First(Fields!DeliveryNoteNo.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="DeliveryNoteTextBox">
             <Visibility>
               <Hidden>=iif(First(Fields!DeliveryNoteNo.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice") Is Nothing, true, false)</Hidden>
             </Visibility>
-            <Top>0.25cm</Top>
+            <Top>0.1cm</Top>
             <Width>2.53968cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <ZIndex>8</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>8.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>12.1cm</Left>
+            <Height>0.4cm</Height>
             <Value>="/ Delivery No"</Value>
           </Textbox>
           <Textbox Name="VanDescription">
             <rd:DefaultName>VanDescription</rd:DefaultName>
-            <Top>1cm</Top>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
+            <Top>0.7cm</Top>
+            <Width>3.5cm</Width>
             <ZIndex>7</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>11.75cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>16.2cm</Left>
+            <Height>0.4cm</Height>
             <Value>=First(Fields!VanDescription.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="InvoiceNo">
             <rd:DefaultName>InvoiceNo</rd:DefaultName>
-            <Top>1cm</Top>
+            <Top>0.7cm</Top>
             <Width>2cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
             <ZIndex>6</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>6.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>10.1cm</Left>
+            <Height>0.4cm</Height>
             <Value>=First(Fields!InvoiceNo.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="PaymentTerms">
             <rd:DefaultName>PaymentTerms</rd:DefaultName>
-            <Top>1cm</Top>
+            <Top>0.7cm</Top>
             <Width>3cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
             <ZIndex>5</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>3cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>5cm</Left>
+            <Height>0.4cm</Height>
             <Value>=First(Fields!PaymentTerms.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="OrderDate">
             <rd:DefaultName>OrderDate</rd:DefaultName>
-            <Top>1cm</Top>
+            <Top>0.7cm</Top>
             <Width>2.53968cm</Width>
             <Style>
               <Format>d</Format>
               <TextAlign>Left</TextAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <ZIndex>4</ZIndex>
             <CanGrow>true</CanGrow>
             <Left>0.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Height>0.4cm</Height>
             <Value>=First(Fields!OrderDate.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="textbox4">
             <rd:DefaultName>textbox4</rd:DefaultName>
-            <Top>0.25cm</Top>
+            <Top>0.1cm</Top>
             <Width>2.53968cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <ZIndex>3</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>11.75cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>16.2cm</Left>
+            <Height>0.4cm</Height>
             <Value>Delivery Van</Value>
           </Textbox>
           <Textbox Name="textbox3">
             <rd:DefaultName>textbox3</rd:DefaultName>
-            <Top>0.25cm</Top>
+            <Top>0.1cm</Top>
             <Width>2cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <ZIndex>2</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>6.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>10.1cm</Left>
+            <Height>0.4cm</Height>
             <Value>Invoice No</Value>
           </Textbox>
           <Textbox Name="textbox2">
             <rd:DefaultName>textbox2</rd:DefaultName>
-            <Top>0.25cm</Top>
+            <Top>0.1cm</Top>
             <Width>3cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <ZIndex>1</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>3cm</Left>
-            <Height>0.63492cm</Height>
+            <Left>5cm</Left>
+            <Height>0.4cm</Height>
             <Value>Payment Terms</Value>
           </Textbox>
           <Textbox Name="textbox1">
             <rd:DefaultName>textbox1</rd:DefaultName>
-            <Top>0.25cm</Top>
+            <Top>0.1cm</Top>
             <Width>2.53968cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
             <CanGrow>true</CanGrow>
             <Left>0.25cm</Left>
-            <Height>0.63492cm</Height>
+            <Height>0.4cm</Height>
             <Value>Date of Order</Value>
           </Textbox>
         </ReportItems>
-        <Top>0.75cm</Top>
-        <Width>15.25cm</Width>
+        <Top>0.1cm</Top>
+        <Width>20.1cm</Width>
         <Style>
           <BorderStyle>
             <Default>Solid</Default>
           </BorderStyle>
         </Style>
-        <Height>1.75cm</Height>
+        <Height>1.3cm</Height>
       </Rectangle>
     </ReportItems>
-    <Height>21.25cm</Height>
+    <Height>27.5cm</Height>
   </Body>
   <Language>en-GB</Language>
-  <TopMargin>2.5cm</TopMargin>
-  <PageHeight>29.7cm</PageHeight>
+  <TopMargin>0.2cm</TopMargin>
+  <PageHeight>11.69in</PageHeight>
 </Report>

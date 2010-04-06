@@ -113,10 +113,10 @@ namespace SP.Utils
                     " <OutputFormat>EMF</OutputFormat>" +
                     " <PageWidth>21cm</PageWidth>" +
                     " <PageHeight>29.7cm</PageHeight>" +
-                    " <MarginTop>2.5cm</MarginTop>" +
-                    " <MarginLeft>2.5cm</MarginLeft>" +
-                    " <MarginRight>2.5cm</MarginRight>" +
-                    " <MarginBottom>2.5cm</MarginBottom>" +
+                    " <MarginTop>0.2cm</MarginTop>" +
+                    " <MarginLeft>0.2cm</MarginLeft>" +
+                    " <MarginRight>0.2cm</MarginRight>" +
+                    " <MarginBottom>0.2cm</MarginBottom>" +
                     "</DeviceInfo>";
             }
             else
@@ -126,10 +126,10 @@ namespace SP.Utils
                    " <OutputFormat>EMF</OutputFormat>" +
                    " <PageWidth>29.7cm</PageWidth>" +
                    " <PageHeight>21cm</PageHeight>" +
-                   " <MarginTop>2.5cm</MarginTop>" +
-                   " <MarginLeft>2.5cm</MarginLeft>" +
-                   " <MarginRight>2.5cm</MarginRight>" +
-                   " <MarginBottom>2.5cm</MarginBottom>" +
+                   " <MarginTop>0.2cm</MarginTop>" +
+                   " <MarginLeft>0.2cm</MarginLeft>" +
+                   " <MarginRight>0.2cm</MarginRight>" +
+                   " <MarginBottom>0.2cm</MarginBottom>" +
                    "</DeviceInfo>";
             }
 
