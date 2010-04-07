@@ -388,7 +388,7 @@
             <Width>0.4cm</Width>
             <ZIndex>10</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>4.6cm</Left>
+            <Left>3.9cm</Left>
             <Height>0.4cm</Height>
             <Value>or</Value>
           </Textbox>
@@ -447,14 +447,14 @@
             <Width>3.6cm</Width>
             <ZIndex>6</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>5cm</Left>
+            <Left>4.3cm</Left>
             <Height>0.4cm</Height>
             <Value>=First(Fields!CompanyOfficePhoneNumber2.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="CompanyOfficePhoneNumber1">
             <rd:DefaultName>CompanyOfficePhoneNumber1</rd:DefaultName>
             <Top>2.4cm</Top>
-            <Width>2.9cm</Width>
+            <Width>2.2cm</Width>
             <ZIndex>5</ZIndex>
             <CanGrow>true</CanGrow>
             <Left>1.7cm</Left>
@@ -568,6 +568,7 @@
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <Format>C</Format>
+                  <TextAlign>Left</TextAlign>
                 </Style>
                 <ZIndex>8</ZIndex>
                 <CanGrow>true</CanGrow>
@@ -688,7 +689,7 @@
             <Width>3.75cm</Width>
             <Style>
               <Format>C</Format>
-              <TextAlign>Right</TextAlign>
+              <TextAlign>Left</TextAlign>
             </Style>
             <ZIndex>11</ZIndex>
             <CanGrow>true</CanGrow>
@@ -701,7 +702,7 @@
             <Width>3.75cm</Width>
             <Style>
               <Format>C</Format>
-              <TextAlign>Right</TextAlign>
+              <TextAlign>Left</TextAlign>
             </Style>
             <ZIndex>10</ZIndex>
             <CanGrow>true</CanGrow>
@@ -714,7 +715,7 @@
             <Width>3.75cm</Width>
             <Style>
               <Format>C</Format>
-              <TextAlign>Right</TextAlign>
+              <TextAlign>Left</TextAlign>
             </Style>
             <ZIndex>9</ZIndex>
             <CanGrow>true</CanGrow>
@@ -765,6 +766,7 @@
             <Width>2.53968cm</Width>
             <Style>
               <Format>d</Format>
+              <TextAlign>Left</TextAlign>
             </Style>
             <ZIndex>5</ZIndex>
             <CanGrow>true</CanGrow>
@@ -789,6 +791,9 @@
             <rd:DefaultName>textbox28</rd:DefaultName>
             <Top>4.25cm</Top>
             <Width>2.5cm</Width>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
             <ZIndex>3</ZIndex>
             <CanGrow>true</CanGrow>
             <Left>4.75cm</Left>
@@ -883,6 +888,7 @@
                           <Top>Solid</Top>
                           <Bottom>Solid</Bottom>
                         </BorderStyle>
+                        <TextAlign>Left</TextAlign>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!ProductDescription.Value</Value>
@@ -932,7 +938,7 @@
                           <Bottom>Solid</Bottom>
                         </BorderStyle>
                         <Format>C</Format>
-                        <TextAlign>Right</TextAlign>
+                        <TextAlign>Center</TextAlign>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!RRPPerItem.Value</Value>
@@ -948,6 +954,7 @@
                           <Top>Solid</Top>
                           <Bottom>Solid</Bottom>
                         </BorderStyle>
+                        <TextAlign>Center</TextAlign>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>=iif(Fields!VatExempt.Value, "Y", "N")</Value>
@@ -976,11 +983,6 @@
             </TableRow>
           </TableRows>
         </Details>
-        <Style>
-          <BorderStyle>
-            <Default>Solid</Default>
-          </BorderStyle>
-        </Style>
         <Header>
           <TableRows>
             <TableRow>
@@ -991,10 +993,10 @@
                       <rd:DefaultName>textbox22</rd:DefaultName>
                       <Style>
                         <BorderStyle>
-                          <Default>Solid</Default>
+                          <Bottom>Solid</Bottom>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
-                        <TextAlign>Left</TextAlign>
+                        <TextAlign>Center</TextAlign>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>No Of Units</Value>
@@ -1007,7 +1009,7 @@
                       <rd:DefaultName>textbox23</rd:DefaultName>
                       <Style>
                         <BorderStyle>
-                          <Default>Solid</Default>
+                          <Bottom>Solid</Bottom>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
                       </Style>
@@ -1022,9 +1024,10 @@
                       <rd:DefaultName>textbox24</rd:DefaultName>
                       <Style>
                         <BorderStyle>
-                          <Default>Solid</Default>
+                          <Bottom>Solid</Bottom>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>Qty per unit</Value>
@@ -1037,9 +1040,10 @@
                       <rd:DefaultName>textbox31</rd:DefaultName>
                       <Style>
                         <BorderStyle>
-                          <Default>Solid</Default>
+                          <Bottom>Solid</Bottom>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>Price per unit</Value>
@@ -1052,9 +1056,10 @@
                       <rd:DefaultName>textbox34</rd:DefaultName>
                       <Style>
                         <BorderStyle>
-                          <Default>Solid</Default>
+                          <Bottom>Solid</Bottom>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>RRP </Value>
@@ -1067,9 +1072,10 @@
                       <rd:DefaultName>textbox25</rd:DefaultName>
                       <Style>
                         <BorderStyle>
-                          <Default>Solid</Default>
+                          <Bottom>Solid</Bottom>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>Vat Exempt</Value>
@@ -1082,9 +1088,10 @@
                       <rd:DefaultName>textbox32</rd:DefaultName>
                       <Style>
                         <BorderStyle>
-                          <Default>Solid</Default>
+                          <Bottom>Solid</Bottom>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                       </Style>
                       <CanGrow>true</CanGrow>
                       <Value>Net Price</Value>
