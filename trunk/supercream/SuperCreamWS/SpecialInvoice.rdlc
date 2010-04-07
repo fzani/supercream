@@ -349,7 +349,7 @@
         <CanGrow>true</CanGrow>
         <Left>14cm</Left>
         <Height>0.4cm</Height>
-        <Value>=Sum(Fields!Total.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceTotals") + Sum(Fields!VatableTotal.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceTotals") + Sum(Fields!VatTotal.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceTotals")</Value>
+        <Value>=Sum(Fields!NetTotal.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceTotals")</Value>
       </Textbox>
       <Textbox Name="textbox30">
         <Top>26.9cm</Top>
@@ -386,7 +386,7 @@
         <CanGrow>true</CanGrow>
         <Left>14cm</Left>
         <Height>0.4cm</Height>
-        <Value>=Sum(Fields!Total.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceTotals") + Sum(Fields!VatableTotal.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceTotals")</Value>
+        <Value>=Sum(Fields!Total.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceTotals")</Value>
       </Textbox>
       <Textbox Name="textbox26">
         <rd:DefaultName>textbox26</rd:DefaultName>
@@ -475,7 +475,7 @@
             <CanGrow>true</CanGrow>
             <Left>3.8cm</Left>
             <Height>0.4cm</Height>
-            <Value>=Sum(Fields!Total.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceTotals")</Value>
+            <Value>=Sum(Fields!NonVatableTotal.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceTotals")</Value>
           </Textbox>
           <Textbox Name="textbox24">
             <rd:DefaultName>textbox24</rd:DefaultName>
@@ -1105,7 +1105,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                       <CanGrow>true</CanGrow>
-                      <Value>=Fields!VatExempt.Value</Value>
+                      <Value>=iif(Fields!VatExempt.Value = true, "Y", "N")</Value>
                     </Textbox>
                   </ReportItems>
                 </TableCell>
@@ -1287,6 +1287,22 @@
       <Rectangle Name="rectangle2">
         <ZIndex>2</ZIndex>
         <ReportItems>
+          <Textbox Name="textbox33">
+            <Top>0.7cm</Top>
+            <Width>3.8cm</Width>
+            <Style>
+              <FontSize>14pt</FontSize>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+            <ZIndex>2</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>2.2cm</Left>
+            <Height>0.75cm</Height>
+            <Value>=First(Fields!InvoiceNo.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceDetails")</Value>
+          </Textbox>
           <Textbox Name="CompanyName">
             <rd:DefaultName>CompanyName</rd:DefaultName>
             <Top>0.1cm</Top>
@@ -1307,7 +1323,7 @@
           <Textbox Name="textbox1">
             <rd:DefaultName>textbox1</rd:DefaultName>
             <Top>0.7cm</Top>
-            <Width>4cm</Width>
+            <Width>2cm</Width>
             <Style>
               <FontSize>14pt</FontSize>
               <PaddingLeft>2pt</PaddingLeft>
