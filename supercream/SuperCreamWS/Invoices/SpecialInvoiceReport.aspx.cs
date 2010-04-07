@@ -12,9 +12,11 @@ public partial class Invoices_SpecialInvoiceReport : System.Web.UI.Page
         if (!IsPostBack)
         {
             IReportDataSets IReportDataSet = new SpecialInvoiceReportDataSets();
-            int specialInvoiceId = 304;
-            int accountId = 404;
-            int outletStoreId = 200;
+
+            SP.Util.UrlParameterPasser p = new SP.Util.UrlParameterPasser();
+            int specialInvoiceId = Convert.ToInt32(p["id"]);
+            int accountId = Convert.ToInt32(p["accountId"]);
+            int outletStoreId = Convert.ToInt32(p["outletStore"]);
 
             Microsoft.Reporting.WebForms.ReportDataSource[] reportDataSets = IReportDataSet.GetReportDataSets(specialInvoiceId, accountId, outletStoreId);
          

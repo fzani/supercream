@@ -89,6 +89,15 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
 
     #region General Event handlers
 
+    protected void PrintButton_Click(object sender, EventArgs e)
+    {
+        SP.Util.UrlParameterPasser p = new SP.Util.UrlParameterPasser("~/Invoices/SPecialInvoiceReport.aspx");
+        p["id"] = this.SpecialInvoiceID.ToString();
+        p["outletStore"] = this.OutletStoreDropDownList.SelectedValue;
+        p["accountId"] = this.AccountDropDownList.SelectedValue;
+        p.PassParameters();
+    }
+
     protected void SearchButton_Click(object sender, EventArgs e)
     {
         DataBind();
@@ -623,6 +632,5 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
         headerUI.Update(header);
     }
 
-    #endregion
-  
+    #endregion   
 }

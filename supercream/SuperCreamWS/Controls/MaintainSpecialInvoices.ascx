@@ -262,6 +262,13 @@
                                 OnClick="CancelNewOrderButton_Click" />
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <asp:Button ID="PrintButton" Text="Print" Width="200px" runat="server" onclick="PrintButton_Click" />
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
                 </table>
             </asp:Panel>
             <asp:Panel ID="AddSpecialInvoiceLineDetailsPanel" runat="server">
@@ -361,8 +368,9 @@
                                 OnClick="CancelSpecialInvoiceLineButton_Click1"></asp:LinkButton>
                             <asp:LinkButton ID="CalculateButton" Text="Calculate" runat="server" OnClick="CalculateButton_Click1">
                             </asp:LinkButton>
+                        </td>
+                    </tr>
                 </table>
-                </td> </tr> </table>
             </asp:Panel>
             <asp:Panel ID="SpecialInvoiceLinesGridViewPanel" runat="server">
                 <fieldset id="Fieldset1">
@@ -525,8 +533,7 @@
                             </td>
                         </tr>
                     </table>
-                </fieldset>
-            </asp:Panel>
+                </fieldset></asp:Panel>
         </fieldset>
     </div>
 </asp:Panel>
