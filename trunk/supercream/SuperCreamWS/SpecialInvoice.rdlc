@@ -446,15 +446,12 @@
           <Textbox Name="PercentageValue">
             <rd:DefaultName>PercentageValue</rd:DefaultName>
             <Top>2.1cm</Top>
-            <Width>2.53968cm</Width>
-            <Style>
-              <Format>P</Format>
-            </Style>
+            <Width>2.7cm</Width>
             <ZIndex>6</ZIndex>
             <CanGrow>true</CanGrow>
             <Left>0.7cm</Left>
             <Height>0.4cm</Height>
-            <Value>=First(Fields!PercentageValue.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceTotals")</Value>
+            <Value>="Vat @ " &amp; First(Fields!PercentageValue.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceTotals") &amp; "%"</Value>
           </Textbox>
           <Textbox Name="textbox25">
             <rd:DefaultName>textbox25</rd:DefaultName>

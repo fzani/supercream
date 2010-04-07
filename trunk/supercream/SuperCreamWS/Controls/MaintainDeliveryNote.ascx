@@ -11,7 +11,7 @@
             <table class="search">
                 <tr>
                     <td class="right">
-                        <table class="left">                           
+                        <table class="left">
                             <tr>
                                 <td>
                                     <asp:Label ID="OrderNoLabel" Text="Order No" runat="server"></asp:Label>
@@ -94,7 +94,7 @@
                                     <asp:LinkButton ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
                                         OnClick="ClearButton_Click" />
                                 </td>
-                            </tr>
+                            </tr>                           
                         </table>
                     </td>
                 </tr>
@@ -244,7 +244,7 @@
                                 OnClick="CreateInvoiceButton_Click" />
                             <asp:Button ID="PrintDeliveryNoteButton" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 Visible="false" Text="Print Delivery Note" runat="server" OnClick="PrintDeliveryNoteButton_Click" />
-                            <asp:Button ID="RePrintDeliveryButton"  ValidationGroup="ModifyInvoiceDetailsGroup"
+                            <asp:Button ID="RePrintDeliveryButton" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 Visible="false" Text="RePrint Delivery Note" runat="server" />
                             <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
                             <asp:Button ID="btnOKTrigger" runat="server" Style="display: none" />
