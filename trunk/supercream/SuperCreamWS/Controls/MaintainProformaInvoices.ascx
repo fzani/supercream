@@ -291,7 +291,7 @@
                             <asp:Button ID="ConvertToInvoiceButton" Text="Convert to Invoice" runat="server" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 OnClick="ConvertToInvoice_Click" Visible="false" />
                             <asp:Button ID="CancelInvoiceButton" ValidationGroup="ModifyInvoiceDetailsGroup"
-                                Visible="false" Text="Cancel Invoice" runat="server" OnClick="CancelInvoiceButton_Click" />
+                                Visible="false" Text="Revert to Order" runat="server" OnClick="CancelInvoiceButton_Click" />
                             <asp:Button ID="PrintInvoiceButton" ValidationGroup="ModifyInvoiceDetailsGroup" Visible="false"
                                 Text="Print Proforma Invoice" runat="server" OnClick="PrintInvoiceButton_Click" />
                             <asp:Button ID="RePrintInvoiceButton" ValidationGroup="ModifyInvoiceDetailsGroup"
