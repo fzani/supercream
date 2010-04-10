@@ -239,7 +239,7 @@
                             <asp:Button ID="ChangeDeliveryNoteDetailsButton" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 Visible="false" Text="Change Delivery Note Details" runat="server" OnClick="ChangeDeliveryNoteDetailsButton_Click" />
                             <asp:Button ID="CancelDeliveryNoteButton" ValidationGroup="ModifyInvoiceDetailsGroup"
-                                Visible="false" Text="Cancel Delivery Note" runat="server" OnClick="CancelInvoiceButton_Click" />
+                                Visible="false" Text="Revert to Order" runat="server" OnClick="CancelInvoiceButton_Click" />
                             <asp:Button ID="CreateInvoiceButton" Text="Create Invoice" runat="server" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 OnClick="CreateInvoiceButton_Click" />
                             <asp:Button ID="PrintDeliveryNoteButton" ValidationGroup="ModifyInvoiceDetailsGroup"
