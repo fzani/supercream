@@ -48,8 +48,9 @@ public class SpecialInvoiceHeaderUI : IDisposable
             updatedSpecialInvoice.ID = newSpecialInvoice.ID;
             updatedSpecialInvoice.OrderDate = newSpecialInvoice.OrderDate;
             updatedSpecialInvoice.DeliveryDate = newSpecialInvoice.DeliveryDate;
-            updatedSpecialInvoice.OrderStatus = (short)originalSpecialInvoice.OrderStatus;
-            updatedSpecialInvoice.SpecialInstructions = newSpecialInvoice.SpecialInstructions;           
+            updatedSpecialInvoice.OrderStatus = (short)newSpecialInvoice.OrderStatus;
+            updatedSpecialInvoice.SpecialInstructions = newSpecialInvoice.SpecialInstructions;
+            updatedSpecialInvoice.ReasonForVoiding = newSpecialInvoice.ReasonForVoiding;
             updatedSpecialInvoice.DateModified = newSpecialInvoice.DateModified;          
 
             _proxy.UpdateSpecialInvoiceHeader(updatedSpecialInvoice, originalSpecialInvoice);

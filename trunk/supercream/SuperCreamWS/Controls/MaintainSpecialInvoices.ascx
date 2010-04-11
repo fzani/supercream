@@ -258,13 +258,45 @@
                         <td colspan="2">
                             <asp:LinkButton ID="AddOrderLineDetailsButton" runat="server" ValidationGroup="AddOrderDetailsGroup"
                                 Text="Add Invoice Line Details" OnClick="AddOrderLineDetailsButton_Click" />
-                            <asp:LinkButton ID="Button1" CausesValidation="false" runat="server" Text="| Cancel"
+                            <asp:LinkButton ID="Button1" CausesValidation="false" runat="server" Text="| Cancel | "
                                 OnClick="CancelNewOrderButton_Click" />
+                            <asp:LinkButton ID="DeleteOrderButton" CausesValidation="false" runat="server" Text="Void Order Details"
+                                OnClick="GetVoidSpecialInvoiceReasonButton_Click" />
+                            <asp:Button ID="btnTrigger1" runat="server" Style="display: none" />
+                            <ajaxToolkit:ModalPopupExtender ID="ReasonForVoidingPopupExtenderInvoice" DropShadow="true"
+                                runat="server" TargetControlID="btnTrigger1" PopupControlID="ReasonForVoidingPanelMessage"
+                                CancelControlID="CancelReasonorVoidingButton" BackgroundCssClass="XPopUpBackGround" />
+                            <asp:Panel Style="display: none" DefaultButton="ReasonforVoidingButton" Width="700px"
+                                ID="ReasonForVoidingPanelMessage" runat="server" CssClass="modalPopup">
+                                <table>
+                                    <tr>
+                                        <td style="width: 30%">
+                                            <h3>
+                                                Reason for Voiding Order</h3>
+                                        </td>
+                                        <td>
+                                            <asp:TextBox ID="ReasonforVoidingTextBox" Width="100%" Height="300px" TextMode="MultiLine"
+                                                runat="server" ValidationGroup="VoidOrderDetailsGroup"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1ReasonForVoiding" Display="Dynamic"
+                                                ValidationGroup="VoidOrderDetailsGroup" ControlToValidate="ReasonforVoidingTextBox"
+                                                InitialValue="" ErrorMessage="Invoice to is a required Field" Text="*" runat="server" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Button ID="ReasonforVoidingButton" CoommandArgument='<%# SpecialInvoiceID %>'
+                                                Text="Void Order" runat="server" OnClick="VoidOrderButton_Click" ValidationGroup="VoidOrderDetailsGroup" />
+                                            <asp:Button ID="CancelReasonorVoidingButton" Text="Cancel" CausesValidation="false"
+                                                runat="server" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="PrintButton" Text="Print" Width="200px" runat="server" onclick="PrintButton_Click" />
+                            <asp:Button ID="PrintButton" Text="Print" Width="200px" runat="server" OnClick="PrintButton_Click" />
                         </td>
                         <td>
                         </td>
@@ -533,7 +565,8 @@
                             </td>
                         </tr>
                     </table>
-                </fieldset></asp:Panel>
+                </fieldset>
+            </asp:Panel>
         </fieldset>
     </div>
 </asp:Panel>
