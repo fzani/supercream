@@ -109,6 +109,23 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
         DataBind();
     }
 
+    protected void GetVoidSpecialInvoiceReasonButton_Click(object sender, EventArgs e)
+    {
+        ReasonForVoidingPopupExtenderInvoice.Show();
+    }
+
+    protected void VoidOrderButton_Click(object sender, EventArgs e)
+    {
+        Panel p = ReasonForVoidingPanelMessage.FindControl("ReasonForVoidingPanelMessage") as Panel;
+        TextBox reasonForVoidingTextBox = p.FindControl("ReasonforVoidingTextBox") as TextBox;
+        UpdateSpecialInvoiceHeaderForVoiding(reasonForVoidingTextBox.Text);
+
+        this.ChangeState += new EventHandler<EventArgs>(CancelOrderState);
+        this.ChangeState(this, e);
+
+        DataBind();
+    }
+
     protected void OrderStatusDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
 
@@ -121,7 +138,7 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
             decimal discount = 0;
 
             if (this.DiscountTextBox.Text.Length != 0)
-                discount = Convert.ToDecimal(this.DiscountTextBox.Text);           
+                discount = Convert.ToDecimal(this.DiscountTextBox.Text);
 
             SpecialInvoiceLineUI ui = new SpecialInvoiceLineUI();
             SpecialInvoiceLine specialInvoiceLine = new SpecialInvoiceLine
@@ -157,7 +174,7 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
                 this.ModifySpecialInvoiceError(this, args);
             }
         }
-    }   
+    }
 
     protected void CancelSpecialInvoiceLineButton_Click(object sender, EventArgs e)
     {
@@ -182,7 +199,7 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
                 this.ModifySpecialInvoiceError(this, args);
             }
         }
-    }    
+    }
 
     protected void SpecialInvoicesSearchGridView_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -194,7 +211,7 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
         this.ChangeState += new EventHandler<EventArgs>(AddOrderLineState);
         this.ChangeState(this, e);
     }
-    
+
     protected void CancelNewOrderButton_Click(object sender, EventArgs e)
     {
         this.ChangeState += new EventHandler<EventArgs>(CancelOrderState);
@@ -302,8 +319,8 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
         try
         {
             GridViewRow row = this.AddSpecialInvoiceLinesGridViewPanel.Rows[this.AddSpecialInvoiceLinesGridViewPanel.SelectedIndex];
-            Panel messagePanel = row.FindControl("PanelMessage") as Panel;          
-           
+            Panel messagePanel = row.FindControl("PanelMessage") as Panel;
+
             Label idLabel = row.FindControl("ID") as Label;
 
             SpecialInvoiceLineUI ui = new SpecialInvoiceLineUI();
@@ -432,7 +449,7 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
             CustomerUI customerUI = new CustomerUI();
             Customer customer = customerUI.GetByID(Convert.ToInt32(CustomerDropDownList.SelectedValue));
 
-            SpecialInvoiceHeaderUI ui = new SpecialInvoiceHeaderUI();           
+            SpecialInvoiceHeaderUI ui = new SpecialInvoiceHeaderUI();
 
             SpecialInvoiceHeader specialInvoiceHeader = new SpecialInvoiceHeader
             {
@@ -632,5 +649,17 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
         headerUI.Update(header);
     }
 
-    #endregion   
+    private void UpdateSpecialInvoiceHeaderForVoiding(string reasonForVoiding)
+    {
+        SpecialInvoiceHeaderUI headerUI = new SpecialInvoiceHeaderUI();
+        SpecialInvoiceHeader header = headerUI.GetById(this.SpecialInvoiceID);
+
+        header.DateModified = DateTime.Now;
+        header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Void;
+        header.ReasonForVoiding = reasonForVoiding;
+
+        headerUI.Update(header);
+    }
+
+    #endregion
 }
