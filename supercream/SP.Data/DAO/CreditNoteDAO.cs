@@ -24,6 +24,19 @@ namespace SP.Data.LTS
         {
         }
 
+        public string GenerateCreditNo()
+        {
+            if (db.SpecialInvoiceHeader.FirstOrDefault() == null)
+            {
+                return "CRN-1";
+            }
+            else
+            {
+                int maxInvoiceNo = (int)db.CreditNote.Select(q => Convert.ToInt32(q.Reference.Substring(4, q.Reference.Length - 4))).Max();
+                return "CRN-" + (maxInvoiceNo + 1).ToString();
+            }
+        }
+
         public override CreditNote GetById(int id)
         {
             return db.CreditNote.Single<CreditNote>(q => q.ID == id);

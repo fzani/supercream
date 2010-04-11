@@ -20,6 +20,7 @@ namespace SP.Core.DataInterfaces
            DateTime dateFrom, 
            DateTime dateTo);
 
+       string GenerateCreditNo();
        InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID);
        bool CreditNoteExistsByOrderId(int orderId);
        bool ReferenceExists(string referenceNo);

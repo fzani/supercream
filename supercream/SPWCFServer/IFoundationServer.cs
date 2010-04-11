@@ -1214,6 +1214,7 @@ namespace SPWCFServer
         private string _Reason;
         private DateTime _DateCreated;
         private string _Reference;
+        private bool _VatExempt;
 
         [DataMember]
         public int ID
@@ -1292,6 +1293,20 @@ namespace SPWCFServer
             set
             {
                 _Reference = value;
+            }
+        }
+
+        [DataMember]
+        public bool VatExempt
+        {
+            get
+            {
+                return _VatExempt;
+            }
+
+            set
+            {
+                _VatExempt = value;
             }
         }
     }
@@ -2866,6 +2881,7 @@ namespace SPWCFServer
         private short _OrderStatus;
         private string _SpecialInstructions;
         private string _InvoiceNo;
+        private string _ReasonForVoiding;
         private DateTime _DatePrinted;
         private DateTime _DateReprinted;
         private DateTime _DateCreated;
@@ -3082,6 +3098,19 @@ namespace SPWCFServer
             set
             {
                 _DateModified = value;
+            }
+        }
+
+        [DataMember]
+        public string ReasonForVoiding
+        {
+            get
+            {
+                return _ReasonForVoiding;
+            }
+            set
+            {
+                _ReasonForVoiding = value;
             }
         }
     }

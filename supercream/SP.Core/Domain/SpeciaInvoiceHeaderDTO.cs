@@ -16,7 +16,7 @@ namespace SP.Core.Domain
         private int _CustomerID;
         private int _AccountID;
         private int _OutletStoreID;
-        private int _VatCodeID;       
+        private int _VatCodeID;
         private short _AlphaPrefixOrPostFix;
         private string _AlphaID;
         private DateTime _OrderDate;
@@ -28,6 +28,7 @@ namespace SP.Core.Domain
         private DateTime _DateReprinted;
         private DateTime _DateCreated;
         private DateTime _DateModified;
+        private string _ReasonForVoiding;
 
         public override int ID
         {
@@ -81,14 +82,14 @@ namespace SP.Core.Domain
 
         public int VatCodeID
         {
-            get 
-            { 
-                return _VatCodeID; 
+            get
+            {
+                return _VatCodeID;
             }
-            
-            set 
-            { 
-                _VatCodeID = value; 
+
+            set
+            {
+                _VatCodeID = value;
             }
         }
 
@@ -211,6 +212,18 @@ namespace SP.Core.Domain
             set
             {
                 _InvoiceNo = value;
+            }
+        }
+
+        public string ReasonForVoiding
+        {
+            get
+            {
+                return _ReasonForVoiding;
+            }
+            set
+            {
+                _ReasonForVoiding = value;
             }
         }
     }

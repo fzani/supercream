@@ -89,9 +89,9 @@
                                 <td>
                                 </td>
                                 <td>
-                                    <asp:Button ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
-                                        OnClick="SearchButton_Click" />
-                                    <asp:Button ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
+                                    <asp:LinkButton ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
+                                        OnClick="SearchButton_Click" /> | 
+                                    <asp:LinkButton ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
                                         OnClick="ClearButton_Click" />
                                 </td>
                             </tr>
@@ -113,7 +113,7 @@
                 <Columns>
                     <asp:TemplateField ItemStyle-Width="15%" ShowHeader="False">
                         <ItemTemplate>
-                            <asp:Button ID="SelectButton" runat="server" CausesValidation="false" CommandName="Select"
+                            <asp:LinkButton ID="SelectButton" runat="server" CausesValidation="false" CommandName="Select"
                                 CommandArgument='<%# Bind("ID") %>' Text="Select" />
                         </ItemTemplate>
                         <ItemStyle Width="15%" />
