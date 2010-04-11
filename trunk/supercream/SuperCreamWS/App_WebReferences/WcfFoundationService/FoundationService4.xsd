@@ -427,6 +427,7 @@
       <xs:element minOccurs="0" name="OrderID" type="xs:int" />
       <xs:element minOccurs="0" name="Reason" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Reference" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VatExempt" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CreditNote" nillable="true" type="tns:CreditNote" />

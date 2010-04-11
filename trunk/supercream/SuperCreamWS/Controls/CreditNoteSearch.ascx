@@ -84,9 +84,9 @@
                                 <td>
                                 </td>
                                 <td>
-                                    <asp:Button ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
-                                        OnClick="SearchButton_Click" />
-                                    <asp:Button ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
+                                    <asp:LinkButton ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
+                                        OnClick="SearchButton_Click" /> |
+                                    <asp:LinkButton ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
                                         OnClick="ClearButton_Click" />
                                 </td>
                             </tr>
@@ -124,7 +124,7 @@
                         SortExpression="CreditNoteID" Visible="false" />
                     <asp:TemplateField ItemStyle-Width="20%">
                         <ItemTemplate>
-                            <asp:Button ID="EditCreditNoteButton" runat="server" CommandArgument='<%# Bind("CreditNoteID") %>'
+                            <asp:LinkButton ID="EditCreditNoteButton" runat="server" CommandArgument='<%# Bind("CreditNoteID") %>'
                                 CommandName="EditCreditNote" ControlStyle-CssClass="button" ItemStyle-Width="20%"
                                 Text="Select" />
                         </ItemTemplate>

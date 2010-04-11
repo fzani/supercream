@@ -1,10 +1,13 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SaveCreditNoteControl.ascx.cs"
     Inherits="Controls_SaveCreditNoteControl" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
-
 <div class="FormInput">
     <fieldset id="Fieldset3">
         <asp:Panel ID="CreditNoteSavePanel" DefaultButton="SaveButton" runat="server">
+            <h2>
+                Credit Note &nbsp;
+                <asp:Label ID="creditNoteLabel" Text="<>" runat="server"></asp:Label>
+            </h2>
             <legend>
                 <h3>
                     Save Credit Note</h3>
@@ -26,15 +29,7 @@
                         <asp:Label ID="InvoiceAmountCreditedLabel" runat="server" />
                     </td>
                 </tr>
-                 <tr>
-                    <td>
-                       Credit Note Reference No.
-                    </td>
-                    <td>
-                        <asp:TextBox ID="CreditNoteReferenceTextBox" Width="50%" MaxLength="20" runat="server" />
-                    </td>
-                </tr>
-                 <tr>
+                <tr>
                     <td>
                         Invoice Amount available to be credited
                     </td>
@@ -50,10 +45,17 @@
                         <asp:TextBox ID="AmountToCreditTextBox" runat="server" MaxLength="8" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="SaveCreditNoteGroup"
                             ControlToValidate="AmountToCreditTextBox" ErrorMessage="Amount to credit is a required field"
-                            InitialValue="" Text="Required" runat="server" />                                                                                                              
-                        <ajaxToolkit:FilteredTextBoxExtender  TargetControlID="AmountToCreditTextBox" FilterType="Custom, Numbers"
+                            InitialValue="" Text="Required" runat="server" />
+                        <ajaxToolkit:FilteredTextBoxExtender TargetControlID="AmountToCreditTextBox" FilterType="Custom, Numbers"
                             ValidChars="£,." runat="server" />
-
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Vat Exempt
+                    </td>
+                    <td>
+                        <asp:CheckBox ID="VatExemptCheckBox" runat="server" MaxLength="8" />
                     </td>
                 </tr>
                 <tr>
@@ -62,9 +64,9 @@
                     </td>
                     <td>
                         <asp:TextBox ID="ReasonTextBox" Width="90%" Rows="6" TextMode="MultiLine" runat="server" />
-                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="SaveCreditNoteGroup"
-                            ControlToValidate="ReasonTextBox" ErrorMessage="Reason is a required field"
-                            InitialValue="" Text="Required" runat="server" />                 
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="SaveCreditNoteGroup"
+                            ControlToValidate="ReasonTextBox" ErrorMessage="Reason is a required field" InitialValue=""
+                            Text="Required" runat="server" />
                     </td>
                 </tr>
                 <tr>
@@ -72,9 +74,9 @@
                     </td>
                     <td>
                         <asp:Button ID="SaveButton" runat="server" ValidationGroup="SaveCreditNoteGroup"
-                            Text="Save" Width="20%" onclick="SaveButton_Click" />
+                            Text="Save" Width="20%" OnClick="SaveButton_Click" />
                         <asp:Button ID="DeleteButton" runat="server" ValidationGroup="SaveCreditNoteGroup"
-                            Text="Delete" Width="20%" onclick="DeleteButton_Click" />
+                            Text="Delete" Width="20%" OnClick="DeleteButton_Click" />
                     </td>
                 </tr>
             </table>

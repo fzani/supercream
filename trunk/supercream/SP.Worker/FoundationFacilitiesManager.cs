@@ -259,6 +259,7 @@ namespace SP.Worker
             ICreditNoteDao validateNoteDao = factory.GetCreditNoteDao();
             if (validateNoteDao.ReferenceExists(creditnote.Reference))
                 throw new ApplicationException("Cannot add credit note Credit Reference is alreasy in use");
+            creditnote.Reference = creditNoteDao.GenerateCreditNo();
 
             return creditNoteDao.Save(creditnote);
         }
