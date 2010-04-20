@@ -1,7 +1,21 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <TestRunConfiguration name="Local Test Run" id="c0eac942-9381-41df-a390-355507443d5b" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
   <Description>This is a default test run configuration for a local test run.</Description>
-  <Deployment enabled="false">
+  <CodeCoverage enabled="true">
+    <Regular>
+      <CodeCoverageItem binaryFile="SP.Core\bin\Debug\SP.Core.dll" pdbFile="SP.Core\bin\Debug\SP.Core.pdb" instrumentInPlace="true" />
+      <CodeCoverageItem binaryFile="SP.Data\bin\Debug\SP.Data.dll" pdbFile="SP.Data\bin\Debug\SP.Data.pdb" instrumentInPlace="true" />
+      <CodeCoverageItem binaryFile="SP.Utils\bin\Debug\SP.Utils.dll" pdbFile="SP.Utils\bin\Debug\SP.Utils.pdb" instrumentInPlace="true" />
+      <CodeCoverageItem binaryFile="SP.Worker\bin\Debug\SP.Worker.dll" pdbFile="SP.Worker\bin\Debug\SP.Worker.pdb" instrumentInPlace="true" />
+      <CodeCoverageItem binaryFile="TestSP.Data\bin\Debug\TestSP.Data.dll" pdbFile="TestSP.Data\bin\Debug\TestSP.Data.pdb" instrumentInPlace="true" />
+    </Regular>
+    <AspNet>
+      <AspNetCodeCoverageItem id="6359a152-40c5-4b8e-9aeb-d320bce13584" name="SPWCFServer" applicationRoot="/" url="http://localhost:0/" />
+      <AspNetCodeCoverageItem id="4d865e68-53c9-4e7b-a38b-3e070652e773" name="SuperCreamReportsWS" applicationRoot="/" url="http://localhost:0/" />
+      <AspNetCodeCoverageItem id="ffff15a1-1851-44c3-be18-ae7f5a264810" name="SuperCreamWS" applicationRoot="/SuperCreamWS" url="http://localhost:0/SuperCreamWS" />
+    </AspNet>
+  </CodeCoverage>
+  <Deployment>
     <DeploymentItem filename="TestSP.Data\App_Data\" />
   </Deployment>
   <TestTypeSpecific>

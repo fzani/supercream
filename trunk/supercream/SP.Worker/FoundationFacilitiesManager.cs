@@ -226,7 +226,8 @@ namespace SP.Worker
         {
             IDaoFactory factory = new LTSDaoFactory();
             ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
-            return creditNoteDao.GetInvoiceCreditDetails(orderID);
+            decimal vatRatePercentage = GetStandardVatRatePercentageValue();
+            return creditNoteDao.GetInvoiceCreditDetails(orderID, vatRatePercentage);
         }
 
         public void DeleteCreditNote(CreditNote creditnote)
@@ -1498,6 +1499,20 @@ namespace SP.Worker
 
             return orderHeaderDao.GenerateDeliveryNoteNo();
         }
+
+        private static decimal GetStandardVatRatePercentageValue()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IStandardVatRateDao standardVatCodeDao = factory.GetStandardVatRateDao();
+
+            StandardVatRate standardVatRate = standardVatCodeDao.Get();
+
+            IVatCodeDao vatCodeDao = factory.GetVatCodeDao();
+            VatCode vatCode = vatCodeDao.GetById(standardVatRate.VatCodeID);
+
+            return Convert.ToDecimal(vatCode.PercentageValue);
+        }
+
 
         #endregion
     }
