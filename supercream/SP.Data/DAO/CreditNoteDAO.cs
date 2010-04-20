@@ -118,11 +118,15 @@ namespace SP.Data.LTS
             return filteredCreditNotes;
         }
 
-        public InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderNo)
+        public InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderNo, decimal vatRate)
         {
+            vatRate += 1;
+
             var invoiceTotal = Math.Round((from o in db.OrderHeader
                                            join ol in db.OrderLine on o.ID equals ol.OrderID
-                                           select ol.Price * ol.NoOfUnits).Sum(), 2);
+                                           join p in db.Product on ol.ProductID equals p.ID
+                                           where o.ID == orderNo
+                                           select (p.VatExempt ? (ol.Price * ol.NoOfUnits) : (ol.Price * ol.NoOfUnits * vatRate))).Sum(),2);
 
             decimal creditTotal = new decimal(0.0);
             

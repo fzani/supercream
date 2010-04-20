@@ -21,7 +21,7 @@ namespace SP.Core.DataInterfaces
            DateTime dateTo);
 
        string GenerateCreditNo();
-       InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID);
+       InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID, decimal vatRate);
        bool CreditNoteExistsByOrderId(int orderId);
        bool ReferenceExists(string referenceNo);
        CreditNote GetByReferenceId(string reference);
