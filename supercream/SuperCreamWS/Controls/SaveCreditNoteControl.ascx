@@ -14,16 +14,16 @@
             </legend>
             <table style="width: 100%">
                 <tr>
-                    <td style="width: 30%">
+                    <td style="width: 40%">
                         Total Invoice Amount
                     </td>
-                    <td style="width: 70%">
+                    <td style="width: 60%">
                         <asp:Label ID="TotalInvoiceAmountLabel" runat="server" />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        Invoice Amount so far credited
+                        Invoice Amount so far credited (incl Vat.)
                     </td>
                     <td>
                         <asp:Label ID="InvoiceAmountCreditedLabel" runat="server" />

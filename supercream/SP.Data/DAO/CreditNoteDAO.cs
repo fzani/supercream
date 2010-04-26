@@ -120,31 +120,65 @@ namespace SP.Data.LTS
 
         public InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderNo, decimal vatRate)
         {
-            vatRate += 1;
+            vatRate = (vatRate / 100) + 1;
 
             var invoiceTotal = Math.Round((from o in db.OrderHeader
                                            join ol in db.OrderLine on o.ID equals ol.OrderID
                                            join p in db.Product on ol.ProductID equals p.ID
                                            where o.ID == orderNo
-                                           select (p.VatExempt ? (ol.Price * ol.NoOfUnits) : (ol.Price * ol.NoOfUnits * vatRate))).Sum(),2);
+                                           select (p.VatExempt ? (ol.Price * ol.NoOfUnits) : (ol.Price * ol.NoOfUnits * vatRate))).Sum(), 2);
 
             decimal creditTotal = new decimal(0.0);
-            
-            var creditNotes = db.CreditNote.Where(q => q.OrderID == orderNo).DefaultIfEmpty<CreditNote>();           
+
+            var creditNotes = db.CreditNote.Where(q => q.OrderID == orderNo).DefaultIfEmpty<CreditNote>();
             if (creditNotes.First() != null)
             {
-                creditTotal = Math.Round((from o in db.CreditNote
-                                          where o.OrderID == orderNo
-                                          select o.CreditAmount).Sum(), 2);
+                creditTotal = Math.Round((from cr in db.CreditNote
+                                          where cr.OrderID == orderNo
+                                          select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * vatRate)).Sum(), 2);
             }
 
             return new InvoiceCreditNoteDetails
             {
                 OrderID = orderNo,
                 TotalInvoiceAmount = invoiceTotal,
-                TotalAmountCredited = creditTotal,
+                TotalAmountCredited = creditTotal, // inclusing vat
                 Balance = (invoiceTotal - creditTotal)
             };
-        }            
-   }
+        }
+
+        public decimal GetOustandingCreditNoteBalance(int orderNo, int creditNote, decimal vatRate)
+        {
+            vatRate = (vatRate / 100) + 1;
+
+            var creditTotal = new decimal(0.0);
+
+            var creditNotes = db.CreditNote.Where(q => q.OrderID == orderNo).DefaultIfEmpty<CreditNote>();
+            if (creditNotes.First() != null)
+            {
+                var crCount = db.CreditNote.Where(q => q.OrderID == orderNo).Count();
+                if (crCount > 1)
+                {
+                    if (creditNote != -1)
+                    {
+
+                        creditTotal = Math.Round(((from cr in db.CreditNote
+                                                   where ((cr.OrderID == orderNo) && (cr.ID != creditNote))
+                                                   select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * vatRate))).
+                                                     Sum(),
+                                                 2);
+                    }
+                    else
+                    {
+                        creditTotal = Math.Round((from cr in db.CreditNote
+                                                  where (cr.OrderID == orderNo)
+                                                  select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * vatRate)).Sum
+                                                     (),
+                                                 2);
+                    }
+                }
+            }
+            return creditTotal;
+        }
+    }
 }

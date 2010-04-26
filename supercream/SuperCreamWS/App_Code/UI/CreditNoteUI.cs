@@ -13,6 +13,13 @@ using System.Transactions;
 
 using WcfFoundationService;
 
+public struct creditNote
+{
+    static creditNote()
+    {
+        throw new NotImplementedException();
+    }
+}
 /// <summary>
 /// Summary description for OrderListUI
 /// </summary>
@@ -76,7 +83,7 @@ public class CreditNoteUI : IDisposable
     }
 
     public bool CreditNoteExists(int orderId)
-    { 
+    {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
             return _proxy.CreditNoteExistsByOrderId(orderId);
@@ -96,6 +103,14 @@ public class CreditNoteUI : IDisposable
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
             _proxy.DeleteCreditNote(creditNote);
+        }
+    }
+
+    public decimal GetOustandingCreditBalance(int orderNo, int creditNote, decimal vatRate)
+    {
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return _proxy.GetOustandingCreditNoteBalance(orderNo, creditNote, vatRate);
         }
     }
 

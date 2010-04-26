@@ -119,27 +119,40 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
     protected void SaveButton_Click(object sender, EventArgs e)
     {
         try
-        {
-            decimal creditAmount = 0;
-
+        {          
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
             OrderHeader orderHeader = orderHeaderUI.GetById(this.OrderID.Value);
+
+            CreditNoteUI creditNoteUI = new CreditNoteUI();
+            invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(this.OrderID.Value);
+
             VatCodeUI vatCodeUI = new VatCodeUI();
             VatCode vatCode = vatCodeUI.GetByID(orderHeader.VatCodeID);
+           
+            var currentCreditAmount = String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ? new decimal(0.0) :
+                String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ? new decimal(0.0) : Util.ConvertStringToDecimal(this.AmountToCreditTextBox.Text);
 
-            if (this.VatExemptCheckBox.Checked)
+            // Get oustanding credit already applied
+            decimal oustandingCreditedAmount;
+            if (this.IsNewCreditNote.Value)
             {
-                creditAmount = String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ? new decimal(0.0) : (Util.ConvertStringToDecimal(this.AmountToCreditTextBox.Text)
-                       + (Util.ConvertStringToDecimal(this.AmountToCreditTextBox.Text) * (decimal)vatCode.PercentageValue));
+                oustandingCreditedAmount =
+                    creditNoteUI.GetOustandingCreditBalance(this.OrderID.Value, -1, new decimal(vatCode.PercentageValue));
             }
             else
             {
-                creditAmount = String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ? new decimal(0.0) : Util.ConvertStringToDecimal(this.AmountToCreditTextBox.Text);
+                oustandingCreditedAmount =
+                    creditNoteUI.GetOustandingCreditBalance(this.OrderID.Value, this.CreditNoteID.Value, new decimal(vatCode.PercentageValue));
             }
 
-            if ((Util.ConvertStringToDecimal(this.TotalInvoiceAmountLabel.Text) - Util.ConvertStringToDecimal(this.AmountToCreditTextBox.Text) - creditAmount) < 0)
+            // Check that we are not crediting too much
+            decimal totalAmountThatWillBeCredited = Util.ConvertStringToDecimal(this.TotalInvoiceAmountLabel.Text) -
+                                  oustandingCreditedAmount -
+                                  this.CalculateCreditAmount(currentCreditAmount, new decimal(vatCode.PercentageValue));
+            if(totalAmountThatWillBeCredited < 0)
                 throw new ApplicationException("Cannot credit for more than the invoicable amount");
 
+            // Persist credit note details
             CreditNoteUI ui = new CreditNoteUI();
             if (this.IsNewCreditNote.Value)
             {
@@ -147,7 +160,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
                 {
                     ID = -1,
                     OrderID = this.OrderID.Value,
-                    CreditAmount = creditAmount,
+                    CreditAmount = currentCreditAmount,
                     DateCreated = DateTime.Now,
                     Reason = this.ReasonTextBox.Text,                  
                     VatExempt = this.VatExemptCheckBox.Checked
@@ -160,7 +173,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
                 {
                     ID = CreditNoteID.Value,
                     OrderID = creditNote.OrderID,
-                    CreditAmount = creditAmount,
+                    CreditAmount = currentCreditAmount,
                     DateCreated = DateTime.Now,
                     Reason = this.ReasonTextBox.Text,
                     Reference = creditNote.Reference,
@@ -196,6 +209,21 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
             {
                 this.CompletedEventHandler(this, new EventArgs());
             }
+        }
+    }
+
+    #endregion
+
+    #region Private Helper
+    private decimal CalculateCreditAmount(decimal creditAmount, decimal actualVatRate)
+    {
+        if(this.VatExemptCheckBox.Checked)
+        {
+            return creditAmount;
+        }
+        else
+        {
+            return creditAmount * ((actualVatRate / 100) + 1);
         }
     }
 
