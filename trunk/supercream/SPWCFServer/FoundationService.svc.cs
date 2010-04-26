@@ -509,6 +509,19 @@ namespace SPWCFServer
             }
         }
 
+        public decimal GetOustandingCreditNoteBalance(int orderNo, int creditNote, decimal vatRate)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return mgr.GetOustandingCreditNoteBalance(orderNo, creditNote, vatRate);               
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         #endregion
 
         #region ICustomer Members
@@ -1048,7 +1061,7 @@ namespace SPWCFServer
 
                 SP.Core.Domain.OrderHeader orderHeader = mgr.GetOrderHeader(id);
                 OrderHeader order = ObjectExtension.CloneProperties<SP.Core.Domain.OrderHeader, SPWCFServer.OrderHeader>(orderHeader);
-                order.VatCode = ObjectExtension.CloneProperties<SP.Core.Domain.VatCode, SPWCFServer.VatCode>(orderHeader.VatCode);
+               // order.VatCode = ObjectExtension.CloneProperties<SP.Core.Domain.VatCode, SPWCFServer.VatCode>(orderHeader.VatCode);
                 return order;
 
             }
@@ -2621,7 +2634,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion
-    }
+        #endregion            
+   }
 }
 

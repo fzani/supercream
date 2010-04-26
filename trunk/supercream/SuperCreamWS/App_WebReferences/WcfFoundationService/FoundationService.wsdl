@@ -8,6 +8,12 @@
       <xsd:import schemaLocation="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Linq" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IFoundationService_GetAllSpecialInvoiceLines_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSpecialInvoiceLines" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetAllSpecialInvoiceLines_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSpecialInvoiceLinesResponse" />
+  </wsdl:message>
   <wsdl:message name="IFoundationService_GetSpecialInvoiceLine_InputMessage">
     <wsdl:part name="parameters" element="tns:GetSpecialInvoiceLine" />
   </wsdl:message>
@@ -163,6 +169,12 @@
   </wsdl:message>
   <wsdl:message name="IFoundationService_DeleteVan_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteVanResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_UpdateOrderNotesStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrderNotesStatus" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_UpdateOrderNotesStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrderNotesStatusResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_UpdatePaymentCompleted_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePaymentCompleted" />
@@ -374,11 +386,11 @@
   <wsdl:message name="IFoundationService_DeleteSpecialInvoiceLine_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteSpecialInvoiceLineResponse" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_GetAllSpecialInvoiceLines_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllSpecialInvoiceLines" />
+  <wsdl:message name="IFoundationService_SaveContactDetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveContactDetail" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_GetAllSpecialInvoiceLines_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllSpecialInvoiceLinesResponse" />
+  <wsdl:message name="IFoundationService_SaveContactDetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveContactDetailResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_UpdateContactDetail_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateContactDetail" />
@@ -590,12 +602,6 @@
   <wsdl:message name="IFoundationService_SaveOrderNotesStatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:SaveOrderNotesStatusResponse" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_UpdateOrderNotesStatus_InputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateOrderNotesStatus" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_UpdateOrderNotesStatus_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateOrderNotesStatusResponse" />
-  </wsdl:message>
   <wsdl:message name="IFoundationService_SaveAccount_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveAccount" />
   </wsdl:message>
@@ -788,6 +794,12 @@
   <wsdl:message name="IFoundationService_GetInvoiceCreditDetails_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetInvoiceCreditDetailsResponse" />
   </wsdl:message>
+  <wsdl:message name="IFoundationService_GetOustandingCreditNoteBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOustandingCreditNoteBalance" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetOustandingCreditNoteBalance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOustandingCreditNoteBalanceResponse" />
+  </wsdl:message>
   <wsdl:message name="IFoundationService_DeleteContactDetail_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteContactDetail" />
   </wsdl:message>
@@ -806,13 +818,11 @@
   <wsdl:message name="IFoundationService_GetContactDetailsByCustomer_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetContactDetailsByCustomerResponse" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_SaveContactDetail_InputMessage">
-    <wsdl:part name="parameters" element="tns:SaveContactDetail" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_SaveContactDetail_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SaveContactDetailResponse" />
-  </wsdl:message>
   <wsdl:portType name="IFoundationService">
+    <wsdl:operation name="GetAllSpecialInvoiceLines">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetAllSpecialInvoiceLines" message="tns:IFoundationService_GetAllSpecialInvoiceLines_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetAllSpecialInvoiceLinesResponse" message="tns:IFoundationService_GetAllSpecialInvoiceLines_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetSpecialInvoiceLine">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetSpecialInvoiceLine" message="tns:IFoundationService_GetSpecialInvoiceLine_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetSpecialInvoiceLineResponse" message="tns:IFoundationService_GetSpecialInvoiceLine_OutputMessage" />
@@ -916,6 +926,10 @@
     <wsdl:operation name="DeleteVan">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/DeleteVan" message="tns:IFoundationService_DeleteVan_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/DeleteVanResponse" message="tns:IFoundationService_DeleteVan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderNotesStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdateOrderNotesStatus" message="tns:IFoundationService_UpdateOrderNotesStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/UpdateOrderNotesStatusResponse" message="tns:IFoundationService_UpdateOrderNotesStatus_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdatePaymentCompleted">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdatePaymentCompleted" message="tns:IFoundationService_UpdatePaymentCompleted_InputMessage" />
@@ -1057,9 +1071,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/DeleteSpecialInvoiceLine" message="tns:IFoundationService_DeleteSpecialInvoiceLine_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/DeleteSpecialInvoiceLineResponse" message="tns:IFoundationService_DeleteSpecialInvoiceLine_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetAllSpecialInvoiceLines">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetAllSpecialInvoiceLines" message="tns:IFoundationService_GetAllSpecialInvoiceLines_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetAllSpecialInvoiceLinesResponse" message="tns:IFoundationService_GetAllSpecialInvoiceLines_OutputMessage" />
+    <wsdl:operation name="SaveContactDetail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveContactDetail" message="tns:IFoundationService_SaveContactDetail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveContactDetailResponse" message="tns:IFoundationService_SaveContactDetail_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateContactDetail">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdateContactDetail" message="tns:IFoundationService_UpdateContactDetail_InputMessage" />
@@ -1201,10 +1215,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveOrderNotesStatus" message="tns:IFoundationService_SaveOrderNotesStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveOrderNotesStatusResponse" message="tns:IFoundationService_SaveOrderNotesStatus_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="UpdateOrderNotesStatus">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdateOrderNotesStatus" message="tns:IFoundationService_UpdateOrderNotesStatus_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/UpdateOrderNotesStatusResponse" message="tns:IFoundationService_UpdateOrderNotesStatus_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="SaveAccount">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveAccount" message="tns:IFoundationService_SaveAccount_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveAccountResponse" message="tns:IFoundationService_SaveAccount_OutputMessage" />
@@ -1333,6 +1343,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetInvoiceCreditDetails" message="tns:IFoundationService_GetInvoiceCreditDetails_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetInvoiceCreditDetailsResponse" message="tns:IFoundationService_GetInvoiceCreditDetails_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetOustandingCreditNoteBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetOustandingCreditNoteBalance" message="tns:IFoundationService_GetOustandingCreditNoteBalance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetOustandingCreditNoteBalanceResponse" message="tns:IFoundationService_GetOustandingCreditNoteBalance_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DeleteContactDetail">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/DeleteContactDetail" message="tns:IFoundationService_DeleteContactDetail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/DeleteContactDetailResponse" message="tns:IFoundationService_DeleteContactDetail_OutputMessage" />
@@ -1345,13 +1359,18 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetContactDetailsByCustomer" message="tns:IFoundationService_GetContactDetailsByCustomer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetContactDetailsByCustomerResponse" message="tns:IFoundationService_GetContactDetailsByCustomer_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SaveContactDetail">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveContactDetail" message="tns:IFoundationService_SaveContactDetail_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveContactDetailResponse" message="tns:IFoundationService_SaveContactDetail_OutputMessage" />
-    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IFoundationService" type="tns:IFoundationService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllSpecialInvoiceLines">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetAllSpecialInvoiceLines" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetSpecialInvoiceLine">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/GetSpecialInvoiceLine" style="document" />
       <wsdl:input>
@@ -1579,6 +1598,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteVan">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/DeleteVan" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderNotesStatus">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/UpdateOrderNotesStatus" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1901,8 +1929,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetAllSpecialInvoiceLines">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetAllSpecialInvoiceLines" style="document" />
+    <wsdl:operation name="SaveContactDetail">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/SaveContactDetail" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2225,15 +2253,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="UpdateOrderNotesStatus">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/UpdateOrderNotesStatus" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="SaveAccount">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/SaveAccount" style="document" />
       <wsdl:input>
@@ -2522,6 +2541,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetOustandingCreditNoteBalance">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetOustandingCreditNoteBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="DeleteContactDetail">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/DeleteContactDetail" style="document" />
       <wsdl:input>
@@ -2542,15 +2570,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetContactDetailsByCustomer">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/GetContactDetailsByCustomer" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SaveContactDetail">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/SaveContactDetail" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

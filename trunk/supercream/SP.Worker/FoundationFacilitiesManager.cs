@@ -283,6 +283,13 @@ namespace SP.Worker
             return creditNoteDao.SearchCreditNotes(orderNo, invoiceNo, customerName, dateFrom, dateTo);
         }
 
+        public decimal GetOustandingCreditNoteBalance(int orderNo, int creditNote, decimal vatRate)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
+            return creditNoteDao.GetOustandingCreditNoteBalance(orderNo, creditNote, vatRate);
+        }
+
         #endregion
 
         #region ICustomer Related Functions
@@ -612,7 +619,7 @@ namespace SP.Worker
             IVatCodeDao vatCodeDao = factory.GetVatCodeDao();
             vatCodeDao.SetDataContext(orderHeaderDao.GetDataContext());
             VatCode vatCode = vatCodeDao.GetById(newOrderHeader.VatCodeID);
-           
+
             newOrderHeader.VatCode = vatCode;
             origOrderHeader.VatCode = vatCode;
 
@@ -655,7 +662,7 @@ namespace SP.Worker
             IVatCodeDao vatCodeDao = factory.GetVatCodeDao();
             vatCodeDao.SetDataContext(orderHeaderDao.GetDataContext());
             VatCode vatCode = vatCodeDao.GetById(newOrderHeader.VatCodeID);
-          
+
             newOrderHeader.VatCode = vatCode;
             originalOrder.VatCode = vatCode;
 

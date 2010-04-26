@@ -149,6 +149,10 @@ namespace SPWCFServer
         [ReferencePreservingDataContractFormat]
         InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID);
 
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        decimal GetOustandingCreditNoteBalance(int orderNo, int creditNote, decimal vatRate);
+
         #endregion
 
         #region Contacts

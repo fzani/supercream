@@ -22,6 +22,7 @@ namespace SP.Core.DataInterfaces
 
        string GenerateCreditNo();
        InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID, decimal vatRate);
+       decimal GetOustandingCreditNoteBalance(int orderNo, int creditNote, decimal vatRate);
        bool CreditNoteExistsByOrderId(int orderId);
        bool ReferenceExists(string referenceNo);
        CreditNote GetByReferenceId(string reference);
