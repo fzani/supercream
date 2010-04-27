@@ -57,6 +57,24 @@ public class SuperCreamReportDataSets : IReportDataSets
         return reportDataSources;
     }
 
+    public ReportDataSource[] GetArbitraryCreditNoteReportDataSets(int creditNoteId)
+    {
+        DataSet dsCreditNotes = GetArbitraryCreditNoteDS(creditNoteId);
+        DataSet dsFoundationAddressLines = GetFoundationFacilityAddressLinesDS(999); // Fake ID doesn't matter ignored ...
+      
+        ReportDataSource[] reportDataSources = new ReportDataSource[2];
+
+        reportDataSources[0] = new
+           ReportDataSource("SuperCreamDBDataSet_rptGetArbitraryCreditNote",
+             dsCreditNotes.Tables[0]);
+
+        reportDataSources[1] = new
+           ReportDataSource("SuperCreamDBDataSet_rptGetFoundationFacilityAddressLines",
+               dsFoundationAddressLines.Tables[0]);
+
+        return reportDataSources;
+    }
+
     #endregion
 
     #region Private Helpers
@@ -123,6 +141,27 @@ public class SuperCreamReportDataSets : IReportDataSets
         adapter.Fill(dataSet);
         return dataSet;
     }
+
+     private static DataSet GetArbitraryCreditNoteDS(int creditNoteId)
+     {
+         string connectionString = ConfigurationManager.ConnectionStrings["SuperCreamDBConnectionString"].ConnectionString;
+         SqlConnection connection = new SqlConnection(connectionString);
+         connection.Open();
+
+         SqlCommand command = new SqlCommand();
+         command.CommandType = System.Data.CommandType.StoredProcedure;
+         command.CommandText = "rptGetArbitraryCreditNote";
+         command.Connection = connection;
+
+         SqlParameter creditIdParameter = command.Parameters.Add("@CreditNoteID", System.Data.SqlDbType.Int);
+         creditIdParameter.Value = creditNoteId;
+
+         DataSet dataSet = new DataSet("CreditNoteDS");
+
+         SqlDataAdapter adapter = new SqlDataAdapter(command);
+         adapter.Fill(dataSet);
+         return dataSet;
+     }
 
     private static DataSet GetFoundationFacilityAddressLinesDS(int accountId)
     {
