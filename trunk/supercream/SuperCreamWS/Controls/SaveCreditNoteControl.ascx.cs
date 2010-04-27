@@ -84,6 +84,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
 
         decimal totalInvoiceAmount = invoiceCreditNoteDetails.TotalInvoiceAmount;
         decimal invoiceAmountCredited = invoiceCreditNoteDetails.TotalAmountCredited;
+        this.DueDateTextBox.Text = DateTime.Now.AddDays(7).ToShortDateString();
 
         this.TotalInvoiceAmountLabel.Text = totalInvoiceAmount.ToString("c");
         this.InvoiceAmountCreditedLabel.Text = invoiceAmountCredited.ToString("c");
@@ -106,6 +107,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
         this.TotalInvoiceAmountLabel.Text = totalInvoiceAmount.ToString("c");
         this.InvoiceAmountCreditedLabel.Text = invoiceAmountCredited.ToString("c");
         this.AmountAvailableToBeCreditedLabel.Text = (totalInvoiceAmount - invoiceAmountCredited).ToString("c");
+        this.DueDateTextBox.Text = creditNote.DueDate.ToShortDateString();
 
         this.AmountToCreditTextBox.Text = creditNote.CreditAmount.ToString("c");
         this.ReasonTextBox.Text = creditNote.Reason;      
@@ -163,7 +165,8 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
                     CreditAmount = currentCreditAmount,
                     DateCreated = DateTime.Now,
                     Reason = this.ReasonTextBox.Text,                  
-                    VatExempt = this.VatExemptCheckBox.Checked
+                    VatExempt = this.VatExemptCheckBox.Checked,
+                    DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
                 });
             }
             else
@@ -177,7 +180,8 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
                     DateCreated = DateTime.Now,
                     Reason = this.ReasonTextBox.Text,
                     Reference = creditNote.Reference,
-                    VatExempt = this.VatExemptCheckBox.Checked
+                    VatExempt = this.VatExemptCheckBox.Checked,
+                    DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
                 });
             }
 

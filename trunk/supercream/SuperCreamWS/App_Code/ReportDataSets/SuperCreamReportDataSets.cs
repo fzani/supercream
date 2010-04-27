@@ -10,13 +10,13 @@ using Microsoft.Reporting.WebForms;
 /// <summary>
 /// Summary description for ReportDataSets
 /// </summary>
-public class SpecialInvoiceReportDataSets : IReportDataSets
+public class SuperCreamReportDataSets : IReportDataSets
 {
     #region Constructors
     /// <summary>
     /// Initializes a new instance of the <see cref="ReportDataSets"/> class.
     /// </summary>    
-    public SpecialInvoiceReportDataSets()
+    public SuperCreamReportDataSets()
     {
     }
 

@@ -11,7 +11,7 @@ public partial class Invoices_SpecialInvoiceReport : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            IReportDataSets IReportDataSet = new SpecialInvoiceReportDataSets();
+            IReportDataSets IReportDataSet = new SuperCreamReportDataSets();
 
             SP.Util.UrlParameterPasser p = new SP.Util.UrlParameterPasser();
             int specialInvoiceId = Convert.ToInt32(p["id"]);

@@ -60,6 +60,25 @@
                 </tr>
                 <tr>
                     <td>
+                        Due Date
+                    </td>
+                    <td>
+                        <asp:TextBox ID="DueDateTextBox" Style="vertical-align: middle;" runat="server" ValidationGroup="SaveCreditNoteGroup"
+                            MaxLength="100" Width="100px"></asp:TextBox>
+                        <asp:Image runat="Server" Style="vertical-align: middle;" ID="Image1" ImageUrl="~/images/Calendar_scheduleHS.png"
+                            AlternateText="Click to show calendar" />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="SaveCreditNoteGroup"
+                            ControlToValidate="DueDateTextBox" ErrorMessage="Due Date is required" InitialValue=""
+                            Text="Required" runat="server" />
+                        <ajaxToolkit:CalendarExtender ID="calendarButtonExtender" Format="dd/MM/yyyy" runat="server"
+                            TargetControlID="DueDateTextBox" PopupButtonID="Image1" />
+                         <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" TargetControlID="DueDateTextBox"
+                                            Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
+                                            OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         Reason
                     </td>
                     <td>

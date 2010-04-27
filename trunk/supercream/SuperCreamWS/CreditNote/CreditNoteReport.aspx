@@ -3,7 +3,7 @@
 <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainPlaceholder" Runat="Server">
-    <rsweb:ReportViewer ID="ReportViewer1" runat="server">
+    <rsweb:ReportViewer ID="CreditNoteReportViewer" Width="100%" runat="server">
     </rsweb:ReportViewer>
 </asp:Content>
 
