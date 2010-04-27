@@ -18,5 +18,5 @@ public interface IReportDataSets
     /// <param name="outletStoreId">The outlet store id.</param>
     /// <returns></returns>
     ReportDataSource[] GetReportDataSets(int orderId, int accountId, int outletStoreId);
-    ReportDataSource[] GetArbitraryCreditNoteReportDataSets(int creditNoteId);
+    ReportDataSource[] GetArbitraryCreditNoteReportDataSets(int creditNoteId, int accountId);
 }

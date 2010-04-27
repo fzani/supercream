@@ -113,7 +113,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
         this.DueDateTextBox.Text = creditNote.DueDate.ToShortDateString();
 
         this.AmountToCreditTextBox.Text = creditNote.CreditAmount.ToString("c");
-        this.ReasonTextBox.Text = creditNote.Reason;      
+        this.ReasonTextBox.Text = creditNote.Reason;
         this.VatExemptCheckBox.Checked = creditNote.VatExempt;
 
         this.PrintButton.Visible = true;
@@ -126,7 +126,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
     protected void SaveButton_Click(object sender, EventArgs e)
     {
         try
-        {          
+        {
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
             OrderHeader orderHeader = orderHeaderUI.GetById(this.OrderID.Value);
 
@@ -135,7 +135,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
 
             VatCodeUI vatCodeUI = new VatCodeUI();
             VatCode vatCode = vatCodeUI.GetByID(orderHeader.VatCodeID);
-           
+
             var currentCreditAmount = String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ? new decimal(0.0) :
                 String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ? new decimal(0.0) : Util.ConvertStringToDecimal(this.AmountToCreditTextBox.Text);
 
@@ -156,7 +156,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
             decimal totalAmountThatWillBeCredited = Util.ConvertStringToDecimal(this.TotalInvoiceAmountLabel.Text) -
                                   oustandingCreditedAmount -
                                   this.CalculateCreditAmount(currentCreditAmount, new decimal(vatCode.PercentageValue));
-            if(totalAmountThatWillBeCredited < 0)
+            if (totalAmountThatWillBeCredited < 0)
                 throw new ApplicationException("Cannot credit for more than the invoicable amount");
 
             // Persist credit note details
@@ -169,7 +169,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
                     OrderID = this.OrderID.Value,
                     CreditAmount = currentCreditAmount,
                     DateCreated = DateTime.Now,
-                    Reason = this.ReasonTextBox.Text,                  
+                    Reason = this.ReasonTextBox.Text,
                     VatExempt = this.VatExemptCheckBox.Checked,
                     DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
                 });
@@ -208,8 +208,13 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
 
     protected void PrintButton_Click(object sender, EventArgs e)
     {
+        OrderNotesStatusUI ui = new OrderNotesStatusUI();
+
+        var orderNoteStatus = ui.GetOrderNotesStatusByOrderID(this.OrderID.Value);
+
         SP.Util.UrlParameterPasser p = new UrlParameterPasser("~/CreditNote/CreditNoteReport.aspx");
-        p["id"] = this.CreditNoteID.Value.ToString();       
+        p["creditNoteId"] = this.CreditNoteID.Value.ToString();
+        p["accountId"] = orderNoteStatus.AccountID.ToString();
         p.PassParameters();
     }
 
@@ -233,7 +238,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
     #region Private Helper
     private decimal CalculateCreditAmount(decimal creditAmount, decimal actualVatRate)
     {
-        if(this.VatExemptCheckBox.Checked)
+        if (this.VatExemptCheckBox.Checked)
         {
             return creditAmount;
         }

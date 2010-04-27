@@ -57,12 +57,13 @@ public class SuperCreamReportDataSets : IReportDataSets
         return reportDataSources;
     }
 
-    public ReportDataSource[] GetArbitraryCreditNoteReportDataSets(int creditNoteId)
+    public ReportDataSource[] GetArbitraryCreditNoteReportDataSets(int creditNoteId, int accountId)
     {
         DataSet dsCreditNotes = GetArbitraryCreditNoteDS(creditNoteId);
         DataSet dsFoundationAddressLines = GetFoundationFacilityAddressLinesDS(999); // Fake ID doesn't matter ignored ...
+        DataSet dsInvoiceAddressLines = GetInvoiceAddressLinesDS(accountId);
       
-        ReportDataSource[] reportDataSources = new ReportDataSource[2];
+        ReportDataSource[] reportDataSources = new ReportDataSource[3];
 
         reportDataSources[0] = new
            ReportDataSource("SuperCreamDBDataSet_rptGetArbitraryCreditNote",
@@ -71,6 +72,10 @@ public class SuperCreamReportDataSets : IReportDataSets
         reportDataSources[1] = new
            ReportDataSource("SuperCreamDBDataSet_rptGetFoundationFacilityAddressLines",
                dsFoundationAddressLines.Tables[0]);
+
+        reportDataSources[2] = new
+           ReportDataSource("SuperCreamDBDataSet_rptGetAddressLinesForInvoice",
+               dsInvoiceAddressLines.Tables[0]);
 
         return reportDataSources;
     }

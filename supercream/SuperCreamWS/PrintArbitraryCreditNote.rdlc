@@ -130,6 +130,50 @@
           <DataField>CompanyAddressType</DataField>
           <rd:TypeName>System.Int16</rd:TypeName>
         </Field>
+        <Field Name="EMailAddress">
+          <DataField>EMailAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FirstName">
+          <DataField>FirstName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InitialNote">
+          <DataField>InitialNote</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="JobRole">
+          <DataField>JobRole</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LastName">
+          <DataField>LastName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Title">
+          <DataField>Title</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvoiceAddressMapReference">
+          <DataField>InvoiceAddressMapReference</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvoiceAddressCounty">
+          <DataField>InvoiceAddressCounty</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvoiceAddressTown">
+          <DataField>InvoiceAddressTown</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvoiceAddressPostCode">
+          <DataField>InvoiceAddressPostCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AccountPhoneNumber">
+          <DataField>AccountPhoneNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>SuperCreamDBConnectionString</DataSourceName>
@@ -166,12 +210,165 @@
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
       </rd:DataSetInfo>
     </DataSet>
+    <DataSet Name="SuperCreamDBDataSet_rptGetAddressLinesForInvoice">
+      <Fields>
+        <Field Name="AddressLine">
+          <DataField>AddressLine</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>SuperCreamDBConnectionString</DataSourceName>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>dbo.rptGetAddressLinesForInvoice</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>SuperCreamDBDataSet</rd:DataSetName>
+        <rd:TableName>rptGetAddressLinesForInvoice</rd:TableName>
+        <rd:TableAdapterName>rptGetAddressLinesForInvoiceTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+      </rd:DataSetInfo>
+    </DataSet>
   </DataSets>
   <Code />
   <Width>20.5cm</Width>
   <Body>
     <ColumnSpacing>1cm</ColumnSpacing>
     <ReportItems>
+      <Rectangle Name="rectangle3">
+        <Left>0.6cm</Left>
+        <ZIndex>3</ZIndex>
+        <ReportItems>
+          <Textbox Name="AccountPhoneNumber_1">
+            <rd:DefaultName>AccountPhoneNumber_1</rd:DefaultName>
+            <Top>2.8cm</Top>
+            <Width>3cm</Width>
+            <ZIndex>8</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>3.7cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!AccountPhoneNumber.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+          </Textbox>
+          <Textbox Name="textbox8">
+            <rd:DefaultName>textbox8</rd:DefaultName>
+            <Top>2.7cm</Top>
+            <Width>2.53968cm</Width>
+            <Style>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <ZIndex>7</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.25cm</Left>
+            <Height>0.4cm</Height>
+            <Value>Tel No</Value>
+          </Textbox>
+          <Textbox Name="textbox7">
+            <rd:DefaultName>textbox7</rd:DefaultName>
+            <Top>2.3cm</Top>
+            <Width>2.75cm</Width>
+            <ZIndex>6</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>3.7cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!FirstName.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote") &amp; " " &amp; First(Fields!LastName.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+          </Textbox>
+          <Textbox Name="textbox6">
+            <rd:DefaultName>textbox6</rd:DefaultName>
+            <Top>2.3cm</Top>
+            <Width>3.5cm</Width>
+            <Style>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <ZIndex>5</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.25cm</Left>
+            <Height>0.4cm</Height>
+            <Value>For the attention of </Value>
+          </Textbox>
+          <Textbox Name="InvoiceAddressPostCode">
+            <rd:DefaultName>InvoiceAddressPostCode</rd:DefaultName>
+            <Top>1.9cm</Top>
+            <Width>5.5cm</Width>
+            <ZIndex>4</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.25cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!InvoiceAddressPostCode.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+          </Textbox>
+          <Textbox Name="InvoiceAddressCounty">
+            <rd:DefaultName>InvoiceAddressCounty</rd:DefaultName>
+            <Top>1.5cm</Top>
+            <Width>6.75cm</Width>
+            <ZIndex>3</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.25cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!InvoiceAddressCounty.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+          </Textbox>
+          <Textbox Name="InvoiceAddressTown">
+            <rd:DefaultName>InvoiceAddressTown</rd:DefaultName>
+            <Top>1.1cm</Top>
+            <Width>7cm</Width>
+            <ZIndex>2</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.25cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!InvoiceAddressTown.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+          </Textbox>
+          <Table Name="table1">
+            <ZIndex>1</ZIndex>
+            <DataSetName>SuperCreamDBDataSet_rptGetAddressLinesForInvoice</DataSetName>
+            <Top>0.7cm</Top>
+            <Width>6.75cm</Width>
+            <Details>
+              <TableRows>
+                <TableRow>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox3">
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!AddressLine.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                  <Height>0.4cm</Height>
+                </TableRow>
+              </TableRows>
+            </Details>
+            <TableColumns>
+              <TableColumn>
+                <Width>6.75cm</Width>
+              </TableColumn>
+            </TableColumns>
+            <Height>0.4cm</Height>
+            <Left>0.25cm</Left>
+          </Table>
+          <Textbox Name="textbox5">
+            <rd:DefaultName>textbox5</rd:DefaultName>
+            <Top>0.25cm</Top>
+            <Width>3cm</Width>
+            <Style>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <CanGrow>true</CanGrow>
+            <Left>0.25cm</Left>
+            <Height>0.4cm</Height>
+            <Value>Invoice Adress</Value>
+          </Textbox>
+        </ReportItems>
+        <Top>4.4cm</Top>
+        <Width>8.8cm</Width>
+        <Style>
+          <BorderStyle>
+            <Default>Solid</Default>
+          </BorderStyle>
+        </Style>
+        <Height>3.5cm</Height>
+      </Rectangle>
       <Rectangle Name="rectangle7">
         <Left>10.2cm</Left>
         <ZIndex>2</ZIndex>
@@ -185,15 +382,15 @@
             <Height>0.4cm</Height>
             <Value>or</Value>
           </Textbox>
-          <Textbox Name="textbox18">
-            <rd:DefaultName>textbox18</rd:DefaultName>
+          <Textbox Name="CompanyVatRegistrationNumber">
+            <rd:DefaultName>CompanyVatRegistrationNumber</rd:DefaultName>
             <Top>2.8cm</Top>
             <Width>5.7cm</Width>
             <ZIndex>9</ZIndex>
             <CanGrow>true</CanGrow>
             <Left>3.5cm</Left>
             <Height>0.4cm</Height>
-            <Value />
+            <Value>=First(Fields!CompanyVatRegistrationNumber.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
           </Textbox>
           <Textbox Name="textbox10">
             <Top>2.8cm</Top>
@@ -307,9 +504,74 @@
         <Height>3.5cm</Height>
       </Rectangle>
       <Rectangle Name="rectangle2">
-        <Left>0.4cm</Left>
+        <Left>10.3cm</Left>
         <ZIndex>1</ZIndex>
         <ReportItems>
+          <Textbox Name="textbox19">
+            <Top>2.2cm</Top>
+            <Width>4.6cm</Width>
+            <ZIndex>7</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>3.4cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!Description.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+          </Textbox>
+          <Textbox Name="textbox18">
+            <Top>2.1cm</Top>
+            <Width>2.7cm</Width>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+            <ZIndex>6</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.3cm</Left>
+            <Height>0.4cm</Height>
+            <Value>Payment Terms</Value>
+          </Textbox>
+          <Textbox Name="InvoiceNo">
+            <rd:DefaultName>InvoiceNo</rd:DefaultName>
+            <Top>1.5cm</Top>
+            <Width>4.6cm</Width>
+            <ZIndex>5</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>3.4cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!InvoiceNo.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+          </Textbox>
+          <Textbox Name="textbox16">
+            <Top>1.5cm</Top>
+            <Width>2.5cm</Width>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+            <ZIndex>4</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.4cm</Left>
+            <Height>0.4cm</Height>
+            <Value>Invoice No</Value>
+          </Textbox>
+          <Textbox Name="OrderNo">
+            <rd:DefaultName>OrderNo</rd:DefaultName>
+            <Top>0.9cm</Top>
+            <Width>4.7cm</Width>
+            <ZIndex>3</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>3.3cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!OrderNo.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+          </Textbox>
+          <Textbox Name="textbox4">
+            <Top>0.9cm</Top>
+            <Width>2.5cm</Width>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+            <ZIndex>2</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.4cm</Left>
+            <Height>0.4cm</Height>
+            <Value>Order No</Value>
+          </Textbox>
           <Textbox Name="CreditNoteReference_1">
             <rd:DefaultName>CreditNoteReference_1</rd:DefaultName>
             <Top>0.3cm</Top>
@@ -333,9 +595,9 @@
             <Value>Credit Note No</Value>
           </Textbox>
         </ReportItems>
-        <Top>2.7cm</Top>
+        <Top>4.4cm</Top>
         <Width>8.4cm</Width>
-        <Height>5.39683cm</Height>
+        <Height>3.3cm</Height>
       </Rectangle>
       <Rectangle Name="rectangle1">
         <Left>0.3cm</Left>

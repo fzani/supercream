@@ -174,7 +174,7 @@ public class ReportDataSets : IReportDataSets
 
     #endregion   
 
-    public ReportDataSource[] GetArbitraryCreditNoteReportDataSets(int creditNoteId)
+    public ReportDataSource[] GetArbitraryCreditNoteReportDataSets(int creditNoteId, int accountId)
     {
         throw new NotImplementedException();
     }    
