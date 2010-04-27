@@ -1219,6 +1219,7 @@ namespace SPWCFServer
         private DateTime _DateCreated;
         private string _Reference;
         private bool _VatExempt;
+        private DateTime _DueDate;
 
         [DataMember]
         public int ID
@@ -1313,6 +1314,20 @@ namespace SPWCFServer
                 _VatExempt = value;
             }
         }
+
+        [DataMember]
+        public DateTime DueDate
+        {
+            get
+            {
+                return _DueDate;
+            }
+
+            set
+            {
+                _DueDate = value;
+            }
+        }
     }
 
     [DataContract]
@@ -1325,6 +1340,7 @@ namespace SPWCFServer
         private DateTime _DateCreated;
         private string _CustomerName;
         private string _Reference;
+        private DateTime _DueDate;
 
         [DataMember]
         public int CreditNoteID
@@ -1419,6 +1435,20 @@ namespace SPWCFServer
             set
             {
                 _Reference = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime DueDate
+        {
+            get
+            {
+                return _DueDate;
+            }
+
+            set
+            {
+                _DueDate = value;
             }
         }
     }

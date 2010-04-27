@@ -15,7 +15,8 @@ namespace SP.Core.Domain
         private DateTime _DateCreated;
         private string _CustomerName;
         private string _Reference;
-    
+        private DateTime _DueDate;
+     
         public int CreditNoteID
         {
             get 
@@ -102,6 +103,19 @@ namespace SP.Core.Domain
             set 
             { 
                 _Reference = value; 
+            }
+        }
+
+        public DateTime DueDate
+        {
+            get
+            {
+                return _DueDate;
+            }
+
+            set
+            {
+                _DueDate = value;
             }
         }
     }

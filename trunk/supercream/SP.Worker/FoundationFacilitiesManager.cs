@@ -221,7 +221,6 @@ namespace SP.Worker
             return creditNoteDao.CreditNoteExistsByOrderId(orderId);
         }
 
-
         public InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID)
         {
             IDaoFactory factory = new LTSDaoFactory();
