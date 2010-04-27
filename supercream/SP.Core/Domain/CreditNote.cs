@@ -19,7 +19,8 @@ namespace SP.Core.Domain
         private string _Reason;
         private DateTime _DateCreated;
         private string _Reference;
-        private bool _VatExempt;      
+        private bool _VatExempt;
+        private DateTime _DueDate;
 
         public override int ID
         {
@@ -106,6 +107,19 @@ namespace SP.Core.Domain
             set 
             { 
                 _VatExempt = value; 
+            }
+        }
+
+        public DateTime DueDate
+        {
+            get
+            {
+                return _DueDate;
+            }
+            
+            set
+            {
+                _DueDate = value;
             }
         }
     }
