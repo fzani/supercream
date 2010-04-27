@@ -12,20 +12,21 @@ public partial class CreditNote_CreditNoteReport : System.Web.UI.Page
         IReportDataSets IReportDataSet = new SuperCreamReportDataSets();
 
         SP.Util.UrlParameterPasser p = new SP.Util.UrlParameterPasser();
-        int creditNoteId = Convert.ToInt32(p["id"]);     
+        int creditNoteId = Convert.ToInt32(p["id"]);
 
-        //Microsoft.Reporting.WebForms.ReportDataSource[] reportDataSets = IReportDataSet.GetReportDataSets(specialInvoiceId, accountId, outletStoreId);
+        Microsoft.Reporting.WebForms.ReportDataSource[] reportDataSets =
+            IReportDataSet.GetArbitraryCreditNoteReportDataSets(creditNoteId);
 
-        //CreditNoteReportViewer.LocalReport.DataSources.Clear();
-        //foreach (Microsoft.Reporting.WebForms.ReportDataSource reportDataSet in reportDataSets)
+        CreditNoteReportViewer.LocalReport.DataSources.Clear();
+        foreach (Microsoft.Reporting.WebForms.ReportDataSource reportDataSet in reportDataSets)
+        {
+            CreditNoteReportViewer.LocalReport.DataSources.Add(reportDataSet);
+        }
+        //if (reportDataSets.Tables[0].Rows.Count == 0)
         //{
-        //    CreditNoteReportViewer.LocalReport.DataSources.Add(reportDataSet);
+        //    lblMessage.Text = "Sorry, no products under this category!";
         //}
-        ////if (reportDataSets.Tables[0].Rows.Count == 0)
-        ////{
-        ////    lblMessage.Text = "Sorry, no products under this category!";
-        ////}
 
-        //CreditNoteReportViewer.LocalReport.Refresh();
+        CreditNoteReportViewer.LocalReport.Refresh();
     }
 }

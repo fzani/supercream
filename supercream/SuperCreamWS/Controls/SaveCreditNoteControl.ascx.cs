@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using SP.Util;
 using WcfFoundationService;
 
 public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
@@ -89,7 +90,9 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
         this.TotalInvoiceAmountLabel.Text = totalInvoiceAmount.ToString("c");
         this.InvoiceAmountCreditedLabel.Text = invoiceAmountCredited.ToString("c");
         this.AmountAvailableToBeCreditedLabel.Text = (totalInvoiceAmount - invoiceAmountCredited).ToString("c");
-        AutoGenUI autoGenUI = new AutoGenUI();      
+        AutoGenUI autoGenUI = new AutoGenUI();
+
+        this.PrintButton.Visible = false;
     }
 
     private void SetCreditNoteForCreditNoteSaveStatuses()
@@ -112,6 +115,8 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
         this.AmountToCreditTextBox.Text = creditNote.CreditAmount.ToString("c");
         this.ReasonTextBox.Text = creditNote.Reason;      
         this.VatExemptCheckBox.Checked = creditNote.VatExempt;
+
+        this.PrintButton.Visible = true;
     }
 
     #endregion
@@ -199,6 +204,13 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
                 ErrorMessageEventHandler(this, arg);
             }
         }
+    }
+
+    protected void PrintButton_Click(object sender, EventArgs e)
+    {
+        SP.Util.UrlParameterPasser p = new UrlParameterPasser("~/CreditNote/CreditNoteReport.aspx");
+        p["id"] = this.CreditNoteID.Value.ToString();       
+        p.PassParameters();
     }
 
     protected void DeleteButton_Click(object sender, EventArgs e)

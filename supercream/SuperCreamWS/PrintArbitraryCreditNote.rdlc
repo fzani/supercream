@@ -12,11 +12,11 @@
   <InteractiveHeight>11in</InteractiveHeight>
   <rd:DrawGrid>true</rd:DrawGrid>
   <InteractiveWidth>8.5in</InteractiveWidth>
-  <rd:GridSpacing>0.25cm</rd:GridSpacing>
+  <rd:GridSpacing>0.1cm</rd:GridSpacing>
   <rd:SnapToGrid>true</rd:SnapToGrid>
-  <RightMargin>2.5cm</RightMargin>
-  <LeftMargin>2.5cm</LeftMargin>
-  <BottomMargin>2.5cm</BottomMargin>
+  <RightMargin>0.2cm</RightMargin>
+  <LeftMargin>0.2cm</LeftMargin>
+  <BottomMargin>0.2cm</BottomMargin>
   <rd:ReportID>e301fd19-73aa-4d16-ac68-3a491009b7dd</rd:ReportID>
   <PageWidth>21cm</PageWidth>
   <DataSets>
@@ -86,6 +86,50 @@
           <DataField>CompanyToInvoiceTo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyEMailAddress">
+          <DataField>CompanyEMailAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyOfficePhoneNumber1">
+          <DataField>CompanyOfficePhoneNumber1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyOfficePhoneNumber2">
+          <DataField>CompanyOfficePhoneNumber2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyVatRegistrationNumber">
+          <DataField>CompanyVatRegistrationNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyAddressLines">
+          <DataField>CompanyAddressLines</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyCounty">
+          <DataField>CompanyCounty</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyMapReference">
+          <DataField>CompanyMapReference</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyPostCode">
+          <DataField>CompanyPostCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyTown">
+          <DataField>CompanyTown</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyAddressType">
+          <DataField>CompanyAddressType</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>SuperCreamDBConnectionString</DataSourceName>
@@ -101,880 +145,227 @@
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
       </rd:DataSetInfo>
     </DataSet>
+    <DataSet Name="SuperCreamDBDataSet_rptGetFoundationFacilityAddressLines">
+      <Fields>
+        <Field Name="AddressLine">
+          <DataField>AddressLine</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>SuperCreamDBConnectionString</DataSourceName>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>dbo.rptGetFoundationFacilityAddressLines</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>SuperCreamDBDataSet</rd:DataSetName>
+        <rd:TableName>rptGetFoundationFacilityAddressLines</rd:TableName>
+        <rd:TableAdapterName>rptGetFoundationFacilityAddressLinesTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+      </rd:DataSetInfo>
+    </DataSet>
   </DataSets>
-  <Width>40.63492cm</Width>
+  <Code />
+  <Width>20.5cm</Width>
   <Body>
     <ColumnSpacing>1cm</ColumnSpacing>
     <ReportItems>
-      <Textbox Name="textbox1">
-        <rd:DefaultName>textbox1</rd:DefaultName>
-        <Style>
-          <Color>SteelBlue</Color>
-          <FontFamily>Tahoma</FontFamily>
-          <FontSize>20pt</FontSize>
-          <FontWeight>700</FontWeight>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
+      <Rectangle Name="rectangle7">
+        <Left>10.2cm</Left>
+        <ZIndex>2</ZIndex>
+        <ReportItems>
+          <Textbox Name="textbox15">
+            <Top>2.4cm</Top>
+            <Width>0.4cm</Width>
+            <ZIndex>10</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>3.9cm</Left>
+            <Height>0.4cm</Height>
+            <Value>or</Value>
+          </Textbox>
+          <Textbox Name="textbox18">
+            <rd:DefaultName>textbox18</rd:DefaultName>
+            <Top>2.8cm</Top>
+            <Width>5.7cm</Width>
+            <ZIndex>9</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>3.5cm</Left>
+            <Height>0.4cm</Height>
+            <Value />
+          </Textbox>
+          <Textbox Name="textbox10">
+            <Top>2.8cm</Top>
+            <Width>3cm</Width>
+            <ZIndex>8</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.5cm</Left>
+            <Height>0.4cm</Height>
+            <Value>Vat Reg. Number</Value>
+          </Textbox>
+          <Table Name="table2">
+            <ZIndex>7</ZIndex>
+            <DataSetName>SuperCreamDBDataSet_rptGetFoundationFacilityAddressLines</DataSetName>
+            <Top>0.5cm</Top>
+            <Width>6.5cm</Width>
+            <Details>
+              <TableRows>
+                <TableRow>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="AddressLine">
+                          <rd:DefaultName>AddressLine</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!AddressLine.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                  <Height>0.4cm</Height>
+                </TableRow>
+              </TableRows>
+            </Details>
+            <TableColumns>
+              <TableColumn>
+                <Width>6.5cm</Width>
+              </TableColumn>
+            </TableColumns>
+            <Height>0.4cm</Height>
+            <Left>0.45cm</Left>
+          </Table>
+          <Textbox Name="textbox17">
+            <Top>2.4cm</Top>
+            <Width>3.6cm</Width>
+            <ZIndex>6</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>4.3cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!CompanyOfficePhoneNumber2.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+          </Textbox>
+          <Textbox Name="CompanyOfficePhoneNumber1">
+            <rd:DefaultName>CompanyOfficePhoneNumber1</rd:DefaultName>
+            <Top>2.4cm</Top>
+            <Width>2.2cm</Width>
+            <ZIndex>5</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>1.7cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!CompanyOfficePhoneNumber1.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+          </Textbox>
+          <Textbox Name="textbox14">
+            <rd:DefaultName>textbox14</rd:DefaultName>
+            <Top>2.4cm</Top>
+            <Width>1cm</Width>
+            <ZIndex>4</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.45cm</Left>
+            <Height>0.4cm</Height>
+            <Value>Tel</Value>
+          </Textbox>
+          <Textbox Name="textbox13">
+            <Top>2cm</Top>
+            <Width>6cm</Width>
+            <ZIndex>3</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.45cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!CompanyPostCode.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+          </Textbox>
+          <Textbox Name="textbox12">
+            <Top>1.5cm</Top>
+            <Width>6.5cm</Width>
+            <ZIndex>2</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.45cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!CompanyCounty.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+          </Textbox>
+          <Textbox Name="textbox11">
+            <Top>1cm</Top>
+            <Width>6.75cm</Width>
+            <ZIndex>1</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>0.45cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!CompanyTown.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+          </Textbox>
+          <Textbox Name="textbox9">
+            <Top>0.15cm</Top>
+            <Style>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <CanGrow>true</CanGrow>
+            <Left>0.45cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!CompanyName.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+          </Textbox>
+        </ReportItems>
+        <Top>0.4cm</Top>
+        <Width>10cm</Width>
+        <Height>3.5cm</Height>
+      </Rectangle>
+      <Rectangle Name="rectangle2">
+        <Left>0.4cm</Left>
         <ZIndex>1</ZIndex>
-        <CanGrow>true</CanGrow>
-        <Height>0.91429cm</Height>
-        <Value>PrintArbitraryCreditNote</Value>
-      </Textbox>
-      <Table Name="table1">
-        <DataSetName>SuperCreamDBDataSet_rptGetArbitraryCreditNote</DataSetName>
-        <Top>0.91429cm</Top>
-        <Details>
-          <TableRows>
-            <TableRow>
-              <TableCells>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="CreditNoteID">
-                      <rd:DefaultName>CreditNoteID</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!CreditNoteID.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="OrderID">
-                      <rd:DefaultName>OrderID</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!OrderID.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="VatExempt">
-                      <rd:DefaultName>VatExempt</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!VatExempt.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="NetAmount">
-                      <rd:DefaultName>NetAmount</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!NetAmount.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="VatableAmount">
-                      <rd:DefaultName>VatableAmount</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!VatableAmount.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="VatRate">
-                      <rd:DefaultName>VatRate</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!VatRate.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="LineTotal">
-                      <rd:DefaultName>LineTotal</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!LineTotal.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="Reason">
-                      <rd:DefaultName>Reason</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!Reason.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="DateCreated">
-                      <rd:DefaultName>DateCreated</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!DateCreated.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="CreditNoteReference">
-                      <rd:DefaultName>CreditNoteReference</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!CreditNoteReference.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="OrderNo">
-                      <rd:DefaultName>OrderNo</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!OrderNo.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="InvoiceNo">
-                      <rd:DefaultName>InvoiceNo</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!InvoiceNo.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="Description">
-                      <rd:DefaultName>Description</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!Description.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="ID">
-                      <rd:DefaultName>ID</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!ID.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="AlphaID">
-                      <rd:DefaultName>AlphaID</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!AlphaID.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="CompanyToInvoiceTo">
-                      <rd:DefaultName>CompanyToInvoiceTo</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!CompanyToInvoiceTo.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-              </TableCells>
-              <Height>0.53333cm</Height>
-            </TableRow>
-          </TableRows>
-        </Details>
-        <Header>
-          <TableRows>
-            <TableRow>
-              <TableCells>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox2">
-                      <rd:DefaultName>textbox2</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <TextAlign>Right</TextAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Credit Note ID</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox3">
-                      <rd:DefaultName>textbox3</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <TextAlign>Right</TextAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Order ID</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox4">
-                      <rd:DefaultName>textbox4</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Vat Exempt</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox5">
-                      <rd:DefaultName>textbox5</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <TextAlign>Right</TextAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Net Amount</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox6">
-                      <rd:DefaultName>textbox6</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <TextAlign>Right</TextAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Vatable Amount</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox7">
-                      <rd:DefaultName>textbox7</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <TextAlign>Right</TextAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Vat Rate</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox8">
-                      <rd:DefaultName>textbox8</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <TextAlign>Right</TextAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Line Total</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox9">
-                      <rd:DefaultName>textbox9</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Reason</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox10">
-                      <rd:DefaultName>textbox10</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Date Created</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox11">
-                      <rd:DefaultName>textbox11</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Credit Note Reference</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox12">
-                      <rd:DefaultName>textbox12</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Order No</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox13">
-                      <rd:DefaultName>textbox13</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Invoice No</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox14">
-                      <rd:DefaultName>textbox14</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Description</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox15">
-                      <rd:DefaultName>textbox15</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <TextAlign>Right</TextAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>ID</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox16">
-                      <rd:DefaultName>textbox16</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Alpha ID</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox17">
-                      <rd:DefaultName>textbox17</rd:DefaultName>
-                      <Style>
-                        <Color>White</Color>
-                        <BackgroundColor>SteelBlue</BackgroundColor>
-                        <BorderColor>
-                          <Default>LightGrey</Default>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                        </BorderStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>700</FontWeight>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Company To Invoice To</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-              </TableCells>
-              <Height>0.55873cm</Height>
-            </TableRow>
-          </TableRows>
-          <RepeatOnNewPage>true</RepeatOnNewPage>
-        </Header>
-        <TableColumns>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.53968cm</Width>
-          </TableColumn>
-        </TableColumns>
-      </Table>
+        <ReportItems>
+          <Textbox Name="CreditNoteReference_1">
+            <rd:DefaultName>CreditNoteReference_1</rd:DefaultName>
+            <Top>0.3cm</Top>
+            <Width>5cm</Width>
+            <ZIndex>1</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>3.3cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!CreditNoteReference.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+          </Textbox>
+          <Textbox Name="textbox2">
+            <rd:DefaultName>textbox2</rd:DefaultName>
+            <Top>0.3cm</Top>
+            <Width>2.5cm</Width>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+            <CanGrow>true</CanGrow>
+            <Left>0.4cm</Left>
+            <Height>0.4cm</Height>
+            <Value>Credit Note No</Value>
+          </Textbox>
+        </ReportItems>
+        <Top>2.7cm</Top>
+        <Width>8.4cm</Width>
+        <Height>5.39683cm</Height>
+      </Rectangle>
+      <Rectangle Name="rectangle1">
+        <Left>0.3cm</Left>
+        <ReportItems>
+          <Textbox Name="textbox1">
+            <rd:DefaultName>textbox1</rd:DefaultName>
+            <Top>0.3cm</Top>
+            <Width>6.7cm</Width>
+            <Style>
+              <FontSize>16pt</FontSize>
+              <FontWeight>700</FontWeight>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+            <CanGrow>true</CanGrow>
+            <Left>0.3cm</Left>
+            <Height>0.8cm</Height>
+            <Value>SuperCream Credit Note</Value>
+          </Textbox>
+        </ReportItems>
+        <Top>0.3cm</Top>
+        <Width>7.1cm</Width>
+        <Height>1.4cm</Height>
+      </Rectangle>
     </ReportItems>
-    <Height>2.00635cm</Height>
+    <Height>27.5cm</Height>
   </Body>
   <Language>en-US</Language>
-  <TopMargin>2.5cm</TopMargin>
+  <TopMargin>0.2cm</TopMargin>
   <PageHeight>29.7cm</PageHeight>
 </Report>

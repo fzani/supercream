@@ -172,5 +172,10 @@ public class ReportDataSets : IReportDataSets
         return invoiceHeaderDataSet;
     }
 
-    #endregion
+    #endregion   
+
+    public ReportDataSource[] GetArbitraryCreditNoteReportDataSets(int creditNoteId)
+    {
+        throw new NotImplementedException();
+    }    
 }
