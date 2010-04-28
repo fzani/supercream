@@ -24,6 +24,8 @@ namespace SP.Core.DataInterfaces
         IInvoiceItemDao GetInvoiceItemDao();
         INoteDao GetNoteDao();
         IOrderHeaderDao GetOrderHeaderDao();
+        IOrderCreditNoteDao GetOrderCreditNoteDao();
+        IOrderCreditNoteLineDao GetOrderCreditNoteLineDao();
         IOutletDao GetOutletDao();
         IOutletStoreDao GetOutletStoreDao();
         IPhoneDao GetPhoneDao();

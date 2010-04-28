@@ -61,6 +61,8 @@
   <ItemGroup>
     <Compile Include="DataInterfaces\IAutoGen.cs" />
     <Compile Include="DataInterfaces\ICreditNoteDAO.cs" />
+    <Compile Include="DataInterfaces\IOrderCreditNoteDAO.cs" />
+    <Compile Include="DataInterfaces\IOrderCreditNoteLineDAO.cs" />
     <Compile Include="DataInterfaces\IOrderNotesStatusDAO.cs" />
     <Compile Include="DataInterfaces\IProformaInvoiceDao.cs" />
     <Compile Include="DataInterfaces\IPriceListHeaderDao.cs" />
@@ -96,6 +98,8 @@
     <Compile Include="Domain\InvoiceCreditNoteDetails.cs" />
     <Compile Include="Domain\CreditNoteDetails.cs" />
     <Compile Include="Domain\CreditNote.cs" />
+    <Compile Include="Domain\OrderCreditNoteDTO.cs" />
+    <Compile Include="Domain\OrderCreditNoteLineDTO.cs" />
     <Compile Include="Domain\StandardVatRateDTO.cs" />
     <Compile Include="Domain\VanInvoiceCount.cs" />
     <Compile Include="Domain\InvoicesWithStatus.cs" />

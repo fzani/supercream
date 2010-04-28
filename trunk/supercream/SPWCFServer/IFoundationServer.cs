@@ -215,6 +215,54 @@ namespace SPWCFServer
         OutletStore UpdateOutletStore(OutletStore newStore, OutletStore origStore);
         #endregion
 
+        #region OrderCreditNote
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        void DeleteOrderCreditNote(OrderCreditNote orderCreditNote);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<OrderCreditNote> GetAllOrderCreditNotes();
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        OrderCreditNote GetOrderCreditNote(int id);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        OrderCreditNote SaveOrderCreditNote(OrderCreditNote orderCreditNote);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        OrderCreditNote UpdateOrderCreditNote(OrderCreditNote newOrderCreditNote, OrderCreditNote origOrderCreditNote);
+
+        #endregion
+
+        #region OrderCreditNoteLine
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        void DeleteOrderCreditNoteLine(OrderCreditNoteLine orderCreditNoteLine);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<OrderCreditNoteLine> GetAllOrderCreditNoteLines();
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        OrderCreditNoteLine GetOrderCreditNoteLine(int id);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        OrderCreditNoteLine SaveOrderCreditNoteLine(OrderCreditNoteLine orderCreditNoteLine);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        OrderCreditNoteLine UpdateOrderCreditNoteLine(OrderCreditNoteLine newOrderCreditNoteLine, OrderCreditNoteLine origOrderCreditNoteLine);
+
+        #endregion
+
         #region Order Header
 
         [OperationContract]
@@ -1642,6 +1690,212 @@ namespace SPWCFServer
 
         [DataMember]
         public decimal Balance { get; set; }
+    }
+
+    [DataContract]
+    public class OrderCreditNote
+    {
+        private int _ID;
+        private int _OrderID;
+        private string _Reason;
+        private DateTime _DateCreated;
+        private string _Reference;
+        private DateTime _DueDate;
+
+        [DataMember]
+        public int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+
+        [DataMember]
+        public int OrderID
+        {
+            get
+            {
+                return _OrderID;
+            }
+            set
+            {
+                _OrderID = value;
+            }
+        }
+
+        [DataMember]
+        public string Reason
+        {
+            get
+            {
+                return _Reason;
+            }
+            set
+            {
+                _Reason = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime DateCreated
+        {
+            get
+            {
+                return _DateCreated;
+            }
+            set
+            {
+                _DateCreated = value;
+            }
+        }
+
+        [DataMember]
+        public string Reference
+        {
+            get
+            {
+                return _Reference;
+            }
+            set
+            {
+                _Reference = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime DueDate
+        {
+            get
+            {
+                return _DueDate;
+            }
+            set
+            {
+                _DueDate = value;
+            }
+        }
+    }
+
+    [DataContract]
+    public class OrderCreditNoteLine
+    {
+        private int _ID;
+        private int _OrderCreditNoteID;
+        private int _OrderLineID;
+        private int _ProductID;
+        private int _QtyPerUnit;
+        private int _NoOfUnits;
+        private int _Discount;
+        private decimal _Price;
+
+        [DataMember]
+        public int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+
+        [DataMember]
+        public int OrderCreditNoteID
+        {
+            get
+            {
+                return _OrderCreditNoteID;
+            }
+            set
+            {
+                _OrderCreditNoteID = value;
+            }
+        }
+
+        [DataMember]
+        public int OrderLineID
+        {
+            get
+            {
+                return _OrderLineID;
+            }
+            set
+            {
+                _OrderLineID = value;
+            }
+        }
+
+        [DataMember]
+        public int ProductID
+        {
+            get
+            {
+                return _ProductID;
+            }
+            set
+            {
+                _ProductID = value;
+            }
+        }
+
+        [DataMember]
+        public int QtyPerUnit
+        {
+            get
+            {
+                return _QtyPerUnit;
+            }
+            set
+            {
+                _QtyPerUnit = value;
+            }
+        }
+
+        [DataMember]
+        public int NoOfUnits
+        {
+            get
+            {
+                return _NoOfUnits;
+            }
+            set
+            {
+                _NoOfUnits = value;
+            }
+        }
+
+        [DataMember]
+        public int Discount
+        {
+            get
+            {
+                return _Discount;
+            }
+            set
+            {
+                _Discount = value;
+            }
+        }
+
+        [DataMember]
+        public decimal Price
+        {
+            get
+            {
+                return _Price;
+            }
+            set
+            {
+                _Price = value;
+            }
+        }
     }
 
     [DataContract]

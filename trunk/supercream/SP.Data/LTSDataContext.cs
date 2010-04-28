@@ -172,6 +172,22 @@ namespace SP.Data.LTS
             }
         }
 
+        public System.Data.Linq.Table<OrderCreditNote> OrderCreditNote
+        {
+            get
+            {
+                return this.GetTable<OrderCreditNote>();
+            }
+        }
+
+        public System.Data.Linq.Table<OrderCreditNoteLine> OrderCreditNoteLine
+        {
+            get
+            {
+                return this.GetTable<OrderCreditNoteLine>();
+            }
+        }
+
         public System.Data.Linq.Table<OrderNotesStatus> OrderNotesStatus
         {
             get

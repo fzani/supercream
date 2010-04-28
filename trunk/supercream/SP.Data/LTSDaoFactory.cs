@@ -88,6 +88,16 @@ namespace SP.Data.LTS
             return new NoteDao();
         }
 
+        public IOrderCreditNoteDao GetOrderCreditNoteDao()
+        {
+            return new OrderCreditNoteDao();
+        }
+
+        public IOrderCreditNoteLineDao GetOrderCreditNoteLineDao()
+        {
+            return new OrderCreditNoteLineDao();
+        }
+
         public IOrderHeaderDao GetOrderHeaderDao()
         {
             return new OrderHeaderDao();
