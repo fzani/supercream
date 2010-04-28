@@ -79,6 +79,22 @@ namespace SP.Core.ManagerInterfaces
         FoundationFacility UpdateFoundationFacility(FoundationFacility newFoundationfacility, FoundationFacility origFoundationFacility);
         #endregion
 
+        #region OrderCreditNote
+        void DeleteOrderCreditNote(OrderCreditNote ordercreditnote);
+        OrderCreditNote GetOrderCreditNote(int id);
+        List<OrderCreditNote> GetAllOrderCreditNotes();
+        OrderCreditNote SaveOrderCreditNote(OrderCreditNote ordercreditnote);
+        OrderCreditNote UpdateOrderCreditNote(OrderCreditNote newOrderCreditNote, OrderCreditNote origOrderCreditNote);
+        #endregion
+
+        #region OrderCreditNoteLine
+        void DeleteOrderCreditNoteLine(OrderCreditNoteLine ordercreditnoteline);
+        OrderCreditNoteLine GetOrderCreditNoteLine(int id);
+        List<OrderCreditNoteLine> GetAllOrderCreditNoteLines();
+        OrderCreditNoteLine SaveOrderCreditNoteLine(OrderCreditNoteLine ordercreditnoteline);
+        OrderCreditNoteLine UpdateOrderCreditNoteLine(OrderCreditNoteLine newOrderCreditNoteLine, OrderCreditNoteLine origOrderCreditNoteLine);
+        #endregion 
+
         #region OrderHeader     
 
         OrderHeader CreateInvoice(OrderHeader newOrderHeader, OrderHeader origOrderHeader);

@@ -1005,6 +1005,168 @@ namespace SPWCFServer
         }
         #endregion
 
+        #region OrderCreditNote
+
+        public void DeleteOrderCreditNote(OrderCreditNote orderCreditNote)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                mgr.DeleteOrderCreditNote(ObjectExtension.CloneProperties<SPWCFServer.OrderCreditNote, SP.Core.Domain.OrderCreditNote>(orderCreditNote));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete, it is likely that there are dependent items still linked to it");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public List<OrderCreditNote> GetAllOrderCreditNotes()
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.OrderCreditNote> orderCreditNoteList = mgr.GetAllOrderCreditNotes();
+                return ObjectExtension.CloneList<SP.Core.Domain.OrderCreditNote, SPWCFServer.OrderCreditNote>(orderCreditNoteList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public OrderCreditNote GetOrderCreditNote(int id)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.OrderCreditNote orderCreditNote = mgr.GetOrderCreditNote(id);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.OrderCreditNote, SPWCFServer.OrderCreditNote>(orderCreditNote);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public OrderCreditNote SaveOrderCreditNote(OrderCreditNote orderCreditNote)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.OrderCreditNote coreOrderCreditNote =
+                   ObjectExtension.CloneProperties<SPWCFServer.OrderCreditNote, SP.Core.Domain.OrderCreditNote>(orderCreditNote);
+                coreOrderCreditNote = mgr.SaveOrderCreditNote(coreOrderCreditNote);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.OrderCreditNote, SPWCFServer.OrderCreditNote>(coreOrderCreditNote);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public OrderCreditNote UpdateOrderCreditNote(OrderCreditNote newOrderCreditNote, OrderCreditNote origOrderCreditNote)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+
+                return ObjectExtension.CloneProperties<SP.Core.Domain.OrderCreditNote, SPWCFServer.OrderCreditNote>
+                   (mgr.UpdateOrderCreditNote(ObjectExtension.CloneProperties<SPWCFServer.OrderCreditNote, SP.Core.Domain.OrderCreditNote>(newOrderCreditNote),
+                      ObjectExtension.CloneProperties<SPWCFServer.OrderCreditNote, SP.Core.Domain.OrderCreditNote>(origOrderCreditNote)));
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region OrderCreditNoteLine
+
+        public void DeleteOrderCreditNoteLine(OrderCreditNoteLine orderCreditNoteLine)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                mgr.DeleteOrderCreditNoteLine(ObjectExtension.CloneProperties<SPWCFServer.OrderCreditNoteLine, SP.Core.Domain.OrderCreditNoteLine>(orderCreditNoteLine));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete, it is likely that there are dependent items still linked to it");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public List<OrderCreditNoteLine> GetAllOrderCreditNoteLines()
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.OrderCreditNoteLine> orderCreditNoteLineList = mgr.GetAllOrderCreditNoteLines();
+                return ObjectExtension.CloneList<SP.Core.Domain.OrderCreditNoteLine, SPWCFServer.OrderCreditNoteLine>(orderCreditNoteLineList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public OrderCreditNoteLine GetOrderCreditNoteLine(int id)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.OrderCreditNoteLine orderCreditNoteLine = mgr.GetOrderCreditNoteLine(id);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.OrderCreditNoteLine, SPWCFServer.OrderCreditNoteLine>(orderCreditNoteLine);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public OrderCreditNoteLine SaveOrderCreditNoteLine(OrderCreditNoteLine orderCreditNoteLine)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.OrderCreditNoteLine coreOrderCreditNoteLine =
+                   ObjectExtension.CloneProperties<SPWCFServer.OrderCreditNoteLine, SP.Core.Domain.OrderCreditNoteLine>(orderCreditNoteLine);
+                coreOrderCreditNoteLine = mgr.SaveOrderCreditNoteLine(coreOrderCreditNoteLine);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.OrderCreditNoteLine, SPWCFServer.OrderCreditNoteLine>(coreOrderCreditNoteLine);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public OrderCreditNoteLine UpdateOrderCreditNoteLine(OrderCreditNoteLine newOrderCreditNoteLine, OrderCreditNoteLine origOrderCreditNoteLine)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+
+                return ObjectExtension.CloneProperties<SP.Core.Domain.OrderCreditNoteLine, SPWCFServer.OrderCreditNoteLine>
+                   (mgr.UpdateOrderCreditNoteLine(ObjectExtension.CloneProperties<SPWCFServer.OrderCreditNoteLine, SP.Core.Domain.OrderCreditNoteLine>(newOrderCreditNoteLine),
+                      ObjectExtension.CloneProperties<SPWCFServer.OrderCreditNoteLine, SP.Core.Domain.OrderCreditNoteLine>(origOrderCreditNoteLine)));
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        #endregion
+
         #region OrderHeader
 
         public List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)

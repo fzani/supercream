@@ -508,6 +508,84 @@ namespace SP.Worker
 
         #endregion
 
+        #region OrderCreditNote
+        public void DeleteOrderCreditNote(OrderCreditNote ordercreditnote)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteDao orderCreditNoteDao = factory.GetOrderCreditNoteDao();
+
+            orderCreditNoteDao.Delete(ordercreditnote);
+        }
+
+        public OrderCreditNote GetOrderCreditNote(int id)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteDao orderCreditNoteDao = factory.GetOrderCreditNoteDao();
+            return orderCreditNoteDao.GetById(id);
+        }
+
+        public List<OrderCreditNote> GetAllOrderCreditNotes()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteDao orderCreditNoteDao = factory.GetOrderCreditNoteDao();
+            return orderCreditNoteDao.GetAll();
+        }
+
+        public OrderCreditNote SaveOrderCreditNote(OrderCreditNote ordercreditnote)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteDao orderCreditNoteDao = factory.GetOrderCreditNoteDao();
+            return orderCreditNoteDao.Save(ordercreditnote);
+        }
+
+        public OrderCreditNote UpdateOrderCreditNote(OrderCreditNote newOrderCreditNote, OrderCreditNote origOrderCreditNote)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteDao orderCreditNoteDao = factory.GetOrderCreditNoteDao();
+            return orderCreditNoteDao.Update(newOrderCreditNote, origOrderCreditNote);
+        }
+
+        #endregion
+
+        #region OrderCreditNoteLine
+        public void DeleteOrderCreditNoteLine(OrderCreditNoteLine ordercreditnoteline)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteLineDao orderCreditNoteLineDao = factory.GetOrderCreditNoteLineDao();
+
+            orderCreditNoteLineDao.Delete(ordercreditnoteline);
+        }
+
+        public OrderCreditNoteLine GetOrderCreditNoteLine(int id)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteLineDao orderCreditNoteLineDao = factory.GetOrderCreditNoteLineDao();
+            return orderCreditNoteLineDao.GetById(id);
+        }
+
+        public List<OrderCreditNoteLine> GetAllOrderCreditNoteLines()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteLineDao orderCreditNoteLineDao = factory.GetOrderCreditNoteLineDao();
+            return orderCreditNoteLineDao.GetAll();
+        }
+
+        public OrderCreditNoteLine SaveOrderCreditNoteLine(OrderCreditNoteLine ordercreditnoteline)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteLineDao orderCreditNoteLineDao = factory.GetOrderCreditNoteLineDao();
+            return orderCreditNoteLineDao.Save(ordercreditnoteline);
+        }
+
+        public OrderCreditNoteLine UpdateOrderCreditNoteLine(OrderCreditNoteLine newOrderCreditNoteLine, OrderCreditNoteLine origOrderCreditNoteLine)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteLineDao orderCreditNoteLineDao = factory.GetOrderCreditNoteLineDao();
+            return orderCreditNoteLineDao.Update(newOrderCreditNoteLine, origOrderCreditNoteLine);
+        }
+
+        #endregion 
+
         #region OrderHeader
 
         public List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
