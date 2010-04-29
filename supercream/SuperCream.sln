@@ -33,7 +33,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SuperCreamWS", "SuperCreamW
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "4971"
+		VWDPort = "50687"
 	EndProjectSection
 	ProjectSection(ProjectDependencies) = postProject
 		{6359A152-40C5-4B8E-9AEB-D320BCE13584} = {6359A152-40C5-4B8E-9AEB-D320BCE13584}
