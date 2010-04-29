@@ -78,9 +78,9 @@
                     </li>
                     <li><strong>Credit Notes</strong>
                         <br />
-                        <a id="A4" href="~/CreditNote/CreditNote.aspx" runat="server">Credit Notes</a>
-                    
-                    
+                        <a id="A4" href="~/CreditNote/CreditNote.aspx" runat="server">Credit Note against Order</a>
+                          <br />
+                        <a id="A8" href="~/CreditNote/OrderCreditNote.aspx" runat="server">Credit Note against Order Line</a>                                        
                     </li>
                     <li><a href="#"><strong>Pick Lists</strong>
                         <br />
@@ -92,8 +92,7 @@
                 <ul class="sidemenu">
                     <li><strong>Reports</strong>
                         <br />
-                        <a id="A7" href="http://bali/Reports/Pages/Folder.aspx?ItemPath=%2fSuperCreamReports&ViewMode=List"
-                            runat="server">General Reports</a><br />
+                        <a href="http://bali/Reports/Pages/Folder.aspx?ItemPath=%2fSuperCreamReports&ViewMode=List" id="A7" runat="server">General Reports</a><br />
                     </li>
                 </ul>
                 <h3>
