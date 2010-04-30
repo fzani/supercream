@@ -14,5 +14,6 @@ namespace SP.Core.DataInterfaces
 {
    public interface IOrderCreditNoteDao : IDao<OrderCreditNote, int>
    {
+       List<OrderLine> AvailableOrderLinesForCreditNote(int orderId);    
    }
 }

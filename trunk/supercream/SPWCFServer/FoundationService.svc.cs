@@ -1007,6 +1007,20 @@ namespace SPWCFServer
 
         #region OrderCreditNote
 
+        public List<OrderLine> AvailableOrderLinesForCreditNote(int orderId)
+        {
+            try
+            {
+                var mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.OrderLine> orderCreditNoteList = mgr.AvailableOrderLinesForCreditNote(orderId);
+                return ObjectExtension.CloneList<SP.Core.Domain.OrderLine, SPWCFServer.OrderLine>(orderCreditNoteList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public void DeleteOrderCreditNote(OrderCreditNote orderCreditNote)
         {
             try
@@ -2796,7 +2810,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion            
-   }
+        #endregion                           
+    }
 }
 

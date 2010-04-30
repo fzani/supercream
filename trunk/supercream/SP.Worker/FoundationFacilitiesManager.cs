@@ -287,7 +287,7 @@ namespace SP.Worker
             IDaoFactory factory = new LTSDaoFactory();
             ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
             return creditNoteDao.GetOustandingCreditNoteBalance(orderNo, creditNote, vatRate);
-        }
+        }               
 
         #endregion
 
@@ -509,6 +509,14 @@ namespace SP.Worker
         #endregion
 
         #region OrderCreditNote
+
+        public List<OrderLine> AvailableOrderLinesForCreditNote(int orderId)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteDao creditNoteDao = factory.GetOrderCreditNoteDao();
+            return creditNoteDao.AvailableOrderLinesForCreditNote(orderId);
+        }
+
         public void DeleteOrderCreditNote(OrderCreditNote ordercreditnote)
         {
             IDaoFactory factory = new LTSDaoFactory();
@@ -1597,7 +1605,7 @@ namespace SP.Worker
             return Convert.ToDecimal(vatCode.PercentageValue);
         }
 
+        #endregion            
 
-        #endregion
     }
 }

@@ -237,6 +237,10 @@ namespace SPWCFServer
         [ReferencePreservingDataContractFormat]
         OrderCreditNote UpdateOrderCreditNote(OrderCreditNote newOrderCreditNote, OrderCreditNote origOrderCreditNote);
 
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<OrderLine> AvailableOrderLinesForCreditNote(int orderId);
+
         #endregion
 
         #region OrderCreditNoteLine
