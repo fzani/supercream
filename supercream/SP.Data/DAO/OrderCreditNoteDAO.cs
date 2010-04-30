@@ -13,20 +13,27 @@ using SP.Core.DataInterfaces;
 
 namespace SP.Data.LTS
 {
-   public class OrderCreditNoteDao : AbstractLTSDao<OrderCreditNote, int>, IOrderCreditNoteDao
-   {
-      public OrderCreditNoteDao()
-      {
-      }
+    public class OrderCreditNoteDao : AbstractLTSDao<OrderCreditNote, int>, IOrderCreditNoteDao
+    {
+        public OrderCreditNoteDao()
+        {
+        }
 
-      public OrderCreditNoteDao(LTSDataContext ctx)
-         : base(ctx)
-      {
-      }
+        public OrderCreditNoteDao(LTSDataContext ctx)
+            : base(ctx)
+        {
+        }
 
-      public override OrderCreditNote GetById(int id)
-      {
-         return db.OrderCreditNote.Single<OrderCreditNote>(q => q.ID == id);
-      }
-   }
+        public override OrderCreditNote GetById(int id)
+        {
+            return db.OrderCreditNote.Single<OrderCreditNote>(q => q.ID == id);
+        }
+
+        public List<OrderLine> AvailableOrderLinesForCreditNote(int orderId)
+        {
+            return  (from ol in db.OrderLine
+                     where (ol.OrderID == orderId)
+                     select ol).ToList<OrderLine>();
+        }
+    }
 }
