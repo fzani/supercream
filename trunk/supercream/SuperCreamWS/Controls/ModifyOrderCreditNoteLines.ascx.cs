@@ -71,6 +71,9 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
             decimal tempPrice = Math.Round(orderLine.Price * orderLine.NoOfUnits, 2);
             priceTotal += tempPrice;
 
+            Label orderLinePriceAfterDiscountLabel = e.Row.FindControl("OrderLinePriceAfterDiscountLabel") as Label;
+            orderLinePriceAfterDiscountLabel.Text = Math.Round(orderLine.Price, 2).ToString();
+
             Label orderLinePriceLabel = e.Row.FindControl("OrderLinePriceLabel") as Label;
             orderLinePriceLabel.Text = String.Format("{0:c}", tempPrice);
 
@@ -79,17 +82,7 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
 
             Label productNameLabel = e.Row.FindControl("ProductNameLabel") as Label;
             Product product = productUI.GetProductByID(productID.Value);
-            productNameLabel.Text = product.Description;
-
-            Image img = e.Row.FindControl("SIImage") as Image;
-            if (String.IsNullOrEmpty(orderLine.SpecialInstructions))
-            {
-                img.ImageUrl = "~/images/16-circle-green.png";
-            }
-            else
-            {
-                img.ImageUrl = "~/images/12-em-check.png";
-            }
+            productNameLabel.Text = product.Description;          
         }
 
         if (e.Row.RowType == DataControlRowType.Footer)

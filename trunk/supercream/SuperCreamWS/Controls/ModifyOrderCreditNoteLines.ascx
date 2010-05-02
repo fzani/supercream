@@ -36,13 +36,21 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Discount" SortExpression="Discount">
                             <ItemTemplate>
-                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("Discount") %>'></asp:Label>
+                                <asp:Label ID="Label3" runat="server" Text='<%# Eval("Discount", "{0}%") %>' ></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Discount") %>'></asp:TextBox>
                             </EditItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Price" SortExpression="Price">
+                        <asp:TemplateField HeaderText="Price (After Discount)" SortExpression="Price">
+                            <ItemTemplate>
+                                <asp:Label ID="OrderLinePriceAfterDiscountLabel" runat="server"></asp:Label>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:Label ID="OrderLinePriceAfterDiscountLabel" runat="server"></asp:Label>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Net Price" SortExpression="Price">
                             <ItemTemplate>
                                 <asp:Label ID="OrderLinePriceLabel" runat="server"></asp:Label>
                             </ItemTemplate>
@@ -53,15 +61,7 @@
                                 Ex Vat. Total &nbsp;
                                 <asp:Label ID="priceLabelTotal" runat="server"></asp:Label>
                             </FooterTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="SI" SortExpression="SpecialInstructions">
-                            <ItemTemplate>
-                                <asp:Image ID="SIImage" runat="server"></asp:Image>
-                            </ItemTemplate>
-                            <EditItemTemplate>
-                                <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("SpecialInstructions") %>'></asp:TextBox>
-                            </EditItemTemplate>
-                        </asp:TemplateField>
+                        </asp:TemplateField>                       
                         <asp:TemplateField HeaderText="Edit" SortExpression="SpecialInstructions">
                             <ItemTemplate>
                                 <asp:Button ID="btnTrigger" runat="server" Style="display: none" />

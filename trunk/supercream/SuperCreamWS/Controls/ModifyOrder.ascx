@@ -480,13 +480,21 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Discount" SortExpression="Discount">
                             <ItemTemplate>
-                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("Discount") %>'></asp:Label>
+                                 <asp:Label ID="Label3" runat="server" Text='<%# Eval("Discount", "{0}%") %>' ></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Discount") %>'></asp:TextBox>
+                                 <asp:Label ID="Label3" runat="server" Text='<%# Eval("Discount", "{0}%") %>' ></asp:Label>
                             </EditItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Price" SortExpression="Price">
+                         <asp:TemplateField HeaderText="Price (After Discount)" SortExpression="Price">
+                            <ItemTemplate>
+                                <asp:Label ID="OrderLinePriceAfterDiscountLabel" runat="server"></asp:Label>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:Label ID="OrderLinePriceAfterDiscountLabel" runat="server"></asp:Label>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Net Price" SortExpression="Price">
                             <ItemTemplate>
                                 <asp:Label ID="OrderLinePriceLabel" runat="server"></asp:Label>
                             </ItemTemplate>

@@ -353,6 +353,9 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             Label orderLinePriceLabel = e.Row.FindControl("OrderLinePriceLabel") as Label;
             orderLinePriceLabel.Text = String.Format("{0:c}", tempPrice);
 
+            Label orderLinePriceAfterDiscountLabel = e.Row.FindControl("OrderLinePriceAfterDiscountLabel") as Label;
+            orderLinePriceAfterDiscountLabel.Text = Math.Round(orderLine.Price, 2).ToString();
+
             ProductUI productUI = new ProductUI();
             int? productID = DataBinder.Eval(e.Row.DataItem, "ProductID") as int?;
 
