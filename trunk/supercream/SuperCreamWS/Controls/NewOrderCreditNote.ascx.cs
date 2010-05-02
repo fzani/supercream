@@ -51,6 +51,10 @@ public partial class Controls_NewOrderCreditNote : System.Web.UI.UserControl
 
     private void NewCreditNoteSearch_ModifyOrderCreditNoteLines(object sender, OrderCreditNoteContinueEventArgs e)
     {
+        this.ModifyOrderCreditNoteLines.OrderID = e.OrderId;
+        this.ModifyOrderCreditNoteLines.AlphaID = e.AlphaId;
+        this.ModifyOrderCreditNoteLines.DataBind();
+
         this.ChangeState += new EventHandler<EventArgs>(this.ModifyOrderCreditNoteLinesState);
         this.ChangeState(this, new EventArgs());
     }
@@ -73,7 +77,7 @@ public partial class Controls_NewOrderCreditNote : System.Web.UI.UserControl
             this.ErrorMessageEventHandler(sender, e);
         }
     }
-          
+
     #endregion
 
     #region General Events
@@ -113,7 +117,7 @@ public partial class Controls_NewOrderCreditNote : System.Web.UI.UserControl
         this.OrderCreditNoteHeader.Visible = false;
         this.ModifyOrderCreditNoteLines.Visible = true;
     }
-    
+
     #endregion
 
 }
