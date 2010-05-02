@@ -22,7 +22,7 @@ public class OrderCreditNoteLineUI : IDisposable
     private WcfFoundationService.FoundationServiceClient _proxy;
 
     public OrderCreditNoteLineUI()
-    {        
+    {
     }
 
     [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
@@ -39,10 +39,16 @@ public class OrderCreditNoteLineUI : IDisposable
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.AvailableOrderLinesForCreditNote(orderId) as List<OrderLine>;
+            if (orderId > -1)
+            {
+                return _proxy.AvailableOrderLinesForCreditNote(orderId) as List<OrderLine>;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
-
 
     public void SaveOrderCreditNoteLine(OrderCreditNoteLine OrderCreditNoteLine)
     {
@@ -59,10 +65,10 @@ public class OrderCreditNoteLineUI : IDisposable
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-          //  _proxy.DeleteOrderCreditNoteLine(OrderCreditNoteLine);
+            //  _proxy.DeleteOrderCreditNoteLine(OrderCreditNoteLine);
         }
     }
-   
+
     public void UpdatePopupOrderCreditNoteLine(OrderCreditNoteLine newOrderCreditNoteLine)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
@@ -75,25 +81,25 @@ public class OrderCreditNoteLineUI : IDisposable
 
             //_proxy.UpdateOrderCreditNoteLine(newOrderCreditNoteLine, origOrderCreditNoteLine);
         }
-    }    
+    }
 
     public OrderCreditNoteLine GetByID(int id)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-        return _proxy.GetOrderCreditNoteLine(id);
+            return _proxy.GetOrderCreditNoteLine(id);
         }
     }
 
     #region IDisposable Members
 
     public void Dispose()
-    {     
+    {
     }
 
     #endregion
 
     ~OrderCreditNoteLineUI()
-    {        
+    {
     }
 }

@@ -188,7 +188,7 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
             {
                 this.OrderCreditNoteContinueEventHandler(this, 
                     new OrderCreditNoteContinueEventArgs(this.OrderID.Value, this.ReasonTextBox.Text,
-                        Convert.ToDateTime(this.DueDateTextBox.Text)));
+                        Convert.ToDateTime(this.DueDateTextBox.Text), orderHeader.AlphaID));
             }
         }
         catch (Exception ex)

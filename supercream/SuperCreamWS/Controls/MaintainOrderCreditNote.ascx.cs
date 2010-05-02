@@ -84,18 +84,27 @@ public partial class Controls_MaintainOrderCreditNote : System.Web.UI.UserContro
 
     #endregion
 
-    #region Page Event Handlers
+    #region Page States 
 
     private void InitialiseCreditNoteState(object sender, EventArgs args)
     {
         this.SaveCreditNoteControl.Visible = false;
         this.CreditNoteSearch.Visible = true;
+        this.ModifyOrderCreditNoteLines.Visible = false;
     }
 
     private void SaveCreditNoteState(object sender, EventArgs args)
     {
         this.SaveCreditNoteControl.Visible = true;
         this.CreditNoteSearch.Visible = false;
+        this.ModifyOrderCreditNoteLines.Visible = false;
+    }
+
+    private void ModifyOrderCreditNoteState(object sender, EventArgs args)
+    {
+        this.SaveCreditNoteControl.Visible = false;
+        this.CreditNoteSearch.Visible = false;
+        this.ModifyOrderCreditNoteLines.Visible = true;
     }
 
     #endregion
