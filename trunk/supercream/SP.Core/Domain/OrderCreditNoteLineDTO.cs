@@ -19,7 +19,7 @@ namespace SP.Core.Domain
       private int	_ProductID;
       private int	_QtyPerUnit;
       private int	_NoOfUnits;
-      private int	_Discount;
+      private float	_Discount;
       private decimal	_Price;
 
       public override int ID
@@ -94,7 +94,7 @@ namespace SP.Core.Domain
          }
       }
 
-      public int Discount
+      public float Discount
       {
          get
          {

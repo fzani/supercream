@@ -13,20 +13,34 @@ using SP.Core.DataInterfaces;
 
 namespace SP.Data.LTS
 {
-   public class OrderCreditNoteLineDao : AbstractLTSDao<OrderCreditNoteLine, int>, IOrderCreditNoteLineDao
-   {
-      public OrderCreditNoteLineDao()
-      {
-      }
+    public class OrderCreditNoteLineDao : AbstractLTSDao<OrderCreditNoteLine, int>, IOrderCreditNoteLineDao
+    {
+        public OrderCreditNoteLineDao()
+        {
+        }
 
-      public OrderCreditNoteLineDao(LTSDataContext ctx)
-         : base(ctx)
-      {
-      }
+        public OrderCreditNoteLineDao(LTSDataContext ctx)
+            : base(ctx)
+        {
+        }
 
-      public override OrderCreditNoteLine GetById(int id)
-      {
-         return db.OrderCreditNoteLine.Single<OrderCreditNoteLine>(q => q.ID == id);
-      }
-   }
+        public bool CheckIfCreditNoteLineExists(int creditNoteid, int orderLineId)
+        {
+            return ((db.OrderCreditNoteLine
+                        .Where(q => q.OrderCreditNoteID == creditNoteid && q.OrderLineID == orderLineId).SingleOrDefault()) ==
+                    null);
+        }
+
+        public OrderCreditNoteLine GetCreditNoteLineByOrderIdAndOrderLineId(int creditNoteid, int orderLineId)
+        {
+            return db.OrderCreditNoteLine
+                .Where(q => q.OrderCreditNoteID == creditNoteid && q.OrderLineID == orderLineId)
+                .SingleOrDefault();
+        }
+
+        public override OrderCreditNoteLine GetById(int id)
+        {
+            return db.OrderCreditNoteLine.Single<OrderCreditNoteLine>(q => q.ID == id);
+        }
+    }
 }

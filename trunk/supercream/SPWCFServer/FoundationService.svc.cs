@@ -1102,6 +1102,40 @@ namespace SPWCFServer
 
         #region OrderCreditNoteLine
 
+        public OrderCreditNoteLine GetCreditNoteLineByOrderIdAndOrderLineId(int creditNoteid, int orderLineId)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return ObjectExtension.CloneProperties<SP.Core.Domain.OrderCreditNoteLine, SPWCFServer.OrderCreditNoteLine>(mgr.GetCreditNoteLineByOrderIdAndOrderLineId(creditNoteid, orderLineId));               
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete, it is likely that there are dependent items still linked to it");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public bool CheckIfCreditNoteLineExists(int creditNoteid, int orderLineId)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return mgr.CheckIfCreditNoteLineExists(creditNoteid, orderLineId);
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete, it is likely that there are dependent items still linked to it");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public void DeleteOrderCreditNoteLine(OrderCreditNoteLine orderCreditNoteLine)
         {
             try
@@ -2810,7 +2844,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion                           
+        #endregion                                                             
     }
 }
 

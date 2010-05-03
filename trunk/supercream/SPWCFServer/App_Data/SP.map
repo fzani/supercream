@@ -162,9 +162,36 @@
       <Column Name="LastModifiedDate" Member="LastModifiedDate" Storage="_LastModifiedDate" DbType="DateTime" />
       <Association Name="FK_CreditNote_OrderHeader" Member="CreditNote" Storage="_CreditNote" ThisKey="ID" OtherKey="OrderID" DeleteRule="NO ACTION" />
       <Association Name="FK_Order_Customer" Member="Customer" Storage="_Customer" ThisKey="CustomerID" OtherKey="ID" IsForeignKey="true" />
+      <Association Name="FK_OrderCreditNote_OrderHeader" Member="OrderCreditNote" Storage="_OrderCreditNote" ThisKey="ID" OtherKey="OrderID" DeleteRule="NO ACTION" />
       <Association Name="FK_OrderHeader_VatCode" Member="VatCode" Storage="_VatCode" ThisKey="VatCodeID" OtherKey="ID" IsForeignKey="true" />
       <Association Name="FK_OrderLine_Order" Member="OrderLine" Storage="_OrderLine" ThisKey="ID" OtherKey="OrderID" DeleteRule="NO ACTION" />
       <Association Name="FK_OrderNotesStatus_OrderHeader" Member="OrderNotesStatus" Storage="_OrderNotesStatus" ThisKey="ID" OtherKey="OrderID" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderCreditNote" Member="OrderCreditNote">
+    <Type Name="OrderCreditNote">
+      <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
+      <Column Name="OrderID" Member="OrderID" Storage="_OrderID" DbType="Int" />
+      <Column Name="Reason" Member="Reason" Storage="_Reason" DbType="NText" UpdateCheck="Never" />
+      <Column Name="DateCreated" Member="DateCreated" Storage="_DateCreated" DbType="DateTime" />
+      <Column Name="Reference" Member="Reference" Storage="_Reference" DbType="VarChar(255)" />
+      <Column Name="DueDate" Member="DueDate" Storage="_DueDate" DbType="DateTime" />
+      <Association Name="FK_OrderCreditNote_OrderHeader" Member="OrderHeader" Storage="_OrderHeader" ThisKey="OrderID" OtherKey="ID" IsForeignKey="true" />
+      <Association Name="FK_OrderCreditNoteLine_OrderCreditNote" Member="OrderCreditNoteLine" Storage="_OrderCreditNoteLine" ThisKey="ID" OtherKey="OrderCreditNoteID" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderCreditNoteLine" Member="OrderCreditNoteLine">
+    <Type Name="OrderCreditNoteLine">
+      <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
+      <Column Name="OrderCreditNoteID" Member="OrderCreditNoteID" Storage="_OrderCreditNoteID" DbType="Int" />
+      <Column Name="OrderLineID" Member="OrderLineID" Storage="_OrderLineID" DbType="Int" />
+      <Column Name="ProductID" Member="ProductID" Storage="_ProductID" DbType="Int" />
+      <Column Name="QtyPerUnit" Member="QtyPerUnit" Storage="_QtyPerUnit" DbType="Int" />
+      <Column Name="NoOfUnits" Member="NoOfUnits" Storage="_NoOfUnits" DbType="Int" />
+      <Column Name="Discount" Member="Discount" Storage="_Discount" DbType="Float" />
+      <Column Name="Price" Member="Price" Storage="_Price" DbType="Decimal(10,2)" />
+      <Association Name="FK_OrderCreditNoteLine_OrderCreditNote" Member="OrderCreditNote" Storage="_OrderCreditNote" ThisKey="OrderCreditNoteID" OtherKey="ID" IsForeignKey="true" />
+      <Association Name="FK_OrderCreditNoteLine_Product" Member="Product" Storage="_Product" ThisKey="ProductID" OtherKey="ID" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.OrderLine" Member="OrderLine">
@@ -262,11 +289,11 @@
       <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
       <Column Name="ProductCode" Member="ProductCode" Storage="_ProductCode" DbType="VarChar(10)" />
       <Column Name="Description" Member="Description" Storage="_Description" DbType="VarChar(150)" />
-      <Column Name="UnitQty" Member="UnitQty" Storage="_UnitQty" DbType="int" />
+      <Column Name="UnitQty" Member="UnitQty" Storage="_UnitQty" DbType="Int" />
       <Column Name="UnitPrice" Member="UnitPrice" Storage="_UnitPrice" DbType="Decimal(10,2)" />
       <Column Name="RRPPerItem" Member="RRPPerItem" Storage="_RRPPerItem" DbType="Decimal(10,2)" />
-      <Column Name="VatExempt" Member="VatExempt" Storage="_VatExempt" DbType="bit" />
-
+      <Column Name="VatExempt" Member="VatExempt" Storage="_VatExempt" DbType="Bit" />
+      <Association Name="FK_OrderCreditNoteLine_Product" Member="OrderCreditNoteLine" Storage="_OrderCreditNoteLine" ThisKey="ID" OtherKey="ProductID" DeleteRule="NO ACTION" />
       <Association Name="FK_OrderLine_Product" Member="OrderLine" Storage="_OrderLine" ThisKey="ID" OtherKey="ProductID" DeleteRule="NO ACTION" />
       <Association Name="FK_PriceListItem_Product" Member="PriceListItem" Storage="_PriceListItem" ThisKey="ID" OtherKey="ProductID" DeleteRule="NO ACTION" />
     </Type>

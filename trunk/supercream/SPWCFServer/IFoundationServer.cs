@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
-
-using System.Data.Linq;
 
 namespace SPWCFServer
 {
@@ -244,6 +240,13 @@ namespace SPWCFServer
         #endregion
 
         #region OrderCreditNoteLine
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        bool CheckIfCreditNoteLineExists(int creditNoteid, int orderLineId);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        OrderCreditNoteLine GetCreditNoteLineByOrderIdAndOrderLineId(int creditNoteid, int orderLineId);
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
@@ -1794,7 +1797,7 @@ namespace SPWCFServer
         private int _ProductID;
         private int _QtyPerUnit;
         private int _NoOfUnits;
-        private int _Discount;
+        private float _Discount;
         private decimal _Price;
 
         [DataMember]
@@ -1876,7 +1879,7 @@ namespace SPWCFServer
         }
 
         [DataMember]
-        public int Discount
+        public float Discount
         {
             get
             {

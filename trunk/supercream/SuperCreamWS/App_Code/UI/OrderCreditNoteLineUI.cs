@@ -19,29 +19,27 @@ using WcfFoundationService;
 [System.ComponentModel.DataObject]
 public class OrderCreditNoteLineUI : IDisposable
 {
-    private WcfFoundationService.FoundationServiceClient _proxy;
-
     public OrderCreditNoteLineUI()
     {
     }
 
     [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
-    public List<OrderCreditNoteLine> GetAllCreditNotes()
+    public static List<OrderCreditNoteLine> GetAllCreditNotes()
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.GetAllOrderCreditNoteLines() as List<OrderCreditNoteLine>;
+            return proxy.GetAllOrderCreditNoteLines() as List<OrderCreditNoteLine>;
         }
     }
 
     [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
-    public List<OrderLine> GetAvailableOrderLines(int orderId)
+    public static List<OrderLine> GetAvailableOrderLines(int orderId)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
             if (orderId > -1)
             {
-                return _proxy.AvailableOrderLinesForCreditNote(orderId) as List<OrderLine>;
+                return proxy.AvailableOrderLinesForCreditNote(orderId) as List<OrderLine>;
             }
             else
             {
@@ -51,49 +49,61 @@ public class OrderCreditNoteLineUI : IDisposable
     }
 
     [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
-    public List<OrderLine> GetCreditNoteLines(int creditNoteId)
+    public static List<OrderLine> GetCreditNoteLines(int creditNoteId)
     {
         return null;
     }
 
-    public void SaveOrderCreditNoteLine(OrderCreditNoteLine OrderCreditNoteLine)
+    public static void SaveOrderCreditNoteLine(OrderCreditNoteLine OrderCreditNoteLine)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            //if(_proxy.AlphaIDExists(OrderCreditNoteLine.AlphaID))
-            //    throw new ApplicationException("OrderCreditNoteLine no " + OrderCreditNoteLine.AlphaID + " is already used");    
-            _proxy.SaveOrderCreditNoteLine(OrderCreditNoteLine);
+            proxy.SaveOrderCreditNoteLine(OrderCreditNoteLine);
         }
 
     }
 
-    public void DeleteOrderCreditNoteLine(int id)
+    public static void DeleteOrderCreditNoteLine(int id)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            //  _proxy.DeleteOrderCreditNoteLine(OrderCreditNoteLine);
+            OrderCreditNoteLine line = proxy.GetOrderCreditNoteLine(id);
+            proxy.DeleteOrderCreditNoteLine(line);
         }
     }
 
-    public void UpdatePopupOrderCreditNoteLine(OrderCreditNoteLine newOrderCreditNoteLine)
+    public static void Update(OrderCreditNoteLine newOrderCreditNoteLine)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            //OrderCreditNoteLine origOrderCreditNoteLine = _proxy.GetOrderCreditNoteLine(newOrderCreditNoteLine.ID);
-            //newOrderCreditNoteLine.ID = origOrderCreditNoteLine.ID;           
+            OrderCreditNoteLine origOrderCreditNoteLine = proxy.GetOrderCreditNoteLine(newOrderCreditNoteLine.ID);
+            newOrderCreditNoteLine.ID = origOrderCreditNoteLine.ID;                      
 
-            //// Note :- have to remove cyclic reference fom orig Object
-            //origOrderCreditNoteLine.Address.OrderCreditNoteLine = null;
-
-            //_proxy.UpdateOrderCreditNoteLine(newOrderCreditNoteLine, origOrderCreditNoteLine);
+            proxy.UpdateOrderCreditNoteLine(newOrderCreditNoteLine, origOrderCreditNoteLine);
         }
     }
 
-    public OrderCreditNoteLine GetByID(int id)
+    public static OrderCreditNoteLine GetByID(int id)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.GetOrderCreditNoteLine(id);
+            return proxy.GetOrderCreditNoteLine(id);
+        }
+    }
+
+    public static OrderCreditNoteLine GetCreditNoteLineByOrderIdAndOrderLineId(int creditNoteId, int orderLineId)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.GetCreditNoteLineByOrderIdAndOrderLineId(creditNoteId, orderLineId);
+        }
+    }
+
+    public static bool CheckIfOrderCreditLineExists(int creditNoteId, int orderLineId)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.CheckIfCreditNoteLineExists(creditNoteId, orderLineId);
         }
     }
 

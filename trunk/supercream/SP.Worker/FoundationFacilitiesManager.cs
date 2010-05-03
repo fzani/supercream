@@ -539,11 +539,16 @@ namespace SP.Worker
             return orderCreditNoteDao.GetAll();
         }
 
-        public OrderCreditNote SaveOrderCreditNote(OrderCreditNote ordercreditnote)
+        public OrderCreditNote SaveOrderCreditNote(OrderCreditNote orderCreditNote)
         {
             IDaoFactory factory = new LTSDaoFactory();
             IOrderCreditNoteDao orderCreditNoteDao = factory.GetOrderCreditNoteDao();
-            return orderCreditNoteDao.Save(ordercreditnote);
+            IOrderCreditNoteDao validateNoteDao = factory.GetOrderCreditNoteDao();
+            if (validateNoteDao.ReferenceExists(orderCreditNote.Reference))
+                throw new ApplicationException("Cannot add credit note Credit Reference is alreasy in use");
+            orderCreditNote.Reference = orderCreditNoteDao.GenerateCreditNo();
+
+            return orderCreditNoteDao.Save(orderCreditNote);
         }
 
         public OrderCreditNote UpdateOrderCreditNote(OrderCreditNote newOrderCreditNote, OrderCreditNote origOrderCreditNote)
@@ -556,6 +561,24 @@ namespace SP.Worker
         #endregion
 
         #region OrderCreditNoteLine
+
+
+        public OrderCreditNoteLine GetCreditNoteLineByOrderIdAndOrderLineId(int creditNoteid, int orderLineId)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteLineDao orderCreditNoteLineDao = factory.GetOrderCreditNoteLineDao();
+
+            return orderCreditNoteLineDao.GetCreditNoteLineByOrderIdAndOrderLineId(creditNoteid, orderLineId);
+        }
+
+        public bool CheckIfCreditNoteLineExists(int creditNoteid, int orderLineId)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteLineDao orderCreditNoteLineDao = factory.GetOrderCreditNoteLineDao();
+
+            return orderCreditNoteLineDao.CheckIfCreditNoteLineExists(creditNoteid, orderLineId);
+        }
+
         public void DeleteOrderCreditNoteLine(OrderCreditNoteLine ordercreditnoteline)
         {
             IDaoFactory factory = new LTSDaoFactory();
@@ -1605,7 +1628,6 @@ namespace SP.Worker
             return Convert.ToDecimal(vatCode.PercentageValue);
         }
 
-        #endregion            
-
+        #endregion                
     }
 }

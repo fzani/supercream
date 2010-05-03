@@ -196,16 +196,31 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
         else
         {
             OrderLineUI.Update(orderLine);
-        }    
+        }  
 
-        
-    
-
-
-        OrderCreditNoteLineUI orderCreditNoteLineUI = new OrderCreditNoteLineUI();
-       // orderCreditNoteLineUI.SaveOrderCreditNoteLine();
-
-
+        if(OrderCreditNoteLineUI.CheckIfOrderCreditLineExists(credtNoteId, orderLineId))
+        {
+            OrderCreditNoteLine orderCreditNoteLine = OrderCreditNoteLineUI.GetCreditNoteLineByOrderIdAndOrderLineId(credtNoteId, orderLineId);
+            orderCreditNoteLine.NoOfUnits += noOfUnits;
+            OrderCreditNoteLineUI.Update(orderCreditNoteLine);
+        }
+        else
+        {
+            var orderCreditNoteLine = new OrderCreditNoteLine
+                                          {
+                                               ID = -1,
+                                               OrderCreditNoteID = credtNoteId,
+                                               OrderLineID = orderLine.ID,
+                                               ProductID = orderLine.ProductID,
+                                               QtyPerUnit = orderLine.QtyPerUnit,
+                                               NoOfUnits = noOfUnits,
+                                               Discount = orderLine.Discount,
+                                               Price = orderLine.Price
+                                          };
+            OrderCreditNoteLineUI.SaveOrderCreditNoteLine(orderCreditNoteLine);
+        }
+       
+        this.DataBind();
     }
 
     protected void CreditNoteOrderDetailsGridPanel_RowDataBound(object sender, GridViewRowEventArgs e)
