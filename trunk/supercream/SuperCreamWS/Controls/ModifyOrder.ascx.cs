@@ -386,12 +386,11 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         if (e.CommandName.Equals("Select"))
         {
             Int32 index = Convert.ToInt32(e.CommandArgument);
-            GridViewRow row = this.OrderDetailsGridView.Rows[index];
+            GridViewRow row = this.OrderDetailsGridView.Rows[index];            
 
             Label idLabel = row.FindControl("IDLabel") as Label;
-
-            OrderLineUI orderLineUI = new OrderLineUI();
-            OrderLine orderLine = orderLineUI.GetOrderLine(Convert.ToInt32(idLabel.Text));
+            
+            OrderLine orderLine = OrderLineUI.GetOrderLine(Convert.ToInt32(idLabel.Text));
             ProductUI productUI = new ProductUI();
             Product product = productUI.GetProductByID(orderLine.ProductID);
 
@@ -528,9 +527,8 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
                 QtyPerUnit = qtyPerUnit,
                 SpecialInstructions = specialInstructionsTextBox.Text
             };
-
-            OrderLineUI ui = new OrderLineUI();
-            ui.Update(line);
+          
+            OrderLineUI.Update(line);
             DataBind();
 
         }
@@ -545,11 +543,10 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     protected void DeleteButton_Click(object sender, EventArgs e)
     {
         try
-        {
-            OrderLineUI ui = new OrderLineUI();
+        {           
             Button btn = sender as Button;
             if (btn.CommandName == "DeleteButton")
-                ui.DeleteOrderLine(Convert.ToInt32(btn.CommandArgument));
+                OrderLineUI.DeleteOrderLine(Convert.ToInt32(btn.CommandArgument));
             DataBind();
         }
         catch (Exception ex)

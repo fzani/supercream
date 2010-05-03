@@ -32,6 +32,19 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
         }
     }
 
+    public int CreditNoteID
+    {
+        get
+        {
+            return (int)ViewState["CreditNoteID"];
+        }
+
+        set
+        {
+            ViewState["CreditNoteID"] = value;
+        }
+    }
+
     public string AlphaID
     {
         get
@@ -43,6 +56,12 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
         {
             ViewState["AlphaID"] = value;
         }
+    }
+
+    public List<OrderLine> OrderLines
+    {
+        get;
+        set;
     }
 
     #endregion
@@ -82,7 +101,7 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
 
             Label productNameLabel = e.Row.FindControl("ProductNameLabel") as Label;
             Product product = productUI.GetProductByID(productID.Value);
-            productNameLabel.Text = product.Description;          
+            productNameLabel.Text = product.Description;
         }
 
         if (e.Row.RowType == DataControlRowType.Footer)
@@ -101,41 +120,97 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
 
             Label idLabel = row.FindControl("IDLabel") as Label;
 
-            OrderLineUI orderLineUI = new OrderLineUI();
-            OrderLine orderLine = orderLineUI.GetOrderLine(Convert.ToInt32(idLabel.Text));
+            OrderLine orderLine = OrderLineUI.GetOrderLine(Convert.ToInt32(idLabel.Text));
             ProductUI productUI = new ProductUI();
             Product product = productUI.GetProductByID(orderLine.ProductID);
 
-            Label productIDLabel = row.FindControl("ProductIDLabel") as Label;
-            productIDLabel.Text = orderLine.ProductID.ToString();
+            Panel panelMessage = row.FindControl("PanelMessage") as Panel;
+            Label noOfUnitsLabel = row.FindControl("NoOfUnitsLabel") as Label;
+            int qtyToCredit = Convert.ToInt32(noOfUnitsLabel.Text);
 
-            Label productNameLabel = row.FindControl("PanelProductNameLabel") as Label;
-            productNameLabel.Text = product.Description;
+            DropDownList quantityToCreditDropDownList = panelMessage.FindControl("QuantityToCreditDropDownList") as DropDownList;
 
-            Label alphaIDLabel = row.FindControl("AlphaIDLabel") as Label;
-            alphaIDLabel.Text = AlphaID;
+            for (int i = 0; i < qtyToCredit; i++)
+            {
+                quantityToCreditDropDownList.Items.Add(new ListItem((i + 1).ToString(), (i + 1).ToString()));
+            }
+            quantityToCreditDropDownList.SelectedValue = qtyToCredit.ToString();
 
-            Label orderIDLabel = row.FindControl("OrderIDLabel") as Label;
-            orderIDLabel.Text = orderLine.OrderID.ToString();
+            //Label productIDLabel = row.FindControl("ProductIDLabel") as Label;
+            //productIDLabel.Text = orderLine.ProductID.ToString();
 
-            TextBox qtyTextBox = row.FindControl("QtyTextBox") as TextBox;
-            qtyTextBox.Text = orderLine.QtyPerUnit.ToString();
+            //Label productNameLabel = row.FindControl("ProductNameLabel") as Label;
+            //productNameLabel.Text = product.Description;
 
-            TextBox noOfUnitsTextBox = row.FindControl("NoOfUnitsTextBox") as TextBox;
-            noOfUnitsTextBox.Text = orderLine.NoOfUnits.ToString();
+            //Label alphaIDLabel = row.FindControl("AlphaIDLabel") as Label;
+            //alphaIDLabel.Text = AlphaID;
 
-            TextBox discountTextBox = row.FindControl("DiscountTextBox") as TextBox;
-            discountTextBox.Text = orderLine.Discount.ToString();
+            //Label orderIDLabel = row.FindControl("OrderIDLabel") as Label;
+            //orderIDLabel.Text = orderLine.OrderID.ToString();
 
-            TextBox priceTextBox = row.FindControl("PriceTextBox") as TextBox;
-            priceTextBox.Text = String.Format("{0:c}", orderLine.Price);
+            //TextBox qtyTextBox = row.FindControl("QtyTextBox") as TextBox;
+            //qtyTextBox.Text = orderLine.QtyPerUnit.ToString();
 
-            TextBox specialInstructionsTextBox = row.FindControl("SpecialInstructionsTextBox") as TextBox;
-            specialInstructionsTextBox.Text = orderLine.SpecialInstructions;
+            //TextBox noOfUnitsTextBox = row.FindControl("NoOfUnitsTextBox") as TextBox;
+            //noOfUnitsTextBox.Text = orderLine.NoOfUnits.ToString();
+
+            //TextBox discountTextBox = row.FindControl("DiscountTextBox") as TextBox;
+            //discountTextBox.Text = orderLine.Discount.ToString();
+
+            //TextBox priceTextBox = row.FindControl("PriceTextBox") as TextBox;
+            //priceTextBox.Text = String.Format("{0:c}", orderLine.Price);
+
+            //TextBox specialInstructionsTextBox = row.FindControl("SpecialInstructionsTextBox") as TextBox;
+            //specialInstructionsTextBox.Text = orderLine.SpecialInstructions;
 
             ModalPopupExtender extender = row.FindControl("ModalPopupExtender") as ModalPopupExtender;
             extender.Show();
         }
+    }
+
+    protected void UpdateOrderCreditLineButton_Click(object sender, EventArgs e)
+    {
+        Button button = sender as Button;
+
+        Int32 index = Convert.ToInt32(button.CommandArgument);
+        GridViewRow row = this.OrderDetailsGridView.Rows[index];
+        OrderLine line = row.DataItem as OrderLine;
+
+        Panel panelMessage = row.FindControl("PanelMessage") as Panel;
+        DropDownList quantityToCreditDropDownList = panelMessage.FindControl("QuantityToCreditDropDownList") as DropDownList;
+
+        int noOfUnits = Convert.ToInt32(quantityToCreditDropDownList.SelectedValue.ToString());
+        int orderLineId = Convert.ToInt32(this.OrderDetailsGridView.SelectedDataKey.Value);
+        int credtNoteId = CreditNoteID;
+        // Now check if order atline should be updated or deleted.
+        // update or delete.
+        // Then check if credit note line exists - if not create then 
+        // write credit Note line and if neccessary remove order line
+        // First Read Order line
+        var orderLine = OrderLineUI.GetOrderLine(orderLineId);
+        orderLine.NoOfUnits -= noOfUnits;
+        if(orderLine.NoOfUnits == 0)
+        {
+            OrderLineUI.DeleteOrderLine(orderLineId);
+        }
+        else
+        {
+            OrderLineUI.Update(orderLine);
+        }    
+
+        
+    
+
+
+        OrderCreditNoteLineUI orderCreditNoteLineUI = new OrderCreditNoteLineUI();
+       // orderCreditNoteLineUI.SaveOrderCreditNoteLine();
+
+
+    }
+
+    protected void CreditNoteOrderDetailsGridPanel_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+
     }
 
     #endregion

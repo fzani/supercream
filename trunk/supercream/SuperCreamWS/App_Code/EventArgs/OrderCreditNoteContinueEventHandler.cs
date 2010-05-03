@@ -15,14 +15,21 @@ namespace App_Code.EventArgs
         private readonly string reason;
         private readonly DateTime dueDate;
         private readonly string alphaId;
+        private readonly int creditNoteId;
 
-        public OrderCreditNoteContinueEventArgs(int orderId, string reason, DateTime dueDate, string alphaId)
+        public OrderCreditNoteContinueEventArgs(int orderId, string reason, DateTime dueDate, string alphaId, int creditNoteId)
         {
             this.orderId = orderId;
+            this.creditNoteId = creditNoteId;
             this.dueDate = dueDate;
             this.alphaId = alphaId;
             this.reason = reason;
 
+        }
+
+        public int CreditNoteId
+        {
+            get { return creditNoteId; }
         }
 
         public string AlphaId

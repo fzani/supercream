@@ -50,6 +50,12 @@ public class OrderCreditNoteLineUI : IDisposable
         }
     }
 
+    [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
+    public List<OrderLine> GetCreditNoteLines(int creditNoteId)
+    {
+        return null;
+    }
+
     public void SaveOrderCreditNoteLine(OrderCreditNoteLine OrderCreditNoteLine)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
