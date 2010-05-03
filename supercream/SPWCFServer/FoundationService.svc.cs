@@ -514,7 +514,7 @@ namespace SPWCFServer
             try
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
-                return mgr.GetOustandingCreditNoteBalance(orderNo, creditNote, vatRate);               
+                return mgr.GetOustandingCreditNoteBalance(orderNo, creditNote, vatRate);
             }
             catch (Exception ex)
             {
@@ -1102,12 +1102,29 @@ namespace SPWCFServer
 
         #region OrderCreditNoteLine
 
+        public bool CheckIfOrderLineAlreadyExistsForCreditNotes(int orderLineId)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return mgr.CheckIfOrderLineAlreadyExistsForCreditNotes(orderLineId);
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete, it is likely that there are dependent items still linked to it");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public OrderCreditNoteLine GetCreditNoteLineByOrderIdAndOrderLineId(int creditNoteid, int orderLineId)
         {
             try
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
-                return ObjectExtension.CloneProperties<SP.Core.Domain.OrderCreditNoteLine, SPWCFServer.OrderCreditNoteLine>(mgr.GetCreditNoteLineByOrderIdAndOrderLineId(creditNoteid, orderLineId));               
+                return ObjectExtension.CloneProperties<SP.Core.Domain.OrderCreditNoteLine, SPWCFServer.OrderCreditNoteLine>(mgr.GetCreditNoteLineByOrderIdAndOrderLineId(creditNoteid, orderLineId));
             }
             catch (SqlException)
             {
@@ -1271,7 +1288,7 @@ namespace SPWCFServer
 
                 SP.Core.Domain.OrderHeader orderHeader = mgr.GetOrderHeader(id);
                 OrderHeader order = ObjectExtension.CloneProperties<SP.Core.Domain.OrderHeader, SPWCFServer.OrderHeader>(orderHeader);
-               // order.VatCode = ObjectExtension.CloneProperties<SP.Core.Domain.VatCode, SPWCFServer.VatCode>(orderHeader.VatCode);
+                // order.VatCode = ObjectExtension.CloneProperties<SP.Core.Domain.VatCode, SPWCFServer.VatCode>(orderHeader.VatCode);
                 return order;
 
             }
@@ -2844,7 +2861,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion                                                             
+        #endregion
     }
 }
 
