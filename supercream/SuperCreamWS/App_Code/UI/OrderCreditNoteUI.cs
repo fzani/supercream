@@ -34,15 +34,14 @@ public class OrderCreditNoteUI : IDisposable
         }
     }
 
-    public void SaveOrderCreditNote(OrderCreditNote OrderCreditNote)
+    public OrderCreditNote SaveOrderCreditNote(OrderCreditNote OrderCreditNote)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
             //if(_proxy.AlphaIDExists(OrderCreditNote.AlphaID))
             //    throw new ApplicationException("OrderCreditNote no " + OrderCreditNote.AlphaID + " is already used");    
-            _proxy.SaveOrderCreditNote(OrderCreditNote);
+            return _proxy.SaveOrderCreditNote(OrderCreditNote);
         }
-
     }
 
     public void DeleteOrderCreditNote(int id)

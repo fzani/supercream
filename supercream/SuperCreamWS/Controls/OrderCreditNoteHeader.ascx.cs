@@ -20,11 +20,13 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
 
     #region Public Properies
 
-    public bool? IsNewCreditNote
+    public bool IsNewCreditNote
     {
         get
         {
-            return ViewState["IsNewCreditNote"] as bool?;
+            if (ViewState["IsNewCreditNote"] == null)
+                return true;
+            return (bool) ViewState["IsNewCreditNote"];
         }
 
         set
@@ -107,8 +109,8 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
         this.InvoiceAmountCreditedLabel.Text = invoiceAmountCredited.ToString("c");
         this.AmountAvailableToBeCreditedLabel.Text = (totalInvoiceAmount - invoiceAmountCredited).ToString("c");
         this.DueDateTextBox.Text = creditNote.DueDate.ToShortDateString();
-      
-        this.ReasonTextBox.Text = creditNote.Reason;       
+
+        this.ReasonTextBox.Text = creditNote.Reason;
 
         this.PrintButton.Visible = true;
     }
@@ -130,44 +132,21 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
             VatCodeUI vatCodeUI = new VatCodeUI();
             VatCode vatCode = vatCodeUI.GetByID(orderHeader.VatCodeID);
 
-            //var currentCreditAmount = String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ? new decimal(0.0) :
-            //    String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ? new decimal(0.0) : Util.ConvertStringToDecimal(this.AmountToCreditTextBox.Text);
+            // Persist credit note details
+            var ui = new OrderCreditNoteUI();
+            var orderCreditNote = new OrderCreditNote();
 
-            //// Get oustanding credit already applied
-            //decimal oustandingCreditedAmount;
-            //if (this.IsNewCreditNote.Value)
-            //{
-            //    oustandingCreditedAmount =
-            //        creditNoteUI.GetOustandingCreditBalance(this.OrderID.Value, -1, new decimal(vatCode.PercentageValue));
-            //}
-            //else
-            //{
-            //    oustandingCreditedAmount =
-            //        creditNoteUI.GetOustandingCreditBalance(this.OrderID.Value, this.CreditNoteID.Value, new decimal(vatCode.PercentageValue));
-            //}
-
-            //// Check that we are not crediting too much
-            //decimal totalAmountThatWillBeCredited = Util.ConvertStringToDecimal(this.TotalInvoiceAmountLabel.Text) -
-            //                      oustandingCreditedAmount -
-            //                      this.CalculateCreditAmount(currentCreditAmount, new decimal(vatCode.PercentageValue));
-            //if (totalAmountThatWillBeCredited < 0)
-            //    throw new ApplicationException("Cannot credit for more than the invoicable amount");
-
-            //// Persist credit note details
-            //CreditNoteUI ui = new CreditNoteUI();
-            //if (this.IsNewCreditNote.Value)
-            //{
-            //    ui.SaveCreditNote(new CreditNote
-            //    {
-            //        ID = -1,
-            //        OrderID = this.OrderID.Value,
-            //        CreditAmount = currentCreditAmount,
-            //        DateCreated = DateTime.Now,
-            //        Reason = this.ReasonTextBox.Text,
-            //        VatExempt = this.VatExemptCheckBox.Checked,
-            //        DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
-            //    });
-            //}
+            if (this.IsNewCreditNote)
+            {
+                orderCreditNote = ui.SaveOrderCreditNote(new OrderCreditNote()
+                {
+                    ID = -1,
+                    OrderID = this.OrderID.Value,
+                    DateCreated = DateTime.Now,
+                    Reason = this.ReasonTextBox.Text,
+                    DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
+                });
+            }
             //else
             //{
             //    CreditNote creditNote = ui.GetCreditNote(CreditNoteID.Value);
@@ -186,9 +165,9 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
 
             if (this.OrderCreditNoteContinueEventHandler != null)
             {
-                this.OrderCreditNoteContinueEventHandler(this, 
+                this.OrderCreditNoteContinueEventHandler(this,
                     new OrderCreditNoteContinueEventArgs(this.OrderID.Value, this.ReasonTextBox.Text,
-                        Convert.ToDateTime(this.DueDateTextBox.Text), orderHeader.AlphaID));
+                        Convert.ToDateTime(this.DueDateTextBox.Text), orderHeader.AlphaID, orderCreditNote.ID));
             }
         }
         catch (Exception ex)
@@ -224,14 +203,14 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
 
             if (this.OrderCreditNoteContinueEventHandler != null)
             {
-              //  this.OrderCreditNoteContinueEventHandler(this, new EventArgs());
+                //  this.OrderCreditNoteContinueEventHandler(this, new EventArgs());
             }
         }
     }
 
     #endregion
 
-    #region Private Helper   
+    #region Private Helper
     #endregion
 
 }

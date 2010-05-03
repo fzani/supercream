@@ -36,11 +36,11 @@ public class OrderLineUI : IDisposable
         }
     }
 
-    public void Update(OrderLine newOrderLine)
+    public static void Update(OrderLine newOrderLine)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            OrderLine origOrderLine = _proxy.GetOrderLine(newOrderLine.ID);
+            OrderLine origOrderLine = proxy.GetOrderLine(newOrderLine.ID);
             OrderLine updatedOrderLine = origOrderLine.Clone<OrderLine>();
             updatedOrderLine.Discount = newOrderLine.Discount;
             updatedOrderLine.NoOfUnits = newOrderLine.NoOfUnits;
@@ -53,7 +53,7 @@ public class OrderLineUI : IDisposable
             updatedOrderLine.QtyPerUnit = newOrderLine.QtyPerUnit;
             updatedOrderLine.SpecialInstructions = newOrderLine.SpecialInstructions;
 
-            _proxy.UpdateOrderLine(updatedOrderLine, origOrderLine);
+            proxy.UpdateOrderLine(updatedOrderLine, origOrderLine);
         }
     }
 
@@ -65,20 +65,20 @@ public class OrderLineUI : IDisposable
         }
     }
 
-    public OrderLine GetOrderLine(int id)
+    public static OrderLine GetOrderLine(int id)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.GetOrderLine(id);
+            return proxy.GetOrderLine(id);
         }
     }
 
-    public void DeleteOrderLine(int id)
+    public static void DeleteOrderLine(int id)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            OrderLine line = _proxy.GetOrderLine(id);
-            _proxy.DeleteOrderLine(line);
+            OrderLine line = proxy.GetOrderLine(id);
+            proxy.DeleteOrderLine(line);
         }
     }
 
