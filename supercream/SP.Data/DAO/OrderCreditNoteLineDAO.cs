@@ -24,6 +24,13 @@ namespace SP.Data.LTS
         {
         }
 
+        public bool CheckIfOrderLineAlreadyExists(int orderLineId)
+        {
+            return ((db.OrderCreditNoteLine
+                        .Where(q=> q.OrderLineID == orderLineId).FirstOrDefault()) ==
+                    null);
+        }
+
         public bool CheckIfCreditNoteLineExists(int creditNoteid, int orderLineId)
         {
             return ((db.OrderCreditNoteLine
