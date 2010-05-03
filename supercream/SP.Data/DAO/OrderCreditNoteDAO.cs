@@ -24,6 +24,21 @@ namespace SP.Data.LTS
         {
         }
 
+        public string GenerateCreditNo()
+        {
+            if (db.OrderCreditNote.FirstOrDefault() == null)
+            {
+                return "OCRN-1";
+            }
+            else
+            {
+                int maxInvoiceNo =
+                    (int)
+                    db.OrderCreditNote.Select(q => Convert.ToInt32(q.Reference.Substring(5, q.Reference.Length - 5))).Max();
+                return "OCRN-" + (maxInvoiceNo + 1).ToString();
+            }
+        }    
+
         public override OrderCreditNote GetById(int id)
         {
             return db.OrderCreditNote.Single<OrderCreditNote>(q => q.ID == id);
@@ -34,6 +49,11 @@ namespace SP.Data.LTS
             return  (from ol in db.OrderLine
                      where (ol.OrderID == orderId)
                      select ol).ToList<OrderLine>();
+        }
+
+        public bool ReferenceExists(string referenceNo)
+        {
+            return (db.OrderCreditNote.Where<OrderCreditNote>(q => q.Reference == referenceNo).FirstOrDefault() != null) ? true : false;
         }
     }
 }
