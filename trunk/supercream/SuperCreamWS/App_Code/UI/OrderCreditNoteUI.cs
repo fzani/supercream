@@ -13,6 +13,13 @@ using System.Transactions;
 
 using WcfFoundationService;
 
+public struct id
+{
+		static id()
+		{
+				throw new NotImplementedException();
+		}
+}
 /// <summary>
 /// Summary description for OrderListUI
 /// </summary>
@@ -20,6 +27,7 @@ using WcfFoundationService;
 public class OrderCreditNoteUI : IDisposable
 {
     private WcfFoundationService.FoundationServiceClient _proxy;
+                                                                private static bool id = false;
 
     public OrderCreditNoteUI()
     {        
@@ -71,6 +79,14 @@ public class OrderCreditNoteUI : IDisposable
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
         return _proxy.GetOrderCreditNote(id);
+        }
+    }
+
+    public static bool CheckIfOrderCreditLineExists(int creditNoteId, int orderLineId)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.CheckIfCreditNoteLineExists(creditNoteId, orderLineId);
         }
     }
 
