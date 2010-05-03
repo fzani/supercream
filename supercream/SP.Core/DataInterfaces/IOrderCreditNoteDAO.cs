@@ -12,8 +12,10 @@ using SP.Core.Domain;
 
 namespace SP.Core.DataInterfaces
 {
-   public interface IOrderCreditNoteDao : IDao<OrderCreditNote, int>
-   {
-       List<OrderLine> AvailableOrderLinesForCreditNote(int orderId);    
-   }
+    public interface IOrderCreditNoteDao : IDao<OrderCreditNote, int>
+    {
+        List<OrderLine> AvailableOrderLinesForCreditNote(int orderId);
+        string GenerateCreditNo();
+        bool ReferenceExists(string referenceNo);
+    }
 }

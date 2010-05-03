@@ -81,15 +81,7 @@ public class OrderCreditNoteUI : IDisposable
         return _proxy.GetOrderCreditNote(id);
         }
     }
-
-    public static bool CheckIfOrderCreditLineExists(int creditNoteId, int orderLineId)
-    {
-        using (var proxy = new WcfFoundationService.FoundationServiceClient())
-        {
-            return proxy.CheckIfCreditNoteLineExists(creditNoteId, orderLineId);
-        }
-    }
-
+  
     #region IDisposable Members
 
     public void Dispose()

@@ -12,7 +12,9 @@ using SP.Core.Domain;
 
 namespace SP.Core.DataInterfaces
 {
-   public interface IOrderCreditNoteLineDao : IDao<OrderCreditNoteLine, int>
-   {
-   }
+    public interface IOrderCreditNoteLineDao : IDao<OrderCreditNoteLine, int>
+    {
+        bool CheckIfCreditNoteLineExists(int creditNoteid, int orderLineId);
+        OrderCreditNoteLine GetCreditNoteLineByOrderIdAndOrderLineId(int creditNoteid, int orderLineId);
+    }
 }

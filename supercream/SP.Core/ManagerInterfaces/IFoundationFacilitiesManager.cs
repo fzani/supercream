@@ -85,16 +85,19 @@ namespace SP.Core.ManagerInterfaces
         void DeleteOrderCreditNote(OrderCreditNote ordercreditnote);
         OrderCreditNote GetOrderCreditNote(int id);
         List<OrderCreditNote> GetAllOrderCreditNotes();
-        OrderCreditNote SaveOrderCreditNote(OrderCreditNote ordercreditnote);
+        OrderCreditNote SaveOrderCreditNote(OrderCreditNote orderCreditNote);
         OrderCreditNote UpdateOrderCreditNote(OrderCreditNote newOrderCreditNote, OrderCreditNote origOrderCreditNote);
         #endregion
 
         #region OrderCreditNoteLine
+        OrderCreditNoteLine GetCreditNoteLineByOrderIdAndOrderLineId(int creditNoteid, int orderLineId);
         void DeleteOrderCreditNoteLine(OrderCreditNoteLine ordercreditnoteline);
         OrderCreditNoteLine GetOrderCreditNoteLine(int id);
         List<OrderCreditNoteLine> GetAllOrderCreditNoteLines();
         OrderCreditNoteLine SaveOrderCreditNoteLine(OrderCreditNoteLine ordercreditnoteline);
         OrderCreditNoteLine UpdateOrderCreditNoteLine(OrderCreditNoteLine newOrderCreditNoteLine, OrderCreditNoteLine origOrderCreditNoteLine);
+        bool CheckIfCreditNoteLineExists(int creditNoteid, int orderLineId);
+
         #endregion 
 
         #region OrderHeader     
