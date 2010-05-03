@@ -562,6 +562,13 @@ namespace SP.Worker
 
         #region OrderCreditNoteLine
 
+        public bool CheckIfOrderLineAlreadyExistsForCreditNotes(int orderLineId)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteLineDao orderCreditNoteLineDao = factory.GetOrderCreditNoteLineDao();
+
+            return orderCreditNoteLineDao.CheckIfOrderLineAlreadyExists(orderLineId);
+        }
 
         public OrderCreditNoteLine GetCreditNoteLineByOrderIdAndOrderLineId(int creditNoteid, int orderLineId)
         {
@@ -1628,6 +1635,6 @@ namespace SP.Worker
             return Convert.ToDecimal(vatCode.PercentageValue);
         }
 
-        #endregion                
+        #endregion                                
     }
 }
