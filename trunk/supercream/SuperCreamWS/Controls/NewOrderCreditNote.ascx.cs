@@ -103,6 +103,7 @@ public partial class Controls_NewOrderCreditNote : System.Web.UI.UserControl
         this.NewCreditNoteSearch.Visible = true;
         this.OrderCreditNoteHeader.Visible = false;
         this.ModifyOrderCreditNoteLines.Visible = false;
+        this.CancelButton.Text = "Cancel";
     }
 
     private void ModifyOrderCreditNoteHeaderState(object sender, EventArgs args)
@@ -110,6 +111,7 @@ public partial class Controls_NewOrderCreditNote : System.Web.UI.UserControl
         this.NewCreditNoteSearch.Visible = false;
         this.OrderCreditNoteHeader.Visible = true;
         this.ModifyOrderCreditNoteLines.Visible = false;
+        this.CancelButton.Text = "Cancel";
     }
 
     private void ModifyOrderCreditNoteLinesState(object sender, EventArgs args)
@@ -117,6 +119,7 @@ public partial class Controls_NewOrderCreditNote : System.Web.UI.UserControl
         this.NewCreditNoteSearch.Visible = false;
         this.OrderCreditNoteHeader.Visible = false;
         this.ModifyOrderCreditNoteLines.Visible = true;
+        this.CancelButton.Text = "Continue";
     }
 
     #endregion
