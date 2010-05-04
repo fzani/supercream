@@ -103,6 +103,18 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
             Label productNameLabel = e.Row.FindControl("ProductNameLabel") as Label;
             Product product = productUI.GetProductByID(productID.Value);
             productNameLabel.Text = product.Description;
+
+            Image img = e.Row.FindControl("CreditNoteExistsImage") as Image;
+
+            bool? creditNoteExists = true;
+            if (creditNoteExists == true)
+            {
+                img.ImageUrl = "~/images/12-em-check.png";
+            }
+            else
+            {
+                img.ImageUrl = "~/images/12-em-check.png";
+            }
         }
 
         if (e.Row.RowType == DataControlRowType.Footer)
@@ -191,7 +203,7 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
         Panel panelMessage = row.FindControl("PanelMessage") as Panel;
         DropDownList quantityToCreditDropDownList = panelMessage.FindControl("QuantityToCreditDropDownList") as DropDownList;
         int selectedNoOfUnits = Convert.ToInt32(quantityToCreditDropDownList.SelectedValue.ToString());
-       
+
         //// Second Add units to credit note and create or update order credit line         
         // var orderLine = OrderLineUI.GetOrderLine(orderLineId);      
         //if(OrderCreditNoteLineUI.CheckIfOrderCreditLineExists(credtNoteId, orderLineId))
@@ -215,13 +227,25 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
         //                                  };
         //    OrderCreditNoteLineUI.SaveOrderCreditNoteLine(orderCreditNoteLine);
         //}
-       
+
         //this.DataBind();
     }
 
-    protected void CreditNoteOrderDetailsGridPanel_RowDataBound(object sender, GridViewRowEventArgs e)
+    protected void CreditNoteLinesGridView_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+        GridViewRow drv = e.Row.DataItem as GridViewRow;
 
+        Image img = e.Row.FindControl("CreditNoteExistsImage") as Image;
+
+        bool? creditNoteExists = true;
+        if (creditNoteExists == true)
+        {
+            img.ImageUrl = "~/images/12-em-check.png";
+        }
+        else
+        {
+            img.ImageUrl = "~/images/12-em-check.png";
+        }
     }
 
     #endregion
