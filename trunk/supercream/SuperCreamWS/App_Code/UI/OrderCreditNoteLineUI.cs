@@ -77,7 +77,7 @@ public class OrderCreditNoteLineUI : IDisposable
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
             OrderCreditNoteLine origOrderCreditNoteLine = proxy.GetOrderCreditNoteLine(newOrderCreditNoteLine.ID);
-            newOrderCreditNoteLine.ID = origOrderCreditNoteLine.ID;                      
+            newOrderCreditNoteLine.ID = origOrderCreditNoteLine.ID;
 
             proxy.UpdateOrderCreditNoteLine(newOrderCreditNoteLine, origOrderCreditNoteLine);
         }
@@ -104,6 +104,22 @@ public class OrderCreditNoteLineUI : IDisposable
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
             return proxy.CheckIfCreditNoteLineExists(creditNoteId, orderLineId);
+        }
+    }
+
+    public static bool CheckIfOrderLineAlreadyExistsForCreditNotes(int orderLineId)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.CheckIfOrderLineAlreadyExistsForCreditNotes(orderLineId);
+        }
+    }
+
+    public static int GetAvailableNoOfUnitsOnOrderLine(int orderLineId)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.GetAvailableNoOfUnitsOnOrderLine(orderLineId);
         }
     }
 

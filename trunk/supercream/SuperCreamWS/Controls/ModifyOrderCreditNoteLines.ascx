@@ -63,21 +63,21 @@
                                 <asp:Label ID="priceLabelTotal" runat="server"></asp:Label>
                             </FooterTemplate>
                         </asp:TemplateField>
-                         <asp:TemplateField ItemStyle-Width="10%">
-                                <HeaderTemplate>
-                                    Exists
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Image ID="CreditNoteExistsImage" runat="server" />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Net Price" SortExpression="Price">
+                        <asp:TemplateField ItemStyle-Width="10%">
+                            <HeaderTemplate>
+                                Exists
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Image ID="CreditNoteExistsImage" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField>
                             <ItemTemplate>
                                 <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
                                 <asp:ImageButton ID="EditImage" ImageUrl="~/images/user6_(edit)_16x16.gif" CommandName="Select"
                                     CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" runat="server" />
                                 <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender" DropShadow="true" runat="server"
-                                    TargetControlID="btnTrigger" PopupControlID="PanelMessage" CancelControlID="CancelButton"
+                                    TargetControlID="btnTrigger" PopupControlID="PanelMessage"
                                     BackgroundCssClass="XPopUpBackGround" />
                                 <asp:Panel Style="display: none" Width="700px" ID="PanelMessage" runat="server" CssClass="modalPopup">
                                     <fieldset id="Fieldset2">
@@ -112,6 +112,7 @@
                     </SelectParameters>
                 </asp:ObjectDataSource>
             </fieldset>
+            </asp:Panel>
             <asp:Panel ID="CreditLinesPanel" runat="server" Visible="false">
                 <legend>
                     <h3>
@@ -171,7 +172,7 @@
                                     Ex Vat. Total &nbsp;
                                     <asp:Label ID="priceLabelTotal" runat="server"></asp:Label>
                                 </FooterTemplate>
-                            </asp:TemplateField>                           
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="Edit" SortExpression="SpecialInstructions">
                                 <ItemTemplate>
                                     <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
@@ -192,6 +193,6 @@
                         </SelectParameters>
                     </asp:ObjectDataSource>
                 </fieldset>
-            </asp:Panel>
-        </asp:Panel>
+            </asp:Panel>       
+    </fieldset>
 </div>

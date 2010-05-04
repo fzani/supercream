@@ -242,6 +242,10 @@ namespace SPWCFServer
         #region OrderCreditNoteLine
         [OperationContract]
         [ReferencePreservingDataContractFormat]
+        int GetAvailableNoOfUnitsOnOrderLine(int orderLineId);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
         bool CheckIfOrderLineAlreadyExistsForCreditNotes(int orderLineId);
 
         [OperationContract]

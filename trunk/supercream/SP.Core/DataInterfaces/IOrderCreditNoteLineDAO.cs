@@ -17,5 +17,6 @@ namespace SP.Core.DataInterfaces
         bool CheckIfCreditNoteLineExists(int creditNoteid, int orderLineId);
         OrderCreditNoteLine GetCreditNoteLineByOrderIdAndOrderLineId(int creditNoteid, int orderLineId);
         bool CheckIfOrderLineAlreadyExists(int orderLineId);
+        int GetAvailableNoOfUnitsOnOrderLine(int orderLineId);
     }
 }
