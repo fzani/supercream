@@ -63,6 +63,14 @@
                                 <asp:Label ID="priceLabelTotal" runat="server"></asp:Label>
                             </FooterTemplate>
                         </asp:TemplateField>
+                         <asp:TemplateField ItemStyle-Width="10%">
+                                <HeaderTemplate>
+                                    Exists
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Image ID="CreditNoteExistsImage" runat="server" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         <asp:TemplateField HeaderText="Net Price" SortExpression="Price">
                             <ItemTemplate>
                                 <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
@@ -81,12 +89,13 @@
                                         <table style="width: 100%">
                                             <tr>
                                                 <td>
-                                                    <asp:DropDownList ID="QuantityToCreditDropDownList" style="width:50px" runat="server"></asp:DropDownList>
+                                                    <asp:DropDownList ID="QuantityToCreditDropDownList" Style="width: 50px" runat="server">
+                                                    </asp:DropDownList>
                                                 </td>
                                             </tr>
                                         </table>
-                                        <asp:Button ID="UpdateButton" Text="Update" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" OnClick="UpdateOrderCreditLineButton_Click"
-                                            runat="server" />
+                                        <asp:Button ID="UpdateButton" Text="Update" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
+                                            OnClick="UpdateOrderCreditLineButton_Click" runat="server" />
                                 </asp:Panel>
                             </ItemTemplate>
                             <EditItemTemplate>
@@ -111,7 +120,7 @@
                 </legend>
                 <fieldset>
                     <asp:GridView ID="CreditNoteLinesGridView" Width="97%" runat="server" AutoGenerateColumns="False"
-                        DataSourceID="CreditNoteLinesObjectDataSource" DataKeyNames="ID" OnRowDataBound="CreditNoteOrderDetailsGridPanel_RowDataBound"
+                        DataSourceID="CreditNoteLinesObjectDataSource" DataKeyNames="ID" OnRowDataBound="CreditNoteLinesGridView_RowDataBound"
                         OnRowCommand="OrderDetailsGridPanel_RowCommand" ShowFooter="true">
                         <Columns>
                             <asp:TemplateField HeaderText="ID" SortExpression="ID" Visible="false">
@@ -162,7 +171,7 @@
                                     Ex Vat. Total &nbsp;
                                     <asp:Label ID="priceLabelTotal" runat="server"></asp:Label>
                                 </FooterTemplate>
-                            </asp:TemplateField>
+                            </asp:TemplateField>                           
                             <asp:TemplateField HeaderText="Edit" SortExpression="SpecialInstructions">
                                 <ItemTemplate>
                                     <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
