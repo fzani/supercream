@@ -1102,6 +1102,23 @@ namespace SPWCFServer
 
         #region OrderCreditNoteLine
 
+        public int GetAvailableNoOfUnitsOnOrderLine(int orderLineId)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return mgr.GetAvailableNoOfUnitsOnOrderLine(orderLineId);
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete, it is likely that there are dependent items still linked to it");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public bool CheckIfOrderLineAlreadyExistsForCreditNotes(int orderLineId)
         {
             try
@@ -2861,7 +2878,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion
+        #endregion           
     }
 }
 

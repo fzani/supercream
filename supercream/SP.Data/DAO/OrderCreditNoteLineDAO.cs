@@ -26,16 +26,16 @@ namespace SP.Data.LTS
 
         public bool CheckIfOrderLineAlreadyExists(int orderLineId)
         {
-            return ((db.OrderCreditNoteLine
-                        .Where(q=> q.OrderLineID == orderLineId).FirstOrDefault()) ==
-                    null);
+            var p = db.OrderCreditNoteLine
+                .Where(q => q.OrderLineID == orderLineId).FirstOrDefault();
+            return p != null;           
         }
 
         public bool CheckIfCreditNoteLineExists(int creditNoteid, int orderLineId)
         {
-            return ((db.OrderCreditNoteLine
-                        .Where(q => q.OrderCreditNoteID == creditNoteid && q.OrderLineID == orderLineId).SingleOrDefault()) ==
-                    null);
+            var p = db.OrderCreditNoteLine
+                .Where(q => q.OrderCreditNoteID == creditNoteid && q.OrderLineID == orderLineId).SingleOrDefault();
+            return p != null;                  
         }
 
         public OrderCreditNoteLine GetCreditNoteLineByOrderIdAndOrderLineId(int creditNoteid, int orderLineId)
@@ -48,6 +48,21 @@ namespace SP.Data.LTS
         public override OrderCreditNoteLine GetById(int id)
         {
             return db.OrderCreditNoteLine.Single<OrderCreditNoteLine>(q => q.ID == id);
+        }
+
+        public int GetAvailableNoOfUnitsOnOrderLine(int orderLineId)
+        {
+            var orderLine = db.OrderLine.SingleOrDefault(ol => ol.ID == orderLineId);
+
+            var noOfCreditNoteUnits = 0;
+            var creditNoteLines = db.OrderCreditNoteLine.Where(q => q.OrderLineID == orderLineId);
+            if(creditNoteLines.Count() != 0)
+            {
+                noOfCreditNoteUnits = creditNoteLines.Sum(q => q.NoOfUnits);
+            }
+
+            return orderLine.NoOfUnits - noOfCreditNoteUnits;
+
         }
     }
 }

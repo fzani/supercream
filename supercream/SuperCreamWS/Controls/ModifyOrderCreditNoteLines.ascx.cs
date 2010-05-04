@@ -104,16 +104,27 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
             Product product = productUI.GetProductByID(productID.Value);
             productNameLabel.Text = product.Description;
 
-            Image img = e.Row.FindControl("CreditNoteExistsImage") as Image;
-
-            bool? creditNoteExists = true;
-            if (creditNoteExists == true)
+            Image img = e.Row.FindControl("CreditNoteExistsImage") as Image;           
+            if (OrderCreditNoteLineUI.CheckIfOrderLineAlreadyExistsForCreditNotes(orderLine.ID))
             {
                 img.ImageUrl = "~/images/12-em-check.png";
+                img.Visible = true;
+                if (OrderCreditNoteLineUI.GetAvailableNoOfUnitsOnOrderLine(orderLine.ID) == 0)
+                {
+                    // all order lines have credit notes against them so do not allow to edit
+                    var editImageButton = e.Row.FindControl("EditImage") as ImageButton;
+                    editImageButton.Visible = false;
+                }
+                else
+                {
+                    var editImageButton = e.Row.FindControl("EditImage") as ImageButton;
+                    editImageButton.Visible = true;
+                }
             }
             else
             {
-                img.ImageUrl = "~/images/12-em-check.png";
+                img.ImageUrl = String.Empty;
+                img.Visible = false;
             }
         }
 
@@ -135,20 +146,26 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
 
             // To be done:- have to get available no of units to be added to credt note, note the number
             // of units must reflect any existing credit notes for this order line ....
-            // suggest that order line does not show edit button if no of units is fully allocated
+            // done ...
+            // suggest that order line does not show edit button if no of units is fully allocated.
             // to credit note lines.
+            // done ...
+            
+            // also  indicate if existing credit notes have been placed against order line
+            // done ...
+            
             // Also suggest use cancel button to reverse credit note line (i.e remove it ...)
-            // also  indicate if existing credit notes have been placed against order line.
+
             OrderLine orderLine = OrderLineUI.GetOrderLine(Convert.ToInt32(idLabel.Text));
             ProductUI productUI = new ProductUI();
             Product product = productUI.GetProductByID(orderLine.ProductID);
 
             Panel panelMessage = row.FindControl("PanelMessage") as Panel;
             Label noOfUnitsLabel = row.FindControl("NoOfUnitsLabel") as Label;
-            int qtyToCredit = Convert.ToInt32(noOfUnitsLabel.Text);
+            int qtyToCredit = OrderCreditNoteLineUI.GetAvailableNoOfUnitsOnOrderLine(orderLine.ID);
 
             DropDownList quantityToCreditDropDownList = panelMessage.FindControl("QuantityToCreditDropDownList") as DropDownList;
-
+            quantityToCreditDropDownList.Items.Clear();
             for (int i = 0; i < qtyToCredit; i++)
             {
                 quantityToCreditDropDownList.Items.Add(new ListItem((i + 1).ToString(), (i + 1).ToString()));
@@ -198,37 +215,36 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
         GridViewRow row = this.OrderDetailsGridView.Rows[index];
         OrderLine line = row.DataItem as OrderLine;
 
-
         // First get no of units to add to credit note line.
         Panel panelMessage = row.FindControl("PanelMessage") as Panel;
         DropDownList quantityToCreditDropDownList = panelMessage.FindControl("QuantityToCreditDropDownList") as DropDownList;
         int selectedNoOfUnits = Convert.ToInt32(quantityToCreditDropDownList.SelectedValue.ToString());
 
-        //// Second Add units to credit note and create or update order credit line         
-        // var orderLine = OrderLineUI.GetOrderLine(orderLineId);      
-        //if(OrderCreditNoteLineUI.CheckIfOrderCreditLineExists(credtNoteId, orderLineId))
-        //{
-        //    OrderCreditNoteLine orderCreditNoteLine = OrderCreditNoteLineUI.GetCreditNoteLineByOrderIdAndOrderLineId(credtNoteId, orderLineId);
-        //    orderCreditNoteLine.NoOfUnits += selectedNoOfUnits;
-        //    OrderCreditNoteLineUI.Update(orderCreditNoteLine);
-        //}
-        //else
-        //{
-        //    var orderCreditNoteLine = new OrderCreditNoteLine
-        //                                  {
-        //                                       ID = -1,
-        //                                       OrderCreditNoteID = credtNoteId,
-        //                                       OrderLineID = orderLine.ID,
-        //                                       ProductID = orderLine.ProductID,
-        //                                       QtyPerUnit = orderLine.QtyPerUnit,
-        //                                       NoOfUnits = selectedNoOfUnits,
-        //                                       Discount = orderLine.Discount,
-        //                                       Price = orderLine.Price
-        //                                  };
-        //    OrderCreditNoteLineUI.SaveOrderCreditNoteLine(orderCreditNoteLine);
-        //}
+        // Next create or updat credit note order Line           
+        var orderLine = OrderLineUI.GetOrderLine(orderLineId);
+        if (OrderCreditNoteLineUI.CheckIfOrderCreditLineExists(credtNoteId, orderLineId))
+        {
+            OrderCreditNoteLine orderCreditNoteLine = OrderCreditNoteLineUI.GetCreditNoteLineByOrderIdAndOrderLineId(credtNoteId, orderLineId);
+            orderCreditNoteLine.NoOfUnits += selectedNoOfUnits;
+            OrderCreditNoteLineUI.Update(orderCreditNoteLine);
+        }
+        else
+        {
+            var orderCreditNoteLine = new OrderCreditNoteLine
+                                          {
+                                              ID = -1,
+                                              OrderCreditNoteID = credtNoteId,
+                                              OrderLineID = orderLine.ID,
+                                              ProductID = orderLine.ProductID,
+                                              QtyPerUnit = orderLine.QtyPerUnit,
+                                              NoOfUnits = selectedNoOfUnits,
+                                              Discount = orderLine.Discount,
+                                              Price = orderLine.Price
+                                          };
+            OrderCreditNoteLineUI.SaveOrderCreditNoteLine(orderCreditNoteLine);
+        }
 
-        //this.DataBind();
+        this.DataBind();
     }
 
     protected void CreditNoteLinesGridView_RowDataBound(object sender, GridViewRowEventArgs e)
