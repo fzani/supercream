@@ -52,17 +52,15 @@ public class OrderCreditNoteUI : IDisposable
         }
     }
 
-    public void UpdatePopupOrderCreditNote(OrderCreditNote newOrderCreditNote)
+    public static void UpdateOrderCreditNote(OrderCreditNote newOrderCreditNote)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            //OrderCreditNote origOrderCreditNote = _proxy.GetOrderCreditNote(newOrderCreditNote.ID);
-            //newOrderCreditNote.ID = origOrderCreditNote.ID;           
+            OrderCreditNote origOrderCreditNote = proxy.GetOrderCreditNote(newOrderCreditNote.ID);
+            newOrderCreditNote.ID = origOrderCreditNote.ID;           
 
-            //// Note :- have to remove cyclic reference fom orig Object
-            //origOrderCreditNote.Address.OrderCreditNote = null;
-
-            //_proxy.UpdateOrderCreditNote(newOrderCreditNote, origOrderCreditNote);
+            //// Note :- have to remove cyclic reference fom orig Object           
+            proxy.UpdateOrderCreditNote(newOrderCreditNote, origOrderCreditNote);
         }
     }
 
@@ -79,6 +77,14 @@ public class OrderCreditNoteUI : IDisposable
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
             return proxy.SearchOrderCreditNotes(orderNo, invoiceNo, customerName, dateFrom, dateTo);
+        }
+    }
+
+    public InvoiceCreditNoteDetails GetInvoiceCreditNoteDetails(int orderId)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.GetOrderHeaderInvoiceCreditDetails(orderId);
         }
     }
 

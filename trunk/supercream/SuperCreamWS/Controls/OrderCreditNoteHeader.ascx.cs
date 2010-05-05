@@ -78,7 +78,7 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
 
     private void SetCreditNoteForOrderSaveStatuses()
     {
-        CreditNoteUI creditNoteUI = new CreditNoteUI();
+        OrderCreditNoteUI creditNoteUI = new OrderCreditNoteUI();
         invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(OrderID.Value);
 
         decimal totalInvoiceAmount = invoiceCreditNoteDetails.TotalInvoiceAmount;
@@ -95,8 +95,8 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
 
     private void SetCreditNoteForCreditNoteSaveStatuses()
     {
-        CreditNoteUI creditNoteUI = new CreditNoteUI();
-        CreditNote creditNote = creditNoteUI.GetCreditNote(CreditNoteID.Value);
+        OrderCreditNoteUI creditNoteUI = new OrderCreditNoteUI();
+        OrderCreditNote creditNote = creditNoteUI.GetByID(CreditNoteID.Value);
         this.OrderID = creditNote.OrderID;
         invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(creditNote.OrderID);
 
@@ -126,11 +126,8 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
             OrderHeader orderHeader = orderHeaderUI.GetById(this.OrderID.Value);
 
-            CreditNoteUI creditNoteUI = new CreditNoteUI();
-            invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(this.OrderID.Value);
-
-            VatCodeUI vatCodeUI = new VatCodeUI();
-            VatCode vatCode = vatCodeUI.GetByID(orderHeader.VatCodeID);
+            OrderCreditNoteUI creditNoteUI = new OrderCreditNoteUI();
+            invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(this.OrderID.Value);           
 
             // Persist credit note details
             var ui = new OrderCreditNoteUI();
@@ -147,21 +144,19 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
                     DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
                 });
             }
-            //else
-            //{
-            //    CreditNote creditNote = ui.GetCreditNote(CreditNoteID.Value);
-            //    ui.UpdateCreditNotes(new CreditNote
-            //    {
-            //        ID = CreditNoteID.Value,
-            //        OrderID = creditNote.OrderID,
-            //        CreditAmount = currentCreditAmount,
-            //        DateCreated = DateTime.Now,
-            //        Reason = this.ReasonTextBox.Text,
-            //        Reference = creditNote.Reference,
-            //        VatExempt = this.VatExemptCheckBox.Checked,
-            //        DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
-            //    });
-            //}
+            else
+            {
+                OrderCreditNote creditNote = ui.GetByID(CreditNoteID.Value);
+                OrderCreditNoteUI.UpdateOrderCreditNote(new OrderCreditNote
+                {
+                    ID = CreditNoteID.Value,
+                    OrderID = creditNote.OrderID,                   
+                    DateCreated = DateTime.Now,
+                    Reason = this.ReasonTextBox.Text,
+                    Reference = creditNote.Reference,                   
+                    DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
+                });
+            }
 
             if (this.OrderCreditNoteContinueEventHandler != null)
             {

@@ -120,7 +120,10 @@ namespace SP.Data.LTS
 
         public InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderNo, decimal vatRate)
         {
-            vatRate = (vatRate / 100) + 1;
+            if (vatRate != 0)
+            {
+                vatRate = (vatRate / 100) + 1;
+            }
 
             var invoiceTotal = Math.Round((from o in db.OrderHeader
                                            join ol in db.OrderLine on o.ID equals ol.OrderID
@@ -136,6 +139,19 @@ namespace SP.Data.LTS
                 creditTotal = Math.Round((from cr in db.CreditNote
                                           where cr.OrderID == orderNo
                                           select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * vatRate)).Sum(), 2);
+            }
+
+            var orderCreditNotes = (from oh in db.OrderCreditNote
+                                    join ol in db.OrderCreditNoteLine on oh.ID equals ol.OrderCreditNoteID
+                                    where oh.OrderID == orderNo
+                                    select oh).DefaultIfEmpty<OrderCreditNote>();
+            if (orderCreditNotes.First() != null)
+            {
+                creditTotal += Math.Round((from oh in db.OrderCreditNote
+                                           join ol in db.OrderCreditNoteLine on oh.ID equals ol.OrderCreditNoteID
+                                           join p in db.Product on ol.ProductID equals p.ID
+                                           where oh.OrderID == orderNo
+                                           select ((p.VatExempt) ? ol.Price * ol.NoOfUnits : ol.Price * ol.NoOfUnits * vatRate)).Sum(), 2);
             }
 
             return new InvoiceCreditNoteDetails

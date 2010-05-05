@@ -31,42 +31,41 @@ public partial class Controls_MaintainOrderCreditNote : System.Web.UI.UserContro
             this.ChangeState(this, new EventArgs());
         }
 
-        this.CreditNoteSearch.CreditNoteEventHandler += new CreditNoteEventHandler(CreditNoteSearch_CreditNoteEventHandler);      
-        this.SaveCreditNoteControl.CompletedEventHandler += new CompletedEventHandler(Completed_InvoiceEventHandler);
-        this.SaveCreditNoteControl.ErrorMessageEventHandler += new ErrorMessageEventHandler(SaveCreditNoteControl_ErrorMessageEventHandler);
-    }
+        this.CreditNoteSearch.CreditNoteEventHandler += new CreditNoteEventHandler(CreditNoteSearch_CreditNoteEventHandler);
+        this.OrderCreditNoteHeader.OrderCreditNoteContinueEventHandler += new App_Code.EventArgs.OrderCreditNoteContinueEventHandler(OrderCreditNoteHeader_OrderCreditNoteContinueEventHandler);
+        this.OrderCreditNoteHeader.ErrorMessageEventHandler += new ErrorMessageEventHandler(OrderCreditNoteHeader_ErrorMessageEventHandler);
+    }    
 
     #endregion
 
     #region Call Back Handlers
 
-    private void SaveCreditNoteControl_ErrorMessageEventHandler(object sender, ErrorMessageEventArgs e)
+    private void CreditNoteSearch_CreditNoteEventHandler(object sender, CreditNoteEventArgs e)
+    {
+        this.ChangeState += new EventHandler<EventArgs>(this.OrderCreditNoteHeaderState);
+        this.ChangeState(this, new EventArgs());
+
+        this.OrderCreditNoteHeader.CreditNoteID = e.CreditNoteID;
+    }   
+
+    private void OrderCreditNoteHeader_OrderCreditNoteContinueEventHandler(object sender, App_Code.EventArgs.OrderCreditNoteContinueEventArgs e)
+    {
+        this.ChangeState += new EventHandler<EventArgs>(this.ModifyOrderCreditNoteState);
+        this.ModifyOrderCreditNoteLines.CreditNoteID = e.CreditNoteId;
+        this.ModifyOrderCreditNoteLines.OrderID = e.OrderId;
+        this.ModifyOrderCreditNoteLines.AlphaID = e.AlphaId;       
+        this.ChangeState(this, new EventArgs());
+
+    }
+
+    private void OrderCreditNoteHeader_ErrorMessageEventHandler(object sender, ErrorMessageEventArgs e)
     {
         if (this.ErrorMessageEventHandler != null)
         {
             this.ErrorMessageEventHandler(sender, e);
         }
     }
-
-    private void Completed_InvoiceEventHandler(object sender, EventArgs e)
-    {
-        if (this.CompletedEventHandler != null)
-        {
-            this.ChangeState += new EventHandler<EventArgs>(this.InitialiseCreditNoteState);
-            this.ChangeState(this, new EventArgs());
-
-            this.CompletedEventHandler(this, new EventArgs());
-        }
-    }
-
-    private void CreditNoteSearch_CreditNoteEventHandler(object sender, CreditNoteEventArgs e)
-    {
-        this.ChangeState += new EventHandler<EventArgs>(this.SaveCreditNoteState);
-        this.ChangeState(this, new EventArgs());
-
-        this.SaveCreditNoteControl.CreditNoteID = e.CreditNoteID;
-    }
-
+       
     #endregion
 
     #region General Events
@@ -88,21 +87,21 @@ public partial class Controls_MaintainOrderCreditNote : System.Web.UI.UserContro
 
     private void InitialiseCreditNoteState(object sender, EventArgs args)
     {
-        this.SaveCreditNoteControl.Visible = false;
+        this.OrderCreditNoteHeader.Visible = false;
         this.CreditNoteSearch.Visible = true;
         this.ModifyOrderCreditNoteLines.Visible = false;
     }
 
-    private void SaveCreditNoteState(object sender, EventArgs args)
+    private void OrderCreditNoteHeaderState(object sender, EventArgs args)
     {
-        this.SaveCreditNoteControl.Visible = true;
+        this.OrderCreditNoteHeader.Visible = true;
         this.CreditNoteSearch.Visible = false;
         this.ModifyOrderCreditNoteLines.Visible = false;
     }
 
     private void ModifyOrderCreditNoteState(object sender, EventArgs args)
     {
-        this.SaveCreditNoteControl.Visible = false;
+        this.OrderCreditNoteHeader.Visible = false;
         this.CreditNoteSearch.Visible = false;
         this.ModifyOrderCreditNoteLines.Visible = true;
     }

@@ -37,7 +37,7 @@ namespace SP.Data.LTS
                     db.OrderCreditNote.Select(q => Convert.ToInt32(q.Reference.Substring(5, q.Reference.Length - 5))).Max();
                 return "OCRN-" + (maxInvoiceNo + 1).ToString();
             }
-        }    
+        }
 
         public override OrderCreditNote GetById(int id)
         {
@@ -46,9 +46,9 @@ namespace SP.Data.LTS
 
         public List<OrderLine> AvailableOrderLinesForCreditNote(int orderId)
         {
-            return  (from ol in db.OrderLine
-                     where (ol.OrderID == orderId)
-                     select ol).ToList<OrderLine>();
+            return (from ol in db.OrderLine
+                    where (ol.OrderID == orderId)
+                    select ol).ToList<OrderLine>();
         }
 
         public bool ReferenceExists(string referenceNo)
@@ -115,6 +115,51 @@ namespace SP.Data.LTS
             }
 
             return filteredCreditNotes;
+        }
+
+        public InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderNo, decimal vatRate)
+        {
+            if (vatRate != 0)
+            {
+                vatRate = (vatRate / 100) + 1;
+            }
+
+            var invoiceTotal = Math.Round((from o in db.OrderHeader
+                                           join ol in db.OrderLine on o.ID equals ol.OrderID
+                                           join p in db.Product on ol.ProductID equals p.ID
+                                           where o.ID == orderNo
+                                           select (p.VatExempt ? (ol.Price * ol.NoOfUnits) : (ol.Price * ol.NoOfUnits * vatRate))).Sum(), 2);
+
+            decimal creditTotal = new decimal(0.0);
+
+            var creditNotes = db.CreditNote.Where(q => q.OrderID == orderNo).DefaultIfEmpty<CreditNote>();
+            if (creditNotes.First() != null)
+            {
+                creditTotal = Math.Round((from cr in db.CreditNote
+                                          where cr.OrderID == orderNo
+                                          select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * vatRate)).Sum(), 2);
+            }
+
+            var orderCreditNotes = (from oh in db.OrderCreditNote
+                                    join ol in db.OrderCreditNoteLine on oh.ID equals ol.OrderCreditNoteID
+                                    where oh.OrderID == orderNo
+                                    select oh).DefaultIfEmpty<OrderCreditNote>();
+            if (orderCreditNotes.First() != null)
+            {
+                creditTotal += Math.Round((from oh in db.OrderCreditNote
+                                           join ol in db.OrderCreditNoteLine on oh.ID equals ol.OrderCreditNoteID
+                                           join p in db.Product on ol.ProductID equals p.ID
+                                           where oh.OrderID == orderNo
+                                           select ((p.VatExempt) ? ol.Price * ol.NoOfUnits : ol.Price * ol.NoOfUnits * vatRate)).Sum(), 2);
+            }
+
+            return new InvoiceCreditNoteDetails
+            {
+                OrderID = orderNo,
+                TotalInvoiceAmount = invoiceTotal,
+                TotalAmountCredited = creditTotal, // inclusing vat
+                Balance = (invoiceTotal - creditTotal)
+            };
         }
     }
 }

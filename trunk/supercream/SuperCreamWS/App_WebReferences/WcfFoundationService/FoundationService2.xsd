@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SPWCFServer" />
+  <xs:element name="DeleteVatCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="cde" nillable="true" type="q1:VatCode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteVatCodeResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ExemptCodeExists">
     <xs:complexType>
       <xs:sequence />
@@ -30,14 +42,14 @@
   <xs:element name="SaveVan">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="code" nillable="true" type="q1:Van" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="code" nillable="true" type="q2:Van" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveVanResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveVanResult" nillable="true" type="q2:Van" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveVanResult" nillable="true" type="q3:Van" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -51,22 +63,22 @@
   <xs:element name="GetVanResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetVanResult" nillable="true" type="q3:Van" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetVanResult" nillable="true" type="q4:Van" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateVan">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newCode" nillable="true" type="q4:Van" />
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origCode" nillable="true" type="q5:Van" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newCode" nillable="true" type="q5:Van" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origCode" nillable="true" type="q6:Van" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateVanResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateVanResult" nillable="true" type="q6:Van" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateVanResult" nillable="true" type="q7:Van" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -78,20 +90,32 @@
   <xs:element name="GetAllVansResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllVansResult" nillable="true" type="q7:ArrayOfVan" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllVansResult" nillable="true" type="q8:ArrayOfVan" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteVan">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="cde" nillable="true" type="q8:Van" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="cde" nillable="true" type="q9:Van" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteVanResponse">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllProducts">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllProductsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllProductsResult" nillable="true" type="q10:ArrayOfProduct" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetProduct">
@@ -104,22 +128,22 @@
   <xs:element name="GetProductResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetProductResult" nillable="true" type="q9:Product" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetProductResult" nillable="true" type="q11:Product" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateProduct">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newProduct" nillable="true" type="q10:Product" />
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origProduct" nillable="true" type="q11:Product" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newProduct" nillable="true" type="q12:Product" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origProduct" nillable="true" type="q13:Product" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateProductResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateProductResult" nillable="true" type="q12:Product" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateProductResult" nillable="true" type="q14:Product" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -133,7 +157,7 @@
   <xs:element name="GetProductByProductCodeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetProductByProductCodeResult" nillable="true" type="q13:Product" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetProductByProductCodeResult" nillable="true" type="q15:Product" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -161,7 +185,7 @@
   <xs:element name="GetLikeProductCodeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetLikeProductCodeResult" nillable="true" type="q14:ArrayOfProduct" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetLikeProductCodeResult" nillable="true" type="q16:ArrayOfProduct" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -175,7 +199,7 @@
   <xs:element name="GetLikeProductDescriptionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetLikeProductDescriptionResult" nillable="true" type="q15:ArrayOfProduct" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetLikeProductDescriptionResult" nillable="true" type="q17:ArrayOfProduct" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -189,7 +213,7 @@
   <xs:element name="GetProductsInPriceListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetProductsInPriceListResult" nillable="true" type="q16:ArrayOfProduct" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetProductsInPriceListResult" nillable="true" type="q18:ArrayOfProduct" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -203,7 +227,7 @@
   <xs:element name="GetProductsOutOfProductListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetProductsOutOfProductListResult" nillable="true" type="q17:ArrayOfProduct" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetProductsOutOfProductListResult" nillable="true" type="q19:ArrayOfProduct" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -222,14 +246,14 @@
   <xs:element name="GetSpecialHeadersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetSpecialHeadersResult" nillable="true" type="q18:ArrayOfSpecialInvoiceHeader" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetSpecialHeadersResult" nillable="true" type="q20:ArrayOfSpecialInvoiceHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteSpecialInvoiceHeader">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="specialInvoiceHeader" nillable="true" type="q19:SpecialInvoiceHeader" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="specialInvoiceHeader" nillable="true" type="q21:SpecialInvoiceHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -246,7 +270,7 @@
   <xs:element name="GetAllSpecialInvoiceHeadersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllSpecialInvoiceHeadersResult" nillable="true" type="q20:ArrayOfSpecialInvoiceHeader" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllSpecialInvoiceHeadersResult" nillable="true" type="q22:ArrayOfSpecialInvoiceHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -260,36 +284,36 @@
   <xs:element name="GetSpecialInvoiceHeaderResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetSpecialInvoiceHeaderResult" nillable="true" type="q21:SpecialInvoiceHeader" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetSpecialInvoiceHeaderResult" nillable="true" type="q23:SpecialInvoiceHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveSpecialInvoiceHeader">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="specialInvoiceHeader" nillable="true" type="q22:SpecialInvoiceHeader" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="specialInvoiceHeader" nillable="true" type="q24:SpecialInvoiceHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveSpecialInvoiceHeaderResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveSpecialInvoiceHeaderResult" nillable="true" type="q23:SpecialInvoiceHeader" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveSpecialInvoiceHeaderResult" nillable="true" type="q25:SpecialInvoiceHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateSpecialInvoiceHeader">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newSpecialInvoiceHeader" nillable="true" type="q24:SpecialInvoiceHeader" />
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origSpecialInvoiceHeader" nillable="true" type="q25:SpecialInvoiceHeader" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newSpecialInvoiceHeader" nillable="true" type="q26:SpecialInvoiceHeader" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origSpecialInvoiceHeader" nillable="true" type="q27:SpecialInvoiceHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateSpecialInvoiceHeaderResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateSpecialInvoiceHeaderResult" nillable="true" type="q26:SpecialInvoiceHeader" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateSpecialInvoiceHeaderResult" nillable="true" type="q28:SpecialInvoiceHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -303,14 +327,14 @@
   <xs:element name="GetBySpecialInvoiceIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetBySpecialInvoiceIdResult" nillable="true" type="q27:ArrayOfSpecialInvoiceLine" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetBySpecialInvoiceIdResult" nillable="true" type="q29:ArrayOfSpecialInvoiceLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteSpecialInvoiceLine">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="specialInvoiceLines" nillable="true" type="q28:SpecialInvoiceLine" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="specialInvoiceLines" nillable="true" type="q30:SpecialInvoiceLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -327,7 +351,7 @@
   <xs:element name="GetAllSpecialInvoiceLinesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllSpecialInvoiceLinesResult" nillable="true" type="q29:ArrayOfSpecialInvoiceLine" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllSpecialInvoiceLinesResult" nillable="true" type="q31:ArrayOfSpecialInvoiceLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -341,36 +365,36 @@
   <xs:element name="GetSpecialInvoiceLineResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetSpecialInvoiceLineResult" nillable="true" type="q30:SpecialInvoiceLine" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetSpecialInvoiceLineResult" nillable="true" type="q32:SpecialInvoiceLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveSpecialInvoiceLine">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="specialInvoiceLines" nillable="true" type="q31:SpecialInvoiceLine" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="specialInvoiceLines" nillable="true" type="q33:SpecialInvoiceLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveSpecialInvoiceLineResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveSpecialInvoiceLineResult" nillable="true" type="q32:SpecialInvoiceLine" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveSpecialInvoiceLineResult" nillable="true" type="q34:SpecialInvoiceLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateSpecialInvoiceLine">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newSpecialInvoiceLines" nillable="true" type="q33:SpecialInvoiceLine" />
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origSpecialInvoiceLines" nillable="true" type="q34:SpecialInvoiceLine" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newSpecialInvoiceLines" nillable="true" type="q35:SpecialInvoiceLine" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origSpecialInvoiceLines" nillable="true" type="q36:SpecialInvoiceLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateSpecialInvoiceLineResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateSpecialInvoiceLineResult" nillable="true" type="q35:SpecialInvoiceLine" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateSpecialInvoiceLineResult" nillable="true" type="q37:SpecialInvoiceLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -389,7 +413,7 @@
   <xs:element name="DeleteStandardVatRate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="standardVatRate" nillable="true" type="q36:StandardVatRate" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="standardVatRate" nillable="true" type="q38:StandardVatRate" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -406,7 +430,7 @@
   <xs:element name="GetAllStandardVatRatesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllStandardVatRatesResult" nillable="true" type="q37:ArrayOfStandardVatRate" />
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllStandardVatRatesResult" nillable="true" type="q39:ArrayOfStandardVatRate" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -418,50 +442,50 @@
   <xs:element name="GetStandardVatRateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetStandardVatRateResult" nillable="true" type="q38:StandardVatRate" />
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetStandardVatRateResult" nillable="true" type="q40:StandardVatRate" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveStandardVatRate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="standardVatRate" nillable="true" type="q39:StandardVatRate" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="standardVatRate" nillable="true" type="q41:StandardVatRate" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveStandardVatRateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveStandardVatRateResult" nillable="true" type="q40:StandardVatRate" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveStandardVatRateResult" nillable="true" type="q42:StandardVatRate" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateStandardVatRate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newStandardVatRate" nillable="true" type="q41:StandardVatRate" />
-        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origStandardVatRate" nillable="true" type="q42:StandardVatRate" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newStandardVatRate" nillable="true" type="q43:StandardVatRate" />
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origStandardVatRate" nillable="true" type="q44:StandardVatRate" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateStandardVatRateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateStandardVatRateResult" nillable="true" type="q43:StandardVatRate" />
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateStandardVatRateResult" nillable="true" type="q45:StandardVatRate" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveTerm">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="code" nillable="true" type="q44:Terms" />
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="code" nillable="true" type="q46:Terms" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveTermResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveTermResult" nillable="true" type="q45:Terms" />
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveTermResult" nillable="true" type="q47:Terms" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -475,22 +499,22 @@
   <xs:element name="GetTermResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetTermResult" nillable="true" type="q46:Terms" />
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetTermResult" nillable="true" type="q48:Terms" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateTerm">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newCode" nillable="true" type="q47:Terms" />
-        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origCode" nillable="true" type="q48:Terms" />
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newCode" nillable="true" type="q49:Terms" />
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origCode" nillable="true" type="q50:Terms" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateTermResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateTermResult" nillable="true" type="q49:Terms" />
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateTermResult" nillable="true" type="q51:Terms" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -502,14 +526,14 @@
   <xs:element name="GetAllTermsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllTermsResult" nillable="true" type="q50:ArrayOfTerms" />
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllTermsResult" nillable="true" type="q52:ArrayOfTerms" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteTerm">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="cde" nillable="true" type="q51:Terms" />
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="cde" nillable="true" type="q53:Terms" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -521,14 +545,14 @@
   <xs:element name="SaveVatCode">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="code" nillable="true" type="q52:VatCode" />
+        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="code" nillable="true" type="q54:VatCode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveVatCodeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveVatCodeResult" nillable="true" type="q53:VatCode" />
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveVatCodeResult" nillable="true" type="q55:VatCode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -542,22 +566,22 @@
   <xs:element name="GetVatCodeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetVatCodeResult" nillable="true" type="q54:VatCode" />
+        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetVatCodeResult" nillable="true" type="q56:VatCode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateVatCode">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newCode" nillable="true" type="q55:VatCode" />
-        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origCode" nillable="true" type="q56:VatCode" />
+        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newCode" nillable="true" type="q57:VatCode" />
+        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origCode" nillable="true" type="q58:VatCode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateVatCodeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateVatCodeResult" nillable="true" type="q57:VatCode" />
+        <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateVatCodeResult" nillable="true" type="q59:VatCode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -569,20 +593,27 @@
   <xs:element name="GetAllVatCodesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllVatCodesResult" nillable="true" type="q58:ArrayOfVatCode" />
+        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllVatCodesResult" nillable="true" type="q60:ArrayOfVatCode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DeleteVatCode">
+  <xs:element name="GetOrderHeaderForSearch">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="cde" nillable="true" type="q59:VatCode" />
+        <xs:element minOccurs="0" name="orderNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invoiceNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="customerName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="dateFrom" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="dateTo" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="orderStatus" type="xs:short" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DeleteVatCodeResponse">
+  <xs:element name="GetOrderHeaderForSearchResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderHeaderForSearchResult" nillable="true" type="q61:ArrayOfOrderHeader" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetOrderHeaderForSearchWithPrintedOrderStatuses">
@@ -601,36 +632,36 @@
   <xs:element name="GetOrderHeaderForSearchWithPrintedOrderStatusesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderHeaderForSearchWithPrintedOrderStatusesResult" nillable="true" type="q60:ArrayOfOrderHeader" />
+        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderHeaderForSearchWithPrintedOrderStatusesResult" nillable="true" type="q62:ArrayOfOrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveOrderHeader">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderHeader" nillable="true" type="q61:OrderHeader" />
+        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderHeader" nillable="true" type="q63:OrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveOrderHeaderResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveOrderHeaderResult" nillable="true" type="q62:OrderHeader" />
+        <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveOrderHeaderResult" nillable="true" type="q64:OrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateOrderHeader">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderHeader" nillable="true" type="q63:OrderHeader" />
-        <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderHeader" nillable="true" type="q64:OrderHeader" />
+        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderHeader" nillable="true" type="q65:OrderHeader" />
+        <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderHeader" nillable="true" type="q66:OrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateOrderHeaderResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateOrderHeaderResult" nillable="true" type="q65:OrderHeader" />
+        <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateOrderHeaderResult" nillable="true" type="q67:OrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -649,7 +680,7 @@
   <xs:element name="GetInvoicesWithStatusResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetInvoicesWithStatusResult" nillable="true" type="q66:ArrayOfInvoiceWithStatus" />
+        <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetInvoicesWithStatusResult" nillable="true" type="q68:ArrayOfInvoiceWithStatus" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -669,7 +700,7 @@
   <xs:element name="DeleteOrderLine">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderLine" nillable="true" type="q67:OrderLine" />
+        <xs:element xmlns:q69="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderLine" nillable="true" type="q69:OrderLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -688,7 +719,7 @@
   <xs:element name="GetOrderLineResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderLineResult" nillable="true" type="q68:OrderLine" />
+        <xs:element xmlns:q70="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderLineResult" nillable="true" type="q70:OrderLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -702,43 +733,43 @@
   <xs:element name="GetOrderLinesByOrderIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q69="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderLinesByOrderIDResult" nillable="true" type="q69:ArrayOfOrderLine" />
+        <xs:element xmlns:q71="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderLinesByOrderIDResult" nillable="true" type="q71:ArrayOfOrderLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveOrderLine">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q70="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderLine" nillable="true" type="q70:OrderLine" />
+        <xs:element xmlns:q72="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderLine" nillable="true" type="q72:OrderLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveOrderLineResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q71="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveOrderLineResult" nillable="true" type="q71:OrderLine" />
+        <xs:element xmlns:q73="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveOrderLineResult" nillable="true" type="q73:OrderLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateOrderLine">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q72="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderLine" nillable="true" type="q72:OrderLine" />
-        <xs:element xmlns:q73="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderLine" nillable="true" type="q73:OrderLine" />
+        <xs:element xmlns:q74="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderLine" nillable="true" type="q74:OrderLine" />
+        <xs:element xmlns:q75="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderLine" nillable="true" type="q75:OrderLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateOrderLineResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q74="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateOrderLineResult" nillable="true" type="q74:OrderLine" />
+        <xs:element xmlns:q76="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateOrderLineResult" nillable="true" type="q76:OrderLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteOrderNotesStatus">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q75="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderNotesStatus" nillable="true" type="q75:OrderNotesStatus" />
+        <xs:element xmlns:q77="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderNotesStatus" nillable="true" type="q77:OrderNotesStatus" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -755,7 +786,7 @@
   <xs:element name="GetAllOrderNotesStatussResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q76="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllOrderNotesStatussResult" nillable="true" type="q76:ArrayOfOrderNotesStatus" />
+        <xs:element xmlns:q78="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllOrderNotesStatussResult" nillable="true" type="q78:ArrayOfOrderNotesStatus" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -769,7 +800,7 @@
   <xs:element name="GetOrderNoteStatusByOrderIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q77="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderNoteStatusByOrderIdResult" nillable="true" type="q77:OrderNotesStatus" />
+        <xs:element xmlns:q79="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderNoteStatusByOrderIdResult" nillable="true" type="q79:OrderNotesStatus" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -783,7 +814,7 @@
   <xs:element name="GetOrderNotesStatusResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q78="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderNotesStatusResult" nillable="true" type="q78:OrderNotesStatus" />
+        <xs:element xmlns:q80="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderNotesStatusResult" nillable="true" type="q80:OrderNotesStatus" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -804,29 +835,29 @@
   <xs:element name="SaveOrderNotesStatus">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q79="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderNotesStatus" nillable="true" type="q79:OrderNotesStatus" />
+        <xs:element xmlns:q81="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderNotesStatus" nillable="true" type="q81:OrderNotesStatus" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveOrderNotesStatusResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q80="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveOrderNotesStatusResult" nillable="true" type="q80:OrderNotesStatus" />
+        <xs:element xmlns:q82="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveOrderNotesStatusResult" nillable="true" type="q82:OrderNotesStatus" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateOrderNotesStatus">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q81="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderNotesStatus" nillable="true" type="q81:OrderNotesStatus" />
-        <xs:element xmlns:q82="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderNotesStatus" nillable="true" type="q82:OrderNotesStatus" />
+        <xs:element xmlns:q83="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderNotesStatus" nillable="true" type="q83:OrderNotesStatus" />
+        <xs:element xmlns:q84="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderNotesStatus" nillable="true" type="q84:OrderNotesStatus" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateOrderNotesStatusResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q83="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateOrderNotesStatusResult" nillable="true" type="q83:OrderNotesStatus" />
+        <xs:element xmlns:q85="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateOrderNotesStatusResult" nillable="true" type="q85:OrderNotesStatus" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -854,7 +885,7 @@
   <xs:element name="InvoicesByDateAndVanResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q84="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="InvoicesByDateAndVanResult" nillable="true" type="q84:ArrayOfOrderHeader" />
+        <xs:element xmlns:q86="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="InvoicesByDateAndVanResult" nillable="true" type="q86:ArrayOfOrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -881,7 +912,7 @@
   <xs:element name="GetVanInvoiceCountResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q85="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetVanInvoiceCountResult" nillable="true" type="q85:ArrayOfVanInvoiceCount" />
+        <xs:element xmlns:q87="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetVanInvoiceCountResult" nillable="true" type="q87:ArrayOfVanInvoiceCount" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -905,7 +936,7 @@
   <xs:element name="GetAllPriceListHeadersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q86="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllPriceListHeadersResult" nillable="true" type="q86:ArrayOfPriceListHeader" />
+        <xs:element xmlns:q88="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllPriceListHeadersResult" nillable="true" type="q88:ArrayOfPriceListHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -919,36 +950,36 @@
   <xs:element name="GetPriceListHeaderByIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q87="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetPriceListHeaderByIDResult" nillable="true" type="q87:PriceListHeader" />
+        <xs:element xmlns:q89="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetPriceListHeaderByIDResult" nillable="true" type="q89:PriceListHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SavePriceListHeader">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q88="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="priceListHeader" nillable="true" type="q88:PriceListHeader" />
+        <xs:element xmlns:q90="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="priceListHeader" nillable="true" type="q90:PriceListHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SavePriceListHeaderResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q89="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SavePriceListHeaderResult" nillable="true" type="q89:PriceListHeader" />
+        <xs:element xmlns:q91="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SavePriceListHeaderResult" nillable="true" type="q91:PriceListHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdatePriceListHeader">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q90="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newPriceListHeader" nillable="true" type="q90:PriceListHeader" />
-        <xs:element xmlns:q91="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origPriceListHeader" nillable="true" type="q91:PriceListHeader" />
+        <xs:element xmlns:q92="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newPriceListHeader" nillable="true" type="q92:PriceListHeader" />
+        <xs:element xmlns:q93="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origPriceListHeader" nillable="true" type="q93:PriceListHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdatePriceListHeaderResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q92="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdatePriceListHeaderResult" nillable="true" type="q92:PriceListHeader" />
+        <xs:element xmlns:q94="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdatePriceListHeaderResult" nillable="true" type="q94:PriceListHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -974,7 +1005,7 @@
   <xs:element name="GetPriceListItemByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q93="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetPriceListItemByIdResult" nillable="true" type="q93:PriceListItem" />
+        <xs:element xmlns:q95="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetPriceListItemByIdResult" nillable="true" type="q95:PriceListItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -989,7 +1020,7 @@
   <xs:element name="GetPriceListItemByProductIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q94="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetPriceListItemByProductIdResult" nillable="true" type="q94:PriceListItem" />
+        <xs:element xmlns:q96="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetPriceListItemByProductIdResult" nillable="true" type="q96:PriceListItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1003,7 +1034,7 @@
   <xs:element name="GetPriceListItemByPriceListHeaderResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q95="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetPriceListItemByPriceListHeaderResult" nillable="true" type="q95:ArrayOfPriceListItem" />
+        <xs:element xmlns:q97="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetPriceListItemByPriceListHeaderResult" nillable="true" type="q97:ArrayOfPriceListItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1023,50 +1054,50 @@
   <xs:element name="SavePriceListItem">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q96="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="priceListItem" nillable="true" type="q96:PriceListItem" />
+        <xs:element xmlns:q98="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="priceListItem" nillable="true" type="q98:PriceListItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SavePriceListItemResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q97="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SavePriceListItemResult" nillable="true" type="q97:PriceListItem" />
+        <xs:element xmlns:q99="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SavePriceListItemResult" nillable="true" type="q99:PriceListItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdatePriceListItem">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q98="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newProduct" nillable="true" type="q98:PriceListItem" />
-        <xs:element xmlns:q99="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origProduct" nillable="true" type="q99:PriceListItem" />
+        <xs:element xmlns:q100="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newProduct" nillable="true" type="q100:PriceListItem" />
+        <xs:element xmlns:q101="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origProduct" nillable="true" type="q101:PriceListItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdatePriceListItemResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q100="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdatePriceListItemResult" nillable="true" type="q100:PriceListItem" />
+        <xs:element xmlns:q102="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdatePriceListItemResult" nillable="true" type="q102:PriceListItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveProduct">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q101="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="product" nillable="true" type="q101:Product" />
+        <xs:element xmlns:q103="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="product" nillable="true" type="q103:Product" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveProductResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q102="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveProductResult" nillable="true" type="q102:Product" />
+        <xs:element xmlns:q104="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveProductResult" nillable="true" type="q104:Product" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteProduct">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q103="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="product" nillable="true" type="q103:Product" />
+        <xs:element xmlns:q105="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="product" nillable="true" type="q105:Product" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1075,58 +1106,46 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetAllProducts">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAllProductsResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q104="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllProductsResult" nillable="true" type="q104:ArrayOfProduct" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="SaveContactDetail">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q105="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="contactDetail" nillable="true" type="q105:ContactDetail" />
+        <xs:element xmlns:q106="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="contactDetail" nillable="true" type="q106:ContactDetail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveContactDetailResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q106="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveContactDetailResult" nillable="true" type="q106:ContactDetail" />
+        <xs:element xmlns:q107="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveContactDetailResult" nillable="true" type="q107:ContactDetail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateContactDetail">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q107="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newContactDetail" nillable="true" type="q107:ContactDetail" />
-        <xs:element xmlns:q108="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origContactDetail" nillable="true" type="q108:ContactDetail" />
+        <xs:element xmlns:q108="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newContactDetail" nillable="true" type="q108:ContactDetail" />
+        <xs:element xmlns:q109="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origContactDetail" nillable="true" type="q109:ContactDetail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateContactDetailResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q109="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateContactDetailResult" nillable="true" type="q109:ContactDetail" />
+        <xs:element xmlns:q110="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateContactDetailResult" nillable="true" type="q110:ContactDetail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveFoundationFacility">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q110="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="foundationFacility" nillable="true" type="q110:FoundationFacility" />
+        <xs:element xmlns:q111="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="foundationFacility" nillable="true" type="q111:FoundationFacility" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveFoundationFacilityResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q111="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveFoundationFacilityResult" nillable="true" type="q111:FoundationFacility" />
+        <xs:element xmlns:q112="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveFoundationFacilityResult" nillable="true" type="q112:FoundationFacility" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1150,29 +1169,29 @@
   <xs:element name="GetFoundationFacilityResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q112="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetFoundationFacilityResult" nillable="true" type="q112:FoundationFacility" />
+        <xs:element xmlns:q113="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetFoundationFacilityResult" nillable="true" type="q113:FoundationFacility" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateFoundationFacility">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q113="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newFoundationFacility" nillable="true" type="q113:FoundationFacility" />
-        <xs:element xmlns:q114="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origFoundationFacility" nillable="true" type="q114:FoundationFacility" />
+        <xs:element xmlns:q114="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newFoundationFacility" nillable="true" type="q114:FoundationFacility" />
+        <xs:element xmlns:q115="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origFoundationFacility" nillable="true" type="q115:FoundationFacility" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateFoundationFacilityResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q115="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateFoundationFacilityResult" nillable="true" type="q115:FoundationFacility" />
+        <xs:element xmlns:q116="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateFoundationFacilityResult" nillable="true" type="q116:FoundationFacility" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteOutletStore">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q116="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="store" nillable="true" type="q116:OutletStore" />
+        <xs:element xmlns:q117="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="store" nillable="true" type="q117:OutletStore" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1184,14 +1203,14 @@
   <xs:element name="SaveOutletStore">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q117="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="store" nillable="true" type="q117:OutletStore" />
+        <xs:element xmlns:q118="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="store" nillable="true" type="q118:OutletStore" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveOutletStoreResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q118="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveOutletStoreResult" nillable="true" type="q118:OutletStore" />
+        <xs:element xmlns:q119="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveOutletStoreResult" nillable="true" type="q119:OutletStore" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1205,22 +1224,36 @@
   <xs:element name="GetOutletStoreByIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q119="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOutletStoreByIDResult" nillable="true" type="q119:OutletStore" />
+        <xs:element xmlns:q120="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOutletStoreByIDResult" nillable="true" type="q120:OutletStore" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateOutletStore">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q120="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newStore" nillable="true" type="q120:OutletStore" />
-        <xs:element xmlns:q121="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origStore" nillable="true" type="q121:OutletStore" />
+        <xs:element xmlns:q121="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newStore" nillable="true" type="q121:OutletStore" />
+        <xs:element xmlns:q122="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origStore" nillable="true" type="q122:OutletStore" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateOutletStoreResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q122="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateOutletStoreResult" nillable="true" type="q122:OutletStore" />
+        <xs:element xmlns:q123="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateOutletStoreResult" nillable="true" type="q123:OutletStore" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderHeaderInvoiceCreditDetails">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="orderNo" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderHeaderInvoiceCreditDetailsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q124="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderHeaderInvoiceCreditDetailsResult" nillable="true" type="q124:InvoiceCreditNoteDetails" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1238,14 +1271,14 @@
   <xs:element name="SearchOrderCreditNotesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q123="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SearchOrderCreditNotesResult" nillable="true" type="q123:ArrayOfCreditNoteDetails" />
+        <xs:element xmlns:q125="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SearchOrderCreditNotesResult" nillable="true" type="q125:ArrayOfCreditNoteDetails" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteOrderCreditNote">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q124="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderCreditNote" nillable="true" type="q124:OrderCreditNote" />
+        <xs:element xmlns:q126="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderCreditNote" nillable="true" type="q126:OrderCreditNote" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1262,7 +1295,7 @@
   <xs:element name="GetAllOrderCreditNotesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q125="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllOrderCreditNotesResult" nillable="true" type="q125:ArrayOfOrderCreditNote" />
+        <xs:element xmlns:q127="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllOrderCreditNotesResult" nillable="true" type="q127:ArrayOfOrderCreditNote" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1276,36 +1309,36 @@
   <xs:element name="GetOrderCreditNoteResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q126="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderCreditNoteResult" nillable="true" type="q126:OrderCreditNote" />
+        <xs:element xmlns:q128="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderCreditNoteResult" nillable="true" type="q128:OrderCreditNote" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveOrderCreditNote">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q127="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderCreditNote" nillable="true" type="q127:OrderCreditNote" />
+        <xs:element xmlns:q129="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderCreditNote" nillable="true" type="q129:OrderCreditNote" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveOrderCreditNoteResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q128="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveOrderCreditNoteResult" nillable="true" type="q128:OrderCreditNote" />
+        <xs:element xmlns:q130="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveOrderCreditNoteResult" nillable="true" type="q130:OrderCreditNote" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateOrderCreditNote">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q129="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderCreditNote" nillable="true" type="q129:OrderCreditNote" />
-        <xs:element xmlns:q130="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderCreditNote" nillable="true" type="q130:OrderCreditNote" />
+        <xs:element xmlns:q131="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderCreditNote" nillable="true" type="q131:OrderCreditNote" />
+        <xs:element xmlns:q132="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderCreditNote" nillable="true" type="q132:OrderCreditNote" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateOrderCreditNoteResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q131="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateOrderCreditNoteResult" nillable="true" type="q131:OrderCreditNote" />
+        <xs:element xmlns:q133="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateOrderCreditNoteResult" nillable="true" type="q133:OrderCreditNote" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1319,7 +1352,7 @@
   <xs:element name="AvailableOrderLinesForCreditNoteResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q132="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="AvailableOrderLinesForCreditNoteResult" nillable="true" type="q132:ArrayOfOrderLine" />
+        <xs:element xmlns:q134="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="AvailableOrderLinesForCreditNoteResult" nillable="true" type="q134:ArrayOfOrderLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1377,14 +1410,14 @@
   <xs:element name="GetCreditNoteLineByOrderIdAndOrderLineIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q133="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCreditNoteLineByOrderIdAndOrderLineIdResult" nillable="true" type="q133:OrderCreditNoteLine" />
+        <xs:element xmlns:q135="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCreditNoteLineByOrderIdAndOrderLineIdResult" nillable="true" type="q135:OrderCreditNoteLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteOrderCreditNoteLine">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q134="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderCreditNoteLine" nillable="true" type="q134:OrderCreditNoteLine" />
+        <xs:element xmlns:q136="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderCreditNoteLine" nillable="true" type="q136:OrderCreditNoteLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1401,7 +1434,7 @@
   <xs:element name="GetAllOrderCreditNoteLinesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q135="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllOrderCreditNoteLinesResult" nillable="true" type="q135:ArrayOfOrderCreditNoteLine" />
+        <xs:element xmlns:q137="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllOrderCreditNoteLinesResult" nillable="true" type="q137:ArrayOfOrderCreditNoteLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1415,88 +1448,88 @@
   <xs:element name="GetOrderCreditNoteLineResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q136="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderCreditNoteLineResult" nillable="true" type="q136:OrderCreditNoteLine" />
+        <xs:element xmlns:q138="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderCreditNoteLineResult" nillable="true" type="q138:OrderCreditNoteLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveOrderCreditNoteLine">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q137="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderCreditNoteLine" nillable="true" type="q137:OrderCreditNoteLine" />
+        <xs:element xmlns:q139="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderCreditNoteLine" nillable="true" type="q139:OrderCreditNoteLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveOrderCreditNoteLineResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q138="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveOrderCreditNoteLineResult" nillable="true" type="q138:OrderCreditNoteLine" />
+        <xs:element xmlns:q140="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveOrderCreditNoteLineResult" nillable="true" type="q140:OrderCreditNoteLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateOrderCreditNoteLine">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q139="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderCreditNoteLine" nillable="true" type="q139:OrderCreditNoteLine" />
-        <xs:element xmlns:q140="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderCreditNoteLine" nillable="true" type="q140:OrderCreditNoteLine" />
+        <xs:element xmlns:q141="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderCreditNoteLine" nillable="true" type="q141:OrderCreditNoteLine" />
+        <xs:element xmlns:q142="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderCreditNoteLine" nillable="true" type="q142:OrderCreditNoteLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateOrderCreditNoteLineResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q141="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateOrderCreditNoteLineResult" nillable="true" type="q141:OrderCreditNoteLine" />
+        <xs:element xmlns:q143="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateOrderCreditNoteLineResult" nillable="true" type="q143:OrderCreditNoteLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateInvoice">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q142="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderHeader" nillable="true" type="q142:OrderHeader" />
-        <xs:element xmlns:q143="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderHeader" nillable="true" type="q143:OrderHeader" />
+        <xs:element xmlns:q144="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderHeader" nillable="true" type="q144:OrderHeader" />
+        <xs:element xmlns:q145="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderHeader" nillable="true" type="q145:OrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateInvoiceResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q144="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="CreateInvoiceResult" nillable="true" type="q144:OrderHeader" />
+        <xs:element xmlns:q146="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="CreateInvoiceResult" nillable="true" type="q146:OrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateInvoiceProforma">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q145="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderHeader" nillable="true" type="q145:OrderHeader" />
-        <xs:element xmlns:q146="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderHeader" nillable="true" type="q146:OrderHeader" />
+        <xs:element xmlns:q147="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderHeader" nillable="true" type="q147:OrderHeader" />
+        <xs:element xmlns:q148="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderHeader" nillable="true" type="q148:OrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateInvoiceProformaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q147="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="CreateInvoiceProformaResult" nillable="true" type="q147:OrderHeader" />
+        <xs:element xmlns:q149="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="CreateInvoiceProformaResult" nillable="true" type="q149:OrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateDeliveryNote">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q148="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderHeader" nillable="true" type="q148:OrderHeader" />
-        <xs:element xmlns:q149="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderHeader" nillable="true" type="q149:OrderHeader" />
+        <xs:element xmlns:q150="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newOrderHeader" nillable="true" type="q150:OrderHeader" />
+        <xs:element xmlns:q151="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origOrderHeader" nillable="true" type="q151:OrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateDeliveryNoteResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q150="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="CreateDeliveryNoteResult" nillable="true" type="q150:OrderHeader" />
+        <xs:element xmlns:q152="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="CreateDeliveryNoteResult" nillable="true" type="q152:OrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteOrderHeader">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q151="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderHeader" nillable="true" type="q151:OrderHeader" />
+        <xs:element xmlns:q153="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="orderHeader" nillable="true" type="q153:OrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1515,7 +1548,7 @@
   <xs:element name="GetOrderHeaderResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q152="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderHeaderResult" nillable="true" type="q152:OrderHeader" />
+        <xs:element xmlns:q154="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderHeaderResult" nillable="true" type="q154:OrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1529,7 +1562,7 @@
   <xs:element name="GetOrderHeaderByIdWithVatCodeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q153="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderHeaderByIdWithVatCodeResult" nillable="true" type="q153:OrderHeader" />
+        <xs:element xmlns:q155="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderHeaderByIdWithVatCodeResult" nillable="true" type="q155:OrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1543,7 +1576,7 @@
   <xs:element name="GetOrderHeaderByOrderNoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q154="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderHeaderByOrderNoResult" nillable="true" type="q154:OrderHeader" />
+        <xs:element xmlns:q156="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderHeaderByOrderNoResult" nillable="true" type="q156:OrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1555,7 +1588,7 @@
   <xs:element name="GetAllOrderHeadersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q155="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllOrderHeadersResult" nillable="true" type="q155:ArrayOfOrderHeader" />
+        <xs:element xmlns:q157="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllOrderHeadersResult" nillable="true" type="q157:ArrayOfOrderHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1573,36 +1606,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetOrderHeaderForSearch">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="orderNo" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="invoiceNo" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="customerName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="dateFrom" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="dateTo" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="orderStatus" type="xs:short" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrderHeaderForSearchResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q156="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetOrderHeaderForSearchResult" nillable="true" type="q156:ArrayOfOrderHeader" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="SaveAccount">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q157="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="ac" nillable="true" type="q157:Account" />
+        <xs:element xmlns:q158="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="ac" nillable="true" type="q158:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveAccountResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q158="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveAccountResult" nillable="true" type="q158:Account" />
+        <xs:element xmlns:q159="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveAccountResult" nillable="true" type="q159:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1628,7 +1642,7 @@
   <xs:element name="GetAllAccountsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q159="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllAccountsResult" nillable="true" type="q159:ArrayOfAccount" />
+        <xs:element xmlns:q160="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllAccountsResult" nillable="true" type="q160:ArrayOfAccount" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1642,7 +1656,7 @@
   <xs:element name="GetAccountsByCustomerIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q160="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAccountsByCustomerIdResult" nillable="true" type="q160:ArrayOfAccount" />
+        <xs:element xmlns:q161="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAccountsByCustomerIdResult" nillable="true" type="q161:ArrayOfAccount" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1656,7 +1670,7 @@
   <xs:element name="GetAccountResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q161="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAccountResult" nillable="true" type="q161:Account" />
+        <xs:element xmlns:q162="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAccountResult" nillable="true" type="q162:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1670,29 +1684,29 @@
   <xs:element name="GetAccountByAlphaIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q162="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAccountByAlphaIDResult" nillable="true" type="q162:Account" />
+        <xs:element xmlns:q163="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAccountByAlphaIDResult" nillable="true" type="q163:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateAccount">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q163="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newAccount" nillable="true" type="q163:Account" />
-        <xs:element xmlns:q164="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origAccount" nillable="true" type="q164:Account" />
+        <xs:element xmlns:q164="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newAccount" nillable="true" type="q164:Account" />
+        <xs:element xmlns:q165="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origAccount" nillable="true" type="q165:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateAccountResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q165="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateAccountResult" nillable="true" type="q165:Account" />
+        <xs:element xmlns:q166="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateAccountResult" nillable="true" type="q166:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteAccount">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q166="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="cde" nillable="true" type="q166:Account" />
+        <xs:element xmlns:q167="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="cde" nillable="true" type="q167:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1711,7 +1725,7 @@
   <xs:element name="GetAddressResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q167="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAddressResult" nillable="true" type="q167:Address" />
+        <xs:element xmlns:q168="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAddressResult" nillable="true" type="q168:Address" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1749,7 +1763,7 @@
   <xs:element name="GetAccountsByCustomerIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q168="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAccountsByCustomerIDResult" nillable="true" type="q168:ArrayOfAccount" />
+        <xs:element xmlns:q169="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAccountsByCustomerIDResult" nillable="true" type="q169:ArrayOfAccount" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1763,7 +1777,7 @@
   <xs:element name="GetCustomersByAccountNameLikeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q169="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCustomersByAccountNameLikeResult" nillable="true" type="q169:ArrayOfCustomer" />
+        <xs:element xmlns:q170="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCustomersByAccountNameLikeResult" nillable="true" type="q170:ArrayOfCustomer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1777,7 +1791,7 @@
   <xs:element name="GetByTelehoneNoLikeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q170="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetByTelehoneNoLikeResult" nillable="true" type="q170:ArrayOfCustomer" />
+        <xs:element xmlns:q171="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetByTelehoneNoLikeResult" nillable="true" type="q171:ArrayOfCustomer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1789,7 +1803,7 @@
   <xs:element name="GetAllCustomersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q171="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllCustomersResult" nillable="true" type="q171:ArrayOfCustomer" />
+        <xs:element xmlns:q172="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllCustomersResult" nillable="true" type="q172:ArrayOfCustomer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1831,7 +1845,7 @@
   <xs:element name="GetCustomerByNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q172="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCustomerByNameResult" nillable="true" type="q172:Customer" />
+        <xs:element xmlns:q173="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCustomerByNameResult" nillable="true" type="q173:Customer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1845,7 +1859,7 @@
   <xs:element name="GetCustomerByIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q173="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCustomerByIDResult" nillable="true" type="q173:Customer" />
+        <xs:element xmlns:q174="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCustomerByIDResult" nillable="true" type="q174:Customer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1859,7 +1873,7 @@
   <xs:element name="GetCustomerByNameLikeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q174="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCustomerByNameLikeResult" nillable="true" type="q174:ArrayOfCustomer" />
+        <xs:element xmlns:q175="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCustomerByNameLikeResult" nillable="true" type="q175:ArrayOfCustomer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1873,7 +1887,7 @@
   <xs:element name="GetCustomerWithContactsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q175="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCustomerWithContactsResult" nillable="true" type="q175:Customer" />
+        <xs:element xmlns:q176="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCustomerWithContactsResult" nillable="true" type="q176:Customer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1887,36 +1901,36 @@
   <xs:element name="GetCustomerWithOutletStoresResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q176="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCustomerWithOutletStoresResult" nillable="true" type="q176:Customer" />
+        <xs:element xmlns:q177="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCustomerWithOutletStoresResult" nillable="true" type="q177:Customer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveCustomerOutlet">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q177="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="customer" nillable="true" type="q177:Customer" />
+        <xs:element xmlns:q178="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="customer" nillable="true" type="q178:Customer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveCustomerOutletResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q178="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveCustomerOutletResult" nillable="true" type="q178:Customer" />
+        <xs:element xmlns:q179="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveCustomerOutletResult" nillable="true" type="q179:Customer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateCustomer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q179="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newCustomer" nillable="true" type="q179:Customer" />
-        <xs:element xmlns:q180="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origCustomer" nillable="true" type="q180:Customer" />
+        <xs:element xmlns:q180="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newCustomer" nillable="true" type="q180:Customer" />
+        <xs:element xmlns:q181="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origCustomer" nillable="true" type="q181:Customer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateCustomerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q181="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateCustomerResult" nillable="true" type="q181:Customer" />
+        <xs:element xmlns:q182="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateCustomerResult" nillable="true" type="q182:Customer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1937,7 +1951,7 @@
   <xs:element name="DeleteCreditNote">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q182="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="creditNote" nillable="true" type="q182:CreditNote" />
+        <xs:element xmlns:q183="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="creditNote" nillable="true" type="q183:CreditNote" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1954,7 +1968,7 @@
   <xs:element name="GetAllCreditNotesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q183="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllCreditNotesResult" nillable="true" type="q183:ArrayOfCreditNote" />
+        <xs:element xmlns:q184="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetAllCreditNotesResult" nillable="true" type="q184:ArrayOfCreditNote" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1968,36 +1982,36 @@
   <xs:element name="GetCreditNoteResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q184="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCreditNoteResult" nillable="true" type="q184:CreditNote" />
+        <xs:element xmlns:q185="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetCreditNoteResult" nillable="true" type="q185:CreditNote" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveCreditNote">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q185="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="creditNote" nillable="true" type="q185:CreditNote" />
+        <xs:element xmlns:q186="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="creditNote" nillable="true" type="q186:CreditNote" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveCreditNoteResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q186="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveCreditNoteResult" nillable="true" type="q186:CreditNote" />
+        <xs:element xmlns:q187="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SaveCreditNoteResult" nillable="true" type="q187:CreditNote" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateCreditNote">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q187="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newCreditNote" nillable="true" type="q187:CreditNote" />
-        <xs:element xmlns:q188="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origCreditNote" nillable="true" type="q188:CreditNote" />
+        <xs:element xmlns:q188="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="newCreditNote" nillable="true" type="q188:CreditNote" />
+        <xs:element xmlns:q189="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="origCreditNote" nillable="true" type="q189:CreditNote" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateCreditNoteResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q189="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateCreditNoteResult" nillable="true" type="q189:CreditNote" />
+        <xs:element xmlns:q190="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="UpdateCreditNoteResult" nillable="true" type="q190:CreditNote" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -2015,7 +2029,7 @@
   <xs:element name="SearchCreditNotesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q190="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SearchCreditNotesResult" nillable="true" type="q190:ArrayOfCreditNoteDetails" />
+        <xs:element xmlns:q191="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="SearchCreditNotesResult" nillable="true" type="q191:ArrayOfCreditNoteDetails" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -2029,7 +2043,7 @@
   <xs:element name="GetInvoiceCreditDetailsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q191="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetInvoiceCreditDetailsResult" nillable="true" type="q191:InvoiceCreditNoteDetails" />
+        <xs:element xmlns:q192="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetInvoiceCreditDetailsResult" nillable="true" type="q192:InvoiceCreditNoteDetails" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -2052,7 +2066,7 @@
   <xs:element name="DeleteContactDetail">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q192="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="contactDetail" nillable="true" type="q192:ContactDetail" />
+        <xs:element xmlns:q193="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="contactDetail" nillable="true" type="q193:ContactDetail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -2071,7 +2085,7 @@
   <xs:element name="GetContactDetailByIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q193="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetContactDetailByIDResult" nillable="true" type="q193:ContactDetail" />
+        <xs:element xmlns:q194="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetContactDetailByIDResult" nillable="true" type="q194:ContactDetail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -2085,7 +2099,7 @@
   <xs:element name="GetContactDetailsByCustomerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q194="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetContactDetailsByCustomerResult" nillable="true" type="q194:ArrayOfContactDetail" />
+        <xs:element xmlns:q195="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetContactDetailsByCustomerResult" nillable="true" type="q195:ArrayOfContactDetail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

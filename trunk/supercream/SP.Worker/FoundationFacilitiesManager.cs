@@ -221,12 +221,27 @@ namespace SP.Worker
             return creditNoteDao.CreditNoteExistsByOrderId(orderId);
         }
 
-        public InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID)
+        public InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderId)
         {
             IDaoFactory factory = new LTSDaoFactory();
             ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
-            decimal vatRatePercentage = GetStandardVatRatePercentageValue();
-            return creditNoteDao.GetInvoiceCreditDetails(orderID, vatRatePercentage);
+
+            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
+            OrderHeader orderHeader = orderHeaderDao.GetById(orderId);
+
+            decimal vatRatePercentage;
+            IVatCodeDao vatCodeDao = factory.GetVatCodeDao();
+            VatCode vatCode = vatCodeDao.GetById(orderHeader.VatCodeID);
+            if (vatCode.VatExemptible == true)
+            {
+                vatRatePercentage = Convert.ToDecimal(vatCode.PercentageValue);
+            }
+            else
+            {
+                vatRatePercentage = new decimal(0.0);
+            }
+
+            return creditNoteDao.GetInvoiceCreditDetails(orderId, vatRatePercentage);
         }
 
         public void DeleteCreditNote(CreditNote creditnote)
@@ -509,6 +524,29 @@ namespace SP.Worker
         #endregion
 
         #region OrderCreditNote
+
+        public InvoiceCreditNoteDetails GetOrderHeaderInvoiceCreditDetails(int orderNo)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteDao creditNoteDao = factory.GetOrderCreditNoteDao();
+
+            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
+            OrderHeader orderHeader = orderHeaderDao.GetById(orderNo);
+
+            decimal vatRatePercentage;
+            IVatCodeDao vatCodeDao = factory.GetVatCodeDao();
+            VatCode vatCode = vatCodeDao.GetById(orderHeader.VatCodeID);
+            if(vatCode.VatExemptible == true)
+            {
+                vatRatePercentage = Convert.ToDecimal(vatCode.PercentageValue);
+            }
+            else
+            {
+                vatRatePercentage = new decimal(0.0);
+            }
+          
+            return creditNoteDao.GetInvoiceCreditDetails(orderNo, vatRatePercentage);
+        }
 
         public List<CreditNoteDetails> SearchOrderCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
         {
@@ -1650,6 +1688,6 @@ namespace SP.Worker
             return Convert.ToDecimal(vatCode.PercentageValue);
         }
 
-        #endregion
+        #endregion       
     }
 }
