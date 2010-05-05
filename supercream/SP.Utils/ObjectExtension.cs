@@ -56,9 +56,9 @@ namespace SP.Util
                 }
             }
             return destination;
-        }
+        }      
 
-        public static List<T2> CloneList<T1, T2>(List<T1> origList)
+        public static List<T2> CloneList<T1, T2>(this List<T1> origList)
         {
             List<T2> destinationList = new List<T2>();
             foreach (T1 orig in origList)
