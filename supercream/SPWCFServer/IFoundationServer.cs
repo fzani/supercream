@@ -212,6 +212,10 @@ namespace SPWCFServer
         #endregion
 
         #region OrderCreditNote
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<CreditNoteDetails> SearchOrderCreditNotes(string orderNo, string invoiceNo, string customerName,
+                                                       DateTime dateFrom, DateTime dateTo);
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]

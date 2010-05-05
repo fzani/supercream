@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="MaintainOrderCreditNote.ascx.cs"
     Inherits="Controls_MaintainOrderCreditNote" %>
-<%@ Register Src="CreditNoteSearch.ascx" TagName="CreditNoteSearch" TagPrefix="uc1" %>
+<%@ Register Src="OrderCreditNoteSearch.ascx" TagName="CreditNoteSearch" TagPrefix="uc1" %>
 <%@ Register Src="SaveCreditNoteControl.ascx" TagName="SaveCreditNoteControl" TagPrefix="uc2" %>
 <%@ Register Src="ModifyOrderCreditNoteLines.ascx" TagName="ModifyOrderCreditNoteLines"
     TagPrefix="uc3" %>

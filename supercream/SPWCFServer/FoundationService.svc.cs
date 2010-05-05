@@ -1006,6 +1006,19 @@ namespace SPWCFServer
         #endregion
 
         #region OrderCreditNote
+        public List<CreditNoteDetails> SearchOrderCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                var orderCreditNoteList = mgr.SearchOrderCreditNotes(orderNo, invoiceNo, customerName, dateFrom, dateTo);
+                return ObjectExtension.CloneList<SP.Core.Domain.CreditNoteDetails, SPWCFServer.CreditNoteDetails>(orderCreditNoteList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
 
         public List<OrderLine> AvailableOrderLinesForCreditNote(int orderId)
         {
@@ -2878,7 +2891,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion           
+        #endregion
     }
 }
 

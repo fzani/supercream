@@ -17,5 +17,8 @@ namespace SP.Core.DataInterfaces
         List<OrderLine> AvailableOrderLinesForCreditNote(int orderId);
         string GenerateCreditNo();
         bool ReferenceExists(string referenceNo);
+
+        List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName,
+                                                  DateTime dateFrom, DateTime dateTo);
     }
 }
