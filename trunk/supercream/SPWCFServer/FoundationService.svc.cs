@@ -1012,7 +1012,7 @@ namespace SPWCFServer
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
                 var orderCreditNoteList = mgr.SearchOrderCreditNotes(orderNo, invoiceNo, customerName, dateFrom, dateTo);
-                return ObjectExtension.CloneList<SP.Core.Domain.CreditNoteDetails, SPWCFServer.CreditNoteDetails>(orderCreditNoteList);
+                return orderCreditNoteList.CloneList<SP.Core.Domain.CreditNoteDetails, SPWCFServer.CreditNoteDetails>();
             }
             catch (Exception ex)
             {
