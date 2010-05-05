@@ -20,5 +20,7 @@ namespace SP.Core.DataInterfaces
 
         List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName,
                                                   DateTime dateFrom, DateTime dateTo);
+
+        InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderNo, decimal vatRate);
     }
 }

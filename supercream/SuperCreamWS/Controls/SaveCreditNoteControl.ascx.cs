@@ -121,7 +121,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
 
     #endregion
 
-    #region General Event Hanadlers
+    #region General Event Handlers
 
     protected void SaveButton_Click(object sender, EventArgs e)
     {

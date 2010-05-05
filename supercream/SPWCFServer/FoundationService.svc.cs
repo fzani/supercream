@@ -1006,6 +1006,21 @@ namespace SPWCFServer
         #endregion
 
         #region OrderCreditNote
+
+        public InvoiceCreditNoteDetails GetOrderHeaderInvoiceCreditDetails(int orderNo)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.InvoiceCreditNoteDetails invoiceDetails = mgr.GetOrderHeaderInvoiceCreditDetails(orderNo);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.InvoiceCreditNoteDetails, SPWCFServer.InvoiceCreditNoteDetails>(invoiceDetails);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public List<CreditNoteDetails> SearchOrderCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
         {
             try
@@ -2891,7 +2906,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion
+        #endregion       
     }
 }
 
