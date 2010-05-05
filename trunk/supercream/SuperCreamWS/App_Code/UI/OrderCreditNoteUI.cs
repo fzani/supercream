@@ -13,13 +13,6 @@ using System.Transactions;
 
 using WcfFoundationService;
 
-public struct id
-{
-		static id()
-		{
-				throw new NotImplementedException();
-		}
-}
 /// <summary>
 /// Summary description for OrderListUI
 /// </summary>
@@ -27,10 +20,9 @@ public struct id
 public class OrderCreditNoteUI : IDisposable
 {
     private WcfFoundationService.FoundationServiceClient _proxy;
-                                                                private static bool id = false;
 
     public OrderCreditNoteUI()
-    {        
+    {
     }
 
     [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
@@ -56,10 +48,10 @@ public class OrderCreditNoteUI : IDisposable
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-          //  _proxy.DeleteOrderCreditNote(OrderCreditNote);
+            //  _proxy.DeleteOrderCreditNote(OrderCreditNote);
         }
     }
-   
+
     public void UpdatePopupOrderCreditNote(OrderCreditNote newOrderCreditNote)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
@@ -72,25 +64,33 @@ public class OrderCreditNoteUI : IDisposable
 
             //_proxy.UpdateOrderCreditNote(newOrderCreditNote, origOrderCreditNote);
         }
-    }    
+    }
 
     public OrderCreditNote GetByID(int id)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-        return _proxy.GetOrderCreditNote(id);
+            return _proxy.GetOrderCreditNote(id);
         }
     }
-  
+
+    public List<CreditNoteDetails> SearchOrderCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.SearchOrderCreditNotes(orderNo, invoiceNo, customerName, dateFrom, dateTo);
+        }
+    }
+
     #region IDisposable Members
 
     public void Dispose()
-    {     
+    {
     }
 
     #endregion
 
     ~OrderCreditNoteUI()
-    {        
+    {
     }
 }

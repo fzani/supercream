@@ -85,7 +85,8 @@
                                 </td>
                                 <td>
                                     <asp:LinkButton ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
-                                        OnClick="SearchButton_Click" /> |
+                                        OnClick="SearchButton_Click" />
+                                    |
                                     <asp:LinkButton ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
                                         OnClick="ClearButton_Click" />
                                 </td>
@@ -103,25 +104,26 @@
                 <Columns>
                     <asp:TemplateField HeaderText="Order No/Reference" SortExpression="OrderNo/Reference">
                         <ItemTemplate>
-                            <asp:Label ID="Label1" runat="server" Text='<%# Bind("OrderNo") %>'></asp:Label> <br />
+                            <asp:Label ID="Label1" runat="server" Text='<%# Bind("OrderNo") %>'></asp:Label>
+                            <br />
                             <asp:Label ID="Label2" runat="server" Text='<%# Bind("Reference") %>'></asp:Label>
-                        </ItemTemplate>                       
+                        </ItemTemplate>
                         <ItemStyle Width="20%" />
                     </asp:TemplateField>
-                    <asp:BoundField DataField="InvoiceNo" HeaderText="Invoice No" 
-                        ItemStyle-Width="20%" SortExpression="InvoiceNo">
-                    <ItemStyle Width="20%" />
+                    <asp:BoundField DataField="InvoiceNo" HeaderText="Invoice No" ItemStyle-Width="20%"
+                        SortExpression="InvoiceNo">
+                        <ItemStyle Width="20%" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="CustomerName" HeaderText="Customer Name" 
-                        ItemStyle-Width="20%" SortExpression="CustomerName" Visible="">
-                    <ItemStyle Width="20%" />
+                    <asp:BoundField DataField="CustomerName" HeaderText="Customer Name" ItemStyle-Width="20%"
+                        SortExpression="CustomerName" Visible="">
+                        <ItemStyle Width="20%" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="DateCreated" HeaderText="Date Created" 
-                        ItemStyle-Width="20%" SortExpression="DateCreated">
-                    <ItemStyle Width="20%" />
+                    <asp:BoundField DataField="DateCreated" HeaderText="Date Created" ItemStyle-Width="20%"
+                        SortExpression="DateCreated">
+                        <ItemStyle Width="20%" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="CreditNoteID" HeaderText="CreditNoteID" 
-                        SortExpression="CreditNoteID" Visible="false" />
+                    <asp:BoundField DataField="CreditNoteID" HeaderText="CreditNoteID" SortExpression="CreditNoteID"
+                        Visible="false" />
                     <asp:TemplateField ItemStyle-Width="20%">
                         <ItemTemplate>
                             <asp:LinkButton ID="EditCreditNoteButton" runat="server" CommandArgument='<%# Bind("CreditNoteID") %>'
@@ -133,9 +135,9 @@
                 </Columns>
             </asp:GridView>
             <asp:ObjectDataSource ID="CreditNotesObjectDataSource" runat="server" OnSelecting="ObjectDataSource1_Selecting"
-                SelectMethod="SearchCreditNotes" TypeName="CreditNoteUI">
+                SelectMethod="SearchOrderCreditNotes" TypeName="OrderCreditNoteUI">
                 <SelectParameters>
-                    <asp:Parameter Name="orderNo" Type="String" />                   
+                    <asp:Parameter Name="orderNo" Type="String" />
                     <asp:Parameter Name="invoiceNo" Type="String" />
                     <asp:Parameter Name="customerName" Type="String" />
                     <asp:Parameter Name="dateFrom" Type="DateTime" />
