@@ -55,5 +55,66 @@ namespace SP.Data.LTS
         {
             return (db.OrderCreditNote.Where<OrderCreditNote>(q => q.Reference == referenceNo).FirstOrDefault() != null) ? true : false;
         }
+
+        public List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
+        {
+            var creditNotes = (from o in db.OrderHeader
+                               join ons in db.OrderNotesStatus on o.ID equals ons.OrderID
+                               join cr in db.OrderCreditNote on o.ID equals cr.OrderID
+                               join c in db.Customer on o.CustomerID equals c.ID
+                               select new CreditNoteDetails
+                               {
+                                   CreditNoteID = cr.ID,
+                                   OrderID = o.ID,
+                                   OrderNo = o.AlphaID,
+                                   InvoiceNo = o.InvoiceNo,
+                                   CustomerName = c.Name,
+                                   DateCreated = cr.DateCreated,
+                                   Reference = cr.Reference
+                               });
+
+            return FilterCreditNotes(creditNotes,
+                    orderNo,
+                    invoiceNo,
+                    customerName,
+                    dateFrom,
+                    dateTo).OrderByDescending(q => q.DateCreated).ToList<CreditNoteDetails>();
+        }
+
+        private static IQueryable<CreditNoteDetails> FilterCreditNotes(IQueryable<CreditNoteDetails> creditNotes,
+           string orderNo,
+           string invoiceNo,
+           string customerName,
+           DateTime dateFrom,
+           DateTime dateTo)
+        {
+            IQueryable<CreditNoteDetails> filteredCreditNotes = creditNotes;
+            if (!String.IsNullOrEmpty(orderNo))
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.OrderNo.Contains(orderNo));
+            }
+
+            if (!String.IsNullOrEmpty(invoiceNo))
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.InvoiceNo.Contains(invoiceNo));
+            }
+
+            if (!String.IsNullOrEmpty(customerName))
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.CustomerName.Contains(customerName));
+            }
+
+            if (dateFrom != DateTime.MinValue)
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.DateCreated >= dateFrom);
+            }
+
+            if (dateTo != DateTime.MinValue)
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.DateCreated <= dateTo);
+            }
+
+            return filteredCreditNotes;
+        }
     }
 }

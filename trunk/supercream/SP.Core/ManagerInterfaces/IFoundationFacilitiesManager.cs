@@ -87,6 +87,7 @@ namespace SP.Core.ManagerInterfaces
         List<OrderCreditNote> GetAllOrderCreditNotes();
         OrderCreditNote SaveOrderCreditNote(OrderCreditNote orderCreditNote);
         OrderCreditNote UpdateOrderCreditNote(OrderCreditNote newOrderCreditNote, OrderCreditNote origOrderCreditNote);
+        List<CreditNoteDetails> SearchOrderCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo);
         #endregion
 
         #region OrderCreditNoteLine
