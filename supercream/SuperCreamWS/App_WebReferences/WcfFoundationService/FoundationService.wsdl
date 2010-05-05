@@ -8,6 +8,12 @@
       <xsd:import schemaLocation="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Linq" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IFoundationService_ExemptCodeExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExemptCodeExists" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_ExemptCodeExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExemptCodeExistsResponse" />
+  </wsdl:message>
   <wsdl:message name="IFoundationService_VatCodeExists_InputMessage">
     <wsdl:part name="parameters" element="tns:VatCodeExists" />
   </wsdl:message>
@@ -43,6 +49,12 @@
   </wsdl:message>
   <wsdl:message name="IFoundationService_DeleteVan_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteVanResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProduct" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_UpdateProduct_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateProduct" />
@@ -254,11 +266,11 @@
   <wsdl:message name="IFoundationService_DeleteVatCode_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteVatCodeResponse" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_ExemptCodeExists_InputMessage">
-    <wsdl:part name="parameters" element="tns:ExemptCodeExists" />
+  <wsdl:message name="IFoundationService_GetOrderHeaderForSearchWithPrintedOrderStatuses_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderHeaderForSearchWithPrintedOrderStatuses" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_ExemptCodeExists_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ExemptCodeExistsResponse" />
+  <wsdl:message name="IFoundationService_GetOrderHeaderForSearchWithPrintedOrderStatuses_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderHeaderForSearchWithPrintedOrderStatusesResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_SaveOrderHeader_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveOrderHeader" />
@@ -470,12 +482,6 @@
   <wsdl:message name="IFoundationService_GetAllProducts_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllProductsResponse" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_GetProduct_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetProduct" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_GetProduct_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetProductResponse" />
-  </wsdl:message>
   <wsdl:message name="IFoundationService_SaveContactDetail_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveContactDetail" />
   </wsdl:message>
@@ -535,6 +541,12 @@
   </wsdl:message>
   <wsdl:message name="IFoundationService_UpdateOutletStore_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateOutletStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_SearchOrderCreditNotes_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchOrderCreditNotes" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_SearchOrderCreditNotes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchOrderCreditNotesResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_DeleteOrderCreditNote_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteOrderCreditNote" />
@@ -685,12 +697,6 @@
   </wsdl:message>
   <wsdl:message name="IFoundationService_GetOrderHeaderForSearch_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOrderHeaderForSearchResponse" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_GetOrderHeaderForSearchWithPrintedOrderStatuses_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetOrderHeaderForSearchWithPrintedOrderStatuses" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_GetOrderHeaderForSearchWithPrintedOrderStatuses_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetOrderHeaderForSearchWithPrintedOrderStatusesResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_SaveAccount_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveAccount" />
@@ -909,6 +915,10 @@
     <wsdl:part name="parameters" element="tns:GetContactDetailsByCustomerResponse" />
   </wsdl:message>
   <wsdl:portType name="IFoundationService">
+    <wsdl:operation name="ExemptCodeExists">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/ExemptCodeExists" message="tns:IFoundationService_ExemptCodeExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/ExemptCodeExistsResponse" message="tns:IFoundationService_ExemptCodeExists_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="VatCodeExists">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/VatCodeExists" message="tns:IFoundationService_VatCodeExists_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/VatCodeExistsResponse" message="tns:IFoundationService_VatCodeExists_OutputMessage" />
@@ -932,6 +942,10 @@
     <wsdl:operation name="DeleteVan">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/DeleteVan" message="tns:IFoundationService_DeleteVan_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/DeleteVanResponse" message="tns:IFoundationService_DeleteVan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetProduct" message="tns:IFoundationService_GetProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetProductResponse" message="tns:IFoundationService_GetProduct_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdateProduct" message="tns:IFoundationService_UpdateProduct_InputMessage" />
@@ -1073,9 +1087,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/DeleteVatCode" message="tns:IFoundationService_DeleteVatCode_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/DeleteVatCodeResponse" message="tns:IFoundationService_DeleteVatCode_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ExemptCodeExists">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/ExemptCodeExists" message="tns:IFoundationService_ExemptCodeExists_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/ExemptCodeExistsResponse" message="tns:IFoundationService_ExemptCodeExists_OutputMessage" />
+    <wsdl:operation name="GetOrderHeaderForSearchWithPrintedOrderStatuses">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetOrderHeaderForSearchWithPrintedOrderStatuses" message="tns:IFoundationService_GetOrderHeaderForSearchWithPrintedOrderStatuses_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetOrderHeaderForSearchWithPrintedOrderStatusesResponse" message="tns:IFoundationService_GetOrderHeaderForSearchWithPrintedOrderStatuses_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SaveOrderHeader">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveOrderHeader" message="tns:IFoundationService_SaveOrderHeader_InputMessage" />
@@ -1217,10 +1231,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetAllProducts" message="tns:IFoundationService_GetAllProducts_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetAllProductsResponse" message="tns:IFoundationService_GetAllProducts_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetProduct">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetProduct" message="tns:IFoundationService_GetProduct_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetProductResponse" message="tns:IFoundationService_GetProduct_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="SaveContactDetail">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveContactDetail" message="tns:IFoundationService_SaveContactDetail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveContactDetailResponse" message="tns:IFoundationService_SaveContactDetail_OutputMessage" />
@@ -1260,6 +1270,10 @@
     <wsdl:operation name="UpdateOutletStore">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdateOutletStore" message="tns:IFoundationService_UpdateOutletStore_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/UpdateOutletStoreResponse" message="tns:IFoundationService_UpdateOutletStore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchOrderCreditNotes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SearchOrderCreditNotes" message="tns:IFoundationService_SearchOrderCreditNotes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SearchOrderCreditNotesResponse" message="tns:IFoundationService_SearchOrderCreditNotes_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteOrderCreditNote">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/DeleteOrderCreditNote" message="tns:IFoundationService_DeleteOrderCreditNote_InputMessage" />
@@ -1360,10 +1374,6 @@
     <wsdl:operation name="GetOrderHeaderForSearch">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetOrderHeaderForSearch" message="tns:IFoundationService_GetOrderHeaderForSearch_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetOrderHeaderForSearchResponse" message="tns:IFoundationService_GetOrderHeaderForSearch_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetOrderHeaderForSearchWithPrintedOrderStatuses">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetOrderHeaderForSearchWithPrintedOrderStatuses" message="tns:IFoundationService_GetOrderHeaderForSearchWithPrintedOrderStatuses_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetOrderHeaderForSearchWithPrintedOrderStatusesResponse" message="tns:IFoundationService_GetOrderHeaderForSearchWithPrintedOrderStatuses_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SaveAccount">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveAccount" message="tns:IFoundationService_SaveAccount_InputMessage" />
@@ -1512,6 +1522,15 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IFoundationService" type="tns:IFoundationService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ExemptCodeExists">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/ExemptCodeExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="VatCodeExists">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/VatCodeExists" style="document" />
       <wsdl:input>
@@ -1559,6 +1578,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteVan">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/DeleteVan" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProduct">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetProduct" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1881,8 +1909,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ExemptCodeExists">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/ExemptCodeExists" style="document" />
+    <wsdl:operation name="GetOrderHeaderForSearchWithPrintedOrderStatuses">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetOrderHeaderForSearchWithPrintedOrderStatuses" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2205,15 +2233,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetProduct">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetProduct" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="SaveContactDetail">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/SaveContactDetail" style="document" />
       <wsdl:input>
@@ -2297,6 +2316,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateOutletStore">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/UpdateOutletStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchOrderCreditNotes">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/SearchOrderCreditNotes" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2522,15 +2550,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetOrderHeaderForSearch">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/GetOrderHeaderForSearch" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetOrderHeaderForSearchWithPrintedOrderStatuses">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetOrderHeaderForSearchWithPrintedOrderStatuses" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
