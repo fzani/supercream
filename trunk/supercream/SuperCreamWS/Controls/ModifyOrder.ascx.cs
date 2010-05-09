@@ -570,12 +570,13 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
                 DeliveryDate = Convert.ToDateTime(this.DeliveryDateTextBox.Text),
                 OrderStatus = (short)SP.Core.Enums.OrderStatus.Order,
                 AlphaID = this.OrderNoHeaderLabel.Text,
-                SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text
+                SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text,
             };
 
             OrderHeader existingOrderHeader = ui.GetByOrderNo(OrderNoHeaderLabel.Text);
             if (existingOrderHeader.ID != this.OrderID.Value)
                 throw new ApplicationException("Cannot Modify Order - Order No Exists for an existing Order");
+            oh.VatCodeID = existingOrderHeader.VatCodeID;
 
             ui.Update(oh);
 

@@ -72,7 +72,7 @@
                     </td>
                     <td>
                         <asp:Button ID="ContinueButton" runat="server" ValidationGroup="SaveCreditNoteGroup"
-                            Text="Continue" Width="20%" OnClick="ContinueButton_Click" />
+                            Text="Continue" Width="20%" OnClick="ContinueButton_Click" />                      
                         <asp:Button ID="DeleteButton" runat="server" ValidationGroup="SaveCreditNoteGroup"
                             Text="Delete" Width="20%" OnClick="DeleteButton_Click" />
                         <asp:Button ID="PrintButton" OnClick="PrintButton_Click" runat="server" Text="Print" Visible="false" Width="20%" />

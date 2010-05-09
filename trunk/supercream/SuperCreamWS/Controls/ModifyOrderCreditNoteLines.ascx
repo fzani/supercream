@@ -77,7 +77,7 @@
                                 <asp:ImageButton ID="EditImage" ImageUrl="~/images/user6_(edit)_16x16.gif" CommandName="Select"
                                     CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" runat="server" />
                                 <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender" DropShadow="true" runat="server"
-                                    TargetControlID="btnTrigger" PopupControlID="PanelMessage"
+                                    TargetControlID="btnTrigger" CancelControlID="CancelButton" PopupControlID="PanelMessage"
                                     BackgroundCssClass="XPopUpBackGround" />
                                 <asp:Panel Style="display: none" Width="700px" ID="PanelMessage" runat="server" CssClass="modalPopup">
                                     <fieldset id="Fieldset2">
@@ -94,8 +94,9 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                        <asp:Button ID="UpdateButton" Text="Update" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
+                                        <asp:Button ID="UpdateButton" style="width:200px;" Text="Update" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
                                             OnClick="UpdateOrderCreditLineButton_Click" runat="server" />
+                                        <asp:Button ID="CancelButton" style="width:200px;" Text="Cancel" runat="server" />
                                 </asp:Panel>
                             </ItemTemplate>
                             <EditItemTemplate>

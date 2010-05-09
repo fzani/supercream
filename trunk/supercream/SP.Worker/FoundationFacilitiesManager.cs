@@ -234,11 +234,11 @@ namespace SP.Worker
             VatCode vatCode = vatCodeDao.GetById(orderHeader.VatCodeID);
             if (vatCode.VatExemptible == true)
             {
-                vatRatePercentage = Convert.ToDecimal(vatCode.PercentageValue);
+                vatRatePercentage = new decimal(0.0);
             }
             else
             {
-                vatRatePercentage = new decimal(0.0);
+                vatRatePercentage = Convert.ToDecimal(vatCode.PercentageValue);
             }
 
             return creditNoteDao.GetInvoiceCreditDetails(orderId, vatRatePercentage);
@@ -536,7 +536,7 @@ namespace SP.Worker
             decimal vatRatePercentage;
             IVatCodeDao vatCodeDao = factory.GetVatCodeDao();
             VatCode vatCode = vatCodeDao.GetById(orderHeader.VatCodeID);
-            if(vatCode.VatExemptible == true)
+            if (vatCode.VatExemptible == false)
             {
                 vatRatePercentage = Convert.ToDecimal(vatCode.PercentageValue);
             }
@@ -544,7 +544,7 @@ namespace SP.Worker
             {
                 vatRatePercentage = new decimal(0.0);
             }
-          
+
             return creditNoteDao.GetInvoiceCreditDetails(orderNo, vatRatePercentage);
         }
 
@@ -1688,6 +1688,6 @@ namespace SP.Worker
             return Convert.ToDecimal(vatCode.PercentageValue);
         }
 
-        #endregion       
+        #endregion
     }
 }
