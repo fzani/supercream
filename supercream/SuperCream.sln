@@ -1,13 +1,19 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{29C5D078-E45C-4AAC-A40E-CAA87BDCB1C3}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		SuperCream.vsmdi = SuperCream.vsmdi
+	EndProjectSection
+EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SuperCreamWS", "SuperCreamWS\", "{FFFF15A1-1851-44C3-BE18-AE7F5A264810}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = ""
 		SccAuxPath = ""
 		SccLocalPath = ""
 		SccProvider = ""
-		TargetFramework = "3.5"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		ProjectReferences = "{0D1CED41-AD5C-44C5-BCD6-A251C702396E}|SP.Core.dll;{DB71EFBB-AB70-4482-B750-8F8E5BAAED09}|SP.Data.dll;{D446DCEC-2802-4948-8B14-CC7198E1A0DF}|SP.Utils.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/SuperCreamWS"
 		Debug.AspNetCompiler.PhysicalPath = "SuperCreamWS\"
@@ -29,12 +35,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperCreamReportsWS", "SuperCreamReportsWS\SuperCreamReportsWS.csproj", "{4D865E68-53C9-4E7B-A38B-3E070652E773}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSP.Data", "TestSP.Data\TestSP.Data.csproj", "{D0EF4364-F820-45B6-842D-0652E8FB0507}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{29C5D078-E45C-4AAC-A40E-CAA87BDCB1C3}"
-	ProjectSection(SolutionItems) = preProject
-		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
-		SuperCream.vsmdi = SuperCream.vsmdi
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Core", "SP.Core\SP.Core.csproj", "{0D1CED41-AD5C-44C5-BCD6-A251C702396E}"
 EndProject
