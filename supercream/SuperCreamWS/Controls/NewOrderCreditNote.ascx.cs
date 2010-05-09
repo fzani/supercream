@@ -33,9 +33,9 @@ public partial class Controls_NewOrderCreditNote : System.Web.UI.UserControl
         }
 
         this.NewCreditNoteSearch.InvoiceEventHandler += new InvoiceEventHandler(NewCreditNoteSearch_InvoiceEventHandler);
-        this.OrderCreditNoteHeader.OrderCreditNoteContinueEventHandler += new OrderCreditNoteContinueEventHandler(NewCreditNoteSearch_ModifyOrderCreditNoteLines);
+        this.OrderCreditNoteHeader.OrderCreditNoteContinueEventHandler += new OrderCreditNoteContinueEventHandler(NewCreditNoteSearch_ModifyOrderCreditNoteLines);      
         this.OrderCreditNoteHeader.ErrorMessageEventHandler += new ErrorMessageEventHandler(NewCreditNoteSearch_ErrorMessageEventHandler);
-    }
+    }   
 
     #endregion
 

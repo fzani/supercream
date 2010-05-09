@@ -9,6 +9,7 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
 
     public event ErrorMessageEventHandler ErrorMessageEventHandler;
     public event OrderCreditNoteContinueEventHandler OrderCreditNoteContinueEventHandler;
+    public event CancelEventHandler CancelEventHandler;
 
     #endregion
 
@@ -26,7 +27,7 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
         {
             if (ViewState["IsNewCreditNote"] == null)
                 return true;
-            return (bool) ViewState["IsNewCreditNote"];
+            return (bool)ViewState["IsNewCreditNote"];
         }
 
         set
@@ -127,7 +128,7 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
             OrderHeader orderHeader = orderHeaderUI.GetById(this.OrderID.Value);
 
             OrderCreditNoteUI creditNoteUI = new OrderCreditNoteUI();
-            invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(this.OrderID.Value);           
+            invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(this.OrderID.Value);
 
             // Persist credit note details
             var ui = new OrderCreditNoteUI();
@@ -150,10 +151,10 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
                 OrderCreditNoteUI.UpdateOrderCreditNote(new OrderCreditNote
                 {
                     ID = CreditNoteID.Value,
-                    OrderID = creditNote.OrderID,                   
+                    OrderID = creditNote.OrderID,
                     DateCreated = DateTime.Now,
                     Reason = this.ReasonTextBox.Text,
-                    Reference = creditNote.Reference,                   
+                    Reference = creditNote.Reference,
                     DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
                 });
             }
@@ -188,6 +189,14 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
         p.PassParameters();
     }
 
+    protected void CancelButton_Click(object sender, EventArgs e)
+    {
+        if (this.CancelEventHandler != null)
+        {
+            this.CancelEventHandler(this, new EventArgs());
+        }
+    }
+
     protected void DeleteButton_Click(object sender, EventArgs e)
     {
         if (CreditNoteID != null)
@@ -207,5 +216,4 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
 
     #region Private Helper
     #endregion
-
 }
