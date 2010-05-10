@@ -13,6 +13,7 @@
     </CollectionMappings>
     <GenerateSerializableTypes>true</GenerateSerializableTypes>
     <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
     <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
     <ReferencedAssemblies />
     <ReferencedDataContractTypes />
@@ -25,9 +26,9 @@
     <MetadataFile FileName="FoundationService.xsd" MetadataType="Schema" ID="309cab15-ba0d-4a5d-879d-d48ef0925914" SourceId="1" SourceUrl="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd1" />
     <MetadataFile FileName="FoundationService2.xsd" MetadataType="Schema" ID="b8753789-113b-4ab1-bfde-aa61efc2fc26" SourceId="1" SourceUrl="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd0" />
     <MetadataFile FileName="FoundationService.wsdl" MetadataType="Wsdl" ID="7357aaaf-292c-43fc-84a9-8e8dc6e50b77" SourceId="1" SourceUrl="http://bali.alterax.com/SPWCFServer/FoundationService.svc?wsdl" />
+    <MetadataFile FileName="FoundationService4.xsd" MetadataType="Schema" ID="3b121c56-6d4f-4583-9830-e6c01e2a5659" SourceId="1" SourceUrl="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd2" />
     <MetadataFile FileName="FoundationService3.xsd" MetadataType="Schema" ID="a7f199b8-5d03-4e18-b891-b0abad23e098" SourceId="1" SourceUrl="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd3" />
     <MetadataFile FileName="FoundationService.disco" MetadataType="Disco" ID="604ee473-0cac-453c-98f5-dea40b18f271" SourceId="1" SourceUrl="http://bali.alterax.com/SPWCFServer/FoundationService.svc?disco" />
-    <MetadataFile FileName="FoundationService4.xsd" MetadataType="Schema" ID="3b121c56-6d4f-4583-9830-e6c01e2a5659" SourceId="1" SourceUrl="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
