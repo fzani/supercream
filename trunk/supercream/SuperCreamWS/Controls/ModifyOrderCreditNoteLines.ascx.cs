@@ -220,6 +220,12 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
         DropDownList quantityToCreditDropDownList = panelMessage.FindControl("QuantityToCreditDropDownList") as DropDownList;
         int selectedNoOfUnits = Convert.ToInt32(quantityToCreditDropDownList.SelectedValue.ToString());
 
+        OrderCreditNoteUI creditNoteUI = new OrderCreditNoteUI();
+        InvoiceCreditNoteDetails invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(this.OrderID);
+        // JC Here --------------------------------------------------------------------
+        if(invoiceCreditNoteDetails.Balance - (selectedNoOfUnits * line.Price) < 0)
+            throw new ApplicationException("Cannot add a Credit note that exceeds the value of Invoice");
+
         // Next create or updat credit note order Line           
         var orderLine = OrderLineUI.GetOrderLine(orderLineId);
         if (OrderCreditNoteLineUI.CheckIfOrderCreditLineExists(credtNoteId, orderLineId))
