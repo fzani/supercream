@@ -1053,7 +1053,7 @@ namespace SPWCFServer
         {
             try
             {
-                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();                
                 mgr.DeleteOrderCreditNote(ObjectExtension.CloneProperties<SPWCFServer.OrderCreditNote, SP.Core.Domain.OrderCreditNote>(orderCreditNote));
             }
             catch (SqlException)

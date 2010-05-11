@@ -44,11 +44,12 @@ public class OrderCreditNoteUI : IDisposable
         }
     }
 
-    public void DeleteOrderCreditNote(int id)
+    public static void DeleteOrderCreditNote(int id)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            //  _proxy.DeleteOrderCreditNote(OrderCreditNote);
+            OrderCreditNote note = proxy.GetOrderCreditNote(id);
+            proxy.DeleteOrderCreditNote(note);
         }
     }
 
