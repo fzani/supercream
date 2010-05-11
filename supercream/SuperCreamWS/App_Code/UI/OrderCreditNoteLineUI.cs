@@ -33,6 +33,15 @@ public class OrderCreditNoteLineUI : IDisposable
     }
 
     [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
+    public static List<OrderCreditNoteLine> GetOrderCreditNoteLines(int creditNoteId)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.GetOrderCreditNoteLinesByCreditNoteId(creditNoteId) as List<OrderCreditNoteLine>;
+        }
+    }
+
+    [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
     public static List<OrderLine> GetAvailableOrderLines(int orderId)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
@@ -83,7 +92,7 @@ public class OrderCreditNoteLineUI : IDisposable
         }
     }
 
-    public static OrderCreditNoteLine GetByID(int id)
+    public static OrderCreditNoteLine GetById(int id)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {

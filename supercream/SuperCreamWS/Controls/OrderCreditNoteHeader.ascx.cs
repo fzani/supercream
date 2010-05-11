@@ -147,14 +147,14 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
             }
             else
             {
-                OrderCreditNote creditNote = ui.GetByID(CreditNoteID.Value);
+                orderCreditNote = ui.GetByID(CreditNoteID.Value);
                 OrderCreditNoteUI.UpdateOrderCreditNote(new OrderCreditNote
                 {
                     ID = CreditNoteID.Value,
-                    OrderID = creditNote.OrderID,
+                    OrderID = orderCreditNote.OrderID,
                     DateCreated = DateTime.Now,
                     Reason = this.ReasonTextBox.Text,
-                    Reference = creditNote.Reference,
+                    Reference = orderCreditNote.Reference,
                     DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
                 });
             }

@@ -92,6 +92,8 @@ namespace SP.Core.ManagerInterfaces
         #endregion
 
         #region OrderCreditNoteLine
+
+        List<OrderCreditNoteLine> GetOrderCreditNoteLinesByCreditNoteId(int creditNoteId);
         int GetAvailableNoOfUnitsOnOrderLine(int orderLineId);
         bool CheckIfOrderLineAlreadyExistsForCreditNotes(int orderLineId);
         OrderCreditNoteLine GetCreditNoteLineByOrderIdAndOrderLineId(int creditNoteid, int orderLineId);

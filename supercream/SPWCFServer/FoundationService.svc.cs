@@ -1130,6 +1130,20 @@ namespace SPWCFServer
 
         #region OrderCreditNoteLine
 
+        public List<OrderCreditNoteLine> GetOrderCreditNoteLinesByCreditNoteId(int creditNoteId)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.OrderCreditNoteLine> orderCreditNoteLineList = mgr.GetOrderCreditNoteLinesByCreditNoteId(creditNoteId);
+                return ObjectExtension.CloneList<SP.Core.Domain.OrderCreditNoteLine, SPWCFServer.OrderCreditNoteLine>(orderCreditNoteLineList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public int GetAvailableNoOfUnitsOnOrderLine(int orderLineId)
         {
             try
@@ -2906,7 +2920,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion       
+        #endregion                  
     }
 }
 

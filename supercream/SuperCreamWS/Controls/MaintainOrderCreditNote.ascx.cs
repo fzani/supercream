@@ -34,6 +34,7 @@ public partial class Controls_MaintainOrderCreditNote : System.Web.UI.UserContro
         this.CreditNoteSearch.CreditNoteEventHandler += new CreditNoteEventHandler(CreditNoteSearch_CreditNoteEventHandler);
         this.OrderCreditNoteHeader.OrderCreditNoteContinueEventHandler += new App_Code.EventArgs.OrderCreditNoteContinueEventHandler(OrderCreditNoteHeader_OrderCreditNoteContinueEventHandler);
         this.OrderCreditNoteHeader.ErrorMessageEventHandler += new ErrorMessageEventHandler(OrderCreditNoteHeader_ErrorMessageEventHandler);
+        this.ModifyOrderCreditNoteLines.ErrorMessageEventHandler += new ErrorMessageEventHandler(OrderCreditNoteHeader_ErrorMessageEventHandler);
     }    
 
     #endregion
@@ -53,7 +54,9 @@ public partial class Controls_MaintainOrderCreditNote : System.Web.UI.UserContro
         this.ChangeState += new EventHandler<EventArgs>(this.ModifyOrderCreditNoteState);
         this.ModifyOrderCreditNoteLines.CreditNoteID = e.CreditNoteId;
         this.ModifyOrderCreditNoteLines.OrderID = e.OrderId;
-        this.ModifyOrderCreditNoteLines.AlphaID = e.AlphaId;       
+        this.ModifyOrderCreditNoteLines.AlphaID = e.AlphaId;
+        this.ModifyOrderCreditNoteLines.CreditNotePanelVisible = true;
+        ModifyOrderCreditNoteLines.DataBind();
         this.ChangeState(this, new EventArgs());
 
     }
