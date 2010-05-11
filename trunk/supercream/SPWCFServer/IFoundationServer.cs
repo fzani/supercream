@@ -251,6 +251,10 @@ namespace SPWCFServer
         #region OrderCreditNoteLine
         [OperationContract]
         [ReferencePreservingDataContractFormat]
+        List<OrderCreditNoteLine> GetOrderCreditNoteLinesByCreditNoteId(int creditNoteId);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
         int GetAvailableNoOfUnitsOnOrderLine(int orderLineId);
 
         [OperationContract]

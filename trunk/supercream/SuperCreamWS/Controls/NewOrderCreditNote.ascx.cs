@@ -33,9 +33,10 @@ public partial class Controls_NewOrderCreditNote : System.Web.UI.UserControl
         }
 
         this.NewCreditNoteSearch.InvoiceEventHandler += new InvoiceEventHandler(NewCreditNoteSearch_InvoiceEventHandler);
-        this.OrderCreditNoteHeader.OrderCreditNoteContinueEventHandler += new OrderCreditNoteContinueEventHandler(NewCreditNoteSearch_ModifyOrderCreditNoteLines);      
+        this.OrderCreditNoteHeader.OrderCreditNoteContinueEventHandler += new OrderCreditNoteContinueEventHandler(NewCreditNoteSearch_ModifyOrderCreditNoteLines);
         this.OrderCreditNoteHeader.ErrorMessageEventHandler += new ErrorMessageEventHandler(NewCreditNoteSearch_ErrorMessageEventHandler);
-    }   
+        this.ModifyOrderCreditNoteLines.ErrorMessageEventHandler += new global::ErrorMessageEventHandler(ModifyOrderCreditNoteLines_ErrorMessageEventHandler);
+    }
 
     #endregion
 
@@ -72,6 +73,14 @@ public partial class Controls_NewOrderCreditNote : System.Web.UI.UserControl
     }
 
     private void NewCreditNoteSearch_ErrorMessageEventHandler(object sender, ErrorMessageEventArgs e)
+    {
+        if (this.ErrorMessageEventHandler != null)
+        {
+            this.ErrorMessageEventHandler(sender, e);
+        }
+    }
+
+    private void ModifyOrderCreditNoteLines_ErrorMessageEventHandler(object sender, ErrorMessageEventArgs e)
     {
         if (this.ErrorMessageEventHandler != null)
         {
