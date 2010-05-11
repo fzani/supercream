@@ -201,13 +201,10 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
     {
         if (CreditNoteID != null)
         {
-            CreditNoteUI ui = new CreditNoteUI();
-            CreditNote creditNote = ui.GetCreditNote(this.CreditNoteID.Value);
-            ui.Delete(creditNote);
-
-            if (this.OrderCreditNoteContinueEventHandler != null)
+            OrderCreditNoteUI.DeleteOrderCreditNote(this.CreditNoteID.Value);
+            if (this.CancelEventHandler != null)
             {
-                //  this.OrderCreditNoteContinueEventHandler(this, new EventArgs());
+                this.CancelEventHandler(this, new EventArgs());
             }
         }
     }

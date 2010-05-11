@@ -567,6 +567,15 @@ namespace SP.Worker
             IDaoFactory factory = new LTSDaoFactory();
             IOrderCreditNoteDao orderCreditNoteDao = factory.GetOrderCreditNoteDao();
 
+            IOrderCreditNoteLineDao orderCreditNoteLineDao = factory.GetOrderCreditNoteLineDao();
+            List<OrderCreditNoteLine> orderCreditNoteLines =
+                orderCreditNoteLineDao.GetOrderCreditNoteLinesByCreditNoteId(ordercreditnote.ID);
+            foreach (var orderCreditNoteLine in orderCreditNoteLines)
+            {
+                IOrderCreditNoteLineDao ocl = factory.GetOrderCreditNoteLineDao();
+                ocl.Delete(orderCreditNoteLine);
+            }
+
             orderCreditNoteDao.Delete(ordercreditnote);
         }
 

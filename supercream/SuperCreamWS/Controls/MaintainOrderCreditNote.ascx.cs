@@ -34,9 +34,10 @@ public partial class Controls_MaintainOrderCreditNote : System.Web.UI.UserContro
         this.CreditNoteSearch.CreditNoteEventHandler += new CreditNoteEventHandler(CreditNoteSearch_CreditNoteEventHandler);
         this.OrderCreditNoteHeader.OrderCreditNoteContinueEventHandler += new App_Code.EventArgs.OrderCreditNoteContinueEventHandler(OrderCreditNoteHeader_OrderCreditNoteContinueEventHandler);
         this.OrderCreditNoteHeader.ErrorMessageEventHandler += new ErrorMessageEventHandler(OrderCreditNoteHeader_ErrorMessageEventHandler);
-        this.ModifyOrderCreditNoteLines.ErrorMessageEventHandler += new ErrorMessageEventHandler(OrderCreditNoteHeader_ErrorMessageEventHandler);
-    }    
-
+        this.OrderCreditNoteHeader.CancelEventHandler += new CancelEventHandler(OrderCreditNoteHeader_CancelEventHandler);
+        this.ModifyOrderCreditNoteLines.ErrorMessageEventHandler += new ErrorMessageEventHandler(OrderCreditNoteHeader_ErrorMessageEventHandler);        
+    }
+  
     #endregion
 
     #region Call Back Handlers
@@ -66,6 +67,17 @@ public partial class Controls_MaintainOrderCreditNote : System.Web.UI.UserContro
         if (this.ErrorMessageEventHandler != null)
         {
             this.ErrorMessageEventHandler(sender, e);
+        }
+    }
+
+    private void OrderCreditNoteHeader_CancelEventHandler(object sender, EventArgs e)
+    {
+        this.ChangeState += new EventHandler<EventArgs>(InitialiseCreditNoteState);
+        this.ChangeState(this, new EventArgs());
+
+        if (this.CancelEventHandler != null)
+        {
+            this.CancelEventHandler(this, new EventArgs());
         }
     }
        
