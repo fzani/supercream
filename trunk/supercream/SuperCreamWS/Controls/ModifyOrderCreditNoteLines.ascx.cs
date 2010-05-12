@@ -14,6 +14,7 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
     #region Private Member Variables
 
     private decimal priceTotal;
+    private decimal creditPriceTotal;
 
     #endregion
 
@@ -190,34 +191,7 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
                 quantityToCreditDropDownList.Items.Add(new ListItem((i + 1).ToString(), (i + 1).ToString()));
             }
             quantityToCreditDropDownList.SelectedValue = qtyToCredit.ToString();
-
-            //Label productIDLabel = row.FindControl("ProductIDLabel") as Label;
-            //productIDLabel.Text = orderLine.ProductID.ToString();
-
-            //Label productNameLabel = row.FindControl("ProductNameLabel") as Label;
-            //productNameLabel.Text = product.Description;
-
-            //Label alphaIDLabel = row.FindControl("AlphaIDLabel") as Label;
-            //alphaIDLabel.Text = AlphaID;
-
-            //Label orderIDLabel = row.FindControl("OrderIDLabel") as Label;
-            //orderIDLabel.Text = orderLine.OrderID.ToString();
-
-            //TextBox qtyTextBox = row.FindControl("QtyTextBox") as TextBox;
-            //qtyTextBox.Text = orderLine.QtyPerUnit.ToString();
-
-            //TextBox noOfUnitsTextBox = row.FindControl("NoOfUnitsTextBox") as TextBox;
-            //noOfUnitsTextBox.Text = orderLine.NoOfUnits.ToString();
-
-            //TextBox discountTextBox = row.FindControl("DiscountTextBox") as TextBox;
-            //discountTextBox.Text = orderLine.Discount.ToString();
-
-            //TextBox priceTextBox = row.FindControl("PriceTextBox") as TextBox;
-            //priceTextBox.Text = String.Format("{0:c}", orderLine.Price);
-
-            //TextBox specialInstructionsTextBox = row.FindControl("SpecialInstructionsTextBox") as TextBox;
-            //specialInstructionsTextBox.Text = orderLine.SpecialInstructions;
-
+          
             ModalPopupExtender extender = row.FindControl("ModalPopupExtender") as ModalPopupExtender;
             extender.Show();
         }
@@ -335,7 +309,7 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
             OrderCreditNoteLine orderLine = e.Row.DataItem as OrderCreditNoteLine;
 
             decimal tempPrice = Math.Round(orderLine.Price * orderLine.NoOfUnits, 2);
-            priceTotal += tempPrice;
+            creditPriceTotal += tempPrice;
 
             Label orderLinePriceAfterDiscountLabel = e.Row.FindControl("OrderLinePriceAfterDiscountLabel") as Label;
             orderLinePriceAfterDiscountLabel.Text = Math.Round(orderLine.Price, 2).ToString();
@@ -348,30 +322,13 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
 
             Label productNameLabel = e.Row.FindControl("ProductNameLabel") as Label;
             Product product = productUI.GetProductByID(productID.Value);
-            productNameLabel.Text = product.Description;
+            productNameLabel.Text = product.Description;            
+        }
 
-            //Image img = e.Row.FindControl("CreditNoteExistsImage") as Image;
-            //if (OrderCreditNoteLineUI.CheckIfOrderLineAlreadyExistsForCreditNotes(orderLine.ID))
-            //{
-            //    img.ImageUrl = "~/images/12-em-check.png";
-            //    img.Visible = true;
-            //    if (OrderCreditNoteLineUI.GetAvailableNoOfUnitsOnOrderLine(orderLine.ID) == 0)
-            //    {
-            //        // all order lines have credit notes against them so do not allow to edit
-            //        var editImageButton = e.Row.FindControl("EditImage") as ImageButton;
-            //        editImageButton.Visible = false;
-            //    }
-            //    else
-            //    {
-            //        var editImageButton = e.Row.FindControl("EditImage") as ImageButton;
-            //        editImageButton.Visible = true;
-            //    }
-            //}
-            //else
-            //{
-            //    img.ImageUrl = String.Empty;
-            //    img.Visible = false;
-            //}
+        if (e.Row.RowType == DataControlRowType.Footer)
+        {
+            Label priceLabel = (Label)e.Row.FindControl("priceLabelTotal");
+            priceLabel.Text = this.creditPriceTotal.ToString("c");
         }
     }
 

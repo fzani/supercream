@@ -35,9 +35,9 @@ public partial class Controls_MaintainOrderCreditNote : System.Web.UI.UserContro
         this.OrderCreditNoteHeader.OrderCreditNoteContinueEventHandler += new App_Code.EventArgs.OrderCreditNoteContinueEventHandler(OrderCreditNoteHeader_OrderCreditNoteContinueEventHandler);
         this.OrderCreditNoteHeader.ErrorMessageEventHandler += new ErrorMessageEventHandler(OrderCreditNoteHeader_ErrorMessageEventHandler);
         this.OrderCreditNoteHeader.CancelEventHandler += new CancelEventHandler(OrderCreditNoteHeader_CancelEventHandler);
-        this.ModifyOrderCreditNoteLines.ErrorMessageEventHandler += new ErrorMessageEventHandler(OrderCreditNoteHeader_ErrorMessageEventHandler);        
+        this.ModifyOrderCreditNoteLines.ErrorMessageEventHandler += new ErrorMessageEventHandler(OrderCreditNoteHeader_ErrorMessageEventHandler);
     }
-  
+
     #endregion
 
     #region Call Back Handlers
@@ -48,7 +48,7 @@ public partial class Controls_MaintainOrderCreditNote : System.Web.UI.UserContro
         this.ChangeState(this, new EventArgs());
 
         this.OrderCreditNoteHeader.CreditNoteID = e.CreditNoteID;
-    }   
+    }
 
     private void OrderCreditNoteHeader_OrderCreditNoteContinueEventHandler(object sender, App_Code.EventArgs.OrderCreditNoteContinueEventArgs e)
     {
@@ -57,6 +57,7 @@ public partial class Controls_MaintainOrderCreditNote : System.Web.UI.UserContro
         this.ModifyOrderCreditNoteLines.OrderID = e.OrderId;
         this.ModifyOrderCreditNoteLines.AlphaID = e.AlphaId;
         this.ModifyOrderCreditNoteLines.CreditNotePanelVisible = true;
+        this.CancelButton.Text = "Continue";
         ModifyOrderCreditNoteLines.DataBind();
         this.ChangeState(this, new EventArgs());
 
@@ -80,7 +81,7 @@ public partial class Controls_MaintainOrderCreditNote : System.Web.UI.UserContro
             this.CancelEventHandler(this, new EventArgs());
         }
     }
-       
+
     #endregion
 
     #region General Events
@@ -98,13 +99,14 @@ public partial class Controls_MaintainOrderCreditNote : System.Web.UI.UserContro
 
     #endregion
 
-    #region Page States 
+    #region Page States
 
     private void InitialiseCreditNoteState(object sender, EventArgs args)
     {
         this.OrderCreditNoteHeader.Visible = false;
         this.CreditNoteSearch.Visible = true;
         this.ModifyOrderCreditNoteLines.Visible = false;
+        this.CancelButton.Text = "Cancel";
     }
 
     private void OrderCreditNoteHeaderState(object sender, EventArgs args)

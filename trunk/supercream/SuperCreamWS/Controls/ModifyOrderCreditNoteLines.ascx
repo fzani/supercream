@@ -14,11 +14,13 @@
                     OnRowCommand="OrderDetailsGridPanel_RowCommand" ShowFooter="true">
                     <Columns>
                         <asp:TemplateField HeaderText="ID" SortExpression="ID" Visible="false">
+                            <ItemStyle Width="20" />
                             <ItemTemplate>
                                 <asp:Label ID="IDLabel" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Product" SortExpression="ProductID">
+                            <ItemStyle Width="20%" />
                             <ItemTemplate>
                                 <asp:Label ID="ProductIDLabel" runat="server" Text='<%# Bind("ProductID") %>' Visible="false"></asp:Label>
                                 <asp:Label ID="ProductNameLabel" runat="server" Text='<%# Bind("ProductID") %>'></asp:Label>
@@ -28,6 +30,7 @@
                             </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="No Of Units" SortExpression="NoOfUnits">
+                            <ItemStyle Width="10%" />
                             <ItemTemplate>
                                 <asp:Label ID="NoOfUnitsLabel" runat="server" Text='<%# Bind("NoOfUnits") %>'></asp:Label>
                             </ItemTemplate>
@@ -36,6 +39,7 @@
                             </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Discount" SortExpression="Discount">
+                            <ItemStyle Width="10%" />
                             <ItemTemplate>
                                 <asp:Label ID="Label3" runat="server" Text='<%# Eval("Discount", "{0}%") %>'></asp:Label>
                             </ItemTemplate>
@@ -44,6 +48,7 @@
                             </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Price (After Discount)" SortExpression="Price">
+                            <ItemStyle Width="10%" />
                             <ItemTemplate>
                                 <asp:Label ID="OrderLinePriceAfterDiscountLabel" runat="server"></asp:Label>
                             </ItemTemplate>
@@ -52,6 +57,7 @@
                             </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Net Price" SortExpression="Price">
+                            <ItemStyle Width="15%" />
                             <ItemTemplate>
                                 <asp:Label ID="OrderLinePriceLabel" runat="server"></asp:Label>
                             </ItemTemplate>
@@ -60,18 +66,22 @@
                             </EditItemTemplate>
                             <FooterTemplate>
                                 Ex Vat. Total &nbsp;
-                                <asp:Label ID="priceLabelTotal" runat="server"></asp:Label>
                             </FooterTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField ItemStyle-Width="10%">
+                        <asp:TemplateField>
+                            <ItemStyle Width="5%" />
                             <HeaderTemplate>
                                 Exists
                             </HeaderTemplate>
                             <ItemTemplate>
                                 <asp:Image ID="CreditNoteExistsImage" runat="server" />
                             </ItemTemplate>
+                            <FooterTemplate>
+                                <asp:Label ID="priceLabelTotal" runat="server"></asp:Label>
+                            </FooterTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField>
+                            <ItemStyle Width="10%" />
                             <ItemTemplate>
                                 <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
                                 <asp:ImageButton ID="EditImage" ImageUrl="~/images/user6_(edit)_16x16.gif" CommandName="Select"
@@ -126,11 +136,13 @@
                     OnRowCommand="CreditNoteLinesGridView_RowCommand" ShowFooter="true">
                     <Columns>
                         <asp:TemplateField HeaderText="ID" SortExpression="ID" Visible="false">
+                            <ItemStyle Width="20%" />
                             <ItemTemplate>
                                 <asp:Label ID="IDLabel" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Product" SortExpression="ProductID">
+                            <ItemStyle Width="20%" />
                             <ItemTemplate>
                                 <asp:Label ID="ProductNameLabel" runat="server" Text='<%# Bind("ProductID") %>'></asp:Label>
                             </ItemTemplate>
@@ -139,6 +151,7 @@
                             </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="No Of Units" SortExpression="NoOfUnits">
+                            <ItemStyle Width="10%" />
                             <ItemTemplate>
                                 <asp:Label ID="Label1" runat="server" Text='<%# Bind("NoOfUnits") %>'></asp:Label>
                             </ItemTemplate>
@@ -147,6 +160,7 @@
                             </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Discount" SortExpression="Discount">
+                            <ItemStyle Width="10%" />
                             <ItemTemplate>
                                 <asp:Label ID="Label3" runat="server" Text='<%# Eval("Discount", "{0}%") %>'></asp:Label>
                             </ItemTemplate>
@@ -155,6 +169,7 @@
                             </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Price (After Discount)" SortExpression="Price">
+                            <ItemStyle Width="10%" />
                             <ItemTemplate>
                                 <asp:Label ID="OrderLinePriceAfterDiscountLabel" runat="server"></asp:Label>
                             </ItemTemplate>
@@ -163,6 +178,7 @@
                             </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Net Price" SortExpression="Price">
+                            <ItemStyle Width="15%" />
                             <ItemTemplate>
                                 <asp:Label ID="OrderLinePriceLabel" runat="server"></asp:Label>
                             </ItemTemplate>
@@ -171,10 +187,16 @@
                             </EditItemTemplate>
                             <FooterTemplate>
                                 Ex Vat. Total &nbsp;
+                            </FooterTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField>
+                            <ItemStyle Width="5%" />
+                            <FooterTemplate>
                                 <asp:Label ID="priceLabelTotal" runat="server"></asp:Label>
                             </FooterTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Edit" SortExpression="SpecialInstructions">
+                            <ItemStyle Width="10%" />
                             <ItemTemplate>
                                 <asp:Button ID="btnCreditNoteTrigger" runat="server" Style="display: none" />
                                 <asp:ImageButton ID="EditImage" ImageUrl="~/images/user6_(edit)_16x16.gif" CommandName="Select"
@@ -200,7 +222,8 @@
                                         <asp:Button ID="UpdateButton" Style="width: 200px;" Text="Update" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
                                             OnClick="UpdateOrderCreditLineButton_Click" runat="server" />
                                         <asp:Button ID="CancelButton" runat="server" Style="width: 200px;" Text="Cancel" />
-                                        <asp:Button ID="DeleteButton" Style="width: 200px;" Text="Delete" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"  OnClick="DeleteOrderCreditLineButton_Click" runat="server" />
+                                        <asp:Button ID="DeleteButton" Style="width: 200px;" Text="Delete" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
+                                            OnClick="DeleteOrderCreditLineButton_Click" runat="server" />
                                 </asp:Panel>
                             </ItemTemplate>
                             <EditItemTemplate>
