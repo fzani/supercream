@@ -88,3 +88,9 @@
 {
     margin: 5px 0px 5px 0px;
 }
+
+.CenterBox
+{
+    width: 90%; 
+    border:solid 1px #000000;
+}

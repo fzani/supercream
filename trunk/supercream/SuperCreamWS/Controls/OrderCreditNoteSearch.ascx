@@ -101,6 +101,15 @@
                 Credit Notes</h2>
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width="98%"
                 DataSourceID="CreditNotesObjectDataSource" OnRowCommand="GridView1_RowCommand">
+                <EmptyDataTemplate>
+                    <div align="center" class="CenterBox">
+                        <span style="text-align: center">
+                            <h3>
+                                <asp:Label ID="Label3" Text="No Items Found" runat="server"></asp:Label>
+                            </h3>
+                        </span>
+                    </div>
+                </EmptyDataTemplate>
                 <Columns>
                     <asp:TemplateField HeaderText="Order No/Reference" SortExpression="OrderNo/Reference">
                         <ItemTemplate>

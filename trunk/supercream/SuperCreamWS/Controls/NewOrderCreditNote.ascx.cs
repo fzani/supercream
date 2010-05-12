@@ -55,6 +55,7 @@ public partial class Controls_NewOrderCreditNote : System.Web.UI.UserControl
         this.ModifyOrderCreditNoteLines.OrderID = e.OrderId;
         this.ModifyOrderCreditNoteLines.AlphaID = e.AlphaId;
         this.ModifyOrderCreditNoteLines.CreditNoteID = e.CreditNoteId;
+        this.ModifyOrderCreditNoteLines.CreditNotePanelVisible = true;
         this.ModifyOrderCreditNoteLines.DataBind();
 
         this.ChangeState += new EventHandler<EventArgs>(this.ModifyOrderCreditNoteLinesState);
