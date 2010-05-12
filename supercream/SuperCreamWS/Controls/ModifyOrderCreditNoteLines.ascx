@@ -3,6 +3,9 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <div class="FormInput">
     <fieldset id="Fieldset3">
+        <h2>
+            Credit Note &nbsp; <asp:Label id="CreditNoteLabel" runat="server" />
+        </h2>
         <asp:Panel ID="InvoiceSearchCriteriaPanel" runat="server">
             <legend>
                 <h3>
@@ -127,13 +130,14 @@
         <asp:Panel ID="CreditLinesPanel" runat="server" Visible="false">
             <legend>
                 <h3>
-                    Credit Note Lines
+                    Order Lines on this Credit Note
                 </h3>
             </legend>
             <fieldset>
                 <asp:GridView ID="CreditNoteLinesGridView" Width="97%" runat="server" AutoGenerateColumns="False"
                     DataSourceID="CreditNoteLinesObjectDataSource" DataKeyNames="ID" OnRowDataBound="CreditNoteLinesGridView_RowDataBound"
-                    OnRowCommand="CreditNoteLinesGridView_RowCommand" ShowFooter="true">
+                    OnRowCommand="CreditNoteLinesGridView_RowCommand" ShowFooter="true" 
+                    ondatabound="CreditNoteLinesGridView_DataBound">
                     <Columns>
                         <asp:TemplateField HeaderText="ID" SortExpression="ID" Visible="false">
                             <ItemStyle Width="20%" />

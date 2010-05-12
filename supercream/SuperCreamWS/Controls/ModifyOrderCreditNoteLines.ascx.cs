@@ -71,6 +71,31 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
         }
     }
 
+    public string Reference
+    {
+        get
+        {
+            if (ViewState["Reference"] == null)
+            {
+                return String.Empty;
+            }
+            else
+            {
+                return ViewState["Reference"].ToString();
+            }
+        }
+
+        set
+        {
+            ViewState["Reference"] = value;
+            if (!String.IsNullOrEmpty(value))
+            {
+                this.CreditNoteLabel.Text = this.Reference;
+                this.CreditNoteLabel.DataBind();
+            }
+        }
+    }
+
     public List<OrderLine> OrderLines
     {
         get;
@@ -93,7 +118,7 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
         {
             this.OrderID = -1;
             this.CreditNoteID = -1;
-        }
+        }      
     }
 
     #endregion
@@ -191,7 +216,7 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
                 quantityToCreditDropDownList.Items.Add(new ListItem((i + 1).ToString(), (i + 1).ToString()));
             }
             quantityToCreditDropDownList.SelectedValue = qtyToCredit.ToString();
-          
+
             ModalPopupExtender extender = row.FindControl("ModalPopupExtender") as ModalPopupExtender;
             extender.Show();
         }
@@ -205,7 +230,7 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
         int credtNoteId = CreditNoteID;
 
         Int32 index = Convert.ToInt32(button.CommandArgument);
-        GridViewRow row = this.CreditNoteLinesGridView.Rows[index];     
+        GridViewRow row = this.CreditNoteLinesGridView.Rows[index];
 
         // First get no of units to add to credit note line.
         Panel panelMessage = row.FindControl("PanelMessage") as Panel;
@@ -322,7 +347,7 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
 
             Label productNameLabel = e.Row.FindControl("ProductNameLabel") as Label;
             Product product = productUI.GetProductByID(productID.Value);
-            productNameLabel.Text = product.Description;            
+            productNameLabel.Text = product.Description;
         }
 
         if (e.Row.RowType == DataControlRowType.Footer)
@@ -390,4 +415,16 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
     }
 
     #endregion
+    protected void CreditNoteLinesGridView_DataBound(object sender, EventArgs e)
+    {
+        GridView grid = sender as GridView;
+        if (grid.Rows.Count == 0)
+        {
+            this.CreditLinesPanel.Visible = false;
+        }
+        else
+        {
+            this.CreditLinesPanel.Visible = true;
+        }
+    }
 }

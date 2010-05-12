@@ -57,6 +57,7 @@ public partial class Controls_MaintainOrderCreditNote : System.Web.UI.UserContro
         this.ModifyOrderCreditNoteLines.OrderID = e.OrderId;
         this.ModifyOrderCreditNoteLines.AlphaID = e.AlphaId;
         this.ModifyOrderCreditNoteLines.CreditNotePanelVisible = true;
+        this.ModifyOrderCreditNoteLines.Reference = e.Reference;       
         this.CancelButton.Text = "Continue";
         ModifyOrderCreditNoteLines.DataBind();
         this.ChangeState(this, new EventArgs());
