@@ -16,17 +16,19 @@ namespace App_Code.EventArgs
         private readonly DateTime dueDate;
         private readonly string alphaId;
         private readonly int creditNoteId;
+        private string reference;
 
-        public OrderCreditNoteContinueEventArgs(int orderId, string reason, DateTime dueDate, string alphaId, int creditNoteId)
+        public OrderCreditNoteContinueEventArgs(int orderId, string reason, DateTime dueDate, string alphaId, int creditNoteId, string reference)
         {
             this.orderId = orderId;
+            this.reference = reference;
             this.creditNoteId = creditNoteId;
             this.dueDate = dueDate;
             this.alphaId = alphaId;
             this.reason = reason;
 
         }
-
+       
         public int CreditNoteId
         {
             get { return creditNoteId; }
@@ -50,6 +52,11 @@ namespace App_Code.EventArgs
         public int OrderId
         {
             get { return orderId; }
+        }
+
+        public string Reference
+        {
+            get { return reference; }
         }
     }
 }
