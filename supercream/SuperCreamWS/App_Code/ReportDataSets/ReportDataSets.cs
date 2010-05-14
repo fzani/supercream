@@ -177,5 +177,15 @@ public class ReportDataSets : IReportDataSets
     public ReportDataSource[] GetArbitraryCreditNoteReportDataSets(int creditNoteId, int accountId)
     {
         throw new NotImplementedException();
-    }    
+    }
+
+    #region IReportDataSets Members
+
+
+    public ReportDataSource[] GetOrderCreditNoteReportDataSets(int creditNoteId, int accountId)
+    {
+        throw new NotImplementedException();
+    }
+
+    #endregion
 }

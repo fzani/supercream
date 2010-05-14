@@ -183,7 +183,7 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
 
         var orderNoteStatus = ui.GetOrderNotesStatusByOrderID(this.OrderID.Value);
 
-        SP.Util.UrlParameterPasser p = new UrlParameterPasser("~/CreditNote/CreditNoteReport.aspx");
+        SP.Util.UrlParameterPasser p = new UrlParameterPasser("~/CreditNote/OrderCreditNotePrint.aspx");
         p["creditNoteId"] = this.CreditNoteID.Value.ToString();
         p["accountId"] = orderNoteStatus.AccountID.ToString();
         p.PassParameters();
