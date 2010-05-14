@@ -15,19 +15,19 @@ public partial class OrderCreditNote_Print : System.Web.UI.Page
         int creditNoteId = Convert.ToInt32(p["creditNoteId"]);
         int accountId = Convert.ToInt32(p["accountId"]);
 
-        //Microsoft.Reporting.WebForms.ReportDataSource[] reportDataSets =
-        //    IReportDataSet.GetArbitraryCreditNoteReportDataSets(creditNoteId, accountId);
+        Microsoft.Reporting.WebForms.ReportDataSource[] reportDataSets =
+            IReportDataSet.GetOrderCreditNoteReportDataSets(creditNoteId, accountId);
 
-        //CreditNoteReportViewer.LocalReport.DataSources.Clear();
-        //foreach (Microsoft.Reporting.WebForms.ReportDataSource reportDataSet in reportDataSets)
+        CreditNoteReportViewer.LocalReport.DataSources.Clear();
+        foreach (Microsoft.Reporting.WebForms.ReportDataSource reportDataSet in reportDataSets)
+        {
+            CreditNoteReportViewer.LocalReport.DataSources.Add(reportDataSet);
+        }
+        //if (reportDataSets.Tables[0].Rows.Count == 0)
         //{
-        //    CreditNoteReportViewer.LocalReport.DataSources.Add(reportDataSet);
+        //    lblMessage.Text = "Sorry, no products under this category!";
         //}
-        ////if (reportDataSets.Tables[0].Rows.Count == 0)
-        ////{
-        ////    lblMessage.Text = "Sorry, no products under this category!";
-        ////}
 
-        //CreditNoteReportViewer.LocalReport.Refresh();
+        CreditNoteReportViewer.LocalReport.Refresh();
     }
 }

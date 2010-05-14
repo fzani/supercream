@@ -19,4 +19,5 @@ public interface IReportDataSets
     /// <returns></returns>
     ReportDataSource[] GetReportDataSets(int orderId, int accountId, int outletStoreId);
     ReportDataSource[] GetArbitraryCreditNoteReportDataSets(int creditNoteId, int accountId);
+    ReportDataSource[] GetOrderCreditNoteReportDataSets(int creditNoteId, int accountId);
 }

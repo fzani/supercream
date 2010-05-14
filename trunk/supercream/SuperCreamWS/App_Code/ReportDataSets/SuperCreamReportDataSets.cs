@@ -80,6 +80,30 @@ public class SuperCreamReportDataSets : IReportDataSets
         return reportDataSources;
     }
 
+    public ReportDataSource[] GetOrderCreditNoteReportDataSets(int creditNoteId, int accountId)
+    {
+        DataSet dsCreditNotes = GetOrderCreditNoteDS(creditNoteId);
+        DataSet dsFoundationAddressLines = GetFoundationFacilityAddressLinesDS(999); // Fake ID doesn't matter ignored ...
+        DataSet dsInvoiceAddressLines = GetInvoiceAddressLinesDS(accountId);
+
+        ReportDataSource[] reportDataSources = new ReportDataSource[3];
+
+        reportDataSources[0] = new
+           ReportDataSource("SuperCreamDBDataSet_rptGetOrderCreditNote",
+             dsCreditNotes.Tables[0]);
+
+        reportDataSources[1] = new
+           ReportDataSource("SuperCreamDBDataSet_rptGetFoundationFacilityAddressLines",
+               dsFoundationAddressLines.Tables[0]);
+
+        reportDataSources[2] = new
+           ReportDataSource("SuperCreamDBDataSet_rptGetAddressLinesForInvoice",
+               dsInvoiceAddressLines.Tables[0]);
+
+        return reportDataSources;
+    }
+
+
     #endregion
 
     #region Private Helpers
@@ -156,6 +180,27 @@ public class SuperCreamReportDataSets : IReportDataSets
          SqlCommand command = new SqlCommand();
          command.CommandType = System.Data.CommandType.StoredProcedure;
          command.CommandText = "rptGetArbitraryCreditNote";
+         command.Connection = connection;
+
+         SqlParameter creditIdParameter = command.Parameters.Add("@CreditNoteID", System.Data.SqlDbType.Int);
+         creditIdParameter.Value = creditNoteId;
+
+         DataSet dataSet = new DataSet("CreditNoteDS");
+
+         SqlDataAdapter adapter = new SqlDataAdapter(command);
+         adapter.Fill(dataSet);
+         return dataSet;
+     }
+
+     private static DataSet GetOrderCreditNoteDS(int creditNoteId)
+     {
+         string connectionString = ConfigurationManager.ConnectionStrings["SuperCreamDBConnectionString"].ConnectionString;
+         SqlConnection connection = new SqlConnection(connectionString);
+         connection.Open();
+
+         SqlCommand command = new SqlCommand();
+         command.CommandType = System.Data.CommandType.StoredProcedure;
+         command.CommandText = "rptGetOrderCreditNote";
          command.Connection = connection;
 
          SqlParameter creditIdParameter = command.Parameters.Add("@CreditNoteID", System.Data.SqlDbType.Int);
