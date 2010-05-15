@@ -57,6 +57,11 @@ namespace SP.Data.LTS
             return db.CreditNote.Where<CreditNote>(q => q.Reference == referenceNo).SingleOrDefault<CreditNote>();
         }
 
+        public List<CreditNote> GetCreditNotesByOrderId(int creditNoteId)
+        {
+            return db.CreditNote.Where(q => q.ID == creditNoteId).ToList();
+        }
+
         public List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
         {
             var creditNotes = (from o in db.OrderHeader

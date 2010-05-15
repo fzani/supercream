@@ -51,6 +51,7 @@ namespace SP.Core.ManagerInterfaces
         CreditNote UpdateCreditNote(CreditNote newCreditNote, CreditNote origCreditNote);
         decimal GetOustandingCreditNoteBalance(int orderNo, int creditNote, decimal vatRate);
         List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo);
+        List<CreditNote> GetCreditNotesByOrderId(int creditNoteId);
 
         List<OrderLine> AvailableOrderLinesForCreditNote(int orderId);
         #endregion

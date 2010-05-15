@@ -12,19 +12,21 @@ using SP.Core.Domain;
 
 namespace SP.Core.DataInterfaces
 {
-   public interface ICreditNoteDao : IDao<CreditNote, int>
-   {
-       List<CreditNoteDetails> SearchCreditNotes(          
-           string orderNo, string invoiceNo, 
-           string customerName, 
-           DateTime dateFrom, 
-           DateTime dateTo);
+    public interface ICreditNoteDao : IDao<CreditNote, int>
+    {
+        List<CreditNoteDetails> SearchCreditNotes(
+            string orderNo, string invoiceNo,
+            string customerName,
+            DateTime dateFrom,
+            DateTime dateTo);
 
-       string GenerateCreditNo();
-       InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID, decimal vatRate);
-       decimal GetOustandingCreditNoteBalance(int orderNo, int creditNote, decimal vatRate);
-       bool CreditNoteExistsByOrderId(int orderId);
-       bool ReferenceExists(string referenceNo);
-       CreditNote GetByReferenceId(string reference);
-   }
+        List<CreditNote> GetCreditNotesByOrderId(int creditNoteId);
+
+        string GenerateCreditNo();
+        InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID, decimal vatRate);
+        decimal GetOustandingCreditNoteBalance(int orderNo, int creditNote, decimal vatRate);
+        bool CreditNoteExistsByOrderId(int orderId);
+        bool ReferenceExists(string referenceNo);
+        CreditNote GetByReferenceId(string reference);
+    }
 }

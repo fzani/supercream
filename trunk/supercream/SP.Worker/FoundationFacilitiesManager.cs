@@ -304,6 +304,13 @@ namespace SP.Worker
             return creditNoteDao.GetOustandingCreditNoteBalance(orderNo, creditNote, vatRate);
         }
 
+        public List<CreditNote> GetCreditNotesByOrderId(int creditNoteId)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ICreditNoteDao creditNoteDao = factory.GetCreditNoteDao();
+            return creditNoteDao.GetCreditNotesByOrderId(creditNoteId);
+        }
+
         #endregion
 
         #region ICustomer Related Functions
@@ -1705,6 +1712,6 @@ namespace SP.Worker
             return Convert.ToDecimal(vatCode.PercentageValue);
         }
 
-        #endregion              
+        #endregion                               
     }
 }
