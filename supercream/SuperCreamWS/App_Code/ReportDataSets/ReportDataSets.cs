@@ -80,7 +80,7 @@ public class ReportDataSets : IReportDataSets
         SqlDataAdapter adapter = new SqlDataAdapter(command);
         adapter.Fill(dataSet);
         return dataSet;
-    }
+    }   
 
     private static DataSet GetDeliveryAddressLinesDS(int outletStoreId)
     {
