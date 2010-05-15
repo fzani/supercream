@@ -73,6 +73,14 @@ public class CreditNoteUI : IDisposable
                  dateTo);
         }
     }
+  
+    public List<CreditNote> GetCreditNotesByOrderId(int creditNoteId)      
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.GetCreditNotesByOrderId(creditNoteId);
+        }
+    }
 
     public List<CreditNote> GetAllCreditNotes()
     {

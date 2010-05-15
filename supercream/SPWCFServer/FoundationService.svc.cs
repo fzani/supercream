@@ -509,6 +509,20 @@ namespace SPWCFServer
             }
         }
 
+        public List<CreditNote> GetCreditNotesByOrderId(int creditNoteId)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.CreditNote> creditNoteList = mgr.GetCreditNotesByOrderId(creditNoteId);
+                return creditNoteList.CloneList<SP.Core.Domain.CreditNote, CreditNote>();
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public decimal GetOustandingCreditNoteBalance(int orderNo, int creditNote, decimal vatRate)
         {
             try
@@ -1053,7 +1067,7 @@ namespace SPWCFServer
         {
             try
             {
-                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();                
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
                 mgr.DeleteOrderCreditNote(ObjectExtension.CloneProperties<SPWCFServer.OrderCreditNote, SP.Core.Domain.OrderCreditNote>(orderCreditNote));
             }
             catch (SqlException)
@@ -2920,7 +2934,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion                  
+        #endregion
     }
 }
 

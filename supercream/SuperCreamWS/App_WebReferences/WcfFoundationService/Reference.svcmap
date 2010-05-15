@@ -20,15 +20,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/SPWCFServer/FoundationService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:50646/FoundationService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="FoundationService.xsd" MetadataType="Schema" ID="309cab15-ba0d-4a5d-879d-d48ef0925914" SourceId="1" SourceUrl="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd1" />
-    <MetadataFile FileName="FoundationService2.xsd" MetadataType="Schema" ID="b8753789-113b-4ab1-bfde-aa61efc2fc26" SourceId="1" SourceUrl="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd0" />
-    <MetadataFile FileName="FoundationService.wsdl" MetadataType="Wsdl" ID="7357aaaf-292c-43fc-84a9-8e8dc6e50b77" SourceId="1" SourceUrl="http://bali.alterax.com/SPWCFServer/FoundationService.svc?wsdl" />
-    <MetadataFile FileName="FoundationService4.xsd" MetadataType="Schema" ID="3b121c56-6d4f-4583-9830-e6c01e2a5659" SourceId="1" SourceUrl="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd2" />
-    <MetadataFile FileName="FoundationService3.xsd" MetadataType="Schema" ID="a7f199b8-5d03-4e18-b891-b0abad23e098" SourceId="1" SourceUrl="http://bali.alterax.com/SPWCFServer/FoundationService.svc?xsd=xsd3" />
-    <MetadataFile FileName="FoundationService.disco" MetadataType="Disco" ID="604ee473-0cac-453c-98f5-dea40b18f271" SourceId="1" SourceUrl="http://bali.alterax.com/SPWCFServer/FoundationService.svc?disco" />
+    <MetadataFile FileName="FoundationService1.xsd" MetadataType="Schema" ID="108ee582-342a-4028-a20e-bc464a403d60" SourceId="1" SourceUrl="http://localhost:50646/FoundationService.svc?xsd=xsd1" />
+    <MetadataFile FileName="FoundationService12.xsd" MetadataType="Schema" ID="dec9c475-c7cf-4362-a7b2-3f07d8c31c09" SourceId="1" SourceUrl="http://localhost:50646/FoundationService.svc?xsd=xsd3" />
+    <MetadataFile FileName="FoundationService13.xsd" MetadataType="Schema" ID="92b3539d-7863-48d9-a688-326febd001fd" SourceId="1" SourceUrl="http://localhost:50646/FoundationService.svc?xsd=xsd2" />
+    <MetadataFile FileName="FoundationService14.xsd" MetadataType="Schema" ID="8090f1fe-2cae-4e93-82f7-09d7334e03b7" SourceId="1" SourceUrl="http://localhost:50646/FoundationService.svc?xsd=xsd0" />
+    <MetadataFile FileName="FoundationService1.disco" MetadataType="Disco" ID="89522351-3aa8-4454-b254-28151124de1b" SourceId="1" SourceUrl="http://localhost:50646/FoundationService.svc?disco" />
+    <MetadataFile FileName="FoundationService1.wsdl" MetadataType="Wsdl" ID="65debf15-467c-4467-90e6-54a3929d527b" SourceId="1" SourceUrl="http://localhost:50646/FoundationService.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
