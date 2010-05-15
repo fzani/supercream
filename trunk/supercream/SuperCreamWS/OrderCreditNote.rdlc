@@ -259,6 +259,47 @@
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
       </rd:DataSetInfo>
     </DataSet>
+    <DataSet Name="SuperCreamDBDataSet_rptGetOrderCreditNoteTotals">
+      <Fields>
+        <Field Name="Total">
+          <DataField>Total</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="VatTotal">
+          <DataField>VatTotal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NetTotal">
+          <DataField>NetTotal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NonVatableTotal">
+          <DataField>NonVatableTotal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="VatableTotal">
+          <DataField>VatableTotal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="PercentageValue">
+          <DataField>PercentageValue</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>SuperCreamDBConnectionString</DataSourceName>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>dbo.rptGetOrderCreditNoteTotals</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>SuperCreamDBDataSet</rd:DataSetName>
+        <rd:TableName>rptGetOrderCreditNoteTotals</rd:TableName>
+        <rd:TableAdapterName>rptGetOrderCreditNoteTotalsTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+      </rd:DataSetInfo>
+    </DataSet>
   </DataSets>
   <Width>21.05291cm</Width>
   <Body>
@@ -268,7 +309,7 @@
         <ZIndex>3</ZIndex>
         <DataSetName>SuperCreamDBDataSet_rptGetOrderCreditNote</DataSetName>
         <Top>8.9cm</Top>
-        <Width>19.87936cm</Width>
+        <Width>19.87935cm</Width>
         <Details>
           <TableRows>
             <TableRow>

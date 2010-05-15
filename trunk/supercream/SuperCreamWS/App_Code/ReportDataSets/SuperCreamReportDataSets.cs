@@ -85,8 +85,9 @@ public class SuperCreamReportDataSets : IReportDataSets
         DataSet dsCreditNotes = GetOrderCreditNoteDS(creditNoteId);
         DataSet dsFoundationAddressLines = GetFoundationFacilityAddressLinesDS(999); // Fake ID doesn't matter ignored ...
         DataSet dsInvoiceAddressLines = GetInvoiceAddressLinesDS(accountId);
+        DataSet dsOrderCreditNoteLines = GetInvoiceAddressLinesDS(creditNoteId);
 
-        ReportDataSource[] reportDataSources = new ReportDataSource[3];
+        ReportDataSource[] reportDataSources = new ReportDataSource[4];
 
         reportDataSources[0] = new
            ReportDataSource("SuperCreamDBDataSet_rptGetOrderCreditNote",
@@ -99,6 +100,10 @@ public class SuperCreamReportDataSets : IReportDataSets
         reportDataSources[2] = new
            ReportDataSource("SuperCreamDBDataSet_rptGetAddressLinesForInvoice",
                dsInvoiceAddressLines.Tables[0]);
+
+        reportDataSources[3] = new
+           ReportDataSource("SuperCreamDBDataSet_rptGetOrderCreditNoteTotals",
+               dsOrderCreditNoteLines.Tables[0]);      
 
         return reportDataSources;
     }
@@ -144,6 +149,27 @@ public class SuperCreamReportDataSets : IReportDataSets
         outletStoreIdParmeter.Value = outletStoreId;
 
         DataSet dataSet = new DataSet("DeliveryAddressLinesDS");
+
+        SqlDataAdapter adapter = new SqlDataAdapter(command);
+        adapter.Fill(dataSet);
+        return dataSet;
+    }
+
+    private static DataSet GetOrderCreditNoteTotalsDS(int orderId)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["SuperCreamDBConnectionString"].ConnectionString;
+        SqlConnection connection = new SqlConnection(connectionString);
+        connection.Open();
+
+        SqlCommand command = new SqlCommand();
+        command.CommandType = System.Data.CommandType.StoredProcedure;
+        command.CommandText = "rptGetOrderCreditNoteTotals";
+        command.Connection = connection;
+
+        SqlParameter orderParameterId = command.Parameters.Add("@CreditNoteId", System.Data.SqlDbType.Int);
+        orderParameterId.Value = orderId;
+
+        DataSet dataSet = new DataSet("OrderCreditNoteTotalsSA");
 
         SqlDataAdapter adapter = new SqlDataAdapter(command);
         adapter.Fill(dataSet);
