@@ -85,7 +85,7 @@ public class SuperCreamReportDataSets : IReportDataSets
         DataSet dsCreditNotes = GetOrderCreditNoteDS(creditNoteId);
         DataSet dsFoundationAddressLines = GetFoundationFacilityAddressLinesDS(999); // Fake ID doesn't matter ignored ...
         DataSet dsInvoiceAddressLines = GetInvoiceAddressLinesDS(accountId);
-        DataSet dsOrderCreditNoteLines = GetInvoiceAddressLinesDS(creditNoteId);
+        DataSet dsOrderCreditNoteLines = GetOrderCreditNoteTotalsDS(creditNoteId);
 
         ReportDataSource[] reportDataSources = new ReportDataSource[4];
 
