@@ -34,11 +34,11 @@ public class OrderCreditNoteUI : IDisposable
         }
     }
 
-    public List<OrderCreditNote> GetOrderCreditNotesByOrderId(int orderId)
+    public static List<OrderCreditNote> GetOrderCreditNotesByOrderId(int orderId)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.GetOrderCreditNotesByOrderId(orderId) as List<OrderCreditNote>;
+            return proxy.GetOrderCreditNotesByOrderId(orderId) as List<OrderCreditNote>;
         }
     }
 

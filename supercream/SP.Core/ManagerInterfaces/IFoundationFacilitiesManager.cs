@@ -83,6 +83,7 @@ namespace SP.Core.ManagerInterfaces
         #endregion
 
         #region OrderCreditNote
+        List<OrderCreditNote> GetOrderCreditNotesByOrderId(int orderId);
         void DeleteOrderCreditNote(OrderCreditNote ordercreditnote);
         OrderCreditNote GetOrderCreditNote(int id);
         List<OrderCreditNote> GetAllOrderCreditNotes();

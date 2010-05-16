@@ -216,6 +216,9 @@ namespace SPWCFServer
         #endregion
 
         #region OrderCreditNote
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<OrderCreditNote> GetOrderCreditNotesByOrderId(int orderId);
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]

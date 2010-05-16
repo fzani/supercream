@@ -532,6 +532,13 @@ namespace SP.Worker
 
         #region OrderCreditNote
 
+        public List<OrderCreditNote> GetOrderCreditNotesByOrderId(int orderId)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteDao orderCreditNoteDao = factory.GetOrderCreditNoteDao();
+            return orderCreditNoteDao.GetOrderCreditNotesByOrderId(orderId);
+        }
+
         public InvoiceCreditNoteDetails GetOrderHeaderInvoiceCreditDetails(int orderNo)
         {
             IDaoFactory factory = new LTSDaoFactory();
@@ -1712,6 +1719,6 @@ namespace SP.Worker
             return Convert.ToDecimal(vatCode.PercentageValue);
         }
 
-        #endregion                               
+        #endregion                                          
     }
 }

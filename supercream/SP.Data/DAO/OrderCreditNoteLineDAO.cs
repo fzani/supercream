@@ -36,7 +36,7 @@ namespace SP.Data.LTS
             var p = db.OrderCreditNoteLine
                .Where(q => q.OrderCreditNoteID == creditNoteId).ToList();
             return p; 
-        }
+        }        
 
         public bool CheckIfCreditNoteLineExists(int creditNoteid, int orderLineId)
         {

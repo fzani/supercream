@@ -24,6 +24,11 @@ namespace SP.Data.LTS
         {
         }
 
+        public List<OrderCreditNote> GetOrderCreditNotesByOrderId(int orderId)
+        {
+            return db.OrderCreditNote.Where(q => q.OrderID == orderId).ToList();
+        }
+
         public string GenerateCreditNo()
         {
             if (db.OrderCreditNote.FirstOrDefault() == null)
@@ -148,10 +153,10 @@ namespace SP.Data.LTS
             if (orderCreditNotes.First() != null)
             {
                 orderCreditTotal = Math.Round((from oh in db.OrderCreditNote
-                                           join ol in db.OrderCreditNoteLine on oh.ID equals ol.OrderCreditNoteID
-                                           join p in db.Product on ol.ProductID equals p.ID
-                                           where oh.OrderID == orderNo
-                                           select ((p.VatExempt) ? ol.Price * ol.NoOfUnits : ol.Price * ol.NoOfUnits * vatRate)).Sum(), 2);
+                                               join ol in db.OrderCreditNoteLine on oh.ID equals ol.OrderCreditNoteID
+                                               join p in db.Product on ol.ProductID equals p.ID
+                                               where oh.OrderID == orderNo
+                                               select ((p.VatExempt) ? ol.Price * ol.NoOfUnits : ol.Price * ol.NoOfUnits * vatRate)).Sum(), 2);
             }
 
             creditTotal += orderCreditTotal;
