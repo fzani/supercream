@@ -27,7 +27,6 @@ public struct creditNote
 public class CreditNoteUI : IDisposable
 {
     #region Private Member Variables
-    private WcfFoundationService.FoundationServiceClient _proxy;
     #endregion
 
     #region Ctor's
@@ -42,83 +41,83 @@ public class CreditNoteUI : IDisposable
 
     public CreditNote GetCreditNote(int id)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.GetCreditNote(id);
+            return proxy.GetCreditNote(id);
         }
     }
 
     public CreditNote SaveCreditNote(CreditNote contactDetail)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.SaveCreditNote(contactDetail);
+            return proxy.SaveCreditNote(contactDetail);
         }
     }
     public CreditNote UpdateCreditNotes(CreditNote newCreditNote)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            CreditNote origCreditNote = _proxy.GetCreditNote(newCreditNote.ID);
-            return _proxy.UpdateCreditNote(newCreditNote, origCreditNote);
+            CreditNote origCreditNote = proxy.GetCreditNote(newCreditNote.ID);
+            return proxy.UpdateCreditNote(newCreditNote, origCreditNote);
         }
     }
 
     public List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom,
        DateTime dateTo)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.SearchCreditNotes(orderNo, invoiceNo, customerName, dateFrom,
+            return proxy.SearchCreditNotes(orderNo, invoiceNo, customerName, dateFrom,
                  dateTo);
         }
     }
-  
-    public List<CreditNote> GetCreditNotesByOrderId(int creditNoteId)      
+
+    public List<CreditNote> GetCreditNotesByOrderId(int orderId)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return proxy.GetCreditNotesByOrderId(creditNoteId);
+            return proxy.GetCreditNotesByOrderId(orderId);
         }
     }
 
     public List<CreditNote> GetAllCreditNotes()
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.GetAllCreditNotes();
+            return proxy.GetAllCreditNotes();
         }
     }
 
     public bool CreditNoteExists(int orderId)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.CreditNoteExistsByOrderId(orderId);
+            return proxy.CreditNoteExistsByOrderId(orderId);
         }
     }
 
     public InvoiceCreditNoteDetails GetInvoiceCreditNoteDetails(int orderId)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.GetInvoiceCreditDetails(orderId);
+            return proxy.GetInvoiceCreditDetails(orderId);
         }
     }
 
     public void Delete(CreditNote creditNote)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            _proxy.DeleteCreditNote(creditNote);
+            proxy.DeleteCreditNote(creditNote);
         }
     }
 
     public decimal GetOustandingCreditBalance(int orderNo, int creditNote, decimal vatRate)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.GetOustandingCreditNoteBalance(orderNo, creditNote, vatRate);
+            return proxy.GetOustandingCreditNoteBalance(orderNo, creditNote, vatRate);
         }
     }
 
@@ -130,13 +129,12 @@ public class CreditNoteUI : IDisposable
 
     public void Dispose()
     {
-        _proxy.Close();
+
     }
 
     ~CreditNoteUI()
     {
-        if (_proxy != null)
-            _proxy.Close();
+
     }
 
     #endregion

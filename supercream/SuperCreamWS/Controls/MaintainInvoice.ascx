@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="MaintainInvoice.ascx.cs"
     Inherits="Controls_MaintainInvoice" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+<%@ Register Src="ListArbitraryCreditNote.ascx" TagName="ListArbitraryCreditNote"
+    TagPrefix="uc1" %>
 <div class="FormInput">
     <fieldset id="Fieldset3">
         <asp:Panel ID="InvoiceSearchCriteriaPanel" DefaultButton="SearchButton" runat="server">
@@ -161,8 +163,7 @@
                                         <asp:Image ID="RePrintedImage" runat="server" Visible="false" ImageUrl="~/images/print_16x16.gif" />
                                         <asp:Panel Style="display: inline;" ID="CreditNoteImagePanel" runat="server">
                                             <asp:Image ID="CreditNoteImage" runat="server" ImageUrl="~/images/16-circle-green.gif" />
-                                            &nbsp;
-                                        </asp:Panel>
+                                            &nbsp;</asp:Panel>
                                         <asp:Panel CssClass="popupMenu" ID="PopupMenu" runat="server">
                                             <div style="border: 1px outset black; padding: 2px; background-color: White;">
                                                 <asp:LinkButton ID="LinkButton1" runat="server" CommandName="DisplayCreditNotes"
@@ -330,8 +331,11 @@
                                 Text="Print Invoice" runat="server" OnClick="PrintInvoiceButton_Click" />
                             <asp:Button ID="RePrintInvoiceButton" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 Visible="false" Text="RePrint Invoice" runat="server" OnClick="RePrintInvoiceButton_Click" />
+                            <asp:Button ID="CreditNotesButton" ValidationGroup="ModifyInvoiceDetailsGroup" Visible="false"
+                                Text="Credit Notes" runat="server" OnClick="CreditNoteButton_Click" />
                             <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
                             <asp:Button ID="btnOKTrigger" runat="server" Style="display: none" />
+                            <asp:Button ID="btnCreditNoteTrigger" runat="server" Style="display: none" />
                             <ajaxToolkit:ModalPopupExtender ID="PrintFailedPopupControlExtender" DropShadow="true"
                                 runat="server" TargetControlID="btnTrigger" PopupControlID="PrintPanelMessage"
                                 CancelControlID="OKFailedPrintButton" BackgroundCssClass="XPopUpBackGround" />
@@ -366,6 +370,24 @@
                                 <center>
                                     <asp:Button ID="OKPrintButton" runat="server" Text="OK" ValidationGroup="GridViewPanel"
                                         CssClass="button" />
+                                </center>
+                            </asp:Panel>
+                            <ajaxToolkit:ModalPopupExtender ID="CreditNoteHeaderModalPopupExtender" DropShadow="true"
+                                runat="server" TargetControlID="btnCreditNoteTrigger" PopupControlID="CreditHeaderNotePanel"
+                                CancelControlID="CancelListCreditNotesButton" BackgroundCssClass="XPopUpBackGround" />
+                            <asp:Panel Style="display: none" ID="CreditHeaderNotePanel" runat="server"
+                                CssClass="modalPopup">
+                                <h2>
+                                    Credit Notes for Order <
+                                    <asp:Label ID="CreditNoteOrderHeaderLabel" Style="font-weight: bold;" runat="server"></asp:Label>
+                                    >
+                                </h2>
+                                <div style="height: 400px; overflow: auto;">
+                                    <uc1:ListArbitraryCreditNote ID="ListArbitraryCreditNote" runat="server" />
+                                </div>
+                                <center>
+                                    <asp:Button ID="CancelListCreditNotesButton" runat="server" Text="OK" Width="100%"
+                                        ValidationGroup="GridViewPanel" CssClass="button" />
                                 </center>
                             </asp:Panel>
                         </td>

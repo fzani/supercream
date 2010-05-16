@@ -20,7 +20,7 @@ namespace SP.Core.DataInterfaces
             DateTime dateFrom,
             DateTime dateTo);
 
-        List<CreditNote> GetCreditNotesByOrderId(int creditNoteId);
+        List<CreditNote> GetCreditNotesByOrderId(int orderId);
 
         string GenerateCreditNo();
         InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderID, decimal vatRate);

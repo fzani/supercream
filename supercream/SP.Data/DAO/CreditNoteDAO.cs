@@ -26,7 +26,7 @@ namespace SP.Data.LTS
 
         public string GenerateCreditNo()
         {
-            if (db.SpecialInvoiceHeader.FirstOrDefault() == null)
+            if (db.CreditNote.FirstOrDefault() == null)
             {
                 return "CRN-1";
             }
@@ -57,9 +57,9 @@ namespace SP.Data.LTS
             return db.CreditNote.Where<CreditNote>(q => q.Reference == referenceNo).SingleOrDefault<CreditNote>();
         }
 
-        public List<CreditNote> GetCreditNotesByOrderId(int creditNoteId)
+        public List<CreditNote> GetCreditNotesByOrderId(int orderId)
         {
-            return db.CreditNote.Where(q => q.ID == creditNoteId).ToList();
+            return db.CreditNote.Where(q => q.OrderID == orderId).ToList();
         }
 
         public List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
