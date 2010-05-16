@@ -92,7 +92,7 @@
                 <ul class="sidemenu">
                     <li><strong>Reports</strong>
                         <br />
-                        <a href="http://bali/Reports/Pages/Folder.aspx?ItemPath=%2fSuperCreamReports&ViewMode=List" id="A7" runat="server">General Reports</a><br />
+                        <a href="~/Reports/SelectReports.aspx" id="A7" runat="server">General Reports</a><br />
                     </li>
                 </ul>
                 <h3>
