@@ -50,40 +50,48 @@ public partial class Controls_ListOrderCreditNote : System.Web.UI.UserControl
     }
 
     #endregion
+
+    #region List View Events
+
     protected void lvItemsTable_ItemDataBound(object sender, ListViewItemEventArgs e)
     {
         if (e.Item.ItemType == ListViewItemType.DataItem)
         {
-            //ListViewDataItem dataItem = (ListViewDataItem)e.Item;
-            //decimal creditAmount = (decimal)DataBinder.Eval(dataItem.DataItem, "CreditAmount");
+            Repeater repeater = e.Item.FindControl("OrderCreditNoteDetailsRepeater") as Repeater;
+            ListViewDataItem dataItem = (ListViewDataItem)e.Item;
+            OrderCreditNote creditNote = dataItem.DataItem as OrderCreditNote;
 
-            //CreditNote creditNote = dataItem.DataItem as CreditNote;
-            //OrderHeaderUI orderHeaderUi = new OrderHeaderUI();
-
-            //OrderHeader orderHeader = orderHeaderUi.GetById(creditNote.OrderID);
-            //VatCodeUI vatCodeUi = new VatCodeUI();
-            //VatCode vatCode = vatCodeUi.GetByID(orderHeader.VatCodeID);
-
-            //Label totalCreditAmountLabel = e.Item.FindControl("TotalCreditAmountLabel") as Label;
-
-            //if (vatCode.PercentageValue > 0)
-            //{
-            //    totalCreditAmountLabel.Text = String.Format("{0:c}", Math.Round((creditAmount * new decimal((1 + (vatCode.PercentageValue / 100.0)))), 2));
-            //}
-            //else
-            //{
-            //    totalCreditAmountLabel.Text = String.Format("{0:c}", creditAmount);
-            //}
-
-            //Label vatExemptLabel = e.Item.FindControl("VatExemptLabel") as Label;
-            //if (creditNote.VatExempt)
-            //{
-            //    vatExemptLabel.Text = "Y";
-            //}
-            //else
-            //{
-            //    vatExemptLabel.Text = "N";
-            //}
+            List<OrderCreditNoteLine> lines = OrderCreditNoteLineUI.GetOrderCreditNoteLines(creditNote.ID);
+            repeater.DataSource = lines;
+            if (lines.Count == 0)
+            {
+                repeater.Visible = false;
+            }
+            else
+            {
+                repeater.Visible = true;
+            }
+            repeater.DataBind();
         }
     }
+
+    #endregion
+
+    #region Repeater Events
+
+    protected void OrderCreditNoteDetailsRepeater_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+        {
+            RepeaterItem item = (RepeaterItem)e.Item;
+            OrderCreditNoteLine line = item.DataItem as OrderCreditNoteLine;
+            Label productNameLabel = e.Item.FindControl("ProductNameLabel") as Label;
+
+            ProductUI productUi = new ProductUI();
+            Product product = productUi.GetProductByID(line.ProductID);
+            productNameLabel.Text = product.Description;
+        }
+    }
+
+    #endregion
 }

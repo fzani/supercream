@@ -1021,6 +1021,20 @@ namespace SPWCFServer
 
         #region OrderCreditNote
 
+        public List<OrderCreditNote> GetOrderCreditNotesByOrderId(int orderId)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.OrderCreditNote> orderCreditNoteList = mgr.GetOrderCreditNotesByOrderId(orderId);
+                return orderCreditNoteList.CloneList<SP.Core.Domain.OrderCreditNote, SPWCFServer.OrderCreditNote>();
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public InvoiceCreditNoteDetails GetOrderHeaderInvoiceCreditDetails(int orderNo)
         {
             try
