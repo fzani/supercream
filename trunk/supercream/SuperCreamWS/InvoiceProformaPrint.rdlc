@@ -379,9 +379,292 @@
   <Body>
     <ColumnSpacing>1cm</ColumnSpacing>
     <ReportItems>
+      <Rectangle Name="rectangle4">
+        <Left>0.1cm</Left>
+        <ZIndex>5</ZIndex>
+        <ReportItems>
+          <Table Name="table4">
+            <DataSetName>SuperCreamDBDataSet_rptDetailsGetInvoice</DataSetName>
+            <Top>0.1cm</Top>
+            <Width>19.95cm</Width>
+            <Details>
+              <TableRows>
+                <TableRow>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="NoOfUnits">
+                          <rd:DefaultName>NoOfUnits</rd:DefaultName>
+                          <Style>
+                            <BorderStyle>
+                              <Top>Solid</Top>
+                              <Bottom>Solid</Bottom>
+                            </BorderStyle>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!NoOfUnits.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="ProductDescription">
+                          <rd:DefaultName>ProductDescription</rd:DefaultName>
+                          <Style>
+                            <BorderStyle>
+                              <Top>Solid</Top>
+                              <Bottom>Solid</Bottom>
+                            </BorderStyle>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!ProductDescription.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="QtyPerUnit_1">
+                          <rd:DefaultName>QtyPerUnit_1</rd:DefaultName>
+                          <Style>
+                            <BorderStyle>
+                              <Top>Solid</Top>
+                              <Bottom>Solid</Bottom>
+                            </BorderStyle>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!QtyPerUnit.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="Price">
+                          <rd:DefaultName>Price</rd:DefaultName>
+                          <Style>
+                            <BorderStyle>
+                              <Top>Solid</Top>
+                              <Bottom>Solid</Bottom>
+                            </BorderStyle>
+                            <Format>C</Format>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!Price.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="RRPPerItem">
+                          <rd:DefaultName>RRPPerItem</rd:DefaultName>
+                          <Style>
+                            <BorderStyle>
+                              <Top>Solid</Top>
+                              <Bottom>Solid</Bottom>
+                            </BorderStyle>
+                            <Format>C</Format>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!RRPPerItem.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="VatExempt">
+                          <rd:DefaultName>VatExempt</rd:DefaultName>
+                          <Style>
+                            <BorderStyle>
+                              <Top>Solid</Top>
+                              <Bottom>Solid</Bottom>
+                            </BorderStyle>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>=iif(Fields!VatExempt.Value, "Y", "N")</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox35">
+                          <rd:DefaultName>textbox35</rd:DefaultName>
+                          <Style>
+                            <BorderStyle>
+                              <Top>Solid</Top>
+                              <Bottom>Solid</Bottom>
+                            </BorderStyle>
+                            <Format>C</Format>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Round(Fields!NoOfUnits.Value * Fields!Price.Value,2)</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                  <Height>0.4cm</Height>
+                </TableRow>
+              </TableRows>
+            </Details>
+            <Header>
+              <TableRows>
+                <TableRow>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox22">
+                          <rd:DefaultName>textbox22</rd:DefaultName>
+                          <Style>
+                            <BorderStyle>
+                              <Bottom>Solid</Bottom>
+                            </BorderStyle>
+                            <FontWeight>700</FontWeight>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>No Of Units</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox23">
+                          <rd:DefaultName>textbox23</rd:DefaultName>
+                          <Style>
+                            <BorderStyle>
+                              <Bottom>Solid</Bottom>
+                            </BorderStyle>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>Prod. Description</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox24">
+                          <rd:DefaultName>textbox24</rd:DefaultName>
+                          <Style>
+                            <BorderStyle>
+                              <Bottom>Solid</Bottom>
+                            </BorderStyle>
+                            <FontWeight>700</FontWeight>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>Qty per unit</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox31">
+                          <rd:DefaultName>textbox31</rd:DefaultName>
+                          <Style>
+                            <BorderStyle>
+                              <Bottom>Solid</Bottom>
+                            </BorderStyle>
+                            <FontWeight>700</FontWeight>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>Price per unit</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox34">
+                          <rd:DefaultName>textbox34</rd:DefaultName>
+                          <Style>
+                            <BorderStyle>
+                              <Bottom>Solid</Bottom>
+                            </BorderStyle>
+                            <FontWeight>700</FontWeight>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>RRP </Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox25">
+                          <rd:DefaultName>textbox25</rd:DefaultName>
+                          <Style>
+                            <BorderStyle>
+                              <Bottom>Solid</Bottom>
+                            </BorderStyle>
+                            <FontWeight>700</FontWeight>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>Vat Exempt</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox32">
+                          <rd:DefaultName>textbox32</rd:DefaultName>
+                          <Style>
+                            <BorderStyle>
+                              <Bottom>Solid</Bottom>
+                            </BorderStyle>
+                            <FontWeight>700</FontWeight>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>Net Price</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                  <Height>0.4cm</Height>
+                </TableRow>
+              </TableRows>
+            </Header>
+            <TableColumns>
+              <TableColumn>
+                <Width>2.74736cm</Width>
+              </TableColumn>
+              <TableColumn>
+                <Width>4.25187cm</Width>
+              </TableColumn>
+              <TableColumn>
+                <Width>2.89612cm</Width>
+              </TableColumn>
+              <TableColumn>
+                <Width>3.27067cm</Width>
+              </TableColumn>
+              <TableColumn>
+                <Width>1.63533cm</Width>
+              </TableColumn>
+              <TableColumn>
+                <Width>2.89612cm</Width>
+              </TableColumn>
+              <TableColumn>
+                <Width>2.25253cm</Width>
+              </TableColumn>
+            </TableColumns>
+            <Height>0.8cm</Height>
+            <Left>0.125cm</Left>
+          </Table>
+        </ReportItems>
+        <Top>9cm</Top>
+        <Width>20.2cm</Width>
+        <Height>13.7cm</Height>
+      </Rectangle>
       <Rectangle Name="rectangle7">
         <Left>10.5cm</Left>
-        <ZIndex>5</ZIndex>
+        <ZIndex>4</ZIndex>
         <ReportItems>
           <Textbox Name="textbox15">
             <Top>2.4cm</Top>
@@ -516,7 +799,7 @@
       </Rectangle>
       <Rectangle Name="rectangle6">
         <Left>0.2cm</Left>
-        <ZIndex>4</ZIndex>
+        <ZIndex>3</ZIndex>
         <ReportItems>
           <Textbox Name="textbox52">
             <Top>1.1cm</Top>
@@ -551,7 +834,7 @@
       </Rectangle>
       <Rectangle Name="rectangle5">
         <Left>0.3cm</Left>
-        <ZIndex>3</ZIndex>
+        <ZIndex>2</ZIndex>
         <ReportItems>
           <Textbox Name="textbox50">
             <rd:DefaultName>textbox50</rd:DefaultName>
@@ -858,8 +1141,8 @@
             <Value>Special Instructions</Value>
           </Textbox>
         </ReportItems>
-        <Top>21.3cm</Top>
-        <Width>19.8cm</Width>
+        <Top>22.9cm</Top>
+        <Width>20cm</Width>
         <Style>
           <BorderStyle>
             <Default>Solid</Default>
@@ -867,281 +1150,6 @@
         </Style>
         <Height>5.75cm</Height>
       </Rectangle>
-      <Table Name="table4">
-        <ZIndex>2</ZIndex>
-        <DataSetName>SuperCreamDBDataSet_rptDetailsGetInvoice</DataSetName>
-        <Top>9cm</Top>
-        <Width>19.95cm</Width>
-        <Details>
-          <TableRows>
-            <TableRow>
-              <TableCells>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="NoOfUnits">
-                      <rd:DefaultName>NoOfUnits</rd:DefaultName>
-                      <Style>
-                        <BorderStyle>
-                          <Top>Solid</Top>
-                          <Bottom>Solid</Bottom>
-                        </BorderStyle>
-                        <TextAlign>Center</TextAlign>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!NoOfUnits.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="ProductDescription">
-                      <rd:DefaultName>ProductDescription</rd:DefaultName>
-                      <Style>
-                        <BorderStyle>
-                          <Top>Solid</Top>
-                          <Bottom>Solid</Bottom>
-                        </BorderStyle>
-                        <TextAlign>Left</TextAlign>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!ProductDescription.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="QtyPerUnit_1">
-                      <rd:DefaultName>QtyPerUnit_1</rd:DefaultName>
-                      <Style>
-                        <BorderStyle>
-                          <Top>Solid</Top>
-                          <Bottom>Solid</Bottom>
-                        </BorderStyle>
-                        <TextAlign>Center</TextAlign>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!QtyPerUnit.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="Price">
-                      <rd:DefaultName>Price</rd:DefaultName>
-                      <Style>
-                        <BorderStyle>
-                          <Top>Solid</Top>
-                          <Bottom>Solid</Bottom>
-                        </BorderStyle>
-                        <Format>C</Format>
-                        <TextAlign>Center</TextAlign>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!Price.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="RRPPerItem">
-                      <rd:DefaultName>RRPPerItem</rd:DefaultName>
-                      <Style>
-                        <BorderStyle>
-                          <Top>Solid</Top>
-                          <Bottom>Solid</Bottom>
-                        </BorderStyle>
-                        <Format>C</Format>
-                        <TextAlign>Center</TextAlign>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!RRPPerItem.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="VatExempt">
-                      <rd:DefaultName>VatExempt</rd:DefaultName>
-                      <Style>
-                        <BorderStyle>
-                          <Top>Solid</Top>
-                          <Bottom>Solid</Bottom>
-                        </BorderStyle>
-                        <TextAlign>Center</TextAlign>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=iif(Fields!VatExempt.Value, "Y", "N")</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox35">
-                      <rd:DefaultName>textbox35</rd:DefaultName>
-                      <Style>
-                        <BorderStyle>
-                          <Top>Solid</Top>
-                          <Bottom>Solid</Bottom>
-                        </BorderStyle>
-                        <Format>C</Format>
-                        <TextAlign>Center</TextAlign>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Round(Fields!NoOfUnits.Value * Fields!Price.Value,2)</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-              </TableCells>
-              <Height>0.4cm</Height>
-            </TableRow>
-          </TableRows>
-        </Details>
-        <Header>
-          <TableRows>
-            <TableRow>
-              <TableCells>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox22">
-                      <rd:DefaultName>textbox22</rd:DefaultName>
-                      <Style>
-                        <BorderStyle>
-                          <Bottom>Solid</Bottom>
-                        </BorderStyle>
-                        <FontWeight>700</FontWeight>
-                        <TextAlign>Center</TextAlign>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>No Of Units</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox23">
-                      <rd:DefaultName>textbox23</rd:DefaultName>
-                      <Style>
-                        <BorderStyle>
-                          <Bottom>Solid</Bottom>
-                        </BorderStyle>
-                        <FontWeight>700</FontWeight>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Prod. Description</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox24">
-                      <rd:DefaultName>textbox24</rd:DefaultName>
-                      <Style>
-                        <BorderStyle>
-                          <Bottom>Solid</Bottom>
-                        </BorderStyle>
-                        <FontWeight>700</FontWeight>
-                        <TextAlign>Center</TextAlign>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Qty per unit</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox31">
-                      <rd:DefaultName>textbox31</rd:DefaultName>
-                      <Style>
-                        <BorderStyle>
-                          <Bottom>Solid</Bottom>
-                        </BorderStyle>
-                        <FontWeight>700</FontWeight>
-                        <TextAlign>Center</TextAlign>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Price per unit</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox34">
-                      <rd:DefaultName>textbox34</rd:DefaultName>
-                      <Style>
-                        <BorderStyle>
-                          <Bottom>Solid</Bottom>
-                        </BorderStyle>
-                        <FontWeight>700</FontWeight>
-                        <TextAlign>Center</TextAlign>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>RRP </Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox25">
-                      <rd:DefaultName>textbox25</rd:DefaultName>
-                      <Style>
-                        <BorderStyle>
-                          <Bottom>Solid</Bottom>
-                        </BorderStyle>
-                        <FontWeight>700</FontWeight>
-                        <TextAlign>Center</TextAlign>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Vat Exempt</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox32">
-                      <rd:DefaultName>textbox32</rd:DefaultName>
-                      <Style>
-                        <BorderStyle>
-                          <Bottom>Solid</Bottom>
-                        </BorderStyle>
-                        <FontWeight>700</FontWeight>
-                        <TextAlign>Center</TextAlign>
-                      </Style>
-                      <CanGrow>true</CanGrow>
-                      <Value>Net Price</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-              </TableCells>
-              <Height>0.4cm</Height>
-            </TableRow>
-          </TableRows>
-        </Header>
-        <TableColumns>
-          <TableColumn>
-            <Width>2.74736cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>4.25187cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.89612cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>3.27067cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>1.63533cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.89612cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.25253cm</Width>
-          </TableColumn>
-        </TableColumns>
-        <Height>0.8cm</Height>
-        <Left>0.25cm</Left>
-      </Table>
       <Rectangle Name="rectangle2">
         <Left>0.25cm</Left>
         <ZIndex>1</ZIndex>
@@ -1516,7 +1524,7 @@
         <Height>1.3cm</Height>
       </Rectangle>
     </ReportItems>
-    <Height>27.5cm</Height>
+    <Height>28.8cm</Height>
   </Body>
   <Language>en-GB</Language>
   <TopMargin>0.2cm</TopMargin>
