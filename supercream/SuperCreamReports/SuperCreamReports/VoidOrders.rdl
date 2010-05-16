@@ -1815,7 +1815,7 @@ ORDER BY OrderHeader.OrderDate DESC</CommandText>
         <DataSetName>DataSet1</DataSetName>
         <Top>0.37389in</Top>
         <Height>0.85in</Height>
-        <Width>8.91667in</Width>
+        <Width>8.91666in</Width>
         <Style />
       </Tablix>
       <Textbox Name="textbox1">
@@ -1856,10 +1856,20 @@ ORDER BY OrderHeader.OrderDate DESC</CommandText>
   <ReportParameters>
     <ReportParameter Name="DateFrom">
       <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=DateAdd(DateInterval.Month, -1, Today)</Value>
+        </Values>
+      </DefaultValue>
       <Prompt>Date From</Prompt>
     </ReportParameter>
     <ReportParameter Name="DateTo">
       <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=Today</Value>
+        </Values>
+      </DefaultValue>
       <Prompt>Date To</Prompt>
     </ReportParameter>
   </ReportParameters>
