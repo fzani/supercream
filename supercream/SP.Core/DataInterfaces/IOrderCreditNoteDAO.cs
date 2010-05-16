@@ -14,6 +14,8 @@ namespace SP.Core.DataInterfaces
 {
     public interface IOrderCreditNoteDao : IDao<OrderCreditNote, int>
     {
+        bool OrderCreditNoteExistsByOrderId(int orderId);
+
         List<OrderLine> AvailableOrderLinesForCreditNote(int orderId);
         string GenerateCreditNo();
         bool ReferenceExists(string referenceNo);

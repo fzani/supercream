@@ -1021,6 +1021,19 @@ namespace SPWCFServer
 
         #region OrderCreditNote
 
+        public bool OrderCreditNoteExistsByOrderId(int orderId)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return mgr.OrderCreditNoteExistsByOrderId(orderId);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public List<OrderCreditNote> GetOrderCreditNotesByOrderId(int orderId)
         {
             try

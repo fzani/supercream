@@ -333,7 +333,7 @@
                             <asp:Button ID="RePrintInvoiceButton" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 Visible="false" Text="RePrint Invoice" runat="server" OnClick="RePrintInvoiceButton_Click" />
                             <asp:Button ID="CreditNotesButton" ValidationGroup="ModifyInvoiceDetailsGroup" Visible="false"
-                                Text="Credit Notes" runat="server" OnClick="CreditNoteButton_Click" />
+                                Text="Credit Note Details" runat="server" OnClick="CreditNoteButton_Click" />
                             <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
                             <asp:Button ID="btnOKTrigger" runat="server" Style="display: none" />
                             <asp:Button ID="btnCreditNoteTrigger" runat="server" Style="display: none" />
