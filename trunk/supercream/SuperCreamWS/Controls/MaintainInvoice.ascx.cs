@@ -188,7 +188,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             ui.Update(orderNoteStatus);
 
             PrintInvoiceButton.Visible = false;
-            RePrintInvoiceButton.Visible = true;           
+            RePrintInvoiceButton.Visible = true;                
         }
         catch (System.Exception ex)
         {
@@ -257,6 +257,18 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
         PrintReport printReport = new PrintReport();
         printReport.Run("InvoicePrint.rdlc", reportDataSources, PageMode.Portrait);
         OKModalPopupExtender.Show();
+    }
+
+    protected void CreditNoteButton_Click(object sender, EventArgs e)
+    {
+        OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
+        OrderHeader orderHeader = orderHeaderUI.GetById(this.OrderID.Value);
+        CreditNoteOrderHeaderLabel.Text = orderHeader.AlphaID;
+
+        ListArbitraryCreditNote.OrderId = this.OrderID.Value;
+        ListArbitraryCreditNote.DataBind();
+
+        CreditNoteHeaderModalPopupExtender.Show();
     }
 
     protected void ClearButton_Click(object sender, EventArgs e)
@@ -414,6 +426,9 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
                 ChangeInvoiceDetailsButton.Visible = true;
                 CancelInvoiceButton.Visible = true;
 
+                // Check if credit note exists first ?
+                CreditNotesButton.Visible = true;
+
                 // Now Select Account using Create OrderNotes record ...
                 OrderNotesStatus orderNoteStatus = orderNotesStatusUI.GetOrderNotesStatusByOrderID(OrderID.Value);
                 OrderNoteStatusID = orderNoteStatus.ID;
@@ -441,6 +456,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
                 PrintInvoiceButton.Visible = false;
                 RePrintInvoiceButton.Visible = false;
                 CancelInvoiceButton.Visible = false;
+                CreditNotesButton.Visible = false;
             }
         }
         else if (e.CommandName == "DisplayCreditNotes")

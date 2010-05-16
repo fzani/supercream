@@ -1,10 +1,11 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ArbitraryCreditNoteList.ascx.cs"
-    Inherits="Controls_ArbitraryCreditNoteList" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ListArbitraryCreditNote.ascx.cs"
+    Inherits="Controls_ListArbitraryCreditNote" %>
 <div class="FormInput">
     <fieldset id="Fieldset3" style="padding: 10px 0px 10px 0px;">
-        <asp:ListView ID="lvItemsTable" runat="server" DataSourceID="ObjectDataSource1" ItemContainerID="layoutTableTemplate">
+        <asp:ListView ID="lvItemsTable" runat="server" DataSourceID="ObjectDataSource1" ItemContainerID="layoutTableTemplate"
+            OnItemDataBound="lvItemsTable_ItemDataBound">
             <LayoutTemplate>
-                <div class="blackborder" style="overflow-y: auto; height: 500px; width: 800px;">
+                <div class="blackborder" style="width: 100%;">
                     <table cellpadding="5">
                         <thead style="position: relative;">
                             <tr class="gridheader" style="height: 30px;">
@@ -42,19 +43,19 @@
                         <%# Eval("Reference")%>
                     </td>
                     <td valign="top">
-                        <%# Eval("DateCreated")%>
+                        <%# Eval("DateCreated","{0:d}")%>
                     </td>
                     <td valign="top">
-                        <%# Eval("DueDate")%>
+                        <%# Eval("DueDate","{0:d}")%>
                     </td>
                     <td valign="top">
-                        <%# Eval("NetCreditAmount")%>
+                        <%# Eval("CreditAmount","{0:c}")%>
                     </td>
                     <td valign="top">
-                        <%# Eval("VatExempt")%>
+                        <asp:Label ID="VatExemptLabel" runat="server"></asp:Label>
                     </td>
                     <td valign="top">
-                        <%# Eval("CreditAmount")%>
+                        <asp:Label ID="TotalCreditAmountLabel" runat="server"></asp:Label>
                     </td>
                 </tr>
             </ItemTemplate>
@@ -63,7 +64,7 @@
             OnSelecting="ObjectDataSource1_Selecting" SelectMethod="GetCreditNotesByOrderId"
             TypeName="CreditNoteUI">
             <SelectParameters>
-                <asp:Parameter Name="creditNoteId" Type="Int32" />
+                <asp:Parameter Name="orderId" Type="Int32" />
             </SelectParameters>
         </asp:ObjectDataSource>
     </fieldset>
