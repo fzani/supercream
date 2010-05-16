@@ -139,7 +139,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
             OrderHeader header = orderHeaderUI.GetWithVatCodeById(OrderID.Value);
-            header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Order;          
+            header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Order;
             orderHeaderUI.UpdateForInvoice(header);
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
@@ -188,7 +188,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             ui.Update(orderNoteStatus);
 
             PrintInvoiceButton.Visible = false;
-            RePrintInvoiceButton.Visible = true;                
+            RePrintInvoiceButton.Visible = true;
         }
         catch (System.Exception ex)
         {
@@ -268,6 +268,9 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
         ListArbitraryCreditNote.OrderId = this.OrderID.Value;
         ListArbitraryCreditNote.DataBind();
 
+        ListOrderCreditNote.OrderId = this.OrderID.Value;
+        ListOrderCreditNote.DataBind();
+                
         CreditNoteHeaderModalPopupExtender.Show();
     }
 
@@ -591,7 +594,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
 
                 Label netPriceLabel = e.Item.FindControl("NetPriceLabel") as Label;
                 Decimal totalPrice = Math.Round(pricePerUnit * noOfUnits, 2);
-                              
+
                 Label vatExemptibleLabel = e.Item.FindControl("VatExemptibleLabel") as Label;
                 if (p.VatExempt)
                 {
@@ -609,7 +612,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
                     }
                     vatExemptibleLabel.Text = "N";
                 }
-              
+
                 netPriceLabel.Text = totalPrice.ToString();
 
                 Label specialInstructionsNameLabel = e.Item.FindControl("SpecialInstructionsNameLabel") as Label;

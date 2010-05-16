@@ -34,6 +34,14 @@ public class OrderCreditNoteUI : IDisposable
         }
     }
 
+    public List<OrderCreditNote> GetOrderCreditNotesByOrderId(int orderId)
+    {
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return _proxy.GetOrderCreditNotesByOrderId(orderId) as List<OrderCreditNote>;
+        }
+    }
+
     public OrderCreditNote SaveOrderCreditNote(OrderCreditNote OrderCreditNote)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
@@ -58,7 +66,7 @@ public class OrderCreditNoteUI : IDisposable
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
             OrderCreditNote origOrderCreditNote = proxy.GetOrderCreditNote(newOrderCreditNote.ID);
-            newOrderCreditNote.ID = origOrderCreditNote.ID;           
+            newOrderCreditNote.ID = origOrderCreditNote.ID;
 
             //// Note :- have to remove cyclic reference fom orig Object           
             proxy.UpdateOrderCreditNote(newOrderCreditNote, origOrderCreditNote);
