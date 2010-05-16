@@ -3,6 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <%@ Register Src="ListArbitraryCreditNote.ascx" TagName="ListArbitraryCreditNote"
     TagPrefix="uc1" %>
+<%@ Register Src="ListOrderCreditNote.ascx" TagName="ListOrderCreditNote" TagPrefix="uc2" %>
 <div class="FormInput">
     <fieldset id="Fieldset3">
         <asp:Panel ID="InvoiceSearchCriteriaPanel" DefaultButton="SearchButton" runat="server">
@@ -375,8 +376,7 @@
                             <ajaxToolkit:ModalPopupExtender ID="CreditNoteHeaderModalPopupExtender" DropShadow="true"
                                 runat="server" TargetControlID="btnCreditNoteTrigger" PopupControlID="CreditHeaderNotePanel"
                                 CancelControlID="CancelListCreditNotesButton" BackgroundCssClass="XPopUpBackGround" />
-                            <asp:Panel Style="display: none" ID="CreditHeaderNotePanel" runat="server"
-                                CssClass="modalPopup">
+                            <asp:Panel Style="display: none" ID="CreditHeaderNotePanel" runat="server" CssClass="modalPopup">
                                 <h2>
                                     Credit Notes for Order <
                                     <asp:Label ID="CreditNoteOrderHeaderLabel" Style="font-weight: bold;" runat="server"></asp:Label>
@@ -384,6 +384,7 @@
                                 </h2>
                                 <div style="height: 400px; overflow: auto;">
                                     <uc1:ListArbitraryCreditNote ID="ListArbitraryCreditNote" runat="server" />
+                                    <uc2:ListOrderCreditNote ID="ListOrderCreditNote" runat="server" />
                                 </div>
                                 <center>
                                     <asp:Button ID="CancelListCreditNotesButton" runat="server" Text="OK" Width="100%"
