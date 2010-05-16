@@ -73,6 +73,14 @@ public class OrderCreditNoteUI : IDisposable
         }
     }
 
+    public static bool OrderCreditNoteExists(int orderId)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.OrderCreditNoteExistsByOrderId(orderId);
+        }
+    }
+
     public OrderCreditNote GetByID(int id)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())

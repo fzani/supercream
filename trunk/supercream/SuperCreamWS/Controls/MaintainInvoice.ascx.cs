@@ -270,7 +270,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
 
         ListOrderCreditNote.OrderId = this.OrderID.Value;
         ListOrderCreditNote.DataBind();
-                
+
         CreditNoteHeaderModalPopupExtender.Show();
     }
 
@@ -321,7 +321,8 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
 
             Image img = e.Row.FindControl("CreditNoteImage") as Image;
             CreditNoteUI creditNoteUI = new CreditNoteUI();
-            if (creditNoteUI.CreditNoteExists(orderHeader.ID))
+
+            if (CreditNoteUI.CreditNoteExists(orderHeader.ID) || OrderCreditNoteUI.OrderCreditNoteExists(orderHeader.ID))
             {
                 img.Visible = true;
             }
@@ -429,8 +430,14 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
                 ChangeInvoiceDetailsButton.Visible = true;
                 CancelInvoiceButton.Visible = true;
 
-                // Check if credit note exists first ?
-                CreditNotesButton.Visible = true;
+                if (CreditNoteUI.CreditNoteExists(orderHeader.ID) || OrderCreditNoteUI.OrderCreditNoteExists(orderHeader.ID))
+                {
+                    CreditNotesButton.Visible = true;
+                }
+                else
+                {
+                    CreditNotesButton.Visible = false;
+                }
 
                 // Now Select Account using Create OrderNotes record ...
                 OrderNotesStatus orderNoteStatus = orderNotesStatusUI.GetOrderNotesStatusByOrderID(OrderID.Value);

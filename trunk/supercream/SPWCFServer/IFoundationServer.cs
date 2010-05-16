@@ -218,6 +218,10 @@ namespace SPWCFServer
         #region OrderCreditNote
         [OperationContract]
         [ReferencePreservingDataContractFormat]
+        bool OrderCreditNoteExistsByOrderId(int orderId);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
         List<OrderCreditNote> GetOrderCreditNotesByOrderId(int orderId);
 
         [OperationContract]

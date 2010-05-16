@@ -44,6 +44,11 @@ namespace SP.Data.LTS
             }
         }
 
+        public bool OrderCreditNoteExistsByOrderId(int orderId)
+        {
+            return (db.OrderCreditNote.Where<OrderCreditNote>(q => q.OrderID == orderId).FirstOrDefault() != null) ? true : false;
+        }
+
         public override OrderCreditNote GetById(int id)
         {
             return db.OrderCreditNote.Single<OrderCreditNote>(q => q.ID == id);

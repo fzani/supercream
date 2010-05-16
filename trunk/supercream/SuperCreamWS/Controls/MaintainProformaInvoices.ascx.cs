@@ -323,9 +323,8 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             CustomerUI ui = new CustomerUI();
             Customer customer = ui.GetByID(customerID);
 
-            Image img = e.Row.FindControl("CreditNoteImage") as Image;
-            CreditNoteUI creditNoteUI = new CreditNoteUI();
-            if (creditNoteUI.CreditNoteExists(orderHeader.ID))
+            Image img = e.Row.FindControl("CreditNoteImage") as Image;          
+            if (CreditNoteUI.CreditNoteExists(orderHeader.ID))
             {
                 img.Visible = true;
             }

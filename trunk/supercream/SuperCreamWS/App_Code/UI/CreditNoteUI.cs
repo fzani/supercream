@@ -89,7 +89,7 @@ public class CreditNoteUI : IDisposable
         }
     }
 
-    public bool CreditNoteExists(int orderId)
+    public static bool CreditNoteExists(int orderId)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
