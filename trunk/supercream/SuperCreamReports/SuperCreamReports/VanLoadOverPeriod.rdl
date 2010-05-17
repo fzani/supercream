@@ -77,7 +77,8 @@ FROM            OrderHeader AS oh INNER JOIN
 WHERE        (oh.DeliveryDate &gt;= @StartDate) AND (oh.DeliveryDate &lt;= @EndDate) AND (oh.OrderStatus = dbo.ConstInvoice() OR
                          oh.OrderStatus = dbo.ConstInvoicePrinted() OR
                          oh.OrderStatus = dbo.ConstDeliveryNote() OR
-                         oh.OrderStatus = dbo.ConstDeliveryNotePrinted())</CommandText>
+                         oh.OrderStatus = dbo.ConstDeliveryNotePrinted())
+ORDER BY oh.DeliveryDate DESC</CommandText>
         <QueryParameters>
           <QueryParameter Name="@StartDate">
             <Value>=Parameters!StartDate.Value</Value>
@@ -1189,6 +1190,7 @@ WHERE        (oh.DeliveryDate &gt;= @StartDate) AND (oh.DeliveryDate &lt;= @EndD
               <SortExpressions>
                 <SortExpression>
                   <Value>=Fields!DeliveryDate.Value</Value>
+                  <Direction>Descending</Direction>
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>

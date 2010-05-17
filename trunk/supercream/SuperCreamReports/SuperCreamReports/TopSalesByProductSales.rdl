@@ -17,34 +17,45 @@
           <DataField>Description</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Price">
-          <DataField>Price</DataField>
+        <Field Name="ExVatPrice">
+          <DataField>ExVatPrice</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="PriceInclVat">
+          <DataField>PriceInclVat</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
         </Field>
       </Fields>
       <Query>
         <DataSourceName>SCDataSource</DataSourceName>
-        <CommandText>WITH CTE(ProductCode, Description, Price) AS 
+        <CommandText>WITH cte(ProductCode, Description, ExVatPrice, PriceInclVat) AS 
 (
-	SELECT TOP 1000 
+	select top 1000 
 		p.ProductCode,
 		p.Description
-		,SUM(NoOfUnits * Price) AS Price			
+		,round(sum(NoOfUnits * Price), 2)
+		,case when p.VatExempt = 1 then round(sum(NoOfUnits * Price), 2) else round(sum(NoOfUnits * Price * (1 + (v.PercentageValue / 100))), 2) end	as ExVatPrice
   FROM [SuperCreamDB].[dbo].[OrderHeader] oh
-  INNER JOIN OrderLine ol ON
+  inner join OrderLine ol on
 	oh.ID = ol.OrderID
-  INNER JOIN Product p ON p.ID = ol.ProductID
-  WHERE oh.OrderStatus IN (2,3,6,7)  
- --  AND  oh.DeliveryDate &gt;= @DateStarted AND oh.DeliveryDate &lt;= @DateEnded
-  GROUP BY p.ProductCode, p.Description	   
+  inner join Product p on p.ID = ol.ProductID
+  inner join VatCode v on oh.VatCodeID = v.ID
+  where oh.OrderStatus IN (2,3,6,7)  
+	and  oh.DeliveryDate &gt;= @DateStarted AND oh.DeliveryDate &lt;= @DateEnded	
+  group BY p.ProductCode, p.Description, p.VatExempt	   
    )
-   SELECT * FROM CTE
-   WHERE  ((ISNULL(@PriceValue, '-1')) = '-1' OR Price &gt;= @PriceValue)
-   ORDER BY Price DESC;
- 	   </CommandText>
+   SELECT * FROM cte  
+	where ((ISNULL(@PriceValue, '-1')) = '-1' OR PriceInclVat &gt;= @PriceValue)
+   ORDER BY ExVatPrice DESC;</CommandText>
         <QueryParameters>
           <QueryParameter Name="@PriceValue">
             <Value>=Parameters!PriceValue.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@DateStarted">
+            <Value>=Parameters!DateStarted.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@DateEnded">
+            <Value>=Parameters!DateEnded.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
@@ -60,10 +71,13 @@
               <Width>1in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>6.97917in</Width>
+              <Width>4.26042in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.46875in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.375in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -138,6 +152,41 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Price (Ex. Vat)</Value>
+                              <Style>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="textbox4">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -145,7 +194,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Price</Value>
+                              <Value>Price (incl. Vat)</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -188,6 +237,7 @@
                               <Value>=Fields!ProductCode.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -200,6 +250,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -242,14 +293,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Price">
+                    <Textbox Name="ExVatPrice">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Price.Value</Value>
+                              <Value>=Fields!ExVatPrice.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                               </Style>
@@ -258,7 +309,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Price</rd:DefaultName>
+                      <rd:DefaultName>ExVatPrice</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -272,12 +323,47 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="PriceInclVat">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!PriceInclVat.Value</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <Format>'£'0.00;('£'0.00)</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>PriceInclVat</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-GB</rd:FormatSymbolCulture>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -306,7 +392,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0.36in</Top>
         <Height>0.43in</Height>
-        <Width>8.97917in</Width>
+        <Width>8.10417in</Width>
         <Style />
       </Tablix>
       <Textbox Name="textbox1">
@@ -350,18 +436,28 @@
           <Value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
         </Values>
       </DefaultValue>
-      <Prompt>Price Value &gt;= </Prompt>
+      <Prompt>Price (Incl Vat.) Value &gt;= </Prompt>
     </ReportParameter>
     <ReportParameter Name="DateStarted">
       <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=DateAdd(DateInterval.Month, -1, Today)</Value>
+        </Values>
+      </DefaultValue>
       <Prompt>Date Started</Prompt>
     </ReportParameter>
     <ReportParameter Name="DateEnded">
       <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=Today</Value>
+        </Values>
+      </DefaultValue>
       <Prompt>Date Ended</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>8.97917in</Width>
+  <Width>8.10417in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -369,7 +465,6 @@
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
-  <Language>en-US</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportID>72a40e84-30ea-4f88-ad28-6c3cbe878412</rd:ReportID>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
