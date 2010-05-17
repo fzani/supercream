@@ -21,6 +21,10 @@
       <FullPath>PickList.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>SpecialInvoicePrintReport.rdl</Name>
+      <FullPath>SpecialInvoicePrintReport.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Top10CustomerBySales.rdl</Name>
       <FullPath>Top10CustomerBySales.rdl</FullPath>
     </ProjectItem>
@@ -41,10 +45,6 @@
       <FullPath>TopSalesByProductSales.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>VanLoadOverAllocations.rdl</Name>
-      <FullPath>VanLoadOverAllocations.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>VanLoadOverPeriod.rdl</Name>
       <FullPath>VanLoadOverPeriod.rdl</FullPath>
     </ProjectItem>
@@ -53,8 +53,8 @@
       <FullPath>VoidOrders.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>SpecialInvoicePrintReport.rdl</Name>
-      <FullPath>SpecialInvoicePrintReport.rdl</FullPath>
+      <Name>DailyVanLoadOverAllocations.rdl</Name>
+      <FullPath>DailyVanLoadOverAllocations.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
