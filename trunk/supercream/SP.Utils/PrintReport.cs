@@ -111,8 +111,8 @@ namespace SP.Utils
                 deviceInfo =
                     "<DeviceInfo>" +
                     " <OutputFormat>EMF</OutputFormat>" +
-                    " <PageWidth>21cm</PageWidth>" +
-                    " <PageHeight>29.7cm</PageHeight>" +
+                    " <PageWidth>21.59cm</PageWidth>" +
+                    " <PageHeight>27.94cm</PageHeight>" +
                     " <MarginTop>0.2cm</MarginTop>" +
                     " <MarginLeft>0.2cm</MarginLeft>" +
                     " <MarginRight>0.2cm</MarginRight>" +
@@ -124,8 +124,8 @@ namespace SP.Utils
                 deviceInfo =
                    "<DeviceInfo>" +
                    " <OutputFormat>EMF</OutputFormat>" +
-                   " <PageWidth>29.7cm</PageWidth>" +
-                   " <PageHeight>21cm</PageHeight>" +
+                   " <PageWidth>21.59cm</PageWidth>" +
+                    " <PageHeight>27.94cm</PageHeight>" +
                    " <MarginTop>0.2cm</MarginTop>" +
                    " <MarginLeft>0.2cm</MarginLeft>" +
                    " <MarginRight>0.2cm</MarginRight>" +
