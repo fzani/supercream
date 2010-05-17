@@ -39,7 +39,7 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="ModifyNameTextBox" runat="server" ValidationGroup="NewCustomerGroup"
-                                        MaxLength="40" Width="350px"></asp:TextBox>
+                                        MaxLength="50" Width="350px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ModifyRequiredFieldValidator2" ValidationGroup="NewCustomerGroup"
                                         ControlToValidate="ModifyNameTextBox" ErrorMessage="Name is a required Text Box"
                                         InitialValue="" Text="Required" runat="server" />
