@@ -18,7 +18,6 @@
   <LeftMargin>0.2cm</LeftMargin>
   <BottomMargin>0.2cm</BottomMargin>
   <rd:ReportID>74fa7a66-d059-404a-9927-21e7ef19450f</rd:ReportID>
-  <PageWidth>21cm</PageWidth>
   <DataSets>
     <DataSet Name="SuperCreamDBDataSet_rptGetFoundationFacilityAddressLines">
       <Fields>
@@ -1260,7 +1259,7 @@
             </ReportItems>
             <Top>8.4cm</Top>
             <Width>19.9cm</Width>
-            <Height>14.4cm</Height>
+            <Height>13.1cm</Height>
           </Rectangle>
           <Textbox Name="textbox1">
             <rd:DefaultName>textbox1</rd:DefaultName>
@@ -1501,7 +1500,7 @@
                 <Value>Net Total</Value>
               </Textbox>
             </ReportItems>
-            <Top>23.1cm</Top>
+            <Top>21.7cm</Top>
             <Width>19.9cm</Width>
             <Style>
               <BorderStyle>
@@ -1513,12 +1512,11 @@
         </ReportItems>
         <Top>0.1cm</Top>
         <Width>20.3cm</Width>
-        <Height>28.3cm</Height>
+        <Height>26.9cm</Height>
       </Rectangle>
     </ReportItems>
-    <Height>28.6cm</Height>
+    <Height>27.5cm</Height>
   </Body>
   <Language>en-GB</Language>
   <TopMargin>0.2cm</TopMargin>
-  <PageHeight>29.7cm</PageHeight>
 </Report>
