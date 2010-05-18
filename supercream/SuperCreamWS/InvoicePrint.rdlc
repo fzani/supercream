@@ -1072,7 +1072,7 @@
               <Table Name="table2">
                 <ZIndex>7</ZIndex>
                 <DataSetName>SuperCreamDBDataSet_rptGetFoundationFacilityAddressLines</DataSetName>
-                <Top>0.5cm</Top>
+                <Top>0.6cm</Top>
                 <Width>6.5cm</Width>
                 <Details>
                   <TableRows>
@@ -1211,12 +1211,12 @@
                 </Style>
                 <ZIndex>13</ZIndex>
                 <CanGrow>true</CanGrow>
-                <Left>11.8cm</Left>
+                <Left>11.3cm</Left>
                 <Height>0.4cm</Height>
                 <Value>Vat Analysis</Value>
               </Textbox>
               <Rectangle Name="rectangle3">
-                <Left>11.3cm</Left>
+                <Left>10.8cm</Left>
                 <ZIndex>12</ZIndex>
                 <ReportItems>
                   <Textbox Name="textbox49">
@@ -1229,13 +1229,13 @@
                     </Style>
                     <ZIndex>8</ZIndex>
                     <CanGrow>true</CanGrow>
-                    <Left>5.5cm</Left>
+                    <Left>6.3cm</Left>
                     <Height>0.4cm</Height>
                     <Value>=Sum(Fields!VatTotal.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
                   </Textbox>
                   <Textbox Name="textbox48">
                     <Top>1.25cm</Top>
-                    <Width>1.25cm</Width>
+                    <Width>2.1cm</Width>
                     <Style>
                       <FontStyle>Italic</FontStyle>
                       <Format>C</Format>
@@ -1267,13 +1267,13 @@
                     </Style>
                     <ZIndex>5</ZIndex>
                     <CanGrow>true</CanGrow>
-                    <Left>5.5cm</Left>
+                    <Left>6.3cm</Left>
                     <Height>0.4cm</Height>
                     <Value>0</Value>
                   </Textbox>
                   <Textbox Name="textbox45">
                     <Top>0.7cm</Top>
-                    <Width>1.25cm</Width>
+                    <Width>2.1cm</Width>
                     <Style>
                       <FontStyle>Italic</FontStyle>
                       <Format>C</Format>
@@ -1304,7 +1304,7 @@
                     </Style>
                     <ZIndex>2</ZIndex>
                     <CanGrow>true</CanGrow>
-                    <Left>5.5cm</Left>
+                    <Left>6.3cm</Left>
                     <Height>0.4cm</Height>
                     <Value>Vatable</Value>
                   </Textbox>
@@ -1333,7 +1333,7 @@
                   </Textbox>
                 </ReportItems>
                 <Top>0.6cm</Top>
-                <Width>8.3cm</Width>
+                <Width>8.7cm</Width>
                 <Style>
                   <BorderStyle>
                     <Default>Solid</Default>
@@ -1350,7 +1350,7 @@
                 </Style>
                 <ZIndex>11</ZIndex>
                 <CanGrow>true</CanGrow>
-                <Left>13.79999cm</Left>
+                <Left>13.29999cm</Left>
                 <Height>0.4cm</Height>
                 <Value>=Sum(Fields!NetTotal.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
               </Textbox>
@@ -1363,7 +1363,7 @@
                 </Style>
                 <ZIndex>10</ZIndex>
                 <CanGrow>true</CanGrow>
-                <Left>13.79999cm</Left>
+                <Left>13.29999cm</Left>
                 <Height>0.4cm</Height>
                 <Value>=Sum(Fields!VatTotal.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
               </Textbox>
@@ -1376,7 +1376,7 @@
                 </Style>
                 <ZIndex>9</ZIndex>
                 <CanGrow>true</CanGrow>
-                <Left>13.79999cm</Left>
+                <Left>13.29999cm</Left>
                 <Height>0.4cm</Height>
                 <Value>=Sum(Fields!Total.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
               </Textbox>
@@ -1388,7 +1388,7 @@
                 </Style>
                 <ZIndex>8</ZIndex>
                 <CanGrow>true</CanGrow>
-                <Left>11.55cm</Left>
+                <Left>11.05cm</Left>
                 <Height>0.4cm</Height>
                 <Value>Total</Value>
               </Textbox>
@@ -1400,7 +1400,7 @@
                 </Style>
                 <ZIndex>7</ZIndex>
                 <CanGrow>true</CanGrow>
-                <Left>11.55cm</Left>
+                <Left>11.05cm</Left>
                 <Height>0.4cm</Height>
                 <Value>Vat</Value>
               </Textbox>
@@ -1413,7 +1413,7 @@
                 </Style>
                 <ZIndex>6</ZIndex>
                 <CanGrow>true</CanGrow>
-                <Left>11.55cm</Left>
+                <Left>11.05cm</Left>
                 <Height>0.4cm</Height>
                 <Value>Net Total</Value>
               </Textbox>

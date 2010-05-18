@@ -241,199 +241,216 @@
   <Body>
     <ColumnSpacing>1cm</ColumnSpacing>
     <ReportItems>
-      <Rectangle Name="rectangle4">
+      <Rectangle Name="rectangle5">
         <Left>0.3cm</Left>
         <ZIndex>3</ZIndex>
         <ReportItems>
-          <Textbox Name="VatExempt">
-            <rd:DefaultName>VatExempt</rd:DefaultName>
-            <Top>5cm</Top>
-            <Width>2.53968cm</Width>
-            <Style>
-              <TextAlign>Left</TextAlign>
-            </Style>
-            <ZIndex>12</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>9.1cm</Left>
-            <Height>0.4cm</Height>
-            <Value>=iif(First(Fields!VatExempt.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote") = True, "Y", "N")</Value>
-          </Textbox>
-          <Textbox Name="textbox26">
-            <Top>5cm</Top>
-            <Width>2.1cm</Width>
-            <Style>
-              <FontStyle>Italic</FontStyle>
-              <FontWeight>600</FontWeight>
-              <TextAlign>Left</TextAlign>
-            </Style>
-            <ZIndex>11</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>6.1cm</Left>
-            <Height>0.4cm</Height>
-            <Value>Vat Exempt</Value>
-          </Textbox>
-          <Textbox Name="Reason">
-            <rd:DefaultName>Reason</rd:DefaultName>
-            <Top>0.9cm</Top>
-            <Width>16.4cm</Width>
+          <Rectangle Name="rectangle4">
+            <ZIndex>1</ZIndex>
+            <ReportItems>
+              <Textbox Name="Reason">
+                <rd:DefaultName>Reason</rd:DefaultName>
+                <Top>0.9cm</Top>
+                <Width>16.4cm</Width>
+                <Style>
+                  <BorderStyle>
+                    <Default>Solid</Default>
+                  </BorderStyle>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+                <ZIndex>1</ZIndex>
+                <CanGrow>true</CanGrow>
+                <Left>0.65cm</Left>
+                <Height>3.2cm</Height>
+                <Value>=First(Fields!Reason.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+              </Textbox>
+              <Textbox Name="textbox20">
+                <rd:DefaultName>textbox20</rd:DefaultName>
+                <Top>0.4cm</Top>
+                <Width>2.53968cm</Width>
+                <Style>
+                  <FontWeight>700</FontWeight>
+                </Style>
+                <CanGrow>true</CanGrow>
+                <Left>0.65cm</Left>
+                <Height>0.4cm</Height>
+                <Value>Description</Value>
+              </Textbox>
+            </ReportItems>
+            <Top>0.1cm</Top>
             <Style>
               <BorderStyle>
                 <Default>Solid</Default>
               </BorderStyle>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
-            <ZIndex>10</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>0.6cm</Left>
-            <Height>3.2cm</Height>
-            <Value>=First(Fields!Reason.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
-          </Textbox>
-          <Textbox Name="LineTotal">
-            <rd:DefaultName>LineTotal</rd:DefaultName>
-            <Top>5cm</Top>
-            <Width>2.53968cm</Width>
+            <Height>15.7cm</Height>
+          </Rectangle>
+          <Rectangle Name="rectangle6">
+            <ReportItems>
+              <Textbox Name="VatExempt">
+                <rd:DefaultName>VatExempt</rd:DefaultName>
+                <Top>0.70423cm</Top>
+                <Width>2.53968cm</Width>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+                <ZIndex>10</ZIndex>
+                <CanGrow>true</CanGrow>
+                <Left>11.1cm</Left>
+                <Height>0.4cm</Height>
+                <Value>=iif(First(Fields!VatExempt.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote") = True, "Y", "N")</Value>
+              </Textbox>
+              <Textbox Name="textbox26">
+                <Top>0.70423cm</Top>
+                <Width>2.1cm</Width>
+                <Style>
+                  <FontStyle>Italic</FontStyle>
+                  <FontWeight>600</FontWeight>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+                <ZIndex>9</ZIndex>
+                <CanGrow>true</CanGrow>
+                <Left>8.1cm</Left>
+                <Height>0.4cm</Height>
+                <Value>Vat Exempt</Value>
+              </Textbox>
+              <Textbox Name="LineTotal">
+                <rd:DefaultName>LineTotal</rd:DefaultName>
+                <Top>0.70423cm</Top>
+                <Width>2.53968cm</Width>
+                <Style>
+                  <Format>C</Format>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+                <ZIndex>8</ZIndex>
+                <CanGrow>true</CanGrow>
+                <Left>14.4cm</Left>
+                <Height>0.4cm</Height>
+                <Value>=Sum(Fields!LineTotal.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+              </Textbox>
+              <Textbox Name="textbox25">
+                <rd:DefaultName>textbox25</rd:DefaultName>
+                <Top>0.20423cm</Top>
+                <Width>1.8cm</Width>
+                <Style>
+                  <FontWeight>700</FontWeight>
+                </Style>
+                <ZIndex>7</ZIndex>
+                <CanGrow>true</CanGrow>
+                <Left>14.4cm</Left>
+                <Height>0.4cm</Height>
+                <Value>Line Total</Value>
+              </Textbox>
+              <Textbox Name="VatableAmount">
+                <rd:DefaultName>VatableAmount</rd:DefaultName>
+                <Top>1.70423cm</Top>
+                <Width>3.3cm</Width>
+                <Style>
+                  <Format>C</Format>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+                <ZIndex>6</ZIndex>
+                <CanGrow>true</CanGrow>
+                <Left>11.1cm</Left>
+                <Height>0.4cm</Height>
+                <Value>=Round(Sum(Fields!VatableAmount.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote"),2)</Value>
+              </Textbox>
+              <Textbox Name="textbox24">
+                <rd:DefaultName>textbox24</rd:DefaultName>
+                <Top>1.70423cm</Top>
+                <Width>2.7cm</Width>
+                <Style>
+                  <FontStyle>Italic</FontStyle>
+                  <FontWeight>600</FontWeight>
+                </Style>
+                <ZIndex>5</ZIndex>
+                <CanGrow>true</CanGrow>
+                <Left>8.1cm</Left>
+                <Height>0.4cm</Height>
+                <Value>Vatable Amount</Value>
+              </Textbox>
+              <Textbox Name="VatRate">
+                <rd:DefaultName>VatRate</rd:DefaultName>
+                <Top>1.20423cm</Top>
+                <Width>2.4cm</Width>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+                <ZIndex>4</ZIndex>
+                <CanGrow>true</CanGrow>
+                <Left>11.1cm</Left>
+                <Height>0.4cm</Height>
+                <Value>=Round(iif(First(Fields!VatExempt.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")= True, 0.0, Sum(Fields!VatRate.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")),1)</Value>
+              </Textbox>
+              <Textbox Name="textbox23">
+                <rd:DefaultName>textbox23</rd:DefaultName>
+                <Top>1.20423cm</Top>
+                <Width>0.6cm</Width>
+                <Style>
+                  <FontStyle>Italic</FontStyle>
+                  <FontWeight>600</FontWeight>
+                </Style>
+                <ZIndex>3</ZIndex>
+                <CanGrow>true</CanGrow>
+                <Left>8.1cm</Left>
+                <Height>0.4cm</Height>
+                <Value>%</Value>
+              </Textbox>
+              <Textbox Name="textbox22">
+                <rd:DefaultName>textbox22</rd:DefaultName>
+                <Top>0.20423cm</Top>
+                <Width>2.53968cm</Width>
+                <Style>
+                  <FontWeight>700</FontWeight>
+                </Style>
+                <ZIndex>2</ZIndex>
+                <CanGrow>true</CanGrow>
+                <Left>8.1cm</Left>
+                <Height>0.4cm</Height>
+                <Value>Vat Totals</Value>
+              </Textbox>
+              <Textbox Name="textbox21">
+                <rd:DefaultName>textbox21</rd:DefaultName>
+                <Top>0.20423cm</Top>
+                <Width>2.53968cm</Width>
+                <Style>
+                  <FontWeight>700</FontWeight>
+                </Style>
+                <ZIndex>1</ZIndex>
+                <CanGrow>true</CanGrow>
+                <Left>2.7cm</Left>
+                <Height>0.4cm</Height>
+                <Value>Net Amount</Value>
+              </Textbox>
+              <Textbox Name="NetAmount">
+                <rd:DefaultName>NetAmount</rd:DefaultName>
+                <Top>0.70423cm</Top>
+                <Width>2.53968cm</Width>
+                <Style>
+                  <Format>C</Format>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+                <CanGrow>true</CanGrow>
+                <Left>2.7cm</Left>
+                <Height>0.4cm</Height>
+                <Value>=Sum(Fields!NetAmount.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+              </Textbox>
+            </ReportItems>
+            <Top>16cm</Top>
             <Style>
-              <Format>C</Format>
-              <TextAlign>Left</TextAlign>
+              <BorderStyle>
+                <Default>Solid</Default>
+              </BorderStyle>
             </Style>
-            <ZIndex>9</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>12.4cm</Left>
-            <Height>0.4cm</Height>
-            <Value>=Sum(Fields!LineTotal.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
-          </Textbox>
-          <Textbox Name="textbox25">
-            <rd:DefaultName>textbox25</rd:DefaultName>
-            <Top>4.5cm</Top>
-            <Width>1.8cm</Width>
-            <Style>
-              <FontWeight>700</FontWeight>
-            </Style>
-            <ZIndex>8</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>12.4cm</Left>
-            <Height>0.4cm</Height>
-            <Value>Line Total</Value>
-          </Textbox>
-          <Textbox Name="VatableAmount">
-            <rd:DefaultName>VatableAmount</rd:DefaultName>
-            <Top>6cm</Top>
-            <Width>3.3cm</Width>
-            <Style>
-              <Format>C</Format>
-              <TextAlign>Left</TextAlign>
-            </Style>
-            <ZIndex>7</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>9.1cm</Left>
-            <Height>0.4cm</Height>
-            <Value>=Round(Sum(Fields!VatableAmount.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote"),2)</Value>
-          </Textbox>
-          <Textbox Name="textbox24">
-            <rd:DefaultName>textbox24</rd:DefaultName>
-            <Top>6cm</Top>
-            <Width>2.7cm</Width>
-            <Style>
-              <FontStyle>Italic</FontStyle>
-              <FontWeight>600</FontWeight>
-            </Style>
-            <ZIndex>6</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>6.1cm</Left>
-            <Height>0.4cm</Height>
-            <Value>Vatable Amount</Value>
-          </Textbox>
-          <Textbox Name="VatRate">
-            <rd:DefaultName>VatRate</rd:DefaultName>
-            <Top>5.5cm</Top>
-            <Width>2.4cm</Width>
-            <Style>
-              <TextAlign>Left</TextAlign>
-            </Style>
-            <ZIndex>5</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>9.1cm</Left>
-            <Height>0.4cm</Height>
-            <Value>=Round(iif(First(Fields!VatExempt.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")= True, 0.0, Sum(Fields!VatRate.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")),1)</Value>
-          </Textbox>
-          <Textbox Name="textbox23">
-            <rd:DefaultName>textbox23</rd:DefaultName>
-            <Top>5.5cm</Top>
-            <Width>0.6cm</Width>
-            <Style>
-              <FontStyle>Italic</FontStyle>
-              <FontWeight>600</FontWeight>
-            </Style>
-            <ZIndex>4</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>6.1cm</Left>
-            <Height>0.4cm</Height>
-            <Value>%</Value>
-          </Textbox>
-          <Textbox Name="textbox22">
-            <rd:DefaultName>textbox22</rd:DefaultName>
-            <Top>4.5cm</Top>
-            <Width>2.53968cm</Width>
-            <Style>
-              <FontWeight>700</FontWeight>
-            </Style>
-            <ZIndex>3</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>6.1cm</Left>
-            <Height>0.4cm</Height>
-            <Value>Vat Totals</Value>
-          </Textbox>
-          <Textbox Name="textbox21">
-            <rd:DefaultName>textbox21</rd:DefaultName>
-            <Top>4.5cm</Top>
-            <Width>2.53968cm</Width>
-            <Style>
-              <FontWeight>700</FontWeight>
-            </Style>
-            <ZIndex>2</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>0.7cm</Left>
-            <Height>0.4cm</Height>
-            <Value>Net Amount</Value>
-          </Textbox>
-          <Textbox Name="NetAmount">
-            <rd:DefaultName>NetAmount</rd:DefaultName>
-            <Top>5cm</Top>
-            <Width>2.53968cm</Width>
-            <Style>
-              <Format>C</Format>
-              <TextAlign>Left</TextAlign>
-            </Style>
-            <ZIndex>1</ZIndex>
-            <CanGrow>true</CanGrow>
-            <Left>0.7cm</Left>
-            <Height>0.4cm</Height>
-            <Value>=Sum(Fields!NetAmount.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
-          </Textbox>
-          <Textbox Name="textbox20">
-            <rd:DefaultName>textbox20</rd:DefaultName>
-            <Top>0.4cm</Top>
-            <Width>2.53968cm</Width>
-            <Style>
-              <FontWeight>700</FontWeight>
-            </Style>
-            <CanGrow>true</CanGrow>
-            <Left>0.6cm</Left>
-            <Height>0.4cm</Height>
-            <Value>Description</Value>
-          </Textbox>
+            <Height>2.3cm</Height>
+          </Rectangle>
         </ReportItems>
         <Top>9.3cm</Top>
         <Width>19.9cm</Width>
-        <Style>
-          <BorderStyle>
-            <Default>Solid</Default>
-          </BorderStyle>
-        </Style>
-        <Height>7cm</Height>
+        <Height>18.4cm</Height>
       </Rectangle>
       <Rectangle Name="rectangle3">
         <Left>0.3cm</Left>
@@ -852,7 +869,7 @@
         <Height>1.4cm</Height>
       </Rectangle>
     </ReportItems>
-    <Height>27.5cm</Height>
+    <Height>27.8cm</Height>
   </Body>
   <Language>en-GB</Language>
   <TopMargin>0.2cm</TopMargin>
