@@ -18,7 +18,6 @@
   <LeftMargin>0.2cm</LeftMargin>
   <BottomMargin>0.2cm</BottomMargin>
   <rd:ReportID>4a61d46d-dcfb-45b7-8191-63a23270e129</rd:ReportID>
-  <PageWidth>8.27in</PageWidth>
   <DataSets>
     <DataSet Name="SuperCreamDBDataSet_rptGetOrderTotals">
       <Fields>
@@ -658,16 +657,16 @@
             <Left>0.125cm</Left>
           </Table>
         </ReportItems>
-        <Top>9cm</Top>
+        <Top>8.6cm</Top>
         <Width>20.2cm</Width>
-        <Height>13.7cm</Height>
+        <Height>13.3cm</Height>
       </Rectangle>
       <Rectangle Name="rectangle7">
         <Left>10.5cm</Left>
         <ZIndex>4</ZIndex>
         <ReportItems>
           <Textbox Name="textbox15">
-            <Top>2.4cm</Top>
+            <Top>2.3cm</Top>
             <Width>0.4cm</Width>
             <ZIndex>10</ZIndex>
             <CanGrow>true</CanGrow>
@@ -697,7 +696,7 @@
           <Table Name="table2">
             <ZIndex>7</ZIndex>
             <DataSetName>SuperCreamDBDataSet_rptGetFoundationFacilityAddressLines</DataSetName>
-            <Top>0.5cm</Top>
+            <Top>0.4cm</Top>
             <Width>6.5cm</Width>
             <Details>
               <TableRows>
@@ -726,7 +725,7 @@
             <Left>0.45cm</Left>
           </Table>
           <Textbox Name="textbox17">
-            <Top>2.4cm</Top>
+            <Top>2.3cm</Top>
             <Width>3.6cm</Width>
             <ZIndex>6</ZIndex>
             <CanGrow>true</CanGrow>
@@ -736,7 +735,7 @@
           </Textbox>
           <Textbox Name="CompanyOfficePhoneNumber1">
             <rd:DefaultName>CompanyOfficePhoneNumber1</rd:DefaultName>
-            <Top>2.4cm</Top>
+            <Top>2.3cm</Top>
             <Width>2.2cm</Width>
             <ZIndex>5</ZIndex>
             <CanGrow>true</CanGrow>
@@ -746,7 +745,7 @@
           </Textbox>
           <Textbox Name="textbox14">
             <rd:DefaultName>textbox14</rd:DefaultName>
-            <Top>2.4cm</Top>
+            <Top>2.3cm</Top>
             <Width>1cm</Width>
             <ZIndex>4</ZIndex>
             <CanGrow>true</CanGrow>
@@ -755,7 +754,7 @@
             <Value>Tel</Value>
           </Textbox>
           <Textbox Name="textbox13">
-            <Top>2cm</Top>
+            <Top>1.9cm</Top>
             <Width>6cm</Width>
             <ZIndex>3</ZIndex>
             <CanGrow>true</CanGrow>
@@ -764,7 +763,7 @@
             <Value>=First(Fields!CompanyPostCode.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="textbox12">
-            <Top>1.5cm</Top>
+            <Top>1.4cm</Top>
             <Width>6.5cm</Width>
             <ZIndex>2</ZIndex>
             <CanGrow>true</CanGrow>
@@ -773,7 +772,7 @@
             <Value>=First(Fields!CompanyCounty.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="textbox11">
-            <Top>1cm</Top>
+            <Top>0.9cm</Top>
             <Width>6.75cm</Width>
             <ZIndex>1</ZIndex>
             <CanGrow>true</CanGrow>
@@ -782,7 +781,6 @@
             <Value>=First(Fields!CompanyTown.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="textbox9">
-            <Top>0.15cm</Top>
             <Width>6.125cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
@@ -795,14 +793,14 @@
         </ReportItems>
         <Top>1.6cm</Top>
         <Width>9.8cm</Width>
-        <Height>3.5cm</Height>
+        <Height>3.3cm</Height>
       </Rectangle>
       <Rectangle Name="rectangle6">
         <Left>0.2cm</Left>
         <ZIndex>3</ZIndex>
         <ReportItems>
           <Textbox Name="textbox52">
-            <Top>1.1cm</Top>
+            <Top>1cm</Top>
             <Width>4.7cm</Width>
             <Style>
               <FontSize>16pt</FontSize>
@@ -816,7 +814,7 @@
           </Textbox>
           <Textbox Name="textbox51">
             <rd:DefaultName>textbox51</rd:DefaultName>
-            <Top>0.2cm</Top>
+            <Top>0.1cm</Top>
             <Width>3.6cm</Width>
             <Style>
               <FontSize>16pt</FontSize>
@@ -830,7 +828,7 @@
         </ReportItems>
         <Top>1.6cm</Top>
         <Width>10.1cm</Width>
-        <Height>3.5cm</Height>
+        <Height>3.3cm</Height>
       </Rectangle>
       <Rectangle Name="rectangle5">
         <Left>0.3cm</Left>
@@ -838,7 +836,7 @@
         <ReportItems>
           <Textbox Name="textbox50">
             <rd:DefaultName>textbox50</rd:DefaultName>
-            <Top>0.25cm</Top>
+            <Top>0.2cm</Top>
             <Width>2.5cm</Width>
             <Style>
               <BackgroundColor>White</BackgroundColor>
@@ -859,25 +857,26 @@
             <ZIndex>12</ZIndex>
             <ReportItems>
               <Textbox Name="textbox49">
-                <Top>1.75cm</Top>
-                <Width>1.25cm</Width>
+                <Top>1.4cm</Top>
+                <Width>1.7cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <Format>C</Format>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
                 <ZIndex>8</ZIndex>
                 <CanGrow>true</CanGrow>
-                <Left>5.5cm</Left>
+                <Left>6.4cm</Left>
                 <Height>0.4cm</Height>
                 <Value>=Sum(Fields!VatTotal.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
               </Textbox>
               <Textbox Name="textbox48">
-                <Top>1.75cm</Top>
-                <Width>1.25cm</Width>
+                <Top>1.4cm</Top>
+                <Width>2cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <Format>C</Format>
+                  <TextAlign>Center</TextAlign>
                 </Style>
                 <ZIndex>7</ZIndex>
                 <CanGrow>true</CanGrow>
@@ -886,7 +885,7 @@
                 <Value>=Sum(Fields!VatableTotal.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
               </Textbox>
               <Textbox Name="textbox47">
-                <Top>1.75cm</Top>
+                <Top>1.4cm</Top>
                 <Width>3.5cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
@@ -898,24 +897,26 @@
                 <Value>="Vat Applied " &amp; "@" &amp; First(Fields!PercentageValue.Value, "SuperCreamDBDataSet_rptGetOrderTotals") &amp; "%"</Value>
               </Textbox>
               <Textbox Name="textbox46">
-                <Top>1cm</Top>
-                <Width>1.5cm</Width>
+                <Top>0.8cm</Top>
+                <Width>1.7cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <Format>C</Format>
+                  <TextAlign>Center</TextAlign>
                 </Style>
                 <ZIndex>5</ZIndex>
                 <CanGrow>true</CanGrow>
-                <Left>5.5cm</Left>
+                <Left>6.4cm</Left>
                 <Height>0.4cm</Height>
                 <Value>0</Value>
               </Textbox>
               <Textbox Name="textbox45">
-                <Top>1cm</Top>
-                <Width>1.25cm</Width>
+                <Top>0.8cm</Top>
+                <Width>2cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <Format>C</Format>
+                  <TextAlign>Center</TextAlign>
                 </Style>
                 <ZIndex>4</ZIndex>
                 <CanGrow>true</CanGrow>
@@ -924,7 +925,7 @@
                 <Value>=Sum(Fields!NonVatableTotal.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
               </Textbox>
               <Textbox Name="textbox44">
-                <Top>1cm</Top>
+                <Top>0.8cm</Top>
                 <Width>2cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
@@ -937,21 +938,23 @@
               </Textbox>
               <Textbox Name="textbox43">
                 <Top>0.25cm</Top>
-                <Width>1.5cm</Width>
+                <Width>1.7cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
+                  <TextAlign>Center</TextAlign>
                 </Style>
                 <ZIndex>2</ZIndex>
                 <CanGrow>true</CanGrow>
-                <Left>5.5cm</Left>
+                <Left>6.4cm</Left>
                 <Height>0.4cm</Height>
                 <Value>Vatable</Value>
               </Textbox>
               <Textbox Name="textbox42">
                 <Top>0.25cm</Top>
-                <Width>1.25cm</Width>
+                <Width>2cm</Width>
                 <Style>
                   <FontStyle>Italic</FontStyle>
+                  <TextAlign>Center</TextAlign>
                 </Style>
                 <ZIndex>1</ZIndex>
                 <CanGrow>true</CanGrow>
@@ -971,17 +974,17 @@
                 <Value>Vat Name</Value>
               </Textbox>
             </ReportItems>
-            <Top>1cm</Top>
-            <Width>7.25cm</Width>
+            <Top>0.6cm</Top>
+            <Width>8.4cm</Width>
             <Style>
               <BorderStyle>
                 <Default>Solid</Default>
               </BorderStyle>
             </Style>
-            <Height>2.25cm</Height>
+            <Height>2cm</Height>
           </Rectangle>
           <Textbox Name="textbox37">
-            <Top>5cm</Top>
+            <Top>4.2cm</Top>
             <Width>3.75cm</Width>
             <Style>
               <Format>C</Format>
@@ -994,7 +997,7 @@
             <Value>=Sum(Fields!NetTotal.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
           </Textbox>
           <Textbox Name="textbox38">
-            <Top>4.25cm</Top>
+            <Top>3.6cm</Top>
             <Width>3.75cm</Width>
             <Style>
               <Format>C</Format>
@@ -1007,7 +1010,7 @@
             <Value>=Sum(Fields!VatTotal.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
           </Textbox>
           <Textbox Name="textbox39">
-            <Top>3.5cm</Top>
+            <Top>2.9cm</Top>
             <Width>3.75cm</Width>
             <Style>
               <Format>C</Format>
@@ -1020,7 +1023,7 @@
             <Value>=Sum(Fields!Total.Value, "SuperCreamDBDataSet_rptGetOrderTotals")</Value>
           </Textbox>
           <Textbox Name="textbox36">
-            <Top>5cm</Top>
+            <Top>4.2cm</Top>
             <Width>1.75cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
@@ -1032,7 +1035,7 @@
             <Value>Total</Value>
           </Textbox>
           <Textbox Name="textbox33">
-            <Top>4.25cm</Top>
+            <Top>3.6cm</Top>
             <Width>1.25cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
@@ -1045,7 +1048,7 @@
           </Textbox>
           <Textbox Name="textbox30">
             <rd:DefaultName>textbox30</rd:DefaultName>
-            <Top>3.5cm</Top>
+            <Top>2.9cm</Top>
             <Width>1.75cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
@@ -1058,7 +1061,7 @@
           </Textbox>
           <Textbox Name="DeliveryDate">
             <rd:DefaultName>DeliveryDate</rd:DefaultName>
-            <Top>5cm</Top>
+            <Top>4cm</Top>
             <Width>2.53968cm</Width>
             <Style>
               <Format>d</Format>
@@ -1072,7 +1075,7 @@
           </Textbox>
           <Textbox Name="textbox29">
             <rd:DefaultName>textbox29</rd:DefaultName>
-            <Top>5cm</Top>
+            <Top>4cm</Top>
             <Width>2.53968cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
@@ -1085,7 +1088,7 @@
           </Textbox>
           <Textbox Name="textbox28">
             <rd:DefaultName>textbox28</rd:DefaultName>
-            <Top>4.25cm</Top>
+            <Top>3.4cm</Top>
             <Width>2.5cm</Width>
             <Style>
               <TextAlign>Left</TextAlign>
@@ -1098,7 +1101,7 @@
           </Textbox>
           <Textbox Name="textbox27">
             <rd:DefaultName>textbox27</rd:DefaultName>
-            <Top>4.25cm</Top>
+            <Top>3.4cm</Top>
             <Width>4.25cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
@@ -1111,7 +1114,7 @@
           </Textbox>
           <Textbox Name="SpecialInstructions">
             <rd:DefaultName>SpecialInstructions</rd:DefaultName>
-            <Top>1cm</Top>
+            <Top>0.6cm</Top>
             <Width>8.95cm</Width>
             <Style>
               <BorderStyle>
@@ -1130,7 +1133,7 @@
           </Textbox>
           <Textbox Name="textbox26">
             <rd:DefaultName>textbox26</rd:DefaultName>
-            <Top>0.25cm</Top>
+            <Top>0.1cm</Top>
             <Width>3.75cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
@@ -1141,14 +1144,14 @@
             <Value>Special Instructions</Value>
           </Textbox>
         </ReportItems>
-        <Top>22.9cm</Top>
+        <Top>22.1cm</Top>
         <Width>20cm</Width>
         <Style>
           <BorderStyle>
             <Default>Solid</Default>
           </BorderStyle>
         </Style>
-        <Height>5.75cm</Height>
+        <Height>4.8cm</Height>
       </Rectangle>
       <Rectangle Name="rectangle2">
         <Left>0.25cm</Left>
@@ -1379,7 +1382,7 @@
             <Value>=First(Fields!OutletStoreName.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
         </ReportItems>
-        <Top>5.3cm</Top>
+        <Top>5cm</Top>
         <Width>20.05cm</Width>
         <Style>
           <BorderStyle>
@@ -1524,9 +1527,8 @@
         <Height>1.3cm</Height>
       </Rectangle>
     </ReportItems>
-    <Height>28.8cm</Height>
+    <Height>27.1cm</Height>
   </Body>
   <Language>en-GB</Language>
   <TopMargin>0.2cm</TopMargin>
-  <PageHeight>11.69in</PageHeight>
 </Report>
