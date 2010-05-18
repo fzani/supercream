@@ -17,6 +17,10 @@
       <FullPath>DailyReportForLedger.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>DailyVanAllocation.rdl</Name>
+      <FullPath>DailyVanAllocation.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>PickList.rdl</Name>
       <FullPath>PickList.rdl</FullPath>
     </ProjectItem>
@@ -33,16 +37,16 @@
       <FullPath>Top10VatExempt.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>TopCustomerBySales.rdl</Name>
-      <FullPath>TopCustomerBySales.rdl</FullPath>
+      <Name>TopCustomersBySales.rdl</Name>
+      <FullPath>TopCustomersBySales.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>TopSalesByProductQuantity.rdl</Name>
       <FullPath>TopSalesByProductQuantity.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>TopSalesByProductSales.rdl</Name>
-      <FullPath>TopSalesByProductSales.rdl</FullPath>
+      <Name>TopSalesByProductDelivered.rdl</Name>
+      <FullPath>TopSalesByProductDelivered.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>VanLoadOverPeriod.rdl</Name>
@@ -51,10 +55,6 @@
     <ProjectItem>
       <Name>VoidOrders.rdl</Name>
       <FullPath>VoidOrders.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>DailyVanLoadOverAllocations.rdl</Name>
-      <FullPath>DailyVanLoadOverAllocations.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
