@@ -13,6 +13,10 @@
       <FullPath>CustomerReport.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>CustomersBySales.rdl</Name>
+      <FullPath>CustomersBySales.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>DailyReportForLedger.rdl</Name>
       <FullPath>DailyReportForLedger.rdl</FullPath>
     </ProjectItem>
@@ -29,12 +33,12 @@
       <FullPath>SpecialInvoicePrintReport.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Top10VatExempt.rdl</Name>
-      <FullPath>Top10VatExempt.rdl</FullPath>
+      <Name>Top10CustomersBySales.rdl</Name>
+      <FullPath>Top10CustomersBySales.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>CustomersBySales.rdl</Name>
-      <FullPath>CustomersBySales.rdl</FullPath>
+      <Name>Top10VatExempt.rdl</Name>
+      <FullPath>Top10VatExempt.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>TopSalesByProductDelivered.rdl</Name>
@@ -53,8 +57,8 @@
       <FullPath>VoidOrders.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Top10CustomersBySales.rdl</Name>
-      <FullPath>Top10CustomersBySales.rdl</FullPath>
+      <Name>CustomerTopSellingProducts.rdl</Name>
+      <FullPath>CustomerTopSellingProducts.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
