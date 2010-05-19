@@ -20,7 +20,7 @@
       </Fields>
       <Query>
         <DataSourceName>SCDataSource</DataSourceName>
-        <CommandText>SELECT        TOP (10) c.Name, SUM(ol.NoOfUnits * ol.Price) AS Price
+        <CommandText>SELECT        c.Name, SUM(ol.NoOfUnits * ol.Price) AS Price
 FROM            OrderHeader AS oh INNER JOIN
                          Customer AS c ON oh.CustomerID = c.ID INNER JOIN
                          OrderLine AS ol ON oh.ID = ol.OrderID
@@ -75,7 +75,7 @@ ORDER BY Price DESC</CommandText>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Top 10 Customers By Sales</Value>
+                <Value>Customers By Sales</Value>
                 <Style>
                   <FontSize>16pt</FontSize>
                   <FontWeight>Bold</FontWeight>

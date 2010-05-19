@@ -29,24 +29,20 @@
       <FullPath>SpecialInvoicePrintReport.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Top10CustomerBySales.rdl</Name>
-      <FullPath>Top10CustomerBySales.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>Top10VatExempt.rdl</Name>
       <FullPath>Top10VatExempt.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>TopCustomersBySales.rdl</Name>
-      <FullPath>TopCustomersBySales.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>TopSalesByProductQuantity.rdl</Name>
-      <FullPath>TopSalesByProductQuantity.rdl</FullPath>
+      <Name>CustomersBySales.rdl</Name>
+      <FullPath>CustomersBySales.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>TopSalesByProductDelivered.rdl</Name>
       <FullPath>TopSalesByProductDelivered.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>TopSalesByProductQuantity.rdl</Name>
+      <FullPath>TopSalesByProductQuantity.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>VanLoadOverPeriod.rdl</Name>
@@ -55,6 +51,10 @@
     <ProjectItem>
       <Name>VoidOrders.rdl</Name>
       <FullPath>VoidOrders.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Top10CustomersBySales.rdl</Name>
+      <FullPath>Top10CustomersBySales.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
