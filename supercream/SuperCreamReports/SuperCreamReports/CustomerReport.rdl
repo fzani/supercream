@@ -72,25 +72,25 @@ INNER JOIN PhoneNoType pt ON
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.94048in</Width>
+              <Width>2.42203in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.94048in</Width>
+              <Width>1.39078in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.47173in</Width>
+              <Width>1.38036in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.18006in</Width>
+              <Width>1.08869in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.28423in</Width>
+              <Width>1.19286in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.99256in</Width>
+              <Width>1.26577in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.85714in</Width>
+              <Width>1.76577in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -122,6 +122,7 @@ INNER JOIN PhoneNoType pt ON
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -155,6 +156,7 @@ INNER JOIN PhoneNoType pt ON
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -190,6 +192,7 @@ INNER JOIN PhoneNoType pt ON
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -223,6 +226,7 @@ INNER JOIN PhoneNoType pt ON
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -256,6 +260,7 @@ INNER JOIN PhoneNoType pt ON
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -291,6 +296,7 @@ INNER JOIN PhoneNoType pt ON
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -324,6 +330,7 @@ INNER JOIN PhoneNoType pt ON
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1208,6 +1215,7 @@ INNER JOIN PhoneNoType pt ON
                               <Value>=Fields!PhoneTypeDescription.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1580,18 +1588,19 @@ INNER JOIN PhoneNoType pt ON
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
+        <Left>0.01059cm</Left>
         <Height>1.31in</Height>
-        <Width>8.66667in</Width>
+        <Width>10.50625in</Width>
         <Style />
       </Tablix>
     </ReportItems>
-    <Height>1.31in</Height>
+    <Height>3.3274cm</Height>
     <Style />
   </Body>
-  <Width>8.66667in</Width>
+  <Width>26.69647cm</Width>
   <Page>
     <PageHeader>
-      <Height>0.9144cm</Height>
+      <Height>0.98496cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1614,7 +1623,7 @@ INNER JOIN PhoneNoType pt ON
           </Paragraphs>
           <rd:DefaultName>textbox1</rd:DefaultName>
           <Height>0.36in</Height>
-          <Width>8.66667in</Width>
+          <Width>9.3125in</Width>
           <Style>
             <PaddingLeft>2pt</PaddingLeft>
             <PaddingRight>2pt</PaddingRight>
@@ -1654,9 +1663,9 @@ INNER JOIN PhoneNoType pt ON
           </Paragraphs>
           <rd:DefaultName>Textbox19</rd:DefaultName>
           <Top>0.125in</Top>
-          <Left>6.9in</Left>
+          <Left>7.77917in</Left>
           <Height>0.25in</Height>
-          <Width>1.7625in</Width>
+          <Width>1.49167in</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1674,16 +1683,17 @@ INNER JOIN PhoneNoType pt ON
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>8.5in</PageHeight>
-    <PageWidth>11in</PageWidth>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <PageHeight>21.59cm</PageHeight>
+    <PageWidth>27.94cm</PageWidth>
+    <LeftMargin>0.5cm</LeftMargin>
+    <RightMargin>0.5cm</RightMargin>
+    <TopMargin>0.5cm</TopMargin>
+    <BottomMargin>0.5cm</BottomMargin>
+    <ColumnSpacing>1.27cm</ColumnSpacing>
     <Style />
   </Page>
   <Language>en-US</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportID>8e809e35-61bf-4d62-9c0d-15011f53f0c7</rd:ReportID>
-  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
 </Report>
