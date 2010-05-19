@@ -102,6 +102,7 @@ ORDER BY van.Description, p.ProductCode</CommandText>
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -136,6 +137,7 @@ ORDER BY van.Description, p.ProductCode</CommandText>
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -170,6 +172,7 @@ ORDER BY van.Description, p.ProductCode</CommandText>
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -206,6 +209,7 @@ ORDER BY van.Description, p.ProductCode</CommandText>
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -717,6 +721,9 @@ ORDER BY van.Description, p.ProductCode</CommandText>
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <TopBorder>
+                          <Width>3pt</Width>
+                        </TopBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -750,6 +757,9 @@ ORDER BY van.Description, p.ProductCode</CommandText>
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <TopBorder>
+                          <Width>3pt</Width>
+                        </TopBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -880,7 +890,7 @@ ORDER BY van.Description, p.ProductCode</CommandText>
                   <Style />
                 </TextRun>
                 <TextRun>
-                  <Value>=First(Fields!DeliveryDate.Value, "DataSet1")</Value>
+                  <Value>=First(FormatDateTime(Fields!DeliveryDate.Value,DateFormat.ShortDate), "DataSet1")</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -965,7 +975,7 @@ ORDER BY van.Description, p.ProductCode</CommandText>
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
-  <Language>en-US</Language>
+  <Language>en-GB</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportID>b357cb16-1d46-4b0a-b692-ebf0500c1492</rd:ReportID>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
