@@ -2213,6 +2213,7 @@ namespace SPWCFServer
         private float _Discount;
         private Decimal _Price;
         private string _SpecialInstructions;
+        private decimal _RRPPerItem;
 
         private OrderHeader _OrderHeader;
 
@@ -2325,6 +2326,20 @@ namespace SPWCFServer
         {
             get { return _SpecialInstructions; }
             set { _SpecialInstructions = value; }
+        }
+
+        [DataMember]
+        public decimal RRPPerItem
+        {
+            get
+            {
+                return _RRPPerItem;
+            }
+
+            set
+            {
+                _RRPPerItem = value;
+            }
         }
 
         [DataMember]

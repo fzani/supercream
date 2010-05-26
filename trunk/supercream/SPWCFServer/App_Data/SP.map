@@ -205,6 +205,7 @@
       <Column Name="Discount" Member="Discount" Storage="_Discount" DbType="Float" />
       <Column Name="Price" Member="Price" Storage="_Price" DbType="Decimal(10,2)" />
       <Column Name="SpecialInstructions" Member="SpecialInstructions" Storage="_SpecialInstructions" DbType="varchar(8000)" />
+      <Column Name="RRPPerItem" Member="RRPPerItem" Storage="_RRPPerItem" DbType="Decimal(10,2)" />
       <Association Name="FK_InvoiceItem_OrderLine" Member="InvoiceItem" Storage="_InvoiceItem" ThisKey="ID" OtherKey="OrderLineID" DeleteRule="NO ACTION" />
       <Association Name="FK_OrderLine_Order" Member="OrderHeader" Storage="_OrderHeader" ThisKey="OrderID" OtherKey="ID" IsForeignKey="true" />
       <Association Name="FK_OrderLine_Product" Member="Product" Storage="_Product" ThisKey="ProductID" OtherKey="ID" IsForeignKey="true" />
