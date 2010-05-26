@@ -580,7 +580,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
                 descriptionLabel.Text = p.Description;
 
                 Label rrpLabel = e.Item.FindControl("RRPLabel") as Label;
-                rrpLabel.Text = String.Format("{0:c}", p.RRPPerItem);
+                rrpLabel.Text = String.Format("{0:c}", line.RRPPerItem);
 
                 Label noOfUnitsLabel = e.Item.FindControl("NoOfUnitsLabel") as Label;
                 int noOfUnits = Convert.ToInt32(noOfUnitsLabel.Text);

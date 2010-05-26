@@ -28,11 +28,11 @@ public class OrderLineUI : IDisposable
 
     }
 
-    public OrderLine Save(OrderLine OrderLine)
+    public static OrderLine Save(OrderLine OrderLine)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.SaveOrderLine(OrderLine);
+            return proxy.SaveOrderLine(OrderLine);
         }
     }
 
@@ -49,6 +49,7 @@ public class OrderLineUI : IDisposable
             updatedOrderLine.OrderID = newOrderLine.OrderID;
             updatedOrderLine.OrderLineStatus = origOrderLine.OrderLineStatus;
             updatedOrderLine.Price = newOrderLine.Price;
+            updatedOrderLine.RRPPerItem = origOrderLine.RRPPerItem;
             updatedOrderLine.ProductID = newOrderLine.ProductID;
             updatedOrderLine.QtyPerUnit = newOrderLine.QtyPerUnit;
             updatedOrderLine.SpecialInstructions = newOrderLine.SpecialInstructions;

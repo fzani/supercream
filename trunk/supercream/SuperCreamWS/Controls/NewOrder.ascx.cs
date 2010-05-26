@@ -244,6 +244,7 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
                 discount = (Single.TryParse(discountTmp, out discount)) ? Single.Parse(discountTmp) : 0;
             }
 
+            ProductUI productUI = new ProductUI();
             using (OrderLineUI ui = new OrderLineUI())
             {
                 OrderLine orderLine = new OrderLine
@@ -254,12 +255,13 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
                     QtyPerUnit = Convert.ToInt32(QtyPerUnitLabel.Text),
                     Price = Decimal.Parse(PriceTextBox.Text, System.Globalization.NumberStyles.Currency),
                     ProductID = this.ProductID.Value,
+                    RRPPerItem = productUI.GetProductByID(this.ProductID.Value).RRPPerItem,
                     Discount = discount,
                     SpecialInstructions = SpecialInstructionsTextBox.Text,
                     OrderLineStatus = (short)SP.Core.Enums.OrderStatus.Order,
                 };
 
-                ui.Save(orderLine);
+                OrderLineUI.Save(orderLine);
 
                 DataBind();
             }
@@ -344,7 +346,7 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
                 QtyPerUnit = qtyPerUnit,
                 SpecialInstructions = specialInstructionsTextBox.Text
             };
-          
+
             OrderLineUI.Update(line);
             DataBind();
 
@@ -356,11 +358,11 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
             ProductSearchError(this, args);
         }
     }
-   
+
     protected void DeleteButton_Click(object sender, EventArgs e)
     {
         try
-        {           
+        {
             Button btn = sender as Button;
             if (btn.CommandName == "DeleteButton")
                 OrderLineUI.DeleteOrderLine(Convert.ToInt32(btn.CommandArgument));
@@ -582,7 +584,7 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
             GridViewRow row = this.OrderDetailsGridView.Rows[index];
 
             Label idLabel = row.FindControl("IDLabel") as Label;
-            
+
             OrderLine orderLine = OrderLineUI.GetOrderLine(Convert.ToInt32(idLabel.Text));
             ProductUI productUI = new ProductUI();
             Product product = productUI.GetProductByID(orderLine.ProductID);

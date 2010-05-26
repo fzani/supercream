@@ -521,7 +521,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
                 Discount = discount,
                 OrderID = Convert.ToInt32(orderIDLabel.Text),
                 NoOfUnits = noOfUnits,
-                Price = price,
+                Price = price,                
                 ProductID = productID,
                 OrderLineStatus = (short)SP.Core.Enums.OrderLineStatus.Open,
                 QtyPerUnit = qtyPerUnit,
@@ -612,6 +612,8 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
             OrderHeader header = orderHeaderUI.GetById(this.OrderID.Value);
+            ProductUI productUI = new ProductUI();
+            Product product = productUI.GetProductByID(this.ProductID.Value);
 
             using (OrderLineUI ui = new OrderLineUI())
             {
@@ -622,13 +624,14 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
                     NoOfUnits = Convert.ToInt32(NoOfUnitsTextBox.Text),
                     QtyPerUnit = Convert.ToInt32(QtyPerUnitLabel.Text),
                     Price = Decimal.Parse(PriceTextBox.Text, System.Globalization.NumberStyles.Currency),
+                    RRPPerItem = product.RRPPerItem,
                     ProductID = this.ProductID.Value,
                     Discount = discount,
                     SpecialInstructions = SpecialInstructionsTextBox.Text,
                     OrderLineStatus = (short)header.OrderStatus,
                 };
 
-                ui.Save(orderLine);
+                OrderLineUI.Save(orderLine);
 
                 CompleteOrderButton.Visible = true;
 
