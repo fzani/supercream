@@ -4,10 +4,10 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI.WebControls;
-using SP.Utils;
-using WcfFoundationService;
 using Microsoft.Reporting.WebForms;
 using SP.Core.Enums;
+using SP.Utils;
+using WcfFoundationService;
 
 public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
 {
@@ -396,6 +396,21 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             OrderID = orderHeader.ID;
             OrderHeaderNoLabel.Text = orderHeader.AlphaID;
             InvoiceHeaderNoLabel.Text = orderHeader.InvoiceNo;
+
+            CreditNoteUI creditNoteUI = new CreditNoteUI();
+            var creditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(OrderID.Value);
+
+            if (creditNoteDetails.TotalAmountCredited > 0)
+            {
+                CreditNoteLabel.Visible = true;
+                CreditNotePriceLabel.Visible = true;
+                CreditNotePriceLabel.Text = String.Format("{0:c}", creditNoteDetails.TotalAmountCredited);
+            }
+            else
+            {
+                CreditNoteLabel.Visible = false;
+                CreditNotePriceLabel.Visible = false;
+            }
 
             int customerID = orderHeader.CustomerID;
 

@@ -313,6 +313,18 @@
                 </tr>
                 <tr>
                     <td>
+                    </td>
+                    <td>
+                        <i>
+                            <asp:Label ID="CreditNoteLabel" Text="CR:- " Visible="False" runat="server" Font-Size="12"
+                                ForeColor="Red"></asp:Label>
+                            <asp:Label ID="CreditNotePriceLabel" Visible="False" runat="server"
+                                Font-Size="12" ForeColor="Red"></asp:Label>
+                        </i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         <asp:LinkButton ID="CancelSelectInvoiceDetails" Text="Cancel Select Details" Width="100%"
                             runat="server" OnClick="CancelSelectInvoiceDetails_Click" />
                     </td>

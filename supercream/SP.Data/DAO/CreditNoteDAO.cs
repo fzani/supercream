@@ -130,6 +130,22 @@ namespace SP.Data.LTS
                 vatRate = (vatRate / 100) + 1;
             }
 
+            // First check to see if any Order Lines exists for Order ...
+            var orderLineCount = (from o in db.OrderHeader
+                                  join ol in db.OrderLine on o.ID equals ol.OrderID
+                                  where ol.OrderID == orderNo
+                                  select ol.ID).Count();
+            if(orderLineCount == 0)
+            {
+                return new InvoiceCreditNoteDetails
+                {
+                    OrderID = orderNo,
+                    TotalInvoiceAmount = new decimal(0.0),
+                    TotalAmountCredited = new decimal(0.0), // inclusing vat
+                    Balance = new decimal(0.0)
+                };
+            }
+
             var invoiceTotal = Math.Round((from o in db.OrderHeader
                                            join ol in db.OrderLine on o.ID equals ol.OrderID
                                            join p in db.Product on ol.ProductID equals p.ID
