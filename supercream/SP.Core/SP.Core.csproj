@@ -99,6 +99,7 @@
     <Compile Include="Domain\BaseEntity.cs" />
     <Compile Include="Domain\ContactDetailDTO.cs" />
     <Compile Include="Domain\AutoGenDTO.cs" />
+    <Compile Include="Domain\SpecialInvoiceCreditNote.cs" />
     <Compile Include="Domain\InvoiceCreditNoteDetails.cs" />
     <Compile Include="Domain\CreditNoteDetails.cs" />
     <Compile Include="Domain\CreditNote.cs" />

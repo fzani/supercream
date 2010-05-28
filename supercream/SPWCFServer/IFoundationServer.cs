@@ -3209,6 +3209,127 @@ namespace SPWCFServer
     }
 
     [DataContract]
+    public class SpecialInvoiceNoteCreditNote
+    {
+        private int _ID;
+        private int _SpecialInvoiceID;
+        private decimal _CreditAmount;
+        private string _Reason;
+        private DateTime _DateCreated;
+        private string _Reference;
+        private bool _VatExempt;
+        private DateTime _DueDate;
+
+        [DataMember]
+        public int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+
+        [DataMember]
+        public int SpecialInvoiceID
+        {
+            get
+            {
+                return _SpecialInvoiceID;
+            }
+            set
+            {
+                _SpecialInvoiceID = value;
+            }
+        }
+
+        [DataMember]
+        public decimal CreditAmount
+        {
+            get
+            {
+                return _CreditAmount;
+            }
+            set
+            {
+                _CreditAmount = value;
+            }
+        }
+
+        [DataMember]
+        public string Reason
+        {
+            get
+            {
+                return _Reason;
+            }
+            set
+            {
+                _Reason = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime DateCreated
+        {
+            get
+            {
+                return _DateCreated;
+            }
+
+            set
+            {
+                _DateCreated = value;
+            }
+        }
+
+        [DataMember]
+        public string Reference
+        {
+            get
+            {
+                return _Reference;
+            }
+
+            set
+            {
+                _Reference = value;
+            }
+        }
+
+        [DataMember]
+        public bool VatExempt
+        {
+            get
+            {
+                return _VatExempt;
+            }
+
+            set
+            {
+                _VatExempt = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime DueDate
+        {
+            get
+            {
+                return _DueDate;
+            }
+
+            set
+            {
+                _DueDate = value;
+            }
+        }
+    }
+
+    [DataContract]
     public class SpecialInvoiceHeader
     {
         private int _ID;
