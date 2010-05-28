@@ -524,6 +524,30 @@ namespace SPWCFServer
 
         #endregion
 
+        #region SpecialInvoiceCreditNote
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        void DeleteSpecialInvoiceCreditNote(SpecialInvoiceCreditNote specialInvoiceCreditNote);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<SpecialInvoiceCreditNote> GetAllSpecialInvoiceCreditNotes();
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        SpecialInvoiceCreditNote GetSpecialInvoiceCreditNote(int id);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        SpecialInvoiceCreditNote SaveSpecialInvoiceCreditNote(SpecialInvoiceCreditNote specialInvoiceCreditNote);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        SpecialInvoiceCreditNote UpdateSpecialInvoiceCreditNote(SpecialInvoiceCreditNote newSpecialInvoiceCreditNote, SpecialInvoiceCreditNote origSpecialInvoiceCreditNote);
+
+        #endregion
+
         #region SpecialInvoiceHeader
         [OperationContract]
         [ReferencePreservingDataContractFormat]
@@ -3209,7 +3233,7 @@ namespace SPWCFServer
     }
 
     [DataContract]
-    public class SpecialInvoiceNoteCreditNote
+    public class SpecialInvoiceCreditNote
     {
         private int _ID;
         private int _SpecialInvoiceID;

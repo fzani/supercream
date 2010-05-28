@@ -236,6 +236,14 @@ namespace SP.Data.LTS
             }
         }
 
+        public System.Data.Linq.Table<SpecialInvoiceCreditNote> SpecialInvoiceCreditNote
+        {
+            get
+            {
+                return this.GetTable<SpecialInvoiceCreditNote>();
+            }
+        }
+
         public System.Data.Linq.Table<SpecialInvoiceHeader> SpecialInvoiceHeader
         {
             get

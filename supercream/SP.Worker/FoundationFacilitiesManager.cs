@@ -1371,6 +1371,45 @@ namespace SP.Worker
 
         #endregion
 
+        #region SpecialInvoiceCreditNote
+        public void DeleteSpecialInvoiceCreditNote(SpecialInvoiceCreditNote specialinvoicecreditnote)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ISpecialInvoiceCreditNoteDao specialInvoiceCreditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
+
+            specialInvoiceCreditNoteDao.Delete(specialinvoicecreditnote);
+        }
+
+        public SpecialInvoiceCreditNote GetSpecialInvoiceCreditNote(int id)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ISpecialInvoiceCreditNoteDao specialInvoiceCreditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
+            return specialInvoiceCreditNoteDao.GetById(id);
+        }
+
+        public List<SpecialInvoiceCreditNote> GetAllSpecialInvoiceCreditNotes()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ISpecialInvoiceCreditNoteDao specialInvoiceCreditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
+            return specialInvoiceCreditNoteDao.GetAll();
+        }
+
+        public SpecialInvoiceCreditNote SaveSpecialInvoiceCreditNote(SpecialInvoiceCreditNote specialinvoicecreditnote)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ISpecialInvoiceCreditNoteDao specialInvoiceCreditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
+            return specialInvoiceCreditNoteDao.Save(specialinvoicecreditnote);
+        }
+
+        public SpecialInvoiceCreditNote UpdateSpecialInvoiceCreditNote(SpecialInvoiceCreditNote newSpecialInvoiceCreditNote, SpecialInvoiceCreditNote origSpecialInvoiceCreditNote)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ISpecialInvoiceCreditNoteDao specialInvoiceCreditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
+            return specialInvoiceCreditNoteDao.Update(newSpecialInvoiceCreditNote, origSpecialInvoiceCreditNote);
+        }
+
+        #endregion 
+
         #region SpecialInvoiceHeader
         public List<SpecialInvoiceHeader> GetSpecialHeaders(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
         {

@@ -79,6 +79,7 @@
     <Compile Include="DataInterfaces\IPriceListItem.cs" />
     <Compile Include="DataInterfaces\IOrderLineAccount.cs" />
     <Compile Include="DataInterfaces\IAccount.cs" />
+    <Compile Include="DataInterfaces\ISpecialInvoiceCreditNoteDAO.cs" />
     <Compile Include="DataInterfaces\ISpecialInvoiceHeaderDAO.cs" />
     <Compile Include="DataInterfaces\ISpecialInvoiceLineDAO.cs" />
     <Compile Include="DataInterfaces\IStandardVatRateDAO.cs" />
