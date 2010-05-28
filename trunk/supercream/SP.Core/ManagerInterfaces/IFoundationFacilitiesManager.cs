@@ -224,6 +224,14 @@ namespace SP.Core.ManagerInterfaces
         bool ExemptCodeExists();
         #endregion
 
+        #region SpecialInvoiceCreditNote
+        void DeleteSpecialInvoiceCreditNote(SpecialInvoiceCreditNote specialinvoicecreditnote);
+        SpecialInvoiceCreditNote GetSpecialInvoiceCreditNote(int id);
+        List<SpecialInvoiceCreditNote> GetAllSpecialInvoiceCreditNotes();
+        SpecialInvoiceCreditNote SaveSpecialInvoiceCreditNote(SpecialInvoiceCreditNote specialinvoicecreditnote);
+        SpecialInvoiceCreditNote UpdateSpecialInvoiceCreditNote(SpecialInvoiceCreditNote newSpecialInvoiceCreditNote, SpecialInvoiceCreditNote origSpecialInvoiceCreditNote);
+        #endregion 
+
         #region SpecialInvoiceHeader
         void DeleteSpecialInvoiceHeader(SpecialInvoiceHeader specialinvoiceheader);
         SpecialInvoiceHeader GetSpecialInvoiceHeader(int id);

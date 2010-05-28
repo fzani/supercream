@@ -11,7 +11,7 @@ using System.Text;
 namespace SP.Core.Domain
 {
     [Serializable]
-    public class SpecialInvoiceNoteCreditNote : BaseEntity
+    public class SpecialInvoiceCreditNote : BaseEntity
     {
         private int _ID;
         private int _SpecialInvoiceID;

@@ -2484,6 +2484,87 @@ namespace SPWCFServer
 
         #endregion
 
+        #region SpecialInvoiceCreditNote
+
+        public void DeleteSpecialInvoiceCreditNote(SpecialInvoiceCreditNote specialInvoiceCreditNote)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                mgr.DeleteSpecialInvoiceCreditNote(ObjectExtension.CloneProperties<SPWCFServer.SpecialInvoiceCreditNote, SP.Core.Domain.SpecialInvoiceCreditNote>(specialInvoiceCreditNote));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete, it is likely that there are dependent items still linked to it");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public List<SpecialInvoiceCreditNote> GetAllSpecialInvoiceCreditNotes()
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.SpecialInvoiceCreditNote> specialInvoiceCreditNoteList = mgr.GetAllSpecialInvoiceCreditNotes();
+                return ObjectExtension.CloneList<SP.Core.Domain.SpecialInvoiceCreditNote, SPWCFServer.SpecialInvoiceCreditNote>(specialInvoiceCreditNoteList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public SpecialInvoiceCreditNote GetSpecialInvoiceCreditNote(int id)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.SpecialInvoiceCreditNote specialInvoiceCreditNote = mgr.GetSpecialInvoiceCreditNote(id);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.SpecialInvoiceCreditNote, SPWCFServer.SpecialInvoiceCreditNote>(specialInvoiceCreditNote);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public SpecialInvoiceCreditNote SaveSpecialInvoiceCreditNote(SpecialInvoiceCreditNote specialInvoiceCreditNote)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.SpecialInvoiceCreditNote coreSpecialInvoiceCreditNote =
+                   ObjectExtension.CloneProperties<SPWCFServer.SpecialInvoiceCreditNote, SP.Core.Domain.SpecialInvoiceCreditNote>(specialInvoiceCreditNote);
+                coreSpecialInvoiceCreditNote = mgr.SaveSpecialInvoiceCreditNote(coreSpecialInvoiceCreditNote);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.SpecialInvoiceCreditNote, SPWCFServer.SpecialInvoiceCreditNote>(coreSpecialInvoiceCreditNote);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public SpecialInvoiceCreditNote UpdateSpecialInvoiceCreditNote(SpecialInvoiceCreditNote newSpecialInvoiceCreditNote, SpecialInvoiceCreditNote origSpecialInvoiceCreditNote)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+
+                return ObjectExtension.CloneProperties<SP.Core.Domain.SpecialInvoiceCreditNote, SPWCFServer.SpecialInvoiceCreditNote>
+                   (mgr.UpdateSpecialInvoiceCreditNote(ObjectExtension.CloneProperties<SPWCFServer.SpecialInvoiceCreditNote, SP.Core.Domain.SpecialInvoiceCreditNote>(newSpecialInvoiceCreditNote),
+                      ObjectExtension.CloneProperties<SPWCFServer.SpecialInvoiceCreditNote, SP.Core.Domain.SpecialInvoiceCreditNote>(origSpecialInvoiceCreditNote)));
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        #endregion
+
         #region SpecialInvoiceHeader
 
         public List<SpecialInvoiceHeader> GetSpecialHeaders(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)

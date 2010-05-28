@@ -133,6 +133,11 @@ namespace SP.Data.LTS
             return new ProformaInvoiceDao();
         }
 
+        public ISpecialInvoiceCreditNoteDao GetSpecialInvoiceCreditNoteDao()
+        {
+            return new SpecialInvoiceCreditNoteDao();
+        }
+
         public ISpecialInvoiceHeaderDao GetSpecialInvoiceHeaderDao()
         {
             return new SpecialInvoiceHeaderDao();
