@@ -3749,6 +3749,22 @@ namespace SPWCFServer
     }
 
     [DataContract]
+    public class SpecialInvoiceCreditNoteDetails
+    {
+        [DataMember]
+        public int SpecialInvoiceID { get; set; }
+
+        [DataMember]
+        public decimal TotalInvoiceAmount { get; set; }
+
+        [DataMember]
+        public decimal TotalAmountCredited { get; set; }
+
+        [DataMember]
+        public decimal Balance { get; set; }
+    }
+
+    [DataContract]
     public class StandardVatRate
     {
         private int _ID;

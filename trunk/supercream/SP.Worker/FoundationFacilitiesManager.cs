@@ -1408,6 +1408,52 @@ namespace SP.Worker
             return specialInvoiceCreditNoteDao.Update(newSpecialInvoiceCreditNote, origSpecialInvoiceCreditNote);
         }
 
+        public List<SpecialInvoiceCreditNoteDetails> SearchSpecialInvoiceCreditNotes(string specialInvoiceNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ISpecialInvoiceCreditNoteDao creditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
+            return creditNoteDao.SearchSpecialInvoiceCreditNotes(specialInvoiceNo, invoiceNo, customerName, dateFrom, dateTo);
+        }
+
+        public List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int specialInvoiceId)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ISpecialInvoiceCreditNoteDao creditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
+            return creditNoteDao.GetSpecialInvoiceCreditNotesByInvoiceId(specialInvoiceId);
+        }
+
+        public string GenerateSpecialInvoiceCreditNo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int orderID, decimal vatRate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public decimal GetSpecialInvoiceOustandingBalance(int specialInvoiceId, int creditNote, decimal vatRate)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            ISpecialInvoiceCreditNoteDao creditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
+            return creditNoteDao.GetSpecialInvoiceOustandingBalance(specialInvoiceId, creditNote, vatRate);
+        }
+
+        public bool SpecialInvoiceCreditNoteExistsByOrderId(int orderId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ReferenceExists(string referenceNo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public SpecialInvoiceCreditNote SpecialInvoiceGetByReferenceId(string reference)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion 
 
         #region SpecialInvoiceHeader
@@ -1765,6 +1811,6 @@ namespace SP.Worker
             return Convert.ToDecimal(vatCode.PercentageValue);
         }
 
-        #endregion
+        #endregion        
     }
 }

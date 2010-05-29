@@ -14,5 +14,19 @@ namespace SP.Core.DataInterfaces
 {
    public interface ISpecialInvoiceCreditNoteDao : IDao<SpecialInvoiceCreditNote, int>
    {
+       List<SpecialInvoiceCreditNoteDetails> SearchSpecialInvoiceCreditNotes(
+           string orderNo, string invoiceNo,
+           string customerName,
+           DateTime dateFrom,
+           DateTime dateTo);
+
+       List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int orderId);
+
+       string GenerateSpecialInvoiceCreditNo();
+       SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int orderID, decimal vatRate);
+       decimal GetSpecialInvoiceOustandingBalance(int orderNo, int creditNote, decimal vatRate);
+       bool SpecialInvoiceCreditNoteExistsByOrderId(int orderId);
+       bool ReferenceExists(string referenceNo);
+       SpecialInvoiceCreditNote SpecialInvoiceGetByReferenceId(string reference);
    }
 }
