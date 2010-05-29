@@ -28,5 +28,49 @@ namespace SP.Data.LTS
       {
          return db.SpecialInvoiceCreditNote.Single<SpecialInvoiceCreditNote>(q => q.ID == id);
       }
-   }
+
+      #region ISpecialInvoiceCreditNoteDao Members
+
+      public List<SpecialInvoiceCreditNoteDetails> SearchSpecialInvoiceCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
+      {
+          throw new NotImplementedException();
+      }
+
+      public List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int specialInvoiceId)
+      {
+          throw new NotImplementedException();
+      }
+
+      public string GenerateSpecialInvoiceCreditNo()
+      {
+          throw new NotImplementedException();
+      }
+    
+      public decimal GetSpecialInvoiceOustandingBalance(int orderNo, int creditNote, decimal vatRate)
+      {
+          throw new NotImplementedException();
+      }
+
+      public bool SpecialInvoiceCreditNoteExistsByOrderId(int orderId)
+      {
+          throw new NotImplementedException();
+      }
+
+      public bool ReferenceExists(string referenceNo)
+      {
+          throw new NotImplementedException();
+      }
+
+      public SpecialInvoiceCreditNote SpecialInvoiceGetByReferenceId(string reference)
+      {
+          throw new NotImplementedException();
+      }
+
+      #endregion     
+
+      public SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int orderID, decimal vatRate)
+      {
+          throw new NotImplementedException();
+      }
+  }
 }
