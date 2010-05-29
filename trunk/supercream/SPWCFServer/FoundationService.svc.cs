@@ -389,7 +389,7 @@ namespace SPWCFServer
 
         #endregion
 
-        #region CreditNote
+        #region ICreditNote
 
         public bool CreditNoteExistsByOrderId(int orderId)
         {
@@ -2556,6 +2556,101 @@ namespace SPWCFServer
                 return ObjectExtension.CloneProperties<SP.Core.Domain.SpecialInvoiceCreditNote, SPWCFServer.SpecialInvoiceCreditNote>
                    (mgr.UpdateSpecialInvoiceCreditNote(ObjectExtension.CloneProperties<SPWCFServer.SpecialInvoiceCreditNote, SP.Core.Domain.SpecialInvoiceCreditNote>(newSpecialInvoiceCreditNote),
                       ObjectExtension.CloneProperties<SPWCFServer.SpecialInvoiceCreditNote, SP.Core.Domain.SpecialInvoiceCreditNote>(origSpecialInvoiceCreditNote)));
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public List<SpecialInvoiceCreditNoteDetails> SearchSpecialInvoiceCreditNotes(string specialInvoiceNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.SpecialInvoiceCreditNoteDetails> creditNoteList = mgr.SearchSpecialInvoiceCreditNotes(specialInvoiceNo, invoiceNo, customerName, dateFrom, dateTo);
+                return ObjectExtension.CloneList<SP.Core.Domain.SpecialInvoiceCreditNoteDetails, SPWCFServer.SpecialInvoiceCreditNoteDetails>(creditNoteList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int specialInvoiceNo)
+        {
+
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.SpecialInvoiceCreditNote> invoiceDetails = mgr.GetSpecialInvoiceCreditNotesByInvoiceId(specialInvoiceNo);
+                return ObjectExtension.CloneList<SP.Core.Domain.SpecialInvoiceCreditNote, SPWCFServer.SpecialInvoiceCreditNote>(invoiceDetails);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public string GenerateSpecialInvoiceCreditNo()
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return mgr.GenerateSpecialInvoiceCreditNo();
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int specialInvoiceNo, decimal vatRate)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return ObjectExtension.CloneProperties<SP.Core.Domain.SpecialInvoiceCreditNoteDetails,
+                    SPWCFServer.SpecialInvoiceCreditNoteDetails>(mgr.GetSpecialInvoiceCreditDetails(specialInvoiceNo, vatRate));
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public decimal GetSpecialInvoiceOustandingBalance(int specialInvoiceNo, int creditNote, decimal vatRate)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return mgr.GetSpecialInvoiceOustandingBalance(specialInvoiceNo, creditNote, vatRate);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public bool SpecialInvoiceCreditNoteExistsByOrderId(int specialInvoiceNo)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return mgr.SpecialInvoiceCreditNoteExistsByOrderId(specialInvoiceNo);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public SpecialInvoiceCreditNote SpecialInvoiceGetByReferenceId(string reference)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return ObjectExtension.CloneProperties<SP.Core.Domain.SpecialInvoiceCreditNote, SPWCFServer.SpecialInvoiceCreditNote>(mgr.SpecialInvoiceGetByReferenceId(reference));
             }
             catch (Exception ex)
             {

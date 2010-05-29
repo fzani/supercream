@@ -1424,12 +1424,16 @@ namespace SP.Worker
 
         public string GenerateSpecialInvoiceCreditNo()
         {
-            throw new NotImplementedException();
+            IDaoFactory factory = new LTSDaoFactory();
+            ISpecialInvoiceCreditNoteDao creditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
+            return creditNoteDao.GenerateSpecialInvoiceCreditNo();
         }
 
-        public SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int orderID, decimal vatRate)
+        public SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int specialInvoiceNo, decimal vatRate)
         {
-            throw new NotImplementedException();
+            IDaoFactory factory = new LTSDaoFactory();
+            ISpecialInvoiceCreditNoteDao creditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
+            return creditNoteDao.GetSpecialInvoiceCreditDetails(specialInvoiceNo, vatRate);
         }
 
         public decimal GetSpecialInvoiceOustandingBalance(int specialInvoiceId, int creditNote, decimal vatRate)
@@ -1439,22 +1443,28 @@ namespace SP.Worker
             return creditNoteDao.GetSpecialInvoiceOustandingBalance(specialInvoiceId, creditNote, vatRate);
         }
 
-        public bool SpecialInvoiceCreditNoteExistsByOrderId(int orderId)
+        public bool SpecialInvoiceCreditNoteExistsByOrderId(int specialInvoiceNo)
         {
-            throw new NotImplementedException();
+            IDaoFactory factory = new LTSDaoFactory();
+            ISpecialInvoiceCreditNoteDao creditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
+            return creditNoteDao.SpecialInvoiceCreditNoteExistsByOrderId(specialInvoiceNo);
         }
 
         public bool ReferenceExists(string referenceNo)
         {
-            throw new NotImplementedException();
+            IDaoFactory factory = new LTSDaoFactory();
+            ISpecialInvoiceCreditNoteDao creditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
+            return creditNoteDao.ReferenceExists(referenceNo);
         }
 
         public SpecialInvoiceCreditNote SpecialInvoiceGetByReferenceId(string reference)
         {
-            throw new NotImplementedException();
+            IDaoFactory factory = new LTSDaoFactory();
+            ISpecialInvoiceCreditNoteDao creditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
+            return creditNoteDao.SpecialInvoiceGetByReferenceId(reference);
         }
 
-        #endregion 
+        #endregion
 
         #region SpecialInvoiceHeader
         public List<SpecialInvoiceHeader> GetSpecialHeaders(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
@@ -1811,6 +1821,6 @@ namespace SP.Worker
             return Convert.ToDecimal(vatCode.PercentageValue);
         }
 
-        #endregion        
+        #endregion
     }
 }

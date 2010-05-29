@@ -108,9 +108,9 @@ namespace SP.Core.ManagerInterfaces
         OrderCreditNoteLine UpdateOrderCreditNoteLine(OrderCreditNoteLine newOrderCreditNoteLine, OrderCreditNoteLine origOrderCreditNoteLine);
         bool CheckIfCreditNoteLineExists(int creditNoteid, int orderLineId);
 
-        #endregion 
+        #endregion
 
-        #region OrderHeader     
+        #region OrderHeader
 
         OrderHeader CreateInvoice(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
         OrderHeader CreateInvoiceProforma(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
@@ -212,7 +212,7 @@ namespace SP.Core.ManagerInterfaces
         List<StandardVatRate> GetAllStandardVatRates();
         StandardVatRate SaveStandardVatRate(StandardVatRate standardvatrate);
         StandardVatRate UpdateStandardVatRate(StandardVatRate newStandardVatRate, StandardVatRate origStandardVatRate);
-        #endregion 
+        #endregion
 
         #region Vat Codes
         void DeleteVatCode(SP.Core.Domain.VatCode cde);
@@ -245,7 +245,7 @@ namespace SP.Core.ManagerInterfaces
         bool SpecialInvoiceCreditNoteExistsByOrderId(int orderId);
         bool ReferenceExists(string referenceNo);
         SpecialInvoiceCreditNote SpecialInvoiceGetByReferenceId(string reference);
-        #endregion 
+        #endregion
 
         #region SpecialInvoiceHeader
         void DeleteSpecialInvoiceHeader(SpecialInvoiceHeader specialinvoiceheader);
