@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SPWCFServer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SPWCFServer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:50646/FoundationService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Linq" />
+  <xs:complexType name="VatCode">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="PercentageValue" type="xs:float" />
+      <xs:element minOccurs="0" name="VatExemptible" type="xs:boolean" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Data.Linq" minOccurs="0" name="Version" nillable="true" type="q1:Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VatCode" nillable="true" type="tns:VatCode" />
   <xs:complexType name="Van">
     <xs:sequence>
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
@@ -9,6 +20,34 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Van" nillable="true" type="tns:Van" />
+  <xs:complexType name="ArrayOfVan">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Van" nillable="true" type="tns:Van" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVan" nillable="true" type="tns:ArrayOfVan" />
+  <xs:complexType name="SpecialInvoiceCreditNoteDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Balance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SpecialInvoiceID" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalAmountCredited" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalInvoiceAmount" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SpecialInvoiceCreditNoteDetails" nillable="true" type="tns:SpecialInvoiceCreditNoteDetails" />
+  <xs:complexType name="SpecialInvoiceCreditNote">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreditAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DueDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Reason" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Reference" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SpecialInvoiceID" type="xs:int" />
+      <xs:element minOccurs="0" name="VatExempt" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SpecialInvoiceCreditNote" nillable="true" type="tns:SpecialInvoiceCreditNote" />
   <xs:complexType name="ArrayOfSpecialInvoiceHeader">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="SpecialInvoiceHeader" nillable="true" type="tns:SpecialInvoiceHeader" />
@@ -231,29 +270,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfTerms" nillable="true" type="tns:ArrayOfTerms" />
-  <xs:complexType name="VatCode">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="PercentageValue" type="xs:float" />
-      <xs:element minOccurs="0" name="VatExemptible" type="xs:boolean" />
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Data.Linq" minOccurs="0" name="Version" nillable="true" type="q1:Binary" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="VatCode" nillable="true" type="tns:VatCode" />
   <xs:complexType name="ArrayOfVatCode">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="VatCode" nillable="true" type="tns:VatCode" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfVatCode" nillable="true" type="tns:ArrayOfVatCode" />
-  <xs:complexType name="ArrayOfVan">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Van" nillable="true" type="tns:Van" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfVan" nillable="true" type="tns:ArrayOfVan" />
   <xs:complexType name="ArrayOfVanInvoiceCount">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="VanInvoiceCount" nillable="true" type="tns:VanInvoiceCount" />
@@ -316,25 +338,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfProduct" nillable="true" type="tns:ArrayOfProduct" />
-  <xs:complexType name="SpecialInvoiceCreditNote">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CreditAmount" type="xs:decimal" />
-      <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="DueDate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="Reason" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Reference" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="SpecialInvoiceID" type="xs:int" />
-      <xs:element minOccurs="0" name="VatExempt" type="xs:boolean" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="SpecialInvoiceCreditNote" nillable="true" type="tns:SpecialInvoiceCreditNote" />
   <xs:complexType name="ArrayOfSpecialInvoiceCreditNote">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="SpecialInvoiceCreditNote" nillable="true" type="tns:SpecialInvoiceCreditNote" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfSpecialInvoiceCreditNote" nillable="true" type="tns:ArrayOfSpecialInvoiceCreditNote" />
+  <xs:complexType name="ArrayOfSpecialInvoiceCreditNoteDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SpecialInvoiceCreditNoteDetails" nillable="true" type="tns:SpecialInvoiceCreditNoteDetails" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSpecialInvoiceCreditNoteDetails" nillable="true" type="tns:ArrayOfSpecialInvoiceCreditNoteDetails" />
   <xs:complexType name="OrderCreditNoteLine">
     <xs:sequence>
       <xs:element minOccurs="0" name="Discount" type="xs:float" />

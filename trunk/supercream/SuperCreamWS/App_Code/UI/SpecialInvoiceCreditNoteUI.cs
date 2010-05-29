@@ -49,47 +49,39 @@ public class SpecialInvoiceCreditNoteUI
         }
     }
 
-    //public List<CreditNoteDetails> SearchCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom,
-    //   DateTime dateTo)
-    //{
-    //    using (var proxy = new WcfFoundationService.FoundationServiceClient())
-    //    {
-    //        return proxy.SearchCreditNotes(orderNo, invoiceNo, customerName, dateFrom,
-    //             dateTo);
-    //    }
-    //}
+    public List<SpecialInvoiceCreditNoteDetails> searchcreditnotes(string specialInvoiceNo, string invoiceno, string customername, DateTime datefrom,
+       DateTime dateto)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.SearchSpecialInvoiceCreditNotes(specialInvoiceNo, invoiceno, customername, datefrom,
+                 dateto);
+        }
+    }
 
-    //public List<SpecialInvoiceCreditNote> GetCreditNotesByOrderId(int orderId)
-    //{
-    //    using (var proxy = new WcfFoundationService.FoundationServiceClient())
-    //    {
-    //        return proxy.GetCreditNotesByOrderId(orderId);
-    //    }
-    //}
+    public List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int specialInvoiceId)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.GetSpecialInvoiceCreditNotesByInvoiceId(specialInvoiceId);
+        }
+    }
 
-    //public List<SpecialInvoiceCreditNote> GetAllCreditNotes()
-    //{
-    //    using (var proxy = new WcfFoundationService.FoundationServiceClient())
-    //    {
-    //        return proxy.GetAllCreditNotes();
-    //    }
-    //}
+    public List<SpecialInvoiceCreditNote> GetAllSpecialInvoiceCreditNotes()
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.GetAllSpecialInvoiceCreditNotes();
+        }
+    }
 
-    //public static bool CreditNoteExists(int orderId)
-    //{
-    //    using (var proxy = new WcfFoundationService.FoundationServiceClient())
-    //    {
-    //        return proxy.CreditNoteExistsByOrderId(orderId);
-    //    }
-    //}
-
-    //public InvoiceCreditNoteDetails GetInvoiceCreditNoteDetails(int orderId)
-    //{
-    //    using (var proxy = new WcfFoundationService.FoundationServiceClient())
-    //    {
-    //        return proxy.GetInvoiceCreditDetails(orderId);
-    //    }
-    //}
+    public static bool SpecialInvoiceCreditNoteExistsByOrderId(int specialInvoiceNo)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.SpecialInvoiceCreditNoteExistsByOrderId(specialInvoiceNo);
+        }
+    }  
 
     public void Delete(SpecialInvoiceCreditNote creditNote)
     {
@@ -99,13 +91,13 @@ public class SpecialInvoiceCreditNoteUI
         }
     }
 
-    //public decimal GetOustandingCreditBalance(int orderNo, int creditNote, decimal vatRate)
-    //{
-    //    using (var proxy = new WcfFoundationService.FoundationServiceClient())
-    //    {
-    //        return proxy.GetOustandingCreditNoteBalance(orderNo, creditNote, vatRate);
-    //    }
-    //}
+    public decimal GetSpecialInvoiceOustandingCreditBalance(int specialInvoiceNo, int creditNote, decimal vatRate)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.GetSpecialInvoiceOustandingBalance(specialInvoiceNo, creditNote, vatRate);
+        }
+    }
 
     #endregion
 }
