@@ -81,6 +81,8 @@
                         <a id="A4" href="~/CreditNote/CreditNote.aspx" runat="server">Credit Note against Order</a>
                           <br />
                         <a id="A8" href="~/CreditNote/OrderCreditNote.aspx" runat="server">Credit Note against Order Line</a>                                        
+                            <br />
+                        <a id="A9" href="~/CreditNote/SpecialInvoiceCreditNote.aspx" runat="server">Special Invoice Credit Note</a>    
                     </li>
                     <li><a href="#"><strong>Pick Lists</strong>
                         <br />
