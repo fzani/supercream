@@ -546,6 +546,38 @@ namespace SPWCFServer
         [ReferencePreservingDataContractFormat]
         SpecialInvoiceCreditNote UpdateSpecialInvoiceCreditNote(SpecialInvoiceCreditNote newSpecialInvoiceCreditNote, SpecialInvoiceCreditNote origSpecialInvoiceCreditNote);
 
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<SpecialInvoiceCreditNoteDetails> SearchSpecialInvoiceCreditNotes(
+         string orderNo, string invoiceNo,
+         string customerName,
+         DateTime dateFrom,
+         DateTime dateTo);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int orderId);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        string GenerateSpecialInvoiceCreditNo();
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int orderID, decimal vatRate);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        decimal GetSpecialInvoiceOustandingBalance(int orderNo, int creditNote, decimal vatRate);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        bool SpecialInvoiceCreditNoteExistsByOrderId(int orderId);
+       
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        SpecialInvoiceCreditNote SpecialInvoiceGetByReferenceId(string reference);
+
         #endregion
 
         #region SpecialInvoiceHeader
