@@ -2605,13 +2605,13 @@ namespace SPWCFServer
             }
         }
 
-        public SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int specialInvoiceNo, decimal vatRate)
+        public SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int specialInvoiceNo)
         {
             try
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
                 return ObjectExtension.CloneProperties<SP.Core.Domain.SpecialInvoiceCreditNoteDetails,
-                    SPWCFServer.SpecialInvoiceCreditNoteDetails>(mgr.GetSpecialInvoiceCreditDetails(specialInvoiceNo, vatRate));
+                    SPWCFServer.SpecialInvoiceCreditNoteDetails>(mgr.GetSpecialInvoiceCreditDetails(specialInvoiceNo));
             }
             catch (Exception ex)
             {
