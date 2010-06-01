@@ -61,7 +61,7 @@ public partial class Controls_NewSpecialInvoiceCreditNote : System.Web.UI.UserCo
 
     private void NewCreditNoteSearch_InvoiceEventHandler(object sender, InvoiceEventEventArgs e)
     {
-        this.SaveSpecialInvoiceCreditNoteControl.OrderID = e.OrderID;
+        this.SaveSpecialInvoiceCreditNoteControl.SpecialInvoiceID = e.OrderID;
 
         this.ChangeState += new EventHandler<EventArgs>(this.SaveCreditNoteState);
         this.ChangeState(this, new EventArgs());

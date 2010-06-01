@@ -20,15 +20,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:50646/FoundationService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:56391/FoundationService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="FoundationService1.xsd" MetadataType="Schema" ID="108ee582-342a-4028-a20e-bc464a403d60" SourceId="1" SourceUrl="http://localhost:50646/FoundationService.svc?xsd=xsd1" />
-    <MetadataFile FileName="FoundationService12.xsd" MetadataType="Schema" ID="dec9c475-c7cf-4362-a7b2-3f07d8c31c09" SourceId="1" SourceUrl="http://localhost:50646/FoundationService.svc?xsd=xsd3" />
-    <MetadataFile FileName="FoundationService13.xsd" MetadataType="Schema" ID="92b3539d-7863-48d9-a688-326febd001fd" SourceId="1" SourceUrl="http://localhost:50646/FoundationService.svc?xsd=xsd2" />
-    <MetadataFile FileName="FoundationService14.xsd" MetadataType="Schema" ID="8090f1fe-2cae-4e93-82f7-09d7334e03b7" SourceId="1" SourceUrl="http://localhost:50646/FoundationService.svc?xsd=xsd0" />
-    <MetadataFile FileName="FoundationService1.disco" MetadataType="Disco" ID="89522351-3aa8-4454-b254-28151124de1b" SourceId="1" SourceUrl="http://localhost:50646/FoundationService.svc?disco" />
-    <MetadataFile FileName="FoundationService1.wsdl" MetadataType="Wsdl" ID="65debf15-467c-4467-90e6-54a3929d527b" SourceId="1" SourceUrl="http://localhost:50646/FoundationService.svc?wsdl" />
+    <MetadataFile FileName="FoundationService.xsd" MetadataType="Schema" ID="290fb4ea-6426-4aa3-a638-f0e0d722f0c6" SourceId="1" SourceUrl="http://localhost:56391/FoundationService.svc?xsd=xsd2" />
+    <MetadataFile FileName="FoundationService2.xsd" MetadataType="Schema" ID="c9734cc7-3bb1-4a9c-9a06-4c5d8b0ca8b3" SourceId="1" SourceUrl="http://localhost:56391/FoundationService.svc?xsd=xsd1" />
+    <MetadataFile FileName="FoundationService3.xsd" MetadataType="Schema" ID="6eb1535c-de4f-4950-a414-c5fbaaadd66d" SourceId="1" SourceUrl="http://localhost:56391/FoundationService.svc?xsd=xsd3" />
+    <MetadataFile FileName="FoundationService.disco" MetadataType="Disco" ID="220901af-df9b-47b5-9032-c83b34b76033" SourceId="1" SourceUrl="http://localhost:56391/FoundationService.svc?disco" />
+    <MetadataFile FileName="FoundationService.wsdl" MetadataType="Wsdl" ID="a1b71a70-e5ae-48e5-a088-7dbee7af28a1" SourceId="1" SourceUrl="http://localhost:56391/FoundationService.svc?wsdl" />
+    <MetadataFile FileName="FoundationService4.xsd" MetadataType="Schema" ID="27ecc8cc-de96-4ef9-8054-977208d2555b" SourceId="1" SourceUrl="http://localhost:56391/FoundationService.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

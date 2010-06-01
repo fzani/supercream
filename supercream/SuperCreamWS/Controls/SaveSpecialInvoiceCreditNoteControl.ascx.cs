@@ -18,7 +18,7 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
 
     #region Private Properties
 
-    private InvoiceCreditNoteDetails invoiceCreditNoteDetails;
+    private SpecialInvoiceCreditNoteDetails invoiceCreditNoteDetails;
 
     #endregion
 
@@ -38,16 +38,16 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
 
     }
 
-    public int? OrderID
+    public int? SpecialInvoiceID
     {
         get
         {
-            return ViewState["OrderID"] as int?;
+            return ViewState["SpecialInvoiceID"] as int?;
         }
 
         set
         {
-            ViewState["OrderID"] = value;
+            ViewState["SpecialInvoiceID"] = value;
             this.SetCreditNoteForOrderSaveStatuses();
             this.IsNewCreditNote = true;
             this.DeleteButton.Visible = false;
@@ -80,8 +80,7 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
 
     private void SetCreditNoteForOrderSaveStatuses()
     {
-        CreditNoteUI creditNoteUI = new CreditNoteUI();
-        invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(OrderID.Value);
+        this.invoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteDetails(SpecialInvoiceID.Value);
 
         decimal totalInvoiceAmount = invoiceCreditNoteDetails.TotalInvoiceAmount;
         decimal invoiceAmountCredited = invoiceCreditNoteDetails.TotalAmountCredited;
@@ -97,10 +96,10 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
 
     private void SetCreditNoteForCreditNoteSaveStatuses()
     {
-        CreditNoteUI creditNoteUI = new CreditNoteUI();
-        CreditNote creditNote = creditNoteUI.GetCreditNote(CreditNoteID.Value);
-        this.OrderID = creditNote.OrderID;
-        invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(creditNote.OrderID);
+        SpecialInvoiceCreditNoteUI creditNoteUI = new SpecialInvoiceCreditNoteUI();
+        SpecialInvoiceCreditNote creditNote = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNote(CreditNoteID.Value);
+        this.SpecialInvoiceID = creditNote.SpecialInvoiceID;
+        this.invoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteDetails(creditNote.SpecialInvoiceID);
 
         this.creditNoteLabel.Text = creditNote.Reference;
 
@@ -127,14 +126,14 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
     {
         try
         {
-            OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
-            OrderHeader orderHeader = orderHeaderUI.GetById(this.OrderID.Value);
+            SpecialInvoiceHeaderUI specialInvoiceHeaderUI = new SpecialInvoiceHeaderUI();
+            SpecialInvoiceHeader specialInvoiceHeader = specialInvoiceHeaderUI.GetById(this.SpecialInvoiceID.Value);
 
-            CreditNoteUI creditNoteUI = new CreditNoteUI();
-            invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(this.OrderID.Value);
+            SpecialInvoiceCreditNoteUI creditNoteUI = new SpecialInvoiceCreditNoteUI();
+            this.invoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteDetails(this.SpecialInvoiceID.Value);
 
             VatCodeUI vatCodeUI = new VatCodeUI();
-            VatCode vatCode = vatCodeUI.GetByID(orderHeader.VatCodeID);
+            VatCode vatCode = vatCodeUI.GetByID(specialInvoiceHeader.VatCodeID);
 
             var currentCreditAmount = String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ? new decimal(0.0) :
                 String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ? new decimal(0.0) : Util.ConvertStringToDecimal(this.AmountToCreditTextBox.Text);
@@ -144,12 +143,12 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
             if (this.IsNewCreditNote.Value)
             {
                 oustandingCreditedAmount =
-                    creditNoteUI.GetOustandingCreditBalance(this.OrderID.Value, -1, new decimal(vatCode.PercentageValue));
+                    SpecialInvoiceCreditNoteUI.GetSpecialInvoiceOustandingCreditBalance(this.SpecialInvoiceID.Value, -1, new decimal(vatCode.PercentageValue));
             }
             else
             {
                 oustandingCreditedAmount =
-                    creditNoteUI.GetOustandingCreditBalance(this.OrderID.Value, this.CreditNoteID.Value, new decimal(vatCode.PercentageValue));
+                    SpecialInvoiceCreditNoteUI.GetSpecialInvoiceOustandingCreditBalance(this.SpecialInvoiceID.Value, this.CreditNoteID.Value, new decimal(vatCode.PercentageValue));
             }
 
             // Check that we are not crediting too much
@@ -159,14 +158,13 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
             if (totalAmountThatWillBeCredited < 0)
                 throw new ApplicationException("Cannot credit for more than the invoicable amount");
 
-            // Persist credit note details
-            CreditNoteUI ui = new CreditNoteUI();
+            // Persist credit note details           
             if (this.IsNewCreditNote.Value)
             {
-                ui.SaveCreditNote(new CreditNote
+                SpecialInvoiceCreditNoteUI.SaveCreditNote(new SpecialInvoiceCreditNote
                 {
                     ID = -1,
-                    OrderID = this.OrderID.Value,
+                    SpecialInvoiceID = this.SpecialInvoiceID.Value,
                     CreditAmount = currentCreditAmount,
                     DateCreated = DateTime.Now,
                     Reason = this.ReasonTextBox.Text,
@@ -176,11 +174,11 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
             }
             else
             {
-                CreditNote creditNote = ui.GetCreditNote(CreditNoteID.Value);
-                ui.UpdateCreditNotes(new CreditNote
+                SpecialInvoiceCreditNote creditNote = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNote(CreditNoteID.Value);
+                SpecialInvoiceCreditNoteUI.UpdateCreditNotes(new SpecialInvoiceCreditNote
                 {
                     ID = CreditNoteID.Value,
-                    OrderID = creditNote.OrderID,
+                    SpecialInvoiceID = creditNote.SpecialInvoiceID,
                     CreditAmount = currentCreditAmount,
                     DateCreated = DateTime.Now,
                     Reason = this.ReasonTextBox.Text,
@@ -210,7 +208,7 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
     {
         OrderNotesStatusUI ui = new OrderNotesStatusUI();
 
-        var orderNoteStatus = ui.GetOrderNotesStatusByOrderID(this.OrderID.Value);
+        var orderNoteStatus = ui.GetOrderNotesStatusByOrderID(this.SpecialInvoiceID.Value);
 
         SP.Util.UrlParameterPasser p = new UrlParameterPasser("~/CreditNote/CreditNoteReport.aspx");
         p["creditNoteId"] = this.CreditNoteID.Value.ToString();
@@ -222,9 +220,8 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
     {
         if (CreditNoteID != null)
         {
-            CreditNoteUI ui = new CreditNoteUI();
-            CreditNote creditNote = ui.GetCreditNote(this.CreditNoteID.Value);
-            ui.Delete(creditNote);
+            var creditNote = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNote(this.CreditNoteID.Value);
+            SpecialInvoiceCreditNoteUI.Delete(creditNote);
 
             if (this.CompletedEventHandler != null)
             {

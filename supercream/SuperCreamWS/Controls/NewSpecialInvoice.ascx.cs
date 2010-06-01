@@ -15,7 +15,7 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
 
     #endregion
 
-    #region public Event Handlers
+    #region Public Event Handlers
 
     public event CancelEventHandler CancelHandler;
     public event CompletedEventHandler CompletedEventHandler;

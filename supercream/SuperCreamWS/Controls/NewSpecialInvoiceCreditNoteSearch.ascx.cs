@@ -48,9 +48,9 @@ public partial class Controls_NewSpecialInvoiceCreditNoteSearch : System.Web.UI.
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            OrderHeader orderHeader = e.Row.DataItem as OrderHeader;
+            SpecialInvoiceHeader specialInvoiceHeader = e.Row.DataItem as SpecialInvoiceHeader;
 
-            int customerID = orderHeader.CustomerID;
+            int customerID = specialInvoiceHeader.CustomerID;
 
             CustomerUI ui = new CustomerUI();
             Customer customer = ui.GetByID(customerID);
@@ -78,23 +78,22 @@ public partial class Controls_NewSpecialInvoiceCreditNoteSearch : System.Web.UI.
     #region Object Data Source Events
 
     protected void InvoiceObjectDataSource_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
-    {
-        e.InputParameters[0] = OrderNoSearchTextBox.Text;
-        e.InputParameters[1] = InvoiceNoSearchTextBox.Text;
+    {      
+        e.InputParameters[0] = InvoiceNoSearchTextBox.Text;
 
-        e.InputParameters[2] = CustomerNameSearchTextBox.Text;
+        e.InputParameters[1] = CustomerNameSearchTextBox.Text;
         if (!String.IsNullOrEmpty(DateFromTextBox.Text))
-            e.InputParameters[3] = Convert.ToDateTime(DateFromTextBox.Text);
+            e.InputParameters[2] = Convert.ToDateTime(DateFromTextBox.Text);
+        else
+            e.InputParameters[2] = String.Empty;
+
+        if (!String.IsNullOrEmpty(DateToTextBox.Text))
+            e.InputParameters[3] = Convert.ToDateTime(DateToTextBox.Text);
         else
             e.InputParameters[3] = String.Empty;
 
-        if (!String.IsNullOrEmpty(DateToTextBox.Text))
-            e.InputParameters[4] = Convert.ToDateTime(DateToTextBox.Text);
-        else
-            e.InputParameters[4] = String.Empty;
-
-        e.InputParameters[5] = (short)SP.Core.Enums.OrderStatus.Invoice;
-        e.InputParameters[6] = (short)SP.Core.Enums.OrderStatus.InvoicePrinted;
+        e.InputParameters[4] = (short)SP.Core.Enums.OrderStatus.Invoice;
+        e.InputParameters[5] = (short)SP.Core.Enums.OrderStatus.InvoicePrinted;
 
     }
 

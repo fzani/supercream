@@ -25,7 +25,7 @@ public class SpecialInvoiceCreditNoteUI
 
     #region Special Credit Note Related Functions
 
-    public static SpecialInvoiceCreditNote GetCreditNote(int id)
+    public static SpecialInvoiceCreditNote GetSpecialInvoiceCreditNote(int id)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
@@ -33,14 +33,15 @@ public class SpecialInvoiceCreditNoteUI
         }
     }
 
-    public SpecialInvoiceCreditNote SaveCreditNote(SpecialInvoiceCreditNote specialInvoiceCreditNote)
+    public static SpecialInvoiceCreditNote SaveCreditNote(SpecialInvoiceCreditNote specialInvoiceCreditNote)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
             return proxy.SaveSpecialInvoiceCreditNote(specialInvoiceCreditNote);
         }
     }
-    public SpecialInvoiceCreditNote UpdateCreditNotes(SpecialInvoiceCreditNote newCreditNote)
+
+    public static SpecialInvoiceCreditNote UpdateCreditNotes(SpecialInvoiceCreditNote newCreditNote)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
@@ -49,7 +50,7 @@ public class SpecialInvoiceCreditNoteUI
         }
     }
 
-    public List<SpecialInvoiceCreditNoteDetails> searchcreditnotes(string specialInvoiceNo, string invoiceno, string customername, DateTime datefrom,
+    public static List<SpecialInvoiceCreditNoteDetails> SearchCreditNotes(string specialInvoiceNo, string invoiceno, string customername, DateTime datefrom,
        DateTime dateto)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
@@ -59,7 +60,7 @@ public class SpecialInvoiceCreditNoteUI
         }
     }
 
-    public List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int specialInvoiceId)
+    public static List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int specialInvoiceId)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
@@ -67,7 +68,7 @@ public class SpecialInvoiceCreditNoteUI
         }
     }
 
-    public List<SpecialInvoiceCreditNote> GetAllSpecialInvoiceCreditNotes()
+    public static List<SpecialInvoiceCreditNote> GetAllSpecialInvoiceCreditNotes()
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
@@ -83,7 +84,7 @@ public class SpecialInvoiceCreditNoteUI
         }
     }  
 
-    public void Delete(SpecialInvoiceCreditNote creditNote)
+    public static void Delete(SpecialInvoiceCreditNote creditNote)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
@@ -91,7 +92,15 @@ public class SpecialInvoiceCreditNoteUI
         }
     }
 
-    public decimal GetSpecialInvoiceOustandingCreditBalance(int specialInvoiceNo, int creditNote, decimal vatRate)
+    public static SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditNoteDetails(int specialInvoiceId)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.GetSpecialInvoiceCreditDetails(specialInvoiceId);
+        }
+    }
+
+    public static decimal GetSpecialInvoiceOustandingCreditBalance(int specialInvoiceNo, int creditNote, decimal vatRate)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
