@@ -564,7 +564,7 @@ namespace SPWCFServer
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
-        SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int orderID, decimal vatRate);
+        SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int orderID);
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]

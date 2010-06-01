@@ -22,11 +22,11 @@ namespace SP.Core.DataInterfaces
 
        List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int orderId);
 
-       string GenerateSpecialInvoiceCreditNo();
-       SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int orderID, decimal vatRate);
+       string GenerateSpecialInvoiceCreditNo();       
        decimal GetSpecialInvoiceOustandingBalance(int orderNo, int creditNote, decimal vatRate);
        bool SpecialInvoiceCreditNoteExistsByOrderId(int orderId);
        bool ReferenceExists(string referenceNo);
        SpecialInvoiceCreditNote SpecialInvoiceGetByReferenceId(string reference);
+       SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int specialInvoiceId, decimal vatRate);
    }
 }
