@@ -29,19 +29,18 @@ public partial class Controls_CreditNoteSearch : System.Web.UI.UserControl
     #region Object Data Source Events
 
     protected void ObjectDataSource1_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
-    {
-        e.InputParameters[0] = OrderNoSearchTextBox.Text;
-        e.InputParameters[1] = InvoiceNoSearchTextBox.Text;
-        e.InputParameters[2] = CustomerNameSearchTextBox.Text;
+    {       
+        e.InputParameters[0] = InvoiceNoSearchTextBox.Text;
+        e.InputParameters[1] = CustomerNameSearchTextBox.Text;
         if (!String.IsNullOrEmpty(DateFromTextBox.Text))
-            e.InputParameters[3] = Convert.ToDateTime(DateFromTextBox.Text);
+            e.InputParameters[2] = Convert.ToDateTime(DateFromTextBox.Text);
         else
-            e.InputParameters[3] = String.Empty;
+            e.InputParameters[2] = String.Empty;
 
         if (!String.IsNullOrEmpty(DateToTextBox.Text))
-            e.InputParameters[4] = Convert.ToDateTime(DateToTextBox.Text);
+            e.InputParameters[3] = Convert.ToDateTime(DateToTextBox.Text);
         else
-            e.InputParameters[4] = String.Empty;       
+            e.InputParameters[3] = String.Empty;       
     }
 
     #endregion

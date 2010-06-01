@@ -33,7 +33,63 @@ namespace SP.Data.LTS
 
         public List<SpecialInvoiceCreditNoteDetails> SearchSpecialInvoiceCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
         {
-            throw new NotImplementedException();
+            var creditNotes = (from o in db.SpecialInvoiceHeader
+                               // join ons in db.OrderNotesStatus on o.ID equals ons.OrderID
+                               join cr in db.SpecialInvoiceCreditNote on o.ID equals cr.SpecialInvoiceID
+                               join c in db.Customer on o.CustomerID equals c.ID
+                               select new SpecialInvoiceCreditNoteDetails
+                               {                                   
+                                   CreditNoteID = cr.ID,
+                                   SpecialInvoiceID = o.ID,
+                                   OrderNo = o.AlphaID,
+                                   InvoiceNo = o.InvoiceNo,
+                                   CustomerName = c.Name,
+                                   DateCreated = cr.DateCreated,
+                                   Reference = cr.Reference
+                               });
+
+            return FilterCreditNotes(creditNotes,
+                    orderNo,
+                    invoiceNo,
+                    customerName,
+                    dateFrom,
+                    dateTo).OrderByDescending(q => q.DateCreated).ToList<SpecialInvoiceCreditNoteDetails>();
+        }
+
+        private static IQueryable<SpecialInvoiceCreditNoteDetails> FilterCreditNotes(IQueryable<SpecialInvoiceCreditNoteDetails> creditNotes,
+           string orderNo,
+           string invoiceNo,
+           string customerName,
+           DateTime dateFrom,
+           DateTime dateTo)
+        {
+            IQueryable<SpecialInvoiceCreditNoteDetails> filteredCreditNotes = creditNotes;
+            if (!String.IsNullOrEmpty(orderNo))
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.OrderNo.Contains(orderNo));
+            }
+
+            if (!String.IsNullOrEmpty(invoiceNo))
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.InvoiceNo.Contains(invoiceNo));
+            }
+
+            if (!String.IsNullOrEmpty(customerName))
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.CustomerName.Contains(customerName));
+            }
+
+            if (dateFrom != DateTime.MinValue)
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.DateCreated >= dateFrom);
+            }
+
+            if (dateTo != DateTime.MinValue)
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.DateCreated <= dateTo);
+            }
+
+            return filteredCreditNotes;
         }
 
         public List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int specialInvoiceId)
@@ -72,14 +128,14 @@ namespace SP.Data.LTS
                         creditTotal = Math.Round(((from cr in db.SpecialInvoiceCreditNote
                                                    where ((cr.SpecialInvoiceID == specialInvoiceNo) && (cr.ID != creditNote))
                                                    select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * vatRate))).
-                                                     Sum(),2);
+                                                     Sum(), 2);
                     }
                     else
                     {
                         creditTotal = Math.Round((from cr in db.SpecialInvoiceCreditNote
                                                   where (cr.SpecialInvoiceID == specialInvoiceNo)
                                                   select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * vatRate)).Sum
-                                                     (),2);
+                                                     (), 2);
                     }
                 }
             }
@@ -101,7 +157,7 @@ namespace SP.Data.LTS
             return db.SpecialInvoiceCreditNote.Where<SpecialInvoiceCreditNote>(q => q.Reference == reference).SingleOrDefault<SpecialInvoiceCreditNote>();
         }
 
-        public SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int specialInvoiceId, decimal vatRate)
+        public SpecialInvoiceCreditNoteBalance GetSpecialInvoiceCreditBalance(int specialInvoiceId, decimal vatRate)
         {
             if (vatRate != 0)
             {
@@ -115,7 +171,7 @@ namespace SP.Data.LTS
                                     select ol.ID).Count();
             if (invoiceLineCount == 0)
             {
-                return new SpecialInvoiceCreditNoteDetails
+                return new SpecialInvoiceCreditNoteBalance
                 {
                     SpecialInvoiceID = specialInvoiceId,
                     TotalInvoiceAmount = new decimal(0.0),
@@ -166,7 +222,7 @@ namespace SP.Data.LTS
             //                               select ((ol.VatExempt) ? ol.Price * ol.NoOfUnits : ol.Price * ol.NoOfUnits * vatRate)).Sum(), 2);
             //}
 
-            return new SpecialInvoiceCreditNoteDetails
+            return new SpecialInvoiceCreditNoteBalance
             {
                 SpecialInvoiceID = specialInvoiceId,
                 TotalInvoiceAmount = invoiceTotal,

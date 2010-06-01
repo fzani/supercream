@@ -564,7 +564,7 @@ namespace SPWCFServer
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
-        SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int orderID);
+        SpecialInvoiceCreditNoteBalance GetSpecialInvoiceCreditBalance(int specialInvoiceId);
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
@@ -3781,7 +3781,7 @@ namespace SPWCFServer
     }
 
     [DataContract]
-    public class SpecialInvoiceCreditNoteDetails
+    public class SpecialInvoiceCreditNoteBalance
     {
         [DataMember]
         public int SpecialInvoiceID { get; set; }
@@ -3794,6 +3794,129 @@ namespace SPWCFServer
 
         [DataMember]
         public decimal Balance { get; set; }
+    }
+
+    [DataContract]
+    public class SpecialInvoiceCreditNoteDetails
+    {
+        private int _CreditNoteID;
+        private int _SpecialInvoiceID;
+        private string _OrderNo;
+        private string _InvoiceNo;
+        private DateTime _DateCreated;
+        private string _CustomerName;
+        private string _Reference;
+        private DateTime _DueDate;
+
+        [DataMember]
+        public int CreditNoteID
+        {
+            get
+            {
+                return _CreditNoteID;
+            }
+
+            set
+            {
+                _CreditNoteID = value;
+            }
+        }
+
+        [DataMember]
+        public int SpecialInvoiceID
+        {
+            get
+            {
+                return _SpecialInvoiceID;
+            }
+            set
+            {
+                _SpecialInvoiceID = value;
+            }
+        }
+
+        [DataMember]
+        public string OrderNo
+        {
+            get
+            {
+                return _OrderNo;
+            }
+
+            set
+            {
+                _OrderNo = value;
+            }
+        }
+
+        [DataMember]
+        public string InvoiceNo
+        {
+            get
+            {
+                return _InvoiceNo;
+            }
+            set
+            {
+                _InvoiceNo = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime DateCreated
+        {
+            get
+            {
+                return _DateCreated;
+            }
+            set
+            {
+                _DateCreated = value;
+            }
+        }
+
+        [DataMember]
+        public string CustomerName
+        {
+            get
+            {
+                return
+                    _CustomerName;
+            }
+
+            set
+            {
+                _CustomerName = value;
+            }
+        }
+
+        [DataMember]
+        public string Reference
+        {
+            get
+            {
+                return _Reference;
+            }
+
+            set
+            {
+                _Reference = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime DueDate
+        {
+            get
+            {
+                return _DueDate;
+            }
+
+            set
+            {
+                _DueDate = value;
+            }
+        }
     }
 
     [DataContract]

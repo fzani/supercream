@@ -1,7 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SpecialInvoiceCreditNoteSearch.ascx.cs"
     Inherits="Controls_CreditNoteSearch" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
-<div class="FormInput">Invoice
+<div class="FormInput">
+    Invoice
     <fieldset id="Fieldset3">
         <asp:Panel ID="CreditNoteSearchCriteriaPanel" DefaultButton="SearchButton" runat="server">
             <legend>e
@@ -18,14 +19,6 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="InvoiceNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label ID="OrderNoLabel" Text="Order No" runat="server"></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="OrderNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -144,9 +137,8 @@
                 </Columns>
             </asp:GridView>
             <asp:ObjectDataSource ID="CreditNotesObjectDataSource" runat="server" OnSelecting="ObjectDataSource1_Selecting"
-                SelectMethod="SearchCreditNotes" TypeName="CreditNoteUI">
-                <SelectParameters>
-                    <asp:Parameter Name="orderNo" Type="String" />
+                SelectMethod="SearchCreditNotes" TypeName="SpecialInvoiceCreditNoteUI">
+                <SelectParameters>                    
                     <asp:Parameter Name="invoiceNo" Type="String" />
                     <asp:Parameter Name="customerName" Type="String" />
                     <asp:Parameter Name="dateFrom" Type="DateTime" />
