@@ -240,11 +240,11 @@ namespace SP.Core.ManagerInterfaces
         List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int orderId);
 
         string GenerateSpecialInvoiceCreditNo();
-        SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int specialInvoiceId);
+        SpecialInvoiceCreditNoteBalance GetSpecialInvoiceCreditBalance(int specialInvoiceId);
         decimal GetSpecialInvoiceOustandingBalance(int orderNo, int creditNote, decimal vatRate);
         bool SpecialInvoiceCreditNoteExistsByOrderId(int orderId);
         bool ReferenceExists(string referenceNo);
-        SpecialInvoiceCreditNote SpecialInvoiceGetByReferenceId(string reference);
+        SpecialInvoiceCreditNote SpecialInvoieceGetByReferenceId(string reference);
         #endregion
 
         #region SpecialInvoiceHeader

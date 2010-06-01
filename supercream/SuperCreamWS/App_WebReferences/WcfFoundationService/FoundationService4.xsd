@@ -118,17 +118,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetSpecialInvoiceCreditDetails">
+  <xs:element name="GetSpecialInvoiceCreditBalance">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="orderID" type="xs:int" />
+        <xs:element minOccurs="0" name="specialInvoiceId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetSpecialInvoiceCreditDetailsResponse">
+  <xs:element name="GetSpecialInvoiceCreditBalanceResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetSpecialInvoiceCreditDetailsResult" nillable="true" type="q10:SpecialInvoiceCreditNoteDetails" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SPWCFServer" minOccurs="0" name="GetSpecialInvoiceCreditBalanceResult" nillable="true" type="q10:SpecialInvoiceCreditNoteBalance" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -1429,7 +1429,7 @@ namespace SP.Worker
             return creditNoteDao.GenerateSpecialInvoiceCreditNo();
         }
 
-        public SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int specialInvoiceNo)
+        public SpecialInvoiceCreditNoteBalance GetSpecialInvoiceCreditBalance(int specialInvoiceNo)
         {
             IDaoFactory factory = new LTSDaoFactory();
             ISpecialInvoiceCreditNoteDao creditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
@@ -1449,7 +1449,7 @@ namespace SP.Worker
                 vatRatePercentage = Convert.ToDecimal(vatCode.PercentageValue);
             }
 
-            return creditNoteDao.GetSpecialInvoiceCreditDetails(specialInvoiceNo, vatRatePercentage);
+            return creditNoteDao.GetSpecialInvoiceCreditBalance(specialInvoiceNo, vatRatePercentage);
         }
 
         public decimal GetSpecialInvoiceOustandingBalance(int specialInvoiceId, int creditNote, decimal vatRate)
@@ -1473,7 +1473,7 @@ namespace SP.Worker
             return creditNoteDao.ReferenceExists(referenceNo);
         }
 
-        public SpecialInvoiceCreditNote SpecialInvoiceGetByReferenceId(string reference)
+        public SpecialInvoiceCreditNote SpecialInvoieceGetByReferenceId(string reference)       
         {
             IDaoFactory factory = new LTSDaoFactory();
             ISpecialInvoiceCreditNoteDao creditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();

@@ -2604,14 +2604,14 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-
-        public SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int specialInvoiceNo)
+       
+        public SpecialInvoiceCreditNoteBalance GetSpecialInvoiceCreditBalance(int specialInvoiceId)      
         {
             try
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
-                return ObjectExtension.CloneProperties<SP.Core.Domain.SpecialInvoiceCreditNoteDetails,
-                    SPWCFServer.SpecialInvoiceCreditNoteDetails>(mgr.GetSpecialInvoiceCreditDetails(specialInvoiceNo));
+                return ObjectExtension.CloneProperties<SP.Core.Domain.SpecialInvoiceCreditNoteBalance,
+                    SPWCFServer.SpecialInvoiceCreditNoteBalance>(mgr.GetSpecialInvoiceCreditBalance(specialInvoiceId));
             }
             catch (Exception ex)
             {
@@ -2650,7 +2650,7 @@ namespace SPWCFServer
             try
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
-                return ObjectExtension.CloneProperties<SP.Core.Domain.SpecialInvoiceCreditNote, SPWCFServer.SpecialInvoiceCreditNote>(mgr.SpecialInvoiceGetByReferenceId(reference));
+                return ObjectExtension.CloneProperties<SP.Core.Domain.SpecialInvoiceCreditNote, SPWCFServer.SpecialInvoiceCreditNote>(mgr.SpecialInvoieceGetByReferenceId(reference));
             }
             catch (Exception ex)
             {
@@ -3137,7 +3137,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion
+        #endregion            
     }
 }
 

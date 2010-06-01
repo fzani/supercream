@@ -62,11 +62,11 @@
   <wsdl:message name="IFoundationService_GenerateSpecialInvoiceCreditNo_OutputMessage">
     <wsdl:part name="parameters" element="tns:GenerateSpecialInvoiceCreditNoResponse" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_GetSpecialInvoiceCreditDetails_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetSpecialInvoiceCreditDetails" />
+  <wsdl:message name="IFoundationService_GetSpecialInvoiceCreditBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSpecialInvoiceCreditBalance" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_GetSpecialInvoiceCreditDetails_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetSpecialInvoiceCreditDetailsResponse" />
+  <wsdl:message name="IFoundationService_GetSpecialInvoiceCreditBalance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSpecialInvoiceCreditBalanceResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_GetSpecialInvoiceOustandingBalance_InputMessage">
     <wsdl:part name="parameters" element="tns:GetSpecialInvoiceOustandingBalance" />
@@ -1053,9 +1053,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GenerateSpecialInvoiceCreditNo" message="tns:IFoundationService_GenerateSpecialInvoiceCreditNo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GenerateSpecialInvoiceCreditNoResponse" message="tns:IFoundationService_GenerateSpecialInvoiceCreditNo_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetSpecialInvoiceCreditDetails">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetSpecialInvoiceCreditDetails" message="tns:IFoundationService_GetSpecialInvoiceCreditDetails_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetSpecialInvoiceCreditDetailsResponse" message="tns:IFoundationService_GetSpecialInvoiceCreditDetails_OutputMessage" />
+    <wsdl:operation name="GetSpecialInvoiceCreditBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetSpecialInvoiceCreditBalance" message="tns:IFoundationService_GetSpecialInvoiceCreditBalance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetSpecialInvoiceCreditBalanceResponse" message="tns:IFoundationService_GetSpecialInvoiceCreditBalance_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetSpecialInvoiceOustandingBalance">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetSpecialInvoiceOustandingBalance" message="tns:IFoundationService_GetSpecialInvoiceOustandingBalance_InputMessage" />
@@ -1773,8 +1773,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetSpecialInvoiceCreditDetails">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetSpecialInvoiceCreditDetails" style="document" />
+    <wsdl:operation name="GetSpecialInvoiceCreditBalance">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetSpecialInvoiceCreditBalance" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

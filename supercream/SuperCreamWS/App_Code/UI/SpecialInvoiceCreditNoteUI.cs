@@ -50,12 +50,13 @@ public class SpecialInvoiceCreditNoteUI
         }
     }
 
-    public static List<SpecialInvoiceCreditNoteDetails> SearchCreditNotes(string specialInvoiceNo, string invoiceno, string customername, DateTime datefrom,
+    public static List<SpecialInvoiceCreditNoteDetails> SearchCreditNotes(string invoiceno, string customername, DateTime datefrom,
        DateTime dateto)
     {
+        string specialInvoiceNo = String.Empty;
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return proxy.SearchSpecialInvoiceCreditNotes(specialInvoiceNo, invoiceno, customername, datefrom,
+            return proxy.SearchSpecialInvoiceCreditNotes(specialInvoiceNo,invoiceno, customername, datefrom,
                  dateto);
         }
     }
@@ -92,11 +93,11 @@ public class SpecialInvoiceCreditNoteUI
         }
     }
 
-    public static SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditNoteDetails(int specialInvoiceId)
+    public static SpecialInvoiceCreditNoteBalance GetSpecialInvoiceCreditNoteBalance(int specialInvoiceId)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return proxy.GetSpecialInvoiceCreditDetails(specialInvoiceId);
+            return proxy.GetSpecialInvoiceCreditBalance(specialInvoiceId);
         }
     }
 

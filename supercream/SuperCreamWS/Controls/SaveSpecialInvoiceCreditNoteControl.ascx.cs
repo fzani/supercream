@@ -18,7 +18,7 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
 
     #region Private Properties
 
-    private SpecialInvoiceCreditNoteDetails invoiceCreditNoteDetails;
+    private SpecialInvoiceCreditNoteBalance invoiceCreditNoteDetails;
 
     #endregion
 
@@ -80,7 +80,7 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
 
     private void SetCreditNoteForOrderSaveStatuses()
     {
-        this.invoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteDetails(SpecialInvoiceID.Value);
+        this.invoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteBalance(SpecialInvoiceID.Value);
 
         decimal totalInvoiceAmount = invoiceCreditNoteDetails.TotalInvoiceAmount;
         decimal invoiceAmountCredited = invoiceCreditNoteDetails.TotalAmountCredited;
@@ -99,7 +99,7 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
         SpecialInvoiceCreditNoteUI creditNoteUI = new SpecialInvoiceCreditNoteUI();
         SpecialInvoiceCreditNote creditNote = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNote(CreditNoteID.Value);
         this.SpecialInvoiceID = creditNote.SpecialInvoiceID;
-        this.invoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteDetails(creditNote.SpecialInvoiceID);
+        this.invoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteBalance(creditNote.SpecialInvoiceID);
 
         this.creditNoteLabel.Text = creditNote.Reference;
 
@@ -130,7 +130,7 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
             SpecialInvoiceHeader specialInvoiceHeader = specialInvoiceHeaderUI.GetById(this.SpecialInvoiceID.Value);
 
             SpecialInvoiceCreditNoteUI creditNoteUI = new SpecialInvoiceCreditNoteUI();
-            this.invoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteDetails(this.SpecialInvoiceID.Value);
+            this.invoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteBalance(this.SpecialInvoiceID.Value);
 
             VatCodeUI vatCodeUI = new VatCodeUI();
             VatCode vatCode = vatCodeUI.GetByID(specialInvoiceHeader.VatCodeID);

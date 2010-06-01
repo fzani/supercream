@@ -12,21 +12,21 @@ using SP.Core.Domain;
 
 namespace SP.Core.DataInterfaces
 {
-   public interface ISpecialInvoiceCreditNoteDao : IDao<SpecialInvoiceCreditNote, int>
-   {
-       List<SpecialInvoiceCreditNoteDetails> SearchSpecialInvoiceCreditNotes(
-           string orderNo, string invoiceNo,
-           string customerName,
-           DateTime dateFrom,
-           DateTime dateTo);
+    public interface ISpecialInvoiceCreditNoteDao : IDao<SpecialInvoiceCreditNote, int>
+    {
+        List<SpecialInvoiceCreditNoteDetails> SearchSpecialInvoiceCreditNotes(
+            string orderNo, string invoiceNo,
+            string customerName,
+            DateTime dateFrom,
+            DateTime dateTo);
 
-       List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int orderId);
+        List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int orderId);
 
-       string GenerateSpecialInvoiceCreditNo();       
-       decimal GetSpecialInvoiceOustandingBalance(int orderNo, int creditNote, decimal vatRate);
-       bool SpecialInvoiceCreditNoteExistsByOrderId(int orderId);
-       bool ReferenceExists(string referenceNo);
-       SpecialInvoiceCreditNote SpecialInvoiceGetByReferenceId(string reference);
-       SpecialInvoiceCreditNoteDetails GetSpecialInvoiceCreditDetails(int specialInvoiceId, decimal vatRate);
-   }
+        string GenerateSpecialInvoiceCreditNo();
+        decimal GetSpecialInvoiceOustandingBalance(int orderNo, int creditNote, decimal vatRate);
+        bool SpecialInvoiceCreditNoteExistsByOrderId(int orderId);
+        bool ReferenceExists(string referenceNo);
+        SpecialInvoiceCreditNote SpecialInvoiceGetByReferenceId(string reference);
+        SpecialInvoiceCreditNoteBalance GetSpecialInvoiceCreditBalance(int specialInvoiceId, decimal vatRate);
+    }
 }
