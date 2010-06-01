@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 using SP.Util;
@@ -51,7 +52,7 @@ public class SpecialInvoiceHeaderUI : IDisposable
             updatedSpecialInvoice.OrderStatus = (short)newSpecialInvoice.OrderStatus;
             updatedSpecialInvoice.SpecialInstructions = newSpecialInvoice.SpecialInstructions;
             updatedSpecialInvoice.ReasonForVoiding = newSpecialInvoice.ReasonForVoiding;
-            updatedSpecialInvoice.DateModified = newSpecialInvoice.DateModified;          
+            updatedSpecialInvoice.DateModified = newSpecialInvoice.DateModified;
 
             _proxy.UpdateSpecialInvoiceHeader(updatedSpecialInvoice, originalSpecialInvoice);
         }
@@ -89,6 +90,32 @@ public class SpecialInvoiceHeaderUI : IDisposable
                 dateFrom,
                 dateTo,
                 orderStatus);
+        }
+    }
+
+    public List<SpecialInvoiceHeader> GetSpecialInvoiceHeadersSearchWithPrintedStatuses(string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo,
+           short actualOrderStatus, short printedOrderStatus)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            string orderNo = String.Empty;
+
+            if (actualOrderStatus == (short)SP.Core.Enums.OrderStatus.ProformaInvoice ||
+                (printedOrderStatus == (short)SP.Core.Enums.OrderStatus.ProformaInvoice) ||
+                (actualOrderStatus == (short)SP.Core.Enums.OrderStatus.Invoice) ||
+                (printedOrderStatus == (short)SP.Core.Enums.OrderStatus.ProformaInvoice) ||
+                (actualOrderStatus == (short)SP.Core.Enums.OrderStatus.DeliveryNote) ||
+                (printedOrderStatus == (short)SP.Core.Enums.OrderStatus.DeliveryNotePrinted)
+                )
+            {
+                var list = proxy.GetSpecialHeaders(orderNo,
+                    invoiceNo, customerName, dateFrom, dateTo, actualOrderStatus).OrderByDescending(q => q.DateModified);
+                return list.ToList<SpecialInvoiceHeader>();
+            }
+            else
+            {
+                return proxy.GetSpecialHeaders(orderNo, invoiceNo, customerName, dateFrom, dateTo, actualOrderStatus);
+            }
         }
     }
 

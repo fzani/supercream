@@ -59,7 +59,7 @@
                 </tr>
                 <tr>
                     <td style="width: 30%;">
-                        Date of Order
+                        Date of Invoice
                     </td>
                     <td style="width: 70%;">
                         <asp:TextBox ID="OrderDateTextBox" Style="vertical-align: middle;" runat="server"

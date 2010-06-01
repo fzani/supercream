@@ -5,17 +5,17 @@
     <fieldset id="Fieldset3">
         <asp:Panel ID="CreditNoteSavePanel" DefaultButton="SaveButton" runat="server">
             <h2>
-                Credit Note &nbsp;
+                Special Invoice Credit Note &nbsp;
                 <asp:Label ID="creditNoteLabel" Text="<>" runat="server"></asp:Label>
             </h2>
             <legend>
                 <h3>
-                    Save Credit Note</h3>
+                    Save Special Invoice Credit Note</h3>
             </legend>
             <table style="width: 100%">
                 <tr>
                     <td style="width: 40%">
-                        Total Invoice Amount
+                        Total Invoice Amount (incl. Discount)
                     </td>
                     <td style="width: 60%">
                         <asp:Label ID="TotalInvoiceAmountLabel" runat="server" />

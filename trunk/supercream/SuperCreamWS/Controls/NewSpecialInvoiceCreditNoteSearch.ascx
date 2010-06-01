@@ -6,7 +6,7 @@
         <asp:Panel ID="InvoiceSearchCriteriaPanel" DefaultButton="SearchButton" runat="server">
             <legend>
                 <h3>
-                    Search Invoices</h3>
+                    Search Special Invoices</h3>
             </legend>
             <table class="search">
                 <tr>
@@ -18,14 +18,6 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="InvoiceNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label ID="OrderNoLabel" Text="Order No" runat="server"></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="OrderNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -83,14 +75,15 @@
                             <tr>
                                 <td>
                                     Invoices/InvoicesPrinted
-                                </td>                               
+                                </td>
                             </tr>
                             <tr>
                                 <td>
                                 </td>
                                 <td>
                                     <asp:LinkButton ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
-                                        OnClick="SearchButton_Click" /> | 
+                                        OnClick="SearchButton_Click" />
+                                    |
                                     <asp:LinkButton ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
                                         OnClick="ClearButton_Click" />
                                 </td>
@@ -102,7 +95,7 @@
         </asp:Panel>
         <asp:Panel ID="InvoiceHeaderSearchGridPanel" runat="server">
             <h2>
-                Invoices</h2>
+                Special Invoices</h2>
             <asp:GridView ID="InvoiceGridView" DataKeyNames="ID" runat="server" Width="98%" AllowPaging="True"
                 DataSourceID="InvoiceObjectDataSource" AutoGenerateColumns="False" OnRowDataBound="InvoiceGridView_RowDataBound"
                 OnRowCommand="InvoiceGridView_RowCommand">
@@ -117,15 +110,6 @@
                                 CommandArgument='<%# Bind("ID") %>' Text="Select" />
                         </ItemTemplate>
                         <ItemStyle Width="15%" />
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Order No." ItemStyle-Width="25%" SortExpression="AlphaID">
-                        <ItemTemplate>
-                            <asp:Label ID="Label2" runat="server" Text='<%# Bind("AlphaID") %>'></asp:Label>
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("AlphaID") %>'></asp:TextBox>
-                        </EditItemTemplate>
-                        <ItemStyle Width="20%" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Invoice No." ItemStyle-Width="25%" SortExpression="InvoiceNo">
                         <ItemTemplate>
@@ -145,7 +129,7 @@
                         </EditItemTemplate>
                         <ItemStyle Width="40%" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Order Date" SortExpression="OrderDate">
+                    <asp:TemplateField HeaderText="Invoice Date" SortExpression="OrderDate">
                         <ItemTemplate>
                             <asp:Label ID="Label3" runat="server" ItemStyle-Width="20%" Text='<%# DataBinder.Eval(Container.DataItem, "OrderDate", "{0:d}") %>'></asp:Label>
                         </ItemTemplate>
@@ -155,10 +139,9 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-            <asp:ObjectDataSource ID="InvoiceObjectDataSource" runat="server" SelectMethod="GetOrderHeadersSearchWithPrintedStatuses"
-                TypeName="OrderHeaderUI" OnSelecting="InvoiceObjectDataSource_Selecting">
+            <asp:ObjectDataSource ID="InvoiceObjectDataSource" runat="server" SelectMethod="GetSpecialInvoiceHeadersSearchWithPrintedStatuses"
+                TypeName="SpecialInvoiceHeaderUI" OnSelecting="InvoiceObjectDataSource_Selecting">
                 <SelectParameters>
-                    <asp:Parameter Name="orderHeader" Type="String" />
                     <asp:Parameter Name="invoiceNo" Type="String" />
                     <asp:Parameter Name="customerName" Type="String" />
                     <asp:Parameter Name="dateFrom" Type="DateTime" />
