@@ -5,7 +5,7 @@
     Invoice
     <fieldset id="Fieldset3">
         <asp:Panel ID="CreditNoteSearchCriteriaPanel" DefaultButton="SearchButton" runat="server">
-            <legend>e
+            <legend>
                 <h3>
                     Search Credit Notes</h3>
             </legend>

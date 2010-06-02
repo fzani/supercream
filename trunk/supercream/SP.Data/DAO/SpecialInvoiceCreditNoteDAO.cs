@@ -38,7 +38,7 @@ namespace SP.Data.LTS
                                join cr in db.SpecialInvoiceCreditNote on sih.ID equals cr.SpecialInvoiceID
                                join c in db.Customer on sih.CustomerID equals c.ID
                                select new SpecialInvoiceCreditNoteDetails
-                               {                                   
+                               {
                                    CreditNoteID = cr.ID,
                                    SpecialInvoiceID = sih.ID,
                                    OrderNo = sih.AlphaID,
@@ -122,6 +122,9 @@ namespace SP.Data.LTS
                 var crCount = db.SpecialInvoiceCreditNote.Where(q => q.SpecialInvoiceID == specialInvoiceNo).Count();
                 if (crCount > 1)
                 {
+                    // Check to see if Credit Note already exists
+                    // In the case where Credit Note exists make sure that we do not include the original credit note balance 
+                    // in the outstanding balance.
                     if (creditNote != -1)
                     {
 
@@ -211,6 +214,7 @@ namespace SP.Data.LTS
                                           select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * vatRate)).Sum(), 2);
             }
 
+            // Now deal with taking account of SpecialInvoiceCreditNoteLineItems & Header
             //var specialInvoiceCreditNotes = (from oh in db.SpecialInvoiceCreditNote
             //                      //  join ol in db.OrderCreditNoteLine on oh.ID equals ol.OrderCreditNoteID
             //                        where oh.SpecialInvoiceID == specialInvoiceId
@@ -227,16 +231,12 @@ namespace SP.Data.LTS
             {
                 SpecialInvoiceID = specialInvoiceId,
                 TotalInvoiceAmount = invoiceTotal,
-                TotalAmountCredited = creditTotal, // inclusing vat
+                TotalAmountCredited = creditTotal, // including vat
                 Balance = (invoiceTotal - creditTotal)
             };
         }
 
         #endregion
 
-        private decimal CalculatePrice(SpecialInvoiceLine line, decimal vatRate)
-        {
-            return 10.12m;
-        }
     }
 }
