@@ -18,7 +18,7 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
 
     #region Private Properties
 
-    private SpecialInvoiceCreditNoteBalance invoiceCreditNoteDetails;
+    private SpecialInvoiceCreditNoteBalance specialInvoiceCreditNoteDetails;
 
     #endregion
 
@@ -80,10 +80,10 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
 
     private void SetCreditNoteForOrderSaveStatuses()
     {
-        this.invoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteBalance(SpecialInvoiceID.Value);
+        this.specialInvoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteBalance(SpecialInvoiceID.Value);
 
-        decimal totalInvoiceAmount = invoiceCreditNoteDetails.TotalInvoiceAmount;
-        decimal invoiceAmountCredited = invoiceCreditNoteDetails.TotalAmountCredited;
+        decimal totalInvoiceAmount = specialInvoiceCreditNoteDetails.TotalInvoiceAmount;
+        decimal invoiceAmountCredited = specialInvoiceCreditNoteDetails.TotalAmountCredited;
         this.DueDateTextBox.Text = DateTime.Now.AddDays(7).ToShortDateString();
 
         this.TotalInvoiceAmountLabel.Text = totalInvoiceAmount.ToString("c");
@@ -96,15 +96,14 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
 
     private void SetCreditNoteForCreditNoteSaveStatuses()
     {
-        SpecialInvoiceCreditNoteUI creditNoteUI = new SpecialInvoiceCreditNoteUI();
         SpecialInvoiceCreditNote creditNote = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNote(CreditNoteID.Value);
         this.SpecialInvoiceID = creditNote.SpecialInvoiceID;
-        this.invoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteBalance(creditNote.SpecialInvoiceID);
+        this.specialInvoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteBalance(creditNote.SpecialInvoiceID);
 
         this.creditNoteLabel.Text = creditNote.Reference;
 
-        decimal totalInvoiceAmount = invoiceCreditNoteDetails.TotalInvoiceAmount;
-        decimal invoiceAmountCredited = invoiceCreditNoteDetails.TotalAmountCredited;
+        decimal totalInvoiceAmount = specialInvoiceCreditNoteDetails.TotalInvoiceAmount;
+        decimal invoiceAmountCredited = specialInvoiceCreditNoteDetails.TotalAmountCredited;
 
         this.TotalInvoiceAmountLabel.Text = totalInvoiceAmount.ToString("c");
         this.InvoiceAmountCreditedLabel.Text = invoiceAmountCredited.ToString("c");
@@ -128,15 +127,14 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
         {
             SpecialInvoiceHeaderUI specialInvoiceHeaderUI = new SpecialInvoiceHeaderUI();
             SpecialInvoiceHeader specialInvoiceHeader = specialInvoiceHeaderUI.GetById(this.SpecialInvoiceID.Value);
-
-            SpecialInvoiceCreditNoteUI creditNoteUI = new SpecialInvoiceCreditNoteUI();
-            this.invoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteBalance(this.SpecialInvoiceID.Value);
+            
+            this.specialInvoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteBalance(this.SpecialInvoiceID.Value);
 
             VatCodeUI vatCodeUI = new VatCodeUI();
             VatCode vatCode = vatCodeUI.GetByID(specialInvoiceHeader.VatCodeID);
 
-            var currentCreditAmount = String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ? new decimal(0.0) :
-                String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ? new decimal(0.0) : Util.ConvertStringToDecimal(this.AmountToCreditTextBox.Text);
+            var currentCreditAmount = String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ? 
+                new decimal(0.0) : Util.ConvertStringToDecimal(this.AmountToCreditTextBox.Text);
 
             // Get oustanding credit already applied
             decimal oustandingCreditedAmount;
