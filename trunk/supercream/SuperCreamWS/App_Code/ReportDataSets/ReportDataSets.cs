@@ -188,4 +188,14 @@ public class ReportDataSets : IReportDataSets
     }
 
     #endregion
+
+    #region IReportDataSets Members
+
+
+    public ReportDataSource[] GetSpecialInvoiceArbitraryCreditNoteReportDataSets(int creditNoteId, int accountId)
+    {
+        throw new NotImplementedException();
+    }
+
+    #endregion
 }

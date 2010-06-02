@@ -124,16 +124,15 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
     protected void SaveButton_Click(object sender, EventArgs e)
     {
         try
-        {
-            SpecialInvoiceHeaderUI specialInvoiceHeaderUI = new SpecialInvoiceHeaderUI();
-            SpecialInvoiceHeader specialInvoiceHeader = specialInvoiceHeaderUI.GetById(this.SpecialInvoiceID.Value);
-            
+        {           
+            SpecialInvoiceHeader specialInvoiceHeader = SpecialInvoiceHeaderUI.GetById(this.SpecialInvoiceID.Value);
+
             this.specialInvoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteBalance(this.SpecialInvoiceID.Value);
 
             VatCodeUI vatCodeUI = new VatCodeUI();
             VatCode vatCode = vatCodeUI.GetByID(specialInvoiceHeader.VatCodeID);
 
-            var currentCreditAmount = String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ? 
+            var currentCreditAmount = String.IsNullOrEmpty(this.AmountToCreditTextBox.Text) ?
                 new decimal(0.0) : Util.ConvertStringToDecimal(this.AmountToCreditTextBox.Text);
 
             // Get oustanding credit already applied
@@ -203,14 +202,12 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
     }
 
     protected void PrintButton_Click(object sender, EventArgs e)
-    {
-        OrderNotesStatusUI ui = new OrderNotesStatusUI();
+    {       
+        var specialInvoiceHeader = SpecialInvoiceHeaderUI.GetById(this.SpecialInvoiceID.Value);
 
-        var orderNoteStatus = ui.GetOrderNotesStatusByOrderID(this.SpecialInvoiceID.Value);
-
-        SP.Util.UrlParameterPasser p = new UrlParameterPasser("~/CreditNote/CreditNoteReport.aspx");
+        SP.Util.UrlParameterPasser p = new UrlParameterPasser("~/CreditNote/SpecialInvoiceCreditNoteReport.aspx");
         p["creditNoteId"] = this.CreditNoteID.Value.ToString();
-        p["accountId"] = orderNoteStatus.AccountID.ToString();
+        p["accountId"] = specialInvoiceHeader.AccountID.ToString();
         p.PassParameters();
     }
 

@@ -26,19 +26,19 @@ public class SpecialInvoiceHeaderUI : IDisposable
         }
     }
 
-    public SpecialInvoiceHeader GetById(int id)
+    public static SpecialInvoiceHeader GetById(int id)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.GetSpecialInvoiceHeader(id);
+            return proxy.GetSpecialInvoiceHeader(id);
         }
     }
 
-    public void Update(SpecialInvoiceHeader newSpecialInvoice)
+    public static void Update(SpecialInvoiceHeader newSpecialInvoice)
     {
-        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            SpecialInvoiceHeader originalSpecialInvoice = _proxy.GetSpecialInvoiceHeader(newSpecialInvoice.ID);
+            SpecialInvoiceHeader originalSpecialInvoice = proxy.GetSpecialInvoiceHeader(newSpecialInvoice.ID);
             SpecialInvoiceHeader updatedSpecialInvoice = originalSpecialInvoice.Clone<SpecialInvoiceHeader>();
 
             updatedSpecialInvoice.AlphaID = newSpecialInvoice.AlphaID;
@@ -54,7 +54,7 @@ public class SpecialInvoiceHeaderUI : IDisposable
             updatedSpecialInvoice.ReasonForVoiding = newSpecialInvoice.ReasonForVoiding;
             updatedSpecialInvoice.DateModified = newSpecialInvoice.DateModified;
 
-            _proxy.UpdateSpecialInvoiceHeader(updatedSpecialInvoice, originalSpecialInvoice);
+            proxy.UpdateSpecialInvoiceHeader(updatedSpecialInvoice, originalSpecialInvoice);
         }
     }
 
