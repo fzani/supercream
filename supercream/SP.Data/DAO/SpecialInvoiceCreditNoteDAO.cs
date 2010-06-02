@@ -99,7 +99,7 @@ namespace SP.Data.LTS
 
         public string GenerateSpecialInvoiceCreditNo()
         {
-            if (db.CreditNote.FirstOrDefault() == null)
+            if (db.SpecialInvoiceCreditNote.FirstOrDefault() == null)
             {
                 return "SP-CRN-1";
             }
@@ -206,8 +206,8 @@ namespace SP.Data.LTS
             var creditNotes = db.SpecialInvoiceCreditNote.Where(q => q.SpecialInvoiceID == specialInvoiceId).DefaultIfEmpty<SpecialInvoiceCreditNote>();
             if (creditNotes.First() != null)
             {
-                creditTotal = Math.Round((from cr in db.CreditNote
-                                          where cr.OrderID == specialInvoiceId
+                creditTotal = Math.Round((from cr in db.SpecialInvoiceCreditNote
+                                          where cr.SpecialInvoiceID == specialInvoiceId
                                           select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * vatRate)).Sum(), 2);
             }
 
