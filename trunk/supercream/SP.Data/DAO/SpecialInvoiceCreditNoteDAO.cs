@@ -33,16 +33,16 @@ namespace SP.Data.LTS
 
         public List<SpecialInvoiceCreditNoteDetails> SearchSpecialInvoiceCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
         {
-            var creditNotes = (from o in db.SpecialInvoiceHeader
+            var creditNotes = (from sih in db.SpecialInvoiceHeader
                                // join ons in db.OrderNotesStatus on o.ID equals ons.OrderID
-                               join cr in db.SpecialInvoiceCreditNote on o.ID equals cr.SpecialInvoiceID
-                               join c in db.Customer on o.CustomerID equals c.ID
+                               join cr in db.SpecialInvoiceCreditNote on sih.ID equals cr.SpecialInvoiceID
+                               join c in db.Customer on sih.CustomerID equals c.ID
                                select new SpecialInvoiceCreditNoteDetails
                                {                                   
                                    CreditNoteID = cr.ID,
-                                   SpecialInvoiceID = o.ID,
-                                   OrderNo = o.AlphaID,
-                                   InvoiceNo = o.InvoiceNo,
+                                   SpecialInvoiceID = sih.ID,
+                                   OrderNo = sih.AlphaID,
+                                   InvoiceNo = sih.InvoiceNo,
                                    CustomerName = c.Name,
                                    DateCreated = cr.DateCreated,
                                    Reference = cr.Reference
@@ -142,7 +142,7 @@ namespace SP.Data.LTS
             return creditTotal;
         }
 
-        public bool SpecialInvoiceCreditNoteExistsByOrderId(int specialInvoiceId)
+        public bool SpecialInvoiceCreditNoteExistsByInvoiceId(int specialInvoiceId)
         {
             return (db.SpecialInvoiceCreditNote.Where<SpecialInvoiceCreditNote>(q => q.SpecialInvoiceID == specialInvoiceId).FirstOrDefault() != null) ? true : false;
         }
@@ -200,6 +200,7 @@ namespace SP.Data.LTS
 
             invoiceTotal = Math.Round(invoiceTotal, 2);
 
+            // Now deal with Credit Notes ...
             decimal creditTotal = new decimal(0.0);
 
             var creditNotes = db.SpecialInvoiceCreditNote.Where(q => q.SpecialInvoiceID == specialInvoiceId).DefaultIfEmpty<SpecialInvoiceCreditNote>();

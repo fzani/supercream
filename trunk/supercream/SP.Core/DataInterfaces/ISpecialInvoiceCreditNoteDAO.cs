@@ -20,11 +20,11 @@ namespace SP.Core.DataInterfaces
             DateTime dateFrom,
             DateTime dateTo);
 
-        List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int orderId);
+        List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int specialInvoiceId);
 
         string GenerateSpecialInvoiceCreditNo();
         decimal GetSpecialInvoiceOustandingBalance(int orderNo, int creditNote, decimal vatRate);
-        bool SpecialInvoiceCreditNoteExistsByOrderId(int orderId);
+        bool SpecialInvoiceCreditNoteExistsByInvoiceId(int specialInvoiceId);
         bool ReferenceExists(string referenceNo);
         SpecialInvoiceCreditNote SpecialInvoiceGetByReferenceId(string reference);
         SpecialInvoiceCreditNoteBalance GetSpecialInvoiceCreditBalance(int specialInvoiceId, decimal vatRate);
