@@ -301,7 +301,7 @@
   </Table>
   <Table Name="dbo.SpecialInvoiceCreditNote" Member="SpecialInvoiceCreditNote">
     <Type Name="SpecialInvoiceCreditNote">
-      <Column Name="ID" Member="ID" Storage="_ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
+      <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
       <Column Name="SpecialInvoiceID" Member="SpecialInvoiceID" Storage="_SpecialInvoiceID" DbType="Int" />
       <Column Name="CreditAmount" Member="CreditAmount" Storage="_CreditAmount" DbType="Decimal(18,2)" />
       <Column Name="Reason" Member="Reason" Storage="_Reason" DbType="NVarChar(MAX)" UpdateCheck="Never" />

@@ -1463,7 +1463,7 @@ namespace SP.Worker
         {
             IDaoFactory factory = new LTSDaoFactory();
             ISpecialInvoiceCreditNoteDao creditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
-            return creditNoteDao.SpecialInvoiceCreditNoteExistsByOrderId(specialInvoiceNo);
+            return creditNoteDao.SpecialInvoiceCreditNoteExistsByInvoiceId(specialInvoiceNo);
         }
 
         public bool ReferenceExists(string referenceNo)

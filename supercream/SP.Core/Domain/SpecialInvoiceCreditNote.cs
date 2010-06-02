@@ -12,8 +12,7 @@ namespace SP.Core.Domain
 {
     [Serializable]
     public class SpecialInvoiceCreditNote : BaseEntity
-    {
-        private int _ID;
+    {       
         private int _SpecialInvoiceID;
         private decimal _CreditAmount;
         private string _Reason;
