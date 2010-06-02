@@ -57,12 +57,35 @@ public class SuperCreamReportDataSets : IReportDataSets
         return reportDataSources;
     }
 
+    public ReportDataSource[] GetSpecialInvoiceArbitraryCreditNoteReportDataSets(int creditNoteId, int accountId)
+    {
+        DataSet dsCreditNotes = GetSpecialInvoiceArbitraryCreditNoteDS(creditNoteId);
+        DataSet dsFoundationAddressLines = GetFoundationFacilityAddressLinesDS(999); // Fake ID doesn't matter ignored ...
+        DataSet dsInvoiceAddressLines = GetInvoiceAddressLinesDS(accountId);
+
+        ReportDataSource[] reportDataSources = new ReportDataSource[3];
+
+        reportDataSources[0] = new
+           ReportDataSource("SuperCreamDBDataSet_rptGetSpecialInvoiceArbitraryCreditNote",
+             dsCreditNotes.Tables[0]);
+
+        reportDataSources[1] = new
+           ReportDataSource("SuperCreamDBDataSet_rptGetFoundationFacilityAddressLines",
+               dsFoundationAddressLines.Tables[0]);
+
+        reportDataSources[2] = new
+           ReportDataSource("SuperCreamDBDataSet_rptGetAddressLinesForInvoice",
+               dsInvoiceAddressLines.Tables[0]);
+
+        return reportDataSources;
+    }
+
     public ReportDataSource[] GetArbitraryCreditNoteReportDataSets(int creditNoteId, int accountId)
     {
         DataSet dsCreditNotes = GetArbitraryCreditNoteDS(creditNoteId);
         DataSet dsFoundationAddressLines = GetFoundationFacilityAddressLinesDS(999); // Fake ID doesn't matter ignored ...
         DataSet dsInvoiceAddressLines = GetInvoiceAddressLinesDS(accountId);
-      
+
         ReportDataSource[] reportDataSources = new ReportDataSource[3];
 
         reportDataSources[0] = new
@@ -103,7 +126,7 @@ public class SuperCreamReportDataSets : IReportDataSets
 
         reportDataSources[3] = new
            ReportDataSource("SuperCreamDBDataSet_rptGetOrderCreditNoteTotals",
-               dsOrderCreditNoteLines.Tables[0]);      
+               dsOrderCreditNoteLines.Tables[0]);
 
         return reportDataSources;
     }
@@ -197,47 +220,47 @@ public class SuperCreamReportDataSets : IReportDataSets
         return dataSet;
     }
 
-     private static DataSet GetArbitraryCreditNoteDS(int creditNoteId)
-     {
-         string connectionString = ConfigurationManager.ConnectionStrings["SuperCreamDBConnectionString"].ConnectionString;
-         SqlConnection connection = new SqlConnection(connectionString);
-         connection.Open();
+    private static DataSet GetArbitraryCreditNoteDS(int creditNoteId)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["SuperCreamDBConnectionString"].ConnectionString;
+        SqlConnection connection = new SqlConnection(connectionString);
+        connection.Open();
 
-         SqlCommand command = new SqlCommand();
-         command.CommandType = System.Data.CommandType.StoredProcedure;
-         command.CommandText = "rptGetArbitraryCreditNote";
-         command.Connection = connection;
+        SqlCommand command = new SqlCommand();
+        command.CommandType = System.Data.CommandType.StoredProcedure;
+        command.CommandText = "rptGetArbitraryCreditNote";
+        command.Connection = connection;
 
-         SqlParameter creditIdParameter = command.Parameters.Add("@CreditNoteID", System.Data.SqlDbType.Int);
-         creditIdParameter.Value = creditNoteId;
+        SqlParameter creditIdParameter = command.Parameters.Add("@CreditNoteID", System.Data.SqlDbType.Int);
+        creditIdParameter.Value = creditNoteId;
 
-         DataSet dataSet = new DataSet("CreditNoteDS");
+        DataSet dataSet = new DataSet("CreditNoteDS");
 
-         SqlDataAdapter adapter = new SqlDataAdapter(command);
-         adapter.Fill(dataSet);
-         return dataSet;
-     }
+        SqlDataAdapter adapter = new SqlDataAdapter(command);
+        adapter.Fill(dataSet);
+        return dataSet;
+    }
 
-     private static DataSet GetOrderCreditNoteDS(int creditNoteId)
-     {
-         string connectionString = ConfigurationManager.ConnectionStrings["SuperCreamDBConnectionString"].ConnectionString;
-         SqlConnection connection = new SqlConnection(connectionString);
-         connection.Open();
+    private static DataSet GetOrderCreditNoteDS(int creditNoteId)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["SuperCreamDBConnectionString"].ConnectionString;
+        SqlConnection connection = new SqlConnection(connectionString);
+        connection.Open();
 
-         SqlCommand command = new SqlCommand();
-         command.CommandType = System.Data.CommandType.StoredProcedure;
-         command.CommandText = "rptGetOrderCreditNote";
-         command.Connection = connection;
+        SqlCommand command = new SqlCommand();
+        command.CommandType = System.Data.CommandType.StoredProcedure;
+        command.CommandText = "rptGetOrderCreditNote";
+        command.Connection = connection;
 
-         SqlParameter creditIdParameter = command.Parameters.Add("@CreditNoteID", System.Data.SqlDbType.Int);
-         creditIdParameter.Value = creditNoteId;
+        SqlParameter creditIdParameter = command.Parameters.Add("@CreditNoteID", System.Data.SqlDbType.Int);
+        creditIdParameter.Value = creditNoteId;
 
-         DataSet dataSet = new DataSet("CreditNoteDS");
+        DataSet dataSet = new DataSet("CreditNoteDS");
 
-         SqlDataAdapter adapter = new SqlDataAdapter(command);
-         adapter.Fill(dataSet);
-         return dataSet;
-     }
+        SqlDataAdapter adapter = new SqlDataAdapter(command);
+        adapter.Fill(dataSet);
+        return dataSet;
+    }
 
     private static DataSet GetFoundationFacilityAddressLinesDS(int accountId)
     {
@@ -279,6 +302,27 @@ public class SuperCreamReportDataSets : IReportDataSets
         SqlDataAdapter adapter = new SqlDataAdapter(command);
         adapter.Fill(invoiceHeaderDataSet);
         return invoiceHeaderDataSet;
+    }
+
+    private static DataSet GetSpecialInvoiceArbitraryCreditNoteDS(int creditNoteId)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["SuperCreamDBConnectionString"].ConnectionString;
+        SqlConnection connection = new SqlConnection(connectionString);
+        connection.Open();
+
+        SqlCommand command = new SqlCommand();
+        command.CommandType = System.Data.CommandType.StoredProcedure;
+        command.CommandText = "rptGetSpecialInvoiceArbitraryCreditNote";
+        command.Connection = connection;
+
+        SqlParameter creditIdParameter = command.Parameters.Add("@CreditNoteID", System.Data.SqlDbType.Int);
+        creditIdParameter.Value = creditNoteId;
+
+        DataSet dataSet = new DataSet("CreditNoteDS");
+
+        SqlDataAdapter adapter = new SqlDataAdapter(command);
+        adapter.Fill(dataSet);
+        return dataSet;
     }
 
     #endregion

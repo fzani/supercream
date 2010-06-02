@@ -449,8 +449,6 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
             CustomerUI customerUI = new CustomerUI();
             Customer customer = customerUI.GetByID(Convert.ToInt32(CustomerDropDownList.SelectedValue));
 
-            SpecialInvoiceHeaderUI ui = new SpecialInvoiceHeaderUI();
-
             SpecialInvoiceHeader specialInvoiceHeader = new SpecialInvoiceHeader
             {
                 ID = this.SpecialInvoiceID,
@@ -467,7 +465,7 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
                 VatCodeID = this.VatCodeID
             };
 
-            ui.Update(specialInvoiceHeader);
+            SpecialInvoiceHeaderUI.Update(specialInvoiceHeader);
 
             Util.ClearControls(this);
 
@@ -550,8 +548,7 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
         if (e.CommandName == "Select")
         {
             this.SpecialInvoiceID = Convert.ToInt32(e.CommandArgument);
-            SpecialInvoiceHeaderUI ui = new SpecialInvoiceHeaderUI();
-            SpecialInvoiceHeader specialInvoiceHeader = ui.GetById(SpecialInvoiceID);
+            SpecialInvoiceHeader specialInvoiceHeader = SpecialInvoiceHeaderUI.GetById(SpecialInvoiceID);
             this.VatCodeID = specialInvoiceHeader.VatCodeID;
 
             CustomerDropDownList.SelectedValue = specialInvoiceHeader.CustomerID.ToString();
@@ -641,24 +638,22 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
 
     private void UpdateSpecialInvoiceHeader()
     {
-        SpecialInvoiceHeaderUI headerUI = new SpecialInvoiceHeaderUI();
-        SpecialInvoiceHeader header = headerUI.GetById(this.SpecialInvoiceID);
+        SpecialInvoiceHeader header = SpecialInvoiceHeaderUI.GetById(this.SpecialInvoiceID);
 
         header.DateModified = DateTime.Now;
 
-        headerUI.Update(header);
+        SpecialInvoiceHeaderUI.Update(header);
     }
 
     private void UpdateSpecialInvoiceHeaderForVoiding(string reasonForVoiding)
     {
-        SpecialInvoiceHeaderUI headerUI = new SpecialInvoiceHeaderUI();
-        SpecialInvoiceHeader header = headerUI.GetById(this.SpecialInvoiceID);
+        SpecialInvoiceHeader header = SpecialInvoiceHeaderUI.GetById(this.SpecialInvoiceID);
 
         header.DateModified = DateTime.Now;
         header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Void;
         header.ReasonForVoiding = reasonForVoiding;
 
-        headerUI.Update(header);
+        SpecialInvoiceHeaderUI.Update(header);
     }
 
     #endregion
