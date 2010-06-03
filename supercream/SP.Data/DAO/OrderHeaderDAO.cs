@@ -15,6 +15,14 @@ namespace SP.Data.LTS
 {
     public class OrderHeaderDao : AbstractLTSDao<OrderHeader, int>, IOrderHeaderDao
     {
+        public decimal GetOrderExVatTotal(int orderId)
+        {
+            var exVatTotal = Math.Round((from ol in db.OrderLine
+                              where ol.OrderID == orderId
+                              select ol.Price * ol.NoOfUnits).Sum(),2);
+            return exVatTotal;
+        }
+
         public override OrderHeader GetById(int id)
         {
             return db.OrderHeader.Single<OrderHeader>(q => q.ID == id);

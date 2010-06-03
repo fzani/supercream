@@ -1798,6 +1798,14 @@ namespace SP.Worker
 
         #region Private Helper Methods
 
+        public decimal GetOrderExVatTotal(int orderId)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
+
+            return orderHeaderDao.GetOrderExVatTotal(orderId);
+        }
+
         private string GenerateOrderNo()
         {
             IDaoFactory factory = new LTSDaoFactory();
@@ -1843,6 +1851,6 @@ namespace SP.Worker
             return Convert.ToDecimal(vatCode.PercentageValue);
         }
 
-        #endregion
+        #endregion               
     }
 }

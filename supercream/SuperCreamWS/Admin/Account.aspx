@@ -403,9 +403,9 @@
                                             <asp:Label ID="cpItemDetails" runat="server" Visible="false"></asp:Label>
                                             <p>
                                                 <center>
-                                                    <asp:Button ID="OkButton" runat="server" Text="Update" ValidationGroup="GridViewPanel"
+                                                    <asp:Button ID="OkButton" runat="server" Text="Update" 
                                                         OnClick="ModalPopupUpdateAccountButton_Click" CssClass="button" />
-                                                    <asp:Button ID="DeleteButton" runat="server" Text="Delete" ValidationGroup="GridViewPanel"
+                                                    <asp:Button ID="DeleteButton" runat="server" Text="Delete"
                                                         OnClick="ModalPopupDeleteAccountButton_Click" CssClass="button" />
                                                     <asp:Button ID="CancelButton" Text="Cancel" runat="server" ValidationGroup="GridViewPanel"
                                                         CssClass="button" />

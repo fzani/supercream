@@ -112,6 +112,7 @@ namespace SP.Core.ManagerInterfaces
 
         #region OrderHeader
 
+        decimal GetOrderExVatTotal(int orderId);
         OrderHeader CreateInvoice(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
         OrderHeader CreateInvoiceProforma(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
         OrderHeader CreateDeliveryNote(OrderHeader newOrderHeader, OrderHeader origOrderHeader);

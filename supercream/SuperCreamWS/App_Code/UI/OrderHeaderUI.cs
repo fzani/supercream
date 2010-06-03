@@ -36,6 +36,14 @@ public class OrderHeaderUI : IDisposable
         }
     }
 
+    public static decimal GetExVatTotal(int orderId)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.GetOrderExVatTotal(orderId);
+        }
+    }
+
     public OrderHeader GetById(int id)
     {
         if (id != -1)
@@ -292,7 +300,7 @@ public class OrderHeaderUI : IDisposable
                 return _proxy.GetOrderHeaderForSearchWithPrintedOrderStatuses(orderHeader, invoiceNo, customerName, dateFrom, dateTo, actualOrderStatus, printedOrderStatus);
             }
         }
-    }    
+    }
 
     Decimal CalculateDiscount(Decimal discount, Decimal unitPrice)
     {
@@ -309,5 +317,10 @@ public class OrderHeaderUI : IDisposable
 
     ~OrderHeaderUI()
     {
+    }
+
+    public static void GetExVatTotal(int? nullable)
+    {
+        throw new NotImplementedException();
     }
 }
