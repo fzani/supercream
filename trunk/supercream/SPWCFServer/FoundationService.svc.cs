@@ -1334,6 +1334,13 @@ namespace SPWCFServer
 
         #region OrderHeader
 
+        public decimal GetOrderExVatTotal(int orderId)
+        {
+            IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+
+            return mgr.GetOrderExVatTotal(orderId);
+        }
+
         public List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
         {
 
@@ -2604,8 +2611,8 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-       
-        public SpecialInvoiceCreditNoteBalance GetSpecialInvoiceCreditBalance(int specialInvoiceId)      
+
+        public SpecialInvoiceCreditNoteBalance GetSpecialInvoiceCreditBalance(int specialInvoiceId)
         {
             try
             {
@@ -3137,7 +3144,7 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
-        #endregion            
+        #endregion
     }
 }
 

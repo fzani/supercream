@@ -303,6 +303,9 @@ namespace SPWCFServer
         #endregion
 
         #region Order Header
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        decimal GetOrderExVatTotal(int orderId);
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
@@ -573,7 +576,7 @@ namespace SPWCFServer
         [OperationContract]
         [ReferencePreservingDataContractFormat]
         bool SpecialInvoiceCreditNoteExistsByOrderId(int orderId);
-       
+
         [OperationContract]
         [ReferencePreservingDataContractFormat]
         SpecialInvoiceCreditNote SpecialInvoiceGetByReferenceId(string reference);

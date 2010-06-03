@@ -8,6 +8,12 @@
       <xsd:import schemaLocation="http://localhost:56391/FoundationService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Linq" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IFoundationService_GetAllVatCodes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllVatCodes" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetAllVatCodes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllVatCodesResponse" />
+  </wsdl:message>
   <wsdl:message name="IFoundationService_DeleteVatCode_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteVatCode" />
   </wsdl:message>
@@ -55,6 +61,12 @@
   </wsdl:message>
   <wsdl:message name="IFoundationService_DeleteVan_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteVanResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetSpecialInvoiceCreditNotesByInvoiceId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSpecialInvoiceCreditNotesByInvoiceId" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetSpecialInvoiceCreditNotesByInvoiceId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSpecialInvoiceCreditNotesByInvoiceIdResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_GenerateSpecialInvoiceCreditNo_InputMessage">
     <wsdl:part name="parameters" element="tns:GenerateSpecialInvoiceCreditNo" />
@@ -242,11 +254,11 @@
   <wsdl:message name="IFoundationService_UpdateVatCode_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateVatCodeResponse" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_GetAllVatCodes_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllVatCodes" />
+  <wsdl:message name="IFoundationService_InvoicesByDateAndVan_InputMessage">
+    <wsdl:part name="parameters" element="tns:InvoicesByDateAndVan" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_GetAllVatCodes_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllVatCodesResponse" />
+  <wsdl:message name="IFoundationService_InvoicesByDateAndVan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InvoicesByDateAndVanResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_UpdateVanForInvoice_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateVanForInvoice" />
@@ -434,12 +446,6 @@
   <wsdl:message name="IFoundationService_SearchSpecialInvoiceCreditNotes_OutputMessage">
     <wsdl:part name="parameters" element="tns:SearchSpecialInvoiceCreditNotesResponse" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_GetSpecialInvoiceCreditNotesByInvoiceId_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetSpecialInvoiceCreditNotesByInvoiceId" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_GetSpecialInvoiceCreditNotesByInvoiceId_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetSpecialInvoiceCreditNotesByInvoiceIdResponse" />
-  </wsdl:message>
   <wsdl:message name="IFoundationService_GetOrderCreditNoteLine_InputMessage">
     <wsdl:part name="parameters" element="tns:GetOrderCreditNoteLine" />
   </wsdl:message>
@@ -457,6 +463,12 @@
   </wsdl:message>
   <wsdl:message name="IFoundationService_UpdateOrderCreditNoteLine_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateOrderCreditNoteLineResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetOrderExVatTotal_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderExVatTotal" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetOrderExVatTotal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderExVatTotalResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_CreateInvoice_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateInvoice" />
@@ -625,12 +637,6 @@
   </wsdl:message>
   <wsdl:message name="IFoundationService_UpdatePaymentCompleted_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePaymentCompletedResponse" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_InvoicesByDateAndVan_InputMessage">
-    <wsdl:part name="parameters" element="tns:InvoicesByDateAndVan" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_InvoicesByDateAndVan_OutputMessage">
-    <wsdl:part name="parameters" element="tns:InvoicesByDateAndVanResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_GetOustandingCreditNoteBalance_InputMessage">
     <wsdl:part name="parameters" element="tns:GetOustandingCreditNoteBalance" />
@@ -1017,6 +1023,10 @@
     <wsdl:part name="parameters" element="tns:GetInvoiceCreditDetailsResponse" />
   </wsdl:message>
   <wsdl:portType name="IFoundationService">
+    <wsdl:operation name="GetAllVatCodes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetAllVatCodes" message="tns:IFoundationService_GetAllVatCodes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetAllVatCodesResponse" message="tns:IFoundationService_GetAllVatCodes_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DeleteVatCode">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/DeleteVatCode" message="tns:IFoundationService_DeleteVatCode_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/DeleteVatCodeResponse" message="tns:IFoundationService_DeleteVatCode_OutputMessage" />
@@ -1048,6 +1058,10 @@
     <wsdl:operation name="DeleteVan">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/DeleteVan" message="tns:IFoundationService_DeleteVan_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/DeleteVanResponse" message="tns:IFoundationService_DeleteVan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSpecialInvoiceCreditNotesByInvoiceId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetSpecialInvoiceCreditNotesByInvoiceId" message="tns:IFoundationService_GetSpecialInvoiceCreditNotesByInvoiceId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetSpecialInvoiceCreditNotesByInvoiceIdResponse" message="tns:IFoundationService_GetSpecialInvoiceCreditNotesByInvoiceId_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GenerateSpecialInvoiceCreditNo">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GenerateSpecialInvoiceCreditNo" message="tns:IFoundationService_GenerateSpecialInvoiceCreditNo_InputMessage" />
@@ -1173,9 +1187,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdateVatCode" message="tns:IFoundationService_UpdateVatCode_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/UpdateVatCodeResponse" message="tns:IFoundationService_UpdateVatCode_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetAllVatCodes">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetAllVatCodes" message="tns:IFoundationService_GetAllVatCodes_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetAllVatCodesResponse" message="tns:IFoundationService_GetAllVatCodes_OutputMessage" />
+    <wsdl:operation name="InvoicesByDateAndVan">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/InvoicesByDateAndVan" message="tns:IFoundationService_InvoicesByDateAndVan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/InvoicesByDateAndVanResponse" message="tns:IFoundationService_InvoicesByDateAndVan_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateVanForInvoice">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdateVanForInvoice" message="tns:IFoundationService_UpdateVanForInvoice_InputMessage" />
@@ -1301,10 +1315,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SearchSpecialInvoiceCreditNotes" message="tns:IFoundationService_SearchSpecialInvoiceCreditNotes_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SearchSpecialInvoiceCreditNotesResponse" message="tns:IFoundationService_SearchSpecialInvoiceCreditNotes_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetSpecialInvoiceCreditNotesByInvoiceId">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetSpecialInvoiceCreditNotesByInvoiceId" message="tns:IFoundationService_GetSpecialInvoiceCreditNotesByInvoiceId_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetSpecialInvoiceCreditNotesByInvoiceIdResponse" message="tns:IFoundationService_GetSpecialInvoiceCreditNotesByInvoiceId_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="GetOrderCreditNoteLine">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetOrderCreditNoteLine" message="tns:IFoundationService_GetOrderCreditNoteLine_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetOrderCreditNoteLineResponse" message="tns:IFoundationService_GetOrderCreditNoteLine_OutputMessage" />
@@ -1316,6 +1326,10 @@
     <wsdl:operation name="UpdateOrderCreditNoteLine">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdateOrderCreditNoteLine" message="tns:IFoundationService_UpdateOrderCreditNoteLine_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/UpdateOrderCreditNoteLineResponse" message="tns:IFoundationService_UpdateOrderCreditNoteLine_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderExVatTotal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetOrderExVatTotal" message="tns:IFoundationService_GetOrderExVatTotal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetOrderExVatTotalResponse" message="tns:IFoundationService_GetOrderExVatTotal_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateInvoice">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/CreateInvoice" message="tns:IFoundationService_CreateInvoice_InputMessage" />
@@ -1428,10 +1442,6 @@
     <wsdl:operation name="UpdatePaymentCompleted">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdatePaymentCompleted" message="tns:IFoundationService_UpdatePaymentCompleted_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/UpdatePaymentCompletedResponse" message="tns:IFoundationService_UpdatePaymentCompleted_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="InvoicesByDateAndVan">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/InvoicesByDateAndVan" message="tns:IFoundationService_InvoicesByDateAndVan_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/InvoicesByDateAndVanResponse" message="tns:IFoundationService_InvoicesByDateAndVan_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetOustandingCreditNoteBalance">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetOustandingCreditNoteBalance" message="tns:IFoundationService_GetOustandingCreditNoteBalance_InputMessage" />
@@ -1692,6 +1702,15 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IFoundationService" type="tns:IFoundationService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllVatCodes">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetAllVatCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="DeleteVatCode">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/DeleteVatCode" style="document" />
       <wsdl:input>
@@ -1757,6 +1776,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteVan">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/DeleteVan" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSpecialInvoiceCreditNotesByInvoiceId">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetSpecialInvoiceCreditNotesByInvoiceId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2043,8 +2071,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetAllVatCodes">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetAllVatCodes" style="document" />
+    <wsdl:operation name="InvoicesByDateAndVan">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/InvoicesByDateAndVan" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2331,15 +2359,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetSpecialInvoiceCreditNotesByInvoiceId">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetSpecialInvoiceCreditNotesByInvoiceId" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="GetOrderCreditNoteLine">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/GetOrderCreditNoteLine" style="document" />
       <wsdl:input>
@@ -2360,6 +2379,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateOrderCreditNoteLine">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/UpdateOrderCreditNoteLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderExVatTotal">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetOrderExVatTotal" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2612,15 +2640,6 @@
     </wsdl:operation>
     <wsdl:operation name="UpdatePaymentCompleted">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/UpdatePaymentCompleted" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="InvoicesByDateAndVan">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/InvoicesByDateAndVan" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

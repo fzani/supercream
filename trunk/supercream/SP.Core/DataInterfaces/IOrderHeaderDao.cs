@@ -18,5 +18,6 @@ namespace SP.Core.DataInterfaces
         string GenerateInvoiceNo();
         string GenerateDeliveryNoteNo();
         string GenerateInvoiceProformaNo();
+        decimal GetOrderExVatTotal(int orderId);
     }
 }
