@@ -4,23 +4,33 @@
     background-color: white;
     color: black;
     width: 300px;
+    padding: 0px;
+    margin: 0px;
 }
 .MyCalendar .ajax__calendar_body
 {
     width: 100%;
+    padding: 0px;
+    margin: 0px;
 }
 .MyCalendar .ajax__calendar_other .ajax__calendar_day, .MyCalendar .ajax__calendar_other .ajax__calendar_year
 {
     color: black;
+    padding: 0px;
+    margin: 0px;
 }
 .MyCalendar .ajax__calendar_hover .ajax__calendar_day, .MyCalendar .ajax__calendar_hover .ajax__calendar_month, .MyCalendar .ajax__calendar_hover .ajax__calendar_year
 {
     color: black;
+    padding: 0px;
+    margin: 0px;
 }
 .MyCalendar .ajax__calendar_active .ajax__calendar_day, .MyCalendar .ajax__calendar_active .ajax__calendar_month, .MyCalendar .ajax__calendar_active .ajax__calendar_year
 {
     color: black;
     font-weight: bold;
+    padding: 0px;
+    margin: 0px;
 }
 
 .ListSearchExtenderPrompt
@@ -91,6 +101,6 @@
 
 .CenterBox
 {
-    width: 90%; 
-    border:solid 1px #000000;
+    width: 90%;
+    border: solid 1px #000000;
 }

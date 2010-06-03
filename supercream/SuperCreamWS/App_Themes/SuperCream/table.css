@@ -24,10 +24,10 @@ table th
 }
 table tr
 {
-    height: 30px;
+   height: 23px;
 }
 table td
-{
+{   
     padding-left: 11px;
     padding-right: 11px;
     vertical-align: middle;
