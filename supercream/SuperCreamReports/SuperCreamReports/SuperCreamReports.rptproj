@@ -9,8 +9,12 @@
   </DataSources>
   <Reports>
     <ProjectItem>
-      <Name>CustomerReport.rdl</Name>
-      <FullPath>CustomerReport.rdl</FullPath>
+      <Name>CustomerProductSalesOverPeriod.rdl</Name>
+      <FullPath>CustomerProductSalesOverPeriod.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>13 - CustomerContactReport.rdl</Name>
+      <FullPath>13 - CustomerContactReport.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>CustomersBySales.rdl</Name>
@@ -29,8 +33,8 @@
       <FullPath>DailyVanAllocation.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>PickList.rdl</Name>
-      <FullPath>PickList.rdl</FullPath>
+      <Name>01 - PickList.rdl</Name>
+      <FullPath>01 - PickList.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>SpecialInvoicePrintReport.rdl</Name>
@@ -57,12 +61,8 @@
       <FullPath>VanLoadOverPeriod.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>VoidOrders.rdl</Name>
-      <FullPath>VoidOrders.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>CustomerProductSalesOverPeriod.rdl</Name>
-      <FullPath>CustomerProductSalesOverPeriod.rdl</FullPath>
+      <Name>14 - VoidOrders.rdl</Name>
+      <FullPath>14 - VoidOrders.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

@@ -109,7 +109,7 @@ ORDER BY OrderHeader.OrderDate DESC</CommandText>
               <Width>0.76042in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.6875in</Width>
+              <Width>0.84375in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.52083in</Width>
@@ -1815,7 +1815,7 @@ ORDER BY OrderHeader.OrderDate DESC</CommandText>
         <DataSetName>DataSet1</DataSetName>
         <Top>0.37389in</Top>
         <Height>0.85in</Height>
-        <Width>8.91666in</Width>
+        <Width>9.07291in</Width>
         <Style />
       </Tablix>
       <Textbox Name="textbox1">
@@ -1873,7 +1873,7 @@ ORDER BY OrderHeader.OrderDate DESC</CommandText>
       <Prompt>Date To</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>8.91667in</Width>
+  <Width>9.07291in</Width>
   <Page>
     <PageHeight>8.5in</PageHeight>
     <PageWidth>11in</PageWidth>
