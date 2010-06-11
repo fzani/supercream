@@ -694,6 +694,27 @@
         <Left>0.4cm</Left>
         <ZIndex>2</ZIndex>
         <ReportItems>
+          <Textbox Name="textbox10">
+            <Top>1cm</Top>
+            <Width>8cm</Width>
+            <ZIndex>7</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>11.4cm</Left>
+            <Height>0.4cm</Height>
+            <Value>=First(Fields!OpeningHoursNotes.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+          </Textbox>
+          <Textbox Name="textbox8">
+            <Top>0.3cm</Top>
+            <Width>3.75cm</Width>
+            <Style>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <ZIndex>6</ZIndex>
+            <CanGrow>true</CanGrow>
+            <Left>11.4cm</Left>
+            <Height>0.4cm</Height>
+            <Value>Opening Hours</Value>
+          </Textbox>
           <Textbox Name="DeliveryDate">
             <rd:DefaultName>DeliveryDate</rd:DefaultName>
             <Top>4cm</Top>
