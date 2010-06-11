@@ -299,6 +299,179 @@
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
       </rd:DataSetInfo>
     </DataSet>
+    <DataSet Name="SuperCreamDBDataSet_rptGetArbitraryCreditNote">
+      <Fields>
+        <Field Name="CreditNoteID">
+          <DataField>CreditNoteID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="OrderID">
+          <DataField>OrderID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="VatExempt">
+          <DataField>VatExempt</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="NetAmount">
+          <DataField>NetAmount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="VatableAmount">
+          <DataField>VatableAmount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="VatRate">
+          <DataField>VatRate</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="LineTotal">
+          <DataField>LineTotal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Reason">
+          <DataField>Reason</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DateCreated">
+          <DataField>DateCreated</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="CreditNoteReference">
+          <DataField>CreditNoteReference</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OrderNo">
+          <DataField>OrderNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvoiceNo">
+          <DataField>InvoiceNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ID">
+          <DataField>ID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="AlphaID">
+          <DataField>AlphaID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyToInvoiceTo">
+          <DataField>CompanyToInvoiceTo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EMailAddress">
+          <DataField>EMailAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FirstName">
+          <DataField>FirstName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InitialNote">
+          <DataField>InitialNote</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="JobRole">
+          <DataField>JobRole</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LastName">
+          <DataField>LastName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Title">
+          <DataField>Title</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyEMailAddress">
+          <DataField>CompanyEMailAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyOfficePhoneNumber1">
+          <DataField>CompanyOfficePhoneNumber1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyOfficePhoneNumber2">
+          <DataField>CompanyOfficePhoneNumber2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyVatRegistrationNumber">
+          <DataField>CompanyVatRegistrationNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyAddressLines">
+          <DataField>CompanyAddressLines</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyCounty">
+          <DataField>CompanyCounty</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyMapReference">
+          <DataField>CompanyMapReference</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyPostCode">
+          <DataField>CompanyPostCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyTown">
+          <DataField>CompanyTown</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyAddressType">
+          <DataField>CompanyAddressType</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="InvoiceAddressMapReference">
+          <DataField>InvoiceAddressMapReference</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvoiceAddressCounty">
+          <DataField>InvoiceAddressCounty</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvoiceAddressTown">
+          <DataField>InvoiceAddressTown</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvoiceAddressPostCode">
+          <DataField>InvoiceAddressPostCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AccountPhoneNumber">
+          <DataField>AccountPhoneNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DueDate">
+          <DataField>DueDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>SuperCreamDBConnectionString</DataSourceName>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>dbo.rptGetArbitraryCreditNote</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>SuperCreamDBDataSet</rd:DataSetName>
+        <rd:TableName>rptGetArbitraryCreditNote</rd:TableName>
+        <rd:TableAdapterName>rptGetArbitraryCreditNoteTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+      </rd:DataSetInfo>
+    </DataSet>
   </DataSets>
   <Width>20.7cm</Width>
   <Body>
@@ -313,7 +486,7 @@
             <ReportItems>
               <Textbox Name="DueDate">
                 <rd:DefaultName>DueDate</rd:DefaultName>
-                <Top>0.3cm</Top>
+                <Top>0.2cm</Top>
                 <Width>3.7cm</Width>
                 <Style>
                   <Format>D</Format>
@@ -326,7 +499,7 @@
                 <Value>=First(Fields!DueDate.Value, "SuperCreamDBDataSet_rptGetOrderCreditNote")</Value>
               </Textbox>
               <Textbox Name="textbox27">
-                <Top>0.3cm</Top>
+                <Top>0.2cm</Top>
                 <Width>1.7cm</Width>
                 <Style>
                   <FontWeight>700</FontWeight>
@@ -339,7 +512,7 @@
                 <Value>Due Date</Value>
               </Textbox>
               <Textbox Name="textbox19">
-                <Top>2.1cm</Top>
+                <Top>2cm</Top>
                 <Width>4.6cm</Width>
                 <ZIndex>7</ZIndex>
                 <CanGrow>true</CanGrow>
@@ -348,7 +521,7 @@
                 <Value>=First(Fields!PaymentTerms.Value, "SuperCreamDBDataSet_rptGetOrderCreditNote")</Value>
               </Textbox>
               <Textbox Name="textbox18">
-                <Top>2.1cm</Top>
+                <Top>2cm</Top>
                 <Width>2.7cm</Width>
                 <Style>
                   <FontWeight>700</FontWeight>
@@ -362,7 +535,7 @@
               </Textbox>
               <Textbox Name="InvoiceNo">
                 <rd:DefaultName>InvoiceNo</rd:DefaultName>
-                <Top>1.5cm</Top>
+                <Top>1.4cm</Top>
                 <Width>4.6cm</Width>
                 <ZIndex>5</ZIndex>
                 <CanGrow>true</CanGrow>
@@ -371,7 +544,7 @@
                 <Value>=First(Fields!InvoiceNo.Value, "SuperCreamDBDataSet_rptGetOrderCreditNote")</Value>
               </Textbox>
               <Textbox Name="textbox16">
-                <Top>1.5cm</Top>
+                <Top>1.4cm</Top>
                 <Width>2.5cm</Width>
                 <Style>
                   <FontWeight>700</FontWeight>
@@ -385,7 +558,7 @@
               </Textbox>
               <Textbox Name="OrderNo">
                 <rd:DefaultName>OrderNo</rd:DefaultName>
-                <Top>0.9cm</Top>
+                <Top>0.8cm</Top>
                 <Width>4.7cm</Width>
                 <ZIndex>3</ZIndex>
                 <CanGrow>true</CanGrow>
@@ -394,7 +567,7 @@
                 <Value>=First(Fields!OrderNo.Value, "SuperCreamDBDataSet_rptGetOrderCreditNote")</Value>
               </Textbox>
               <Textbox Name="textbox4">
-                <Top>0.9cm</Top>
+                <Top>0.8cm</Top>
                 <Width>2.5cm</Width>
                 <Style>
                   <FontWeight>700</FontWeight>
@@ -408,7 +581,7 @@
               </Textbox>
               <Textbox Name="CreditNoteReference_1">
                 <rd:DefaultName>CreditNoteReference_1</rd:DefaultName>
-                <Top>0.3cm</Top>
+                <Top>0.2cm</Top>
                 <Width>5cm</Width>
                 <ZIndex>1</ZIndex>
                 <CanGrow>true</CanGrow>
@@ -418,7 +591,7 @@
               </Textbox>
               <Textbox Name="textbox2">
                 <rd:DefaultName>textbox2</rd:DefaultName>
-                <Top>0.3cm</Top>
+                <Top>0.2cm</Top>
                 <Width>2.5cm</Width>
                 <Style>
                   <FontWeight>700</FontWeight>
@@ -430,19 +603,28 @@
                 <Value>Credit Note No</Value>
               </Textbox>
             </ReportItems>
-            <Top>4.9cm</Top>
+            <Top>5.4cm</Top>
             <Width>19.8cm</Width>
             <Style>
               <BorderStyle>
                 <Default>Solid</Default>
               </BorderStyle>
             </Style>
-            <Height>3.3cm</Height>
+            <Height>2.8cm</Height>
           </Rectangle>
           <Rectangle Name="rectangle3">
             <Left>0.3cm</Left>
             <ZIndex>3</ZIndex>
             <ReportItems>
+              <Textbox Name="textbox52">
+                <Top>0.7cm</Top>
+                <Width>10.7cm</Width>
+                <ZIndex>20</ZIndex>
+                <CanGrow>true</CanGrow>
+                <Left>0.2cm</Left>
+                <Height>0.4cm</Height>
+                <Value>=First(Fields!CompanyToInvoiceTo.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+              </Textbox>
               <Textbox Name="textbox15">
                 <Top>2.575cm</Top>
                 <Width>0.4cm</Width>
@@ -572,7 +754,7 @@
               </Textbox>
               <Textbox Name="AccountPhoneNumber_1">
                 <rd:DefaultName>AccountPhoneNumber_1</rd:DefaultName>
-                <Top>2.8cm</Top>
+                <Top>3.2cm</Top>
                 <Width>3cm</Width>
                 <ZIndex>8</ZIndex>
                 <CanGrow>true</CanGrow>
@@ -582,7 +764,7 @@
               </Textbox>
               <Textbox Name="textbox8">
                 <rd:DefaultName>textbox8</rd:DefaultName>
-                <Top>2.7cm</Top>
+                <Top>3.1cm</Top>
                 <Width>2.53968cm</Width>
                 <Style>
                   <FontWeight>700</FontWeight>
@@ -595,7 +777,7 @@
               </Textbox>
               <Textbox Name="textbox7">
                 <rd:DefaultName>textbox7</rd:DefaultName>
-                <Top>2.3cm</Top>
+                <Top>2.7cm</Top>
                 <Width>5.3cm</Width>
                 <ZIndex>6</ZIndex>
                 <CanGrow>true</CanGrow>
@@ -605,7 +787,7 @@
               </Textbox>
               <Textbox Name="textbox6">
                 <rd:DefaultName>textbox6</rd:DefaultName>
-                <Top>2.3cm</Top>
+                <Top>2.7cm</Top>
                 <Width>3.55cm</Width>
                 <Style>
                   <FontWeight>700</FontWeight>
@@ -618,7 +800,7 @@
               </Textbox>
               <Textbox Name="InvoiceAddressPostCode">
                 <rd:DefaultName>InvoiceAddressPostCode</rd:DefaultName>
-                <Top>1.9cm</Top>
+                <Top>2.3cm</Top>
                 <Width>5.5cm</Width>
                 <ZIndex>4</ZIndex>
                 <CanGrow>true</CanGrow>
@@ -628,7 +810,7 @@
               </Textbox>
               <Textbox Name="InvoiceAddressCounty_1">
                 <rd:DefaultName>InvoiceAddressCounty_1</rd:DefaultName>
-                <Top>1.5cm</Top>
+                <Top>1.9cm</Top>
                 <Width>6.75cm</Width>
                 <ZIndex>3</ZIndex>
                 <CanGrow>true</CanGrow>
@@ -638,7 +820,7 @@
               </Textbox>
               <Textbox Name="AddressLine_1">
                 <rd:DefaultName>AddressLine_1</rd:DefaultName>
-                <Top>1.1cm</Top>
+                <Top>1.5cm</Top>
                 <Width>7cm</Width>
                 <ZIndex>2</ZIndex>
                 <CanGrow>true</CanGrow>
@@ -649,7 +831,7 @@
               <Table Name="table1">
                 <ZIndex>1</ZIndex>
                 <DataSetName>SuperCreamDBDataSet_rptGetAddressLinesForInvoice</DataSetName>
-                <Top>0.7cm</Top>
+                <Top>1.1cm</Top>
                 <Width>6.75cm</Width>
                 <Details>
                   <TableRows>
@@ -696,7 +878,7 @@
                 <Default>Solid</Default>
               </BorderStyle>
             </Style>
-            <Height>3.7cm</Height>
+            <Height>4.3cm</Height>
           </Rectangle>
           <Rectangle Name="rectangle6">
             <Left>0.2cm</Left>
@@ -1264,7 +1446,7 @@
           <Textbox Name="textbox1">
             <rd:DefaultName>textbox1</rd:DefaultName>
             <Top>0.1cm</Top>
-            <Width>6.4cm</Width>
+            <Width>9.2cm</Width>
             <Style>
               <FontSize>16pt</FontSize>
               <PaddingLeft>2pt</PaddingLeft>
@@ -1276,7 +1458,7 @@
             <CanGrow>true</CanGrow>
             <Left>0.5cm</Left>
             <Height>0.7cm</Height>
-            <Value>SuperCream Credit Note</Value>
+            <Value>Midland SuperCream Credit Note</Value>
           </Textbox>
           <Rectangle Name="rectangle5">
             <Left>0.1cm</Left>

@@ -23,7 +23,7 @@ public partial class Reports_SelectReports : System.Web.UI.Page
             rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
             CatalogItem[] catalogItems;
             catalogItems = rs.ListChildren("/" + superCreamReportsPath, true);
-            catalogItems.OrderBy(q => q.Name);
+            catalogItems.OrderBy(q => q.Name.Substring(0, 2));
 
             string strDisplay;
             foreach (var reportItem in catalogItems.Where(
