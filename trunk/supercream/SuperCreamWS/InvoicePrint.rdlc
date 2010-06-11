@@ -660,7 +660,7 @@
                 <Left>0.15cm</Left>
               </Table>
             </ReportItems>
-            <Top>9cm</Top>
+            <Top>9.1cm</Top>
             <Width>20cm</Width>
             <Height>14.1cm</Height>
           </Rectangle>
@@ -1197,6 +1197,30 @@
           <Rectangle Name="rectangle5">
             <Left>0.20582cm</Left>
             <ReportItems>
+              <Textbox Name="textbox53">
+                <Top>0.2cm</Top>
+                <Width>4.7cm</Width>
+                <Style>
+                  <FontStyle>Italic</FontStyle>
+                </Style>
+                <ZIndex>15</ZIndex>
+                <CanGrow>true</CanGrow>
+                <Left>4.4cm</Left>
+                <Height>0.4cm</Height>
+                <Value>=First(Fields!OpeningHoursNotes.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+              </Textbox>
+              <Textbox Name="textbox52">
+                <Top>0.2cm</Top>
+                <Width>3.75cm</Width>
+                <Style>
+                  <FontWeight>700</FontWeight>
+                </Style>
+                <ZIndex>14</ZIndex>
+                <CanGrow>true</CanGrow>
+                <Left>0.2cm</Left>
+                <Height>0.4cm</Height>
+                <Value>Opening Hours</Value>
+              </Textbox>
               <Textbox Name="textbox50">
                 <rd:DefaultName>textbox50</rd:DefaultName>
                 <Top>0.2cm</Top>
@@ -1419,7 +1443,7 @@
               </Textbox>
               <Textbox Name="DeliveryDate">
                 <rd:DefaultName>DeliveryDate</rd:DefaultName>
-                <Top>3.1cm</Top>
+                <Top>3.7cm</Top>
                 <Width>2.53968cm</Width>
                 <Style>
                   <Format>d</Format>
@@ -1433,7 +1457,7 @@
               </Textbox>
               <Textbox Name="textbox29">
                 <rd:DefaultName>textbox29</rd:DefaultName>
-                <Top>3.1cm</Top>
+                <Top>3.7cm</Top>
                 <Width>3.45cm</Width>
                 <Style>
                   <FontWeight>700</FontWeight>
@@ -1446,7 +1470,7 @@
               </Textbox>
               <Textbox Name="textbox28">
                 <rd:DefaultName>textbox28</rd:DefaultName>
-                <Top>2.4cm</Top>
+                <Top>3.1cm</Top>
                 <Width>2.5cm</Width>
                 <Style>
                   <TextAlign>Left</TextAlign>
@@ -1459,7 +1483,7 @@
               </Textbox>
               <Textbox Name="textbox27">
                 <rd:DefaultName>textbox27</rd:DefaultName>
-                <Top>2.4cm</Top>
+                <Top>3.1cm</Top>
                 <Width>4.25cm</Width>
                 <Style>
                   <FontWeight>700</FontWeight>
@@ -1472,7 +1496,7 @@
               </Textbox>
               <Textbox Name="SpecialInstructions">
                 <rd:DefaultName>SpecialInstructions</rd:DefaultName>
-                <Top>0.7cm</Top>
+                <Top>1.4cm</Top>
                 <Width>8.95cm</Width>
                 <Style>
                   <BorderStyle>
@@ -1491,7 +1515,7 @@
               </Textbox>
               <Textbox Name="textbox26">
                 <rd:DefaultName>textbox26</rd:DefaultName>
-                <Top>0.1cm</Top>
+                <Top>0.8cm</Top>
                 <Width>3.75cm</Width>
                 <Style>
                   <FontWeight>700</FontWeight>
