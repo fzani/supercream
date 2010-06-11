@@ -111,17 +111,17 @@ public partial class Admin_Account : System.Web.UI.Page
             CustomerUI cui = new CustomerUI();
 
             List<ContactDetail> cList = (from c in cui.GetContactDetailsByCustomerID(Convert.ToInt32(CustomerDropDownList.SelectedValue))
-                                                        select new ContactDetail
-                                                        {
-                                                            ID = c.ID,
-                                                            FirstName = c.FirstName + " " + c.LastName,
-                                                            EMailAddress = c.EMailAddress,
-                                                            JobRole = c.JobRole,
-                                                            Title = c.Title,
-                                                            LastName = c.LastName
-                                                        }
+                                         select new ContactDetail
+                                         {
+                                             ID = c.ID,
+                                             FirstName = c.FirstName + " " + c.LastName,
+                                             EMailAddress = c.EMailAddress,
+                                             JobRole = c.JobRole,
+                                             Title = c.Title,
+                                             LastName = c.LastName
+                                         }
                                                    ).ToList<ContactDetail>();
-           
+
             ContactDetail contactDetail = new ContactDetail
             {
                 ID = -1,
@@ -183,8 +183,8 @@ public partial class Admin_Account : System.Web.UI.Page
 
             forTheAttentionOfDropDownList.DataSource = cList;
             forTheAttentionOfDropDownList.DataBind();
-            if(forTheAttentionOfDropDownList.Items.FindByValue(account.ContactDetailID.ToString()) != null)
-              forTheAttentionOfDropDownList.SelectedValue = account.ContactDetailID.ToString();
+            if (forTheAttentionOfDropDownList.Items.FindByValue(account.ContactDetailID.ToString()) != null)
+                forTheAttentionOfDropDownList.SelectedValue = account.ContactDetailID.ToString();
 
             DropDownList paymentDropDownList = row.FindControl("PaymentTermsDropDownList") as DropDownList;
             if (paymentDropDownList != null)
@@ -253,7 +253,7 @@ public partial class Admin_Account : System.Web.UI.Page
             string invoicePostCode = (messagePanel.FindControl("InvoicePostCodeTextBox") as TextBox).Text;
             string companyToInvoiceTo = (messagePanel.FindControl("CompanyToInvoiceToTextBox") as TextBox).Text;
             string forTheAttentionOf = forTheAttentionOfDropDownList.SelectedValue;
-            
+
             if (ui.AlphaIDExists(accountNo) && (ui.GetByID(id).AlphaID != accountNo))
             {
                 throw new ApplicationException("Cannot change Account No Code to another code that already exists");
@@ -367,11 +367,11 @@ public partial class Admin_Account : System.Web.UI.Page
         else
         {
             ContactLabel.Visible = true;
-            ContactNoLabel.Visible = true;                 
+            ContactNoLabel.Visible = true;
 
             ContactDetailUI ui = new ContactDetailUI();
             ContactDetail c = ui.GetContactDetail(Convert.ToInt32(ForTheAttentionOfDropDownList.SelectedValue));
-            ContactNoLabel.Text = c.Phone[0].Description.ToString();
+            ContactNoLabel.Text = c.Phone[2].Description.ToString();
         }
     }
 }
