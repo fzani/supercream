@@ -65,9 +65,8 @@
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
         <CommandText>SELECT        oh.ID AS OrderID, vn.ID AS VanID, vn.Description, oh.DeliveryDate, oh.AlphaID, oh.InvoiceNo, p.ProductCode, p.Description AS ProductDescription, ol.NoOfUnits, 
-                         p.RRPPerItem, p.UnitQty, ol.Price * ol.NoOfUnits AS NetPrice, 
-                         CASE WHEN vc.PercentageValue &gt; 0 THEN round(ol.NoOfUnits * ol.Price * (1 + (vc.PercentageValue / 100)), 2) ELSE round(ol.NoOfUnits * ol.Price, 2) 
-                         END AS Price
+                         p.RRPPerItem, p.UnitQty, ol.Price * ol.NoOfUnits AS NetPrice, CASE WHEN p.VatExempt = 1 THEN round(ol.NoOfUnits * ol.Price, 2) 
+                         ELSE round(ol.NoOfUnits * ol.Price * (1 + (vc.PercentageValue / 100)), 2) END AS Price
 FROM            OrderHeader AS oh INNER JOIN
                          OrderNotesStatus AS os ON oh.ID = os.OrderID INNER JOIN
                          Van AS vn ON os.VanID = vn.ID INNER JOIN

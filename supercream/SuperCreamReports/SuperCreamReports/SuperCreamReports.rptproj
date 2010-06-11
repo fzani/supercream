@@ -9,28 +9,28 @@
   </DataSources>
   <Reports>
     <ProjectItem>
-      <Name>CustomerProductSalesOverPeriod.rdl</Name>
-      <FullPath>CustomerProductSalesOverPeriod.rdl</FullPath>
+      <Name>06 - CustomerProductSalesOverPeriod.rdl</Name>
+      <FullPath>06 - CustomerProductSalesOverPeriod.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>13 - CustomerContactReport.rdl</Name>
       <FullPath>13 - CustomerContactReport.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>CustomersBySales.rdl</Name>
-      <FullPath>CustomersBySales.rdl</FullPath>
+      <Name>08 - CustomersBySales.rdl</Name>
+      <FullPath>08 - CustomersBySales.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>CustomerTopSellingProducts.rdl</Name>
-      <FullPath>CustomerTopSellingProducts.rdl</FullPath>
+      <Name>04 - CustomerTopSellingProducts.rdl</Name>
+      <FullPath>04 - CustomerTopSellingProducts.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>DailyReportForLedger.rdl</Name>
-      <FullPath>DailyReportForLedger.rdl</FullPath>
+      <Name>03 - DailyReportForLedger.rdl</Name>
+      <FullPath>03 - DailyReportForLedger.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>DailyVanAllocation.rdl</Name>
-      <FullPath>DailyVanAllocation.rdl</FullPath>
+      <Name>02 - DailyVanAllocation.rdl</Name>
+      <FullPath>02 - DailyVanAllocation.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>01 - PickList.rdl</Name>
@@ -41,24 +41,24 @@
       <FullPath>SpecialInvoicePrintReport.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Top10CustomersBySales.rdl</Name>
-      <FullPath>Top10CustomersBySales.rdl</FullPath>
+      <Name>07 - Top10CustomersBySales.rdl</Name>
+      <FullPath>07 - Top10CustomersBySales.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Top10VatExempt.rdl</Name>
-      <FullPath>Top10VatExempt.rdl</FullPath>
+      <Name>09 - Top10VatExempt.rdl</Name>
+      <FullPath>09 - Top10VatExempt.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>TopSalesByProductDelivered.rdl</Name>
-      <FullPath>TopSalesByProductDelivered.rdl</FullPath>
+      <Name>10 - TopSalesByProductDelivered.rdl</Name>
+      <FullPath>10 - TopSalesByProductDelivered.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>TopSalesByProductQuantity.rdl</Name>
-      <FullPath>TopSalesByProductQuantity.rdl</FullPath>
+      <Name>05 - TopSalesByProductQuantity.rdl</Name>
+      <FullPath>05 - TopSalesByProductQuantity.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>VanLoadOverPeriod.rdl</Name>
-      <FullPath>VanLoadOverPeriod.rdl</FullPath>
+      <Name>11 - VanLoadOverPeriod.rdl</Name>
+      <FullPath>11 - VanLoadOverPeriod.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>14 - VoidOrders.rdl</Name>
