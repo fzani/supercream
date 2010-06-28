@@ -1012,7 +1012,7 @@
                 <CanGrow>true</CanGrow>
                 <Left>0.25cm</Left>
                 <Height>0.4cm</Height>
-                <Value>Invoice Adress</Value>
+                <Value>Invoice Address</Value>
               </Textbox>
               <Textbox Name="textbox16">
                 <rd:DefaultName>textbox16</rd:DefaultName>
