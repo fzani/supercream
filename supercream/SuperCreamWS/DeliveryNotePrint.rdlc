@@ -363,13 +363,23 @@
     </DataSet>
   </DataSets>
   <Code />
-  <Width>20.5cm</Width>
+  <Width>21.05cm</Width>
   <Body>
     <ColumnSpacing>1cm</ColumnSpacing>
     <ReportItems>
+      <Textbox Name="textbox18">
+        <rd:DefaultName>textbox18</rd:DefaultName>
+        <Top>5.3cm</Top>
+        <Width>6.75cm</Width>
+        <ZIndex>7</ZIndex>
+        <CanGrow>true</CanGrow>
+        <Left>13.1cm</Left>
+        <Height>0.4cm</Height>
+        <Value>=First(Fields!OutletStoreMapReference.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+      </Textbox>
       <Rectangle Name="rectangle6">
         <Left>0.1cm</Left>
-        <ZIndex>5</ZIndex>
+        <ZIndex>6</ZIndex>
         <ReportItems>
           <Table Name="table4">
             <DataSetName>SuperCreamDBDataSet_rptDetailsGetInvoice</DataSetName>
@@ -550,7 +560,7 @@
       </Rectangle>
       <Rectangle Name="rectangle4">
         <Left>10.4cm</Left>
-        <ZIndex>4</ZIndex>
+        <ZIndex>5</ZIndex>
         <ReportItems>
           <Textbox Name="textbox7">
             <rd:DefaultName>textbox7</rd:DefaultName>
@@ -564,7 +574,7 @@
           </Textbox>
           <Table Name="table2">
             <ZIndex>7</ZIndex>
-            <DataSetName>SuperCreamDBDataSet_rptGetAddressLinesForInvoice</DataSetName>
+            <DataSetName>SuperCreamDBDataSet_rptGetFoundationFacilityAddressLines</DataSetName>
             <Top>0.5cm</Top>
             <Width>6cm</Width>
             <Details>
@@ -666,7 +676,7 @@
       </Rectangle>
       <Rectangle Name="rectangle3">
         <Left>0.2cm</Left>
-        <ZIndex>3</ZIndex>
+        <ZIndex>4</ZIndex>
         <ReportItems>
           <Textbox Name="textbox15">
             <Top>0.8cm</Top>
@@ -709,7 +719,7 @@
       </Rectangle>
       <Rectangle Name="rectangle5">
         <Left>0.4cm</Left>
-        <ZIndex>2</ZIndex>
+        <ZIndex>3</ZIndex>
         <ReportItems>
           <Textbox Name="textbox10">
             <Top>0.8cm</Top>
@@ -768,9 +778,9 @@
             </Style>
             <ZIndex>3</ZIndex>
             <CanGrow>true</CanGrow>
-            <Left>4.75cm</Left>
+            <Left>4.8cm</Left>
             <Height>0.4cm</Height>
-            <Value>=CountRows("SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
+            <Value>=Sum(Fields!NoOfUnits.Value, "SuperCreamDBDataSet_rptDetailsGetInvoice")</Value>
           </Textbox>
           <Textbox Name="textbox27">
             <rd:DefaultName>textbox27</rd:DefaultName>
@@ -828,7 +838,7 @@
       </Rectangle>
       <Rectangle Name="rectangle2">
         <Left>0.2cm</Left>
-        <ZIndex>1</ZIndex>
+        <ZIndex>2</ZIndex>
         <ReportItems>
           <Textbox Name="OutletStoreName">
             <rd:DefaultName>OutletStoreName</rd:DefaultName>
@@ -842,6 +852,7 @@
           </Textbox>
           <Textbox Name="textbox5">
             <rd:DefaultName>textbox5</rd:DefaultName>
+            <Top>0.1cm</Top>
             <Width>6.75cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
@@ -922,6 +933,7 @@
       </Rectangle>
       <Rectangle Name="rectangle1">
         <Left>0.25cm</Left>
+        <ZIndex>1</ZIndex>
         <ReportItems>
           <Textbox Name="textbox4">
             <Top>0.25cm</Top>
@@ -1031,6 +1043,15 @@
         </Style>
         <Height>1.88492cm</Height>
       </Rectangle>
+      <Textbox Name="textbox16">
+        <rd:DefaultName>textbox16</rd:DefaultName>
+        <Top>5.3cm</Top>
+        <Width>2.5cm</Width>
+        <CanGrow>true</CanGrow>
+        <Left>10.5cm</Left>
+        <Height>0.4cm</Height>
+        <Value>Map Reference</Value>
+      </Textbox>
     </ReportItems>
     <Height>28.6cm</Height>
   </Body>
