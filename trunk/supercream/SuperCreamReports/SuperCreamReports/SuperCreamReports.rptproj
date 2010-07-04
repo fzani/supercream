@@ -61,10 +61,6 @@
       <FullPath>14 - VoidOrders.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>SpecialInvoicePrintReport.rdl</Name>
-      <FullPath>SpecialInvoicePrintReport.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>15 - PaymentsOutstanding.rdl</Name>
       <FullPath>15 - PaymentsOutstanding.rdl</FullPath>
     </ProjectItem>
@@ -75,6 +71,14 @@
     <ProjectItem>
       <Name>17 - PaymentsOutstandingSummaryByCustomer.rdl</Name>
       <FullPath>17 - PaymentsOutstandingSummaryByCustomer.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>SpecialInvoicePrintReport.rdl</Name>
+      <FullPath>SpecialInvoicePrintReport.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>18 - Ledger Totals.rdl</Name>
+      <FullPath>18 - Ledger Totals.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
