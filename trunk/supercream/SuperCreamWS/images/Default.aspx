@@ -20,12 +20,12 @@
         <!--header -->
         <div id="header">
             <h1 id="logo-text">
-                <a href="Default.aspx">Super Cream Order Processing</a></h1>
+                <a href="~/General/Default.aspx">Super Cream Order Processing</a></h1>
             <p id="slogan">
                 The way forward ...</p>
             <div id="header-links">
                 <p>
-                    <a href="Default.aspx">Home</a> | <a href="Default.aspx">Contact</a> | <a href="Default.aspx">
+                    <a href="~/General/Default.aspx">Home</a> | <a href="~/General/Default.aspx">Contact</a> | <a href="~/General/Default.aspx">
                         Site Map</a>
                 </p>
             </div>
@@ -33,12 +33,12 @@
         <!-- menu -->
         <div id="menu">
             <ul>
-                <li id="current"><a href="Default.aspx">Home</a></li>
-                <li><a href="Default.aspx">Archives</a></li>
-                <li><a href="Default.aspx">Downloads</a></li>
-                <li><a href="Default.aspx">Services</a></li>
-                <li><a href="Default.aspx">Support</a></li>
-                <li class="last"><a href="Default.aspx">About</a></li>
+                <li id="current"><a href="~/General/Default.aspx">Home</a></li>
+                <li><a href="~/General/Default.aspx">Archives</a></li>
+                <li><a href="~/General/Default.aspx">Downloads</a></li>
+                <li><a href="~/General/Default.aspx">Services</a></li>
+                <li><a href="~/General/Default.aspx">Support</a></li>
+                <li class="last"><a href="~/General/Default.aspx">About</a></li>
             </ul>
         </div>
         <!-- content-wrap starts here -->
@@ -55,7 +55,7 @@
                 <h3>
                     Sidebar Menu</h3>
                 <ul class="sidemenu">
-                    <li><a href="Default.aspx">Home</a></li>
+                    <li><a href="~/General/Default.aspx">Home</a></li>
                     <li><a href="#TemplateInfo">Template Info</a></li>
                     <li><a href="#SampleTags">Sample Tags</a></li>
                     <li><a href="http://www.styleshout.com/">More Free Templates</a></li>
@@ -124,7 +124,7 @@
                 
                 <a name="TemplateInfo"></a>
                 <h2>
-                    <a href="Default.aspx">Template Info</a></h2>
+                    <a href="~/General/Default.aspx">Template Info</a></h2>
                 <p>
                     <strong>Envision 1.1</strong> is a free, W3C-compliant, CSS-based website template
                     by <strong><a href="http://www.styleshout.com/">styleshout.com</a></strong>. This
@@ -144,8 +144,8 @@
                 &copy; 2009 <strong>Alterax</strong> | Design by: <a href="http://www.styleshout.com/">
                     styleshout</a> | Valid <a href="http://validator.w3.org/check?uri=referer">XHTML</a>
                 | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="Default.aspx">Home</a>&nbsp;|&nbsp; <a href="Default.aspx">Sitemap</a>&nbsp;|&nbsp;
-                <a href="Default.aspx">RSS Feed</a>
+                <a href="~/General/Default.aspx">Home</a>&nbsp;|&nbsp; <a href="Default.aspx">Sitemap</a>&nbsp;|&nbsp;
+                <a href="~/General/Default.aspx">RSS Feed</a>
             </p>
         </div>
         <!-- wrap ends here -->

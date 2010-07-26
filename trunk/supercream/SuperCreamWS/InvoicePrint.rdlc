@@ -1272,6 +1272,7 @@
                     <Style>
                       <FontStyle>Italic</FontStyle>
                       <Format>C</Format>
+                      <TextAlign>Center</TextAlign>
                     </Style>
                     <ZIndex>7</ZIndex>
                     <CanGrow>true</CanGrow>
@@ -1310,6 +1311,7 @@
                     <Style>
                       <FontStyle>Italic</FontStyle>
                       <Format>C</Format>
+                      <TextAlign>Center</TextAlign>
                     </Style>
                     <ZIndex>4</ZIndex>
                     <CanGrow>true</CanGrow>

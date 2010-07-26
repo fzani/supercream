@@ -22,23 +22,23 @@
         <!--header -->
         <div id="header">
             <h1 id="logo-text">
-                <a href="Default.aspx">Super Cream Order Processing</a></h1>
+                <a href="~/General/Default.aspx" runat="server">Super Cream Order Processing</a></h1>
             <p id="slogan">
                 The way forward ...</p>
             <div id="header-links">
                 <p>
-                    <a href="~/Default.aspx" runat="server">Home</a> | <a href="~/Support.aspx" runat="server">
-                        Contact</a> | <a href="~/Default.aspx" runat="server">Site Map</a>
+                    <a href="~/General/Default.aspx" runat="server">Home</a> | <a href="~/General/Support.aspx" runat="server">
+                        Contact</a> | <a href="~/General/Default.aspx" runat="server">Site Map</a>
                 </p>
             </div>
         </div>
         <!-- menu -->
         <div id="menu">
             <ul>
-                <li id="current"><a href="~/Default.aspx" runat="server">Home</a></li>
-                <li><a href="~/Services.aspx" runat="server">Services</a></li>
-                <li><a href="~/Support.aspx" runat="server">Support</a></li>
-                <li class="last"><a href="~/About.aspx" runat="server">About</a></li>
+                <li id="current"><a href="~/General/Default.aspx" runat="server">Home</a></li>
+                <li><a href="~/General/Services.aspx" runat="server">Services</a></li>
+                <li><a href="~/General/Support.aspx" runat="server">Support</a></li>
+                <li class="last"><a href="~/General/About.aspx" runat="server">About</a></li>
             </ul>
         </div>
         <!-- content-wrap starts here -->
@@ -54,8 +54,8 @@
         <div id="footer">
             <p>
                 &copy; 2009 - 2010 <strong>Alterax</strong> | Design by: <a href="http://www.styleshout.com/">
-                    styleshout</a> | <a href="~/Default.aspx" runat="server">Home</a>&nbsp;|&nbsp;
-                <a href="~/Default.aspx" runat="server">Sitemap</a>&nbsp;|&nbsp; <a href="~/Default.aspx"
+                    styleshout</a> | <a href="~/General/Default.aspx" runat="server">Home</a>&nbsp;|&nbsp;
+                <a href="~/General/Default.aspx" runat="server">Sitemap</a>&nbsp;|&nbsp; <a href="~/General/Default.aspx"
                     runat="server">RSS Feed</a>
             </p>
         </div>
