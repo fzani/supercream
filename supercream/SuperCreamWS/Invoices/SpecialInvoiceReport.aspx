@@ -6,7 +6,7 @@
     Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainPlaceholder" runat="Server">
     <div style="text-align: right; padding-right:20px; font-size:14px;">
-        <asp:HyperLink ID="RedirectLinkButton" Text="Return to main menu" NavigateUrl="~/Default.aspx"
+        <asp:HyperLink ID="RedirectLinkButton" Text="Return to main menu" NavigateUrl="~/Generate/Default.aspx"
             runat="server"></asp:HyperLink>
     </div>
     <rsweb:ReportViewer ID="SpecialInvoiceReportViewer" Style="width: 100%;" runat="server"
