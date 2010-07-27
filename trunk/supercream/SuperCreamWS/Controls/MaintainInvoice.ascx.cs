@@ -254,8 +254,8 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
         IReportDataSets reportDataSets = new ReportDataSets();
         ReportDataSource[] reportDataSources = reportDataSets.GetReportDataSets(orderID, accountId, outletStoreId);
 
-        PrintReport printReport = new PrintReport();
-        printReport.Run("InvoicePrint.rdlc", reportDataSources, PageMode.Portrait);
+        SP.Utils.PrintReport printReport = new SP.Utils.PrintReport();
+        printReport.Run("InvoicePrint.rdlc", reportDataSources, PageMode.Portrait, Profile.PrinterName.ToString());
         OKModalPopupExtender.Show();
     }
 

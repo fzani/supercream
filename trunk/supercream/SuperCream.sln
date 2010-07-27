@@ -14,6 +14,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SuperCreamWS", "SuperCreamWS\", "{3CAC1617-4B72-44EE-AC5C-E83B9F987BDA}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFramework = "3.5"
+		ProjectReferences = "{D446DCEC-2802-4948-8B14-CC7198E1A0DF}|SP.Utils.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/SuperCreamWS"
 		Debug.AspNetCompiler.PhysicalPath = "SuperCreamWS\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\SuperCreamWS\"
