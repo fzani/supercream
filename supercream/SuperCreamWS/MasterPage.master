@@ -26,8 +26,8 @@
                 The way forward ...</p>
             <div id="header-links">
                 <p>
-                    <a href="~/General/Default.aspx" runat="server">Home</a> | <a href="~/General/Support.aspx" runat="server">
-                        Contact</a> | <a href="~/General/Default.aspx" runat="server">Site Map</a>
+                    <a href="~/General/Default.aspx" runat="server">Home</a> | <a href="~/General/Support.aspx"
+                        runat="server">Contact</a> | <a href="~/General/Default.aspx" runat="server">Site Map</a>
                 </p>
             </div>
         </div>
@@ -43,12 +43,13 @@
         <!-- content-wrap starts here -->
         <!-- content-wrap starts here -->
         <div id="content-wrap">
-            <div id="sidebar">               
+            <div id="sidebar">
                 <h3>
                     Admin</h3>
                 <ul class="sidemenu">
                     <li><a href="~/Admin/Account.aspx" runat="server">Accounts</a></li>
                     <li><a href="~/Admin/Customer.aspx" runat="server">Customers</a></li>
+                    <li><a href="~/Admin/SetupPrinter.aspx" runat="server">Setup Printer</a></li>
                     <li><a href="~/Admin/Terms.aspx" runat="server">Payment Terms</a></li>
                     <li><a href="~/Admin/Product.aspx" runat="server">Products</a></li>
                     <li><a href="~/Admin/PriceList.aspx" runat="server">Price Lists</a></li>
@@ -65,12 +66,12 @@
                     <li><strong>Invoicing</strong>
                         <br />
                         <a id="A10" href="~/Invoices/CompleteInvoices.aspx" runat="server">Complete Invoices</a>
-                        <br />                        
+                        <br />
                         <a id="A2" href="~/Invoices/ProformaInvoices.aspx" runat="server">Proforma Invoices</a>
                         <br />
                         <a id="A5" href="~/Invoices/SpecialInvoices.aspx" runat="server">Special Invoices</a>
                         <br />
-                        <a id="A1" href="~/Invoices/Invoices.aspx" runat="server">Standard Invoices</a>                        
+                        <a id="A1" href="~/Invoices/Invoices.aspx" runat="server">Standard Invoices</a>
                     </li>
                     <li><strong>Delivery Notes</strong>
                         <br />
@@ -79,11 +80,12 @@
                     <li><strong>Credit Notes</strong>
                         <br />
                         <a id="A4" href="~/CreditNote/CreditNote.aspx" runat="server">Credit Note against Order</a>
-                          <br />
-                        <a id="A8" href="~/CreditNote/OrderCreditNote.aspx" runat="server">Credit Note against Order Line</a>                                        
-                            <br />
-                        <a id="A9" href="~/CreditNote/SpecialInvoiceCreditNote.aspx" runat="server">Special Invoice Credit Note</a>    
-                    </li>
+                        <br />
+                        <a id="A8" href="~/CreditNote/OrderCreditNote.aspx" runat="server">Credit Note against
+                            Order Line</a>
+                        <br />
+                        <a id="A9" href="~/CreditNote/SpecialInvoiceCreditNote.aspx" runat="server">Special
+                            Invoice Credit Note</a> </li>
                     <li><a href="#"><strong>Pick Lists</strong>
                         <br />
                         <a id="A6" href="~/PickLists/AllocatePickListToVans.aspx" runat="server">Reallocate

@@ -247,7 +247,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             ReportDataSource[] reportDataSources = reportDataSets.GetReportDataSets(orderID, accountId, outletStoreId);
 
             PrintReport printReport = new PrintReport();
-            printReport.Run("DeliveryNotePrint.rdlc", reportDataSources, PageMode.Portrait);
+            printReport.Run("DeliveryNotePrint.rdlc", reportDataSources, PageMode.Portrait, Profile.PrinterName);
             OKModalPopupExtender.Show();
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
@@ -261,7 +261,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             orderNoteStatus.DeliveryNotePrinted = true;
             ui.Update(orderNoteStatus);
 
-            PrintDeliveryNoteButton.Visible = true;                  
+            PrintDeliveryNoteButton.Visible = true;
             //// NewPrinting.Run(@"Report1.rdlc", "\\\\paris\\Samsung CLP-310 Series", ds.Tables[0], "SuperCreamDBDataSet_InvoiceHeader"); 
             // printReport.Run("InvoicePrint.rdl", dataSets, PageMode.Portrait);
         }
@@ -280,7 +280,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             }
         }
     }
-   
+
     #endregion
 
     #region Data Grid Events

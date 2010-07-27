@@ -31,7 +31,7 @@ namespace SP.Utils
         /// <param name="PrinterName">Name of the printer.</param>
         /// <param name="MyDataTable">My data table.</param>
         /// <param name="DSstring">The D sstring.</param>
-        public void Run(string reportName, DataSet[] dataSets, PageMode pageMode)
+        public void Run(string reportName, DataSet[] dataSets, PageMode pageMode, string printerName)
         {
             LocalReport report = new LocalReport();
             report.ReportPath = reportName;
@@ -48,7 +48,7 @@ namespace SP.Utils
 
             this.currentPageIndex = 0;
 
-            Print();
+            Print(printerName);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace SP.Utils
         /// <param name="PrinterName">Name of the printer.</param>
         /// <param name="MyDataTable">My data table.</param>
         /// <param name="DSstring">The D sstring.</param>
-        public void Run(string reportName, ReportDataSource[] reportDataSources, PageMode pageMode)
+        public void Run(string reportName, ReportDataSource[] reportDataSources, PageMode pageMode, string printerName)
         {
             LocalReport report = new LocalReport();
             report.ReportPath = reportName;
@@ -76,7 +76,7 @@ namespace SP.Utils
 
             this.currentPageIndex = 0;
 
-            Print();
+            Print(printerName);
         }
 
         /// <summary>
@@ -161,9 +161,13 @@ namespace SP.Utils
         /// Prints the specified printer name.
         /// </summary>
         /// <param name="PrinterName">Name of the printer.</param>
-        private void Print()
+        private void Print(string printerName)
         {
-            string printerName = System.Configuration.ConfigurationManager.AppSettings["ReportPrinterName"];
+            if (String.IsNullOrEmpty(printerName))
+            {
+                printerName = System.Configuration.ConfigurationManager.AppSettings["ReportPrinterName"];
+            }
+
             if (this.streams == null || this.streams.Count == 0)
                 return;
 
@@ -194,6 +198,6 @@ namespace SP.Utils
 
                 this.streams = null;
             }
-        }
+        }       
     }
 }

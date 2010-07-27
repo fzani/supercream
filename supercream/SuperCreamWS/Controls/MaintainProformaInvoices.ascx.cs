@@ -274,7 +274,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         ReportDataSource[] reportDataSources = reportDataSets.GetReportDataSets(orderID, accountId, outletStoreId);
 
         PrintReport printReport = new PrintReport();
-        printReport.Run("InvoiceProformaPrint.rdlc", reportDataSources, PageMode.Portrait);
+        printReport.Run("InvoiceProformaPrint.rdlc", reportDataSources, PageMode.Portrait, Profile.PrinterName);
         OKModalPopupExtender.Show();
     }
 
