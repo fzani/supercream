@@ -571,8 +571,12 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
 
         if (e.Row.RowType == DataControlRowType.Footer)
         {
-            Label priceLabel = (Label)e.Row.FindControl("priceLabelTotal");
-            priceLabel.Text = priceTotal.ToString("c");
+            if (this.OrderID != -1)
+            {
+                var exVatTotal = OrderHeaderUI.GetExVatTotal(this.OrderID.Value);
+                Label priceLabel = (Label)e.Row.FindControl("priceLabelTotal");
+                priceLabel.Text = exVatTotal.ToString("c");
+            }
         }
     }
 
