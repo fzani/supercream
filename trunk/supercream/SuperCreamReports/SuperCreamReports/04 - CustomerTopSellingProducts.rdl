@@ -132,6 +132,7 @@ order by p.Description</CommandText>
     
     declare @VatCodeId int
     select @VatCodeId = VatCodeID from StandardVatRate
+    select @VatRate = 17.5
     select @VatRate = PercentageValue from VatCode
 		where ID = @VatCodeId					
 	        		
@@ -139,17 +140,22 @@ order by p.Description</CommandText>
 			name, 
 			p.ProductCode, 
 			p.Description,
-		case when p.VatExempt = 1 then round(sum(ol.Price * ol.NoOfUnits),2) else round(sum(ol.Price * ol.NoOfUnits * (1 + (@VatRate/ 100.0))),2) end Price
+		case when p.VatExempt = 1 then round(sum((ol.Price * ol.NoOfUnits) - isnull(ocnl.Price, 0)),2)
+			else Round(sum(ol.Price * ol.NoOfUnits * (1 + (@VatRate/ 100.0))) - sum(isnull(ocnl.Price, 0) * (1 + (@VatRate/ 100.0))),2) end Price			
 		from OrderHeader oh
 		inner join OrderLine ol on
 			oh.ID = ol.OrderID
 		inner join Customer c on 
 			oh.CustomerID = c.ID
 		inner join Product p on
-			ol.ProductID = p.ID				
+			ol.ProductID = p.ID							
+		inner join VatCode v on 
+			oh.VatCodeID = v.ID	
+		left join OrderCreditNoteLine ocnl on
+			ol.ID = ocnl.OrderLineID				
 		where c.ID in (select id from @CustomerIdList) and
 			oh.OrderStatus in (2,3,6,7)			
-			and oh.DeliveryDate between @p_DateFrom and @p_DateTo
+		    and oh.DeliveryDate between @p_DateFrom and @p_DateTo
 		group by c.ID, 
 			name,
 			p.ProductCode, 
@@ -493,7 +499,9 @@ order by p.Description</CommandText>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox48</rd:DefaultName>
@@ -672,7 +680,7 @@ order by p.Description</CommandText>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>The folllowing Report details Product Units Sold  by customer. Dates ranges selected, reflect Delivery Dates for Products.</Value>
+                <Value>The folllowing Report details Product Units Sold  by customer. Dates ranges selected, reflect Delivery Dates for Products. Report takes account of any adjustments made by Credit Notes.</Value>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                 </Style>
