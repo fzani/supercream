@@ -17,10 +17,6 @@
       <FullPath>02 - DailyVanAllocation.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>03 - DailyReportForLedger.rdl</Name>
-      <FullPath>03 - DailyReportForLedger.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>04 - CustomerTopSellingProducts.rdl</Name>
       <FullPath>04 - CustomerTopSellingProducts.rdl</FullPath>
     </ProjectItem>
@@ -73,12 +69,16 @@
       <FullPath>17 - PaymentsOutstandingSummaryByCustomer.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>03 - Ledger Totals.rdl</Name>
+      <FullPath>03 - Ledger Totals.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>SpecialInvoicePrintReport.rdl</Name>
       <FullPath>SpecialInvoicePrintReport.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>18 - Ledger Totals.rdl</Name>
-      <FullPath>18 - Ledger Totals.rdl</FullPath>
+      <Name>19 - ArbitraryCreditNoteSummary.rdl</Name>
+      <FullPath>19 - ArbitraryCreditNoteSummary.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
