@@ -15,15 +15,21 @@
         </Field>
         <Field Name="Price">
           <DataField>Price</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+          <rd:TypeName>System.Double</rd:TypeName>
         </Field>
       </Fields>
       <Query>
         <DataSourceName>SCDataSource</DataSourceName>
-        <CommandText>SELECT        TOP (10) c.Name, SUM(ol.NoOfUnits * ol.Price) AS Price
+        <CommandText>SELECT        TOP (10) c.Name, SUM(CASE WHEN p.VatExempt = 1 THEN round((ol.Price * ol.NoOfUnits) - isnull(ocnl.Price, 0), 2) 
+                         ELSE round((ol.Price * ol.NoOfUnits * (1 + (v.PercentageValue / 100.0))) - isnull(ocnl.Price, 0) * (1 + (v.PercentageValue / 100.0)), 2) END) 
+                         - SUM(ISNULL(cr.CreditAmount, 0)) AS Price
 FROM            OrderHeader AS oh INNER JOIN
                          Customer AS c ON oh.CustomerID = c.ID INNER JOIN
-                         OrderLine AS ol ON oh.ID = ol.OrderID
+                         OrderLine AS ol ON oh.ID = ol.OrderID INNER JOIN
+                         Product AS p ON ol.ProductID = p.ID INNER JOIN
+                         VatCode AS v ON oh.VatCodeID = v.ID LEFT OUTER JOIN
+                         OrderCreditNoteLine AS ocnl ON ol.ID = ocnl.OrderLineID LEFT OUTER JOIN
+                         CreditNote AS cr ON oh.ID = cr.OrderID
 WHERE        (oh.OrderStatus IN (2, 3, 6, 7)) AND (oh.DeliveryDate &gt;= @StartDate) AND (oh.DeliveryDate &lt;= @EndDate)
 GROUP BY c.Name
 ORDER BY Price DESC</CommandText>
