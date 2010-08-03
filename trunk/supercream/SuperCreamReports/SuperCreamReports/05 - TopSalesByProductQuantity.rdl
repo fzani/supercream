@@ -29,16 +29,19 @@
 	SELECT TOP 1000 
 		p.ProductCode,
 		p.Description
-		,SUM(NoOfUnits) AS Units			
+		,SUM(ol.NoOfUnits - ISNULL(ocnl.NoOfUnits,0)) AS Units			
   FROM [SuperCreamDB].[dbo].[OrderHeader] oh
   INNER JOIN OrderLine ol ON
 	oh.ID = ol.OrderID
-  INNER JOIN Product p ON p.ID = ol.ProductID
+  INNER JOIN Product p ON p.ID = ol.ProductID  
+  left join OrderCreditNoteLine ocnl on
+		ol.ID = ocnl.OrderLineID		
+    
   WHERE oh.OrderStatus IN (2,3,6,7)  
-   AND  oh.DeliveryDate &gt;= @DateStarted AND oh.DeliveryDate &lt;= @DateEnded
+  AND  oh.DeliveryDate &gt;= @DateStarted AND oh.DeliveryDate &lt;= @DateEnded
   GROUP BY p.ProductCode, p.Description	   
    )
-   SELECT * FROM CTE
+   SELECT ProductCode, Description, Units FROM CTE
    WHERE  ((ISNULL(@UnitValue, '-1')) = '-1' OR Units &gt;= @UnitValue)
    ORDER BY Units DESC;</CommandText>
         <QueryParameters>
