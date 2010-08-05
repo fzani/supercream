@@ -70,6 +70,7 @@
               <Mapping SourceColumn="CompanyTown" DataSetColumn="CompanyTown" />
               <Mapping SourceColumn="CompanyAddressType" DataSetColumn="CompanyAddressType" />
               <Mapping SourceColumn="VatExempt" DataSetColumn="VatExempt" />
+              <Mapping SourceColumn="CompanyToInvoiceTo" DataSetColumn="CompanyToInvoiceTo" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -351,6 +352,7 @@
               <Mapping SourceColumn="InvoiceAddressTown" DataSetColumn="InvoiceAddressTown" />
               <Mapping SourceColumn="InvoiceAddressPostCode" DataSetColumn="InvoiceAddressPostCode" />
               <Mapping SourceColumn="AccountPhoneNumber" DataSetColumn="AccountPhoneNumber" />
+              <Mapping SourceColumn="CompanyToInvoiceTo1" DataSetColumn="CompanyToInvoiceTo1" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -670,6 +672,13 @@
               </xs:element>
               <xs:element name="CompanyAddressType" msprop:Generator_UserColumnName="CompanyAddressType" msprop:Generator_ColumnVarNameInTable="columnCompanyAddressType" msprop:Generator_ColumnPropNameInRow="CompanyAddressType" msprop:Generator_ColumnPropNameInTable="CompanyAddressTypeColumn" type="xs:short" minOccurs="0" />
               <xs:element name="VatExempt" msprop:Generator_UserColumnName="VatExempt" msprop:Generator_ColumnVarNameInTable="columnVatExempt" msprop:Generator_ColumnPropNameInRow="VatExempt" msprop:Generator_ColumnPropNameInTable="VatExemptColumn" type="xs:boolean" minOccurs="0" />
+              <xs:element name="CompanyToInvoiceTo" msprop:Generator_UserColumnName="CompanyToInvoiceTo" msprop:Generator_ColumnVarNameInTable="columnCompanyToInvoiceTo" msprop:Generator_ColumnPropNameInRow="CompanyToInvoiceTo" msprop:Generator_ColumnPropNameInTable="CompanyToInvoiceToColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -1401,10 +1410,17 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="CompanyToInvoiceTo1" msprop:Generator_UserColumnName="CompanyToInvoiceTo1" msprop:Generator_ColumnPropNameInRow="CompanyToInvoiceTo1" msprop:Generator_ColumnVarNameInTable="columnCompanyToInvoiceTo1" msprop:Generator_ColumnPropNameInTable="CompanyToInvoiceTo1Column" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="rptDetailsGetInvoice" msprop:Generator_UserTableName="rptDetailsGetInvoice" msprop:Generator_RowDeletedName="rptDetailsGetInvoiceRowDeleted" msprop:Generator_TableClassName="rptDetailsGetInvoiceDataTable" msprop:Generator_RowChangedName="rptDetailsGetInvoiceRowChanged" msprop:Generator_RowClassName="rptDetailsGetInvoiceRow" msprop:Generator_RowChangingName="rptDetailsGetInvoiceRowChanging" msprop:Generator_RowEvArgName="rptDetailsGetInvoiceRowChangeEvent" msprop:Generator_RowEvHandlerName="rptDetailsGetInvoiceRowChangeEventHandler" msprop:Generator_TablePropName="rptDetailsGetInvoice" msprop:Generator_TableVarName="tablerptDetailsGetInvoice" msprop:Generator_RowDeletingName="rptDetailsGetInvoiceRowDeleting">
+        <xs:element name="rptDetailsGetInvoice" msprop:Generator_UserTableName="rptDetailsGetInvoice" msprop:Generator_RowDeletedName="rptDetailsGetInvoiceRowDeleted" msprop:Generator_RowChangedName="rptDetailsGetInvoiceRowChanged" msprop:Generator_RowClassName="rptDetailsGetInvoiceRow" msprop:Generator_RowChangingName="rptDetailsGetInvoiceRowChanging" msprop:Generator_RowEvArgName="rptDetailsGetInvoiceRowChangeEvent" msprop:Generator_RowEvHandlerName="rptDetailsGetInvoiceRowChangeEventHandler" msprop:Generator_TableClassName="rptDetailsGetInvoiceDataTable" msprop:Generator_TableVarName="tablerptDetailsGetInvoice" msprop:Generator_RowDeletingName="rptDetailsGetInvoiceRowDeleting" msprop:Generator_TablePropName="rptDetailsGetInvoice">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInTable="IDColumn" type="xs:int" />
