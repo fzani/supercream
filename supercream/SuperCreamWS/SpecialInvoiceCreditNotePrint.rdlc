@@ -219,6 +219,10 @@
           <DataField>AccountPhoneNumber</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CompanyToInvoiceTo1">
+          <DataField>CompanyToInvoiceTo1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>SuperCreamDBConnectionString</DataSourceName>
@@ -233,180 +237,7 @@
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
       </rd:DataSetInfo>
-    </DataSet>
-    <DataSet Name="SuperCreamDBDataSet_rptGetArbitraryCreditNote">
-      <Fields>
-        <Field Name="CreditNoteID">
-          <DataField>CreditNoteID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="OrderID">
-          <DataField>OrderID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="VatExempt">
-          <DataField>VatExempt</DataField>
-          <rd:TypeName>System.Boolean</rd:TypeName>
-        </Field>
-        <Field Name="NetAmount">
-          <DataField>NetAmount</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="VatableAmount">
-          <DataField>VatableAmount</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="VatRate">
-          <DataField>VatRate</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="LineTotal">
-          <DataField>LineTotal</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Reason">
-          <DataField>Reason</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DateCreated">
-          <DataField>DateCreated</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="CreditNoteReference">
-          <DataField>CreditNoteReference</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="OrderNo">
-          <DataField>OrderNo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="InvoiceNo">
-          <DataField>InvoiceNo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Description">
-          <DataField>Description</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ID">
-          <DataField>ID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="AlphaID">
-          <DataField>AlphaID</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CompanyToInvoiceTo">
-          <DataField>CompanyToInvoiceTo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EMailAddress">
-          <DataField>EMailAddress</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FirstName">
-          <DataField>FirstName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="InitialNote">
-          <DataField>InitialNote</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="JobRole">
-          <DataField>JobRole</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="LastName">
-          <DataField>LastName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Title">
-          <DataField>Title</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CompanyName">
-          <DataField>CompanyName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CompanyEMailAddress">
-          <DataField>CompanyEMailAddress</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CompanyOfficePhoneNumber1">
-          <DataField>CompanyOfficePhoneNumber1</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CompanyOfficePhoneNumber2">
-          <DataField>CompanyOfficePhoneNumber2</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CompanyVatRegistrationNumber">
-          <DataField>CompanyVatRegistrationNumber</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CompanyAddressLines">
-          <DataField>CompanyAddressLines</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CompanyCounty">
-          <DataField>CompanyCounty</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CompanyMapReference">
-          <DataField>CompanyMapReference</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CompanyPostCode">
-          <DataField>CompanyPostCode</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CompanyTown">
-          <DataField>CompanyTown</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CompanyAddressType">
-          <DataField>CompanyAddressType</DataField>
-          <rd:TypeName>System.Int16</rd:TypeName>
-        </Field>
-        <Field Name="InvoiceAddressMapReference">
-          <DataField>InvoiceAddressMapReference</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="InvoiceAddressCounty">
-          <DataField>InvoiceAddressCounty</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="InvoiceAddressTown">
-          <DataField>InvoiceAddressTown</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="InvoiceAddressPostCode">
-          <DataField>InvoiceAddressPostCode</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="AccountPhoneNumber">
-          <DataField>AccountPhoneNumber</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DueDate">
-          <DataField>DueDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>SuperCreamDBConnectionString</DataSourceName>
-        <CommandType>StoredProcedure</CommandType>
-        <CommandText>dbo.rptGetArbitraryCreditNote</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>SuperCreamDBDataSet</rd:DataSetName>
-        <rd:TableName>rptGetArbitraryCreditNote</rd:TableName>
-        <rd:TableAdapterName>rptGetArbitraryCreditNoteTableAdapter</rd:TableAdapterName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-      </rd:DataSetInfo>
-    </DataSet>
+    </DataSet>  
   </DataSets>
   <Code />
   <Width>20.5cm</Width>
@@ -743,7 +574,7 @@
                 <CanGrow>true</CanGrow>
                 <Left>0.2cm</Left>
                 <Height>0.4cm</Height>
-                <Value>=First(Fields!CompanyToInvoiceTo.Value, "SuperCreamDBDataSet_rptGetArbitraryCreditNote")</Value>
+                <Value>=First(Fields!CompanyToInvoiceTo.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceArbitraryCreditNote")</Value>
               </Textbox>
               <Textbox Name="textbox15">
                 <Top>2.575cm</Top>

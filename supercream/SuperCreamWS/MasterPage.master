@@ -110,6 +110,11 @@
                 </div>
             </div>
             <div id="main">
+                <div style="text-align: right; padding-right: 0px;">
+                    <i>logged in as:&nbsp; <b>
+                        <asp:LoginName ID="LoginNameLabel" runat="server" />
+                    </b></i>
+                </div>
                 <form id="MainForm" runat="server">
                 <asp:ContentPlaceHolder ID="MainPlaceholder" runat="server">
                 </asp:ContentPlaceHolder>
