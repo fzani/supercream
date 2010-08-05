@@ -110,7 +110,7 @@
                 </div>
             </div>
             <div id="main">
-                <div style="text-align: right; padding-right: 0px;">
+                <div style="text-align: right; padding-right: 0px; color: #7F99A9;">
                     <i>logged in as:&nbsp; <b>
                         <asp:LoginName ID="LoginNameLabel" runat="server" />
                     </b></i>
