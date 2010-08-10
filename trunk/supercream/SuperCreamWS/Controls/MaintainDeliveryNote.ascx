@@ -8,15 +8,15 @@
                 <h3>
                     Search Delivery Notes</h3>
             </legend>
-            <table class="search">
+            <table class="search" style="width:100%;">
                 <tr>
                     <td class="right">
-                        <table class="left">
+                        <table class="left" style="width:100%">
                             <tr>
-                                <td>
+                                <td style="width:30%">
                                     <asp:Label ID="OrderNoLabel" Text="Order No" runat="server"></asp:Label>
                                 </td>
-                                <td>
+                                <td style="width:70%">
                                     <asp:TextBox ID="OrderNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
@@ -176,7 +176,7 @@
             </asp:ObjectDataSource>
         </asp:Panel>
         <asp:Panel ID="DeliveryNoteEntryPanel" Visible="false" runat="server">
-            <table style="width: 100%">
+            <table style="width: 98%">
                 <tr>
                     <td colspan="2">
                         <hr />
@@ -231,9 +231,9 @@
                 </tr>
             </table>
             <asp:Panel ID="OrderHeaderDetailsPanel" Visible="false" runat="server">
-                <table style="width: 100%">
+                <table style="width: 98%">
                     <tr>
-                        <td colspan="7">
+                        <td colspan="4">
                             <asp:Button ID="ConfirmDelivery" Text="Confirm Delivery Note" runat="server" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 OnClick="ConfirmDeliveryNote_Click" />
                             <asp:Button ID="ChangeDeliveryNoteDetailsButton" ValidationGroup="ModifyInvoiceDetailsGroup"
@@ -326,7 +326,7 @@
                 </table>
             </asp:Panel>
             <asp:Panel ID="DisplayDeliveryNotePanel" Visible="false" runat="server">
-                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                <table style="width: 98%" cellpadding="0" cellspacing="0">
                     <tr>
                         <td style="width: 50%">
                             <table style="width: 100%; border: solid 1px #eaeaea;">
@@ -485,7 +485,7 @@
                 <FooterTemplate>
                     <tr>
                         <td colspan="4">
-                            <table>
+                            <table style="width:98%;">
                                 <tr>
                                     <td style="width: 40%">
                                     </td>
