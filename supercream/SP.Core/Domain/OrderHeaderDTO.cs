@@ -18,8 +18,9 @@ namespace SP.Core.Domain
         private string _InvoiceNo;
         private string _InvoiceProformaNo;
         private string _DeliveryNoteNo;
-        private DateTime _DeliveryDate;       
-      
+        private DateTime _DeliveryDate;
+        private DateTime _InvoiceDate;
+
         private OrderNotesStatus _OrderNoteStatus;
         private VatCode _VatCode;
         private DateTime _LastModifiedDate;
@@ -253,6 +254,18 @@ namespace SP.Core.Domain
             set
             {
                 _LastModifiedDate = value;
+            }
+        }
+
+        public DateTime InvoiceDate
+        {
+            get
+            {
+                return _InvoiceDate;
+            }
+            set
+            {
+                _InvoiceDate = value;
             }
         }
     }

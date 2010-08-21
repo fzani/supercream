@@ -153,6 +153,7 @@
       <Column Name="AlphaID" Member="AlphaID" Storage="_AlphaID" DbType="VarChar(20)" />
       <Column Name="OrderDate" Member="OrderDate" Storage="_OrderDate" DbType="DateTime" />
       <Column Name="DeliveryDate" Member="DeliveryDate" Storage="_DeliveryDate" DbType="DateTime" />
+      <Column Name="InvoiceDate" Member="InvoiceDate" Storage="_InvoiceDate" DbType="DateTime" />
       <Column Name="OrderStatus" Member="OrderStatus" Storage="_OrderStatus" DbType="SmallInt" />
       <Column Name="SpecialInstructions" Member="SpecialInstructions" Storage="_SpecialInstructions" DbType="VarChar(8000)" />
       <Column Name="InvoiceNo" Member="InvoiceNo" Storage="_InvoiceNo" DbType="VarChar(50)" />
