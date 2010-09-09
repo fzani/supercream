@@ -95,9 +95,10 @@ public class OrderHeaderUI : IDisposable
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
             OrderHeader origOrderHeader = _proxy.GetOrderHeaderByIdWithVatCode(orderNo);
-            OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
+            OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();           
 
             updatedOrderHeader.OrderStatus = (short)SP.Core.Enums.OrderStatus.Invoice;
+            updatedOrderHeader.InvoiceDate = origOrderHeader.DeliveryDate;
 
             OrderHeader oh = _proxy.CreateInvoice(updatedOrderHeader, origOrderHeader);
             return oh.InvoiceNo;
@@ -214,6 +215,7 @@ public class OrderHeaderUI : IDisposable
             updatedOrderHeader.DeliveryDate = newOrderHeader.DeliveryDate;
             updatedOrderHeader.OrderStatus = (short)origOrderHeader.OrderStatus;
             updatedOrderHeader.SpecialInstructions = newOrderHeader.SpecialInstructions;
+            updatedOrderHeader.InvoiceDate = newOrderHeader.InvoiceDate;
 
             _proxy.UpdateOrderHeader(updatedOrderHeader, origOrderHeader);
         }
