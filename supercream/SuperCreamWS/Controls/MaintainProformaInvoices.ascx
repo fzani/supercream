@@ -30,7 +30,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Date From
+                                    Order Date From
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateFromTextBox" Style="vertical-align: middle;" runat="server"
@@ -52,8 +52,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Date To
-                                </td>
+                                    Order Date To</td>
                                 <td>
                                     <asp:TextBox ID="DateToTextBox" Style="vertical-align: middle;" runat="server" ValidationGroup="NewOutletGroup"
                                         MaxLength="100" Width="100px"></asp:TextBox>
@@ -149,8 +148,7 @@
                                         <asp:Image ID="RePrintedImage" runat="server" Visible="false" ImageUrl="~/images/print_16x16.gif" />
                                         <asp:Panel Style="display: inline;" ID="CreditNoteImagePanel" runat="server">
                                             <asp:Image ID="CreditNoteImage" runat="server" ImageUrl="~/images/16-circle-green.gif" />
-                                            &nbsp;
-                                        </asp:Panel>
+                                            &nbsp;</asp:Panel>
                                     </td>
                                 </tr>
                             </table>

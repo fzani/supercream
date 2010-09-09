@@ -202,6 +202,7 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
                     OrderDate = Convert.ToDateTime(OrderDateTextBox.Text),
                     OrderStatus = (short)OrderStatus.Order,
                     DeliveryDate = Convert.ToDateTime(DeliveryDateTextBox.Text),
+                    InvoiceDate =  Convert.ToDateTime(DeliveryDateTextBox.Text),
                     SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text,
                     VatCode = vatCode,
                     VatCodeID = vatCode.ID,

@@ -30,7 +30,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Date From
+                                    Order Date From
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateFromTextBox" Style="vertical-align: middle;" runat="server"
@@ -52,7 +52,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Date To
+                                    Order Date To
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateToTextBox" Style="vertical-align: middle;" runat="server" ValidationGroup="NewOutletGroup"

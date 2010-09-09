@@ -41,7 +41,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Date From
+                                    Order Date From
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateFromTextBox" Style="vertical-align: middle;" runat="server"
@@ -63,7 +63,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Date To
+                                    Order Date To
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateToTextBox" Style="vertical-align: middle;" runat="server" ValidationGroup="NewOutletGroup"
@@ -313,13 +313,32 @@
                 </tr>
                 <tr>
                     <td>
+                        Invoice Date
+                    </td>
+                    <td>
+                        <asp:TextBox ID="InvoiceDateTextBox" Style="vertical-align: middle;" runat="server"
+                            ValidationGroup="ModifyInvoiceDetailsGroup" MaxLength="100" Width="100px"></asp:TextBox>
+                        <asp:Image runat="Server" Style="vertical-align: middle;" ID="InvoiceDateImage" ImageUrl="~/images/Calendar_scheduleHS.png"
+                            AlternateText="Click to show calendar" />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ValidationGroup="NewOutletGroup"
+                            ControlToValidate="InvoiceDateTextBox" ErrorMessage="Invoice Date is required"
+                            InitialValue="" Text="Required" runat="server" />
+                        <ajaxToolkit:CalendarExtender ID="CalendarExtender2" Format="dd/MM/yyyy" runat="server"
+                            TargetControlID="InvoiceDateTextBox" PopupButtonID="InvoiceDateImage" />
+                        <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender3" runat="server" TargetControlID="InvoiceDateTextBox"
+                            Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
+                            OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                     </td>
                     <td>
                         <i>
                             <asp:Label ID="CreditNoteLabel" Text="CR:- " Visible="False" runat="server" Font-Size="12"
                                 ForeColor="Red"></asp:Label>
-                            <asp:Label ID="CreditNotePriceLabel" Visible="False" runat="server"
-                                Font-Size="12" ForeColor="Red"></asp:Label>
+                            <asp:Label ID="CreditNotePriceLabel" Visible="False" runat="server" Font-Size="12"
+                                ForeColor="Red"></asp:Label>
                         </i>
                     </td>
                 </tr>

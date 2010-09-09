@@ -94,6 +94,12 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             OrderNotesStatusUI ui = new OrderNotesStatusUI();
             ui.Save(status);
 
+            OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
+            var orderHeader = orderHeaderUI.GetById(OrderID.Value);
+            orderHeader.InvoiceDate = DateTime.Parse(InvoiceDateTextBox.Text);
+
+            orderHeaderUI.Update(orderHeader);
+
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
 
@@ -118,6 +124,12 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             status.OutletStoreID = Convert.ToInt32(DeliveryDropDownList.SelectedValue);
 
             ui.Update(status);
+
+            OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
+            var orderHeader = orderHeaderUI.GetById(OrderID.Value);
+            orderHeader.InvoiceDate = DateTime.Parse(InvoiceDateTextBox.Text);
+
+            orderHeaderUI.Update(orderHeader);
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
@@ -425,6 +437,8 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             AccountDropDownList.Items.Clear();
             AccountDropDownList.Items.Add(new ListItem("-- No Item Selected --", "-1"));
             customer.Account.ForEach(accountAction);
+
+            InvoiceDateTextBox.Text = orderHeader.InvoiceDate.ToShortDateString();
 
             ChangeState += new EventHandler<EventArgs>(SelectedOrderState);
             ChangeState(this, e);

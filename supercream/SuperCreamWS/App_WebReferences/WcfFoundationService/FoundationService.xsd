@@ -296,6 +296,7 @@
       <xs:element minOccurs="0" name="DeliveryDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DeliveryNoteNo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="InvoiceDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="InvoiceNo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="InvoiceProformaNo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="LastModifiedDate" type="xs:dateTime" />
