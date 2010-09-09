@@ -390,10 +390,10 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         if (e.CommandName.Equals("Select"))
         {
             Int32 index = Convert.ToInt32(e.CommandArgument);
-            GridViewRow row = this.OrderDetailsGridView.Rows[index];            
+            GridViewRow row = this.OrderDetailsGridView.Rows[index];
 
             Label idLabel = row.FindControl("IDLabel") as Label;
-            
+
             OrderLine orderLine = OrderLineUI.GetOrderLine(Convert.ToInt32(idLabel.Text));
             ProductUI productUI = new ProductUI();
             Product product = productUI.GetProductByID(orderLine.ProductID);
@@ -444,7 +444,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         ChangeState += new EventHandler<EventArgs>(InitLoadState);
         ChangeState(this, e);
     }
-   
+
     protected void CustomerDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
 
@@ -525,13 +525,13 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
                 Discount = discount,
                 OrderID = Convert.ToInt32(orderIDLabel.Text),
                 NoOfUnits = noOfUnits,
-                Price = price,                
+                Price = price,
                 ProductID = productID,
                 OrderLineStatus = (short)SP.Core.Enums.OrderLineStatus.Open,
                 QtyPerUnit = qtyPerUnit,
                 SpecialInstructions = specialInstructionsTextBox.Text
             };
-          
+
             OrderLineUI.Update(line);
             DataBind();
 
@@ -547,7 +547,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     protected void DeleteButton_Click(object sender, EventArgs e)
     {
         try
-        {           
+        {
             Button btn = sender as Button;
             if (btn.CommandName == "DeleteButton")
                 OrderLineUI.DeleteOrderLine(Convert.ToInt32(btn.CommandArgument));
@@ -678,7 +678,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     protected void CreateInvoiceButton_Click(object sender, EventArgs e)
     {
         try
-        {          
+        {
             OrderHeaderUI ui = new OrderHeaderUI();
             string invoiceNo = ui.CreateInvoice(OrderID.Value);
 
@@ -772,6 +772,12 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 
     protected void CreateProformaInvoiceButton_Click(object sender, EventArgs e)
     {
+        CreateInvoiceProformaTextBox.Text = DateTime.Now.AddDays(1).ToString();
+        ModalPopupExtenderInvoiceProforma.Show();        
+    }
+
+    protected void CreateInvoiceProform_Click(object sender, EventArgs e)
+    {
         try
         {
             this.OrderStatus = OrderStatus.ProformaInvoice;
@@ -787,6 +793,10 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             CreateInvoiceButton.Visible = false;
             CreateProformaInvoiceButton.Visible = false;
             CreateDeliveryNoteButton.Visible = false;
+           
+            var orderHeader = ui.GetById(OrderID.Value);
+            orderHeader.InvoiceDate = DateTime.Parse(CreateInvoiceProformaTextBox.Text);
+            ui.Update(orderHeader);
 
             ChangeState += new EventHandler<EventArgs>(CompleteOrderState);
             ChangeState(this, e);
@@ -808,7 +818,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     #region Voiding an Order
 
     protected void GetVoidOrderReasonButton_Click(object sender, EventArgs e)
-    {       
+    {
         ReasonForVoidingPopupExtenderInvoice.Show();
     }
 
