@@ -269,12 +269,16 @@
                                 OnClick="CreateDeliveryNoteButton_Click" />
                             <asp:Button ID="btnTrigger1" runat="server" Style="display: none" />
                             <asp:Button ID="btnTrigger2" runat="server" Style="display: none" />
+                             <asp:Button ID="btnTrigger3" runat="server" Style="display: none" />
                             <ajaxToolkit:ModalPopupExtender ID="ReasonForVoidingPopupExtenderInvoice" DropShadow="true"
                                 runat="server" TargetControlID="btnTrigger1" PopupControlID="ReasonForVoidingPanelMessage"
                                 CancelControlID="CancelReasonorVoidingButton" BackgroundCssClass="XPopUpBackGround" />
-                            <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtenderDeliveryNote" DropShadow="true"
-                                runat="server" TargetControlID="btnTrigger2" PopupControlID="CreateDeliveryNotePanel"
-                                CancelControlID="CancelDeliveryNoteButton" BackgroundCssClass="XPopUpBackGround" />
+                            <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" DropShadow="true"
+                                runat="server" TargetControlID="btnTrigger1" PopupControlID="ReasonForVoidingPanelMessage"
+                                CancelControlID="CancelReasonorVoidingButton" BackgroundCssClass="XPopUpBackGround" />
+                            <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtenderInvoiceProforma" DropShadow="true"
+                                runat="server" TargetControlID="btnTrigger3" PopupControlID="CreateInvoiceProformaPanel"
+                                CancelControlID="CancelInvoiceProformaNoteButton" BackgroundCssClass="XPopUpBackGround" />
                             <asp:Panel Style="display: none" DefaultButton="ReasonforVoidingButton" Width="700px"
                                 ID="ReasonForVoidingPanelMessage" runat="server" CssClass="modalPopup">
                                 <table>
@@ -317,6 +321,35 @@
                                             <asp:Button ID="DeliveryNoteButton" CommandArgument='<%# OrderID %>' Text="Save"
                                                 runat="server" OnClick="CreateDeliveryNoteButton_Click" />
                                             <asp:Button ID="CancelDeliveryNoteButton" Text="Cancel" CausesValidation="false"
+                                                runat="server" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
+                            <asp:Panel Style="display: none" Width="700px" DefaultButton="CreateInvoiceProformaNoteButton"
+                                ID="CreateInvoiceProformaPanel" runat="server" CssClass="modalPopup">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Invoice Date
+                                        </td>
+                                        <td>
+                                            <asp:TextBox ID="CreateInvoiceProformaTextBox" Style="vertical-align: middle;" runat="server"
+                                                ValidationGroup="AddOrderDetailsGroup" MaxLength="100" Width="100px"></asp:TextBox>
+                                            <asp:Image runat="Server" Style="vertical-align: middle;" ID="CreateInvoiceProformaImage"
+                                                ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
+                                            <ajaxToolkit:CalendarExtender ID="CalendarExtender4" Format="dd/MM/yyyy" runat="server"
+                                                TargetControlID="CreateInvoiceProformaTextBox" PopupButtonID="CreateInvoiceProformaImage" />
+                                            <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender5" runat="server" TargetControlID="CreateInvoiceProformaTextBox"
+                                                Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
+                                                OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Button ID="CreateInvoiceProformaNoteButton" CommandArgument='<%# OrderID %>'
+                                                Text="Save" runat="server" OnClick="CreateInvoiceProform_Click" />
+                                            <asp:Button ID="CancelInvoiceProformaNoteButton" Text="Cancel" CausesValidation="false"
                                                 runat="server" />
                                         </td>
                                     </tr>
@@ -480,13 +513,13 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Discount" SortExpression="Discount">
                             <ItemTemplate>
-                                 <asp:Label ID="Label3" runat="server" Text='<%# Eval("Discount", "{0}%") %>' ></asp:Label>
+                                <asp:Label ID="Label3" runat="server" Text='<%# Eval("Discount", "{0}%") %>'></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
-                                 <asp:Label ID="Label3" runat="server" Text='<%# Eval("Discount", "{0}%") %>' ></asp:Label>
+                                <asp:Label ID="Label3" runat="server" Text='<%# Eval("Discount", "{0}%") %>'></asp:Label>
                             </EditItemTemplate>
                         </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Price (After Discount)" SortExpression="Price">
+                        <asp:TemplateField HeaderText="Price (After Discount)" SortExpression="Price">
                             <ItemTemplate>
                                 <asp:Label ID="OrderLinePriceAfterDiscountLabel" runat="server"></asp:Label>
                             </ItemTemplate>
