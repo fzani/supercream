@@ -2017,6 +2017,7 @@ namespace SPWCFServer
         private List<OrderLine> _OrderLine;
         private DateTime _LastModifiedDate;
         private DateTime _InvoiceDate;
+        private DateTime _InvoiceProformaDate;
 
         [DataMember]
         public int ID
@@ -2270,6 +2271,19 @@ namespace SPWCFServer
             set
             {
                 _InvoiceDate = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime InvoiceProformaDate
+        {
+            get
+            {
+                return _InvoiceProformaDate;
+            }
+            set
+            {
+                _InvoiceProformaDate = value;
             }
         }
     }
