@@ -782,7 +782,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         {
             this.OrderStatus = OrderStatus.ProformaInvoice;
 
-            OrderHeaderUI ui = new OrderHeaderUI();
+            var ui = new OrderHeaderUI();
             string invoiceNo = ui.CreateInvoiceProforma(OrderID.Value);
 
             OrderStatusTypeLabel.Text = "<h3>Status : <i>Proforma Produced</i></h3";
