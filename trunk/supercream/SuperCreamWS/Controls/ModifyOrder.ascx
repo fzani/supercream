@@ -244,17 +244,39 @@
                     <tr>
                         <td style="width: 25%;">
                             <asp:Label ID="InvoiceHeaderDateLabel" Text="Invoice Date" runat="server"></asp:Label>
+                            <asp:Label ID="InvoiceProformaHeaderDateLabel" Text="Invoice Proforma Date" runat="server"></asp:Label>
                         </td>
                         <td style="width: 75%;" colspan="2">
                             <asp:TextBox ID="InvoiceHeaderDateTextBox" Style="vertical-align: middle;" runat="server"
                                 ValidationGroup="ModifyOrderDetailsGroup" MaxLength="100" Width="100px"></asp:TextBox>
+                            <asp:TextBox ID="InvoiceProformaHeaderDateTextBox" Style="vertical-align: middle;"
+                                runat="server" ValidationGroup="ModifyOrderDetailsGroup" MaxLength="100" Width="100px"></asp:TextBox>
+                         
                             <asp:Image runat="Server" Style="vertical-align: middle;" ID="InvoiceHeaderImage"
                                 ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
-                            <asp:RequiredFieldValidator ID="InvoiceHeaderRequiredFieldValidator" runat="server" ControlToValidate="InvoiceHeaderDateTextBox"
-                                Display="Dynamic" ErrorMessage="Delivery Date is a required field" SetFocusOnError="True"
-                                ValidationGroup="ModifyOrderDetailsGroup">*</asp:RequiredFieldValidator>
-                            <ajaxToolkit:CalendarExtender ID="InvoiceHeadeCalendarExtender" Format="dd/MM/yyyy" runat="server"
-                                TargetControlID="InvoiceHeaderDateTextBox" PopupButtonID="InvoiceHeaderImage" />
+                         
+                            <asp:Image runat="Server" Style="vertical-align: middle;" ID="InvoiceProformaImage"
+                                ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
+                                
+                            <asp:RequiredFieldValidator ID="InvoiceHeaderRequiredFieldValidator" runat="server"
+                                ControlToValidate="InvoiceHeaderDateTextBox" Display="Dynamic" ErrorMessage="Invoice Date is a required field"
+                                SetFocusOnError="True" ValidationGroup="ModifyOrderDetailsGroup">*</asp:RequiredFieldValidator>
+                                
+                            <asp:RequiredFieldValidator ID="InvoiceProformaHeaderRequiredFieldValidator" runat="server"
+                                ControlToValidate="InvoiceProformaHeaderDateTextBox" Display="Dynamic" ErrorMessage="Invoice Proforma Date is a required field"
+                                SetFocusOnError="True" ValidationGroup="ModifyOrderDetailsGroup">*</asp:RequiredFieldValidator>
+                                
+                            <ajaxToolkit:CalendarExtender ID="InvoiceHeadeCalendarExtender" Format="dd/MM/yyyy"
+                                runat="server" TargetControlID="InvoiceHeaderDateTextBox" PopupButtonID="InvoiceHeaderImage" />
+                                
+                            <ajaxToolkit:CalendarExtender ID="InvoiceProformaHeaderCalendarExtender" Format="dd/MM/yyyy"
+                                runat="server" TargetControlID="InvoiceProformaHeaderDateTextBox" PopupButtonID="InvoiceProformaImage" />
+                                
+                                
+                            <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender9" runat="server" TargetControlID="InvoiceProformaHeaderDateTextBox"
+                                Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
+                                OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
+                                
                             <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender8" runat="server" TargetControlID="InvoiceHeaderDateTextBox"
                                 Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
                                 OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
@@ -280,7 +302,7 @@
                     <tr>
                         <td colspan="3">
                             <asp:LinkButton ID="ConvertToInvoiceButton" Text="Convert to Invoice" runat="server"
-                                OnClick="ConvertToInvoiceButton_Click" />
+                                OnClick="ShowInvoiceButton_Click" />
                             <asp:LinkButton ID="ShowInvoiceDetailsButton" Text="Create Invoice |" runat="server"
                                 OnClick="ShowInvoiceButton_Click" />
                             <asp:LinkButton ID="CreateProformaInvoiceButton" Text="Create Proforma Invoice |"
