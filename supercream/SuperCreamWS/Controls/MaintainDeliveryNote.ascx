@@ -152,9 +152,14 @@
                         </EditItemTemplate>
                         <ItemStyle Width="40%" />
                     </asp:TemplateField>
+                     <asp:TemplateField HeaderText="Delivery Note Date" SortExpression="DeliveryNoteDate">
+                        <ItemTemplate>
+                            <asp:Label ID="DelivertNoteLabel" runat="server" ItemStyle-Width="10%" Text='<%# DataBinder.Eval(Container.DataItem, "DeliveryDate", "{0:d}") %>'></asp:Label>
+                        </ItemTemplate>                      
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="Order Date" SortExpression="OrderDate">
                         <ItemTemplate>
-                            <asp:Label ID="Label3" runat="server" ItemStyle-Width="20%" Text='<%# DataBinder.Eval(Container.DataItem, "OrderDate", "{0:d}") %>'></asp:Label>
+                            <asp:Label ID="Label3" runat="server" ItemStyle-Width="10%" Text='<%# DataBinder.Eval(Container.DataItem, "OrderDate", "{0:d}") %>'></asp:Label>
                         </ItemTemplate>
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox3" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "OrderDate", "{0:d}") %>'></asp:TextBox>

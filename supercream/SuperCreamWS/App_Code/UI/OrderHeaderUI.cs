@@ -212,6 +212,7 @@ public class OrderHeaderUI : IDisposable
             updatedOrderHeader.CustomerID = newOrderHeader.CustomerID;
             updatedOrderHeader.ID = newOrderHeader.ID;
             updatedOrderHeader.OrderDate = newOrderHeader.OrderDate;
+            updatedOrderHeader.InvoiceDate = newOrderHeader.InvoiceDate;
             updatedOrderHeader.DeliveryDate = newOrderHeader.DeliveryDate;
             updatedOrderHeader.OrderStatus = (short)origOrderHeader.OrderStatus;
             updatedOrderHeader.SpecialInstructions = newOrderHeader.SpecialInstructions;
