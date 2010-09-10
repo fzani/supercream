@@ -196,17 +196,18 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
                 VatCode vatCode = vatCodeUI.GetByID(standardVatRate.VatCodeID);
 
                 OrderHeader orderHeader = new OrderHeader
-                {
-                    ID = 1,
-                    CustomerID = Convert.ToInt32(CustomerDropDownList.SelectedValue),
-                    OrderDate = Convert.ToDateTime(OrderDateTextBox.Text),
-                    OrderStatus = (short)OrderStatus.Order,
-                    DeliveryDate = Convert.ToDateTime(DeliveryDateTextBox.Text),
-                    InvoiceDate =  Convert.ToDateTime(DeliveryDateTextBox.Text),
-                    SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text,
-                    VatCode = vatCode,
-                    VatCodeID = vatCode.ID,
-                };
+                                              {
+                                                  ID = 1,
+                                                  CustomerID = Convert.ToInt32(CustomerDropDownList.SelectedValue),
+                                                  OrderDate = Convert.ToDateTime(OrderDateTextBox.Text),
+                                                  OrderStatus = (short)OrderStatus.Order,
+                                                  DeliveryDate = Convert.ToDateTime(DeliveryDateTextBox.Text),
+                                                  InvoiceDate = SP.Utils.Defaults.MinDateTime,
+                                                  InvoiceProformaDate = SP.Utils.Defaults.MinDateTime,
+                                                  SpecialInstructions = OrderHeaderSpecialInstructionsTextBox.Text,
+                                                  VatCode = vatCode,
+                                                  VatCodeID = vatCode.ID,
+                                              };
 
                 ValidateOrder(orderHeader);
 
