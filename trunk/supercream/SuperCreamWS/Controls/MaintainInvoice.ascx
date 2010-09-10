@@ -129,25 +129,25 @@
                         </ItemTemplate>
                         <ItemStyle Width="10%" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Order No." ItemStyle-Width="20%" SortExpression="AlphaID">
+                    <asp:TemplateField HeaderText="Order No." SortExpression="AlphaID">
                         <ItemTemplate>
                             <asp:Label ID="Label2" runat="server" Text='<%# Bind("AlphaID") %>'></asp:Label>
                         </ItemTemplate>
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("AlphaID") %>'></asp:TextBox>
                         </EditItemTemplate>
-                        <ItemStyle Width="20%" />
+                        <ItemStyle Width="12%" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Invoice No." ItemStyle-Width="20%" SortExpression="InvoiceNo">
+                    <asp:TemplateField HeaderText="Invoice No." SortExpression="InvoiceNo">
                         <ItemTemplate>
                             <asp:Label ID="InvoiceLabel" runat="server" Text='<%# Bind("InvoiceNo") %>'></asp:Label>
                         </ItemTemplate>
                         <EditItemTemplate>
                             <asp:TextBox ID="InvoiceTextBox" runat="server" Text='<%# Bind("InvoiceNo") %>'></asp:TextBox>
                         </EditItemTemplate>
-                        <ItemStyle Width="20%" />
+                        <ItemStyle Width="12%" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Customer Name" ItemStyle-Width="30%" SortExpression="CustomerID">
+                    <asp:TemplateField HeaderText="Customer Name" SortExpression="CustomerID">
                         <ItemTemplate>
                             <table>
                                 <tr>
@@ -181,15 +181,22 @@
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CustomerID") %>'></asp:TextBox>
                         </EditItemTemplate>
-                        <ItemStyle Width="30%" />
+                        <ItemStyle Width="46%" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Invoice Date" SortExpression="InvoiceDate">
+                        <ItemTemplate>
+                            <asp:Label ID="InvoiceDateLabel" runat="server" ItemStyle-Width="10%" Text='<%# DataBinder.Eval(Container.DataItem, "InvoiceDate", "{0:d}") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle Width="10%" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Order Date" SortExpression="OrderDate">
                         <ItemTemplate>
-                            <asp:Label ID="Label3" runat="server" ItemStyle-Width="20%" Text='<%# DataBinder.Eval(Container.DataItem, "OrderDate", "{0:d}") %>'></asp:Label>
+                            <asp:Label ID="Label3" runat="server" ItemStyle-Width="10%" Text='<%# DataBinder.Eval(Container.DataItem, "OrderDate", "{0:d}") %>'></asp:Label>
                         </ItemTemplate>
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox3" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "OrderDate", "{0:d}") %>'></asp:TextBox>
                         </EditItemTemplate>
+                         <ItemStyle Width="10%" />
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
