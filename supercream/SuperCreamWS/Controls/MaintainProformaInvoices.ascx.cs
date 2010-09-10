@@ -112,7 +112,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         try
         {
             OrderHeaderUI ui = new OrderHeaderUI();
-            string invoiceNo = ui.CreateInvoice(OrderID.Value);
+            string invoiceNo = ui.CreateInvoice(OrderID.Value, DateTime.Now);
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);

@@ -356,6 +356,35 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 
             #endregion
 
+            #region InvoiceProformaDateHeader
+
+            if (orderHeader.OrderStatus == (short)OrderStatus.ProformaInvoice || orderHeader.OrderStatus == (short)OrderStatus.PoformaInvoicePrinted)
+            {
+                InvoiceProformaHeaderDateLabel.Visible = true;
+                InvoiceProformaHeaderDateTextBox.Enabled = true;
+                InvoiceProformaHeaderDateTextBox.Visible = true;
+                InvoiceProformaImage.Visible = true;
+                InvoiceProformaHeaderRequiredFieldValidator.Enabled = true;
+                if (orderHeader.InvoiceProformaDate == SP.Utils.Defaults.MinDateTime)
+                {
+                    InvoiceProformaHeaderDateTextBox.Text = DateTime.Now.AddDays(1).ToShortDateString();
+                }
+                else
+                {
+                    InvoiceProformaHeaderDateTextBox.Text = orderHeader.InvoiceDate.ToShortDateString();
+                }
+            }
+            else
+            {
+                InvoiceProformaHeaderDateLabel.Visible = false;
+                InvoiceProformaHeaderDateTextBox.Enabled = false;
+                InvoiceProformaHeaderDateTextBox.Visible = false;
+                InvoiceProformaImage.Visible = false;
+                InvoiceProformaHeaderRequiredFieldValidator.Enabled = false;
+            }
+
+            #endregion
+
             ChangeState += new EventHandler<EventArgs>(SelectedOrderState);
             ChangeState(this, e);
 
@@ -614,6 +643,15 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
                 oh.InvoiceDate = existingOrderHeader.InvoiceDate;
             }
 
+            if (IsProformaInvoice(existingOrderHeader.OrderStatus))
+            {
+                oh.InvoiceProformaDate = DateTime.Parse(InvoiceProformaHeaderDateTextBox.Text);
+            }
+            else
+            {
+                oh.InvoiceProformaDate = existingOrderHeader.InvoiceProformaDate;
+            }
+
             ui.Update(oh);
 
             ChangeState += new EventHandler<EventArgs>(CompleteOrderState);
@@ -626,6 +664,12 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             arg.AddErrorMessages(ex.Message);
             ErrorMessageEventHandler(this, arg);
         }
+    }
+
+    private bool IsProformaInvoice(short orderStatus)
+    {
+        return orderStatus == (short)SP.Core.Enums.OrderStatus.ProformaInvoice
+             || orderStatus == (short)SP.Core.Enums.OrderStatus.PoformaInvoicePrinted;
     }
 
     private static bool IsInvoice(short orderStatus)
@@ -724,11 +768,19 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         try
         {
             OrderHeaderUI ui = new OrderHeaderUI();
-            string invoiceNo = ui.CreateInvoice(OrderID.Value);
+            string invoiceNo = ui.CreateInvoice(OrderID.Value, DateTime.Parse(InvoiceDateTextBox.Text));
 
-            var orderHeader = ui.GetById(OrderID.Value);
-            orderHeader.InvoiceDate = DateTime.Parse(InvoiceDateTextBox.Text);
-            ui.Update(orderHeader);
+            //var orderHeader = ui.GetById(OrderID.Value);
+            //orderHeader.InvoiceDate = DateTime.Parse(InvoiceDateTextBox.Text);
+            //ui.Update(orderHeader);
+
+            OrderNotesStatusUI orderNotesStatusUI = new OrderNotesStatusUI();
+            if (orderNotesStatusUI.OrderNoteExistsByOrderID(OrderID.Value))
+            {
+                OrderNotesStatus orderNotesStatus = orderNotesStatusUI.GetOrderNotesStatusByOrderID(OrderID.Value);
+                orderNotesStatus.InvoiceDateCreated = DateTime.Now;
+                orderNotesStatusUI.Update(orderNotesStatus);
+            }
 
             OrderStatusTypeLabel.Text = "<h3>Status : <i>Invoiced</i></h3";
             OrderStatusNoLabel.Text = "<h3><i>Invoice No: " + invoiceNo + "</i></h3>";

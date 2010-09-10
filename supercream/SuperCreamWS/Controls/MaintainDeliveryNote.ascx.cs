@@ -179,7 +179,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
         try
         {
             OrderHeaderUI ui = new OrderHeaderUI();
-            ui.CreateInvoice(OrderID.Value);
+            ui.CreateInvoice(OrderID.Value, DateTime.Now);
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
