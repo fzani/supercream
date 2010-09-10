@@ -301,7 +301,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             #region Visibility on Buttons
             if (orderHeader.OrderStatus == (short)SP.Core.Enums.OrderStatus.Order)
             {
-                CreateInvoiceButton.Visible = true;
+                ShowInvoiceDetailsButton.Visible = true;
                 CreateProformaInvoiceButton.Visible = true;
                 CreateDeliveryNoteButton.Visible = true;
                 ConvertToInvoiceButton.Visible = false;
@@ -309,7 +309,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             else if (orderHeader.OrderStatus == (short)SP.Core.Enums.OrderStatus.Invoice
                 || orderHeader.OrderStatus == (short)SP.Core.Enums.OrderStatus.InvoicePrinted)
             {
-                CreateInvoiceButton.Visible = false;
+                ShowInvoiceDetailsButton.Visible = false;
                 CreateProformaInvoiceButton.Visible = false;
                 CreateDeliveryNoteButton.Visible = false;
                 ConvertToInvoiceButton.Visible = false;
@@ -318,7 +318,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             else if (orderHeader.OrderStatus == (short)SP.Core.Enums.OrderStatus.ProformaInvoice
                 || orderHeader.OrderStatus == (short)SP.Core.Enums.OrderStatus.PoformaInvoicePrinted)
             {
-                CreateInvoiceButton.Visible = false;
+                ShowInvoiceDetailsButton.Visible = false;
                 CreateProformaInvoiceButton.Visible = false;
                 CreateDeliveryNoteButton.Visible = false;
                 ConvertToInvoiceButton.Visible = true;
@@ -326,11 +326,34 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             else if (orderHeader.OrderStatus == (short)SP.Core.Enums.OrderStatus.DeliveryNotePrinted
                 || orderHeader.OrderStatus == (short)SP.Core.Enums.OrderStatus.DeliveryNote)
             {
-                CreateInvoiceButton.Visible = false;
+                ShowInvoiceDetailsButton.Visible = false;
                 CreateProformaInvoiceButton.Visible = false;
                 CreateDeliveryNoteButton.Visible = false;
                 ConvertToInvoiceButton.Visible = true;
             }
+
+            #endregion
+
+            #region InvoiceDateHeader
+
+            if (orderHeader.OrderStatus == (short)OrderStatus.Invoice || orderHeader.OrderStatus == (short)OrderStatus.InvoicePrinted)
+            {
+                InvoiceHeaderDateLabel.Visible = true;
+                InvoiceHeaderDateTextBox.Enabled = true;
+                InvoiceHeaderDateTextBox.Visible = true;
+                InvoiceHeaderImage.Visible = true;
+                InvoiceHeaderRequiredFieldValidator.Enabled = true;
+                InvoiceHeaderDateTextBox.Text = orderHeader.InvoiceDate.ToShortDateString();
+            }
+            else
+            {
+                InvoiceHeaderDateLabel.Visible = false;
+                InvoiceHeaderDateTextBox.Enabled = false;
+                InvoiceHeaderDateTextBox.Visible = false;
+                InvoiceHeaderImage.Visible = false;
+                InvoiceHeaderRequiredFieldValidator.Enabled = false;
+            }
+
             #endregion
 
             ChangeState += new EventHandler<EventArgs>(SelectedOrderState);
@@ -582,6 +605,15 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
                 throw new ApplicationException("Cannot Modify Order - Order No Exists for an existing Order");
             oh.VatCodeID = existingOrderHeader.VatCodeID;
 
+            if (IsInvoice(existingOrderHeader.OrderStatus))
+            {
+                oh.InvoiceDate = DateTime.Parse(InvoiceHeaderDateTextBox.Text);
+            }
+            else
+            {
+                oh.InvoiceDate = existingOrderHeader.InvoiceDate;
+            }
+
             ui.Update(oh);
 
             ChangeState += new EventHandler<EventArgs>(CompleteOrderState);
@@ -594,6 +626,12 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             arg.AddErrorMessages(ex.Message);
             ErrorMessageEventHandler(this, arg);
         }
+    }
+
+    private static bool IsInvoice(short orderStatus)
+    {
+        return orderStatus == (short)SP.Core.Enums.OrderStatus.Invoice
+              || orderStatus == (short)SP.Core.Enums.OrderStatus.InvoicePrinted;
     }
 
     protected void Modify_OrderLineDetailsLinkButton_Click(object sender, EventArgs e)
@@ -675,12 +713,22 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         DataBind();
     }
 
+    protected void ShowInvoiceButton_Click(object sender, EventArgs e)
+    {
+        this.InvoiceDateTextBox.Text = DateTime.Now.AddDays(1).ToString();
+        ModalPopupExtenderCreateInvoice.Show();
+    }
+
     protected void CreateInvoiceButton_Click(object sender, EventArgs e)
     {
         try
         {
             OrderHeaderUI ui = new OrderHeaderUI();
             string invoiceNo = ui.CreateInvoice(OrderID.Value);
+
+            var orderHeader = ui.GetById(OrderID.Value);
+            orderHeader.InvoiceDate = DateTime.Parse(InvoiceDateTextBox.Text);
+            ui.Update(orderHeader);
 
             OrderStatusTypeLabel.Text = "<h3>Status : <i>Invoiced</i></h3";
             OrderStatusNoLabel.Text = "<h3><i>Invoice No: " + invoiceNo + "</i></h3>";
@@ -701,6 +749,12 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             args.AddErrorMessages(ex.Message);
             ErrorMessageEventHandler(this, args);
         }
+    }
+
+    protected void ShowDeliveryNoteButton_Click(object sender, EventArgs e)
+    {
+        DeliveryNoteInvoiceDateTextBox.Text = DateTime.Now.AddDays(1).ToString();
+        ModalPopupExtenderDeliveryNoteInvoice.Show();
     }
 
     protected void CreateDeliveryNoteButton_Click(object sender, EventArgs e)
@@ -749,6 +803,10 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
                 orderNotesStatusUI.Update(orderNotesStatus);
             }
 
+            var orderHeader = ui.GetById(OrderID.Value);
+            orderHeader.InvoiceDate = DateTime.Parse(InvoiceDateTextBox.Text);
+            ui.Update(orderHeader);
+
             OrderStatusTypeLabel.Text = "<h3>Status : <i>Invoiced</i></h3";
             OrderStatusNoLabel.Text = "<h3><i>Invoice No: " + invoiceNo + "</i></h3>";
             OrderStatusTypeLabel.Visible = true;
@@ -770,13 +828,13 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         }
     }
 
-    protected void CreateProformaInvoiceButton_Click(object sender, EventArgs e)
+    protected void ShowProformaInvoiceButton_Click(object sender, EventArgs e)
     {
         CreateInvoiceProformaTextBox.Text = DateTime.Now.AddDays(1).ToString();
-        ModalPopupExtenderInvoiceProforma.Show();        
+        ModalPopupExtenderInvoiceProforma.Show();
     }
 
-    protected void CreateInvoiceProform_Click(object sender, EventArgs e)
+    protected void CreateProformaInvoiceButton_Click(object sender, EventArgs e)
     {
         try
         {
@@ -793,10 +851,11 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             CreateInvoiceButton.Visible = false;
             CreateProformaInvoiceButton.Visible = false;
             CreateDeliveryNoteButton.Visible = false;
-           
-            var orderHeader = ui.GetById(OrderID.Value);
-            orderHeader.InvoiceDate = DateTime.Parse(CreateInvoiceProformaTextBox.Text);
-            ui.Update(orderHeader);
+
+            //  var orderHeader = ui.GetById(OrderID.Value);
+            ////  orderHeader.InvoiceDate = DateTime.Parse(CreateInvoiceProformaTextBox.Text);
+            //  orderHeader.InvoiceDate = DateTime.Parse(CreateInvoiceProformaTextBox.Text);
+            //  ui.Update(orderHeader);
 
             ChangeState += new EventHandler<EventArgs>(CompleteOrderState);
             ChangeState(this, e);

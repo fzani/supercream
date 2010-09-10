@@ -131,6 +131,8 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
 
             orderHeaderUI.Update(orderHeader);
 
+            DataBind();
+
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
         }
@@ -451,7 +453,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             DeliveryDropDownList.Items.Clear();
             DeliveryDropDownList.Items.Add(new ListItem("-- No Item Selected --", "-1"));
             customer.OutletStore.ForEach(outletStoreAction);
-
+          
             OrderNotesStatusUI orderNotesStatusUI = new OrderNotesStatusUI();
             if (orderNotesStatusUI.OrderNoteExistsByOrderID(OrderID.Value))
             {

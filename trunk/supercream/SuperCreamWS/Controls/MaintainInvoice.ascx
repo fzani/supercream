@@ -11,15 +11,15 @@
                 <h3>
                     Search Invoices</h3>
             </legend>
-            <table class="search">
+            <table class="search" style="width: 100%;">
                 <tr>
-                    <td class="right">
-                        <table class="left">
+                    <td class="right" style="width: 100%;">
+                        <table class="left" style="width: 100%;">
                             <tr>
-                                <td>
+                                <td style="width: 20%;">
                                     <asp:Label ID="InvoiceNoLabel" Text="Invoice No" runat="server"></asp:Label>
                                 </td>
-                                <td>
+                                <td style="width: 80%;">
                                     <asp:TextBox ID="InvoiceNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
@@ -196,7 +196,7 @@
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox3" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "OrderDate", "{0:d}") %>'></asp:TextBox>
                         </EditItemTemplate>
-                         <ItemStyle Width="10%" />
+                        <ItemStyle Width="10%" />
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
@@ -257,21 +257,17 @@
             </div>
         </asp:Panel>
         <asp:Panel ID="InvoiceEntryPanel" Visible="false" runat="server">
-            <h3>
+            <h3 style="width: 90%;">
                 Select Invoice Details</h3>
+            <hr />
             <table style="width: 100%">
-                <tr>
-                    <td colspan="2">
-                        <hr />
-                    </td>
-                </tr>
                 <tr>
                     <td>
                         <h2>
                             <i>Order No</i></h2>
                     </td>
                     <td>
-                        <h2>
+                        <h2 style="width: 90%">
                             <i>
                                 <asp:Label ID="OrderHeaderNoLabel" runat="server"></asp:Label>
                             </i>
@@ -285,7 +281,7 @@
                         </h2>
                     </td>
                     <td>
-                        <h2>
+                        <h2 style="width: 90%">
                             <i>
                                 <asp:Label ID="InvoiceHeaderNoLabel" runat="server"></asp:Label>
                             </i>
@@ -711,11 +707,6 @@
                                     <td style="width: 14%">
                                     </td>
                                     <td style="width: 14%">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="7">
-                                        <hr />
                                     </td>
                                 </tr>
                                 <tr>

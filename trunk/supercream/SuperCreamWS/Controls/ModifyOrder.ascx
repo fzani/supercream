@@ -242,6 +242,25 @@
                         </td>
                     </tr>
                     <tr>
+                        <td style="width: 25%;">
+                            <asp:Label ID="InvoiceHeaderDateLabel" Text="Invoice Date" runat="server"></asp:Label>
+                        </td>
+                        <td style="width: 75%;" colspan="2">
+                            <asp:TextBox ID="InvoiceHeaderDateTextBox" Style="vertical-align: middle;" runat="server"
+                                ValidationGroup="ModifyOrderDetailsGroup" MaxLength="100" Width="100px"></asp:TextBox>
+                            <asp:Image runat="Server" Style="vertical-align: middle;" ID="InvoiceHeaderImage"
+                                ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
+                            <asp:RequiredFieldValidator ID="InvoiceHeaderRequiredFieldValidator" runat="server" ControlToValidate="InvoiceHeaderDateTextBox"
+                                Display="Dynamic" ErrorMessage="Delivery Date is a required field" SetFocusOnError="True"
+                                ValidationGroup="ModifyOrderDetailsGroup">*</asp:RequiredFieldValidator>
+                            <ajaxToolkit:CalendarExtender ID="InvoiceHeadeCalendarExtender" Format="dd/MM/yyyy" runat="server"
+                                TargetControlID="InvoiceHeaderDateTextBox" PopupButtonID="InvoiceHeaderImage" />
+                            <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender8" runat="server" TargetControlID="InvoiceHeaderDateTextBox"
+                                Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
+                                OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
                             Special Instructions
                         </td>
@@ -262,23 +281,32 @@
                         <td colspan="3">
                             <asp:LinkButton ID="ConvertToInvoiceButton" Text="Convert to Invoice" runat="server"
                                 OnClick="ConvertToInvoiceButton_Click" />
-                            <asp:LinkButton ID="CreateInvoiceButton" Text="Create Invoice |" runat="server" OnClick="CreateInvoiceButton_Click" />
+                            <asp:LinkButton ID="ShowInvoiceDetailsButton" Text="Create Invoice |" runat="server"
+                                OnClick="ShowInvoiceButton_Click" />
                             <asp:LinkButton ID="CreateProformaInvoiceButton" Text="Create Proforma Invoice |"
                                 runat="server" OnClick="CreateProformaInvoiceButton_Click" />
                             <asp:LinkButton ID="CreateDeliveryNoteButton" Text="Create Delivery Note" runat="server"
                                 OnClick="CreateDeliveryNoteButton_Click" />
                             <asp:Button ID="btnTrigger1" runat="server" Style="display: none" />
                             <asp:Button ID="btnTrigger2" runat="server" Style="display: none" />
-                             <asp:Button ID="btnTrigger3" runat="server" Style="display: none" />
+                            <asp:Button ID="btnTrigger3" runat="server" Style="display: none" />
+                            <asp:Button ID="btnTrigger4" runat="server" Style="display: none" />
+                            <asp:Button ID="btnTrigger5" runat="server" Style="display: none" />
                             <ajaxToolkit:ModalPopupExtender ID="ReasonForVoidingPopupExtenderInvoice" DropShadow="true"
                                 runat="server" TargetControlID="btnTrigger1" PopupControlID="ReasonForVoidingPanelMessage"
                                 CancelControlID="CancelReasonorVoidingButton" BackgroundCssClass="XPopUpBackGround" />
-                            <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" DropShadow="true"
-                                runat="server" TargetControlID="btnTrigger1" PopupControlID="ReasonForVoidingPanelMessage"
-                                CancelControlID="CancelReasonorVoidingButton" BackgroundCssClass="XPopUpBackGround" />
+                            <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" DropShadow="true" runat="server"
+                                TargetControlID="btnTrigger1" PopupControlID="ReasonForVoidingPanelMessage" CancelControlID="CancelReasonorVoidingButton"
+                                BackgroundCssClass="XPopUpBackGround" />
+                            <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtenderCreateInvoice" DropShadow="true"
+                                runat="server" TargetControlID="btnTrigger5" PopupControlID="CreateInvoicePanel"
+                                CancelControlID="CancelInvoiceButton" BackgroundCssClass="XPopUpBackGround" />
                             <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtenderInvoiceProforma" DropShadow="true"
                                 runat="server" TargetControlID="btnTrigger3" PopupControlID="CreateInvoiceProformaPanel"
                                 CancelControlID="CancelInvoiceProformaNoteButton" BackgroundCssClass="XPopUpBackGround" />
+                            <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtenderDeliveryNoteInvoice" DropShadow="true"
+                                runat="server" TargetControlID="btnTrigger4" PopupControlID="CreateDeliveryNotePanel"
+                                CancelControlID="CancelDeliveryNoteButton" BackgroundCssClass="XPopUpBackGround" />
                             <asp:Panel Style="display: none" DefaultButton="ReasonforVoidingButton" Width="700px"
                                 ID="ReasonForVoidingPanelMessage" runat="server" CssClass="modalPopup">
                                 <table>
@@ -310,10 +338,18 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            Invoice No
+                                            Invoice Date
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="DeliveryInvoiceNoTextBox" Width="500px" MaxLength="30" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="DeliveryNoteInvoiceDateTextBox" Style="vertical-align: middle;"
+                                                runat="server" ValidationGroup="AddOrderDetailsGroup" MaxLength="100" Width="100px"></asp:TextBox>
+                                            <asp:Image runat="Server" Style="vertical-align: middle;" ID="DeliveryNoteInvoiceDateImage"
+                                                ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
+                                            <ajaxToolkit:CalendarExtender ID="CalendarExtender5" Format="dd/MM/yyyy" runat="server"
+                                                TargetControlID="DeliveryNoteInvoiceDateTextBox" PopupButtonID="DeliveryNoteInvoiceDateImage" />
+                                            <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender6" runat="server" TargetControlID="DeliveryNoteInvoiceDateTextBox"
+                                                Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
+                                                OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -348,9 +384,37 @@
                                     <tr>
                                         <td>
                                             <asp:Button ID="CreateInvoiceProformaNoteButton" CommandArgument='<%# OrderID %>'
-                                                Text="Save" runat="server" OnClick="CreateInvoiceProform_Click" />
+                                                Text="Save" runat="server" OnClick="CreateProformaInvoiceButton_Click" />
                                             <asp:Button ID="CancelInvoiceProformaNoteButton" Text="Cancel" CausesValidation="false"
                                                 runat="server" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
+                            <asp:Panel Style="display: none" Width="700px" DefaultButton="CreateInvoiceButton"
+                                ID="CreateInvoicePanel" runat="server" CssClass="modalPopup">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Invoice Date
+                                        </td>
+                                        <td>
+                                            <asp:TextBox ID="InvoiceDateTextBox" Style="vertical-align: middle;" runat="server"
+                                                ValidationGroup="AddOrderDetailsGroup" MaxLength="100" Width="100px"></asp:TextBox>
+                                            <asp:Image runat="Server" Style="vertical-align: middle;" ID="InvoiceDateImage" ImageUrl="~/images/Calendar_scheduleHS.png"
+                                                AlternateText="Click to show calendar" />
+                                            <ajaxToolkit:CalendarExtender ID="CalendarExtender6" Format="dd/MM/yyyy" runat="server"
+                                                TargetControlID="InvoiceDateTextBox" PopupButtonID="InvoiceDateImage" />
+                                            <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender7" runat="server" TargetControlID="InvoiceDateTextBox"
+                                                Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
+                                                OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Button ID="CreateInvoiceButton" CommandArgument='<%# OrderID %>' Text="Save"
+                                                runat="server" OnClick="CreateInvoiceButton_Click" />
+                                            <asp:Button ID="CancelInvoiceButton" Text="Cancel" CausesValidation="false" runat="server" />
                                         </td>
                                     </tr>
                                 </table>
