@@ -371,7 +371,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
                 }
                 else
                 {
-                    InvoiceProformaHeaderDateTextBox.Text = orderHeader.InvoiceDate.ToShortDateString();
+                    InvoiceProformaHeaderDateTextBox.Text = orderHeader.InvoiceProformaDate.ToShortDateString();
                 }
             }
             else
@@ -882,7 +882,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 
     protected void ShowProformaInvoiceButton_Click(object sender, EventArgs e)
     {
-        CreateInvoiceProformaTextBox.Text = DateTime.Now.AddDays(1).ToString();
+        InvoiceProformaDateTextBox.Text = DateTime.Now.AddDays(1).ToString();
         ModalPopupExtenderInvoiceProforma.Show();
     }
 
@@ -893,7 +893,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             this.OrderStatus = OrderStatus.ProformaInvoice;
 
             var ui = new OrderHeaderUI();
-            string invoiceNo = ui.CreateInvoiceProforma(OrderID.Value);
+            string invoiceNo = ui.CreateInvoiceProforma(OrderID.Value, DateTime.Parse(InvoiceProformaDateTextBox.Text));
 
             OrderStatusTypeLabel.Text = "<h3>Status : <i>Proforma Produced</i></h3";
             OrderStatusNoLabel.Text = "<h3><i>Invoice No: " + invoiceNo + "</i></h3>";
@@ -903,11 +903,6 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             CreateInvoiceButton.Visible = false;
             CreateProformaInvoiceButton.Visible = false;
             CreateDeliveryNoteButton.Visible = false;
-
-            //  var orderHeader = ui.GetById(OrderID.Value);
-            ////  orderHeader.InvoiceDate = DateTime.Parse(CreateInvoiceProformaTextBox.Text);
-            //  orderHeader.InvoiceDate = DateTime.Parse(CreateInvoiceProformaTextBox.Text);
-            //  ui.Update(orderHeader);
 
             ChangeState += new EventHandler<EventArgs>(CompleteOrderState);
             ChangeState(this, e);

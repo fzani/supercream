@@ -105,7 +105,7 @@ public class OrderHeaderUI : IDisposable
         }
     }
 
-    public string CreateInvoiceProforma(int orderNo)
+    public string CreateInvoiceProforma(int orderNo, DateTime invoiceProformaDate)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
@@ -113,6 +113,7 @@ public class OrderHeaderUI : IDisposable
             OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
 
             updatedOrderHeader.OrderStatus = (short)SP.Core.Enums.OrderStatus.ProformaInvoice;
+            updatedOrderHeader.InvoiceProformaDate = invoiceProformaDate;
 
             OrderHeader oh = _proxy.CreateInvoiceProforma(updatedOrderHeader, origOrderHeader);
             return oh.InvoiceNo;
