@@ -845,7 +845,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         {
             OrderHeaderUI ui = new OrderHeaderUI();
 
-            string invoiceNo = ui.UpdateToInvoice(OrderID.Value);
+            string invoiceNo = ui.UpdateToInvoice(OrderID.Value, DateTime.Parse(InvoiceDateTextBox.Text));
 
             OrderNotesStatusUI orderNotesStatusUI = new OrderNotesStatusUI();
             if (orderNotesStatusUI.OrderNoteExistsByOrderID(OrderID.Value))
