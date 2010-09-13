@@ -8,15 +8,15 @@
                 <h3>
                     Search Delivery Notes</h3>
             </legend>
-            <table class="search" style="width:100%;">
+            <table class="search" style="width: 100%;">
                 <tr>
                     <td class="right">
-                        <table class="left" style="width:100%">
+                        <table class="left" style="width: 100%">
                             <tr>
-                                <td style="width:30%">
+                                <td style="width: 30%">
                                     <asp:Label ID="OrderNoLabel" Text="Order No" runat="server"></asp:Label>
                                 </td>
-                                <td style="width:70%">
+                                <td style="width: 70%">
                                     <asp:TextBox ID="OrderNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
@@ -94,7 +94,7 @@
                                     <asp:LinkButton ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
                                         OnClick="ClearButton_Click" />
                                 </td>
-                            </tr>                           
+                            </tr>
                         </table>
                     </td>
                 </tr>
@@ -152,10 +152,10 @@
                         </EditItemTemplate>
                         <ItemStyle Width="40%" />
                     </asp:TemplateField>
-                     <asp:TemplateField HeaderText="Delivery Note Date" SortExpression="DeliveryNoteDate">
+                    <asp:TemplateField HeaderText="Delivery Note Date" SortExpression="DeliveryNoteDate">
                         <ItemTemplate>
                             <asp:Label ID="DelivertNoteLabel" runat="server" ItemStyle-Width="10%" Text='<%# DataBinder.Eval(Container.DataItem, "DeliveryDate", "{0:d}") %>'></asp:Label>
-                        </ItemTemplate>                      
+                        </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Order Date" SortExpression="OrderDate">
                         <ItemTemplate>
@@ -246,7 +246,7 @@
                             <asp:Button ID="CancelDeliveryNoteButton" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 Visible="false" Text="Revert to Order" runat="server" OnClick="CancelInvoiceButton_Click" />
                             <asp:Button ID="CreateInvoiceButton" Text="Create Invoice" runat="server" ValidationGroup="ModifyInvoiceDetailsGroup"
-                                OnClick="CreateInvoiceButton_Click" />
+                                OnClick="ShowInvoiceButton_Click" />
                             <asp:Button ID="PrintDeliveryNoteButton" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 Visible="false" Text="Print Delivery Note" runat="server" OnClick="PrintDeliveryNoteButton_Click" />
                             <asp:Button ID="RePrintDeliveryButton" ValidationGroup="ModifyInvoiceDetailsGroup"
@@ -273,6 +273,39 @@
                                     <asp:Button ID="OKFailedPrintButton" runat="server" Text="OK" ValidationGroup="GridViewPanel"
                                         CssClass="button" />
                                 </center>
+                            </asp:Panel>
+                            <asp:Button ID="InvoiceButtonTrigger" runat="server" Style="display: none" />
+                            <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtenderCreateInvoice" DropShadow="true"
+                                runat="server" TargetControlID="InvoiceButtonTrigger" PopupControlID="CreateInvoicePanel"
+                                CancelControlID="CancelInvoiceDateEntryButton" BackgroundCssClass="XPopUpBackGround" />
+                            <asp:Panel Style="display: none" Width="700px" DefaultButton="CreateInvoiceButton"
+                                ID="CreateInvoicePanel" runat="server" CssClass="modalPopup">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Invoice Date
+                                        </td>
+                                        <td>
+                                            <asp:TextBox ID="InvoiceDateTextBox" Style="vertical-align: middle;" runat="server"
+                                                ValidationGroup="AddOrderDetailsGroup" MaxLength="100" Width="100px"></asp:TextBox>
+                                            <asp:Image runat="Server" Style="vertical-align: middle;" ID="InvoiceDateImage" ImageUrl="~/images/Calendar_scheduleHS.png"
+                                                AlternateText="Click to show calendar" />
+                                            <ajaxToolkit:CalendarExtender ID="CalendarExtender6" Format="dd/MM/yyyy" runat="server"
+                                                TargetControlID="InvoiceDateTextBox" PopupButtonID="InvoiceDateImage" />
+                                            <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender7" runat="server" TargetControlID="InvoiceDateTextBox"
+                                                Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
+                                                OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Button ID="InvoiceCreateButton" CommandArgument='<%# OrderID %>' Text="Save" runat="server"
+                                                OnClick="ConvertToInvoice_Click" />
+                                            <asp:Button ID="CancelInvoiceDateEntryButton" Text="Cancel" CausesValidation="false"
+                                                runat="server" />
+                                        </td>
+                                    </tr>
+                                </table>
                             </asp:Panel>
                             <ajaxToolkit:ModalPopupExtender ID="OKModalPopupExtender" DropShadow="true" runat="server"
                                 TargetControlID="btnOKTrigger" PopupControlID="PrintOKPanel" CancelControlID="OkPrintButton"
@@ -490,7 +523,7 @@
                 <FooterTemplate>
                     <tr>
                         <td colspan="4">
-                            <table style="width:98%;">
+                            <table style="width: 98%;">
                                 <tr>
                                     <td style="width: 40%">
                                     </td>
