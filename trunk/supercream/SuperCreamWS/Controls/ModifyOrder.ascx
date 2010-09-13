@@ -306,7 +306,7 @@
                             <asp:LinkButton ID="ShowInvoiceDetailsButton" Text="Create Invoice |" runat="server"
                                 OnClick="ShowInvoiceButton_Click" />
                             <asp:LinkButton ID="CreateProformaInvoiceButton" Text="Create Proforma Invoice |"
-                                runat="server" OnClick="CreateProformaInvoiceButton_Click" />
+                                runat="server" OnClick="ShowProformaInvoiceButton_Click" />
                             <asp:LinkButton ID="CreateDeliveryNoteButton" Text="Create Delivery Note" runat="server"
                                 OnClick="CreateDeliveryNoteButton_Click" />
                             <asp:Button ID="btnTrigger1" runat="server" Style="display: none" />
@@ -392,13 +392,13 @@
                                             Invoice Date
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="CreateInvoiceProformaTextBox" Style="vertical-align: middle;" runat="server"
+                                            <asp:TextBox ID="InvoiceProformaDateTextBox" Style="vertical-align: middle;" runat="server"
                                                 ValidationGroup="AddOrderDetailsGroup" MaxLength="100" Width="100px"></asp:TextBox>
                                             <asp:Image runat="Server" Style="vertical-align: middle;" ID="CreateInvoiceProformaImage"
                                                 ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
                                             <ajaxToolkit:CalendarExtender ID="CalendarExtender4" Format="dd/MM/yyyy" runat="server"
-                                                TargetControlID="CreateInvoiceProformaTextBox" PopupButtonID="CreateInvoiceProformaImage" />
-                                            <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender5" runat="server" TargetControlID="CreateInvoiceProformaTextBox"
+                                                TargetControlID="InvoiceProformaDateTextBox" PopupButtonID="CreateInvoiceProformaImage" />
+                                            <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender5" runat="server" TargetControlID="InvoiceProformaDateTextBox"
                                                 Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
                                                 OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
                                         </td>

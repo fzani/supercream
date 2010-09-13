@@ -145,13 +145,10 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
     {
         try
         {
-            OrderNotesStatusUI ui = new OrderNotesStatusUI();
-            OrderNotesStatus status = ui.GetOrderNotesStatus(OrderNoteStatusID.Value);
-            status.AccountID = Convert.ToInt32(AccountDropDownList.SelectedValue);
-            status.VanID = Convert.ToInt32(DeliveryVanDropDownList.SelectedValue);
-            status.OutletStoreID = Convert.ToInt32(DeliveryDropDownList.SelectedValue);
+            UpdateOrderNoteStatus();
+            UpdateOrderHeader();
 
-            ui.Update(status);
+            DataBind();
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
@@ -163,7 +160,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             ErrorMessageEventHandler(this, args);
         }
     }
-
+   
     protected void CancelInvoiceButton_Click(object sender, EventArgs e)
     {
         try
@@ -477,6 +474,8 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
                 RePrintInvoiceButton.Visible = false;
                 CancelInvoiceButton.Visible = false;
             }
+
+            InvoiceHeaderProformaDateTextBox.Text = orderHeader.InvoiceProformaDate.ToShortDateString();
         }
 
         DataBind();
@@ -714,6 +713,25 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
     #endregion
 
     #region Private Helpers
+
+    private void UpdateOrderHeader()
+    {
+        OrderHeaderUI orderHeaderUi = new OrderHeaderUI();
+        OrderHeader orderHeader = orderHeaderUi.GetById(OrderID.Value);
+        orderHeader.InvoiceProformaDate = DateTime.Parse(InvoiceHeaderProformaDateTextBox.Text);
+        orderHeaderUi.Update(orderHeader);
+    }
+
+    private void UpdateOrderNoteStatus()
+    {
+        OrderNotesStatusUI ui = new OrderNotesStatusUI();
+        OrderNotesStatus status = ui.GetOrderNotesStatus(OrderNoteStatusID.Value);
+        status.AccountID = Convert.ToInt32(AccountDropDownList.SelectedValue);
+        status.VanID = Convert.ToInt32(DeliveryVanDropDownList.SelectedValue);
+        status.OutletStoreID = Convert.ToInt32(DeliveryDropDownList.SelectedValue);
+
+        ui.Update(status);
+    }
 
     private void UpdateOrderHeaderToInvoice(OrderHeaderUI orderHeaderUi)
     {

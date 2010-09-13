@@ -8,15 +8,15 @@
                 <h3>
                     Search Proforma Invoices</h3>
             </legend>
-            <table class="search">
+            <table class="search" style="width: 100%;">
                 <tr>
-                    <td class="right">
-                        <table class="left">
+                    <td class="right" style="width: 100%;">
+                        <table class="left" style="width: 100%;">
                             <tr>
-                                <td>
+                                <td style="width: 25%;">
                                     <asp:Label ID="OrderNoLabel" Text="Order No" runat="server"></asp:Label>
                                 </td>
-                                <td>
+                                <td style="width: 75%;">
                                     <asp:TextBox ID="OrderNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
@@ -118,21 +118,22 @@
                         </ItemTemplate>
                         <ItemStyle Width="10%" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Order No." ItemStyle-Width="20%" SortExpression="AlphaID">
+                    <asp:TemplateField HeaderText="Order No." SortExpression="AlphaID">
                         <ItemTemplate>
                             <asp:Label ID="Label2" runat="server" Text='<%# Bind("AlphaID") %>'></asp:Label>
                         </ItemTemplate>
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("AlphaID") %>'></asp:TextBox>
                         </EditItemTemplate>
-                        <ItemStyle Width="20%" />
+                        <ItemStyle Width="15%" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Invoice Proforma No." ItemStyle-Width="20%" SortExpression="InvoiceProformaNo">
                         <ItemTemplate>
                             <asp:Label ID="InvoiceProformaLabel" runat="server" Text='<%# Bind("InvoiceProformaNo") %>'></asp:Label>
                         </ItemTemplate>
+                        <ItemStyle Width="15%" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Customer Name" ItemStyle-Width="30%" SortExpression="CustomerID">
+                    <asp:TemplateField HeaderText="Customer Name" SortExpression="CustomerID">
                         <ItemTemplate>
                             <table>
                                 <tr>
@@ -157,7 +158,13 @@
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CustomerID") %>'></asp:TextBox>
                         </EditItemTemplate>
-                        <ItemStyle Width="30%" />
+                        <ItemStyle Width="40%" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Invoice Proforma Date" SortExpression="InvoiceProformaDate">
+                        <ItemTemplate>
+                            <asp:Label ID="InvoiceProformaDateLabel" runat="server" ItemStyle-Width="20%" Text='<%# DataBinder.Eval(Container.DataItem, "InvoiceProformaDate", "{0:d}") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle Width="10%" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Order Date" SortExpression="OrderDate">
                         <ItemTemplate>
@@ -166,6 +173,7 @@
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox3" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "OrderDate", "{0:d}") %>'></asp:TextBox>
                         </EditItemTemplate>
+                        <ItemStyle Width="10%" />
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
@@ -274,6 +282,26 @@
                 </tr>
                 <tr>
                     <td>
+                        Invoice Proforma Date
+                    </td>
+                    <td>
+                        <asp:TextBox ID="InvoiceHeaderProformaDateTextBox" Style="vertical-align: middle;"
+                            runat="server" ValidationGroup="ModifyInvoiceDetailsGroup" MaxLength="100" Width="100px"></asp:TextBox>
+                        <asp:Image runat="Server" Style="vertical-align: middle;" ID="InvoiceHeaderProformaDateImage"
+                            ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
+                        <asp:RequiredFieldValidator ID="ImageHeaderProformaDateRequiredFieldValidator" ValidationGroup="NewOutletGroup"
+                            ControlToValidate="InvoiceHeaderProformaDateTextBox" ErrorMessage="Invoice Date is required"
+                            InitialValue="" Text="Required" runat="server" />
+                        <ajaxToolkit:CalendarExtender ID="InvoiceHeaderProformaDateCalendarExtender" Format="dd/MM/yyyy"
+                            runat="server" TargetControlID="InvoiceHeaderProformaDateTextBox" PopupButtonID="InvoiceHeaderProformaDateImage" />
+                        <ajaxToolkit:MaskedEditExtender ID="InvoiceHeaderProformaDateMaskedEditExtender"
+                            runat="server" TargetControlID="InvoiceHeaderProformaDateTextBox" Mask="99/99/9999"
+                            MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError"
+                            MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         <asp:LinkButton ID="CancelSelectInvoiceDetails" Text="Cancel Select Details" Width="100%"
                             runat="server" OnClick="CancelSelectInvoiceDetails_Click" />
                     </td>
@@ -286,7 +314,7 @@
                             <asp:Button ID="ConfirmInvoice" Text="Confirm Proforma Invoice" runat="server" ValidationGroup="ModifyInvoiceDetailsGroup"
                                 OnClick="ConfirmInvoice_Click" />
                             <asp:Button ID="ChangeInvoiceDetailsButton" ValidationGroup="ModifyInvoiceDetailsGroup"
-                                Visible="false" Text="Change Invoice Details" runat="server" OnClick="ChangeInvoiceDetailsButton_Click" />
+                                Visible="false" Text="Change Proforma Invoice Details" runat="server" OnClick="ChangeInvoiceDetailsButton_Click" />
                             <asp:Button ID="ConvertToInvoiceButton" Text="Convert to Invoice" runat="server"
                                 ValidationGroup="ModifyInvoiceDetailsGroup" OnClick="ShowInvoiceButton_Click"
                                 Visible="false" />
@@ -325,7 +353,8 @@
                                         <td>
                                             <asp:Button ID="CreateInvoiceButton" CommandArgument='<%# OrderID %>' Text="Save"
                                                 runat="server" OnClick="ConvertToInvoice_Click" />
-                                            <asp:Button ID="CancelInvoiceDateEntryButton" Text="Cancel" CausesValidation="false" runat="server" />
+                                            <asp:Button ID="CancelInvoiceDateEntryButton" Text="Cancel" CausesValidation="false"
+                                                runat="server" />
                                         </td>
                                     </tr>
                                 </table>
