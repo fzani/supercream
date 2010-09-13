@@ -173,20 +173,15 @@ public class OrderHeaderUI : IDisposable
         }
     }
 
-    public string UpdateToInvoice(int orderNo)
+    public string UpdateToInvoice(int orderNo, DateTime invoiceDate)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
             OrderHeader origOrderHeader = _proxy.GetOrderHeaderByIdWithVatCode(orderNo);
             OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
-
-            updatedOrderHeader.AlphaID = origOrderHeader.AlphaID;
-            updatedOrderHeader.CustomerID = origOrderHeader.CustomerID;
-            updatedOrderHeader.ID = origOrderHeader.ID;
-            updatedOrderHeader.OrderDate = origOrderHeader.OrderDate;
+            
             updatedOrderHeader.OrderStatus = (short)SP.Core.Enums.OrderStatus.Invoice;
-            updatedOrderHeader.InvoiceNo = origOrderHeader.InvoiceNo;
-            updatedOrderHeader.SpecialInstructions = origOrderHeader.SpecialInstructions;
+            updatedOrderHeader.InvoiceDate = invoiceDate;
 
             OrderHeader oh = _proxy.CreateInvoice(updatedOrderHeader, origOrderHeader);
             return oh.InvoiceNo;

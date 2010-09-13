@@ -107,12 +107,27 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         }
     }
 
+    protected void ShowInvoiceButton_Click(object sender, EventArgs e)
+    {
+        this.InvoiceDateTextBox.Text = DateTime.Now.AddDays(1).ToString();
+        ModalPopupExtenderCreateInvoice.Show();
+    }
+
     protected void ConvertToInvoice_Click(object sender, EventArgs e)
     {
         try
         {
-            OrderHeaderUI ui = new OrderHeaderUI();
-            string invoiceNo = ui.CreateInvoice(OrderID.Value, DateTime.Now);
+            var orderHeaderUi = new OrderHeaderUI();
+
+            if (new OrderNotesStatusUI().OrderNoteExistsByOrderID(OrderID.Value))
+            {
+                UpdateOrderHeaderToInvoice(orderHeaderUi);
+                UpdateInvoiceCreatedDateOnOrderNoteStatus();
+            }
+            else
+            {
+                orderHeaderUi.CreateInvoice(OrderID.Value, DateTime.Parse(InvoiceDateTextBox.Text));
+            }
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
@@ -125,7 +140,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             ErrorMessageEventHandler(this, args);
         }
     }
-
+    
     protected void ChangeInvoiceDetailsButton_Click(object sender, EventArgs e)
     {
         try
@@ -323,7 +338,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             CustomerUI ui = new CustomerUI();
             Customer customer = ui.GetByID(customerID);
 
-            Image img = e.Row.FindControl("CreditNoteImage") as Image;          
+            Image img = e.Row.FindControl("CreditNoteImage") as Image;
             if (CreditNoteUI.CreditNoteExists(orderHeader.ID))
             {
                 img.Visible = true;
@@ -473,7 +488,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
     {
         InvoiceEntryPanel.Visible = false;
         DisplayInvoicePanel.Visible = false;
-        OrderHeaderDetailsPanel.Visible = false;      
+        OrderHeaderDetailsPanel.Visible = false;
 
         this.InvoiceSearchCriteriaPanel.Visible = true;
         this.InvoiceHeaderSearchGridPanel.Visible = true;
@@ -484,7 +499,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         InvoiceEntryPanel.Visible = true;
         DisplayInvoicePanel.Visible = false;
         InvoiceRepeater.Visible = false;
-        OrderHeaderDetailsPanel.Visible = false;      
+        OrderHeaderDetailsPanel.Visible = false;
 
         this.InvoiceSearchCriteriaPanel.Visible = false;
         this.InvoiceHeaderSearchGridPanel.Visible = false;
@@ -498,7 +513,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         OrderHeaderDetailsPanel.Visible = false;
 
         this.InvoiceSearchCriteriaPanel.Visible = false;
-        this.InvoiceHeaderSearchGridPanel.Visible = false;      
+        this.InvoiceHeaderSearchGridPanel.Visible = false;
     }
 
     public void AccountSelectedState(object sender, EventArgs args)
@@ -509,7 +524,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         OrderHeaderDetailsPanel.Visible = true;
 
         this.InvoiceSearchCriteriaPanel.Visible = false;
-        this.InvoiceHeaderSearchGridPanel.Visible = false;        
+        this.InvoiceHeaderSearchGridPanel.Visible = false;
     }
 
     #endregion
@@ -696,6 +711,25 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             }
         }
     }
+    #endregion
+
+    #region Private Helpers
+
+    private void UpdateOrderHeaderToInvoice(OrderHeaderUI orderHeaderUi)
+    {
+        if (OrderID.HasValue)
+            orderHeaderUi.UpdateToInvoice(OrderID.Value, DateTime.Parse(InvoiceDateTextBox.Text));
+    }
+
+    private void UpdateInvoiceCreatedDateOnOrderNoteStatus()
+    {
+        var orderNotesStatusUI = new OrderNotesStatusUI();
+        var orderNotesStatus = orderNotesStatusUI.GetOrderNotesStatusByOrderID(OrderID.Value);
+
+        orderNotesStatus.InvoiceDateCreated = DateTime.Now;
+        orderNotesStatusUI.Update(orderNotesStatus);
+    }
+
     #endregion
 
     #region Util Methods
