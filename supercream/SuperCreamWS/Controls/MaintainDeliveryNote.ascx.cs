@@ -174,16 +174,30 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
         }
     }
 
-    protected void CreateInvoiceButton_Click(object sender, EventArgs e)
+    protected void ShowInvoiceButton_Click(object sender, EventArgs e)
+    {
+        this.InvoiceDateTextBox.Text = DateTime.Now.AddDays(1).ToString();
+        ModalPopupExtenderCreateInvoice.Show();
+    }
+    
+    protected void ConvertToInvoice_Click(object sender, EventArgs e)
     {
         try
         {
-            OrderHeaderUI ui = new OrderHeaderUI();
-            ui.CreateInvoice(OrderID.Value, DateTime.Now);
+            var orderHeaderUi = new OrderHeaderUI();
+
+            if (new OrderNotesStatusUI().OrderNoteExistsByOrderID(OrderID.Value))
+            {
+                UpdateOrderHeaderToInvoice(orderHeaderUi);
+                UpdateInvoiceCreatedDateOnOrderNoteStatus();
+            }
+            else
+            {
+                orderHeaderUi.CreateInvoice(OrderID.Value, DateTime.Parse(InvoiceDateTextBox.Text));
+            }
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
-
             DataBind();
         }
         catch (Exception ex)
@@ -544,6 +558,25 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             totalRowCount = 0;
         }
     }
+    #endregion
+
+    #region Private Helpers
+
+    private void UpdateOrderHeaderToInvoice(OrderHeaderUI orderHeaderUi)
+    {
+        if (OrderID.HasValue)
+            orderHeaderUi.UpdateToInvoice(OrderID.Value, DateTime.Parse(InvoiceDateTextBox.Text));
+    }
+
+    private void UpdateInvoiceCreatedDateOnOrderNoteStatus()
+    {
+        var orderNotesStatusUI = new OrderNotesStatusUI();
+        var orderNotesStatus = orderNotesStatusUI.GetOrderNotesStatusByOrderID(OrderID.Value);
+
+        orderNotesStatus.InvoiceDateCreated = DateTime.Now;
+        orderNotesStatusUI.Update(orderNotesStatus);
+    }
+
     #endregion
 
     #region Util Methods
