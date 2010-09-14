@@ -13,15 +13,15 @@
                     <h3>
                         Select Order</h3>
                 </legend>
-                <table class="search">
+                <table class="search" style="width:100%;">
                     <tr>
-                        <td class="right">
-                            <table class="left">
+                        <td class="right" style="width:100%;">
+                            <table class="left" style="width:100%;">
                                 <tr>
-                                    <td>
+                                    <td style="width:20%;">
                                         <asp:Label ID="OrderNoLabel" Text="Order No" runat="server"></asp:Label>
                                     </td>
-                                    <td>
+                                    <td style="width:80%;">
                                         <asp:TextBox ID="OrderNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
@@ -251,32 +251,23 @@
                                 ValidationGroup="ModifyOrderDetailsGroup" MaxLength="100" Width="100px"></asp:TextBox>
                             <asp:TextBox ID="InvoiceProformaHeaderDateTextBox" Style="vertical-align: middle;"
                                 runat="server" ValidationGroup="ModifyOrderDetailsGroup" MaxLength="100" Width="100px"></asp:TextBox>
-                         
                             <asp:Image runat="Server" Style="vertical-align: middle;" ID="InvoiceHeaderImage"
                                 ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
-                         
                             <asp:Image runat="Server" Style="vertical-align: middle;" ID="InvoiceProformaImage"
                                 ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
-                                
                             <asp:RequiredFieldValidator ID="InvoiceHeaderRequiredFieldValidator" runat="server"
                                 ControlToValidate="InvoiceHeaderDateTextBox" Display="Dynamic" ErrorMessage="Invoice Date is a required field"
                                 SetFocusOnError="True" ValidationGroup="ModifyOrderDetailsGroup">*</asp:RequiredFieldValidator>
-                                
                             <asp:RequiredFieldValidator ID="InvoiceProformaHeaderRequiredFieldValidator" runat="server"
                                 ControlToValidate="InvoiceProformaHeaderDateTextBox" Display="Dynamic" ErrorMessage="Invoice Proforma Date is a required field"
                                 SetFocusOnError="True" ValidationGroup="ModifyOrderDetailsGroup">*</asp:RequiredFieldValidator>
-                                
                             <ajaxToolkit:CalendarExtender ID="InvoiceHeadeCalendarExtender" Format="dd/MM/yyyy"
                                 runat="server" TargetControlID="InvoiceHeaderDateTextBox" PopupButtonID="InvoiceHeaderImage" />
-                                
                             <ajaxToolkit:CalendarExtender ID="InvoiceProformaHeaderCalendarExtender" Format="dd/MM/yyyy"
                                 runat="server" TargetControlID="InvoiceProformaHeaderDateTextBox" PopupButtonID="InvoiceProformaImage" />
-                                
-                                
                             <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender9" runat="server" TargetControlID="InvoiceProformaHeaderDateTextBox"
                                 Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
                                 OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
-                                
                             <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender8" runat="server" TargetControlID="InvoiceHeaderDateTextBox"
                                 Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
                                 OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
@@ -295,8 +286,10 @@
                         <td colspan="3">
                             <asp:LinkButton ID="DeleteOrderButton" CausesValidation="false" runat="server" Text="Void Order Details |"
                                 OnClick="GetVoidOrderReasonButton_Click" />
-                            <asp:LinkButton ID="Modify_OrderLineDetailsLinkButton" Text="Modfy Order Line Details"
+                            <asp:LinkButton ID="Modify_OrderLineDetailsLinkButton" Text="Modfy Order Line Details |"
                                 runat="server" OnClick="Modify_OrderLineDetailsLinkButton_Click" />
+                            <asp:LinkButton ID="ShowCustomerDetailsButton" Text="Show Customer Details" runat="server"
+                                OnClick="ShowCustomerDetailsButton_Click" />
                         </td>
                     </tr>
                     <tr>
@@ -314,6 +307,7 @@
                             <asp:Button ID="btnTrigger3" runat="server" Style="display: none" />
                             <asp:Button ID="btnTrigger4" runat="server" Style="display: none" />
                             <asp:Button ID="btnTrigger5" runat="server" Style="display: none" />
+                            <asp:Button ID="btnTrigger6" runat="server" Style="display: none" />
                             <ajaxToolkit:ModalPopupExtender ID="ReasonForVoidingPopupExtenderInvoice" DropShadow="true"
                                 runat="server" TargetControlID="btnTrigger1" PopupControlID="ReasonForVoidingPanelMessage"
                                 CancelControlID="CancelReasonorVoidingButton" BackgroundCssClass="XPopUpBackGround" />
@@ -329,6 +323,9 @@
                             <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtenderDeliveryNoteInvoice" DropShadow="true"
                                 runat="server" TargetControlID="btnTrigger4" PopupControlID="CreateDeliveryNotePanel"
                                 CancelControlID="CancelDeliveryNoteButton" BackgroundCssClass="XPopUpBackGround" />
+                            <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtenderShowCustomer" DropShadow="true"
+                                runat="server" TargetControlID="btnTrigger6" PopupControlID="ShowCustomerDetailsPanel"
+                                BackgroundCssClass="XPopUpBackGround" />
                             <asp:Panel Style="display: none" DefaultButton="ReasonforVoidingButton" Width="700px"
                                 ID="ReasonForVoidingPanelMessage" runat="server" CssClass="modalPopup">
                                 <table>
@@ -437,6 +434,54 @@
                                             <asp:Button ID="CreateInvoiceButton" CommandArgument='<%# OrderID %>' Text="Save"
                                                 runat="server" OnClick="CreateInvoiceButton_Click" />
                                             <asp:Button ID="CancelInvoiceButton" Text="Cancel" CausesValidation="false" runat="server" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
+                            <asp:Panel Style="display: none" Width="700px" DefaultButton="ShowComplete_Button"
+                                ID="ShowCustomerDetailsPanel" runat="server" CssClass="modalPopup">
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td style="width: 20%;">
+                                            <h3>
+                                                Customer Name
+                                            </h3>
+                                        </td>
+                                        <td style="width: 80%;">
+                                            <asp:Label ID="CustomerNameTextBoxLabel" runat="server"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <asp:Repeater ID="ContactDetailsRepeater" OnItemDataBound="OrderDetailsContact_ItemDataBound"
+                                                runat="server">
+                                                <ItemTemplate>
+                                                    <ul>
+                                                        <li>Contact &nbsp;
+                                                            <%#Eval("FirstName") %>&nbsp;<%#Eval("LastName") %>
+                                                            <ul>
+                                                                <asp:Repeater ID="PhoneDetailsRepeater" runat="server">
+                                                                    <ItemTemplate>
+                                                                        <li>
+                                                                            <%#Eval("PhoneType") %>
+                                                                            - <i>
+                                                                                <%#Eval("PhoneNumber") %>
+                                                                            </i></li>
+                                                                    </ItemTemplate>
+                                                                </asp:Repeater>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center" colspan="2">
+                                            <asp:Button ID="ShowComplete_Button" Width="98%" Text="OK" CausesValidation="false"
+                                                runat="server" />
                                         </td>
                                     </tr>
                                 </table>
