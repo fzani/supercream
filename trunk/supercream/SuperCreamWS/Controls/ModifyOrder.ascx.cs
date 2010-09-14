@@ -409,7 +409,8 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 
             var shopDetails = customerUI.GetOutletStoresByCustomerID(customerID);
             ShopDetailsRepeater.DataSource = from shop in shopDetails
-                                             let address = shop.Address.Town + "," + shop.Address.County + ", " + shop.Address.PostCode
+                                             let address = SP.Util.Utils.ConvertAddressLinesFromXmlToCommaDelimited(shop.Address.AddressLines) + ","
++ shop.Address.Town + "," + shop.Address.County + ", " + shop.Address.PostCode
                                              let openingHoursNotes = shop.OpeningHoursNotes.Replace("\r\n", "<br />")
                                              let note = shop.Note.Replace("\r\n", "<br />")
                                              select new
@@ -454,7 +455,6 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
                     phoneDetailsRepeater.DataBind();
                 }
             }
-
         }
     }
 
