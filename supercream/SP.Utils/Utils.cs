@@ -50,6 +50,27 @@ namespace SP.Util
             return addressLineList;
         }
 
+        public static string ConvertAddressLinesFromXmlToCommaDelimited(string addressLines)
+        {
+            List<string> addressLineList = new List<string>();
+            MemoryStream mem = new MemoryStream();
+            StringReader r = new StringReader(addressLines);
+
+            XmlSerializer serialiser = new XmlSerializer(typeof(List<string>));
+            addressLineList = (List<string>)serialiser.Deserialize(r);
+            r.Close();
+
+            var addressLine = String.Empty;
+            for (int currentAddressLine =0; currentAddressLine < addressLineList.Count(); currentAddressLine++)
+            {
+                addressLine += addressLineList[currentAddressLine];
+                if ((currentAddressLine + 1) < addressLineList.Count())
+                    addressLine += ",";
+            }
+
+            return addressLine;
+        }
+
         public static string ConvertAddressLinesToXml(TextBox addressLine1, TextBox addressLine2)
         {
             List<string> addressLines = new List<string>();
