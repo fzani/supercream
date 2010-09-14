@@ -24,6 +24,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     #endregion
 
     #region Public Accesors
+
     public int? OrderID
     {
         get
@@ -33,6 +34,18 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         set
         {
             ViewState["OrderID"] = value;
+        }
+    }
+
+    public int? CustomerID
+    {
+        get
+        {
+            return (ViewState["CustomerID"] == null) ? -1 : (int)ViewState["CustomerID"];
+        }
+        set
+        {
+            ViewState["CustomerID"] = value;
         }
     }
 
@@ -184,6 +197,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     #endregion
 
     #region Data Grid Events
+
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
@@ -236,6 +250,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             OrderID = orderHeader.ID;
 
             int customerID = orderHeader.CustomerID;
+            CustomerID = customerID;
 
             CustomerUI customerUI = new CustomerUI();
             Customer customer = customerUI.GetByID(customerID);
@@ -385,10 +400,48 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 
             #endregion
 
+            #region ShowCustomerPanel
+
+            CustomerNameTextBoxLabel.Text = customer.Name;
+
+            var contactDetails = customerUI.GetContactDetailsByCustomerID(customerID);
+            ContactDetailsRepeater.DataSource = contactDetails;
+
+            #endregion
+
             ChangeState += new EventHandler<EventArgs>(SelectedOrderState);
             ChangeState(this, e);
 
             DataBind();
+        }
+    }
+
+    protected void OrderDetailsContact_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        if (e.Item.ItemType == ListItemType.Item)
+        {
+            var contactDetail = e.Item.DataItem as ContactDetail;
+            if (contactDetail != null)
+            {
+                if (contactDetail.Phone != null)
+                {
+                    var phones = contactDetail.Phone;
+                    var phoneDetails = from phone in phones
+                                       orderby phone.PhoneNoType.Description
+                                       select
+                                           new
+                                               {
+                                                   PhoneNumber = phone.Description,
+                                                   PhoneType = phone.PhoneNoType.Description
+                                               };
+
+
+                    Repeater phoneDetailsRepeater = (Repeater)e.Item.FindControl("PhoneDetailsRepeater");
+                    phoneDetailsRepeater.DataSource = phoneDetails;
+                    phoneDetailsRepeater.DataBind();
+                }
+            }
+
         }
     }
 
@@ -761,6 +814,11 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     {
         this.InvoiceDateTextBox.Text = DateTime.Now.AddDays(1).ToString();
         ModalPopupExtenderCreateInvoice.Show();
+    }
+
+    protected void ShowCustomerDetailsButton_Click(object sender, EventArgs e)
+    {
+        ModalPopupExtenderShowCustomer.Show();
     }
 
     protected void CreateInvoiceButton_Click(object sender, EventArgs e)
