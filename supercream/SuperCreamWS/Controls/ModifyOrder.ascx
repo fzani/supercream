@@ -13,15 +13,15 @@
                     <h3>
                         Select Order</h3>
                 </legend>
-                <table class="search" style="width:100%;">
+                <table class="search" style="width: 100%;">
                     <tr>
-                        <td class="right" style="width:100%;">
-                            <table class="left" style="width:100%;">
+                        <td class="right" style="width: 100%;">
+                            <table class="left" style="width: 100%;">
                                 <tr>
-                                    <td style="width:20%;">
+                                    <td style="width: 20%;">
                                         <asp:Label ID="OrderNoLabel" Text="Order No" runat="server"></asp:Label>
                                     </td>
-                                    <td style="width:80%;">
+                                    <td style="width: 80%;">
                                         <asp:TextBox ID="OrderNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
@@ -438,9 +438,9 @@
                                     </tr>
                                 </table>
                             </asp:Panel>
-                            <asp:Panel Style="display: none" Width="700px" DefaultButton="ShowComplete_Button"
+                            <asp:Panel Style="display: none" Width="700px" Height="350px" ScrollBars="Auto" DefaultButton="ShowComplete_Button"
                                 ID="ShowCustomerDetailsPanel" runat="server" CssClass="modalPopup">
-                                <table style="width: 100%">
+                                <table style="width: 100%; margin: 0px 0px 20px 0px;" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td style="width: 20%;">
                                             <h3>
@@ -479,12 +479,35 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: center" colspan="2">
-                                            <asp:Button ID="ShowComplete_Button" Width="98%" Text="OK" CausesValidation="false"
-                                                runat="server" />
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <asp:Repeater ID="ShopDetailsRepeater" OnItemDataBound="ShopDetails_ItemDataBound"
+                                                runat="server">
+                                                <ItemTemplate>
+                                                    <ul>
+                                                        <li>Shop Name &nbsp;
+                                                            <%#Eval("Name") %>
+                                                            <ul>
+                                                                <li>
+                                                                    <%#Eval("Address")%>
+                                                                </li>
+                                                                <li>
+                                                                    <%#Eval("OpeningHoursNotes")%>
+                                                                </li>
+                                                                <li>
+                                                                    <%#Eval("Note")%>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
                                         </td>
                                     </tr>
                                 </table>
+                                <asp:Button ID="ShowComplete_Button" Width="100%" Text="OK" CausesValidation="false"
+                                    runat="server" />
                             </asp:Panel>
                         </td>
                     </tr>

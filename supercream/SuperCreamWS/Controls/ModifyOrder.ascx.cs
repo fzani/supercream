@@ -407,6 +407,19 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             var contactDetails = customerUI.GetContactDetailsByCustomerID(customerID);
             ContactDetailsRepeater.DataSource = contactDetails;
 
+            var shopDetails = customerUI.GetOutletStoresByCustomerID(customerID);
+            ShopDetailsRepeater.DataSource = from shop in shopDetails
+                                             let address = shop.Address.Town + "," + shop.Address.County + ", " + shop.Address.PostCode
+                                             let openingHoursNotes = shop.OpeningHoursNotes.Replace("\r\n", "<br />")
+                                             let note = shop.Note.Replace("\r\n", "<br />")
+                                             select new
+                                             {
+                                                 shop.Name,
+                                                 openingHoursNotes,
+                                                 note,
+                                                 Address = address
+                                             };
+
             #endregion
 
             ChangeState += new EventHandler<EventArgs>(SelectedOrderState);
@@ -443,6 +456,10 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             }
 
         }
+    }
+
+    protected void ShopDetails_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
     }
 
     protected void OrderDetailsGridPanel_RowDataBound(object sender, GridViewRowEventArgs e)
