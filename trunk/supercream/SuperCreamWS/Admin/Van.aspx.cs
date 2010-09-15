@@ -40,6 +40,9 @@ public partial class Admin_Van : System.Web.UI.Page
             cd.Description = DescriptionTextBox.Text;
             cd.MaximumReccomendedParcelCount = Convert.ToInt32(this.MaximumRecommendedTextBox.Text);
 
+            AuditEventsUI.LogEvent("Create Van", cd.Description, Page.ToString(),
+                     AuditEventsUI.AuditEventType.Creating);
+
             ui.SaveVan(cd);
 
             ChangeState(this, e);
@@ -81,12 +84,18 @@ public partial class Admin_Van : System.Web.UI.Page
 
         using (VanUI ui = new VanUI())
         {
+            AuditEventsUI.LogEvent("Updating Van", updatedVan.Description, Page.ToString(),
+                    AuditEventsUI.AuditEventType.Modifying);
+
             ui.UpdateVan(updatedVan);
         }
     }
 
     protected void VanObjectDataSource_Deleted(object sender, ObjectDataSourceStatusEventArgs e)
     {
+        AuditEventsUI.LogEvent("Deleting Van", "van", Page.ToString(),
+                    AuditEventsUI.AuditEventType.Deleting);
+
         Exception ex = e.Exception;
         if (ex != null)
             HandleException(ex, e);

@@ -53,6 +53,9 @@ public partial class Admin_VatCode : System.Web.UI.Page
                 cd.PercentageValue = (VatExemptableCode.Checked) ? 0 : Convert.ToSingle(PercentageTextBox.Text);
                 cd.VatExemptible = VatExemptableCode.Checked;
 
+                AuditEventsUI.LogEvent("Create Vat Code", cd.Description, Page.ToString(),
+                   AuditEventsUI.AuditEventType.Creating);
+
                 ui.SaveVatCode(cd);
 
                 Util.ClearFields(this.Page);
@@ -81,6 +84,9 @@ public partial class Admin_VatCode : System.Web.UI.Page
         if (SelectStandardVatRateDropDownList.SelectedValue != "-1")
         {
             StandardVatCodeUI ui = new StandardVatCodeUI();
+
+            AuditEventsUI.LogEvent("Create Standard Vat Code", "vat", Page.ToString(),
+                 AuditEventsUI.AuditEventType.Creating);
             ui.SaveStandardVatCode(new StandardVatRate { ID = -1, VatCodeID = Convert.ToInt32(SelectStandardVatRateDropDownList.SelectedItem.Value) });
 
             PopulateDropDownList();
@@ -93,6 +99,9 @@ public partial class Admin_VatCode : System.Web.UI.Page
 
     protected void VatCodeGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
     {
+        AuditEventsUI.LogEvent("Updating Vat Code", "vat", Page.ToString(),
+                AuditEventsUI.AuditEventType.Modifying);
+
         Exception ex = e.Exception;
         if (ex != null)
         {
@@ -142,6 +151,9 @@ public partial class Admin_VatCode : System.Web.UI.Page
 
     protected void VatCodeGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
+        AuditEventsUI.LogEvent("Deleting Vat Code", "vat", Page.ToString(),
+                AuditEventsUI.AuditEventType.Deleting);
+
         PopulateDropDownList();
 
         ErrorViewControl.Visible = false;

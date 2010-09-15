@@ -38,7 +38,7 @@ public partial class Admin_YourCompanyDetails : System.Web.UI.Page
                     EMailTextBox.Text = ff.EMailAddress;
                     PostCodeTextBox.Text = ff.Address.PostCode;
                     SaveCompanyDetailsButton.Visible = true;
-                   
+
                     // Deal with converting Address Lines back from XML
                     List<String> addressLines = this.ConvertAddressLinesFromXml(ff.Address.AddressLines);
                     if (addressLines[0] != null)
@@ -86,6 +86,9 @@ public partial class Admin_YourCompanyDetails : System.Web.UI.Page
                 }
             };
             FoundationFacilityUI ui = new FoundationFacilityUI();
+
+            AuditEventsUI.LogEvent("Creating Your Company Details", "Company Details", Page.ToString(),
+               AuditEventsUI.AuditEventType.Creating);
             ui.SaveFoundationFacility(ff);
 
             AddFoundationFacilityButton.Visible = false;
@@ -125,6 +128,8 @@ public partial class Admin_YourCompanyDetails : System.Web.UI.Page
                 }
             };
 
+            AuditEventsUI.LogEvent("Updating Your Company Details", "Company Details", Page.ToString(),
+               AuditEventsUI.AuditEventType.Modifying);
             ui.UpdateFoundationFacility(ffNew, ffOrig);
 
             AddFoundationFacilityButton.Visible = false;
