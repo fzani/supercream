@@ -31,7 +31,7 @@ public partial class Product_Admin : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
-        {            
+        {
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
         }
@@ -44,16 +44,16 @@ public partial class Product_Admin : System.Web.UI.Page
     protected void AddProductCodeButton_Click(object sender, EventArgs e)
     {
         try
-        {           
+        {
             using (ProductUI ui = new ProductUI())
             {
                 if (ui.ProductCodeExists(this.CodeTestBox.Text))
                     throw new ApplicationException("Cannot add Product - Product Code already exists");
 
-                bool vatExempt = (VatExemptionRadioButtonList.SelectedItem.Text == "Yes") ? true : false;             
+                bool vatExempt = (VatExemptionRadioButtonList.SelectedItem.Text == "Yes") ? true : false;
 
                 using (VatCodeUI vatCodeUI = new VatCodeUI())
-                {                   
+                {
                     Product product = new Product()
                     {
                         ID = -1,
@@ -62,8 +62,11 @@ public partial class Product_Admin : System.Web.UI.Page
                         UnitQty = Convert.ToInt32(UnitQuantityTextBox.Text),
                         UnitPrice = Decimal.Parse(UnitPriceTextBox.Text, System.Globalization.NumberStyles.Currency),
                         RRPPerItem = Decimal.Parse(RRPTextBox.Text, System.Globalization.NumberStyles.Currency),
-                        VatExempt = vatExempt                       
+                        VatExempt = vatExempt
                     };
+
+                    AuditEventsUI.LogEvent("Creating Product", product.Description, Page.ToString(),
+                        AuditEventsUI.AuditEventType.Creating);
                     ui.SaveProduct(product);
                 }
             }
@@ -87,7 +90,7 @@ public partial class Product_Admin : System.Web.UI.Page
     protected void ModifyProductCodeButton_Click(object sender, EventArgs e)
     {
         try
-        {           
+        {
             using (ProductUI ui = new ProductUI())
             {
                 bool vatExempt = (ModifyVatExemptionRadioButtonList.SelectedItem.Text == "Yes") ? true : false;
@@ -102,6 +105,9 @@ public partial class Product_Admin : System.Web.UI.Page
                     product.UnitPrice = Decimal.Parse(ModifyUnitPriceTextBox.Text, System.Globalization.NumberStyles.Currency);
                     product.RRPPerItem = Decimal.Parse(ModifyRRPTextBox.Text, System.Globalization.NumberStyles.Currency);
                     product.VatExempt = vatExempt;
+
+                    AuditEventsUI.LogEvent("Updating Product", product.Description, Page.ToString(),
+                        AuditEventsUI.AuditEventType.Modifying);
 
                     ui.UpdateProduct(product);
 
@@ -121,7 +127,7 @@ public partial class Product_Admin : System.Web.UI.Page
     protected void NewProductButton_Click(object sender, EventArgs e)
     {
         VatCodeUI vatCodeUI = new VatCodeUI();
-        List<VatCode> vatCodeList = vatCodeUI.GetAllVatCodes();       
+        List<VatCode> vatCodeList = vatCodeUI.GetAllVatCodes();
 
         ChangeState += new EventHandler<EventArgs>(AddNewProductState);
         ChangeState(this, e);
@@ -163,9 +169,11 @@ public partial class Product_Admin : System.Web.UI.Page
 
     protected void ProductGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
+        AuditEventsUI.LogEvent("Deleting Product", "Product", Page.ToString(),
+                        AuditEventsUI.AuditEventType.Deleting);
         ErrorViewControl.Visible = false;
     }
-    
+
     protected void ProductGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
     {
         Exception ex = e.Exception;
@@ -174,7 +182,7 @@ public partial class Product_Admin : System.Web.UI.Page
 
         DataBind();
     }
-   
+
     protected void ProductGridView_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         if (e.CommandName == "ModifyProduct")
@@ -198,7 +206,7 @@ public partial class Product_Admin : System.Web.UI.Page
             ModifyVatExemptionRadioButtonList.SelectedIndex = (product.VatExempt == true) ? 0 : 1;
 
             VatCodeUI vatCodeUI = new VatCodeUI();
-            List<VatCode> vatCodeList = vatCodeUI.GetAllVatCodes();           
+            List<VatCode> vatCodeList = vatCodeUI.GetAllVatCodes();
         }
         else if (e.CommandName == "Delete")
         {
@@ -244,7 +252,7 @@ public partial class Product_Admin : System.Web.UI.Page
 
         AddProductPanel.Visible = false;
         ModifyProductPanel.Visible = false;
-        VatExemptionRadioButtonList.SelectedIndex = 1;       
+        VatExemptionRadioButtonList.SelectedIndex = 1;
         ErrorViewControl.Visible = false;
         DataBind();
     }
@@ -273,7 +281,7 @@ public partial class Product_Admin : System.Web.UI.Page
 
         AddProductPanel.Visible = false;
         ModifyProductPanel.Visible = false;
-        VatExemptionRadioButtonList.SelectedIndex = 1;       
+        VatExemptionRadioButtonList.SelectedIndex = 1;
         GridViewPanel.Visible = true;
         ErrorViewControl.Visible = false;
     }
@@ -295,7 +303,7 @@ public partial class Product_Admin : System.Web.UI.Page
 
         AddProductPanel.Visible = false;
         ModifyProductPanel.Visible = false;
-        VatExemptionRadioButtonList.SelectedIndex = 1;        
+        VatExemptionRadioButtonList.SelectedIndex = 1;
         ErrorViewControl.Visible = false;
     }
     #endregion
