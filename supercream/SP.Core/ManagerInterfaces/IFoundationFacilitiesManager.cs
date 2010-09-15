@@ -31,6 +31,19 @@ namespace SP.Core.ManagerInterfaces
         int Generate();
         #endregion
 
+        #region AuditEvents
+
+        void ArchiveAuditEvents();
+        List<string> AuditEventDescriptions();
+        void DeleteAuditEvents(AuditEvents auditevents);
+        List<AuditEvents> GetAllAuditEvents(string description, string creator, DateTime createdDate);
+        AuditEvents GetAuditEvents(int id);
+        List<AuditEvents> GetAllAuditEventss();
+        AuditEvents SaveAuditEvents(AuditEvents auditevents);
+        AuditEvents UpdateAuditEvents(AuditEvents newAuditEvents, AuditEvents origAuditEvents);
+
+        #endregion
+
         #region ContactDetails
         void DeleteContactDetail(ContactDetail contactDetail);
         ContactDetail GetContactDetailByID(int id);

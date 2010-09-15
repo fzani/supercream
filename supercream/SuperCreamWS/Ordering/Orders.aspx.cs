@@ -84,7 +84,7 @@ public partial class Ordering_Orders : System.Web.UI.Page
     protected void MaintainOrdersButton_Click(object sender, EventArgs e)
     {
         ChangeState += new EventHandler<EventArgs>(ModifyOrderState);
-        ChangeState(this, e);       
+        ChangeState(this, e);
         NewOrder.Reset();
         DataBind();
     }

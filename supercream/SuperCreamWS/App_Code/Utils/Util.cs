@@ -108,4 +108,9 @@ public class Util
         Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB", false);
         return String.Format("{0:c}", value);
     }
+
+    public static string GetCurrentUser()
+    {
+        return HttpContext.Current.User.Identity.Name;
+    }
 }
