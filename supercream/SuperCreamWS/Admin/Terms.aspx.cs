@@ -38,6 +38,9 @@ public partial class Admin_Terms : System.Web.UI.Page
             cd.ID = -1;
             cd.Description = DescriptionTextBox.Text;
 
+            AuditEventsUI.LogEvent("Creating Payment Term", cd.Description, Page.ToString(),
+                AuditEventsUI.AuditEventType.Creating);
+
             ui.SaveTerms(cd);
 
             ChangeState(this, e);
@@ -79,12 +82,17 @@ public partial class Admin_Terms : System.Web.UI.Page
 
         using (TermsUI ui = new TermsUI())
         {
+            AuditEventsUI.LogEvent("Updating Payment Term", updatedTerms.Description, Page.ToString(),
+                AuditEventsUI.AuditEventType.Modifying);
             ui.UpdateTerms(updatedTerms);
         }
     }
 
     protected void TermsObjectDataSource_Deleted(object sender, ObjectDataSourceStatusEventArgs e)
     {
+        AuditEventsUI.LogEvent("Deleting Payment Term", "Payment Term", Page.ToString(),
+               AuditEventsUI.AuditEventType.Modifying);
+
         Exception ex = e.Exception;
         if (ex != null)
             HandleException(ex, e);
