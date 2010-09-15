@@ -7,7 +7,7 @@
         <a href="Default.aspx">Welcome to Super Cream Order Processing</a></h2>
     <p>
         <asp:Image ImageUrl="~/images/IceCream.jpg" Style="float: left; margin: 5px;" runat="server" />
-        <strong>Super Cream Order Processing 1.1</strong> is a bespoke order Processing
+        <strong>Super Cream Order Processing 1.2</strong> is a bespoke order Processing
         System designed for use by <strong><a href="http://www.styleshout.com/">Alterax.com</a></strong>.
         This work is distributed for express and sole use for SuperCream. The system provides
         Sales Order Processing services for an SME based Ice Cream Company, dealing with
@@ -25,7 +25,7 @@
         <asp:Image ID="Image1" ImageUrl="~/images/SuperCreamWayForWard.jpg" Style="float: right;
             margin: 20px;" runat="server" />
         <p>
-            Please note:- The current release is a Release Candidate 1 version of this system,
+            Please note:- The current release is a Release Candidate 2 version of this system,
             and as such does not represent the final version of this product. Please note the
             next release is imminent and will constitute the final release version of the product.
         </p>

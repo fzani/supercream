@@ -1,7 +1,6 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
 
-<%@ Register TagPrefix="obout" Namespace="OboutInc.Flyout2" Assembly="obout_Flyout2_NET"%>
-
+<%@ Register TagPrefix="obout" Namespace="OboutInc.Flyout2" Assembly="obout_Flyout2_NET" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head id="Head1" runat="server">
@@ -50,6 +49,7 @@
                     Admin</h3>
                 <ul class="sidemenu">
                     <li><a href="~/Admin/Account.aspx" runat="server">Accounts</a></li>
+                    <li><a href="~/Admin/AuditEvents.aspx" runat="server">Audit Events</a></li>
                     <li><a href="~/Admin/Customer.aspx" runat="server">Customers</a></li>
                     <li><a href="~/Admin/SetupPrinter.aspx" runat="server">Setup Printer</a></li>
                     <li><a href="~/Admin/Terms.aspx" runat="server">Payment Terms</a></li>

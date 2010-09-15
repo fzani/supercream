@@ -14,7 +14,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SuperCreamWS", "SuperCreamWS\", "{3CAC1617-4B72-44EE-AC5C-E83B9F987BDA}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFramework = "3.5"
-		ProjectReferences = "{D446DCEC-2802-4948-8B14-CC7198E1A0DF}|SP.Utils.dll;"
+		ProjectReferences = "{D446DCEC-2802-4948-8B14-CC7198E1A0DF}|SP.Utils.dll;{95669874-D934-42BD-96E2-5C317F2EFEFF}|AlteraxWebControls.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/SuperCreamWS"
 		Debug.AspNetCompiler.PhysicalPath = "SuperCreamWS\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\SuperCreamWS\"
@@ -38,6 +38,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperCreamAdmin", "SuperCreamAdmin\SuperCreamAdmin.csproj", "{E51FF7FD-F070-499D-A781-F83BC6495B86}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperCreamAdmin.Tests", "SuperCreamAdmin.Tests\SuperCreamAdmin.Tests.csproj", "{543393A0-6130-427E-840B-68EEDD8D05B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlteraxWebControls", "AlteraxWebControls\AlteraxWebControls\AlteraxWebControls.csproj", "{95669874-D934-42BD-96E2-5C317F2EFEFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,10 @@ Global
 		{543393A0-6130-427E-840B-68EEDD8D05B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{543393A0-6130-427E-840B-68EEDD8D05B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{543393A0-6130-427E-840B-68EEDD8D05B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95669874-D934-42BD-96E2-5C317F2EFEFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95669874-D934-42BD-96E2-5C317F2EFEFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95669874-D934-42BD-96E2-5C317F2EFEFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95669874-D934-42BD-96E2-5C317F2EFEFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
