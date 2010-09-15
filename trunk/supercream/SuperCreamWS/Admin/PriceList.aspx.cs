@@ -106,6 +106,9 @@ public partial class Admin_PriceList : System.Web.UI.Page
                 DateEffectiveTo = DateTime.Parse(this.DateEffectiveFromTextBox.Text, ukCulture),
             };
 
+            AuditEventsUI.LogEvent("Create Price List", priceListHeader.PriceListName, Page.ToString(),
+                       AuditEventsUI.AuditEventType.Creating);
+
             ui.SavePriceListHeader(priceListHeader);
 
             ChangeState(this, e);
@@ -178,6 +181,13 @@ public partial class Admin_PriceList : System.Web.UI.Page
             PriceListID = PriceListID
         };
         PriceListItemUI ui = new PriceListItemUI();
+
+
+        var priceList = new PriceListHeaderUI().GetByID(item.PriceListID);
+        var product = new ProductUI().GetProductByID(item.ProductID.Value);
+
+        AuditEventsUI.LogEvent("Create Price List Item", "PriceList " + priceList.PriceListName + " Product:" + product.Description, Page.ToString(),
+                      AuditEventsUI.AuditEventType.Creating);
         ui.Save(item);
 
         DataBind();
@@ -230,6 +240,9 @@ public partial class Admin_PriceList : System.Web.UI.Page
                 DateEffectiveTo = effectiveTo
             };
 
+            AuditEventsUI.LogEvent("Updating Price List", "PriceList " + ph.PriceListName, Page.ToString(),
+                      AuditEventsUI.AuditEventType.Creating);
+
             ui.Update(ph);
 
             DataBind();
@@ -251,6 +264,11 @@ public partial class Admin_PriceList : System.Web.UI.Page
 
             Button btn = source as Button;
             int id = Convert.ToInt32(Convert.ToInt32(btn.CommandArgument));
+
+            PriceListHeader priceListHeader = ui.GetByID(id);
+
+            AuditEventsUI.LogEvent("Deleting Price List", priceListHeader.PriceListName, Page.ToString(),
+                      AuditEventsUI.AuditEventType.Deleting);
 
             ui.DeleteID(id);
 
@@ -371,6 +389,10 @@ public partial class Admin_PriceList : System.Web.UI.Page
         {
             fromList.SelectedIndex = e.Item.ItemIndex;
             PriceListItemUI ui = new PriceListItemUI();
+
+            AuditEventsUI.LogEvent("Deleting Price List Item", "item", Page.ToString(),
+                     AuditEventsUI.AuditEventType.Deleting);
+
             ui.Delete(Convert.ToInt32(e.CommandArgument));
             fromList.SelectedIndex = -1;
 
@@ -422,6 +444,10 @@ public partial class Admin_PriceList : System.Web.UI.Page
             };
 
             PriceListItemUI pi = new PriceListItemUI();
+
+            AuditEventsUI.LogEvent("Updating Price List Item", "item", Page.ToString(),
+                     AuditEventsUI.AuditEventType.Modifying);
+
             pi.UpdatePriceListItem(item);
             PriceListItemDataList.DataBind();
         }
