@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 namespace SP.Util
 {
     public class Utils
-    {       
+    {
         public static string GetPrePostFix(int id, EntityType entityType)
         {
             // Read whether or not Prefix or Post Fix Type and PrePostFix value from Database
@@ -29,7 +29,7 @@ namespace SP.Util
                 case PrePostFixType.CustomerPostfix:
                 case PrePostFixType.OutletStorePostfix:
                     aphaID = id.ToString() + prePostFixValue;
-                    break; 
+                    break;
                 default:
                     break;
 
@@ -61,7 +61,7 @@ namespace SP.Util
             r.Close();
 
             var addressLine = String.Empty;
-            for (int currentAddressLine =0; currentAddressLine < addressLineList.Count(); currentAddressLine++)
+            for (int currentAddressLine = 0; currentAddressLine < addressLineList.Count(); currentAddressLine++)
             {
                 addressLine += addressLineList[currentAddressLine];
                 if ((currentAddressLine + 1) < addressLineList.Count())

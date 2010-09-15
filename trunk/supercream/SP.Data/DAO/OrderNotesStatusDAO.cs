@@ -12,6 +12,9 @@ using SP.Core.Domain;
 using SP.Core.DataInterfaces;
 using System.Data.Linq;
 
+using SP.Core.Extensions;
+
+
 namespace SP.Data.LTS
 {
     public class OrderNotesStatusDao : AbstractLTSDao<OrderNotesStatus, int>, IOrderNotesStatusDao
@@ -62,39 +65,45 @@ namespace SP.Data.LTS
                      select ons).SingleOrDefault<OrderNotesStatus>() == null) ? false : true;
         }
 
-        public List<OrderHeader> InvoicesByDateAndVan(DateTime deliveryDate, int vanId)
+        public List<VanDeliveryItem> InvoicesByDateAndVan(DateTime deliveryDate, int vanId)
         {
             return (from oh in db.OrderHeader
+                    let item = ((SP.Core.Enums.OrderStatus)oh.OrderStatus).IsInvoice() ? oh.InvoiceNo : oh.DeliveryNoteNo
                     join ons in db.OrderNotesStatus on oh.ID equals ons.OrderID
-                    where (((oh.OrderStatus == 2) || (oh.OrderStatus == 3)) // Invoice or Invoice printed
+                    where ((oh.OrderStatus == (short)SP.Core.Enums.OrderStatus.InvoicePrinted
+                    || oh.OrderStatus == (short)SP.Core.Enums.OrderStatus.Invoice
+                    || oh.OrderStatus == (short)SP.Core.Enums.OrderStatus.DeliveryNote
+                      || oh.OrderStatus == (short)SP.Core.Enums.OrderStatus.DeliveryNotePrinted)
                        && oh.DeliveryDate == deliveryDate
                        && ons.VanID == vanId)
-                    select oh).ToList<OrderHeader>();
+                    select new VanDeliveryItem { ID = oh.ID, Item = item }).ToList<VanDeliveryItem>();
         }
 
         public void UpdateVanForInvoice(int orderID, int vanID)
         {
-            string sql;
-
-            sql = String.Format("UPDATE OrderNotesStatus SET VanId = {0} WHERE OrderID = {1}", vanID.ToString(), orderID.ToString());
-            db.ExecuteCommand(sql);
+            var command = String.Format("UPDATE OrderNotesStatus SET VanId = {0} WHERE OrderID = {1}", vanID.ToString(), orderID.ToString());
+            db.ExecuteCommand(command);
         }
 
         public List<VanInvoiceCount> GetVanInvoiceCount(DateTime deliveryDate)
         {
             var query = (from oh in db.OrderHeader
-                        join ons in db.OrderNotesStatus
-                            on oh.ID equals ons.OrderID
-                        join v in db.Van
-                            on ons.VanID equals v.ID
-                        where oh.DeliveryDate == deliveryDate
-                        group v by v.Description into result                       
-                        select new VanInvoiceCount
-                        {
-                            VanDescription = result.Key,
-                            InvoiceCount = result.Count()
-                        }).ToList<VanInvoiceCount>();
+                         let orderStatus = (SP.Core.Enums.OrderStatus)oh.OrderStatus
+                         join ons in db.OrderNotesStatus
+                             on oh.ID equals ons.OrderID
+                         join v in db.Van
+                             on ons.VanID equals v.ID
+                         where oh.DeliveryDate == deliveryDate && (oh.OrderStatus == (short)SP.Core.Enums.OrderStatus.InvoicePrinted
+                                || oh.OrderStatus == (short)SP.Core.Enums.OrderStatus.Invoice
+                                || oh.OrderStatus == (short)SP.Core.Enums.OrderStatus.DeliveryNote
+                                || oh.OrderStatus == (short)SP.Core.Enums.OrderStatus.DeliveryNotePrinted)
+                         group v by v.Description into result
+                         select new VanInvoiceCount
+                         {
+                             VanDescription = result.Key,
+                             InvoiceCount = result.Count()
+                         }).ToList<VanInvoiceCount>();
             return query;
-        }       
+        }
     }
 }

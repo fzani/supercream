@@ -102,6 +102,7 @@
     <Compile Include="Domain\BaseEntity.cs" />
     <Compile Include="Domain\ContactDetailDTO.cs" />
     <Compile Include="Domain\AutoGenDTO.cs" />
+    <Compile Include="Domain\VanDeliveryDTO.cs" />
     <Compile Include="Domain\SpecialInvoiceCreditNoteBalance.cs" />
     <Compile Include="Domain\SpecialInvoiceCreditNoteDetails.cs" />
     <Compile Include="Domain\SpecialInvoiceCreditNote.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="GlobalSuppresions.cs" />
     <Compile Include="ManagerInterfaces\IFoundationFacilitiesManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Extensions\OrderStatusExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="test.pfx" />

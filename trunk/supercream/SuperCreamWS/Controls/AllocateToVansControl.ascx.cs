@@ -48,21 +48,23 @@ public partial class Controls_AllocateToVansControl : System.Web.UI.UserControl
     {
         if (this.VanAllocatedFrom.SelectedValue.ToString() == this.VanAllocatedTo.SelectedValue.ToString())
         {
-            this.SameVanError();           
+            this.SameVanError();
             return;
         }
 
         if (VanAllocatedFromListBox.SelectedItem != null)
-        {                             
+        {
             OrderNotesStatusUI status = new OrderNotesStatusUI();
-            status.UpdateVanForInvoice(Convert.ToInt32(VanAllocatedFromListBox.SelectedItem.Value), 
+            status.UpdateVanForInvoice(Convert.ToInt32(VanAllocatedFromListBox.SelectedItem.Value),
                 Convert.ToInt32(this.VanAllocatedTo.SelectedValue.ToString()));
 
             VanAllocatedToListBox.Items.Add(VanAllocatedFromListBox.SelectedItem);
             ListItem listItem = VanAllocatedToListBox.SelectedItem;
             listItem.Selected = false;
 
-            VanAllocatedFromListBox.Items.Remove(listItem);   
+            VanAllocatedFromListBox.Items.Remove(listItem);
+
+            DataBind();
         }
     }
 
@@ -70,7 +72,7 @@ public partial class Controls_AllocateToVansControl : System.Web.UI.UserControl
     {
         if (this.VanAllocatedFrom.SelectedValue.ToString() == this.VanAllocatedTo.SelectedValue.ToString())
         {
-            this.SameVanError();            
+            this.SameVanError();
             return;
         }
 
@@ -83,10 +85,12 @@ public partial class Controls_AllocateToVansControl : System.Web.UI.UserControl
             VanAllocatedFromListBox.Items.Add(VanAllocatedToListBox.SelectedItem);
             ListItem listItem = VanAllocatedFromListBox.SelectedItem;
             listItem.Selected = false;
-            
+
             VanAllocatedToListBox.Items.Remove(listItem);
+
+            DataBind();
         }
-       
+
     }
 
     #endregion
@@ -130,5 +134,5 @@ public partial class Controls_AllocateToVansControl : System.Web.UI.UserControl
         this.ErrorMessageEventHandler(this, arg);
     }
 
-    #endregion        
+    #endregion
 }

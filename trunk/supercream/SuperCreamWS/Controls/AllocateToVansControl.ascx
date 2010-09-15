@@ -42,7 +42,7 @@
             </tr>
             <tr>
                 <td>
-                    <asp:ListBox ID="VanAllocatedFromListBox" DataTextField="InvoiceNo" DataValueField="ID"
+                    <asp:ListBox ID="VanAllocatedFromListBox" DataTextField="Item" DataValueField="ID"
                         Height="200px" Width="100%" runat="server" DataSourceID="VanAllocatedFromObjectDataSource">
                     </asp:ListBox>
                     <div style="text-align: left">
@@ -77,7 +77,7 @@
                     </div>
                 </td>
                 <td>
-                    <asp:ListBox ID="VanAllocatedToListBox" DataTextField="InvoiceNo" DataValueField="ID"
+                    <asp:ListBox ID="VanAllocatedToListBox" DataTextField="Item" DataValueField="ID"
                         Height="200px" Width="100%" runat="server" DataSourceID="VanAllocatedToObjectDataSource">
                     </asp:ListBox>
                     <div style="text-align: left">

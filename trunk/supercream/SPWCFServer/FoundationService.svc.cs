@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -1836,13 +1836,13 @@ namespace SPWCFServer
             }
         }
 
-        public List<OrderHeader> InvoicesByDateAndVan(DateTime deliveryDate, int vanId)
+        public List<VanDeliveryItem> InvoicesByDateAndVan(DateTime deliveryDate, int vanId)
         {
             try
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
-                List<SP.Core.Domain.OrderHeader> orderNotesStatusList = mgr.InvoicesByDateAndVan(deliveryDate, vanId);
-                return ObjectExtension.CloneList<SP.Core.Domain.OrderHeader, SPWCFServer.OrderHeader>(orderNotesStatusList).ToList<OrderHeader>();
+                List<SP.Core.Domain.VanDeliveryItem> orderNotesStatusList = mgr.InvoicesByDateAndVan(deliveryDate, vanId);
+                return ObjectExtension.CloneList<SP.Core.Domain.VanDeliveryItem, SPWCFServer.VanDeliveryItem>(orderNotesStatusList).ToList<VanDeliveryItem>();
             }
             catch (Exception ex)
             {
