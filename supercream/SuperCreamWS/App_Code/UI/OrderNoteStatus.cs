@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
 using System.Collections.Generic;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
+using System.Linq;
 using System.Transactions;
-
-using SP.Util;
 
 using WcfFoundationService;
 
@@ -92,11 +82,12 @@ public class OrderNotesStatusUI : IDisposable
         }
     }
 
-    public List<OrderHeader> GetInvoicesByVanAndDate(DateTime deliveryDate, int vanId)
+    public List<VanDeliveryItem> GetInvoicesByVanAndDate(DateTime deliveryDate, int vanId)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.InvoicesByDateAndVan(deliveryDate, vanId);
+            return _proxy.InvoicesByDateAndVan(deliveryDate, vanId)
+                .OrderBy(q => q.Item).ToList();      
         }
     }
 

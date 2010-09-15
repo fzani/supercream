@@ -149,7 +149,7 @@ namespace SP.Core.ManagerInterfaces
         OrderNotesStatus GetOrderNoteStatusByOrderId(int id);
         OrderNotesStatus SaveOrderNotesStatus(OrderNotesStatus ordernotesstatus);
         OrderNotesStatus UpdateOrderNotesStatus(OrderNotesStatus newOrderNotesStatus, OrderNotesStatus origOrderNotesStatus);
-        List<OrderHeader> InvoicesByDateAndVan(DateTime deliveryDate, int vanId);
+        List<VanDeliveryItem> InvoicesByDateAndVan(DateTime deliveryDate, int vanId);
         void UpdateVanForInvoice(int orderID, int vanID);
         List<VanInvoiceCount> GetVanInvoiceCount(DateTime deliveryDate);
         #endregion

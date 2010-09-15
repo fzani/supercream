@@ -427,7 +427,7 @@ namespace SPWCFServer
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
-        List<OrderHeader> InvoicesByDateAndVan(DateTime deliveryDate, int vanId);
+        List<VanDeliveryItem> InvoicesByDateAndVan(DateTime deliveryDate, int vanId);
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
@@ -1595,6 +1595,39 @@ namespace SPWCFServer
             set
             {
                 _DueDate = value;
+            }
+        }
+    }
+
+    [DataContract]
+    public class VanDeliveryItem
+    {
+        private int _id;
+        private string _item;
+
+        [DataMember]
+        public int ID
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+            }
+        }
+
+        [DataMember]
+        public string Item
+        {
+            get
+            {
+                return _item;
+            }
+            set
+            {
+                _item = value;
             }
         }
     }
