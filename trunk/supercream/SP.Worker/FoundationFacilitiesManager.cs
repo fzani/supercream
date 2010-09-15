@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -149,6 +149,77 @@ namespace SP.Worker
             return autoGenDao.Generate("GEN");
         }
         #endregion
+
+        #region AuditEvents
+
+        public void ArchiveAuditEvents()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IAuditEventsDao auditEventsDao = factory.GetAuditEventsDao();
+
+            auditEventsDao.ArchiveAuditEvents();
+        }
+
+        public List<string> AuditEventDescriptions()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IAuditEventsDao auditEventsDao = factory.GetAuditEventsDao();
+
+            return auditEventsDao.Descriptions();
+        }
+
+        public void DeleteAuditEvents(AuditEvents auditevents)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IAuditEventsDao auditEventsDao = factory.GetAuditEventsDao();
+
+            auditEventsDao.Delete(auditevents);
+        }
+
+        public AuditEvents GetAuditEvents(int id)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IAuditEventsDao auditEventsDao = factory.GetAuditEventsDao();
+            return auditEventsDao.GetById(id);
+        }
+
+        public List<AuditEvents> GetAllAuditEventss()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IAuditEventsDao auditEventsDao = factory.GetAuditEventsDao();
+            return auditEventsDao.GetAll();
+        }
+
+        public List<AuditEvents> GetAllAuditEvents(string description, string creator, DateTime createdDate)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IAuditEventsDao auditEventsDao = factory.GetAuditEventsDao();
+            List<AuditEvents> auditEvents = auditEventsDao.GetAllAuditEvents(description, creator, createdDate);
+            // Automatically Archive of > 1000 records
+            if (auditEvents.Count > 1000)
+            {
+                ArchiveAuditEvents();
+            }
+
+            IAuditEventsDao newAuditEventsDao = factory.GetAuditEventsDao();
+            return newAuditEventsDao.GetAllAuditEvents(description, creator, createdDate);
+        }
+
+        public AuditEvents SaveAuditEvents(AuditEvents auditevents)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IAuditEventsDao auditEventsDao = factory.GetAuditEventsDao();
+            return auditEventsDao.Save(auditevents);
+        }
+
+        public AuditEvents UpdateAuditEvents(AuditEvents newAuditEvents, AuditEvents origAuditEvents)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IAuditEventsDao auditEventsDao = factory.GetAuditEventsDao();
+            return auditEventsDao.Update(newAuditEvents, origAuditEvents);
+        }
+
+        #endregion        
 
         #region IContactDetails
 
@@ -1042,7 +1113,7 @@ namespace SP.Worker
             return orderNotesStatusDao.Update(newOrderNotesStatus, origOrderNotesStatus);
         }
 
-        public List<OrderHeader> InvoicesByDateAndVan(DateTime deliveryDate, int vanId)
+        public List<VanDeliveryItem> InvoicesByDateAndVan(DateTime deliveryDate, int vanId)
         {
             IDaoFactory factory = new LTSDaoFactory();
             IOrderNotesStatusDao orderNotesStatusDao = factory.GetOrderNotesStatusDao();

@@ -226,6 +226,127 @@ namespace SPWCFServer
         }
         #endregion
 
+        #region AuditEvents
+
+        public void ArchiveAuditEvents()
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                mgr.ArchiveAuditEvents();
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public List<string> AuditEventDescriptions()
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return mgr.AuditEventDescriptions();
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public void DeleteAuditEvents(AuditEvents auditEvents)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                mgr.DeleteAuditEvents(ObjectExtension.CloneProperties<SPWCFServer.AuditEvents, SP.Core.Domain.AuditEvents>(auditEvents));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete, it is likely that there are dependent items still linked to it");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public List<AuditEvents> GetAllAuditEventss()
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.AuditEvents> auditEventsList = mgr.GetAllAuditEventss();
+                return ObjectExtension.CloneList<SP.Core.Domain.AuditEvents, SPWCFServer.AuditEvents>(auditEventsList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public List<AuditEvents> GetAllAuditEvents(string description, string creator, DateTime createdDate)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.AuditEvents> auditEventsList = mgr.GetAllAuditEvents(description, creator, createdDate);
+                return ObjectExtension.CloneList<SP.Core.Domain.AuditEvents, SPWCFServer.AuditEvents>(auditEventsList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public AuditEvents GetAuditEvents(int id)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.AuditEvents auditEvents = mgr.GetAuditEvents(id);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.AuditEvents, SPWCFServer.AuditEvents>(auditEvents);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public AuditEvents SaveAuditEvents(AuditEvents auditEvents)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.AuditEvents coreAuditEvents =
+                   ObjectExtension.CloneProperties<SPWCFServer.AuditEvents, SP.Core.Domain.AuditEvents>(auditEvents);
+                coreAuditEvents = mgr.SaveAuditEvents(coreAuditEvents);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.AuditEvents, SPWCFServer.AuditEvents>(coreAuditEvents);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public AuditEvents UpdateAuditEvents(AuditEvents newAuditEvents, AuditEvents origAuditEvents)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+
+                return ObjectExtension.CloneProperties<SP.Core.Domain.AuditEvents, SPWCFServer.AuditEvents>
+                   (mgr.UpdateAuditEvents(ObjectExtension.CloneProperties<SPWCFServer.AuditEvents, SP.Core.Domain.AuditEvents>(newAuditEvents),
+                      ObjectExtension.CloneProperties<SPWCFServer.AuditEvents, SP.Core.Domain.AuditEvents>(origAuditEvents)));
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        #endregion
+
         #region IContactDetailMembers
 
         public void DeleteContactDetail(ContactDetail contactDetail)

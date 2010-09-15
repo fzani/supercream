@@ -99,9 +99,11 @@
     <Compile Include="DataInterfaces\IVatCode.cs" />
     <Compile Include="Domain\AccountDTO.cs" />
     <Compile Include="Domain\AddressDTO.cs" />
+    <Compile Include="Domain\AuditEventsDTO.cs" />
     <Compile Include="Domain\BaseEntity.cs" />
     <Compile Include="Domain\ContactDetailDTO.cs" />
     <Compile Include="Domain\AutoGenDTO.cs" />
+    <Compile Include="Domain\AuditEventsArchiveDTO.cs" />
     <Compile Include="Domain\VanDeliveryDTO.cs" />
     <Compile Include="Domain\SpecialInvoiceCreditNoteBalance.cs" />
     <Compile Include="Domain\SpecialInvoiceCreditNoteDetails.cs" />
@@ -142,6 +144,7 @@
     <Compile Include="Enums\OrderStatus.cs" />
     <Compile Include="Enums\PhoneNoTypes.cs" />
     <Compile Include="GlobalSuppresions.cs" />
+    <Compile Include="DataInterfaces\IAuditEventsDao.cs" />
     <Compile Include="ManagerInterfaces\IFoundationFacilitiesManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\OrderStatusExtension.cs" />

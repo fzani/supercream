@@ -100,6 +100,14 @@ namespace SP.Data.LTS
             }
         }
 
+        public System.Data.Linq.Table<AuditEvents> AuditEvents
+        {
+            get
+            {
+                return this.GetTable<AuditEvents>();
+            }
+        }
+
         public System.Data.Linq.Table<ContactDetail> ContactDetail
         {
             get

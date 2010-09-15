@@ -67,9 +67,11 @@
     <Compile Include="AbstractLTSDAO.cs" />
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\AddressDAO.cs" />
+    <Compile Include="DAO\AudiEventsDAO.cs" />
     <Compile Include="DAO\ContactDetailDAO.cs" />
     <Compile Include="DAO\AutoGen.cs" />
     <Compile Include="DAO\CreditNoteDAO.cs" />
+    <Compile Include="IAuditEventsDao.cs" />
     <Compile Include="DAO\OrderCreditNoteDAO.cs" />
     <Compile Include="DAO\OrderCreditNoteLineDAO.cs" />
     <Compile Include="DAO\OrderNotesStatusDAO.cs" />

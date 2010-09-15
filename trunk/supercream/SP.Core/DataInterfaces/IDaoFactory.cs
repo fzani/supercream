@@ -11,6 +11,7 @@ namespace SP.Core.DataInterfaces
     {
         IAddressDao GetAddressDao();
         IAutogenDao GetAutoGenDao();
+        IAuditEventsDao GetAuditEventsDao();
         IOrderLineDao GetOrderLineDao();
         IOrderNotesStatusDao GetOrderNotesStatusDao();
         IPriceListItemDao GetPriceListItemDao();

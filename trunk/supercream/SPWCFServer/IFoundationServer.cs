@@ -53,6 +53,40 @@ namespace SPWCFServer
         int GenerateOrderNo();
         #endregion
 
+        #region AuditEvents
+
+        [OperationContract]
+        void ArchiveAuditEvents();
+
+        [OperationContract]
+        List<string> AuditEventDescriptions();
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        void DeleteAuditEvents(AuditEvents auditEvents);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<AuditEvents> GetAllAuditEventss();
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<AuditEvents> GetAllAuditEvents(string description, string creator, DateTime createdDate);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        AuditEvents GetAuditEvents(int id);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        AuditEvents SaveAuditEvents(AuditEvents auditEvents);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        AuditEvents UpdateAuditEvents(AuditEvents newAuditEvents, AuditEvents origAuditEvents);
+
+        #endregion
+
         #region Customers
         [OperationContract]
         void DeleteCustomer(int customerID);
@@ -1029,6 +1063,117 @@ namespace SPWCFServer
             }
         }
 
+    }
+
+    [DataContract]
+    public class AuditEvents
+    {
+        private int _ID;
+        private string _PageName;
+        private short _EventType;
+        private string _Description;
+        private string _Creator;
+        private string _OperatingOn;
+        private DateTime _CreatedDate;
+        private System.Data.Linq.Binary _Version;
+
+        [DataMember]
+        public int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+
+        [DataMember]
+        public string PageName
+        {
+            get
+            {
+                return _PageName;
+            }
+            set
+            {
+                _PageName = value;
+            }
+        }
+
+        [DataMember]
+        public short EventType
+        {
+            get
+            {
+                return _EventType;
+            }
+            set
+            {
+                _EventType = value;
+            }
+        }
+
+        [DataMember]
+        public string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                _Description = value;
+            }
+        }
+
+        [DataMember]
+        public string OperatingOn
+        {
+            get { return _OperatingOn; }
+            set { _OperatingOn = value; }
+        }
+
+        [DataMember]
+        public string Creator
+        {
+            get
+            {
+                return _Creator;
+            }
+            set
+            {
+                _Creator = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime CreatedDate
+        {
+            get
+            {
+                return _CreatedDate;
+            }
+            set
+            {
+                _CreatedDate = value;
+            }
+        }
+
+        [DataMember]
+        public System.Data.Linq.Binary Version
+        {
+            get
+            {
+                return _Version;
+            }
+            set
+            {
+                _Version = value;
+            }
+        }
     }
 
     [DataContract]
