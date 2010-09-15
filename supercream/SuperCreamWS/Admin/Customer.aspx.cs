@@ -100,6 +100,11 @@ public partial class Admin_Customer : System.Web.UI.Page
             };
 
             CustomerUI ui = new CustomerUI();
+            Customer customer = ui.GetByID(customerID.Value);
+
+            AuditEventsUI.LogEvent("Creating Contact", "Customer: " + customer.Name + "/Contact" + contactDetail.FirstName + " " + contactDetail.LastName, Page.ToString(),
+                AuditEventsUI.AuditEventType.Creating);
+
             ui.SaveContactDetail(contactDetail);
 
             DataBind();
@@ -217,6 +222,10 @@ public partial class Admin_Customer : System.Web.UI.Page
             };
 
             CustomerUI ui = new CustomerUI();
+            var customer = ui.GetByID(customerID.Value);
+
+            AuditEventsUI.LogEvent("Creating Shop", "Customer: " + customer.Name + "/Contact" + outletStore.Name, Page.ToString(),
+                AuditEventsUI.AuditEventType.Creating);
             ui.AddOutletStore(outletStore);
 
             DataBind();
@@ -304,6 +313,8 @@ public partial class Admin_Customer : System.Web.UI.Page
                 }
             }
 
+            AuditEventsUI.LogEvent("Creating Customer", "Customer: " + NameTextBox.Text, Page.ToString(),
+              AuditEventsUI.AuditEventType.Creating);
             ui.Save(c);
 
             ChangeState(this, e);
@@ -338,6 +349,8 @@ public partial class Admin_Customer : System.Web.UI.Page
                 PriceListHeaderID = Convert.ToInt32(ModifyPriceListDropDownList.SelectedValue)
             };
 
+            AuditEventsUI.LogEvent("Updating Customer", "Customer: " + customer.Name, Page.ToString(),
+             AuditEventsUI.AuditEventType.Modifying);
             ui.UpdateCustomer(customer);
 
             ChangeState(this, e);
@@ -366,7 +379,8 @@ public partial class Admin_Customer : System.Web.UI.Page
                 PriceListHeaderID = Convert.ToInt32(CustomerContactPriceListDropDownList.SelectedValue)
             };
 
-            ui.UpdateCustomer(customer);
+            AuditEventsUI.LogEvent("Updating Customer", "Customer: " + customer.Name, Page.ToString(),
+            AuditEventsUI.AuditEventType.Modifying);
 
             ui.UpdateCustomer(customer);
 
@@ -419,6 +433,9 @@ public partial class Admin_Customer : System.Web.UI.Page
     {
         if (e.CommandName == "Delete")
         {
+            AuditEventsUI.LogEvent("Deleting", "Shop: ", Page.ToString(),
+            AuditEventsUI.AuditEventType.Deleting);
+
             EventArgs ev = new EventArgs();
             ChangeState += new EventHandler<EventArgs>(DeletedOutletState);
             ChangeState(this, e);
@@ -523,6 +540,11 @@ public partial class Admin_Customer : System.Web.UI.Page
             else if (e.CommandName == "DeleteCustomer")
             {
                 CustomerUI ui = new CustomerUI();
+                var customer = ui.GetByID(Convert.ToInt32(e.CommandArgument.ToString()));
+
+                AuditEventsUI.LogEvent("Deleting Customer", "Customer: " + customer.Name, Page.ToString(),
+                        AuditEventsUI.AuditEventType.Deleting);
+
                 ui.DeleteCustomer(Convert.ToInt32(e.CommandArgument.ToString()));
                 DataBind();
             }
@@ -570,8 +592,18 @@ public partial class Admin_Customer : System.Web.UI.Page
         else if (e.CommandName == "Delete")
         {
             fromList.SelectedIndex = e.Item.ItemIndex;
-            CustomerUI ui = new CustomerUI();
-            ui.DeleteOutletStore(ModifyCustomerID, Convert.ToInt32(e.CommandArgument));
+
+            var ouletStoreId = Convert.ToInt32(e.CommandArgument);
+
+            Customer customer = GetExistingCustomer();
+            
+            OutletStore outletStore = GetOutletStore(ouletStoreId);
+
+            AuditEventsUI.LogEvent("Deleting Shop", "Customer: " + customer.Name, Page.ToString() + "/Shop: " + outletStore.Name,
+                      AuditEventsUI.AuditEventType.Deleting);
+
+            new CustomerUI().DeleteOutletStore(ModifyCustomerID, ouletStoreId);
+
             fromList.SelectedIndex = -1;
 
             DataBind();
@@ -610,8 +642,12 @@ public partial class Admin_Customer : System.Web.UI.Page
                 }
             };
 
-            CustomerUI ui = new CustomerUI();
-            ui.UpdateOutletStore(store);
+            var customer = GetExistingCustomer();
+
+            AuditEventsUI.LogEvent("Updating Shop", "Customer: " + customer.Name + "/Shop: " + store.Name, Page.ToString(),
+                    AuditEventsUI.AuditEventType.Deleting);
+
+            new CustomerUI().UpdateOutletStore(store);
 
             fromList.SelectedIndex = -1;
 
@@ -691,8 +727,14 @@ public partial class Admin_Customer : System.Web.UI.Page
         else if (e.CommandName == "Delete")
         {
             fromList.SelectedIndex = e.Item.ItemIndex;
-            CustomerUI ui = new CustomerUI();
-            ui.DeleteContactDetail(ModifyCustomerID, Convert.ToInt32(e.CommandArgument));
+
+            var customer = GetExistingCustomer();
+            var contact = GetContactDetail(Convert.ToInt32(e.CommandArgument));
+
+            AuditEventsUI.LogEvent("Deleting Contact Detail", "Customer: " + customer.Name + "/Contact: " + contact.FirstName + " " + contact.LastName, Page.ToString(),
+                  AuditEventsUI.AuditEventType.Deleting);
+
+            new CustomerUI().DeleteContactDetail(ModifyCustomerID, Convert.ToInt32(e.CommandArgument));
             fromList.SelectedIndex = -1;
             DataBind();
         }
@@ -749,8 +791,14 @@ public partial class Admin_Customer : System.Web.UI.Page
                 }
             };
 
-            CustomerUI ui = new CustomerUI();
-            ui.UpdateContactDetails(Detail);
+            var customer = GetExistingCustomer();
+
+            AuditEventsUI.LogEvent("Updating Contact Detail",
+                                   "Customer: " + customer.Name + "/Contact: " + Detail.FirstName + " " +
+                                   Detail.LastName, Page.ToString(),
+                AuditEventsUI.AuditEventType.Modifying);
+
+            new CustomerUI().UpdateContactDetails(Detail);
 
             fromList.SelectedIndex = -1;
 
@@ -1177,7 +1225,7 @@ public partial class Admin_Customer : System.Web.UI.Page
         ModifyCustomerPanel.Visible = false;
 
         AddCustomerContactPanel.Visible = true;
-        AddContactPanel.Visible = false;       
+        AddContactPanel.Visible = false;
 
         SaveNewCustomerPanel.Visible = false;
 
@@ -1255,4 +1303,23 @@ public partial class Admin_Customer : System.Web.UI.Page
             e.ExceptionHandled = true;
         }
     }
+
+    #region Private Helpers
+
+    private Customer GetExistingCustomer()
+    {
+        return new CustomerUI().GetByID(ModifyCustomerID.Value);
+    }
+
+    private static OutletStore GetOutletStore(int ouletStoreId)
+    {
+        return new OutletStoreUI().GetOutletStore(ouletStoreId);
+    }
+
+    private static ContactDetail GetContactDetail(int contactDetail)
+    {
+        return new ContactDetailUI().GetContactDetail(contactDetail);
+    }
+
+    #endregion
 }
