@@ -83,6 +83,9 @@ public partial class Admin_Account : System.Web.UI.Page
                 }
             };
 
+            AuditEventsUI.LogEvent("Creating Account", AccountNoTextBox.Text, Page.ToString(),
+             AuditEventsUI.AuditEventType.Creating);
+
             ui.SaveAccount(acc);
 
             ChangeState(this, e);
@@ -277,6 +280,9 @@ public partial class Admin_Account : System.Web.UI.Page
                 }
             };
 
+            AuditEventsUI.LogEvent("Updating Account", accountNo, Page.ToString(),
+            AuditEventsUI.AuditEventType.Modifying);
+
             ui.UpdatePopupAccount(account);
             DataBind();
         }
@@ -297,6 +303,11 @@ public partial class Admin_Account : System.Web.UI.Page
 
             AccountUI ui = new AccountUI();
             int id = Convert.ToInt32((messagePanel.FindControl("ID") as Label).Text);
+            
+            string accountNo = (messagePanel.FindControl("AccountNoTextBox") as TextBox).Text;
+            
+            AuditEventsUI.LogEvent("Deleting Account", accountNo, Page.ToString(),
+                AuditEventsUI.AuditEventType.Modifying);
 
             ui.DeleteAccount(id);
 
