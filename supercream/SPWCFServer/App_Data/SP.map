@@ -32,7 +32,7 @@
   </Table>
   <Table Name="dbo.AuditEvents" Member="AuditEvents">
     <Type Name="AuditEvents">
-      <Column Name="ID" Member="ID" Storage="_ID" DbType="Int NOT NULL" UpdateCheck="Never" />
+      <Column Name="ID" Member="ID" DbType="Int NOT NULL" UpdateCheck="Never" />
       <Column Name="PageName" Member="PageName" Storage="_PageName" DbType="VarChar(150)" UpdateCheck="Never" />
       <Column Name="EventType" Member="EventType" Storage="_EventType" DbType="SmallInt" UpdateCheck="Never" />
       <Column Name="Description" Member="Description" Storage="_Description" DbType="VarChar(150)" UpdateCheck="Never" />
@@ -44,7 +44,7 @@
   </Table>
   <Table Name="dbo.AuditEventsArchive" Member="AuditEventsArchive">
     <Type Name="AuditEventsArchive">
-      <Column Name="ID" Member="ID" Storage="_ID" DbType="Int NOT NULL" UpdateCheck="Never" />
+      <Column Name="ID" Member="ID" DbType="Int NOT NULL" UpdateCheck="Never" />
       <Column Name="PageName" Member="PageName" Storage="_PageName" DbType="VarChar(150)" UpdateCheck="Never" />
       <Column Name="EventType" Member="EventType" Storage="_EventType" DbType="SmallInt" UpdateCheck="Never" />
       <Column Name="Description" Member="Description" Storage="_Description" DbType="VarChar(150)" UpdateCheck="Never" />
