@@ -18,8 +18,8 @@ namespace SP.Data.LTS
         public decimal GetOrderExVatTotal(int orderId)
         {
             var exVatTotal = Math.Round((from ol in db.OrderLine
-                              where ol.OrderID == orderId
-                              select ol.Price * ol.NoOfUnits).Sum(),2);
+                                         where ol.OrderID == orderId
+                                         select ol.Price * ol.NoOfUnits).Sum(), 2);
             return exVatTotal;
         }
 
@@ -201,6 +201,7 @@ namespace SP.Data.LTS
                                     InvoicePaymentComplete = ons.InvoicePaymentComplete,
                                     InvoiceNo = o.InvoiceNo,
                                     OrderDate = o.OrderDate,
+                                    InvoiceDate = o.InvoiceDate,
                                     OrderID = o.AlphaID,
                                     CustomerName = c.Name,
                                     OrderStatus = o.OrderStatus
@@ -241,12 +242,12 @@ namespace SP.Data.LTS
 
             if (dateFrom != DateTime.MinValue)
             {
-                filteredInvoices = filteredInvoices.Where<InvoiceWithStatus>(q => q.OrderDate >= dateFrom);
+                filteredInvoices = filteredInvoices.Where<InvoiceWithStatus>(q => q.InvoiceDate >= dateFrom);
             }
 
             if (dateTo != DateTime.MinValue)
             {
-                filteredInvoices = filteredInvoices.Where<InvoiceWithStatus>(q => q.OrderDate <= dateTo);
+                filteredInvoices = filteredInvoices.Where<InvoiceWithStatus>(q => q.InvoiceDate <= dateTo);
             }
 
             if (orderStatus == 2)

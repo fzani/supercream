@@ -1904,6 +1904,7 @@ namespace SPWCFServer
         short _OrderStatus;
         bool _InvoicePaymentComplete;
         DateTime _OrderDate;
+        private DateTime _InvoiceDate;
         DateTime _InvoicePrintedDate;
 
         [DataMember]
@@ -1928,6 +1929,13 @@ namespace SPWCFServer
         {
             get { return _OrderDate; }
             set { _OrderDate = value; }
+        }
+
+        [DataMember]
+        public DateTime InvoiceDate
+        {
+            get { return _InvoiceDate; }
+            set { _InvoiceDate = value; }
         }
 
         [DataMember]
