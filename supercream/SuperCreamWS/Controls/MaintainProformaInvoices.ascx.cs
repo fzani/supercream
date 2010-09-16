@@ -91,6 +91,11 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
                 DeliveryNoteDateCreated = Defaults.MinDateTime
             };
 
+            var order = GetOrder(status.OrderID);
+
+            AuditEventsUI.LogEvent("Confirming invoice proforma", order.InvoiceProformaNo, Page.ToString(),
+                       AuditEventsUI.AuditEventType.Creating);
+
             OrderNotesStatusUI ui = new OrderNotesStatusUI();
             ui.Save(status);
 
@@ -122,10 +127,15 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             if (new OrderNotesStatusUI().OrderNoteExistsByOrderID(OrderID.Value))
             {
                 UpdateOrderHeaderToInvoice(orderHeaderUi);
+
+                AuditEventsUI.LogEvent("Converting to invoice", orderHeaderUi.GetById(OrderID.Value).InvoiceProformaNo, Page.ToString(),
+                      AuditEventsUI.AuditEventType.Modifying);
                 UpdateInvoiceCreatedDateOnOrderNoteStatus();
             }
             else
             {
+                AuditEventsUI.LogEvent("Creating invoice", orderHeaderUi.GetById(OrderID.Value).InvoiceProformaNo, Page.ToString(),
+                      AuditEventsUI.AuditEventType.Creating);
                 orderHeaderUi.CreateInvoice(OrderID.Value, DateTime.Parse(InvoiceDateTextBox.Text));
             }
 
@@ -140,13 +150,16 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             ErrorMessageEventHandler(this, args);
         }
     }
-    
+
     protected void ChangeInvoiceDetailsButton_Click(object sender, EventArgs e)
     {
         try
         {
             UpdateOrderNoteStatus();
             UpdateOrderHeader();
+
+            AuditEventsUI.LogEvent("Changing invoice proforma details", new OrderHeaderUI().GetById(OrderID.Value).InvoiceProformaNo, Page.ToString(),
+                     AuditEventsUI.AuditEventType.Modifying);
 
             DataBind();
 
@@ -160,7 +173,7 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             ErrorMessageEventHandler(this, args);
         }
     }
-   
+
     protected void CancelInvoiceButton_Click(object sender, EventArgs e)
     {
         try
@@ -171,6 +184,10 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
             OrderHeader header = orderHeaderUI.GetWithVatCodeById(OrderID.Value);
             header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Order;
+
+            AuditEventsUI.LogEvent("Reverting invoice proforma to order", new OrderHeaderUI().GetById(OrderID.Value).InvoiceProformaNo, Page.ToString(),
+                   AuditEventsUI.AuditEventType.Creating);
+
             orderHeaderUI.UpdateForInvoice(header);
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
@@ -204,6 +221,9 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         try
         {
             int orderID = this.OrderID.Value;
+
+            AuditEventsUI.LogEvent("Printing invoice proforma details", new OrderHeaderUI().GetById(OrderID.Value).InvoiceProformaNo, Page.ToString(),
+                    AuditEventsUI.AuditEventType.Creating);
 
             PrintInvoice(orderID);
 
@@ -243,6 +263,8 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
         {
             int orderID = this.OrderID.Value;
 
+            AuditEventsUI.LogEvent("Reprinting invoice proforma details", new OrderHeaderUI().GetById(OrderID.Value).InvoiceProformaNo, Page.ToString(),
+                   AuditEventsUI.AuditEventType.Creating);
             PrintInvoice(orderID);
 
             OrderHeaderUI orderHeaderUI = new OrderHeaderUI();
@@ -968,6 +990,15 @@ public partial class Controls_MaintainProformaInvoices : System.Web.UI.UserContr
 
         InvoiceRepeater.Visible = true;
     }
+    #endregion
+
+    #region Private Helpers
+
+    private static OrderHeader GetOrder(int orderId)
+    {
+        return new OrderHeaderUI().GetById(orderId);
+    }
+
     #endregion
 }
 
