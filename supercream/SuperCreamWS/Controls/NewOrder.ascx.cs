@@ -212,6 +212,10 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
                 ValidateOrder(orderHeader);
 
                 orderHeader = ui.Save(orderHeader);
+
+                AuditEventsUI.LogEvent("Creating Order", orderHeader.AlphaID, Page.ToString(),
+                                       AuditEventsUI.AuditEventType.Creating);
+
                 OrderID = orderHeader.ID;
                 this.OrderNoLabel.Text = orderHeader.AlphaID;
             }
@@ -263,6 +267,10 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
                     OrderLineStatus = (short)SP.Core.Enums.OrderStatus.Order,
                 };
 
+                var product = GetProduct(orderLine.ProductID);
+
+                AuditEventsUI.LogEvent("Creating Order Line", "Product: " + product.Description, Page.ToString(),
+                                    AuditEventsUI.AuditEventType.Creating);
                 OrderLineUI.Save(orderLine);
 
                 DataBind();
@@ -349,6 +357,9 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
                 SpecialInstructions = specialInstructionsTextBox.Text
             };
 
+            AuditEventsUI.LogEvent("Updating Order Line", "Product: " + GetProduct(line.ProductID).Description, Page.ToString(),
+                                 AuditEventsUI.AuditEventType.Modifying);
+
             OrderLineUI.Update(line);
             DataBind();
 
@@ -365,6 +376,9 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
     {
         try
         {
+            AuditEventsUI.LogEvent("Deleting Order Line", "line", Page.ToString(),
+                                AuditEventsUI.AuditEventType.Deleting);
+
             Button btn = sender as Button;
             if (btn.CommandName == "DeleteButton")
                 OrderLineUI.DeleteOrderLine(Convert.ToInt32(btn.CommandArgument));
@@ -434,6 +448,7 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
     #endregion
 
     #region Control Call Backs
+
     protected void ProductSearch_Selected(object sender, PurchaseOrderEventArgs e)
     {
         ProductID = e.PurchaseOrderID;
@@ -447,6 +462,7 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
         ChangeState += new EventHandler<EventArgs>(AddOrderState);
         ChangeState(this, e);
     }
+    
     #endregion
 
     #region Page States
@@ -488,8 +504,6 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
         {
             OrderDetailsGridPanel.Visible = false;
         }
-
-
     }
 
     public void CancelOrderState(object sender, EventArgs args)
@@ -630,6 +644,7 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
     #endregion
 
     #region Private Methods
+
     private void Calculate()
     {
         if (PriceTextBox.Text == "0" || String.IsNullOrEmpty(PriceTextBox.Text))
@@ -699,6 +714,11 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
 
         if (!int.TryParse(qtyTextBox.Text, out qtyPerUnit))
             throw new ApplicationException("qty per unit must be a number");
+    }
+
+    private static Product GetProduct(int productId)
+    {
+        return new ProductUI().GetProductByID(productId);
     }
 
     #endregion

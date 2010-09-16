@@ -101,6 +101,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     #endregion
 
     #region Public Methods
+
     public void AddOrderDetails(int productID)
     {
         AddOrderDetailsPanel.Visible = true;
@@ -182,6 +183,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     #endregion
 
     #region Control Call Backs
+
     protected void ProductSearch_Selected(object sender, PurchaseOrderEventArgs e)
     {
         ProductID = e.PurchaseOrderID;
@@ -194,6 +196,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
         ChangeState += new EventHandler<EventArgs>(AddOrderState);
         ChangeState(this, e);
     }
+
     #endregion
 
     #region Data Grid Events
@@ -654,6 +657,10 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
                 SpecialInstructions = specialInstructionsTextBox.Text
             };
 
+            Product product = GetProduct(line.ProductID);
+            AuditEventsUI.LogEvent("Updating Order Line", "Product:" + product.Description, Page.ToString(),
+                               AuditEventsUI.AuditEventType.Modifying);
+
             OrderLineUI.Update(line);
             DataBind();
 
@@ -670,6 +677,9 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     {
         try
         {
+            AuditEventsUI.LogEvent("Deleting Order Line", "line:", Page.ToString(),
+                               AuditEventsUI.AuditEventType.Deleting);
+
             Button btn = sender as Button;
             if (btn.CommandName == "DeleteButton")
                 OrderLineUI.DeleteOrderLine(Convert.ToInt32(btn.CommandArgument));
@@ -721,6 +731,9 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             {
                 oh.InvoiceProformaDate = existingOrderHeader.InvoiceProformaDate;
             }
+
+            AuditEventsUI.LogEvent("Updating Order", oh.AlphaID, Page.ToString(),
+                               AuditEventsUI.AuditEventType.Creating);
 
             ui.Update(oh);
 
@@ -786,7 +799,9 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
                     SpecialInstructions = SpecialInstructionsTextBox.Text,
                     OrderLineStatus = (short)header.OrderStatus,
                 };
-
+                
+                AuditEventsUI.LogEvent("Adding Order line", product.Description, Page.ToString(),
+                               AuditEventsUI.AuditEventType.Creating);
                 OrderLineUI.Save(orderLine);
 
                 CompleteOrderButton.Visible = true;
@@ -845,6 +860,9 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             OrderHeaderUI ui = new OrderHeaderUI();
             string invoiceNo = ui.CreateInvoice(OrderID.Value, DateTime.Parse(InvoiceDateTextBox.Text));
 
+            AuditEventsUI.LogEvent("Created Invoice", invoiceNo, Page.ToString(),
+                           AuditEventsUI.AuditEventType.Creating);
+
             //var orderHeader = ui.GetById(OrderID.Value);
             //orderHeader.InvoiceDate = DateTime.Parse(InvoiceDateTextBox.Text);
             //ui.Update(orderHeader);
@@ -893,6 +911,9 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             OrderHeaderUI ui = new OrderHeaderUI();
             string deliveryNoteNo = ui.CreateDeliveryNote(OrderID.Value);
 
+            AuditEventsUI.LogEvent("Created Delivery Note", deliveryNoteNo, Page.ToString(),
+                         AuditEventsUI.AuditEventType.Creating);
+
             OrderStatusTypeLabel.Text = "<h3>Status : <i>Delivery Note Produced</i></h3";
             OrderStatusNoLabel.Text = "<h3><i>Delivery Note: " + deliveryNoteNo + "</i></h3>";
             OrderStatusTypeLabel.Visible = true;
@@ -921,6 +942,9 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             OrderHeaderUI ui = new OrderHeaderUI();
 
             string invoiceNo = ui.UpdateToInvoice(OrderID.Value, DateTime.Parse(InvoiceDateTextBox.Text));
+
+            AuditEventsUI.LogEvent("Convert to invoice", invoiceNo, Page.ToString(),
+                        AuditEventsUI.AuditEventType.Creating);
 
             OrderNotesStatusUI orderNotesStatusUI = new OrderNotesStatusUI();
             if (orderNotesStatusUI.OrderNoteExistsByOrderID(OrderID.Value))
@@ -969,6 +993,9 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
 
             var ui = new OrderHeaderUI();
             string invoiceNo = ui.CreateInvoiceProforma(OrderID.Value, DateTime.Parse(InvoiceProformaDateTextBox.Text));
+
+            AuditEventsUI.LogEvent("Convert to invoice proforma", invoiceNo, Page.ToString(),
+                       AuditEventsUI.AuditEventType.Creating);
 
             OrderStatusTypeLabel.Text = "<h3>Status : <i>Proforma Produced</i></h3";
             OrderStatusNoLabel.Text = "<h3><i>Invoice No: " + invoiceNo + "</i></h3>";
@@ -1216,6 +1243,7 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
     #endregion
 
     #region Private Methods
+
     private void Calculate()
     {
         if (PriceTextBox.Text == "0" || String.IsNullOrEmpty(PriceTextBox.Text))
@@ -1255,5 +1283,11 @@ public partial class Controls_ModifyOrder : System.Web.UI.UserControl
             }
         }
     }
+
+    private static Product GetProduct(int productId)
+    {
+        return new ProductUI().GetProductByID(productId);
+    }
+
     #endregion
 }
