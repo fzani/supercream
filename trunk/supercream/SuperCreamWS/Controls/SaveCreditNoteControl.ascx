@@ -60,7 +60,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Due Date
+                        Credit Note Raised Date
                     </td>
                     <td>
                         <asp:TextBox ID="DueDateTextBox" Style="vertical-align: middle;" runat="server" ValidationGroup="SaveCreditNoteGroup"
@@ -72,9 +72,9 @@
                             Text="Required" runat="server" />
                         <ajaxToolkit:CalendarExtender ID="calendarButtonExtender" Format="dd/MM/yyyy" runat="server"
                             TargetControlID="DueDateTextBox" PopupButtonID="Image1" />
-                         <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" TargetControlID="DueDateTextBox"
-                                            Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
-                                            OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
+                        <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" TargetControlID="DueDateTextBox"
+                            Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
+                            OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
                     </td>
                 </tr>
                 <tr>
@@ -96,7 +96,8 @@
                             Text="Save" Width="20%" OnClick="SaveButton_Click" />
                         <asp:Button ID="DeleteButton" runat="server" ValidationGroup="SaveCreditNoteGroup"
                             Text="Delete" Width="20%" OnClick="DeleteButton_Click" />
-                        <asp:Button ID="PrintButton" OnClick="PrintButton_Click" runat="server" Text="Print" Visible="false" Width="20%" />
+                        <asp:Button ID="PrintButton" OnClick="PrintButton_Click" runat="server" Text="Print"
+                            Visible="false" Width="20%" />
                     </td>
                 </tr>
             </table>
