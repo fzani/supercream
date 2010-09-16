@@ -39,7 +39,7 @@
                 </tr>                         
                 <tr>
                     <td>
-                        Due Date
+                        Credit Note Raised Date
                     </td>
                     <td>
                         <asp:TextBox ID="DueDateTextBox" Style="vertical-align: middle;" runat="server" ValidationGroup="SaveCreditNoteGroup"
