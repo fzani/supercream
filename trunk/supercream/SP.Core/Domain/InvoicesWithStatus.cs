@@ -11,6 +11,7 @@ namespace SP.Core.Domain
         string _InvoiceNo;
         bool _InvoicePaymentComplete;
         DateTime _OrderDate;
+        private DateTime _InvoiceDate;
         DateTime _InvoicePrintedDate;
         string _CustomerName;
         short _OrderStatus;
@@ -31,6 +32,12 @@ namespace SP.Core.Domain
         {
             get { return _OrderDate; }
             set { _OrderDate = value; }
+        }
+
+        public DateTime InvoiceDate
+        {
+            get { return _InvoiceDate; }
+            set { _InvoiceDate = value; }
         }
 
         public bool InvoicePaymentComplete

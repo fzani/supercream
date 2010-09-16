@@ -488,6 +488,7 @@
   <xs:complexType name="InvoiceWithStatus">
     <xs:sequence>
       <xs:element minOccurs="0" name="CustomerName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InvoiceDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="InvoiceNo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="InvoicePaymentComplete" type="xs:boolean" />
       <xs:element minOccurs="0" name="OrderDate" type="xs:dateTime" />
