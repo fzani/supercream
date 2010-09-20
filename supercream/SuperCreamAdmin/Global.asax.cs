@@ -17,11 +17,15 @@ namespace SuperCreamAdmin
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "Default",                                              // Route name
-                "{controller}/{action}/{id}",                           // URL with parameters
-                new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
-            );
+               "Default.aspx",                                              // Route name
+               "{controller}.aspx/{action}/{id}",                           // URL with parameters
+               new { controller = "Home", action = "Index", id = "" }); // Parameter defaults
 
+            routes.MapRoute(
+                "ManageUsers.aspx", // Route name
+                "{controller}/{action}/{id}", // URL with parameters
+                new { controller = "Home", action = "Index", id = "" } // Parameter defaults
+                );
         }
 
         protected void Application_Start()
