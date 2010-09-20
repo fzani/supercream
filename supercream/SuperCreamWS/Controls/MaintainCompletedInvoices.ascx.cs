@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -42,15 +43,21 @@ public partial class Controls_MaintainCompletedInvoices : System.Web.UI.UserCont
                 e.InputParameters[5] = (short)SP.Core.Enums.OrderStatus.InvoicePrinted;
                 break;
         }
+        e.InputParameters[6] = this.IncompleteCheckBox.Checked;
     }
 
     #endregion
 
-    #region General Event Handlers     
+    #region General Event Handlers
 
     protected void SearchButton_Click(object sender, EventArgs e)
     {
         InvoiceDetailsListView.DataBind();
+    }
+
+    protected void IncompleteCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+        DataBind();
     }
 
     protected void ClearButton_Click(object sender, EventArgs e)
@@ -60,4 +67,5 @@ public partial class Controls_MaintainCompletedInvoices : System.Web.UI.UserCont
     }
 
     #endregion
+
 }

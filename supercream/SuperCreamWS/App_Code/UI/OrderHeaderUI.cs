@@ -180,7 +180,7 @@ public class OrderHeaderUI : IDisposable
         {
             OrderHeader origOrderHeader = _proxy.GetOrderHeaderByIdWithVatCode(orderNo);
             OrderHeader updatedOrderHeader = origOrderHeader.Clone<OrderHeader>();
-            
+
             updatedOrderHeader.OrderStatus = (short)SP.Core.Enums.OrderStatus.Invoice;
             updatedOrderHeader.InvoiceDate = invoiceDate;
 
@@ -259,12 +259,24 @@ public class OrderHeaderUI : IDisposable
     }
 
     public List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom,
-        DateTime dateTo, SP.Core.Enums.OrderStatus orderStatus)
+        DateTime dateTo, SP.Core.Enums.OrderStatus orderStatus, bool showIncomplete)
     {
         using (_proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return _proxy.GetInvoicesWithStatus(orderNo, invoiceNo, customerName, dateFrom,
-                dateTo, Convert.ToInt16(orderStatus));
+            if (showIncomplete)
+            {
+                return _proxy.GetInvoicesWithStatus(orderNo, invoiceNo, customerName, dateFrom,
+                                                    dateTo, Convert.ToInt16(orderStatus))
+                                                    .Where(q => q.InvoicePaymentComplete == false)
+                                                        .OrderByDescending(
+                                                        q => q.InvoiceDate).ToList();
+            }
+            else
+            {
+                return _proxy.GetInvoicesWithStatus(orderNo, invoiceNo, customerName, dateFrom,
+                                                    dateTo, Convert.ToInt16(orderStatus)).OrderByDescending(
+                                                        q => q.InvoiceDate).ToList();
+            }
         }
     }
 
