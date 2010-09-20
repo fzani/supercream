@@ -95,6 +95,14 @@
                             </tr>
                             <tr>
                                 <td>
+                                    Show Incomplete Invoices
+                                </td>
+                                <td>
+                                    <asp:CheckBox ID="IncompleteCheckBox" runat="server" AutoPostBack="true" OnCheckedChanged="IncompleteCheckBox_CheckedChanged" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                 </td>
                                 <td>
                                     <asp:Button ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
@@ -232,9 +240,9 @@
                     <td>
                         <asp:Label ID="OrderIDTextBox" runat="server" Text='<%# Bind("OrderID") %>' />
                     </td>
-                    <td>
+                    <td colspan="2">
                     </td>
-                    <td>
+                    <td align="center">
                         <asp:CheckBox ID="InvoicePaymentCompleteCheckBox" runat="server" Checked='<%# Bind("InvoicePaymentComplete") %>' />
                     </td>
                 </tr>
@@ -260,6 +268,17 @@
                 </tr>
             </SelectedItemTemplate>
         </asp:ListView>
+        <div align="center">
+            <asp:DataPager ID="DataPager1" PagedControlID="InvoiceDetailsListView" runat="server">
+                <Fields>
+                    <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowNextPageButton="False"
+                        ShowPreviousPageButton="False" />
+                    <asp:NumericPagerField />
+                    <asp:NextPreviousPagerField ButtonType="Button" ShowLastPageButton="True" ShowNextPageButton="False"
+                        ShowPreviousPageButton="False" />
+                </Fields>
+            </asp:DataPager>
+        </div>
     </fieldset>
     <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetInvoicesWithStatus"
         TypeName="OrderHeaderUI" DataObjectTypeName="WcfFoundationService.InvoiceWithStatus"
@@ -271,6 +290,7 @@
             <asp:Parameter Name="dateFrom" Type="DateTime" />
             <asp:Parameter Name="dateTo" Type="DateTime" />
             <asp:Parameter Name="orderStatus" Type="Object" />
+            <asp:Parameter Name="showIncomplete" Type="Boolean" />
         </SelectParameters>
     </asp:ObjectDataSource>
 </div>
