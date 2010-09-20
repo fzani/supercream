@@ -21,13 +21,13 @@
           <DataField>Description</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="DeliveryDate">
-          <DataField>DeliveryDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
         <Field Name="NoOfUnits">
           <DataField>NoOfUnits</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="InvoiceDate">
+          <DataField>InvoiceDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
         <Field Name="Price">
           <DataField>Price</DataField>
@@ -41,24 +41,37 @@
           <DataField>InvoiceNo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="VatExemptible">
-          <DataField>VatExemptible</DataField>
+        <Field Name="VatExempt">
+          <DataField>VatExempt</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
         </Field>
-        <Field Name="TotalPrice">
-          <DataField>TotalPrice</DataField>
+        <Field Name="LineCredit">
+          <DataField>LineCredit</DataField>
           <rd:TypeName>System.Double</rd:TypeName>
         </Field>
         <Field Name="Name">
           <DataField>Name</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="LinePrice">
+          <DataField>LinePrice</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="OrderArbitraryCreditTotal">
+          <DataField>OrderArbitraryCreditTotal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select oh.ID, AlphaID, InvoiceNo, c.Name, DeliveryDate, p.Description, ol.NoOfUnits, ol.Price, v.PercentageValue, 
-	v.VatExemptible,	
-	case when v.VatExemptible = 1 then Round(Price * NoOfUnits, 2) else Round((Price * NoOfUnits) * (1 + (v.PercentageValue / 100)), 2)   end TotalPrice
+        <CommandText>select oh.ID, AlphaID, InvoiceNo, c.Name, InvoiceDate, p.Description, ol.NoOfUnits, ol.Price, v.PercentageValue, 
+	p.VatExempt,	
+	case when p.VatExempt = 1 then round(isnull(ocnl.Price, 0),2) 
+		else round(isnull(ocnl.Price, 0) * (1 + (v.PercentageValue / 100.0)), 2) end LineCredit,                     				
+	case when p.VatExempt = 1 THEN round((ol.Price * ol.NoOfUnits), 2) 
+		else round(ol.Price * ol.NoOfUnits * (1 + (v.PercentageValue / 100.0)),2) end
+			LinePrice,
+		dbo.GetArbiraryCreditNoteTotal(oh.ID) OrderArbitraryCreditTotal
 	from orderheader oh
 inner join OrderNotesStatus os
 on oh.ID = os.OrderID
@@ -72,16 +85,18 @@ inner join Product p on
 	ol.ProductID = p.ID
 inner join VatCode v on
 	oh.VatCodeID = v.ID
+	left outer join OrderCreditNoteLine AS ocnl 
+	ON ol.ID = ocnl.OrderLineID
 where (OrderStatus = dbo.ConstInvoice() or OrderStatus = dbo.ConstInvoicePrinted())
 and InvoicePaymentComplete = dbo.ConstPaymentNotComplete()
-AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderDeliveryEndDate
+and oh.InvoiceDate &gt;= @InvoiceStartDate AND oh.InvoiceDate &lt;= @InvoiceEndEndDate
 order by c.name, oh.alphaid desc</CommandText>
         <QueryParameters>
-          <QueryParameter Name="@OrderDeliveryStartDate">
-            <Value>=Parameters!OrderDeliveryStartDate.Value</Value>
+          <QueryParameter Name="@InvoiceStartDate">
+            <Value>=Parameters!InvoiceStartDate.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@OrderDeliveryEndDate">
-            <Value>=Parameters!OrderDeliveryEndDate.Value</Value>
+          <QueryParameter Name="@InvoiceEndEndDate">
+            <Value>=Parameters!InvoiceEndEndDate.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
@@ -94,7 +109,7 @@ order by c.name, oh.alphaid desc</CommandText>
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.79713in</Width>
+              <Width>1.11509in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1in</Width>
@@ -103,7 +118,7 @@ order by c.name, oh.alphaid desc</CommandText>
               <Width>1in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.15079in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -180,25 +195,34 @@ order by c.name, oh.alphaid desc</CommandText>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox352">
+                    <Textbox Name="Textbox2">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Price</Value>
+                              <Value>Original Invoice Price</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <LeftIndent>0cm</LeftIndent>
-                          <HangingIndent>0cm</HangingIndent>
+                          <Style />
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox352</rd:DefaultName>
+                      <rd:DefaultName>Textbox2</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -222,7 +246,7 @@ order by c.name, oh.alphaid desc</CommandText>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total Price</Value>
+                              <Value>Total Owed(Includng adjustemts for Credit Notes)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -313,25 +337,21 @@ order by c.name, oh.alphaid desc</CommandText>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox385">
+                    <Textbox Name="Textbox7">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total Outs.</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
+                              <Value />
+                              <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
+                          <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox383</rd:DefaultName>
+                      <rd:DefaultName>Textbox7</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -347,17 +367,16 @@ order by c.name, oh.alphaid desc</CommandText>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox364">
+                    <Textbox Name="Textbox1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!TotalPrice.Value)</Value>
+                              <Value />
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>'£'0.00;('£'0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -366,7 +385,7 @@ order by c.name, oh.alphaid desc</CommandText>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox364</rd:DefaultName>
+                      <rd:DefaultName>Textbox1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -377,7 +396,6 @@ order by c.name, oh.alphaid desc</CommandText>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
-                        <rd:FormatSymbolCulture>en-GB</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -419,14 +437,14 @@ order by c.name, oh.alphaid desc</CommandText>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox382">
+                    <Textbox Name="NoOfUnits">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Sum(Fields!NoOfUnits.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -435,7 +453,7 @@ order by c.name, oh.alphaid desc</CommandText>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox382</rd:DefaultName>
+                      <rd:DefaultName>NoOfUnits</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -451,16 +469,16 @@ order by c.name, oh.alphaid desc</CommandText>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox383">
+                    <Textbox Name="LinePrice">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total</Value>
+                              <Value>=Sum(Fields!LinePrice.Value)</Value>
                               <Style>
-                                <FontWeight>Bold</FontWeight>
+                                <Format>'£'0.00;('£'0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -469,7 +487,7 @@ order by c.name, oh.alphaid desc</CommandText>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox383</rd:DefaultName>
+                      <rd:DefaultName>LinePrice</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -479,8 +497,10 @@ order by c.name, oh.alphaid desc</CommandText>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-GB</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -492,7 +512,7 @@ order by c.name, oh.alphaid desc</CommandText>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!TotalPrice.Value)</Value>
+                              <Value>=sum(Fields!LinePrice.Value - Fields!LineCredit.Value) - Fields!OrderArbitraryCreditTotal.Value</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>'£'0.00;('£'0.00)</Format>
@@ -510,6 +530,152 @@ order by c.name, oh.alphaid desc</CommandText>
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-GB</rd:FormatSymbolCulture>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox16">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox16</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox17">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Total</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox17</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox9">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Sum(Fields!Price.Value)</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Format>'£'0.00;('£'0.00)</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox9</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-GB</rd:FormatSymbolCulture>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox20">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=sum(Fields!LinePrice.Value - Fields!LineCredit.Value) - Fields!OrderArbitraryCreditTotal.Value</Value>
+                              <Style>
+                                <FontSize>12pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Format>'£'0.00;('£'0.00)</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox20</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -573,7 +739,7 @@ order by c.name, oh.alphaid desc</CommandText>
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1in</Size>
+                    <Size>1.23958in</Size>
                     <CellContents>
                       <Textbox Name="Textbox3">
                         <CanGrow>true</CanGrow>
@@ -582,7 +748,7 @@ order by c.name, oh.alphaid desc</CommandText>
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Delivery Date</Value>
+                                <Value>Invoice  Date</Value>
                                 <Style>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
@@ -609,7 +775,7 @@ order by c.name, oh.alphaid desc</CommandText>
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>0.82291in</Size>
+                        <Size>1.35416in</Size>
                         <CellContents>
                           <Textbox Name="Textbox376">
                             <CanGrow>true</CanGrow>
@@ -698,7 +864,7 @@ order by c.name, oh.alphaid desc</CommandText>
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1in</Size>
+                    <Size>1.23958in</Size>
                     <CellContents>
                       <Textbox Name="Textbox5">
                         <CanGrow>true</CanGrow>
@@ -731,7 +897,7 @@ order by c.name, oh.alphaid desc</CommandText>
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>0.82291in</Size>
+                        <Size>1.35416in</Size>
                         <CellContents>
                           <Textbox Name="Textbox378">
                             <CanGrow>true</CanGrow>
@@ -780,16 +946,16 @@ order by c.name, oh.alphaid desc</CommandText>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>1in</Size>
+                    <Size>1.23958in</Size>
                     <CellContents>
-                      <Textbox Name="DeliveryDate">
+                      <Textbox Name="InvoiceDate">
                         <CanGrow>true</CanGrow>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>=Fields!DeliveryDate.Value</Value>
+                                <Value>=Fields!InvoiceDate.Value</Value>
                                 <Style>
                                   <FontWeight>Bold</FontWeight>
                                   <Format>d</Format>
@@ -799,7 +965,7 @@ order by c.name, oh.alphaid desc</CommandText>
                             <Style />
                           </Paragraph>
                         </Paragraphs>
-                        <rd:DefaultName>DeliveryDate</rd:DefaultName>
+                        <rd:DefaultName>InvoiceDate</rd:DefaultName>
                         <Style>
                           <Border>
                             <Color>LightGrey</Color>
@@ -817,7 +983,7 @@ order by c.name, oh.alphaid desc</CommandText>
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>0.82291in</Size>
+                        <Size>1.35416in</Size>
                         <CellContents>
                           <Textbox Name="Group3">
                             <CanGrow>true</CanGrow>
@@ -858,6 +1024,83 @@ order by c.name, oh.alphaid desc</CommandText>
                     </TablixMember>
                   </TablixMembers>
                 </TablixMember>
+                <TablixMember>
+                  <TablixHeader>
+                    <Size>1.23958in</Size>
+                    <CellContents>
+                      <Textbox Name="Textbox14">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>Total</Value>
+                                <Style>
+                                  <FontWeight>Bold</FontWeight>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <LeftIndent>0cm</LeftIndent>
+                            <HangingIndent>0cm</HangingIndent>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox14</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <BackgroundColor>#eaeaea</BackgroundColor>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixHeader>
+                  <TablixMembers>
+                    <TablixMember>
+                      <TablixHeader>
+                        <Size>1.35416in</Size>
+                        <CellContents>
+                          <Textbox Name="Textbox15">
+                            <CanGrow>true</CanGrow>
+                            <KeepTogether>true</KeepTogether>
+                            <Paragraphs>
+                              <Paragraph>
+                                <TextRuns>
+                                  <TextRun>
+                                    <Value />
+                                    <Style>
+                                      <FontWeight>Bold</FontWeight>
+                                    </Style>
+                                  </TextRun>
+                                </TextRuns>
+                                <Style />
+                              </Paragraph>
+                            </Paragraphs>
+                            <rd:DefaultName>Textbox15</rd:DefaultName>
+                            <Style>
+                              <Border>
+                                <Color>LightGrey</Color>
+                                <Style>Solid</Style>
+                              </Border>
+                              <BackgroundColor>#eaeaea</BackgroundColor>
+                              <PaddingLeft>2pt</PaddingLeft>
+                              <PaddingRight>2pt</PaddingRight>
+                              <PaddingTop>2pt</PaddingTop>
+                              <PaddingBottom>2pt</PaddingBottom>
+                            </Style>
+                          </Textbox>
+                        </CellContents>
+                      </TablixHeader>
+                    </TablixMember>
+                  </TablixMembers>
+                  <KeepWithGroup>Before</KeepWithGroup>
+                </TablixMember>
               </TablixMembers>
             </TablixMember>
           </TablixMembers>
@@ -874,8 +1117,8 @@ order by c.name, oh.alphaid desc</CommandText>
         </SortExpressions>
         <Top>0.6042in</Top>
         <Left>0.03125in</Left>
-        <Height>0.75in</Height>
-        <Width>7.60913in</Width>
+        <Height>1in</Height>
+        <Width>8.84871in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -919,16 +1162,16 @@ order by c.name, oh.alphaid desc</CommandText>
     <Style />
   </Body>
   <ReportParameters>
-    <ReportParameter Name="OrderDeliveryStartDate">
+    <ReportParameter Name="InvoiceStartDate">
       <DataType>DateTime</DataType>
-      <Prompt>Order Delivery Start Date</Prompt>
+      <Prompt>Invoice Start Date</Prompt>
     </ReportParameter>
-    <ReportParameter Name="OrderDeliveryEndDate">
+    <ReportParameter Name="InvoiceEndEndDate">
       <DataType>DateTime</DataType>
-      <Prompt>Order Delivery End Date</Prompt>
+      <Prompt>Invoice End End Date</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>20.0151cm</Width>
+  <Width>22.5551cm</Width>
   <Page>
     <PageHeader>
       <Height>0.30914in</Height>
@@ -997,6 +1240,7 @@ order by c.name, oh.alphaid desc</CommandText>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox19</rd:DefaultName>
+          <Top>0cm</Top>
           <Left>5.96667in</Left>
           <Height>0.25in</Height>
           <Width>1.7625in</Width>

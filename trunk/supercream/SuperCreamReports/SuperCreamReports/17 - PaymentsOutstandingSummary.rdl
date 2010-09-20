@@ -21,17 +21,13 @@
           <DataField>Description</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="DeliveryDate">
-          <DataField>DeliveryDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
         <Field Name="NoOfUnits">
           <DataField>NoOfUnits</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="Price">
-          <DataField>Price</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+        <Field Name="InvoiceDate">
+          <DataField>InvoiceDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
         <Field Name="PercentageValue">
           <DataField>PercentageValue</DataField>
@@ -45,21 +41,34 @@
           <DataField>VatExemptible</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
         </Field>
-        <Field Name="TotalPrice">
-          <DataField>TotalPrice</DataField>
+        <Field Name="LineCredit">
+          <DataField>LineCredit</DataField>
           <rd:TypeName>System.Double</rd:TypeName>
         </Field>
         <Field Name="Name">
           <DataField>Name</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="LinePrice">
+          <DataField>LinePrice</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="OrderArbitraryCreditTotal">
+          <DataField>OrderArbitraryCreditTotal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select oh.ID, AlphaID, InvoiceNo, c.Name, DeliveryDate, p.Description, ol.NoOfUnits, ol.Price, v.PercentageValue, 
+        <CommandText>select oh.ID, AlphaID, InvoiceNo, c.Name, InvoiceDate, p.Description, ol.NoOfUnits, v.PercentageValue, 
 	v.VatExemptible,	
-	case when v.VatExemptible = 1 then Round(Price * NoOfUnits, 2) else Round((Price * NoOfUnits) * (1 + (v.PercentageValue / 100)), 2)   end TotalPrice
-	from orderheader oh
+	case when p.VatExempt = 1 then round(isnull(ocnl.Price, 0),2) 
+		else round(isnull(ocnl.Price, 0) * (1 + (v.PercentageValue / 100.0)), 2) end LineCredit,                     				
+	case when p.VatExempt = 1 THEN round((ol.Price * ol.NoOfUnits), 2) 
+		else round(ol.Price * ol.NoOfUnits * (1 + (v.PercentageValue / 100.0)),2) end
+			LinePrice,
+		dbo.GetArbiraryCreditNoteTotal(oh.ID) OrderArbitraryCreditTotal
+	from orderheader oh	
 inner join OrderNotesStatus os
 on oh.ID = os.OrderID
 inner join Customer c on
@@ -72,15 +81,18 @@ inner join Product p on
 	ol.ProductID = p.ID
 inner join VatCode v on
 	oh.VatCodeID = v.ID
+left outer join OrderCreditNoteLine AS ocnl 
+	ON ol.ID = ocnl.OrderLineID
 where (OrderStatus = dbo.ConstInvoice() or OrderStatus = dbo.ConstInvoicePrinted())
 and InvoicePaymentComplete = dbo.ConstPaymentNotComplete()
-AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderDeliveryEndDate</CommandText>
+and oh.InvoiceDate &gt;= @InvoiceStartDate AND oh.InvoiceDate &lt;= @InvoiceEndDate
+order by oh.InvoiceDate desc, c.name, oh.alphaid desc</CommandText>
         <QueryParameters>
-          <QueryParameter Name="@OrderDeliveryStartDate">
-            <Value>=Parameters!OrderDeliveryStartDate.Value</Value>
+          <QueryParameter Name="@InvoiceStartDate">
+            <Value>=Parameters!InvoiceStartDate.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@OrderDeliveryEndDate">
-            <Value>=Parameters!OrderDeliveryEndDate.Value</Value>
+          <QueryParameter Name="@InvoiceEndDate">
+            <Value>=Parameters!InvoiceEndDate.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
@@ -93,16 +105,16 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.84871in</Width>
+              <Width>0.90676in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.375in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.38542in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -118,12 +130,14 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Description</Value>
+                              <Value>Invoice No</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
+                          <LeftIndent>0cm</LeftIndent>
+                          <HangingIndent>0cm</HangingIndent>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
@@ -184,7 +198,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Price</Value>
+                              <Value>Orig Invoice Price</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -219,7 +233,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total Price</Value>
+                              <Value>Total Owed (After applying Credit Notes)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -446,6 +460,8 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                               <Style />
                             </TextRun>
                           </TextRuns>
+                          <LeftIndent>0cm</LeftIndent>
+                          <HangingIndent>0cm</HangingIndent>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
@@ -530,143 +546,6 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox382">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox382</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox383">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Total</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox383</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox384">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Sum(Fields!TotalPrice.Value)</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                                <Format>'£'0.00;('£'0.00)</Format>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox384</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                        <rd:FormatSymbolCulture>en-GB</rd:FormatSymbolCulture>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-            <TablixRow>
-              <Height>0.25in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Description">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!Description.Value</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Description</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="NoOfUnits">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -674,7 +553,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!NoOfUnits.Value</Value>
+                              <Value>=Sum(Fields!NoOfUnits.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -699,15 +578,16 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Price">
+                    <Textbox Name="LinePrice">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Price.Value</Value>
+                              <Value>=Sum(Fields!LinePrice.Value)</Value>
                               <Style>
+                                <FontWeight>Bold</FontWeight>
                                 <Format>'£'0.00;('£'0.00)</Format>
                               </Style>
                             </TextRun>
@@ -719,7 +599,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Price</rd:DefaultName>
+                      <rd:DefaultName>LinePrice</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -736,15 +616,16 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TotalPrice">
+                    <Textbox Name="Textbox384">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TotalPrice.Value</Value>
+                              <Value>=sum(Fields!LinePrice.Value - Fields!LineCredit.Value) - Fields!OrderArbitraryCreditTotal.Value</Value>
                               <Style>
+                                <FontWeight>Bold</FontWeight>
                                 <Format>'£'0.00;('£'0.00)</Format>
                               </Style>
                             </TextRun>
@@ -754,7 +635,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>TotalPrice</rd:DefaultName>
+                      <rd:DefaultName>Textbox384</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -794,7 +675,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>Delivery Date</Value>
+                            <Value>Invoice Date</Value>
                             <Style>
                               <FontWeight>Bold</FontWeight>
                             </Style>
@@ -823,7 +704,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1.17709in</Size>
+                    <Size>3.09325in</Size>
                     <CellContents>
                       <Textbox Name="Textbox358">
                         <CanGrow>true</CanGrow>
@@ -861,7 +742,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>0.82291in</Size>
+                        <Size>0.94791in</Size>
                         <CellContents>
                           <Textbox Name="Textbox376">
                             <CanGrow>true</CanGrow>
@@ -908,26 +789,31 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
             <TablixMember>
               <Group Name="Group2">
                 <GroupExpressions>
-                  <GroupExpression>=Fields!DeliveryDate.Value</GroupExpression>
+                  <GroupExpression>=Fields!InvoiceDate.Value</GroupExpression>
                 </GroupExpressions>
               </Group>
               <SortExpressions>
                 <SortExpression>
-                  <Value>=Fields!DeliveryDate.Value</Value>
+                  <Value>=Fields!InvoiceDate.Value</Value>
+                  <Direction>Descending</Direction>
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
                 <Size>1in</Size>
                 <CellContents>
-                  <Textbox Name="Group2">
+                  <Textbox Name="InvoiceDate">
                     <CanGrow>true</CanGrow>
+                    <UserSort>
+                      <SortExpression>=Fields!Name.Value</SortExpression>
+                    </UserSort>
                     <KeepTogether>true</KeepTogether>
                     <Paragraphs>
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>=Fields!DeliveryDate.Value</Value>
+                            <Value>=Fields!InvoiceDate.Value</Value>
                             <Style>
+                              <FontWeight>Bold</FontWeight>
                               <Format>d</Format>
                             </Style>
                           </TextRun>
@@ -935,7 +821,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                         <Style />
                       </Paragraph>
                     </Paragraphs>
-                    <rd:DefaultName>Group2</rd:DefaultName>
+                    <rd:DefaultName>InvoiceDate</rd:DefaultName>
                     <Style>
                       <Border>
                         <Color>LightGrey</Color>
@@ -953,7 +839,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1.17709in</Size>
+                    <Size>3.09325in</Size>
                     <CellContents>
                       <Textbox Name="Textbox370">
                         <CanGrow>true</CanGrow>
@@ -986,7 +872,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>0.82291in</Size>
+                        <Size>0.94791in</Size>
                         <CellContents>
                           <Textbox Name="Textbox377">
                             <CanGrow>true</CanGrow>
@@ -1032,7 +918,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>1.17709in</Size>
+                    <Size>3.09325in</Size>
                     <CellContents>
                       <Textbox Name="Group1">
                         <CanGrow>true</CanGrow>
@@ -1066,7 +952,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>0.82291in</Size>
+                        <Size>0.94791in</Size>
                         <CellContents>
                           <Textbox Name="Textbox378">
                             <CanGrow>true</CanGrow>
@@ -1113,7 +999,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                         </SortExpression>
                       </SortExpressions>
                       <TablixHeader>
-                        <Size>0.82291in</Size>
+                        <Size>0.94791in</Size>
                         <CellContents>
                           <Textbox Name="Group3">
                             <CanGrow>true</CanGrow>
@@ -1123,7 +1009,9 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                                 <TextRuns>
                                   <TextRun>
                                     <Value>=Fields!AlphaID.Value</Value>
-                                    <Style />
+                                    <Style>
+                                      <FontWeight>Bold</FontWeight>
+                                    </Style>
                                   </TextRun>
                                 </TextRuns>
                                 <LeftIndent>0cm</LeftIndent>
@@ -1147,12 +1035,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
                         </CellContents>
                       </TablixHeader>
                       <TablixMembers>
-                        <TablixMember>
-                          <KeepWithGroup>After</KeepWithGroup>
-                        </TablixMember>
-                        <TablixMember>
-                          <Group Name="Details" />
-                        </TablixMember>
+                        <TablixMember />
                       </TablixMembers>
                     </TablixMember>
                   </TablixMembers>
@@ -1161,24 +1044,21 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <KeepTogether>true</KeepTogether>
         <DataSetName>GetOutsandingPayments</DataSetName>
         <SortExpressions>
           <SortExpression>
-            <Value>=Fields!DeliveryDate.Value</Value>
+            <Value>=Fields!InvoiceDate.Value</Value>
             <Direction>Descending</Direction>
-          </SortExpression>
-          <SortExpression>
-            <Value>=Fields!Name.Value</Value>
           </SortExpression>
           <SortExpression>
             <Value>=Fields!AlphaID.Value</Value>
-            <Direction>Descending</Direction>
           </SortExpression>
         </SortExpressions>
-        <Top>0.6042in</Top>
+        <Top>0.7292in</Top>
         <Left>0.03125in</Left>
-        <Height>1.25in</Height>
-        <Width>7.84871in</Width>
+        <Height>1in</Height>
+        <Width>9.70834in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1192,7 +1072,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>The folllowing Report details all Outstanding Invoices, i.e; invoices not yet flagged for settlement on payment.</Value>
+                <Value>The folllowing Report details all Outstanding Invoices, i.e; invoices not yet flagged for settlement on payment. It takes account of all outstanding Credit Notes and determines a total figure for settlement.</Value>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                 </Style>
@@ -1204,7 +1084,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
         <rd:DefaultName>Textbox6</rd:DefaultName>
         <Top>0.06944in</Top>
         <Left>0.17375in</Left>
-        <Height>0.40625in</Height>
+        <Height>0.58333in</Height>
         <Width>5.80542in</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -1218,20 +1098,20 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>27.85292cm</Height>
+    <Height>17.43979cm</Height>
     <Style />
   </Body>
   <ReportParameters>
-    <ReportParameter Name="OrderDeliveryStartDate">
+    <ReportParameter Name="InvoiceStartDate">
       <DataType>DateTime</DataType>
-      <Prompt>Order Delivery Start Date</Prompt>
+      <Prompt>Invoice Start Date</Prompt>
     </ReportParameter>
-    <ReportParameter Name="OrderDeliveryEndDate">
+    <ReportParameter Name="InvoiceEndDate">
       <DataType>DateTime</DataType>
-      <Prompt>Order Delivery End Date</Prompt>
+      <Prompt>Invoice End Date</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>20.0151cm</Width>
+  <Width>24.73856cm</Width>
   <Page>
     <PageHeader>
       <Height>0.30914in</Height>
@@ -1245,7 +1125,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Outstanding Payments Report</Value>
+                  <Value>Outstanding Payments Report Summary</Value>
                   <Style>
                     <FontSize>16pt</FontSize>
                   </Style>
@@ -1258,7 +1138,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
           <Height>0.78521cm</Height>
-          <Width>10.70209cm</Width>
+          <Width>11.60167cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1277,7 +1157,7 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.27083in</Height>
+      <Height>0.25in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1320,10 +1200,12 @@ AND oh.DeliveryDate &gt;= @OrderDeliveryStartDate AND oh.OrderDate &lt;= @OrderD
         </Border>
       </Style>
     </PageFooter>
-    <LeftMargin>0.2in</LeftMargin>
-    <RightMargin>0.2in</RightMargin>
-    <TopMargin>0.2in</TopMargin>
-    <BottomMargin>0.2in</BottomMargin>
+    <PageHeight>8.5in</PageHeight>
+    <PageWidth>11in</PageWidth>
+    <LeftMargin>0.5in</LeftMargin>
+    <RightMargin>0.5in</RightMargin>
+    <TopMargin>0.5in</TopMargin>
+    <BottomMargin>0.5in</BottomMargin>
     <ColumnSpacing>0.05118in</ColumnSpacing>
     <Style />
   </Page>
