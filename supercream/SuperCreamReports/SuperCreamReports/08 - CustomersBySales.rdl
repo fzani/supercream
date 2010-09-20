@@ -22,7 +22,7 @@
         <DataSourceName>SCDataSource</DataSourceName>
         <CommandText>SELECT        c.Name, SUM(CASE WHEN p.VatExempt = 1 THEN round((ol.Price * ol.NoOfUnits) - isnull(ocnl.Price, 0), 2) 
                          ELSE round((ol.Price * ol.NoOfUnits * (1 + (v.PercentageValue / 100.0))) - isnull(ocnl.Price, 0) * (1 + (v.PercentageValue / 100.0)), 2) END) 
-                         - SUM(ISNULL(cr.CreditAmount, 0)) AS Price
+                         - ISNULL(ROUND(SUM(CASE WHEN cr.VatExempt = 0 THEN cr.CreditAmount ELSE cr.CreditAmount * (1 + (v.PercentageValue / 100.0)) END), 2), 0) AS Price
 FROM            OrderHeader AS oh INNER JOIN
                          Customer AS c ON oh.CustomerID = c.ID INNER JOIN
                          OrderLine AS ol ON oh.ID = ol.OrderID INNER JOIN

@@ -645,7 +645,7 @@ ORDER BY van.Description, p.ProductCode</CommandText>
       </ValidValues>
     </ReportParameter>
   </ReportParameters>
-  <Width>20.31697cm</Width>
+  <Width>20.31698cm</Width>
   <Page>
     <PageHeader>
       <Height>2.01083cm</Height>
@@ -695,7 +695,7 @@ ORDER BY van.Description, p.ProductCode</CommandText>
                   </Style>
                 </TextRun>
                 <TextRun>
-                  <Value>=First(FormatDateTime(Fields!DeliveryDate.Value,DateFormat.ShortDate), "DataSet1")</Value>
+                  <Value>=FormatDateTime(Today(), DateFormat.ShortDate)</Value>
                   <Style>
                     <FontStyle>Italic</FontStyle>
                   </Style>

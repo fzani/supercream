@@ -33,19 +33,24 @@
 	select top 1000 
 		p.ProductCode,
 		p.Description
-		,round(sum(NoOfUnits * Price), 2)
-		,case when p.VatExempt = 1 then round(sum(NoOfUnits * Price), 2) else round(sum(NoOfUnits * Price * (1 + (v.PercentageValue / 100))), 2) end	as ExVatPrice
+		,sum(case when p.VatExempt = 1 then round((ol.Price * ol.NoOfUnits) - isnull(ocnl.Price, 0),2)
+		else round((ol.Price * ol.NoOfUnits) - isnull(ocnl.Price, 0),2) end) 
+						
+		,sum(case when p.VatExempt = 1 then round((ol.Price * ol.NoOfUnits) - isnull(ocnl.Price, 0),2)
+		else round((ol.Price * ol.NoOfUnits * (1 + (v.PercentageValue/ 100.0))) - isnull(ocnl.Price, 0) * (1 + (v.PercentageValue/ 100.0)),2) end) 		
   FROM [SuperCreamDB].[dbo].[OrderHeader] oh
   inner join OrderLine ol on
 	oh.ID = ol.OrderID
   inner join Product p on p.ID = ol.ProductID
-  inner join VatCode v on oh.VatCodeID = v.ID
+  inner join VatCode v on oh.VatCodeID = v.ID	
+  left join OrderCreditNoteLine ocnl on
+		ol.ID = ocnl.OrderLineID	  
   where oh.OrderStatus IN (2,3,6,7)  
 	and  oh.DeliveryDate &gt;= @DateStarted AND oh.DeliveryDate &lt;= @DateEnded	
   group BY p.ProductCode, p.Description, p.VatExempt	   
    )
    SELECT * FROM cte  
-	where ((ISNULL(@PriceValue, '-1')) = '-1' OR PriceInclVat &gt;= @PriceValue)
+	  where ((ISNULL(@PriceValue, '-1')) = '-1' OR PriceInclVat &gt;= @PriceValue)
    ORDER BY ExVatPrice DESC;</CommandText>
         <QueryParameters>
           <QueryParameter Name="@PriceValue">
