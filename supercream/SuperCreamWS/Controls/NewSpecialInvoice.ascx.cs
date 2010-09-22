@@ -213,7 +213,7 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
             SpecialInvoiceHeader specialInvoiceHeader = new SpecialInvoiceHeader
             {
                 ID = -1,
-                CustomerID = customer.ID,     
+                CustomerID = customer.ID,
                 AccountID = Convert.ToInt32(this.AccountDropDownList.SelectedValue),
                 OutletStoreID = Convert.ToInt32(this.OutletStoreDropDownList.SelectedValue),
                 AlphaPrefixOrPostFix = 0,
@@ -225,7 +225,7 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
                 DateReprinted = SP.Utils.Defaults.MinDateTime,
                 DateCreated = DateTime.Now,
                 DateModified = DateTime.Now,
-                VatCodeID = standardVatRate.VatCodeID                
+                VatCodeID = standardVatRate.VatCodeID
             };
 
             specialInvoiceHeader = ui.Save(specialInvoiceHeader);
@@ -289,6 +289,23 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
         if ((price != 0) && (discount != 0))
         {
             price -= (price / 100) * discount;
+            if (VatExemptCheckBox.Checked)
+            {
+                PriceIncludingVatLabel.Visible = false;
+            }
+            else
+            {
+                PriceIncludingVatLabel.Visible = true;
+                var specialInvoiceHeader = SpecialInvoiceHeaderUI.GetById(SpecialInvoiceID);
+
+                var vatcode = new VatCodeUI().GetByID(specialInvoiceHeader.VatCodeID);
+                PriceIncludingVatLabel.Text =
+                    String.Format("Price including Vat @({0:c})",
+                                  Math.Round(
+                                      ((price *
+                                        (decimal)((decimal)1.0 + ((decimal)vatcode.PercentageValue / (decimal)100.0)))),
+                                      2));
+            }
         }
 
         if (price != 0)
@@ -428,6 +445,16 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
             CheckBox vatExemptCheckBox = messagePanel.FindControl("VatExemptCheckBox") as CheckBox;
             vatExemptCheckBox.Checked = specialInvoiceLine.VatExempt;
 
+            Label priceChargeLabel = messagePanel.FindControl("PriceChargeLabel") as Label;
+            if (specialInvoiceLine.VatExempt)
+            {
+                priceChargeLabel.Text = PriceExcludingVat(specialInvoiceLine.Price, specialInvoiceLine.NoOfUnits, specialInvoiceLine.Discount);
+            }
+            else
+            {
+                priceChargeLabel.Text = PriceIncludingVat(specialInvoiceLine.Price, specialInvoiceLine.NoOfUnits, specialInvoiceLine.Discount);
+            }
+
             ModalPopupExtender extender = row.FindControl("InvoiceDetailsPopupControlExtender") as ModalPopupExtender;
             extender.Show();
         }
@@ -494,7 +521,33 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
         AddSpecialInvoiceLineDetailsPanel.Visible = true;
         SpecialInvoiceLinesGridViewPanel.Visible = true;
         CancelSpecialInvoiceLineButton.Visible = false;
+
+        PriceIncludingVatLabel.Text = String.Empty;
+        PriceChargeTextBox.Text = String.Empty;
+
         Util.ClearControls(AddSpecialInvoiceLineDetailsPanel);
+    }
+
+    #endregion
+
+    #region Private Helpers
+
+    private string PriceExcludingVat(decimal exVatUnitPrice, decimal noOfUnits, decimal discount)
+    {
+        decimal price = exVatUnitPrice * noOfUnits;
+        price -= (price / 100) * discount;
+        var specialInvoiceHeader = SpecialInvoiceHeaderUI.GetById(SpecialInvoiceID);
+        var vatCode = new VatCodeUI().GetByID(specialInvoiceHeader.VatCodeID);
+        return String.Format("{0:c}", price);
+    }
+
+    private string PriceIncludingVat(decimal exVatUnitPrice, decimal noOfUnits, decimal discount)
+    {
+        decimal price = exVatUnitPrice * noOfUnits;
+        price -= (price / 100) * discount;
+        var specialInvoiceHeader = SpecialInvoiceHeaderUI.GetById(SpecialInvoiceID);
+        var vatCode = new VatCodeUI().GetByID(specialInvoiceHeader.VatCodeID);
+        return String.Format("{0:c}", Math.Round(price * ((decimal)1.0 + ((decimal)vatCode.PercentageValue / (decimal)100.0)), 2));
     }
 
     #endregion
