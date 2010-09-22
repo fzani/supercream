@@ -107,7 +107,7 @@ public partial class Controls_NewOrderCreditNote : System.Web.UI.UserControl
 
     #endregion
 
-    #region Page Event Handlers
+    #region Page States
 
     private void InitialiseCreditNoteState(object sender, EventArgs args)
     {
