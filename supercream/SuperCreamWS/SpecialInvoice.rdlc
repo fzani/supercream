@@ -14,8 +14,8 @@
   <InteractiveWidth>8.5in</InteractiveWidth>
   <rd:GridSpacing>0.1cm</rd:GridSpacing>
   <rd:SnapToGrid>true</rd:SnapToGrid>
-  <RightMargin>0.2cm</RightMargin>
-  <LeftMargin>0.2cm</LeftMargin>
+  <RightMargin>0.6cm</RightMargin>
+  <LeftMargin>0.6cm</LeftMargin>
   <BottomMargin>0.2cm</BottomMargin>
   <rd:ReportID>6380a6ea-50ba-4389-80bd-cedd59b16a31</rd:ReportID>
   <DataSets>
@@ -338,7 +338,7 @@
     </DataSet>
   </DataSets>
   <Code />
-  <Width>20.4cm</Width>
+  <Width>20.2cm</Width>
   <Body>
     <ColumnSpacing>0cm</ColumnSpacing>
     <ReportItems>
@@ -356,7 +356,7 @@
             <CanGrow>true</CanGrow>
             <Left>13.7cm</Left>
             <Height>0.4cm</Height>
-            <Value>=Sum(Fields!NetTotal.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceTotals")</Value>
+            <Value>=Sum(Fields!Total.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceTotals")</Value>
           </Textbox>
           <Textbox Name="textbox30">
             <Top>4.9cm</Top>
@@ -368,7 +368,7 @@
             <CanGrow>true</CanGrow>
             <Left>11.7cm</Left>
             <Height>0.4cm</Height>
-            <Value>Net Total</Value>
+            <Value>Total</Value>
           </Textbox>
           <Textbox Name="textbox29">
             <Top>4.3cm</Top>
@@ -393,12 +393,12 @@
             <CanGrow>true</CanGrow>
             <Left>13.7cm</Left>
             <Height>0.4cm</Height>
-            <Value>=Sum(Fields!Total.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceTotals")</Value>
+            <Value>=Sum(Fields!NetTotal.Value, "SuperCreamDBDataSet_rptGetSpecialInvoiceTotals")</Value>
           </Textbox>
           <Textbox Name="textbox26">
             <rd:DefaultName>textbox26</rd:DefaultName>
             <Top>3.7cm</Top>
-            <Width>1.1cm</Width>
+            <Width>1.7cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
             </Style>
@@ -406,7 +406,7 @@
             <CanGrow>true</CanGrow>
             <Left>11.7cm</Left>
             <Height>0.4cm</Height>
-            <Value>Total</Value>
+            <Value>Net Total</Value>
           </Textbox>
           <Rectangle Name="rectangle8">
             <Left>11cm</Left>
@@ -639,8 +639,7 @@
         <ReportItems>
           <Table Name="table1">
             <DataSetName>SuperCreamDBDataSet_rptGetSpecialInvoiceDetails</DataSetName>
-            <Top>0.2cm</Top>
-            <Width>19.8cm</Width>
+            <Top>0.1cm</Top>
             <Details>
               <TableRows>
                 <TableRow>
@@ -657,7 +656,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                           <CanGrow>true</CanGrow>
-                          <Value>=Fields!NoOfUnits.Value</Value>
+                          <Value>=Fields!QtyPerUnit.Value</Value>
                         </Textbox>
                       </ReportItems>
                     </TableCell>
@@ -689,7 +688,24 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                           <CanGrow>true</CanGrow>
-                          <Value>=Fields!QtyPerUnit.Value</Value>
+                          <Value>=Fields!NoOfUnits.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox37">
+                          <rd:DefaultName>textbox37</rd:DefaultName>
+                          <Style>
+                            <Format>p</Format>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!Discount.Value / 100.0</Value>
                         </Textbox>
                       </ReportItems>
                     </TableCell>
@@ -738,7 +754,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                           <CanGrow>true</CanGrow>
-                          <Value>=Round((Fields!NoOfUnits.Value * Fields!Price.Value), 2)</Value>
+                          <Value>=Round((Fields!NoOfUnits.Value * Fields!Price.Value),2) - Round(((Fields!NoOfUnits.Value * Fields!Price.Value) * (Fields!Discount.Value / 100.0)), 2)</Value>
                         </Textbox>
                       </ReportItems>
                     </TableCell>
@@ -767,7 +783,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                           <CanGrow>true</CanGrow>
-                          <Value>No of Units</Value>
+                          <Value>Qty Per Unit</Value>
                         </Textbox>
                       </ReportItems>
                     </TableCell>
@@ -807,7 +823,27 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                           <CanGrow>true</CanGrow>
-                          <Value>Qty per Unit</Value>
+                          <Value>No of Units</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox36">
+                          <rd:DefaultName>textbox36</rd:DefaultName>
+                          <Style>
+                            <BorderStyle>
+                              <Bottom>Solid</Bottom>
+                            </BorderStyle>
+                            <FontWeight>700</FontWeight>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>Discount</Value>
                         </Textbox>
                       </ReportItems>
                     </TableCell>
@@ -882,33 +918,36 @@
                 <Width>2.66002cm</Width>
               </TableColumn>
               <TableColumn>
-                <Width>8.32937cm</Width>
+                <Width>7.4cm</Width>
               </TableColumn>
               <TableColumn>
-                <Width>2.28066cm</Width>
+                <Width>2.1cm</Width>
+              </TableColumn>
+              <TableColumn>
+                <Width>2cm</Width>
               </TableColumn>
               <TableColumn>
                 <Width>1.68571cm</Width>
               </TableColumn>
               <TableColumn>
-                <Width>2.08234cm</Width>
+                <Width>1.8cm</Width>
               </TableColumn>
               <TableColumn>
-                <Width>2.7619cm</Width>
+                <Width>2.3cm</Width>
               </TableColumn>
             </TableColumns>
             <Height>1.06666cm</Height>
             <Left>0.1cm</Left>
           </Table>
         </ReportItems>
-        <Top>7.9cm</Top>
-        <Width>20.06789cm</Width>
+        <Top>8cm</Top>
+        <Width>20.04573cm</Width>
         <Style>
           <BorderStyle>
             <Default>Solid</Default>
           </BorderStyle>
         </Style>
-        <Height>12.5cm</Height>
+        <Height>12.4cm</Height>
       </Rectangle>
       <Rectangle Name="rectangle5">
         <Left>9.8cm</Left>
@@ -1002,7 +1041,6 @@
           </Textbox>
         </ReportItems>
         <Top>4.3cm</Top>
-        <Width>10.4cm</Width>
         <Style>
           <BorderStyle>
             <Default>Solid</Default>
@@ -1313,7 +1351,6 @@
           </Textbox>
         </ReportItems>
         <Top>0.1cm</Top>
-        <Width>10.4cm</Width>
         <Style>
           <BorderStyle>
             <Default>Solid</Default>
