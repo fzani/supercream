@@ -121,10 +121,10 @@
                 <asp:Label ID="SpecialInvoiceLabel" runat="server"></asp:Label></h2>
             <table style="width: 100%">
                 <tr>
-                    <td class="emphasise" style="width: 15%">
+                    <td class="emphasise" style="width: 25%">
                         <b>Description</b>
                     </td>
-                    <td style="width: 85%">
+                    <td style="width: 75%">
                         <asp:TextBox ID="LineDescriptionTextBox" MaxLength="100" Width="80%" runat="server"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="AddSpecialInvoiceLinesGroup"
                             ControlToValidate="LineDescriptionTextBox" ErrorMessage="Description is required"
@@ -160,7 +160,7 @@
                 </tr>
                 <tr>
                     <td class="emphasise">
-                        <i>Price (per units)</i>
+                        <i>Price(per units)(£)</i>
                     </td>
                     <td>
                         <asp:TextBox ID="PricePerUnitsTextBox" runat="server"></asp:TextBox>
@@ -183,7 +183,7 @@
                 </tr>
                 <tr>
                     <td class="emphasise">
-                        <i>Price Charge</i>
+                        <i>Ex. Vat Price Charge</i>
                     </td>
                     <td>
                         <asp:Label ID="PriceChargeTextBox" runat="server"></asp:Label>
@@ -195,6 +195,9 @@
                     </td>
                     <td>
                         <asp:CheckBox ID="VatExemptCheckBox" runat="server"></asp:CheckBox>
+                        &nbsp;&nbsp;
+                        <asp:Label ID="PriceIncludingVatLabel" Visible="false" Font-Italic="true" Font-Size="Medium"
+                            runat="server"></asp:Label>
                     </td>
                 </tr>
                 <tr>
@@ -235,20 +238,21 @@
                                 <asp:Label ID="ID" runat="server" Text='<%# Bind("ID") %>' Visible="false"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Description" HeaderText="Description" ItemStyle-Width="20%"
-                            SortExpression="Description" />
-                        <asp:BoundField DataField="NoOfUnits" HeaderText="NoOfUnits" ItemStyle-Width="14%"
-                            SortExpression="NoOfUnits" />
-                        <asp:BoundField DataField="Price" HeaderText="Price (per unit)" ItemStyle-Width="14%"
-                            SortExpression="Price" />
-                        <asp:TemplateField HeaderText="Price" ItemStyle-Width="11%">
+                        <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description"
+                            ItemStyle-Width="25%" />
+                        <asp:BoundField DataField="NoOfUnits" HeaderText="NoOfUnits" SortExpression="NoOfUnits"
+                            ItemStyle-Width="14%" />
+                        <asp:BoundField DataField="Price" HeaderText="Price(per unit)(£)" SortExpression="Price"
+                            ItemStyle-Width="20%" />
+                        <asp:TemplateField HeaderText="Ex. Vat Price">
                             <ItemTemplate>
                                 <asp:Label ID="priceLabel" runat="server"></asp:Label>
                             </ItemTemplate>
+                            <ItemStyle Width="16%" />
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Discount" ItemStyle-Width="11%" HeaderText="Discount (%)"
-                            SortExpression="Discount" />
-                        <asp:TemplateField ItemStyle-Width="11%">
+                        <asp:BoundField DataField="Discount" HeaderText="Discount (%)" SortExpression="Discount"
+                            ItemStyle-Width="16%" />
+                        <asp:TemplateField>
                             <ItemTemplate>
                                 <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
                                 <asp:LinkButton ID="UpdateGridButton" Text="Select" CommandName="Select" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
@@ -327,10 +331,10 @@
                                             </tr>
                                             <tr>
                                                 <td class="emphasise">
-                                                    <i>Price Charge</i>
+                                                    <i>Ex. Vat Price Charge</i>
                                                 </td>
                                                 <td>
-                                                    <asp:Label ID="PriceChargeTextBox" runat="server"></asp:Label>
+                                                    <asp:Label ID="PriceChargeLabel" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -365,6 +369,7 @@
                                     </p>
                                 </asp:Panel>
                             </ItemTemplate>
+                            <ItemStyle Width="9%" />
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
