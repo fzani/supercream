@@ -82,9 +82,11 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
         OrderCreditNoteUI creditNoteUI = new OrderCreditNoteUI();
         invoiceCreditNoteDetails = creditNoteUI.GetInvoiceCreditNoteDetails(OrderID.Value);
 
+        var orderHeader = new OrderHeaderUI().GetById(OrderID.Value);
+
         decimal totalInvoiceAmount = invoiceCreditNoteDetails.TotalInvoiceAmount;
         decimal invoiceAmountCredited = invoiceCreditNoteDetails.TotalAmountCredited;
-        this.DueDateTextBox.Text = DateTime.Now.AddDays(7).ToShortDateString();
+        this.DueDateTextBox.Text = orderHeader.DeliveryDate.ToShortDateString();
 
         this.TotalInvoiceAmountLabel.Text = totalInvoiceAmount.ToString("c");
         this.InvoiceAmountCreditedLabel.Text = invoiceAmountCredited.ToString("c");
