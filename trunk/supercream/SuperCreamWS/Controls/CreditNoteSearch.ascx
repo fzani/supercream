@@ -8,15 +8,15 @@
                 <h3>
                     Search Credit Notes</h3>
             </legend>
-            <table class="search">
+            <table class="search" style="width: 100%;">
                 <tr>
-                    <td class="right">
-                        <table class="left">
+                    <td class="right" style="width: 100%;">
+                        <table class="left" style="width: 100%;">
                             <tr>
-                                <td>
+                                <td style="width: 20%;">
                                     <asp:Label ID="InvoiceNoLabel" Text="Invoice No" runat="server"></asp:Label>
                                 </td>
-                                <td>
+                                <td style="width: 80%;">
                                     <asp:TextBox ID="InvoiceNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
@@ -38,7 +38,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Date From
+                                    Date Created From
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateFromTextBox" Style="vertical-align: middle;" runat="server"
@@ -60,7 +60,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Date To
+                                    Date Created To
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateToTextBox" Style="vertical-align: middle;" runat="server" ValidationGroup="NewOutletGroup"
