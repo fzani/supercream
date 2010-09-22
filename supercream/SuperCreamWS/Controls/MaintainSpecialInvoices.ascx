@@ -379,6 +379,9 @@
                         </td>
                         <td>
                             <asp:CheckBox ID="VatExemptCheckBox" runat="server"></asp:CheckBox>
+                            &nbsp;&nbsp;
+                            <asp:Label ID="PriceIncludingVatLabel" Visible="false" Font-Italic="true" Font-Size="Medium"
+                                runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>
@@ -416,20 +419,20 @@
                                         <asp:Label ID="ID" runat="server" Text='<%# Bind("ID") %>' Visible="false"></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="Description" HeaderText="Description" ItemStyle-Width="20%"
+                                <asp:BoundField DataField="Description" HeaderText="Description" ItemStyle-Width="25%"
                                     SortExpression="Description" />
                                 <asp:BoundField DataField="NoOfUnits" HeaderText="NoOfUnits" ItemStyle-Width="14%"
                                     SortExpression="NoOfUnits" />
-                                <asp:BoundField DataField="Price" HeaderText="Price (per unit)" ItemStyle-Width="14%"
+                                <asp:BoundField DataField="Price" HeaderText="Price(per unit)(£)" ItemStyle-Width="20%"
                                     SortExpression="Price" />
-                                <asp:TemplateField HeaderText="Price" ItemStyle-Width="11%">
+                                <asp:TemplateField HeaderText="Ex. Vat Price" ItemStyle-Width="16%">
                                     <ItemTemplate>
                                         <asp:Label ID="priceLabel" runat="server"></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="Discount" ItemStyle-Width="13%" HeaderText="Discount (%)"
+                                <asp:BoundField DataField="Discount" ItemStyle-Width="16%" HeaderText="Discount (%)"
                                     SortExpression="Discount" />
-                                <asp:TemplateField ItemStyle-Width="8%">
+                                <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
                                         <asp:LinkButton ID="UpdateGridButton" Text="Select" CommandName="Select" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
@@ -511,7 +514,7 @@
                                                             <i>Price Charge</i>
                                                         </td>
                                                         <td>
-                                                            <asp:Label ID="PriceChargeTextBox" runat="server"></asp:Label>
+                                                            <asp:Label ID="PriceChargeLabel" runat="server"></asp:Label>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -547,6 +550,7 @@
                                             </p>
                                         </asp:Panel>
                                     </ItemTemplate>
+                                    <ItemStyle Width="9%" />
                                 </asp:TemplateField>
                             </Columns>
                         </asp:GridView>

@@ -306,6 +306,23 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
         if ((price != 0) && (discount != 0))
         {
             price -= (price / 100) * discount;
+            if (VatExemptCheckBox.Checked)
+            {
+                PriceIncludingVatLabel.Visible = false;
+            }
+            else
+            {
+                PriceIncludingVatLabel.Visible = true;
+                var specialInvoiceHeader = SpecialInvoiceHeaderUI.GetById(SpecialInvoiceID);
+
+                var vatcode = new VatCodeUI().GetByID(specialInvoiceHeader.VatCodeID);
+                PriceIncludingVatLabel.Text =
+                    String.Format("Price including Vat @({0:c})",
+                                  Math.Round(
+                                      ((price *
+                                        (decimal)((decimal)1.0 + ((decimal)vatcode.PercentageValue / (decimal)100.0)))),
+                                      2));
+            }
         }
 
         if (price != 0)
@@ -437,7 +454,10 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
             CheckBox vatExemptCheckBox = messagePanel.FindControl("VatExemptCheckBox") as CheckBox;
             vatExemptCheckBox.Checked = specialInvoiceLine.VatExempt;
 
-            ModalPopupExtender extender = row.FindControl("InvoiceDetailsPopupControlExtender") as ModalPopupExtender;
+            var priceChargeLabel = messagePanel.FindControl("PriceChargeLabel") as Label;
+            priceChargeLabel.Text = specialInvoiceLine.VatExempt ? PriceExcludingVat(specialInvoiceLine.Price, specialInvoiceLine.NoOfUnits, specialInvoiceLine.Discount) : PriceIncludingVat(specialInvoiceLine.Price, specialInvoiceLine.NoOfUnits, specialInvoiceLine.Discount);
+
+            var extender = row.FindControl("InvoiceDetailsPopupControlExtender") as ModalPopupExtender;
             extender.Show();
         }
     }
@@ -561,7 +581,7 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
             OrderDateTextBox.Text = specialInvoiceHeader.OrderDate.ToShortDateString();
             DeliveryDateTextBox.Text = specialInvoiceHeader.DeliveryDate.ToShortDateString();
             OrderHeaderSpecialInstructionsTextBox.Text = specialInvoiceHeader.SpecialInstructions;
-
+            
             this.ChangeState += new EventHandler<EventArgs>(this.OrderSelectedState);
             this.ChangeState(this, e);
 
@@ -654,6 +674,28 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
         header.ReasonForVoiding = reasonForVoiding;
 
         SpecialInvoiceHeaderUI.Update(header);
+    }
+
+    #endregion
+
+    #region Private Helpers
+
+    private string PriceExcludingVat(decimal exVatUnitPrice, decimal noOfUnits, decimal discount)
+    {
+        decimal price = exVatUnitPrice * noOfUnits;
+        price -= (price / 100) * discount;
+        var specialInvoiceHeader = SpecialInvoiceHeaderUI.GetById(SpecialInvoiceID);
+        var vatCode = new VatCodeUI().GetByID(specialInvoiceHeader.VatCodeID);
+        return String.Format("{0:c}", price);
+    }
+
+    private string PriceIncludingVat(decimal exVatUnitPrice, decimal noOfUnits, decimal discount)
+    {
+        decimal price = exVatUnitPrice * noOfUnits;
+        price -= (price / 100) * discount;
+        var specialInvoiceHeader = SpecialInvoiceHeaderUI.GetById(SpecialInvoiceID);
+        var vatCode = new VatCodeUI().GetByID(specialInvoiceHeader.VatCodeID);
+        return String.Format("{0:c}", Math.Round(price * ((decimal)1.0 + ((decimal)vatCode.PercentageValue / (decimal)100.0)), 2));
     }
 
     #endregion

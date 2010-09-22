@@ -241,9 +241,9 @@
                         <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description"
                             ItemStyle-Width="25%" />
                         <asp:BoundField DataField="NoOfUnits" HeaderText="NoOfUnits" SortExpression="NoOfUnits"
-                            ItemStyle-Width="14%" />
+                            ItemStyle-Width="10%" />
                         <asp:BoundField DataField="Price" HeaderText="Price(per unit)(£)" SortExpression="Price"
-                            ItemStyle-Width="20%" />
+                            ItemStyle-Width="16%" />
                         <asp:TemplateField HeaderText="Ex. Vat Price">
                             <ItemTemplate>
                                 <asp:Label ID="priceLabel" runat="server"></asp:Label>
