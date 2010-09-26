@@ -125,7 +125,7 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
     protected void SaveButton_Click(object sender, EventArgs e)
     {
         try
-        {           
+        {
             SpecialInvoiceHeader specialInvoiceHeader = SpecialInvoiceHeaderUI.GetById(this.SpecialInvoiceID.Value);
 
             this.specialInvoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteBalance(this.SpecialInvoiceID.Value);
@@ -159,7 +159,7 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
             // Persist credit note details           
             if (this.IsNewCreditNote.Value)
             {
-                SpecialInvoiceCreditNoteUI.SaveCreditNote(new SpecialInvoiceCreditNote
+                var specialInvoiceCreditNote = SpecialInvoiceCreditNoteUI.SaveCreditNote(new SpecialInvoiceCreditNote
                 {
                     ID = -1,
                     SpecialInvoiceID = this.SpecialInvoiceID.Value,
@@ -169,11 +169,14 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
                     VatExempt = this.VatExemptCheckBox.Checked,
                     DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
                 });
+
+                AuditEventsUI.LogEvent("Creating special invoice credit note", specialInvoiceCreditNote.Reference, Page.ToString(),
+                    AuditEventsUI.AuditEventType.Creating);
             }
             else
             {
                 SpecialInvoiceCreditNote creditNote = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNote(CreditNoteID.Value);
-                SpecialInvoiceCreditNoteUI.UpdateCreditNotes(new SpecialInvoiceCreditNote
+                var specialInvoiceCreditNote = SpecialInvoiceCreditNoteUI.UpdateCreditNotes(new SpecialInvoiceCreditNote
                 {
                     ID = CreditNoteID.Value,
                     SpecialInvoiceID = creditNote.SpecialInvoiceID,
@@ -184,6 +187,9 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
                     VatExempt = this.VatExemptCheckBox.Checked,
                     DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
                 });
+                
+                AuditEventsUI.LogEvent("Updating special invoice credit note", specialInvoiceCreditNote.Reference, Page.ToString(),
+                    AuditEventsUI.AuditEventType.Modifying);
             }
 
             if (this.CompletedEventHandler != null)
@@ -203,8 +209,13 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
     }
 
     protected void PrintButton_Click(object sender, EventArgs e)
-    {       
+    {
         var specialInvoiceHeader = SpecialInvoiceHeaderUI.GetById(this.SpecialInvoiceID.Value);
+
+        var specialInvoiceCreditNote = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNote(CreditNoteID.Value);
+
+        AuditEventsUI.LogEvent("Printing special invoice credit note", specialInvoiceCreditNote.Reference, Page.ToString(),
+                  AuditEventsUI.AuditEventType.Modifying);
 
         SP.Util.UrlParameterPasser p = new UrlParameterPasser("~/CreditNote/SpecialInvoiceCreditNoteReport.aspx");
         p["creditNoteId"] = this.CreditNoteID.Value.ToString();
@@ -218,6 +229,9 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
         {
             var creditNote = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNote(this.CreditNoteID.Value);
             SpecialInvoiceCreditNoteUI.Delete(creditNote);
+
+            AuditEventsUI.LogEvent("Deleting special invoice credit note", creditNote.Reference, Page.ToString(),
+                  AuditEventsUI.AuditEventType.Deleting);
 
             if (this.CompletedEventHandler != null)
             {
