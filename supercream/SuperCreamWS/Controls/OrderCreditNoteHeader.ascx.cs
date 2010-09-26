@@ -146,6 +146,9 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
                     Reason = this.ReasonTextBox.Text,
                     DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
                 });
+
+                AuditEventsUI.LogEvent("Creating Order Credit Note", orderCreditNote.Reference, Page.ToString(),
+                        AuditEventsUI.AuditEventType.Creating);
             }
             else
             {
@@ -159,6 +162,9 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
                     Reference = orderCreditNote.Reference,
                     DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
                 });
+
+                AuditEventsUI.LogEvent("Updating Order Credit Note", orderCreditNote.Reference, Page.ToString(),
+                       AuditEventsUI.AuditEventType.Modifying);
             }
 
             if (this.OrderCreditNoteContinueEventHandler != null)
@@ -185,6 +191,9 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
 
         var orderNoteStatus = ui.GetOrderNotesStatusByOrderID(this.OrderID.Value);
 
+        AuditEventsUI.LogEvent("Printing Order Credit Note", "Credit note", Page.ToString(),
+                     AuditEventsUI.AuditEventType.Deleting);
+
         SP.Util.UrlParameterPasser p = new UrlParameterPasser("~/CreditNote/OrderCreditNotePrint.aspx");
         p["creditNoteId"] = this.CreditNoteID.Value.ToString();
         p["accountId"] = orderNoteStatus.AccountID.ToString();
@@ -203,6 +212,10 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
     {
         if (CreditNoteID != null)
         {
+            var orderCreditNote = new OrderCreditNoteUI().GetByID(CreditNoteID.Value);
+            AuditEventsUI.LogEvent("Deleting Order Credit Note", orderCreditNote.Reference, Page.ToString(),
+                     AuditEventsUI.AuditEventType.Deleting);
+
             OrderCreditNoteUI.DeleteOrderCreditNote(this.CreditNoteID.Value);
             if (this.CancelEventHandler != null)
             {
