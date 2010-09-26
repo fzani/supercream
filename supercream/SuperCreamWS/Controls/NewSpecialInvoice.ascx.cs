@@ -231,6 +231,9 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
             specialInvoiceHeader = ui.Save(specialInvoiceHeader);
             SpecialInvoiceID = specialInvoiceHeader.ID;
 
+            AuditEventsUI.LogEvent("Created special invoice", specialInvoiceHeader.InvoiceNo, Page.ToString(),
+                    AuditEventsUI.AuditEventType.Creating);
+
             SpecialInvoiceLabel.Text = specialInvoiceHeader.InvoiceNo;
 
             this.ChangeState += new EventHandler<EventArgs>(OrderLineState);
@@ -382,6 +385,9 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
                 VatExempt = this.VatExemptCheckBox.Checked
 
             };
+
+            AuditEventsUI.LogEvent("Created Special Invoice line", specialInvoiceLine.Description, Page.ToString(),
+                              AuditEventsUI.AuditEventType.Creating);
 
             specialInvoiceLine = ui.Save(specialInvoiceLine);
             this.ChangeState += new EventHandler<EventArgs>(OrderLineAddedState);

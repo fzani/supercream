@@ -156,6 +156,9 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
 
             };
 
+            AuditEventsUI.LogEvent("Created Special Invoice line", specialInvoiceLine.Description, Page.ToString(),
+                              AuditEventsUI.AuditEventType.Creating);
+
             specialInvoiceLine = ui.Save(specialInvoiceLine);
 
             UpdateSpecialInvoiceHeader();
@@ -366,6 +369,9 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
                 VatExempt = vatExempt
             };
 
+            AuditEventsUI.LogEvent("Updating Special Invoice line", specialInvoiceLine.Description, Page.ToString(),
+                             AuditEventsUI.AuditEventType.Modifying);
+
             ui.Update(specialInvoiceLine);
 
             UpdateSpecialInvoiceHeader();
@@ -390,6 +396,9 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
 
         SpecialInvoiceLineUI ui = new SpecialInvoiceLineUI();
         int id = Convert.ToInt32((messagePanel.FindControl("ID") as Label).Text);
+
+        AuditEventsUI.LogEvent("Deleting Special Invoice line", "Special invoice line", Page.ToString(),
+                             AuditEventsUI.AuditEventType.Deleting);
 
         ui.DeleteSpecialInvoiceLine(id);
         DataBind();
@@ -484,6 +493,10 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
                 DateModified = DateTime.Now,
                 VatCodeID = this.VatCodeID
             };
+
+
+            AuditEventsUI.LogEvent("Updating Special Invoice header", specialInvoiceHeader.InvoiceNo, Page.ToString(),
+                             AuditEventsUI.AuditEventType.Modifying);
 
             SpecialInvoiceHeaderUI.Update(specialInvoiceHeader);
 
@@ -581,7 +594,7 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
             OrderDateTextBox.Text = specialInvoiceHeader.OrderDate.ToShortDateString();
             DeliveryDateTextBox.Text = specialInvoiceHeader.DeliveryDate.ToShortDateString();
             OrderHeaderSpecialInstructionsTextBox.Text = specialInvoiceHeader.SpecialInstructions;
-            
+
             this.ChangeState += new EventHandler<EventArgs>(this.OrderSelectedState);
             this.ChangeState(this, e);
 
