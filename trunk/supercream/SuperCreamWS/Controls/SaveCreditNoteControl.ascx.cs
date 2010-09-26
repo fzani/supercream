@@ -165,7 +165,7 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
             CreditNoteUI ui = new CreditNoteUI();
             if (this.IsNewCreditNote.Value)
             {
-                ui.SaveCreditNote(new CreditNote
+                CreditNote creditNote = ui.SaveCreditNote(new CreditNote
                 {
                     ID = -1,
                     OrderID = this.OrderID.Value,
@@ -175,6 +175,9 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
                     VatExempt = this.VatExemptCheckBox.Checked,
                     DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
                 });
+
+                AuditEventsUI.LogEvent("Created Order Credit Note", creditNote.Reference, Page.ToString(),
+                    AuditEventsUI.AuditEventType.Creating);
             }
             else
             {
@@ -190,6 +193,9 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
                     VatExempt = this.VatExemptCheckBox.Checked,
                     DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
                 });
+
+                AuditEventsUI.LogEvent("Updated Order Credit Note", creditNote.Reference, Page.ToString(),
+                 AuditEventsUI.AuditEventType.Modifying);
             }
 
             if (this.CompletedEventHandler != null)
@@ -214,6 +220,9 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
 
         var orderNoteStatus = ui.GetOrderNotesStatusByOrderID(this.OrderID.Value);
 
+        AuditEventsUI.LogEvent("Printed Credit Note", "Credit Note", Page.ToString(),
+                 AuditEventsUI.AuditEventType.Modifying);
+
         SP.Util.UrlParameterPasser p = new UrlParameterPasser("~/CreditNote/CreditNoteReport.aspx");
         p["creditNoteId"] = this.CreditNoteID.Value.ToString();
         p["accountId"] = orderNoteStatus.AccountID.ToString();
@@ -227,6 +236,9 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
             CreditNoteUI ui = new CreditNoteUI();
             CreditNote creditNote = ui.GetCreditNote(this.CreditNoteID.Value);
             ui.Delete(creditNote);
+
+            AuditEventsUI.LogEvent("Deleted Credit Note", creditNote.Reference, Page.ToString(),
+                AuditEventsUI.AuditEventType.Modifying);
 
             if (this.CompletedEventHandler != null)
             {
