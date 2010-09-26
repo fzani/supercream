@@ -154,6 +154,9 @@ public partial class Controls_NewSpecialInvoice : System.Web.UI.UserControl
                 VatExempt = vatExempt
             };
 
+            AuditEventsUI.LogEvent("Updating special invoice line", specialInvoiceLine.Description, Page.ToString(),
+                  AuditEventsUI.AuditEventType.Modifying);
+
             ui.Update(specialInvoiceLine);
 
             DataBind();
