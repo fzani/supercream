@@ -1288,6 +1288,19 @@ namespace SPWCFServer
             }
         }
 
+        public decimal GetOrderCreditNoteLineAvailableTotal(int orderCreditNoteId)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return mgr.GetOrderCreditNoteLineAvailableTotal(orderCreditNoteId);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         #endregion
 
         #region OrderCreditNoteLine

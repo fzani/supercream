@@ -13,10 +13,10 @@
                     <td class="right" style="width: 100%;">
                         <table class="left" style="width: 100%;">
                             <tr>
-                                <td style="width: 20%;">
+                                <td style="width: 25%;">
                                     <asp:Label ID="InvoiceNoLabel" Text="Invoice No" runat="server"></asp:Label>
                                 </td>
-                                <td style="width: 80%;">
+                                <td style="width: 75%;">
                                     <asp:TextBox ID="InvoiceNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
@@ -38,7 +38,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Credit Note Date Due From
+                                    Credit Note Date Raised From
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateFromTextBox" Style="vertical-align: middle;" runat="server"
@@ -60,7 +60,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Credit Note Date Due To
+                                    Credit Note Date Raised To
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateToTextBox" Style="vertical-align: middle;" runat="server" ValidationGroup="NewOutletGroup"
@@ -127,7 +127,7 @@
                         SortExpression="CustomerName" Visible="">
                         <ItemStyle Width="40%" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="DueDate" HeaderText="Credit Note Date Due" ItemStyle-Width="20%"
+                    <asp:BoundField DataField="DueDate" HeaderText="Credit Note Raised" ItemStyle-Width="20%"
                         SortExpression="DueDate" DataFormatString="{0:d}">
                         <ItemStyle Width="20%" HorizontalAlign="Center" />
                     </asp:BoundField>

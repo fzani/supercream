@@ -784,6 +784,13 @@ namespace SP.Worker
             return orderCreditNoteLineDao.Update(newOrderCreditNoteLine, origOrderCreditNoteLine);
         }
 
+        public decimal GetOrderCreditNoteLineAvailableTotal(int orderCreditNoteId)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderCreditNoteDao orderCreditNoteLineDao = factory.GetOrderCreditNoteDao();
+            return orderCreditNoteLineDao.GetOrderCreditNoteLineAvailableTotal(orderCreditNoteId);
+        }
+
         #endregion
 
         #region OrderHeader

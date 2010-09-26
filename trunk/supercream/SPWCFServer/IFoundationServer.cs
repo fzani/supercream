@@ -291,6 +291,9 @@ namespace SPWCFServer
         [ReferencePreservingDataContractFormat]
         List<OrderLine> AvailableOrderLinesForCreditNote(int orderId);
 
+        [OperationContract]
+        decimal GetOrderCreditNoteLineAvailableTotal(int orderCreditNoteId);
+
         #endregion
 
         #region OrderCreditNoteLine

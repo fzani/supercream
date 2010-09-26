@@ -120,6 +120,7 @@ namespace SP.Core.ManagerInterfaces
         OrderCreditNoteLine SaveOrderCreditNoteLine(OrderCreditNoteLine ordercreditnoteline);
         OrderCreditNoteLine UpdateOrderCreditNoteLine(OrderCreditNoteLine newOrderCreditNoteLine, OrderCreditNoteLine origOrderCreditNoteLine);
         bool CheckIfCreditNoteLineExists(int creditNoteid, int orderLineId);
+        decimal GetOrderCreditNoteLineAvailableTotal(int orderCreditNoteId);
 
         #endregion
 

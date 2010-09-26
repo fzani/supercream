@@ -70,6 +70,6 @@ namespace SP.Data.LTS
 
             return orderLine.NoOfUnits - noOfCreditNoteUnits;
 
-        }
+        }       
     }
 }

@@ -174,5 +174,31 @@ namespace SP.Data.LTS
                 Balance = (invoiceTotal - creditTotal)
             };
         }
+
+        public decimal GetOrderCreditNoteLineAvailableTotal(int orderCreditNoteId)
+        {
+            decimal orderCreditNoteExVatTotal = GetOrderLinesExVatTotal(orderCreditNoteId);
+            decimal orderCreditNoteLineExVatTotal = GetOrderCreditNoteLinesExVatTotal(orderCreditNoteId);
+
+            return orderCreditNoteExVatTotal - orderCreditNoteLineExVatTotal;
+        }
+
+        private decimal GetOrderCreditNoteLinesExVatTotal(int orderCreditNoteId)
+        {
+            return Math.Round((from ocn in db.OrderCreditNote
+                               join onl in db.OrderCreditNoteLine on ocn.ID equals onl.OrderCreditNoteID
+                               where ocn.ID == orderCreditNoteId
+                               select onl.Price * onl.NoOfUnits).Sum(), 2);
+        }
+
+        private decimal GetOrderLinesExVatTotal(int orderCreditNoteId)
+        {
+            var total = (from ocn in db.OrderCreditNote
+                         join ol in db.OrderLine on ocn.OrderID equals ol.OrderID
+                         where ocn.ID == orderCreditNoteId
+                         select ol.Price * ol.NoOfUnits).Sum();
+            ;
+            return total;
+        }
     }
 }

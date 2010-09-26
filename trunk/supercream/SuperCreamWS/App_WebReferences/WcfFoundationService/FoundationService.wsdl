@@ -9,6 +9,12 @@
       <xsd:import schemaLocation="http://localhost:56391/FoundationService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IFoundationService_SaveStandardVatRate_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveStandardVatRate" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_SaveStandardVatRate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveStandardVatRateResponse" />
+  </wsdl:message>
   <wsdl:message name="IFoundationService_UpdateStandardVatRate_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateStandardVatRate" />
   </wsdl:message>
@@ -116,6 +122,12 @@
   </wsdl:message>
   <wsdl:message name="IFoundationService_DeleteVan_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteVanResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetLikeProductCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLikeProductCode" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetLikeProductCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLikeProductCodeResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_GetLikeProductDescription_InputMessage">
     <wsdl:part name="parameters" element="tns:GetLikeProductDescription" />
@@ -303,11 +315,11 @@
   <wsdl:message name="IFoundationService_GetStandardVatRate_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetStandardVatRateResponse" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_SaveStandardVatRate_InputMessage">
-    <wsdl:part name="parameters" element="tns:SaveStandardVatRate" />
+  <wsdl:message name="IFoundationService_SaveOrderLine_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveOrderLine" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_SaveStandardVatRate_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SaveStandardVatRateResponse" />
+  <wsdl:message name="IFoundationService_SaveOrderLine_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveOrderLineResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_UpdateOrderLine_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateOrderLine" />
@@ -495,17 +507,17 @@
   <wsdl:message name="IFoundationService_ProductCodeExists_OutputMessage">
     <wsdl:part name="parameters" element="tns:ProductCodeExistsResponse" />
   </wsdl:message>
-  <wsdl:message name="IFoundationService_GetLikeProductCode_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetLikeProductCode" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_GetLikeProductCode_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetLikeProductCodeResponse" />
-  </wsdl:message>
   <wsdl:message name="IFoundationService_AvailableOrderLinesForCreditNote_InputMessage">
     <wsdl:part name="parameters" element="tns:AvailableOrderLinesForCreditNote" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_AvailableOrderLinesForCreditNote_OutputMessage">
     <wsdl:part name="parameters" element="tns:AvailableOrderLinesForCreditNoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetOrderCreditNoteLineAvailableTotal_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderCreditNoteLineAvailableTotal" />
+  </wsdl:message>
+  <wsdl:message name="IFoundationService_GetOrderCreditNoteLineAvailableTotal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderCreditNoteLineAvailableTotalResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_GetOrderCreditNoteLinesByCreditNoteId_InputMessage">
     <wsdl:part name="parameters" element="tns:GetOrderCreditNoteLinesByCreditNoteId" />
@@ -686,12 +698,6 @@
   </wsdl:message>
   <wsdl:message name="IFoundationService_GetOrderLinesByOrderID_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOrderLinesByOrderIDResponse" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_SaveOrderLine_InputMessage">
-    <wsdl:part name="parameters" element="tns:SaveOrderLine" />
-  </wsdl:message>
-  <wsdl:message name="IFoundationService_SaveOrderLine_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SaveOrderLineResponse" />
   </wsdl:message>
   <wsdl:message name="IFoundationService_CreditNoteExistsByOrderId_InputMessage">
     <wsdl:part name="parameters" element="tns:CreditNoteExistsByOrderId" />
@@ -1078,6 +1084,10 @@
     <wsdl:part name="parameters" element="tns:UpdateCustomerResponse" />
   </wsdl:message>
   <wsdl:portType name="IFoundationService">
+    <wsdl:operation name="SaveStandardVatRate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveStandardVatRate" message="tns:IFoundationService_SaveStandardVatRate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveStandardVatRateResponse" message="tns:IFoundationService_SaveStandardVatRate_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="UpdateStandardVatRate">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdateStandardVatRate" message="tns:IFoundationService_UpdateStandardVatRate_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/UpdateStandardVatRateResponse" message="tns:IFoundationService_UpdateStandardVatRate_OutputMessage" />
@@ -1149,6 +1159,10 @@
     <wsdl:operation name="DeleteVan">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/DeleteVan" message="tns:IFoundationService_DeleteVan_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/DeleteVanResponse" message="tns:IFoundationService_DeleteVan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLikeProductCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetLikeProductCode" message="tns:IFoundationService_GetLikeProductCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetLikeProductCodeResponse" message="tns:IFoundationService_GetLikeProductCode_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetLikeProductDescription">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetLikeProductDescription" message="tns:IFoundationService_GetLikeProductDescription_InputMessage" />
@@ -1274,9 +1288,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetStandardVatRate" message="tns:IFoundationService_GetStandardVatRate_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetStandardVatRateResponse" message="tns:IFoundationService_GetStandardVatRate_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SaveStandardVatRate">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveStandardVatRate" message="tns:IFoundationService_SaveStandardVatRate_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveStandardVatRateResponse" message="tns:IFoundationService_SaveStandardVatRate_OutputMessage" />
+    <wsdl:operation name="SaveOrderLine">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveOrderLine" message="tns:IFoundationService_SaveOrderLine_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveOrderLineResponse" message="tns:IFoundationService_SaveOrderLine_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateOrderLine">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/UpdateOrderLine" message="tns:IFoundationService_UpdateOrderLine_InputMessage" />
@@ -1402,13 +1416,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/ProductCodeExists" message="tns:IFoundationService_ProductCodeExists_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/ProductCodeExistsResponse" message="tns:IFoundationService_ProductCodeExists_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetLikeProductCode">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetLikeProductCode" message="tns:IFoundationService_GetLikeProductCode_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetLikeProductCodeResponse" message="tns:IFoundationService_GetLikeProductCode_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="AvailableOrderLinesForCreditNote">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/AvailableOrderLinesForCreditNote" message="tns:IFoundationService_AvailableOrderLinesForCreditNote_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/AvailableOrderLinesForCreditNoteResponse" message="tns:IFoundationService_AvailableOrderLinesForCreditNote_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderCreditNoteLineAvailableTotal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetOrderCreditNoteLineAvailableTotal" message="tns:IFoundationService_GetOrderCreditNoteLineAvailableTotal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetOrderCreditNoteLineAvailableTotalResponse" message="tns:IFoundationService_GetOrderCreditNoteLineAvailableTotal_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetOrderCreditNoteLinesByCreditNoteId">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetOrderCreditNoteLinesByCreditNoteId" message="tns:IFoundationService_GetOrderCreditNoteLinesByCreditNoteId_InputMessage" />
@@ -1529,10 +1543,6 @@
     <wsdl:operation name="GetOrderLinesByOrderID">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/GetOrderLinesByOrderID" message="tns:IFoundationService_GetOrderLinesByOrderID_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/GetOrderLinesByOrderIDResponse" message="tns:IFoundationService_GetOrderLinesByOrderID_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="SaveOrderLine">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/SaveOrderLine" message="tns:IFoundationService_SaveOrderLine_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFoundationService/SaveOrderLineResponse" message="tns:IFoundationService_SaveOrderLine_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreditNoteExistsByOrderId">
       <wsdl:input wsaw:Action="http://tempuri.org/IFoundationService/CreditNoteExistsByOrderId" message="tns:IFoundationService_CreditNoteExistsByOrderId_InputMessage" />
@@ -1793,6 +1803,15 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IFoundationService" type="tns:IFoundationService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveStandardVatRate">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/SaveStandardVatRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="UpdateStandardVatRate">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/UpdateStandardVatRate" style="document" />
       <wsdl:input>
@@ -1948,6 +1967,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteVan">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/DeleteVan" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLikeProductCode">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetLikeProductCode" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2234,8 +2262,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SaveStandardVatRate">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/SaveStandardVatRate" style="document" />
+    <wsdl:operation name="SaveOrderLine">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/SaveOrderLine" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2522,8 +2550,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetLikeProductCode">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetLikeProductCode" style="document" />
+    <wsdl:operation name="AvailableOrderLinesForCreditNote">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/AvailableOrderLinesForCreditNote" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2531,8 +2559,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="AvailableOrderLinesForCreditNote">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/AvailableOrderLinesForCreditNote" style="document" />
+    <wsdl:operation name="GetOrderCreditNoteLineAvailableTotal">
+      <soap:operation soapAction="http://tempuri.org/IFoundationService/GetOrderCreditNoteLineAvailableTotal" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2803,15 +2831,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetOrderLinesByOrderID">
       <soap:operation soapAction="http://tempuri.org/IFoundationService/GetOrderLinesByOrderID" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SaveOrderLine">
-      <soap:operation soapAction="http://tempuri.org/IFoundationService/SaveOrderLine" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

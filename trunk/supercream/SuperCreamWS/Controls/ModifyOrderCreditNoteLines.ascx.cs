@@ -176,7 +176,9 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
         if (e.Row.RowType == DataControlRowType.Footer)
         {
             Label priceLabel = (Label)e.Row.FindControl("priceLabelTotal");
-            priceLabel.Text = priceTotal.ToString("c");
+
+            var orderCreditNoteLineAvailableTotal = new OrderCreditNoteUI().GetOrderCreditNoteLineAvailableTotal(CreditNoteID);
+            priceLabel.Text = orderCreditNoteLineAvailableTotal.ToString("c");
         }
     }
 
@@ -334,7 +336,7 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
     }
 
     protected void DeleteOrderCreditLineButton_Click(object sender, EventArgs e)
-    {       
+    {
         AuditEventsUI.LogEvent("Deleting Order Credit Note line", "Credit note line", Page.ToString(),
           AuditEventsUI.AuditEventType.Deleting);
 

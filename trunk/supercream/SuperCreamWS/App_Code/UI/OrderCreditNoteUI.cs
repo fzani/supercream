@@ -34,6 +34,14 @@ public class OrderCreditNoteUI : IDisposable
         }
     }
 
+    public decimal GetOrderCreditNoteLineAvailableTotal(int orderCreditNoteId)
+    {
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return _proxy.GetOrderCreditNoteLineAvailableTotal(orderCreditNoteId);
+        }
+    }
+
     public static List<OrderCreditNote> GetOrderCreditNotesByOrderId(int orderId)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())

@@ -26,5 +26,7 @@ namespace SP.Core.DataInterfaces
         List<OrderCreditNote> GetOrderCreditNotesByOrderId(int orderId);
 
         InvoiceCreditNoteDetails GetInvoiceCreditDetails(int orderNo, decimal vatRate);
+
+        decimal GetOrderCreditNoteLineAvailableTotal(int orderCreditNoteId);
     }
 }
