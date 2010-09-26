@@ -8,15 +8,15 @@
                 <h3>
                     Search Invoices</h3>
             </legend>
-            <table class="search" style="width:100%;">
+            <table class="search" style="width: 100%;">
                 <tr>
-                    <td class="right" style="width:100%;">
-                        <table class="left" style="width:100%;">
+                    <td class="right" style="width: 100%;">
+                        <table class="left" style="width: 100%;">
                             <tr>
-                                <td style="width:20%;">
+                                <td style="width: 20%;">
                                     <asp:Label ID="InvoiceNoLabel" Text="Invoice No" runat="server"></asp:Label>
                                 </td>
-                                <td style="width:80%;">
+                                <td style="width: 80%;">
                                     <asp:TextBox ID="InvoiceNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
@@ -38,7 +38,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Order Date From
+                                    Invoice Date From
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateFromTextBox" Style="vertical-align: middle;" runat="server"
@@ -60,7 +60,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Order Date To
+                                    Invoice Date To
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateToTextBox" Style="vertical-align: middle;" runat="server" ValidationGroup="NewOutletGroup"
@@ -83,14 +83,15 @@
                             <tr>
                                 <td>
                                     Invoices/InvoicesPrinted
-                                </td>                               
+                                </td>
                             </tr>
                             <tr>
                                 <td>
                                 </td>
                                 <td>
                                     <asp:LinkButton ID="SearchButton" Text="Search" CausesValidation="false" runat="server"
-                                        OnClick="SearchButton_Click" /> | 
+                                        OnClick="SearchButton_Click" />
+                                    |
                                     <asp:LinkButton ID="ClearButton" Text="Clear Search" CausesValidation="false" runat="server"
                                         OnClick="ClearButton_Click" />
                                 </td>
@@ -145,17 +146,17 @@
                         </EditItemTemplate>
                         <ItemStyle Width="40%" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Order Date" SortExpression="OrderDate">
+                    <asp:TemplateField HeaderText="Invoice Date" SortExpression="InvoiceDate">
                         <ItemTemplate>
-                            <asp:Label ID="Label3" runat="server" ItemStyle-Width="20%" Text='<%# DataBinder.Eval(Container.DataItem, "OrderDate", "{0:d}") %>'></asp:Label>
+                            <asp:Label ID="Label3" runat="server" ItemStyle-Width="20%" Text='<%# DataBinder.Eval(Container.DataItem, "InvoiceDate", "{0:d}") %>'></asp:Label>
                         </ItemTemplate>
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox3" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "OrderDate", "{0:d}") %>'></asp:TextBox>
+                            <asp:TextBox ID="TextBox3" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "InvoiceDate", "{0:d}") %>'></asp:TextBox>
                         </EditItemTemplate>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-            <asp:ObjectDataSource ID="InvoiceObjectDataSource" runat="server" SelectMethod="GetOrderHeadersSearchWithPrintedStatuses"
+            <asp:ObjectDataSource ID="InvoiceObjectDataSource" runat="server" SelectMethod="SearchInvoices"
                 TypeName="OrderHeaderUI" OnSelecting="InvoiceObjectDataSource_Selecting">
                 <SelectParameters>
                     <asp:Parameter Name="orderHeader" Type="String" />
