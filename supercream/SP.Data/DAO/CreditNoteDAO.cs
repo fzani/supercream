@@ -76,6 +76,7 @@ namespace SP.Data.LTS
                                    InvoiceNo = o.InvoiceNo,
                                    CustomerName = c.Name,
                                    DateCreated = cr.DateCreated,
+                                   DueDate = cr.DueDate,
                                    Reference = cr.Reference
                                });
 
@@ -112,12 +113,12 @@ namespace SP.Data.LTS
 
             if (dateFrom != DateTime.MinValue)
             {
-                filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.DateCreated >= dateFrom);
+                filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.DueDate >= dateFrom);
             }
 
             if (dateTo != DateTime.MinValue)
             {
-                filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.DateCreated <= dateTo);
+                filteredCreditNotes = filteredCreditNotes.Where<CreditNoteDetails>(q => q.DueDate <= dateTo);
             }
 
             return filteredCreditNotes;
