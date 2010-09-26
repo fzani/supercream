@@ -9,15 +9,15 @@
                 <h3>
                     Search Credit Notes</h3>
             </legend>
-            <table class="search">
+            <table class="search" style="width:100%">
                 <tr>
-                    <td class="right">
-                        <table class="left">
+                    <td class="right" style="width:100%">
+                        <table class="left" style="width:100%">
                             <tr>
-                                <td>
+                                <td style="width:30%">
                                     <asp:Label ID="InvoiceNoLabel" Text="Invoice No" runat="server"></asp:Label>
                                 </td>
-                                <td>
+                                <td style="width:70%">
                                     <asp:TextBox ID="InvoiceNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
@@ -31,7 +31,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Date From
+                                    Credit Note Due Date From
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateFromTextBox" Style="vertical-align: middle;" runat="server"
@@ -53,7 +53,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Date To
+                                    Credit Note Due Date To
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateToTextBox" Style="vertical-align: middle;" runat="server" ValidationGroup="NewOutletGroup"
@@ -112,27 +112,27 @@
                         </ItemTemplate>
                         <ItemStyle Width="20%" />
                     </asp:TemplateField>
-                    <asp:BoundField DataField="InvoiceNo" HeaderText="Invoice No" ItemStyle-Width="20%"
+                    <asp:BoundField DataField="InvoiceNo" HeaderText="Invoice No" ItemStyle-Width="15%"
                         SortExpression="InvoiceNo">
-                        <ItemStyle Width="20%" />
+                        <ItemStyle Width="15%" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="CustomerName" HeaderText="Customer Name" ItemStyle-Width="20%"
+                    <asp:BoundField DataField="CustomerName" HeaderText="Customer Name" ItemStyle-Width="40%"
                         SortExpression="CustomerName" Visible="">
-                        <ItemStyle Width="20%" />
+                        <ItemStyle Width="35%" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="DateCreated" HeaderText="Date Created" ItemStyle-Width="20%"
-                        SortExpression="DateCreated" DataFormatString="{0:d}">
+                    <asp:BoundField DataField="DueDate" HeaderText="Credit Note Due Date"
+                        SortExpression="DueDate" ItemStyle-HorizontalAlign="Center" DataFormatString="{0:d}">
                         <ItemStyle Width="20%" />
                     </asp:BoundField>
                     <asp:BoundField DataField="CreditNoteID" HeaderText="CreditNoteID" SortExpression="CreditNoteID"
                         Visible="false" />
-                    <asp:TemplateField ItemStyle-Width="20%">
+                    <asp:TemplateField>
                         <ItemTemplate>
                             <asp:LinkButton ID="EditCreditNoteButton" runat="server" CommandArgument='<%# Bind("CreditNoteID") %>'
                                 CommandName="EditCreditNote" ControlStyle-CssClass="button" ItemStyle-Width="20%"
                                 Text="Select" />
                         </ItemTemplate>
-                        <ItemStyle Width="20%" />
+                        <ItemStyle Width="10%" HorizontalAlign="Center" />
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
