@@ -9,15 +9,15 @@
                     <h3>
                         Special Invoices</h3>
                 </legend>
-                <table class="search">
+                <table class="search" style="width: 100%">
                     <tr>
-                        <td class="right">
-                            <table class="left">
+                        <td class="right" style="width: 100%">
+                            <table class="left" style="width: 100%">
                                 <tr>
-                                    <td>
+                                    <td style="width: 20%">
                                         Invoice No
                                     </td>
-                                    <td>
+                                    <td style="width: 80%">
                                         <asp:TextBox ID="InvoiceNoTextBox" Width="300px" MaxLength="20" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
@@ -31,7 +31,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Date From
+                                        Invoice Date From
                                     </td>
                                     <td>
                                         <asp:TextBox ID="DateFromTextBox" Style="vertical-align: middle;" runat="server"
@@ -50,7 +50,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Date To
+                                        Invoice Date To
                                     </td>
                                     <td>
                                         <asp:TextBox ID="DateToTextBox" Style="vertical-align: middle;" runat="server" ValidationGroup="NewOutletGroup"

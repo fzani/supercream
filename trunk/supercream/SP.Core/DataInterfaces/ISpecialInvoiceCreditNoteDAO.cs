@@ -25,7 +25,7 @@ namespace SP.Core.DataInterfaces
         string GenerateSpecialInvoiceCreditNo();
         decimal GetSpecialInvoiceOustandingBalance(int orderNo, int creditNote, decimal vatRate);
         bool SpecialInvoiceCreditNoteExistsByInvoiceId(int specialInvoiceId);
-        bool ReferenceExists(string referenceNo);
+        bool CheckIfReferenceExists(string referenceNo);
         SpecialInvoiceCreditNote SpecialInvoiceGetByReferenceId(string reference);
         SpecialInvoiceCreditNoteBalance GetSpecialInvoiceCreditBalance(int specialInvoiceId, decimal vatRate);
     }

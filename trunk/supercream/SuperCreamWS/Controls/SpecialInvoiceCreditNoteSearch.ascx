@@ -121,7 +121,7 @@
                         <ItemStyle Width="20%" />
                     </asp:BoundField>
                     <asp:BoundField DataField="DateCreated" HeaderText="Date Created" ItemStyle-Width="20%"
-                        SortExpression="DateCreated">
+                        SortExpression="DateCreated" DataFormatString="{0:d}">
                         <ItemStyle Width="20%" />
                     </asp:BoundField>
                     <asp:BoundField DataField="CreditNoteID" HeaderText="CreditNoteID" SortExpression="CreditNoteID"

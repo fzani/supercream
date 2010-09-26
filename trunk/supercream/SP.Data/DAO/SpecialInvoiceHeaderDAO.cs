@@ -93,7 +93,7 @@ namespace SP.Data.LTS
 
             if (dateFrom != DateTime.MinValue && dateTo != DateTime.MinValue)
             {
-                filteredInvoices = filteredInvoices.Where<SpecialInvoiceHeader>(q => q.OrderDate >= dateFrom && q.OrderDate <= dateTo);
+                filteredInvoices = filteredInvoices.Where<SpecialInvoiceHeader>(q => (q.OrderDate >= dateFrom) && (q.OrderDate <= dateTo));
             }
 
             if (orderStatus == 2)

@@ -81,10 +81,11 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
     private void SetCreditNoteForOrderSaveStatuses()
     {
         this.specialInvoiceCreditNoteDetails = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNoteBalance(SpecialInvoiceID.Value);
+        var specialInvoiceHeader = SpecialInvoiceHeaderUI.GetById(SpecialInvoiceID.Value);
 
         decimal totalInvoiceAmount = specialInvoiceCreditNoteDetails.TotalInvoiceAmount;
         decimal invoiceAmountCredited = specialInvoiceCreditNoteDetails.TotalAmountCredited;
-        this.DueDateTextBox.Text = DateTime.Now.AddDays(7).ToShortDateString();
+        this.DueDateTextBox.Text = specialInvoiceHeader.DateCreated.ToShortDateString();
 
         this.TotalInvoiceAmountLabel.Text = totalInvoiceAmount.ToString("c");
         this.InvoiceAmountCreditedLabel.Text = invoiceAmountCredited.ToString("c");
