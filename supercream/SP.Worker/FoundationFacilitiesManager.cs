@@ -1471,7 +1471,7 @@ namespace SP.Worker
             ISpecialInvoiceCreditNoteDao specialInvoiceCreditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
             ISpecialInvoiceCreditNoteDao validateNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
 
-            if (validateNoteDao.ReferenceExists(specialinvoicecreditnote.Reference))
+            if (validateNoteDao.CheckIfReferenceExists(specialinvoicecreditnote.Reference))
                 throw new ApplicationException("Cannot add Special Invoice Credit note - Credit Reference is already in use");
             specialinvoicecreditnote.Reference = specialInvoiceCreditNoteDao.GenerateSpecialInvoiceCreditNo();           
             
@@ -1547,7 +1547,7 @@ namespace SP.Worker
         {
             IDaoFactory factory = new LTSDaoFactory();
             ISpecialInvoiceCreditNoteDao creditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
-            return creditNoteDao.ReferenceExists(referenceNo);
+            return creditNoteDao.CheckIfReferenceExists(referenceNo);
         }
 
         public SpecialInvoiceCreditNote SpecialInvoieceGetByReferenceId(string reference)       

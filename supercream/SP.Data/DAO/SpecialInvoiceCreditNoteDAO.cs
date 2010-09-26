@@ -15,6 +15,8 @@ namespace SP.Data.LTS
 {
     public class SpecialInvoiceCreditNoteDao : AbstractLTSDao<SpecialInvoiceCreditNote, int>, ISpecialInvoiceCreditNoteDao
     {
+        #region Constructors
+
         public SpecialInvoiceCreditNoteDao()
         {
         }
@@ -24,12 +26,14 @@ namespace SP.Data.LTS
         {
         }
 
+        #endregion
+
+        #region Public Methods
+
         public override SpecialInvoiceCreditNote GetById(int id)
         {
             return db.SpecialInvoiceCreditNote.Single<SpecialInvoiceCreditNote>(q => q.ID == id);
-        }
-
-        #region ISpecialInvoiceCreditNoteDao Members
+        }        
 
         public List<SpecialInvoiceCreditNoteDetails> SearchSpecialInvoiceCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
         {
@@ -55,43 +59,7 @@ namespace SP.Data.LTS
                     dateFrom,
                     dateTo).OrderByDescending(q => q.DateCreated).ToList<SpecialInvoiceCreditNoteDetails>();
         }
-
-        private static IQueryable<SpecialInvoiceCreditNoteDetails> FilterCreditNotes(IQueryable<SpecialInvoiceCreditNoteDetails> creditNotes,
-           string orderNo,
-           string invoiceNo,
-           string customerName,
-           DateTime dateFrom,
-           DateTime dateTo)
-        {
-            IQueryable<SpecialInvoiceCreditNoteDetails> filteredCreditNotes = creditNotes;
-            if (!String.IsNullOrEmpty(orderNo))
-            {
-                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.OrderNo.Contains(orderNo));
-            }
-
-            if (!String.IsNullOrEmpty(invoiceNo))
-            {
-                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.InvoiceNo.Contains(invoiceNo));
-            }
-
-            if (!String.IsNullOrEmpty(customerName))
-            {
-                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.CustomerName.Contains(customerName));
-            }
-
-            if (dateFrom != DateTime.MinValue)
-            {
-                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.DateCreated >= dateFrom);
-            }
-
-            if (dateTo != DateTime.MinValue)
-            {
-                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.DateCreated <= dateTo);
-            }
-
-            return filteredCreditNotes;
-        }
-
+      
         public List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int specialInvoiceId)
         {
             throw new NotImplementedException();
@@ -150,7 +118,7 @@ namespace SP.Data.LTS
             return (db.SpecialInvoiceCreditNote.Where<SpecialInvoiceCreditNote>(q => q.SpecialInvoiceID == specialInvoiceId).FirstOrDefault() != null) ? true : false;
         }
 
-        public bool ReferenceExists(string referenceNo)
+        public bool CheckIfReferenceExists(string referenceNo)
         {
             return (db.SpecialInvoiceCreditNote.Where<SpecialInvoiceCreditNote>(q => q.Reference == referenceNo).FirstOrDefault() != null) ? true : false;
         }
@@ -162,17 +130,7 @@ namespace SP.Data.LTS
 
         public SpecialInvoiceCreditNoteBalance GetSpecialInvoiceCreditBalance(int specialInvoiceId, decimal vatRate)
         {
-            if (vatRate != 0)
-            {
-                vatRate = (vatRate / 100) + 1;
-            }
-
-            // First check to see if any Order Lines exists for Order ...
-            var invoiceLineCount = (from o in db.SpecialInvoiceHeader
-                                    join ol in db.SpecialInvoiceLine on o.ID equals ol.SpecialInvoiceID
-                                    where ol.SpecialInvoiceID == specialInvoiceId
-                                    select ol.ID).Count();
-            if (invoiceLineCount == 0)
+            if (CheckForInvoiceLines(specialInvoiceId) == false)
             {
                 return new SpecialInvoiceCreditNoteBalance
                 {
@@ -183,49 +141,9 @@ namespace SP.Data.LTS
                 };
             }
 
-            var invoiceLines = from o in db.SpecialInvoiceHeader
-                               join ol in db.SpecialInvoiceLine on o.ID equals ol.SpecialInvoiceID
-                               where o.ID == specialInvoiceId
-                               select ol;
+            decimal invoiceTotal = GetInvoiceTotalIncludingVat(specialInvoiceId, vatRate);
 
-            var invoiceTotal = 0.0m;
-            foreach (SpecialInvoiceLine line in invoiceLines)
-            {
-                decimal price = line.Price;
-                if ((price != 0) && (line.Discount != 0))
-                {
-                    price = line.VatExempt ? (line.Price * line.NoOfUnits) : (line.Price * line.NoOfUnits * vatRate);
-                    price -= (price / 100) * line.Discount;
-                }
-
-                invoiceTotal += price;
-            }
-
-            invoiceTotal = Math.Round(invoiceTotal, 2);
-
-            // Now deal with Credit Notes ...
-            decimal creditTotal = new decimal(0.0);
-
-            var creditNotes = db.SpecialInvoiceCreditNote.Where(q => q.SpecialInvoiceID == specialInvoiceId).DefaultIfEmpty<SpecialInvoiceCreditNote>();
-            if (creditNotes.First() != null)
-            {
-                creditTotal = Math.Round((from cr in db.SpecialInvoiceCreditNote
-                                          where cr.SpecialInvoiceID == specialInvoiceId
-                                          select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * vatRate)).Sum(), 2);
-            }
-
-            // Now deal with taking account of SpecialInvoiceCreditNoteLineItems & Header
-            //var specialInvoiceCreditNotes = (from oh in db.SpecialInvoiceCreditNote
-            //                      //  join ol in db.OrderCreditNoteLine on oh.ID equals ol.OrderCreditNoteID
-            //                        where oh.SpecialInvoiceID == specialInvoiceId
-            //                        select oh).DefaultIfEmpty<SpecialInvoiceCreditNote>();
-            //if (specialInvoiceCreditNotes.First() != null)
-            //{
-            //    creditTotal += Math.Round((from oh in db.SpecialInvoiceCreditNote
-            //                        //       join ol in db.OrderCreditNoteLine on oh.ID equals ol.OrderCreditNoteID                                           
-            //                               where oh.SpecialInvoiceID == specialInvoiceId
-            //                               select ((ol.VatExempt) ? ol.Price * ol.NoOfUnits : ol.Price * ol.NoOfUnits * vatRate)).Sum(), 2);
-            //}
+            decimal creditTotal = GetCreditTotalIncudingVat(specialInvoiceId, vatRate);
 
             return new SpecialInvoiceCreditNoteBalance
             {
@@ -237,6 +155,103 @@ namespace SP.Data.LTS
         }
 
         #endregion
+
+        #region Private Helpers
+
+        private static IQueryable<SpecialInvoiceCreditNoteDetails> FilterCreditNotes(IQueryable<SpecialInvoiceCreditNoteDetails> creditNotes,
+         string orderNo,
+         string invoiceNo,
+         string customerName,
+         DateTime dateFrom,
+         DateTime dateTo)
+        {
+            IQueryable<SpecialInvoiceCreditNoteDetails> filteredCreditNotes = creditNotes;
+            if (!String.IsNullOrEmpty(orderNo))
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.OrderNo.Contains(orderNo));
+            }
+
+            if (!String.IsNullOrEmpty(invoiceNo))
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.InvoiceNo.Contains(invoiceNo));
+            }
+
+            if (!String.IsNullOrEmpty(customerName))
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.CustomerName.Contains(customerName));
+            }
+
+            if (dateFrom != DateTime.MinValue)
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.DateCreated >= dateFrom);
+            }
+
+            if (dateTo != DateTime.MinValue)
+            {
+                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.DateCreated <= dateTo);
+            }
+
+            return filteredCreditNotes;
+        }
+
+        private bool CheckForInvoiceLines(int specialInvoiceId)
+        {
+            return ((from o in db.SpecialInvoiceHeader
+                     join ol in db.SpecialInvoiceLine on o.ID equals ol.SpecialInvoiceID
+                     where ol.SpecialInvoiceID == specialInvoiceId
+                     select ol.ID).Count() > 0);
+        }
+
+        private decimal GetCreditTotalIncudingVat(int specialInvoiceId, decimal vatRate)
+        {
+            var creditTotal = new decimal(0.0);
+
+            var creditNotes = db.SpecialInvoiceCreditNote.Where(q => q.SpecialInvoiceID == specialInvoiceId).DefaultIfEmpty<SpecialInvoiceCreditNote>();
+            if (creditNotes.First() != null)
+            {
+                creditTotal = Math.Round((from cr in db.SpecialInvoiceCreditNote
+                                          where cr.SpecialInvoiceID == specialInvoiceId
+                                          select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * vatRate)).Sum(), 2);
+            }
+            return creditTotal;
+        }
+
+        private decimal GetInvoiceTotalIncludingVat(int specialInvoiceId, decimal vatRate)
+        {
+            if (vatRate != 0)
+            {
+                vatRate = (vatRate / 100) + 1;
+            }
+
+            var invoiceLines = from o in db.SpecialInvoiceHeader
+                               join ol in db.SpecialInvoiceLine on o.ID equals ol.SpecialInvoiceID
+                               where o.ID == specialInvoiceId
+                               select ol;
+
+            var invoiceTotal = 0.0m;
+            foreach (SpecialInvoiceLine line in invoiceLines)
+            {
+                decimal price = line.Price;
+                if (price != 0)
+                {
+                    if (line.Discount != 0)
+                    {
+                        price -= Math.Round((price / 100) * line.Discount, 2);
+                    }
+
+                    price = Math.Round(line.VatExempt ? (price * line.NoOfUnits) : (price * line.NoOfUnits * vatRate), 2);
+
+                }
+
+                invoiceTotal += price;
+
+            }
+
+            invoiceTotal = Math.Round(invoiceTotal, 2);
+            return invoiceTotal;
+        }
+
+        #endregion        
 
     }
 }

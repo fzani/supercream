@@ -10,10 +10,10 @@
             </legend>
             <table style="width: 100%">
                 <tr>
-                    <td style="width: 30%;">
+                    <td style="width: 20%;">
                         Customer Name
                     </td>
-                    <td>
+                    <td style="width:80%;">
                         <asp:DropDownList ID="CustomerDropDownList" AutoPostBack="true" Width="400px" runat="server"
                             ValidationGroup="AddOrderDetailsGroup" OnSelectedIndexChanged="CustomerDropDownList_SelectedIndexChanged">
                         </asp:DropDownList>
@@ -59,7 +59,7 @@
                 </tr>
                 <tr>
                     <td style="width: 30%;">
-                        Date of Invoice
+                        Invoice Date
                     </td>
                     <td style="width: 70%;">
                         <asp:TextBox ID="OrderDateTextBox" Style="vertical-align: middle;" runat="server"
