@@ -38,7 +38,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Date Created From
+                                    Credit Note Date Due From
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateFromTextBox" Style="vertical-align: middle;" runat="server"
@@ -60,7 +60,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Date Created To
+                                    Credit Note Date Due To
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateToTextBox" Style="vertical-align: middle;" runat="server" ValidationGroup="NewOutletGroup"
@@ -117,29 +117,29 @@
                             <br />
                             <asp:Label ID="Label2" runat="server" Text='<%# Bind("Reference") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle Width="20%" />
+                        <ItemStyle Width="15%" />
                     </asp:TemplateField>
                     <asp:BoundField DataField="InvoiceNo" HeaderText="Invoice No" ItemStyle-Width="20%"
                         SortExpression="InvoiceNo">
-                        <ItemStyle Width="20%" />
+                        <ItemStyle Width="15%" />
                     </asp:BoundField>
                     <asp:BoundField DataField="CustomerName" HeaderText="Customer Name" ItemStyle-Width="20%"
                         SortExpression="CustomerName" Visible="">
-                        <ItemStyle Width="20%" />
+                        <ItemStyle Width="40%" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="DateCreated" HeaderText="Date Created" ItemStyle-Width="20%"
-                        SortExpression="DateCreated">
-                        <ItemStyle Width="20%" />
+                    <asp:BoundField DataField="DueDate" HeaderText="Credit Note Date Due" ItemStyle-Width="20%"
+                        SortExpression="DueDate" DataFormatString="{0:d}">
+                        <ItemStyle Width="20%" HorizontalAlign="Center" />
                     </asp:BoundField>
                     <asp:BoundField DataField="CreditNoteID" HeaderText="CreditNoteID" SortExpression="CreditNoteID"
                         Visible="false" />
-                    <asp:TemplateField ItemStyle-Width="20%">
+                    <asp:TemplateField>
                         <ItemTemplate>
                             <asp:LinkButton ID="EditCreditNoteButton" runat="server" CommandArgument='<%# Bind("CreditNoteID") %>'
                                 CommandName="EditCreditNote" ControlStyle-CssClass="button" ItemStyle-Width="20%"
                                 Text="Select" />
                         </ItemTemplate>
-                        <ItemStyle Width="20%" />
+                        <ItemStyle Width="10%" HorizontalAlign="Center" />
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
