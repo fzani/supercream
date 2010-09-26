@@ -8,15 +8,15 @@
                 <h3>
                     Search Credit Notes</h3>
             </legend>
-            <table class="search" style="width:100%">
+            <table class="search" style="width: 100%">
                 <tr>
-                    <td class="right" style="width:100%">
-                        <table class="left" style="width:100%">
+                    <td class="right" style="width: 100%">
+                        <table class="left" style="width: 100%">
                             <tr>
-                                <td style="width:20%;">
+                                <td style="width: 25%;">
                                     <asp:Label ID="InvoiceNoLabel" Text="Invoice No" runat="server"></asp:Label>
                                 </td>
-                                <td style="width:80%;">
+                                <td style="width: 75%;">
                                     <asp:TextBox ID="InvoiceNoSearchTextBox" Width="300px" MaxLength="10" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
@@ -38,7 +38,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Order Date From
+                                    Credit Note Raised Date From
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateFromTextBox" Style="vertical-align: middle;" runat="server"
@@ -60,7 +60,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Order Date To
+                                    Credit Note Raised Date To
                                 </td>
                                 <td>
                                     <asp:TextBox ID="DateToTextBox" Style="vertical-align: middle;" runat="server" ValidationGroup="NewOutletGroup"
@@ -121,19 +121,19 @@
                     </asp:TemplateField>
                     <asp:BoundField DataField="InvoiceNo" HeaderText="Invoice No" ItemStyle-Width="20%"
                         SortExpression="InvoiceNo">
-                        <ItemStyle Width="20%" />
+                        <ItemStyle Width="15%" />
                     </asp:BoundField>
                     <asp:BoundField DataField="CustomerName" HeaderText="Customer Name" ItemStyle-Width="20%"
                         SortExpression="CustomerName" Visible="">
-                        <ItemStyle Width="20%" />
+                        <ItemStyle Width="40%" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="DateCreated" HeaderText="Date Created" ItemStyle-Width="20%"
-                        SortExpression="DateCreated">
-                        <ItemStyle Width="20%" />
+                    <asp:BoundField DataField="DueDate" HeaderText="Date Raised" ItemStyle-Width="20%"
+                        SortExpression="DueDate" DataFormatString="{0:d}">
+                        <ItemStyle Width="15%" />
                     </asp:BoundField>
                     <asp:BoundField DataField="CreditNoteID" HeaderText="CreditNoteID" SortExpression="CreditNoteID"
                         Visible="false" />
-                    <asp:TemplateField ItemStyle-Width="20%">
+                    <asp:TemplateField ItemStyle-Width="10%">
                         <ItemTemplate>
                             <asp:LinkButton ID="EditCreditNoteButton" runat="server" CommandArgument='<%# Bind("CreditNoteID") %>'
                                 CommandName="EditCreditNote" ControlStyle-CssClass="button" ItemStyle-Width="20%"
