@@ -98,6 +98,9 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             var orderHeader = orderHeaderUI.GetById(OrderID.Value);
             orderHeader.InvoiceDate = DateTime.Parse(InvoiceDateTextBox.Text);
 
+            AuditEventsUI.LogEvent("Confirmed invoice", orderHeader.InvoiceNo, Page.ToString(),
+               AuditEventsUI.AuditEventType.Creating);
+
             orderHeaderUI.Update(orderHeader);
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
@@ -129,6 +132,9 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             var orderHeader = orderHeaderUI.GetById(OrderID.Value);
             orderHeader.InvoiceDate = DateTime.Parse(InvoiceDateTextBox.Text);
 
+            AuditEventsUI.LogEvent("Updated invoice", orderHeader.InvoiceNo, Page.ToString(),
+                 AuditEventsUI.AuditEventType.Modifying);
+
             orderHeaderUI.Update(orderHeader);
 
             DataBind();
@@ -155,6 +161,9 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             OrderHeader header = orderHeaderUI.GetWithVatCodeById(OrderID.Value);
             header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Order;
             orderHeaderUI.UpdateForInvoice(header);
+
+            AuditEventsUI.LogEvent("Cancelled invoice", header.InvoiceNo, Page.ToString(),
+                 AuditEventsUI.AuditEventType.Modifying);
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
@@ -201,6 +210,9 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             orderNoteStatus.InvoicePrinted = true;
             ui.Update(orderNoteStatus);
 
+            AuditEventsUI.LogEvent("Printed invoice", orderHeader.InvoiceNo, Page.ToString(),
+               AuditEventsUI.AuditEventType.Modifying);
+
             PrintInvoiceButton.Visible = false;
             RePrintInvoiceButton.Visible = true;
         }
@@ -238,6 +250,9 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             orderNoteStatus.InvoiceDateReprinted = DateTime.Now;
             orderNoteStatus.InvoiceReprinted = true;
             ui.Update(orderNoteStatus);
+
+            AuditEventsUI.LogEvent("Reprinted invoice", orderHeader.InvoiceNo, Page.ToString(),
+              AuditEventsUI.AuditEventType.Modifying);
 
             PrintInvoiceButton.Visible = false;
             RePrintInvoiceButton.Visible = true;
@@ -453,7 +468,7 @@ public partial class Controls_MaintainInvoice : System.Web.UI.UserControl
             DeliveryDropDownList.Items.Clear();
             DeliveryDropDownList.Items.Add(new ListItem("-- No Item Selected --", "-1"));
             customer.OutletStore.ForEach(outletStoreAction);
-          
+
             OrderNotesStatusUI orderNotesStatusUI = new OrderNotesStatusUI();
             if (orderNotesStatusUI.OrderNoteExistsByOrderID(OrderID.Value))
             {
