@@ -118,7 +118,7 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
         {
             this.OrderID = -1;
             this.CreditNoteID = -1;
-        }      
+        }
     }
 
     #endregion
@@ -237,7 +237,7 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
         DropDownList quantityToCreditDropDownList = panelMessage.FindControl("QuantityToCreditDropDownList") as DropDownList;
         int selectedNoOfUnits = Convert.ToInt32(quantityToCreditDropDownList.SelectedValue.ToString());
 
-        // Next create or updat credit note order Line           
+        // Next create or update credit note order Line           
         var orderLine = OrderCreditNoteLineUI.GetById(creditNoteLineId);
         if ((orderLine.NoOfUnits - selectedNoOfUnits) == 0)
         {
@@ -248,6 +248,11 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
             OrderCreditNoteLine orderCreditNoteLine = OrderCreditNoteLineUI.GetCreditNoteLineByOrderIdAndOrderLineId(credtNoteId, orderLine.OrderLineID);
             orderCreditNoteLine.NoOfUnits -= selectedNoOfUnits;
             OrderCreditNoteLineUI.Update(orderCreditNoteLine);
+
+            var product = new ProductUI().GetProductByID(orderCreditNoteLine.ProductID);
+
+            AuditEventsUI.LogEvent("Upating Order Credit Note line", product.Description, Page.ToString(),
+                   AuditEventsUI.AuditEventType.Creating);
         }
 
         this.DataBind();
@@ -288,6 +293,11 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
                 OrderCreditNoteLine orderCreditNoteLine = OrderCreditNoteLineUI.GetCreditNoteLineByOrderIdAndOrderLineId(credtNoteId, orderLineId);
                 orderCreditNoteLine.NoOfUnits += selectedNoOfUnits;
                 OrderCreditNoteLineUI.Update(orderCreditNoteLine);
+
+                var product = new ProductUI().GetProductByID(orderCreditNoteLine.ProductID);
+
+                AuditEventsUI.LogEvent("Upating Order Credit Note line", product.Description, Page.ToString(),
+                  AuditEventsUI.AuditEventType.Modifying);
             }
             else
             {
@@ -303,6 +313,11 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
                                                   Price = orderLine.Price
                                               };
                 OrderCreditNoteLineUI.SaveOrderCreditNoteLine(orderCreditNoteLine);
+
+                var product = new ProductUI().GetProductByID(orderCreditNoteLine.ProductID);
+
+                AuditEventsUI.LogEvent("Created Order Credit Note line", product.Description, Page.ToString(),
+                  AuditEventsUI.AuditEventType.Creating);
             }
 
             this.DataBind();
@@ -319,7 +334,10 @@ public partial class Controls_ModifyOrderCreditNoteLines : System.Web.UI.UserCon
     }
 
     protected void DeleteOrderCreditLineButton_Click(object sender, EventArgs e)
-    {
+    {       
+        AuditEventsUI.LogEvent("Deleting Order Credit Note line", "Credit note line", Page.ToString(),
+          AuditEventsUI.AuditEventType.Deleting);
+
         int creditNoteLineId = Convert.ToInt32(this.CreditNoteLinesGridView.SelectedDataKey.Value);
         OrderCreditNoteLineUI.DeleteOrderCreditNoteLine(creditNoteLineId);
         this.DataBind();
