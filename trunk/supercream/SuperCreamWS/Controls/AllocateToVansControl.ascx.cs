@@ -64,6 +64,9 @@ public partial class Controls_AllocateToVansControl : System.Web.UI.UserControl
 
             VanAllocatedFromListBox.Items.Remove(listItem);
 
+            AuditEventsUI.LogEvent("Allocated item to", listItem.Text, Page.ToString(),
+                  AuditEventsUI.AuditEventType.Modifying);
+
             DataBind();
         }
     }
@@ -87,6 +90,9 @@ public partial class Controls_AllocateToVansControl : System.Web.UI.UserControl
             listItem.Selected = false;
 
             VanAllocatedToListBox.Items.Remove(listItem);
+
+            AuditEventsUI.LogEvent("Allocated item from", listItem.Text, Page.ToString(),
+                 AuditEventsUI.AuditEventType.Modifying);
 
             DataBind();
         }
