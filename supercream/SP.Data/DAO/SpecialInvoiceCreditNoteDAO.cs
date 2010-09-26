@@ -49,6 +49,7 @@ namespace SP.Data.LTS
                                    InvoiceNo = sih.InvoiceNo,
                                    CustomerName = c.Name,
                                    DateCreated = cr.DateCreated,
+                                   DueDate = cr.DueDate,
                                    Reference = cr.Reference
                                });
 
@@ -183,12 +184,12 @@ namespace SP.Data.LTS
 
             if (dateFrom != DateTime.MinValue)
             {
-                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.DateCreated >= dateFrom);
+                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.DueDate >= dateFrom);
             }
 
             if (dateTo != DateTime.MinValue)
             {
-                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.DateCreated <= dateTo);
+                filteredCreditNotes = filteredCreditNotes.Where<SpecialInvoiceCreditNoteDetails>(q => q.DueDate <= dateTo);
             }
 
             return filteredCreditNotes;
@@ -211,7 +212,7 @@ namespace SP.Data.LTS
             {
                 creditTotal = Math.Round((from cr in db.SpecialInvoiceCreditNote
                                           where cr.SpecialInvoiceID == specialInvoiceId
-                                          select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * vatRate)).Sum(), 2);
+                                          select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * (1 + ((decimal)vatRate/(decimal)100.0)))).Sum(), 2);
             }
             return creditTotal;
         }

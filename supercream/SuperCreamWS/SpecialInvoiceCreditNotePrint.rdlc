@@ -237,7 +237,7 @@
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
       </rd:DataSetInfo>
-    </DataSet>  
+    </DataSet>
   </DataSets>
   <Code />
   <Width>20.5cm</Width>
@@ -292,7 +292,7 @@
           <Textbox Name="textbox25">
             <rd:DefaultName>textbox25</rd:DefaultName>
             <Top>0.20423cm</Top>
-            <Width>1.8cm</Width>
+            <Width>2.5cm</Width>
             <Style>
               <FontWeight>700</FontWeight>
             </Style>
@@ -300,7 +300,7 @@
             <CanGrow>true</CanGrow>
             <Left>14.4cm</Left>
             <Height>0.4cm</Height>
-            <Value>Line Total</Value>
+            <Value>Total Amount</Value>
           </Textbox>
           <Textbox Name="VatableAmount">
             <rd:DefaultName>VatableAmount</rd:DefaultName>
