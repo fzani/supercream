@@ -1013,7 +1013,7 @@
                                 <PaddingBottom>2pt</PaddingBottom>
                               </Style>
                               <CanGrow>true</CanGrow>
-                              <Value>Price</Value>
+                              <Value>Net Price</Value>
                             </Textbox>
                           </ReportItems>
                         </TableCell>
@@ -1055,7 +1055,7 @@
                                 <PaddingBottom>2pt</PaddingBottom>
                               </Style>
                               <CanGrow>true</CanGrow>
-                              <Value>Net Price</Value>
+                              <Value>Total Price</Value>
                             </Textbox>
                           </ReportItems>
                         </TableCell>
