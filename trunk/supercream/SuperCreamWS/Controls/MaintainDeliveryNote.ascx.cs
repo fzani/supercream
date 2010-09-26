@@ -96,6 +96,11 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             OrderNotesStatusUI ui = new OrderNotesStatusUI();
             ui.Save(status);
 
+            var orderHeader = new OrderHeaderUI().GetById(OrderID.Value);
+
+            AuditEventsUI.LogEvent("Created Delivery Note", orderHeader.DeliveryNoteNo, Page.ToString(),
+                    AuditEventsUI.AuditEventType.Creating);
+
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
 
@@ -138,6 +143,10 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             OrderNotesStatusUI ui = new OrderNotesStatusUI();
             ui.Update(status);
 
+            var orderHeader = new OrderHeaderUI().GetById(OrderID.Value);
+            AuditEventsUI.LogEvent("Updated Delivery Note", orderHeader.DeliveryNoteNo, Page.ToString(),
+                  AuditEventsUI.AuditEventType.Modifying);
+
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
         }
@@ -161,6 +170,10 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             header.OrderStatus = (short)SP.Core.Enums.OrderStatus.Order;
             orderHeaderUI.UpdateForInvoice(header);
 
+            var orderHeader = new OrderHeaderUI().GetById(OrderID.Value);
+            AuditEventsUI.LogEvent("Cancelling Delivery Note", header.DeliveryNoteNo, Page.ToString(),
+                  AuditEventsUI.AuditEventType.Deleting);
+
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
 
@@ -179,7 +192,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
         this.InvoiceDateTextBox.Text = DateTime.Now.AddDays(1).ToString();
         ModalPopupExtenderCreateInvoice.Show();
     }
-    
+
     protected void ConvertToInvoice_Click(object sender, EventArgs e)
     {
         try
@@ -195,6 +208,10 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             {
                 orderHeaderUi.CreateInvoice(OrderID.Value, DateTime.Parse(InvoiceDateTextBox.Text));
             }
+
+            var orderHeader = new OrderHeaderUI().GetById(OrderID.Value);
+            AuditEventsUI.LogEvent("Convert to invoice", orderHeader.DeliveryNoteNo, Page.ToString(),
+                  AuditEventsUI.AuditEventType.Modifying);
 
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
@@ -274,6 +291,9 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             orderNoteStatus.DeliveryNoteDatePrinted = DateTime.Now;
             orderNoteStatus.DeliveryNotePrinted = true;
             ui.Update(orderNoteStatus);
+          
+            AuditEventsUI.LogEvent("Printing invoice", orderHeader.DeliveryNoteNo, Page.ToString(),
+                  AuditEventsUI.AuditEventType.Modifying);
 
             PrintDeliveryNoteButton.Visible = true;
             //// NewPrinting.Run(@"Report1.rdlc", "\\\\paris\\Samsung CLP-310 Series", ds.Tables[0], "SuperCreamDBDataSet_InvoiceHeader"); 
