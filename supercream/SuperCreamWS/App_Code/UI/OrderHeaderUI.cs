@@ -314,6 +314,36 @@ public class OrderHeaderUI : IDisposable
         }
     }
 
+    public List<OrderHeader> SearchInvoices(string orderHeader, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo,
+        short actualOrderStatus, short printedOrderStatus)
+    {
+        using (_proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            if (actualOrderStatus == (short)SP.Core.Enums.OrderStatus.ProformaInvoice ||
+                (printedOrderStatus == (short)SP.Core.Enums.OrderStatus.ProformaInvoice) ||
+                (actualOrderStatus == (short)SP.Core.Enums.OrderStatus.Invoice) ||
+                (printedOrderStatus == (short)SP.Core.Enums.OrderStatus.ProformaInvoice) ||
+                (actualOrderStatus == (short)SP.Core.Enums.OrderStatus.DeliveryNote) ||
+                (printedOrderStatus == (short)SP.Core.Enums.OrderStatus.DeliveryNotePrinted)
+                )
+            {
+                var list = _proxy.SearchInvoices(orderHeader,
+                    invoiceNo, customerName, dateFrom, dateTo, actualOrderStatus, printedOrderStatus)
+                        .OrderByDescending(q => q.LastModifiedDate);
+                return list.ToList<OrderHeader>();
+            }
+            else
+            {
+                return
+                    _proxy.GetOrderHeaderForSearchWithPrintedOrderStatuses(orderHeader, invoiceNo, customerName,
+                                                                           dateFrom, dateTo, actualOrderStatus,
+                                                                           printedOrderStatus)
+                        .OrderByDescending(q => q.LastModifiedDate)
+                        .ToList();
+            }
+        }
+    }
+
     Decimal CalculateDiscount(Decimal discount, Decimal unitPrice)
     {
         return Math.Round(unitPrice - ((unitPrice / 100) * discount), 2);
