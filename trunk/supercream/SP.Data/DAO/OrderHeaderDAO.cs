@@ -185,6 +185,62 @@ namespace SP.Data.LTS
             }
         }
 
+
+        public List<OrderHeader> SearchInvoices(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short actualOrderStatus, short printedOrderStatus)
+        {
+            using (SqlConnection conn = new SqlConnection(db.Connection.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand("[dbo].[GetInvoices]", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter myParm1 = cmd.Parameters.Add("@OrderID", System.Data.SqlDbType.VarChar, 50);
+                if (String.IsNullOrEmpty(orderNo))
+                    myParm1.Value = DBNull.Value;
+                else
+                    myParm1.Value = orderNo;
+                cmd.Parameters[0].IsNullable = true;
+
+                SqlParameter myParm2 = cmd.Parameters.Add("@InvoiceNo", System.Data.SqlDbType.VarChar, 50);
+                if (String.IsNullOrEmpty(invoiceNo))
+                    myParm2.Value = DBNull.Value;
+                else
+                    myParm2.Value = invoiceNo;
+                cmd.Parameters[0].IsNullable = true;
+
+                cmd.Parameters.Add("@CustomerName", System.Data.SqlDbType.VarChar, 50);
+                if (String.IsNullOrEmpty(customerName))
+                    cmd.Parameters["@CustomerName"].Value = DBNull.Value;
+                else
+                    cmd.Parameters["@CustomerName"].Value = customerName;
+                cmd.Parameters[1].IsNullable = true;
+
+                cmd.Parameters.Add("@ActualOrderStatus", System.Data.SqlDbType.SmallInt);
+                cmd.Parameters["@ActualOrderStatus"].Value = actualOrderStatus;
+
+                cmd.Parameters.Add("@PrintedOrderStatus", System.Data.SqlDbType.SmallInt);
+                cmd.Parameters["@PrintedOrderStatus"].Value = printedOrderStatus;
+
+                cmd.Parameters.Add("@DateFrom", System.Data.SqlDbType.DateTime, 20);
+                cmd.Parameters["@DateFrom"].IsNullable = true;
+                if (dateFrom == DateTime.MinValue)
+                    cmd.Parameters["@DateFrom"].Value = DBNull.Value;
+                else
+                    cmd.Parameters["@DateFrom"].Value = dateFrom;
+
+                cmd.Parameters.Add("@DateTo", System.Data.SqlDbType.DateTime, 20);
+                cmd.Parameters["@DateTo"].IsNullable = true;
+                if (dateTo == DateTime.MinValue)
+                    cmd.Parameters["@DateTo"].Value = DBNull.Value;
+                else
+                    cmd.Parameters["@DateTo"].Value = dateTo;
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                return db.Translate<OrderHeader>(reader).ToList<OrderHeader>();
+            }
+        }
+
         public List<InvoiceWithStatus> GetInvoicesWithStatus(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus)
         {
             DataLoadOptions dlo = new DataLoadOptions();

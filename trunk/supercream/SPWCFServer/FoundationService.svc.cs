@@ -1480,6 +1480,22 @@ namespace SPWCFServer
             }
         }
 
+        public List<OrderHeader> SearchInvoices(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short actualOrderStatus, short printedOrderStatus)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+
+                List<SP.Core.Domain.OrderHeader> orderHeader = mgr.SearchInvoices(orderNo, invoiceNo, customerName, dateFrom, dateTo, actualOrderStatus, printedOrderStatus).OrderByDescending(o => o.OrderDate).ThenByDescending(o => o.AlphaID).ToList<SP.Core.Domain.OrderHeader>();
+                return ObjectExtension.CloneList<SP.Core.Domain.OrderHeader, SPWCFServer.OrderHeader>(orderHeader);
+            }
+            catch (Exception ex)
+            {
+                // Log full Exception to be done ...
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public void DeleteOrderHeader(OrderHeader orderHeader)
         {
             try
