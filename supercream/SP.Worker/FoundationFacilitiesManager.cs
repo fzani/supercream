@@ -219,7 +219,7 @@ namespace SP.Worker
             return auditEventsDao.Update(newAuditEvents, origAuditEvents);
         }
 
-        #endregion        
+        #endregion
 
         #region IContactDetails
 
@@ -841,6 +841,13 @@ namespace SP.Worker
             IOrderHeaderDao orderHeaderDao = factory.GetOrderHeaderDao();
 
             return orderHeaderDao.GetAll().OrderByDescending(q => q.OrderDate).ThenBy(q => q.AlphaID).ToList<OrderHeader>();
+        }
+
+        public List<OrderHeader> SearchInvoices(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short actualOrderStatus, short printedOrderStatus)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOrderHeaderDao dao = new OrderHeaderDao();
+            return dao.SearchInvoices(orderNo, invoiceNo, customerName, dateFrom, dateTo, actualOrderStatus, printedOrderStatus);
         }
 
         public OrderHeader GetOrderHeaderByOrderNo(string orderNo)
@@ -1473,8 +1480,8 @@ namespace SP.Worker
 
             if (validateNoteDao.CheckIfReferenceExists(specialinvoicecreditnote.Reference))
                 throw new ApplicationException("Cannot add Special Invoice Credit note - Credit Reference is already in use");
-            specialinvoicecreditnote.Reference = specialInvoiceCreditNoteDao.GenerateSpecialInvoiceCreditNo();           
-            
+            specialinvoicecreditnote.Reference = specialInvoiceCreditNoteDao.GenerateSpecialInvoiceCreditNo();
+
             return specialInvoiceCreditNoteDao.Save(specialinvoicecreditnote);
         }
 
@@ -1550,7 +1557,7 @@ namespace SP.Worker
             return creditNoteDao.CheckIfReferenceExists(referenceNo);
         }
 
-        public SpecialInvoiceCreditNote SpecialInvoieceGetByReferenceId(string reference)       
+        public SpecialInvoiceCreditNote SpecialInvoieceGetByReferenceId(string reference)
         {
             IDaoFactory factory = new LTSDaoFactory();
             ISpecialInvoiceCreditNoteDao creditNoteDao = factory.GetSpecialInvoiceCreditNoteDao();
@@ -1922,6 +1929,6 @@ namespace SP.Worker
             return Convert.ToDecimal(vatCode.PercentageValue);
         }
 
-        #endregion               
+        #endregion
     }
 }

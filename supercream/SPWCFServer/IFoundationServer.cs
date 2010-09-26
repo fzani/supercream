@@ -375,6 +375,11 @@ namespace SPWCFServer
 
         [OperationContract]
         [ReferencePreservingDataContractFormat]
+        List<OrderHeader> SearchInvoices(string orderNo, string invoiceNo, string customerName, DateTime dateFrom,
+                                         DateTime dateTo, short actualOrderStatus, short printedOrderStatus);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
         bool InvoiceNoExists(string invoiceNo);
 
         [OperationContract]

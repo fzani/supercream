@@ -140,6 +140,8 @@ namespace SP.Core.ManagerInterfaces
         OrderHeader GetOrderHeaderByOrderNo(string orderNo);
         List<OrderHeader> GetOrderHeaderForSearch(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short orderStatus);
         List<OrderHeader> GetOrderHeaderForSearchWithPrintedOrderStatuses(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo, short actualOrderStatus, short printedOrderStatus);
+        List<OrderHeader> SearchInvoices(string orderNo, string invoiceNo, string customerName, DateTime dateFrom,
+                                         DateTime dateTo, short actualOrderStatus, short printedOrderStatus);
         List<SP.Core.Domain.OrderHeader> GetAllOrderHeaders();
         SP.Core.Domain.OrderHeader SaveOrderHeader(OrderHeader orderHeader);
         OrderHeader UpdateOrderHeader(OrderHeader newOrderHeader, OrderHeader origOrderHeader);
