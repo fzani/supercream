@@ -521,6 +521,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
     #region Invoice Repeater Event Handlers
 
     int totalRowCount = 0;
+    int totalUnits = 0;
 
     protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
@@ -528,7 +529,10 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
         {
             totalRowCount++;
 
-            OrderLine line = e.Item.DataItem as OrderLine;
+            var line = e.Item.DataItem as OrderLine;
+
+            if(line != null)
+                totalUnits += line.NoOfUnits;
 
             ProductUI ui = new ProductUI();
             Product p = ui.GetProductByID(line.ProductID);
@@ -561,7 +565,7 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
         if (e.Item.ItemType == ListItemType.Footer)
         {
             Label totalItemsLabel = e.Item.FindControl("TotalItemsLabel") as Label;
-            totalItemsLabel.Text = totalRowCount.ToString();
+            totalItemsLabel.Text = totalUnits.ToString();
 
             if (OrderID != -1)
             {
@@ -576,6 +580,8 @@ public partial class Controls_MaintainDeliveryNote : System.Web.UI.UserControl
             }
 
             totalRowCount = 0;
+            totalUnits = 0;
+
         }
     }
     #endregion
