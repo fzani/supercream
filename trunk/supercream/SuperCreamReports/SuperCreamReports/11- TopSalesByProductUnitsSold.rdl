@@ -17,36 +17,44 @@
           <DataField>Description</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Units">
-          <DataField>Units</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="ExVatPrice">
+          <DataField>ExVatPrice</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="PriceInclVat">
+          <DataField>PriceInclVat</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
         </Field>
       </Fields>
       <Query>
         <DataSourceName>SCDataSource</DataSourceName>
-        <CommandText>WITH CTE(ProductCode, Description, Units) AS 
+        <CommandText>WITH cte(ProductCode, Description, ExVatPrice, PriceInclVat) AS 
 (
-	SELECT TOP 1000 
+	select top 1000 
 		p.ProductCode,
 		p.Description
-		,SUM(ol.NoOfUnits - ISNULL(ocnl.NoOfUnits,0)) AS Units			
+		,sum(case when p.VatExempt = 1 then round((ol.Price * ol.NoOfUnits) - isnull(ocnl.Price, 0),2)
+		else round((ol.Price * ol.NoOfUnits) - isnull(ocnl.Price, 0),2) end) 
+						
+		,sum(case when p.VatExempt = 1 then round((ol.Price * ol.NoOfUnits) - isnull(ocnl.Price, 0),2)
+		else round((ol.Price * ol.NoOfUnits * (1 + (v.PercentageValue/ 100.0))) - isnull(ocnl.Price, 0) * (1 + (v.PercentageValue/ 100.0)),2) end) 		
   FROM [SuperCreamDB].[dbo].[OrderHeader] oh
-  INNER JOIN OrderLine ol ON
+  inner join OrderLine ol on
 	oh.ID = ol.OrderID
-  INNER JOIN Product p ON p.ID = ol.ProductID  
+  inner join Product p on p.ID = ol.ProductID
+  inner join VatCode v on oh.VatCodeID = v.ID	
   left join OrderCreditNoteLine ocnl on
-		ol.ID = ocnl.OrderLineID		
-    
-  WHERE oh.OrderStatus IN (2,3,6,7)  
-  AND  oh.DeliveryDate &gt;= @DateStarted AND oh.DeliveryDate &lt;= @DateEnded
-  GROUP BY p.ProductCode, p.Description	   
+		ol.ID = ocnl.OrderLineID	  
+  where oh.OrderStatus IN (2,3,6,7)  
+	and  oh.DeliveryDate &gt;= @DateStarted AND oh.DeliveryDate &lt;= @DateEnded	
+  group BY p.ProductCode, p.Description, p.VatExempt	   
    )
-   SELECT ProductCode, Description, Units FROM CTE
-   WHERE  ((ISNULL(@UnitValue, '-1')) = '-1' OR Units &gt;= @UnitValue)
-   ORDER BY Units DESC;</CommandText>
+   SELECT * FROM cte  
+	  where ((ISNULL(@PriceValue, '-1')) = '-1' OR PriceInclVat &gt;= @PriceValue)
+   ORDER BY ExVatPrice DESC;</CommandText>
         <QueryParameters>
-          <QueryParameter Name="@UnitValue">
-            <Value>=Parameters!UnitValue.Value</Value>
+          <QueryParameter Name="@PriceValue">
+            <Value>=Parameters!PriceValue.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@DateStarted">
             <Value>=Parameters!DateStarted.Value</Value>
@@ -65,13 +73,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.15625in</Width>
+              <Width>1.17708in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>6.8125in</Width>
+              <Width>4.26042in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.46875in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.375in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -107,7 +118,7 @@
                           <Width>2pt</Width>
                         </TopBorder>
                         <BottomBorder>
-                          <Width>4pt</Width>
+                          <Width>3pt</Width>
                         </BottomBorder>
                         <LeftBorder>
                           <Width>2pt</Width>
@@ -152,7 +163,54 @@
                           <Width>2pt</Width>
                         </TopBorder>
                         <BottomBorder>
-                          <Width>4pt</Width>
+                          <Width>3pt</Width>
+                        </BottomBorder>
+                        <LeftBorder>
+                          <Width>2pt</Width>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Width>2pt</Width>
+                        </RightBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Price (Ex. Vat)</Value>
+                              <Style>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <TopBorder>
+                          <Width>2pt</Width>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Width>3pt</Width>
                         </BottomBorder>
                         <LeftBorder>
                           <Width>2pt</Width>
@@ -177,15 +235,13 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Units</Value>
+                              <Value>Price (incl. Vat)</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <LeftIndent>0cm</LeftIndent>
-                          <HangingIndent>0cm</HangingIndent>
                           <Style>
                             <TextAlign>Left</TextAlign>
                           </Style>
@@ -201,7 +257,7 @@
                           <Width>2pt</Width>
                         </TopBorder>
                         <BottomBorder>
-                          <Width>4pt</Width>
+                          <Width>3pt</Width>
                         </BottomBorder>
                         <LeftBorder>
                           <Width>2pt</Width>
@@ -234,6 +290,7 @@
                               <Value>=Fields!ProductCode.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -246,6 +303,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -288,14 +346,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Price">
+                    <Textbox Name="ExVatPrice">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Units.Value</Value>
+                              <Value>=Fields!ExVatPrice.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                               </Style>
@@ -304,7 +362,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Price</rd:DefaultName>
+                      <rd:DefaultName>ExVatPrice</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -314,6 +372,40 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="PriceInclVat">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!PriceInclVat.Value</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <Format>'£'0.00;('£'0.00)</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>PriceInclVat</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-GB</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -335,6 +427,7 @@
                               <Value />
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -344,8 +437,14 @@
                       <rd:DefaultName>Textbox2</rd:DefaultName>
                       <Style>
                         <Border>
+                          <Color>LightGrey</Color>
                           <Style>Solid</Style>
+                          <Width>3pt</Width>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BackgroundColor>#eaeaea</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -375,8 +474,13 @@
                       <rd:DefaultName>Textbox3</rd:DefaultName>
                       <Style>
                         <Border>
+                          <Color>LightGrey</Color>
                           <Style>Solid</Style>
+                          <Width>3pt</Width>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -394,11 +498,11 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!Units.Value)</Value>
+                              <Value>=Sum(Fields!ExVatPrice.Value)</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>0.00;(0.00)</Format>
+                                <Format>'£'0.00;('£'0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -408,12 +512,57 @@
                       <rd:DefaultName>Textbox4</rd:DefaultName>
                       <Style>
                         <Border>
+                          <Color>LightGrey</Color>
                           <Style>Solid</Style>
+                          <Width>3pt</Width>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-GB</rd:FormatSymbolCulture>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox5">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Sum(Fields!PriceInclVat.Value)</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                                <Format>'£'0.00;('£'0.00)</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox5</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                          <Width>3pt</Width>
+                        </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-GB</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -424,6 +573,7 @@
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -453,9 +603,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>5.735in</Top>
+        <Top>6.74542in</Top>
+        <Left>0.39688cm</Left>
         <Height>0.68in</Height>
-        <Width>8.96875in</Width>
+        <Width>8.28125in</Width>
         <Style />
       </Tablix>
       <Textbox Name="textbox1">
@@ -465,7 +616,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Top Sales By Product Quantity</Value>
+                <Value>Top Sales By Product Units Sold</Value>
                 <Style>
                   <FontSize>16pt</FontSize>
                   <FontWeight>Bold</FontWeight>
@@ -476,9 +627,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>textbox1</rd:DefaultName>
-        <Left>0.3175cm</Left>
+        <Top>0.26458cm</Top>
+        <Left>0.39688cm</Left>
         <Height>0.36in</Height>
-        <Width>5in</Width>
+        <Width>4.57291in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <PaddingLeft>2pt</PaddingLeft>
@@ -487,43 +639,11 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox6">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>The folllowing Report details Product Units Sold. Dates ranges selected, reflect Delivery Dates for Products.</Value>
-                <Style>
-                  <FontStyle>Italic</FontStyle>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox6</rd:DefaultName>
-        <Top>0.42944in</Top>
-        <Left>0.12333in</Left>
-        <Height>0.40625in</Height>
-        <Width>5.80542in</Width>
-        <ZIndex>2</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Chart Name="Chart2">
+      <Chart Name="Chart1">
         <ChartCategoryHierarchy>
           <ChartMembers>
             <ChartMember>
-              <Group Name="Chart2_CategoryGroup1">
+              <Group Name="Chart1_CategoryGroup1">
                 <GroupExpressions>
                   <GroupExpression>=Fields!Description.Value</GroupExpression>
                 </GroupExpressions>
@@ -535,17 +655,17 @@
         <ChartSeriesHierarchy>
           <ChartMembers>
             <ChartMember>
-              <Label>Units</Label>
+              <Label>Ex Vat Price</Label>
             </ChartMember>
           </ChartMembers>
         </ChartSeriesHierarchy>
         <ChartData>
           <ChartSeriesCollection>
-            <ChartSeries Name="Units">
+            <ChartSeries Name="ExVatPrice">
               <ChartDataPoints>
                 <ChartDataPoint>
                   <ChartDataPointValues>
-                    <Y>=Sum(Fields!Units.Value)</Y>
+                    <Y>=Sum(Fields!ExVatPrice.Value)</Y>
                   </ChartDataPointValues>
                   <ChartDataLabel>
                     <Style />
@@ -558,7 +678,7 @@
                 </ChartDataPoint>
               </ChartDataPoints>
               <Type>Shape</Type>
-              <Subtype>Funnel</Subtype>
+              <Subtype>ExplodedPie</Subtype>
               <Style />
               <ChartEmptyPoints>
                 <Style />
@@ -716,9 +836,6 @@
                 <Maximum>NaN</Maximum>
               </ChartAxis>
             </ChartValueAxes>
-            <ChartThreeDProperties>
-              <Enabled>true</Enabled>
-            </ChartThreeDProperties>
             <Style>
               <BackgroundGradientType>None</BackgroundGradientType>
             </Style>
@@ -770,11 +887,11 @@
           </Style>
         </ChartNoDataMessage>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.96542in</Top>
-        <Left>0.125in</Left>
-        <Height>4.65625in</Height>
-        <Width>6.32292in</Width>
-        <ZIndex>3</ZIndex>
+        <Top>0.98278in</Top>
+        <Left>0.15625in</Left>
+        <Height>5.53347in</Height>
+        <Width>6.65625in</Width>
+        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Color>LightGrey</Color>
@@ -784,8 +901,40 @@
           <BackgroundGradientType>None</BackgroundGradientType>
         </Style>
       </Chart>
+      <Textbox Name="Textbox6">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>The folllowing Report details Sales by Delivery Date. Dates ranges selected, reflect Delivery Dates for Products.</Value>
+                <Style>
+                  <FontStyle>Italic</FontStyle>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox6</rd:DefaultName>
+        <Top>0.50708in</Top>
+        <Left>0.15292in</Left>
+        <Height>0.40625in</Height>
+        <Width>5.80542in</Width>
+        <ZIndex>3</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>6.415in</Height>
+    <Height>7.56084in</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -793,7 +942,7 @@
       <DataType>DateTime</DataType>
       <DefaultValue>
         <Values>
-          <Value>=DateAdd(DateInterval.Month, -1,Today)</Value>
+          <Value>=DateAdd(DateInterval.Month, -1, Today)</Value>
         </Values>
       </DefaultValue>
       <Prompt>Date Started</Prompt>
@@ -807,7 +956,7 @@
       </DefaultValue>
       <Prompt>Date Ended</Prompt>
     </ReportParameter>
-    <ReportParameter Name="UnitValue">
+    <ReportParameter Name="PriceValue">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <DefaultValue>
@@ -815,10 +964,10 @@
           <Value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
         </Values>
       </DefaultValue>
-      <Prompt>Unit Value &gt;= </Prompt>
+      <Prompt>Price (Incl Vat.) Value &gt;= </Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>8.96875in</Width>
+  <Width>8.5625in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -826,7 +975,6 @@
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
-  <Language>en-US</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportID>72a40e84-30ea-4f88-ad28-6c3cbe878412</rd:ReportID>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
