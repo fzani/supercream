@@ -13,80 +13,76 @@
       <FullPath>01 - PickList.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>02 - Ledger Totals.rdl</Name>
-      <FullPath>02 - Ledger Totals.rdl</FullPath>
+      <Name>18 - Ledger Totals.rdl</Name>
+      <FullPath>18 - Ledger Totals.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>04 - CustomerTopSellingProducts.rdl</Name>
-      <FullPath>04 - CustomerTopSellingProducts.rdl</FullPath>
+      <Name>02 - VanLoadInvoicesSummary.rdl</Name>
+      <FullPath>02 - VanLoadInvoicesSummary.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>05 - TopSalesByProductQuantity.rdl</Name>
-      <FullPath>05 - TopSalesByProductQuantity.rdl</FullPath>
+      <Name>03 - VanLoadInvoicesDetail.rdl</Name>
+      <FullPath>03 - VanLoadInvoicesDetail.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>06 - CustomerProductSalesOverPeriod.rdl</Name>
-      <FullPath>06 - CustomerProductSalesOverPeriod.rdl</FullPath>
+      <Name>05 - ProductUnitsSold.rdl</Name>
+      <FullPath>05 - ProductUnitsSold.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>07 - Top10CustomersBySales.rdl</Name>
-      <FullPath>07 - Top10CustomersBySales.rdl</FullPath>
+      <Name>06 -ProductUnitsSoldByCustomer.rdl</Name>
+      <FullPath>06 -ProductUnitsSoldByCustomer.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>08 - CustomersBySales.rdl</Name>
-      <FullPath>08 - CustomersBySales.rdl</FullPath>
+      <Name>07 - CustomerTimeSeriesAnalysis.rdl</Name>
+      <FullPath>07 - CustomerTimeSeriesAnalysis.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>09 - Top10VatExempt.rdl</Name>
-      <FullPath>09 - Top10VatExempt.rdl</FullPath>
+      <Name>08 - Top10CustomersBySales.rdl</Name>
+      <FullPath>08 - Top10CustomersBySales.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>10 - TopSalesByProductDelivered.rdl</Name>
-      <FullPath>10 - TopSalesByProductDelivered.rdl</FullPath>
+      <Name>09 - CustomersBySales.rdl</Name>
+      <FullPath>09 - CustomersBySales.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>04 - VanLoadOverPeriod.rdl</Name>
-      <FullPath>04 - VanLoadOverPeriod.rdl</FullPath>
+      <Name>10 - Top10VatExempt.rdl</Name>
+      <FullPath>10 - Top10VatExempt.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>12 - VanCashReceiptsOverPeriod.rdl</Name>
-      <FullPath>12 - VanCashReceiptsOverPeriod.rdl</FullPath>
+      <Name>11- TopSalesByProductUnitsSold.rdl</Name>
+      <FullPath>11- TopSalesByProductUnitsSold.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>13 - DeliveryNotesOnVarOverPeriod.rdl</Name>
-      <FullPath>13 - DeliveryNotesOnVarOverPeriod.rdl</FullPath>
+      <Name>04 - VanLoadDeliveryNotes.rdl</Name>
+      <FullPath>04 - VanLoadDeliveryNotes.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>14 - CustomerContactReport.rdl</Name>
-      <FullPath>14 - CustomerContactReport.rdl</FullPath>
+      <Name>12 - CustomerContactReport.rdl</Name>
+      <FullPath>12 - CustomerContactReport.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>15 - VoidOrders.rdl</Name>
-      <FullPath>15 - VoidOrders.rdl</FullPath>
+      <Name>13 - VoidOrders.rdl</Name>
+      <FullPath>13 - VoidOrders.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>16 - PaymentsOutstanding.rdl</Name>
-      <FullPath>16 - PaymentsOutstanding.rdl</FullPath>
+      <Name>16 - PaymentDetailsOutstanding.rdl</Name>
+      <FullPath>16 - PaymentDetailsOutstanding.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>17 - PaymentsOutstandingSummary.rdl</Name>
-      <FullPath>17 - PaymentsOutstandingSummary.rdl</FullPath>
+      <Name>15 - PaymentsOutstandingSummary.rdl</Name>
+      <FullPath>15 - PaymentsOutstandingSummary.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>18 - PaymentsOutstandingSummaryByCustomer.rdl</Name>
-      <FullPath>18 - PaymentsOutstandingSummaryByCustomer.rdl</FullPath>
+      <Name>17 - PaymentsOutstandingSummaryByCustomer.rdl</Name>
+      <FullPath>17 - PaymentsOutstandingSummaryByCustomer.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>19 - ArbitraryCreditNoteSummary.rdl</Name>
-      <FullPath>19 - ArbitraryCreditNoteSummary.rdl</FullPath>
+      <Name>14 - ArbitraryCreditNoteSummary.rdl</Name>
+      <FullPath>14 - ArbitraryCreditNoteSummary.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>SpecialInvoicePrintReport.rdl</Name>
       <FullPath>SpecialInvoicePrintReport.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>03 - VanLoadSummaryOverPeriod.rdl</Name>
-      <FullPath>03 - VanLoadSummaryOverPeriod.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
