@@ -186,10 +186,25 @@ namespace SP.Data.LTS
 
         private decimal GetOrderCreditNoteLinesExVatTotal(int orderCreditNoteId)
         {
-            return Math.Round((from ocn in db.OrderCreditNote
-                               join onl in db.OrderCreditNoteLine on ocn.ID equals onl.OrderCreditNoteID
-                               where ocn.ID == orderCreditNoteId
-                               select onl.Price * onl.NoOfUnits).Sum(), 2);
+            var creditNotelines = from ocn in db.OrderCreditNote
+                                  join onl in db.OrderCreditNoteLine on ocn.ID equals onl.OrderCreditNoteID
+                                  where ocn.ID == orderCreditNoteId
+                                  select onl;           
+
+            if(creditNotelines.Count() == 0)
+            {
+                return (decimal) 0.0;
+            }
+            else
+            {
+                return creditNotelines.Sum(q => q.NoOfUnits * q.Price);
+            }
+
+            var total = (from ocn in db.OrderCreditNote
+                         join onl in db.OrderCreditNoteLine on ocn.ID equals onl.OrderCreditNoteID
+                         where ocn.ID == orderCreditNoteId
+                         select onl.Price*onl.NoOfUnits).Sum();
+            return total;
         }
 
         private decimal GetOrderLinesExVatTotal(int orderCreditNoteId)

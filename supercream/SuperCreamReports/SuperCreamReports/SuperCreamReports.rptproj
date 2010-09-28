@@ -13,16 +13,16 @@
       <FullPath>01 - PickList.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>18 - Ledger Totals.rdl</Name>
-      <FullPath>18 - Ledger Totals.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>02 - VanLoadInvoicesSummary.rdl</Name>
       <FullPath>02 - VanLoadInvoicesSummary.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>03 - VanLoadInvoicesDetail.rdl</Name>
       <FullPath>03 - VanLoadInvoicesDetail.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>04 - VanLoadDeliveryNotes.rdl</Name>
+      <FullPath>04 - VanLoadDeliveryNotes.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>05 - ProductUnitsSold.rdl</Name>
@@ -53,10 +53,6 @@
       <FullPath>11- TopSalesByProductUnitsSold.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>04 - VanLoadDeliveryNotes.rdl</Name>
-      <FullPath>04 - VanLoadDeliveryNotes.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>12 - CustomerContactReport.rdl</Name>
       <FullPath>12 - CustomerContactReport.rdl</FullPath>
     </ProjectItem>
@@ -65,24 +61,32 @@
       <FullPath>13 - VoidOrders.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>16 - PaymentDetailsOutstanding.rdl</Name>
-      <FullPath>16 - PaymentDetailsOutstanding.rdl</FullPath>
+      <Name>14 - ArbitraryCreditNoteSummary.rdl</Name>
+      <FullPath>14 - ArbitraryCreditNoteSummary.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>15 - PaymentsOutstandingSummary.rdl</Name>
       <FullPath>15 - PaymentsOutstandingSummary.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>16 - PaymentDetailsOutstanding.rdl</Name>
+      <FullPath>16 - PaymentDetailsOutstanding.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>17 - PaymentsOutstandingSummaryByCustomer.rdl</Name>
       <FullPath>17 - PaymentsOutstandingSummaryByCustomer.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>14 - ArbitraryCreditNoteSummary.rdl</Name>
-      <FullPath>14 - ArbitraryCreditNoteSummary.rdl</FullPath>
+      <Name>19 - Ledger Totals.rdl</Name>
+      <FullPath>19 - Ledger Totals.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>SpecialInvoicePrintReport.rdl</Name>
       <FullPath>SpecialInvoicePrintReport.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>18 - SpecialInvoiceSummary.rdl</Name>
+      <FullPath>18 - SpecialInvoiceSummary.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
