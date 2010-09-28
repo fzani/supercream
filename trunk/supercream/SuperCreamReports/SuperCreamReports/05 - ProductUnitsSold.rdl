@@ -24,21 +24,47 @@
       </Fields>
       <Query>
         <DataSourceName>SCDataSource</DataSourceName>
-        <CommandText>WITH CTE(ProductCode, Description, Units) AS 
+        <CommandText>declare 		
+		@RecordCount int,
+		@ParamResult varchar(50)		
+
+	declare @ProductIdList table (id int)			
+ 
+    if @p_ProductIdList is not null
+
+    begin
+        set @RecordCount = 1
+        set @ParamResult = dbo.RPT_GetColonDelimitedParamItem(@p_ProductIdList, @RecordCount)
+ 
+        while @ParamResult IS NOT NULL
+        begin
+           insert into @ProductIdList (id) VALUES (@ParamResult)
+
+            set @RecordCount = @RecordCount + 1
+            set @ParamResult = dbo.RPT_GetColonDelimitedParamItem(@p_ProductIdList, @RecordCount)
+        end
+    end     ;
+    
+
+WITH CTE(ProductCode, Description, Units) AS 
 (
-	SELECT TOP 1000 
+	SELECT 
 		p.ProductCode,
 		p.Description
-		,SUM(ol.NoOfUnits - ISNULL(ocnl.NoOfUnits,0)) AS Units			
+		,SUM((ol.NoOfUnits) - isnull(ocnl.NoOfUnits,0)) AS Units			
   FROM [SuperCreamDB].[dbo].[OrderHeader] oh
   INNER JOIN OrderLine ol ON
 	oh.ID = ol.OrderID
   INNER JOIN Product p ON p.ID = ol.ProductID  
   left join OrderCreditNoteLine ocnl on
-		ol.ID = ocnl.OrderLineID		
+		ol.ID = ocnl.OrderLineID	
+  left join OrderCreditNote ocn on
+	ocnl.OrderCreditNoteID = ocn.ID	
     
-  WHERE oh.OrderStatus IN (2,3,6,7)  
-  AND  oh.DeliveryDate &gt;= @DateStarted AND oh.DeliveryDate &lt;= @DateEnded
+  WHERE oh.OrderStatus IN (2,3)  
+  and  (oh.DeliveryDate &gt;= @DateStarted AND oh.DeliveryDate &lt;= @DateEnded)
+  and (((ISNULL(ocn.DueDate, '01/01/01') = '01/01/01') OR (ocn.DueDate &gt; @DateStarted and ocn.DueDate &lt;= @DateEnded)))
+  and p.ID in (select id from @ProductIdList)
   GROUP BY p.ProductCode, p.Description	   
    )
    SELECT ProductCode, Description, Units FROM CTE
@@ -48,6 +74,9 @@
           <QueryParameter Name="@UnitValue">
             <Value>=Parameters!UnitValue.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@p_ProductIdList">
+            <Value>=Join(Parameters!p_ProductIdList.Value,":")</Value>
+          </QueryParameter>
           <QueryParameter Name="@DateStarted">
             <Value>=Parameters!DateStarted.Value</Value>
           </QueryParameter>
@@ -55,6 +84,23 @@
             <Value>=Parameters!DateEnded.Value</Value>
           </QueryParameter>
         </QueryParameters>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+    </DataSet>
+    <DataSet Name="ProductList">
+      <Fields>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="description">
+          <DataField>description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>SCDataSource</DataSourceName>
+        <CommandText>select id, description from product</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
     </DataSet>
@@ -494,7 +540,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>The folllowing Report details Product Units Sold. Dates ranges selected, reflect Delivery Dates for Products.</Value>
+                <Value>The folllowing Report details Product Units Sold. Dates ranges selected, reflect Delivery Dates for Products. The report takes account of any Credit Notes that are due over the period.</Value>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                 </Style>
@@ -816,6 +862,18 @@
         </Values>
       </DefaultValue>
       <Prompt>Unit Value &gt;= </Prompt>
+    </ReportParameter>
+    <ReportParameter Name="p_ProductIdList">
+      <DataType>String</DataType>
+      <Prompt>Product Ids</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>ProductList</DataSetName>
+          <ValueField>id</ValueField>
+          <LabelField>description</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
     </ReportParameter>
   </ReportParameters>
   <Width>8.96875in</Width>
