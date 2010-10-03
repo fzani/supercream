@@ -104,6 +104,9 @@
     <Compile Include="Domain\ContactDetailDTO.cs" />
     <Compile Include="Domain\AutoGenDTO.cs" />
     <Compile Include="Domain\AuditEventsArchiveDTO.cs" />
+    <Compile Include="Domain\OfferDTO.cs" />
+    <Compile Include="Domain\OfferItemDTO.cs" />
+    <Compile Include="Domain\OfferQualificationItemDTO.cs" />
     <Compile Include="Domain\VanDeliveryDTO.cs" />
     <Compile Include="Domain\SpecialInvoiceCreditNoteBalance.cs" />
     <Compile Include="Domain\SpecialInvoiceCreditNoteDetails.cs" />
