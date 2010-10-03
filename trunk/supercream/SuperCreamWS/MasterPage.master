@@ -64,7 +64,9 @@
                 <ul class="sidemenu">
                     <li><strong>Ordering</strong>
                         <br />
-                        <a href="~/Ordering/Orders.aspx" runat="server">Orders</a> </li>
+                        <a href="~/Ordering/Orders.aspx" runat="server">Orders</a> <br />
+                        <a id="A11" href="~/BundledOrders/BundledOrders.aspx" runat="server">Bundled Orders</a>
+                    </li>
                     <li><strong>Invoicing</strong>
                         <br />
                         <a id="A10" href="~/Invoices/CompleteInvoices.aspx" runat="server">Complete Invoices</a>

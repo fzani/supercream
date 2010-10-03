@@ -229,13 +229,16 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
         p.PassParameters();
     }
 
-    protected void DeleteButton_Click(object sender, EventArgs e)
+    protected void VoidOrderButton_Click(object sender, EventArgs e)
     {
         if (CreditNoteID != null)
         {
             CreditNoteUI ui = new CreditNoteUI();
             CreditNote creditNote = ui.GetCreditNote(this.CreditNoteID.Value);
-            ui.Delete(creditNote);
+
+            creditNote.IsVoid = true;
+            creditNote.Reason = ReasonforVoidingTextBox.Text;
+            ui.UpdateCreditNotes(creditNote);
 
             AuditEventsUI.LogEvent("Deleted Credit Note", creditNote.Reference, Page.ToString(),
                 AuditEventsUI.AuditEventType.Modifying);
@@ -245,6 +248,12 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
                 this.CompletedEventHandler(this, new EventArgs());
             }
         }
+    }
+
+    protected void DeleteButton_Click(object sender, EventArgs e)
+    {
+        ReasonforVoidingTextBox.Text = String.Empty;
+        ReasonForVoidingPopupExtenderInvoice.Show();
     }
 
     #endregion

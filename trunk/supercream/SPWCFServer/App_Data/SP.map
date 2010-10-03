@@ -69,10 +69,12 @@
       <Column Name="OrderID" Member="OrderID" Storage="_OrderID" DbType="Int" />
       <Column Name="CreditAmount" Member="CreditAmount" Storage="_CreditAmount" DbType="Decimal(18,2)" />
       <Column Name="Reason" Member="Reason" Storage="_Reason" DbType="NVarChar(MAX)" UpdateCheck="Never" />
-      <Column Name="DateCreated" Member="DateCreated" Storage="_DateCreated" DbType="DateTime" UpdateCheck="Never" />
-      <Column Name="Reference" Member="Reference" Storage="_Reference" DbType="NVarChar(255)" UpdateCheck="Never" />
+      <Column Name="DateCreated" Member="DateCreated" Storage="_DateCreated" DbType="DateTime" />
+      <Column Name="Reference" Member="Reference" Storage="_Reference" DbType="NVarChar(255)" />
       <Column Name="VatExempt" Member="VatExempt" Storage="_VatExempt" DbType="Bit" />
       <Column Name="DueDate" Member="DueDate" Storage="_DueDate" DbType="DateTime" />
+      <Column Name="ReasonForVoiding" Member="ReasonForVoiding" Storage="_ReasonForVoiding" DbType="NVarChar(MAX)" UpdateCheck="Never" />
+      <Column Name="IsVoid" Member="IsVoid" Storage="_IsVoid" DbType="Bit" />
       <Association Name="FK_CreditNote_OrderHeader" Member="OrderHeader" Storage="_OrderHeader" ThisKey="OrderID" OtherKey="ID" IsForeignKey="true" />
     </Type>
   </Table>

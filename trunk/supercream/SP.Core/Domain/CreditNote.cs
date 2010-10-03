@@ -12,8 +12,7 @@ namespace SP.Core.Domain
 {
     [Serializable]
     public class CreditNote : BaseEntity
-    {
-        private int _ID;
+    {        
         private int _OrderID;
         private decimal _CreditAmount;
         private string _Reason;
@@ -21,6 +20,8 @@ namespace SP.Core.Domain
         private string _Reference;
         private bool _VatExempt;
         private DateTime _DueDate;
+        private string _ReasonForVoiding;
+        private bool _IsVoid;
 
         public override int ID
         {
@@ -73,40 +74,40 @@ namespace SP.Core.Domain
 
         public DateTime DateCreated
         {
-            get 
-            { 
-                return _DateCreated; 
+            get
+            {
+                return _DateCreated;
             }
 
-            set 
-            { 
-                _DateCreated = value; 
+            set
+            {
+                _DateCreated = value;
             }
         }
 
         public string Reference
         {
-            get 
-            { 
-                return _Reference; 
+            get
+            {
+                return _Reference;
             }
 
-            set 
+            set
             {
-                _Reference = value; 
+                _Reference = value;
             }
         }
 
         public bool VatExempt
         {
-            get 
-            { 
-                return _VatExempt; 
+            get
+            {
+                return _VatExempt;
             }
 
-            set 
-            { 
-                _VatExempt = value; 
+            set
+            {
+                _VatExempt = value;
             }
         }
 
@@ -116,10 +117,36 @@ namespace SP.Core.Domain
             {
                 return _DueDate;
             }
-            
+
             set
             {
                 _DueDate = value;
+            }
+        }
+
+        public string ReasonForVoiding
+        {
+            get
+            {
+                return _ReasonForVoiding;
+            }
+
+            set
+            {
+                _ReasonForVoiding = value;
+            }
+        }
+
+        public bool IsVoid
+        {
+            get
+            {
+                return _IsVoid;
+            }
+
+            set
+            {
+                _IsVoid = value;
             }
         }
     }
