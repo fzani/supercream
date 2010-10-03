@@ -184,6 +184,40 @@
       <Association Name="FK_OrderNotesStatus_OrderHeader" Member="OrderNotesStatus" Storage="_OrderNotesStatus" ThisKey="ID" OtherKey="OrderID" DeleteRule="NO ACTION" />
     </Type>
   </Table>
+  <Table Name="dbo.Offer" Member="Offer">
+    <Type Name="Offer">
+      <Column Name="ID" Member="ID" DbType="Int NOT NULL" IsPrimaryKey="true" />
+      <Column Name="Name" Member="Name" Storage="_Name" DbType="VarChar(50)" />
+      <Column Name="ValidFrom" Member="ValidFrom" Storage="_ValidFrom" DbType="DateTime" />
+      <Column Name="ValidTo" Member="ValidTo" Storage="_ValidTo" DbType="DateTime" />
+      <Association Name="FK_OfferItem_Offer" Member="OfferItem" Storage="_OfferItem" ThisKey="ID" OtherKey="OfferId" DeleteRule="CASCADE" />
+      <Association Name="FK_OfferQualificationItem_Offer" Member="OfferQualificationItem" Storage="_OfferQualificationItem" ThisKey="ID" OtherKey="OfferId" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OfferItem" Member="OfferItem">
+    <Type Name="OfferItem">
+      <Column Name="ID" Member="ID" DbType="Int NOT NULL" IsPrimaryKey="true" />
+      <Column Name="OfferId" Member="OfferId" Storage="_OfferId" DbType="Int" />
+      <Column Name="ProductId" Member="ProductId" Storage="_ProductId" DbType="Int" />
+      <Column Name="VatCodeId" Member="VatCodeId" Storage="_VatCodeId" DbType="Int" />
+      <Column Name="UnitPrice" Member="UnitPrice" Storage="_UnitPrice" DbType="Decimal(10,2)" />
+      <Column Name="NoOfUnits" Member="NoOfUnits" Storage="_NoOfUnits" DbType="Int" />
+      <Column Name="Discount" Member="Discount" Storage="_Discount" DbType="Decimal(10,2)" />
+      <Column Name="VatExempt" Member="VatExempt" Storage="_VatExempt" DbType="Bit" />
+      <Association Name="FK_OfferItem_Offer" Member="Offer" Storage="_Offer" ThisKey="OfferId" OtherKey="ID" IsForeignKey="true" />
+      <Association Name="FK_OfferItem_Product" Member="Product" Storage="_Product" ThisKey="ProductId" OtherKey="ID" IsForeignKey="true" />
+      <Association Name="FK_OfferItem_VatCode" Member="VatCode" Storage="_VatCode" ThisKey="VatCodeId" OtherKey="ID" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OfferQualificationItem" Member="OfferQualificationItem">
+    <Type Name="OfferQualificationItem">
+      <Column Name="ID" Member="ID" DbType="Int NOT NULL" IsPrimaryKey="true" />
+      <Column Name="OfferId" Member="OfferId" Storage="_OfferId" DbType="Int" />
+      <Column Name="ProductId" Member="ProductId" Storage="_ProductId" DbType="Int" />
+      <Column Name="Qty" Member="Qty" Storage="_Qty" DbType="Int" />
+      <Association Name="FK_OfferQualificationItem_Offer" Member="Offer" Storage="_Offer" ThisKey="OfferId" OtherKey="ID" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.OrderCreditNote" Member="OrderCreditNote">
     <Type Name="OrderCreditNote">
       <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
@@ -310,6 +344,7 @@
       <Column Name="UnitPrice" Member="UnitPrice" Storage="_UnitPrice" DbType="Decimal(10,2)" />
       <Column Name="RRPPerItem" Member="RRPPerItem" Storage="_RRPPerItem" DbType="Decimal(10,2)" />
       <Column Name="VatExempt" Member="VatExempt" Storage="_VatExempt" DbType="Bit" />
+      <Association Name="FK_OfferItem_Product" Member="OfferItem" Storage="_OfferItem" ThisKey="ID" OtherKey="ProductId" DeleteRule="NO ACTION" />
       <Association Name="FK_OrderCreditNoteLine_Product" Member="OrderCreditNoteLine" Storage="_OrderCreditNoteLine" ThisKey="ID" OtherKey="ProductID" DeleteRule="NO ACTION" />
       <Association Name="FK_OrderLine_Product" Member="OrderLine" Storage="_OrderLine" ThisKey="ID" OtherKey="ProductID" DeleteRule="NO ACTION" />
       <Association Name="FK_PriceListItem_Product" Member="PriceListItem" Storage="_PriceListItem" ThisKey="ID" OtherKey="ProductID" DeleteRule="NO ACTION" />
@@ -401,6 +436,7 @@
       <Column Name="PercentageValue" Member="PercentageValue" Storage="_PercentageValue" DbType="Real" UpdateCheck="Never" />
       <Column Name="VatExemptible" Member="VatExemptible" Storage="_VatExemptible" DbType="Bit" UpdateCheck="Never" />
       <Column Name="Version" Member="Version" DbType="rowversion" IsDbGenerated="true" IsVersion="true" UpdateCheck="Never" AutoSync="Always" />
+      <Association Name="FK_OfferItem_VatCode" Member="OfferItem" Storage="_OfferItem" ThisKey="ID" OtherKey="VatCodeId" DeleteRule="NO ACTION" />
       <Association Name="FK_OrderHeader_VatCode" Member="OrderHeader" Storage="_OrderHeader" ThisKey="ID" OtherKey="VatCodeID" DeleteRule="NO ACTION" />
       <Association Name="FK_SpecialInvoiceHeader_VatCode" Member="SpecialInvoiceHeader" Storage="_SpecialInvoiceHeader" ThisKey="ID" OtherKey="VatCodeID" DeleteRule="NO ACTION" />
       <Association Name="FK_StandardVatRate_VatCode" Member="StandardVatRate" Storage="_StandardVatRate" ThisKey="ID" OtherKey="VatCodeID" DeleteRule="NO ACTION" />
