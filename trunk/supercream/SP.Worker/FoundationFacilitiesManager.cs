@@ -601,6 +601,126 @@ namespace SP.Worker
 
         #endregion
 
+        #region Offer
+
+        public void DeleteOffer(Offer offer)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferDao offerDao = factory.GetOfferDao();
+
+            offerDao.Delete(offer);
+        }
+
+        public Offer GetOffer(int id)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferDao offerDao = factory.GetOfferDao();
+            return offerDao.GetById(id);
+        }
+
+        public List<Offer> GetAllOffers()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferDao offerDao = factory.GetOfferDao();
+            return offerDao.GetAll();
+        }
+
+        public Offer SaveOffer(Offer offer)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferDao offerDao = factory.GetOfferDao();
+            return offerDao.Save(offer);
+        }
+
+        public Offer UpdateOffer(Offer newOffer, Offer origOffer)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferDao offerDao = factory.GetOfferDao();
+            return offerDao.Update(newOffer, origOffer);
+        }
+
+        #endregion
+
+        #region OfferItem
+
+        public void DeleteOfferItem(OfferItem offeritem)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferItemDao offerItemDao = factory.GetOfferItemDao();
+
+            offerItemDao.Delete(offeritem);
+        }
+
+        public OfferItem GetOfferItem(int id)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferItemDao offerItemDao = factory.GetOfferItemDao();
+            return offerItemDao.GetById(id);
+        }
+
+        public List<OfferItem> GetAllOfferItems()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferItemDao offerItemDao = factory.GetOfferItemDao();
+            return offerItemDao.GetAll();
+        }
+
+        public OfferItem SaveOfferItem(OfferItem offeritem)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferItemDao offerItemDao = factory.GetOfferItemDao();
+            return offerItemDao.Save(offeritem);
+        }
+
+        public OfferItem UpdateOfferItem(OfferItem newOfferItem, OfferItem origOfferItem)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferItemDao offerItemDao = factory.GetOfferItemDao();
+            return offerItemDao.Update(newOfferItem, origOfferItem);
+        }
+
+        #endregion
+
+        #region OfferQualificationItem
+
+        public void DeleteOfferQualificationItem(OfferQualificationItem offerqualificationitem)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferQualificationItemDao offerQualificationItemDao = factory.GetOfferQualificationItemDao();
+
+            offerQualificationItemDao.Delete(offerqualificationitem);
+        }
+
+        public OfferQualificationItem GetOfferQualificationItem(int id)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferQualificationItemDao offerQualificationItemDao = factory.GetOfferQualificationItemDao();
+            return offerQualificationItemDao.GetById(id);
+        }
+
+        public List<OfferQualificationItem> GetAllOfferQualificationItems()
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferQualificationItemDao offerQualificationItemDao = factory.GetOfferQualificationItemDao();
+            return offerQualificationItemDao.GetAll();
+        }
+
+        public OfferQualificationItem SaveOfferQualificationItem(OfferQualificationItem offerqualificationitem)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferQualificationItemDao offerQualificationItemDao = factory.GetOfferQualificationItemDao();
+            return offerQualificationItemDao.Save(offerqualificationitem);
+        }
+
+        public OfferQualificationItem UpdateOfferQualificationItem(OfferQualificationItem newOfferQualificationItem, OfferQualificationItem origOfferQualificationItem)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferQualificationItemDao offerQualificationItemDao = factory.GetOfferQualificationItemDao();
+            return offerQualificationItemDao.Update(newOfferQualificationItem, origOfferQualificationItem);
+        }
+
+        #endregion
+
         #region OrderCreditNote
 
         public bool OrderCreditNoteExistsByOrderId(int orderId)

@@ -164,6 +164,30 @@ namespace SP.Data.LTS
             }
         }
 
+        public System.Data.Linq.Table<Offer> Offer
+        {
+            get
+            {
+                return this.GetTable<Offer>();
+            }
+        }
+
+        public System.Data.Linq.Table<OfferItem> OfferItem
+        {
+            get
+            {
+                return this.GetTable<OfferItem>();
+            }
+        }
+
+        public System.Data.Linq.Table<OfferQualificationItem> OfferQualificationItem
+        {
+            get
+            {
+                return this.GetTable<OfferQualificationItem>();
+            }
+        }
+
         public System.Data.Linq.Table<OrderHeader> OrderHeader
         {
             get

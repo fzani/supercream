@@ -249,6 +249,78 @@ namespace SPWCFServer
         OutletStore UpdateOutletStore(OutletStore newStore, OutletStore origStore);
         #endregion
 
+        #region Offer
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        void DeleteOffer(Offer offer);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<Offer> GetAllOffers();
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        Offer GetOffer(int id);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        Offer SaveOffer(Offer offer);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        Offer UpdateOffer(Offer newOffer, Offer origOffer);
+
+        #endregion
+
+        #region OfferItem
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        void DeleteOfferItem(OfferItem offerItem);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<OfferItem> GetAllOfferItems();
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        OfferItem GetOfferItem(int id);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        OfferItem SaveOfferItem(OfferItem offerItem);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        OfferItem UpdateOfferItem(OfferItem newOfferItem, OfferItem origOfferItem);
+
+        #endregion
+
+        #region OfferQualificationItem
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        void DeleteOfferQualificationItem(OfferQualificationItem offerQualificationItem);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        List<OfferQualificationItem> GetAllOfferQualificationItems();
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        OfferQualificationItem GetOfferQualificationItem(int id);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        OfferQualificationItem SaveOfferQualificationItem(OfferQualificationItem offerQualificationItem);
+
+        [OperationContract]
+        [ReferencePreservingDataContractFormat]
+        OfferQualificationItem UpdateOfferQualificationItem(OfferQualificationItem newOfferQualificationItem, OfferQualificationItem origOfferQualificationItem);
+
+        #endregion
+
         #region OrderCreditNote
         [OperationContract]
         [ReferencePreservingDataContractFormat]
@@ -2012,6 +2084,245 @@ namespace SPWCFServer
 
         [DataMember]
         public decimal Balance { get; set; }
+    }
+
+    [DataContract]
+    public class Offer
+    {
+        private int _ID;
+        private string _Name;
+        private DateTime _ValidFrom;
+        private DateTime _ValidTo;
+
+        [DataMember]
+        public int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+
+        [DataMember]
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                _Name = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime ValidFrom
+        {
+            get
+            {
+                return _ValidFrom;
+            }
+            set
+            {
+                _ValidFrom = value;
+            }
+        }
+
+        [DataMember]
+        public DateTime ValidTo
+        {
+            get
+            {
+                return _ValidTo;
+            }
+            set
+            {
+                _ValidTo = value;
+            }
+        }
+    }
+
+    [DataContract]
+    public class OfferItem
+    {
+        private int _ID;
+        private int _OfferId;
+        private int _ProductId;
+        private int _VatCodeId;
+        private decimal _UnitPrice;
+        private int _NoOfUnits;
+        private decimal _Discount;
+        private bool _VatExempt;
+
+        [DataMember]
+        public int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+
+        [DataMember]
+        public int OfferId
+        {
+            get
+            {
+                return _OfferId;
+            }
+            set
+            {
+                _OfferId = value;
+            }
+        }
+
+        [DataMember]
+        public int ProductId
+        {
+            get
+            {
+                return _ProductId;
+            }
+            set
+            {
+                _ProductId = value;
+            }
+        }
+
+        [DataMember]
+        public int VatCodeId
+        {
+            get
+            {
+                return _VatCodeId;
+            }
+            set
+            {
+                _VatCodeId = value;
+            }
+        }
+
+        [DataMember]
+        public decimal UnitPrice
+        {
+            get
+            {
+                return _UnitPrice;
+            }
+            set
+            {
+                _UnitPrice = value;
+            }
+        }
+
+        [DataMember]
+        public int NoOfUnits
+        {
+            get
+            {
+                return _NoOfUnits;
+            }
+            set
+            {
+                _NoOfUnits = value;
+            }
+        }
+
+        [DataMember]
+        public decimal Discount
+        {
+            get
+            {
+                return _Discount;
+            }
+            set
+            {
+                _Discount = value;
+            }
+        }
+
+        [DataMember]
+        public bool VatExempt
+        {
+            get
+            {
+                return _VatExempt;
+            }
+            set
+            {
+                _VatExempt = value;
+            }
+        }
+    }
+
+    [DataContract]
+    public class OfferQualificationItem
+    {
+        private int _ID;
+        private int _OfferId;
+        private int _ProductId;
+        private int _Qty;
+
+        [DataMember]
+        public int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+
+        [DataMember]
+        public int OfferId
+        {
+            get
+            {
+                return _OfferId;
+            }
+            set
+            {
+                _OfferId = value;
+            }
+        }
+
+        [DataMember]
+        public int ProductId
+        {
+            get
+            {
+                return _ProductId;
+            }
+            set
+            {
+                _ProductId = value;
+            }
+        }
+
+        [DataMember]
+        public int Qty
+        {
+            get
+            {
+                return _Qty;
+            }
+            set
+            {
+                _Qty = value;
+            }
+        }
     }
 
     [DataContract]

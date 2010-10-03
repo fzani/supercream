@@ -98,6 +98,21 @@ namespace SP.Data.LTS
             return new OrderCreditNoteDao();
         }
 
+        public IOfferDao GetOfferDao()
+        {
+            return new OfferDao();
+        }
+
+        public IOfferItemDao GetOfferItemDao()
+        {
+            return new OfferItemDao();
+        }
+
+        public IOfferQualificationItemDao GetOfferQualificationItemDao()
+        {
+            return new OfferQualificationItemDao();
+        }
+
         public IOrderCreditNoteLineDao GetOrderCreditNoteLineDao()
         {
             return new OrderCreditNoteLineDao();

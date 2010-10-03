@@ -71,6 +71,9 @@
     <Compile Include="DAO\ContactDetailDAO.cs" />
     <Compile Include="DAO\AutoGen.cs" />
     <Compile Include="DAO\CreditNoteDAO.cs" />
+    <Compile Include="DAO\OfferDAO.cs" />
+    <Compile Include="DAO\OfferItemDAO.cs" />
+    <Compile Include="DAO\OfferQualificationItemDAO.cs" />
     <Compile Include="IAuditEventsDao.cs" />
     <Compile Include="DAO\OrderCreditNoteDAO.cs" />
     <Compile Include="DAO\OrderCreditNoteLineDAO.cs" />
