@@ -1140,6 +1140,249 @@ namespace SPWCFServer
         }
         #endregion
 
+        #region Offer
+
+        public void DeleteOffer(Offer offer)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                mgr.DeleteOffer(ObjectExtension.CloneProperties<SPWCFServer.Offer, SP.Core.Domain.Offer>(offer));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete, it is likely that there are dependent items still linked to it");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public List<Offer> GetAllOffers()
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.Offer> offerList = mgr.GetAllOffers();
+                return ObjectExtension.CloneList<SP.Core.Domain.Offer, SPWCFServer.Offer>(offerList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public Offer GetOffer(int id)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.Offer offer = mgr.GetOffer(id);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.Offer, SPWCFServer.Offer>(offer);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public Offer SaveOffer(Offer offer)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.Offer coreOffer =
+                   ObjectExtension.CloneProperties<SPWCFServer.Offer, SP.Core.Domain.Offer>(offer);
+                coreOffer = mgr.SaveOffer(coreOffer);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.Offer, SPWCFServer.Offer>(coreOffer);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public Offer UpdateOffer(Offer newOffer, Offer origOffer)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+
+                return ObjectExtension.CloneProperties<SP.Core.Domain.Offer, SPWCFServer.Offer>
+                   (mgr.UpdateOffer(ObjectExtension.CloneProperties<SPWCFServer.Offer, SP.Core.Domain.Offer>(newOffer),
+                      ObjectExtension.CloneProperties<SPWCFServer.Offer, SP.Core.Domain.Offer>(origOffer)));
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region OfferItem
+
+        public void DeleteOfferItem(OfferItem offerItem)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                mgr.DeleteOfferItem(ObjectExtension.CloneProperties<SPWCFServer.OfferItem, SP.Core.Domain.OfferItem>(offerItem));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete, it is likely that there are dependent items still linked to it");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public List<OfferItem> GetAllOfferItems()
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.OfferItem> offerItemList = mgr.GetAllOfferItems();
+                return ObjectExtension.CloneList<SP.Core.Domain.OfferItem, SPWCFServer.OfferItem>(offerItemList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public OfferItem GetOfferItem(int id)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.OfferItem offerItem = mgr.GetOfferItem(id);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.OfferItem, SPWCFServer.OfferItem>(offerItem);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public OfferItem SaveOfferItem(OfferItem offerItem)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.OfferItem coreOfferItem =
+                   ObjectExtension.CloneProperties<SPWCFServer.OfferItem, SP.Core.Domain.OfferItem>(offerItem);
+                coreOfferItem = mgr.SaveOfferItem(coreOfferItem);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.OfferItem, SPWCFServer.OfferItem>(coreOfferItem);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public OfferItem UpdateOfferItem(OfferItem newOfferItem, OfferItem origOfferItem)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+
+                return ObjectExtension.CloneProperties<SP.Core.Domain.OfferItem, SPWCFServer.OfferItem>
+                   (mgr.UpdateOfferItem(ObjectExtension.CloneProperties<SPWCFServer.OfferItem, SP.Core.Domain.OfferItem>(newOfferItem),
+                      ObjectExtension.CloneProperties<SPWCFServer.OfferItem, SP.Core.Domain.OfferItem>(origOfferItem)));
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region OfferQualificationItem
+
+        public void DeleteOfferQualificationItem(OfferQualificationItem offerQualificationItem)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                mgr.DeleteOfferQualificationItem(ObjectExtension.CloneProperties<SPWCFServer.OfferQualificationItem, SP.Core.Domain.OfferQualificationItem>(offerQualificationItem));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete, it is likely that there are dependent items still linked to it");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public List<OfferQualificationItem> GetAllOfferQualificationItems()
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.OfferQualificationItem> offerQualificationItemList = mgr.GetAllOfferQualificationItems();
+                return ObjectExtension.CloneList<SP.Core.Domain.OfferQualificationItem, SPWCFServer.OfferQualificationItem>(offerQualificationItemList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public OfferQualificationItem GetOfferQualificationItem(int id)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.OfferQualificationItem offerQualificationItem = mgr.GetOfferQualificationItem(id);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.OfferQualificationItem, SPWCFServer.OfferQualificationItem>(offerQualificationItem);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public OfferQualificationItem SaveOfferQualificationItem(OfferQualificationItem offerQualificationItem)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                SP.Core.Domain.OfferQualificationItem coreOfferQualificationItem =
+                   ObjectExtension.CloneProperties<SPWCFServer.OfferQualificationItem, SP.Core.Domain.OfferQualificationItem>(offerQualificationItem);
+                coreOfferQualificationItem = mgr.SaveOfferQualificationItem(coreOfferQualificationItem);
+                return ObjectExtension.CloneProperties<SP.Core.Domain.OfferQualificationItem, SPWCFServer.OfferQualificationItem>(coreOfferQualificationItem);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        public OfferQualificationItem UpdateOfferQualificationItem(OfferQualificationItem newOfferQualificationItem, OfferQualificationItem origOfferQualificationItem)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+
+                return ObjectExtension.CloneProperties<SP.Core.Domain.OfferQualificationItem, SPWCFServer.OfferQualificationItem>
+                   (mgr.UpdateOfferQualificationItem(ObjectExtension.CloneProperties<SPWCFServer.OfferQualificationItem, SP.Core.Domain.OfferQualificationItem>(newOfferQualificationItem),
+                      ObjectExtension.CloneProperties<SPWCFServer.OfferQualificationItem, SP.Core.Domain.OfferQualificationItem>(origOfferQualificationItem)));
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
+        #endregion
+
         #region OrderCreditNote
 
         public bool OrderCreditNoteExistsByOrderId(int orderId)

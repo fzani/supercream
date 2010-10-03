@@ -67,6 +67,9 @@
   <ItemGroup>
     <Compile Include="DataInterfaces\IAutoGen.cs" />
     <Compile Include="DataInterfaces\ICreditNoteDAO.cs" />
+    <Compile Include="DataInterfaces\IOfferDAO.cs" />
+    <Compile Include="DataInterfaces\IOfferItemDAO.cs" />
+    <Compile Include="DataInterfaces\IOfferQualificationItemDAO.cs" />
     <Compile Include="DataInterfaces\IOrderCreditNoteDAO.cs" />
     <Compile Include="DataInterfaces\IOrderCreditNoteLineDAO.cs" />
     <Compile Include="DataInterfaces\IOrderNotesStatusDAO.cs" />

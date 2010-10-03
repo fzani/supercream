@@ -95,6 +95,36 @@ namespace SP.Core.ManagerInterfaces
         FoundationFacility UpdateFoundationFacility(FoundationFacility newFoundationfacility, FoundationFacility origFoundationFacility);
         #endregion
 
+        #region Offer
+
+        void DeleteOffer(Offer offer);
+        Offer GetOffer(int id);
+        List<Offer> GetAllOffers();
+        Offer SaveOffer(Offer offer);
+        Offer UpdateOffer(Offer newOffer, Offer origOffer);
+
+        #endregion
+
+        #region OfferItem
+
+        void DeleteOfferItem(OfferItem offeritem);
+        OfferItem GetOfferItem(int id);
+        List<OfferItem> GetAllOfferItems();
+        OfferItem SaveOfferItem(OfferItem offeritem);
+        OfferItem UpdateOfferItem(OfferItem newOfferItem, OfferItem origOfferItem);
+        
+        #endregion
+
+        #region OfferQualificationItem
+        
+        void DeleteOfferQualificationItem(OfferQualificationItem offerqualificationitem);
+        OfferQualificationItem GetOfferQualificationItem(int id);
+        List<OfferQualificationItem> GetAllOfferQualificationItems();
+        OfferQualificationItem SaveOfferQualificationItem(OfferQualificationItem offerqualificationitem);
+        OfferQualificationItem UpdateOfferQualificationItem(OfferQualificationItem newOfferQualificationItem, OfferQualificationItem origOfferQualificationItem);
+        
+        #endregion 
+
         #region OrderCreditNote
 
         bool OrderCreditNoteExistsByOrderId(int orderId);
