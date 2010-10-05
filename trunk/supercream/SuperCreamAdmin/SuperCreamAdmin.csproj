@@ -99,6 +99,7 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\ManageUsers\Edit.aspx" />
     <Content Include="Views\ManageUsers\Index.aspx" />
     <Content Include="Web.config" />

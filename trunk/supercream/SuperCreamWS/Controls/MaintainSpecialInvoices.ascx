@@ -260,7 +260,7 @@
                                 Text="Add Invoice Line Details" OnClick="AddOrderLineDetailsButton_Click" />
                             <asp:LinkButton ID="Button1" CausesValidation="false" runat="server" Text="| Cancel | "
                                 OnClick="CancelNewOrderButton_Click" />
-                            <asp:LinkButton ID="DeleteOrderButton" CausesValidation="false" runat="server" Text="Void Order Details"
+                            <asp:LinkButton ID="DeleteOrderButton" CausesValidation="false" runat="server" Text="Void Special Invoice Details"
                                 OnClick="GetVoidSpecialInvoiceReasonButton_Click" />
                             <asp:Button ID="btnTrigger1" runat="server" Style="display: none" />
                             <ajaxToolkit:ModalPopupExtender ID="ReasonForVoidingPopupExtenderInvoice" DropShadow="true"
@@ -285,7 +285,7 @@
                                     <tr>
                                         <td>
                                             <asp:Button ID="ReasonforVoidingButton" CoommandArgument='<%# SpecialInvoiceID %>'
-                                                Text="Void Order" runat="server" OnClick="VoidOrderButton_Click" ValidationGroup="VoidOrderDetailsGroup" />
+                                                Text="Void Special Invoice" runat="server" OnClick="VoidOrderButton_Click" ValidationGroup="VoidOrderDetailsGroup" />
                                             <asp:Button ID="CancelReasonorVoidingButton" Text="Cancel" CausesValidation="false"
                                                 runat="server" />
                                         </td>
