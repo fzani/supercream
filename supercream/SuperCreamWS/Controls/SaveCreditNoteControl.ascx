@@ -103,7 +103,7 @@
             </table>
         </asp:Panel>
         
-         <asp:Button ID="btnTrigger1" runat="server" Style="display: none" />
+        <asp:Button ID="btnTrigger1" runat="server" Style="display: none" />
         <ajaxToolkit:ModalPopupExtender ID="ReasonForVoidingPopupExtenderInvoice" DropShadow="true"
                                 runat="server" TargetControlID="btnTrigger1" PopupControlID="ReasonForVoidingPanelMessage"
                                 CancelControlID="CancelReasonorVoidingButton" BackgroundCssClass="XPopUpBackGround" />
