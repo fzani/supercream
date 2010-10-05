@@ -2334,6 +2334,8 @@ namespace SPWCFServer
         private DateTime _DateCreated;
         private string _Reference;
         private DateTime _DueDate;
+        private string _ReasonForVoiding;
+        private bool _IsVoid;
 
         [DataMember]
         public int ID
@@ -2410,6 +2412,32 @@ namespace SPWCFServer
             set
             {
                 _DueDate = value;
+            }
+        }
+
+        [DataMember]
+        public string ReasonForVoiding
+        {
+            get
+            {
+                return _ReasonForVoiding;
+            }
+            set
+            {
+                _ReasonForVoiding = value;
+            }
+        }
+
+        [DataMember]
+        public bool IsVoid
+        {
+            get
+            {
+                return _IsVoid;
+            }
+            set
+            {
+                _IsVoid = value;
             }
         }
     }

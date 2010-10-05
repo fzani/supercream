@@ -18,6 +18,8 @@ namespace SP.Core.Domain
         private string _Reference;
         private DateTime _DueDate;
         private DateTime _DateCreated;
+        private string _ReasonForVoiding;
+        private bool _IsVoid;
 
         public override int ID
         {
@@ -88,6 +90,32 @@ namespace SP.Core.Domain
             set
             {
                 _DueDate = value;
+            }
+        }
+
+        public string ReasonForVoiding
+        {
+            get
+            {
+                return _ReasonForVoiding;
+            }
+
+            set
+            {
+                _ReasonForVoiding = value;
+            }
+        }
+
+        public bool IsVoid
+        {
+            get
+            {
+                return _IsVoid;
+            }
+
+            set
+            {
+                _IsVoid = value;
             }
         }
     }
