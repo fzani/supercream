@@ -64,7 +64,9 @@ namespace SP.Data.LTS
 
         public List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int specialInvoiceId)
         {
-            throw new NotImplementedException();
+            return
+                db.SpecialInvoiceCreditNote.Where<SpecialInvoiceCreditNote>(
+                    q => (q.SpecialInvoiceID == specialInvoiceId) && (q.IsVoid == false)).ToList();
         }
 
         public string GenerateSpecialInvoiceCreditNo()
@@ -212,7 +214,7 @@ namespace SP.Data.LTS
             if (creditNotes.First() != null)
             {
                 creditTotal = Math.Round((from cr in db.SpecialInvoiceCreditNote
-                                          where (cr.SpecialInvoiceID == specialInvoiceId) && (cr.IsVoid ==  false)
+                                          where (cr.SpecialInvoiceID == specialInvoiceId) && (cr.IsVoid == false)
                                           select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * (1 + ((decimal)vatRate / (decimal)100.0)))).Sum(), 2);
             }
             return creditTotal;

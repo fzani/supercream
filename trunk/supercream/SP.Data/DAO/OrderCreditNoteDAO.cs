@@ -26,7 +26,7 @@ namespace SP.Data.LTS
 
         public List<OrderCreditNote> GetOrderCreditNotesByOrderId(int orderId)
         {
-            return db.OrderCreditNote.Where(q => q.OrderID == orderId).ToList();
+            return db.OrderCreditNote.Where(q => (q.OrderID == orderId) && (q.IsVoid == false)).ToList();
         }
 
         public string GenerateCreditNo()
@@ -46,7 +46,7 @@ namespace SP.Data.LTS
 
         public bool OrderCreditNoteExistsByOrderId(int orderId)
         {
-            return (db.OrderCreditNote.Where<OrderCreditNote>(q => q.OrderID == orderId).FirstOrDefault() != null) ? true : false;
+            return (db.OrderCreditNote.Where<OrderCreditNote>(q => (q.OrderID == orderId) && (q.IsVoid == false)).FirstOrDefault() != null) ? true : false;
         }
 
         public override OrderCreditNote GetById(int id)
@@ -72,6 +72,7 @@ namespace SP.Data.LTS
                                join ons in db.OrderNotesStatus on o.ID equals ons.OrderID
                                join cr in db.OrderCreditNote on o.ID equals cr.OrderID
                                join c in db.Customer on o.CustomerID equals c.ID
+                               where cr.IsVoid == false
                                select new CreditNoteDetails
                                {
                                    CreditNoteID = cr.ID,
@@ -80,7 +81,7 @@ namespace SP.Data.LTS
                                    InvoiceNo = o.InvoiceNo,
                                    CustomerName = c.Name,
                                    DateCreated = cr.DateCreated,
-                                   DueDate =  cr.DueDate,
+                                   DueDate = cr.DueDate,
                                    Reference = cr.Reference
                                });
 
@@ -143,25 +144,25 @@ namespace SP.Data.LTS
 
             decimal creditTotal = new decimal(0.0);
 
-            var creditNotes = db.CreditNote.Where(q => q.OrderID == orderNo).DefaultIfEmpty<CreditNote>();
+            var creditNotes = db.CreditNote.Where(q => (q.OrderID == orderNo) && (q.IsVoid == false)).DefaultIfEmpty<CreditNote>();
             if (creditNotes.First() != null)
             {
                 creditTotal = Math.Round((from cr in db.CreditNote
-                                          where cr.OrderID == orderNo
+                                          where (cr.OrderID == orderNo) && (cr.IsVoid == false)
                                           select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * vatRate)).Sum(), 2);
             }
 
             decimal orderCreditTotal = new decimal(0.0);
             var orderCreditNotes = (from oh in db.OrderCreditNote
                                     join ol in db.OrderCreditNoteLine on oh.ID equals ol.OrderCreditNoteID
-                                    where oh.OrderID == orderNo
+                                    where (oh.OrderID == orderNo) && (oh.IsVoid == false)
                                     select oh).DefaultIfEmpty<OrderCreditNote>();
             if (orderCreditNotes.First() != null)
             {
                 orderCreditTotal = Math.Round((from oh in db.OrderCreditNote
                                                join ol in db.OrderCreditNoteLine on oh.ID equals ol.OrderCreditNoteID
                                                join p in db.Product on ol.ProductID equals p.ID
-                                               where oh.OrderID == orderNo
+                                               where (oh.OrderID == orderNo) && (oh.IsVoid == false)
                                                select ((p.VatExempt) ? ol.Price * ol.NoOfUnits : ol.Price * ol.NoOfUnits * vatRate)).Sum(), 2);
             }
 
@@ -188,30 +189,30 @@ namespace SP.Data.LTS
         {
             var creditNotelines = from ocn in db.OrderCreditNote
                                   join onl in db.OrderCreditNoteLine on ocn.ID equals onl.OrderCreditNoteID
-                                  where ocn.ID == orderCreditNoteId
-                                  select onl;           
+                                  where (ocn.ID == orderCreditNoteId) && (ocn.IsVoid == false)
+                                  select onl;
 
-            if(creditNotelines.Count() == 0)
+            if (creditNotelines.Count() == 0)
             {
-                return (decimal) 0.0;
+                return (decimal)0.0;
             }
             else
             {
                 return creditNotelines.Sum(q => q.NoOfUnits * q.Price);
             }
 
-            var total = (from ocn in db.OrderCreditNote
-                         join onl in db.OrderCreditNoteLine on ocn.ID equals onl.OrderCreditNoteID
-                         where ocn.ID == orderCreditNoteId
-                         select onl.Price*onl.NoOfUnits).Sum();
-            return total;
+            //var total = (from ocn in db.OrderCreditNote
+            //             join onl in db.OrderCreditNoteLine on ocn.ID equals onl.OrderCreditNoteID
+            //             where ocn.ID == orderCreditNoteId
+            //             select onl.Price * onl.NoOfUnits).Sum();
+            //return total;
         }
 
         private decimal GetOrderLinesExVatTotal(int orderCreditNoteId)
         {
             var total = (from ocn in db.OrderCreditNote
                          join ol in db.OrderLine on ocn.OrderID equals ol.OrderID
-                         where ocn.ID == orderCreditNoteId
+                         where (ocn.ID == orderCreditNoteId) && (ocn.IsVoid == false)
                          select ol.Price * ol.NoOfUnits).Sum();
             ;
             return total;
