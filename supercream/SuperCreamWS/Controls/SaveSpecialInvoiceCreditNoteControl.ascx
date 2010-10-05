@@ -72,9 +72,9 @@
                             Text="Required" runat="server" />
                         <ajaxToolkit:CalendarExtender ID="calendarButtonExtender" Format="dd/MM/yyyy" runat="server"
                             TargetControlID="DueDateTextBox" PopupButtonID="Image1" />
-                         <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" TargetControlID="DueDateTextBox"
-                                            Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
-                                            OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
+                        <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" TargetControlID="DueDateTextBox"
+                            Mask="99/99/9999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus"
+                            OnInvalidCssClass="MaskedEditError" MaskType="Date" DisplayMoney="Left" AcceptNegative="Left" />
                     </td>
                 </tr>
                 <tr>
@@ -96,7 +96,38 @@
                             Text="Save" Width="20%" OnClick="SaveButton_Click" />
                         <asp:Button ID="DeleteButton" runat="server" ValidationGroup="SaveCreditNoteGroup"
                             Text="Delete" Width="20%" OnClick="DeleteButton_Click" />
-                        <asp:Button ID="PrintButton" OnClick="PrintButton_Click" runat="server" Text="Print" Visible="false" Width="20%" />
+                        <asp:Button ID="PrintButton" OnClick="PrintButton_Click" runat="server" Text="Print"
+                            Visible="false" Width="20%" />
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+        <asp:Button ID="btnTrigger1" runat="server" Style="display: none" />
+        <ajaxToolkit:ModalPopupExtender ID="ReasonForVoidingPopupExtender" DropShadow="true"
+            runat="server" TargetControlID="btnTrigger1" PopupControlID="ReasonForVoidingPanelMessage"
+            CancelControlID="CancelReasonorVoidingButton" BackgroundCssClass="XPopUpBackGround" />
+        <asp:Panel Style="display: none" DefaultButton="ReasonforVoidingButton" Width="700px"
+            ID="ReasonForVoidingPanelMessage" runat="server" CssClass="modalPopup">
+            <table>
+                <tr>
+                    <td style="width: 30%">
+                        <h3>
+                            Reason for Voiding Credit Note</h3>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="ReasonforVoidingTextBox" Width="100%" Height="300px" TextMode="MultiLine"
+                            runat="server" ValidationGroup="VoidOrderDetailsGroup"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1ReasonForVoiding" Display="Dynamic"
+                            ValidationGroup="VoidOrderDetailsGroup" ControlToValidate="ReasonforVoidingTextBox"
+                            InitialValue="" ErrorMessage="Invoice to is a required Field" Text="*" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Button ID="ReasonforVoidingButton" CommandArgument='<%# CreditNoteID %>' Text="Void Order"
+                            runat="server" OnClick="VoidOrderButton_Click" ValidationGroup="VoidOrderDetailsGroup" />
+                        <asp:Button ID="CancelReasonorVoidingButton" Text="Cancel" CausesValidation="false"
+                            runat="server" />
                     </td>
                 </tr>
             </table>

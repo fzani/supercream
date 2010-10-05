@@ -360,6 +360,8 @@
       <Column Name="Reference" Member="Reference" Storage="_Reference" DbType="NVarChar(255)" />
       <Column Name="VatExempt" Member="VatExempt" Storage="_VatExempt" DbType="Bit" />
       <Column Name="DueDate" Member="DueDate" Storage="_DueDate" DbType="DateTime" />
+      <Column Name="ReasonForVoiding" Member="ReasonForVoiding" Storage="_ReasonForVoiding" DbType="NVarChar(MAX)" UpdateCheck="Never" />
+      <Column Name="IsVoid" Member="IsVoid" Storage="_IsVoid" DbType="Bit" />
       <Association Name="FK_SpecialInvoiceCreditNote_SpecialInvoiceHeader" Member="SpecialInvoiceHeader" Storage="_SpecialInvoiceHeader" ThisKey="SpecialInvoiceID" OtherKey="ID" IsForeignKey="true" />
     </Type>
   </Table>

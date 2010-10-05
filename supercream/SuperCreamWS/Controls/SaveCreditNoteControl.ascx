@@ -126,7 +126,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:Button ID="ReasonforVoidingButton" CoommandArgument='<%# OrderID %>' Text="Void Order"
+                        <asp:Button ID="ReasonforVoidingButton" CommandArgument='<%# OrderID %>' Text="Void Order"
                             runat="server" OnClick="VoidOrderButton_Click" ValidationGroup="VoidOrderDetailsGroup" />
                         <asp:Button ID="CancelReasonorVoidingButton" Text="Cancel" CausesValidation="false"
                             runat="server" />
