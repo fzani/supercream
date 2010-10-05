@@ -173,7 +173,9 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
                     DateCreated = DateTime.Now,
                     Reason = this.ReasonTextBox.Text,
                     VatExempt = this.VatExemptCheckBox.Checked,
-                    DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
+                    DueDate = Convert.ToDateTime(this.DueDateTextBox.Text),
+                    ReasonForVoiding = String.Empty,
+                    IsVoid = false
                 });
 
                 AuditEventsUI.LogEvent("Created Order Credit Note", creditNote.Reference, Page.ToString(),
@@ -191,7 +193,9 @@ public partial class Controls_SaveCreditNoteControl : System.Web.UI.UserControl
                     Reason = this.ReasonTextBox.Text,
                     Reference = creditNote.Reference,
                     VatExempt = this.VatExemptCheckBox.Checked,
-                    DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
+                    DueDate = Convert.ToDateTime(this.DueDateTextBox.Text),
+                    ReasonForVoiding = String.Empty,
+                    IsVoid = false
                 });
 
                 AuditEventsUI.LogEvent("Updated Order Credit Note", creditNote.Reference, Page.ToString(),

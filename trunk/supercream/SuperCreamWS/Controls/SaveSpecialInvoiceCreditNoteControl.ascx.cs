@@ -167,7 +167,9 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
                     DateCreated = DateTime.Now,
                     Reason = this.ReasonTextBox.Text,
                     VatExempt = this.VatExemptCheckBox.Checked,
-                    DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
+                    DueDate = Convert.ToDateTime(this.DueDateTextBox.Text),
+                    ReasonForVoiding = String.Empty,
+                    IsVoid = false
                 });
 
                 AuditEventsUI.LogEvent("Creating special invoice credit note", specialInvoiceCreditNote.Reference, Page.ToString(),
@@ -185,7 +187,9 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
                     Reason = this.ReasonTextBox.Text,
                     Reference = creditNote.Reference,
                     VatExempt = this.VatExemptCheckBox.Checked,
-                    DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
+                    DueDate = Convert.ToDateTime(this.DueDateTextBox.Text),
+                    ReasonForVoiding = String.Empty,
+                    IsVoid = false
                 });
 
                 AuditEventsUI.LogEvent("Updating special invoice credit note", specialInvoiceCreditNote.Reference, Page.ToString(),
