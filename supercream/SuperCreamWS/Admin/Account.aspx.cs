@@ -147,7 +147,7 @@ public partial class Admin_Account : System.Web.UI.Page
 
     public string ConcatNames(object firstName, object lastName)
     {
-        return firstName as string + " " + lastName as string;
+        return (firstName as string) + " " + lastName as string;
     }
 
     protected void AccountGridView_RowCommand(object sender, GridViewCommandEventArgs e)

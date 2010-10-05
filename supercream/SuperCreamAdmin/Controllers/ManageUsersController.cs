@@ -34,10 +34,10 @@ namespace SuperCreamAdmin.Controllers
         //
         // GET: /ManageUsers/Details/5
 
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        //public ActionResult Details(int id)
+        //{
+        //    return View();
+        //}
 
         public RedirectToRouteResult Delete(string userName)
         {
@@ -48,28 +48,28 @@ namespace SuperCreamAdmin.Controllers
         //
         // GET: /ManageUsers/Create
 
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
         //
         // POST: /ManageUsers/Create
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
+        //[AcceptVerbs(HttpVerbs.Post)]
+        //public ActionResult Create(FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         //
         // GET: /ManageUsers/Edit/5

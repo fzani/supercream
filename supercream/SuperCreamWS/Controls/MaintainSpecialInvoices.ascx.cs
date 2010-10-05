@@ -120,6 +120,17 @@ public partial class Controls_MaintainSpecialInvoices : System.Web.UI.UserContro
         TextBox reasonForVoidingTextBox = p.FindControl("ReasonforVoidingTextBox") as TextBox;
         UpdateSpecialInvoiceHeaderForVoiding(reasonForVoidingTextBox.Text);
 
+        var specialInvoiceCreditNotes = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNotesByInvoiceId(SpecialInvoiceID);
+
+        foreach (var specialInvoiceCreditNote in specialInvoiceCreditNotes)
+        {
+            specialInvoiceCreditNote.IsVoid = true;
+            specialInvoiceCreditNote.Reason = "Special invoice for this credit note is voided";
+            SpecialInvoiceCreditNoteUI.UpdateCreditNotes(specialInvoiceCreditNote);
+        }
+
+        reasonForVoidingTextBox.Text = String.Empty;
+
         this.ChangeState += new EventHandler<EventArgs>(CancelOrderState);
         this.ChangeState(this, e);
 

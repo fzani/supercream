@@ -17,6 +17,5 @@
             </DataSources>
         </LocalReport>
     </rsweb:ReportViewer>
-    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetData"
-        TypeName="SuperCreamDBDataSetTableAdapters."></asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" ></asp:ObjectDataSource>
 </asp:Content>
