@@ -33,7 +33,7 @@ namespace SP.Data.LTS
         public override SpecialInvoiceCreditNote GetById(int id)
         {
             return db.SpecialInvoiceCreditNote.Single<SpecialInvoiceCreditNote>(q => q.ID == id);
-        }        
+        }
 
         public List<SpecialInvoiceCreditNoteDetails> SearchSpecialInvoiceCreditNotes(string orderNo, string invoiceNo, string customerName, DateTime dateFrom, DateTime dateTo)
         {
@@ -41,6 +41,7 @@ namespace SP.Data.LTS
                                // join ons in db.OrderNotesStatus on o.ID equals ons.OrderID
                                join cr in db.SpecialInvoiceCreditNote on sih.ID equals cr.SpecialInvoiceID
                                join c in db.Customer on sih.CustomerID equals c.ID
+                               where cr.IsVoid == false
                                select new SpecialInvoiceCreditNoteDetails
                                {
                                    CreditNoteID = cr.ID,
@@ -60,7 +61,7 @@ namespace SP.Data.LTS
                     dateFrom,
                     dateTo).OrderByDescending(q => q.DateCreated).ToList<SpecialInvoiceCreditNoteDetails>();
         }
-      
+
         public List<SpecialInvoiceCreditNote> GetSpecialInvoiceCreditNotesByInvoiceId(int specialInvoiceId)
         {
             throw new NotImplementedException();
@@ -85,10 +86,10 @@ namespace SP.Data.LTS
 
             var creditTotal = new decimal(0.0);
 
-            var creditNotes = db.SpecialInvoiceCreditNote.Where(q => q.SpecialInvoiceID == specialInvoiceNo).DefaultIfEmpty<SpecialInvoiceCreditNote>();
+            var creditNotes = db.SpecialInvoiceCreditNote.Where(q => (q.SpecialInvoiceID == specialInvoiceNo) && (q.IsVoid == false)).DefaultIfEmpty<SpecialInvoiceCreditNote>();
             if (creditNotes.First() != null)
             {
-                var crCount = db.SpecialInvoiceCreditNote.Where(q => q.SpecialInvoiceID == specialInvoiceNo).Count();
+                var crCount = db.SpecialInvoiceCreditNote.Where(q => (q.SpecialInvoiceID == specialInvoiceNo) && (q.IsVoid == false)).Count();
                 if (crCount > 1)
                 {
                     // Check to see if Credit Note already exists
@@ -98,14 +99,14 @@ namespace SP.Data.LTS
                     {
 
                         creditTotal = Math.Round(((from cr in db.SpecialInvoiceCreditNote
-                                                   where ((cr.SpecialInvoiceID == specialInvoiceNo) && (cr.ID != creditNote))
+                                                   where ((cr.SpecialInvoiceID == specialInvoiceNo) && (cr.IsVoid == false) && (cr.ID != creditNote))
                                                    select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * vatRate))).
                                                      Sum(), 2);
                     }
                     else
                     {
                         creditTotal = Math.Round((from cr in db.SpecialInvoiceCreditNote
-                                                  where (cr.SpecialInvoiceID == specialInvoiceNo)
+                                                  where ((cr.SpecialInvoiceID == specialInvoiceNo) && (cr.IsVoid == false))
                                                   select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * vatRate)).Sum
                                                      (), 2);
                     }
@@ -116,7 +117,7 @@ namespace SP.Data.LTS
 
         public bool SpecialInvoiceCreditNoteExistsByInvoiceId(int specialInvoiceId)
         {
-            return (db.SpecialInvoiceCreditNote.Where<SpecialInvoiceCreditNote>(q => q.SpecialInvoiceID == specialInvoiceId).FirstOrDefault() != null) ? true : false;
+            return (db.SpecialInvoiceCreditNote.Where<SpecialInvoiceCreditNote>(q => (q.SpecialInvoiceID == specialInvoiceId) && (q.IsVoid == false)).FirstOrDefault() != null) ? true : false;
         }
 
         public bool CheckIfReferenceExists(string referenceNo)
@@ -207,12 +208,12 @@ namespace SP.Data.LTS
         {
             var creditTotal = new decimal(0.0);
 
-            var creditNotes = db.SpecialInvoiceCreditNote.Where(q => q.SpecialInvoiceID == specialInvoiceId).DefaultIfEmpty<SpecialInvoiceCreditNote>();
+            var creditNotes = db.SpecialInvoiceCreditNote.Where(q => (q.SpecialInvoiceID == specialInvoiceId) && (q.IsVoid == false)).DefaultIfEmpty<SpecialInvoiceCreditNote>();
             if (creditNotes.First() != null)
             {
                 creditTotal = Math.Round((from cr in db.SpecialInvoiceCreditNote
-                                          where cr.SpecialInvoiceID == specialInvoiceId
-                                          select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * (1 + ((decimal)vatRate/(decimal)100.0)))).Sum(), 2);
+                                          where (cr.SpecialInvoiceID == specialInvoiceId) && (cr.IsVoid ==  false)
+                                          select (cr.VatExempt ? cr.CreditAmount : cr.CreditAmount * (1 + ((decimal)vatRate / (decimal)100.0)))).Sum(), 2);
             }
             return creditTotal;
         }
@@ -252,7 +253,7 @@ namespace SP.Data.LTS
             return invoiceTotal;
         }
 
-        #endregion        
+        #endregion
 
     }
 }

@@ -187,7 +187,7 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
                     VatExempt = this.VatExemptCheckBox.Checked,
                     DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
                 });
-                
+
                 AuditEventsUI.LogEvent("Updating special invoice credit note", specialInvoiceCreditNote.Reference, Page.ToString(),
                     AuditEventsUI.AuditEventType.Modifying);
             }
@@ -225,12 +225,33 @@ public partial class Controls_SaveSpecialInvoiceCreditNoteControl : System.Web.U
 
     protected void DeleteButton_Click(object sender, EventArgs e)
     {
+        //if (CreditNoteID != null)
+        //{
+        //    var creditNote = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNote(this.CreditNoteID.Value);
+        //    SpecialInvoiceCreditNoteUI.Delete(creditNote);
+
+        //    AuditEventsUI.LogEvent("Deleting special invoice credit note", creditNote.Reference, Page.ToString(),
+        //          AuditEventsUI.AuditEventType.Deleting);
+
+        //    if (this.CompletedEventHandler != null)
+        //    {
+        //        this.CompletedEventHandler(this, new EventArgs());
+        //    }
+        //}
+        ReasonforVoidingTextBox.Text = String.Empty;
+        ReasonForVoidingPopupExtender.Show();
+    }
+
+    protected void VoidOrderButton_Click(object sender, EventArgs e)
+    {
         if (CreditNoteID != null)
         {
             var creditNote = SpecialInvoiceCreditNoteUI.GetSpecialInvoiceCreditNote(this.CreditNoteID.Value);
-            SpecialInvoiceCreditNoteUI.Delete(creditNote);
+            creditNote.ReasonForVoiding = ReasonforVoidingTextBox.Text;
+            creditNote.IsVoid = true;
+            SpecialInvoiceCreditNoteUI.UpdateCreditNotes(creditNote);
 
-            AuditEventsUI.LogEvent("Deleting special invoice credit note", creditNote.Reference, Page.ToString(),
+            AuditEventsUI.LogEvent("Voiding special invoice credit note", creditNote.Reference, Page.ToString(),
                   AuditEventsUI.AuditEventType.Deleting);
 
             if (this.CompletedEventHandler != null)

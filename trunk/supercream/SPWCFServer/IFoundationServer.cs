@@ -3841,6 +3841,8 @@ namespace SPWCFServer
         private string _Reference;
         private bool _VatExempt;
         private DateTime _DueDate;
+        private string _ReasonForVoiding;
+        private bool _IsVoid;
 
         [DataMember]
         public int ID
@@ -3947,6 +3949,32 @@ namespace SPWCFServer
             set
             {
                 _DueDate = value;
+            }
+        }
+
+        [DataMember]
+        public string ReasonForVoiding
+        {
+            get
+            {
+                return _ReasonForVoiding;
+            }
+            set
+            {
+                _ReasonForVoiding = value;
+            }
+        }
+
+        [DataMember]
+        public bool IsVoid
+        {
+            get
+            {
+                return _IsVoid;
+            }
+            set
+            {
+                _IsVoid = value;
             }
         }
     }
@@ -4373,6 +4401,8 @@ namespace SPWCFServer
         private string _CustomerName;
         private string _Reference;
         private DateTime _DueDate;
+        private string _ReasonForVoiding;
+        private bool _IsVoid;
 
         [DataMember]
         public int CreditNoteID
@@ -4481,6 +4511,30 @@ namespace SPWCFServer
             set
             {
                 _DueDate = value;
+            }
+        }
+
+        public string ReasonForVoiding
+        {
+            get
+            {
+                return _ReasonForVoiding;
+            }
+            set
+            {
+                _ReasonForVoiding = value;
+            }
+        }
+
+        public bool IsVoid
+        {
+            get
+            {
+                return _IsVoid;
+            }
+            set
+            {
+                _IsVoid = value;
             }
         }
     }
