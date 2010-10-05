@@ -139,13 +139,15 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
             if (this.IsNewCreditNote)
             {
                 orderCreditNote = ui.SaveOrderCreditNote(new OrderCreditNote()
-                {
-                    ID = -1,
-                    OrderID = this.OrderID.Value,
-                    DateCreated = DateTime.Now,
-                    Reason = this.ReasonTextBox.Text,
-                    DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
-                });
+                                                             {
+                                                                 ID = -1,
+                                                                 OrderID = this.OrderID.Value,
+                                                                 DateCreated = DateTime.Now,
+                                                                 Reason = this.ReasonTextBox.Text,
+                                                                 DueDate = Convert.ToDateTime(this.DueDateTextBox.Text),
+                                                                 ReasonForVoiding = String.Empty,
+                                                                 IsVoid = false
+                                                             });
 
                 AuditEventsUI.LogEvent("Creating Order Credit Note", orderCreditNote.Reference, Page.ToString(),
                         AuditEventsUI.AuditEventType.Creating);
@@ -160,7 +162,9 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
                     DateCreated = DateTime.Now,
                     Reason = this.ReasonTextBox.Text,
                     Reference = orderCreditNote.Reference,
-                    DueDate = Convert.ToDateTime(this.DueDateTextBox.Text)
+                    DueDate = Convert.ToDateTime(this.DueDateTextBox.Text),
+                    ReasonForVoiding = String.Empty,
+                    IsVoid = false
                 });
 
                 AuditEventsUI.LogEvent("Updating Order Credit Note", orderCreditNote.Reference, Page.ToString(),
@@ -208,7 +212,7 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
         }
     }
 
-    protected void DeleteButton_Click(object sender, EventArgs e)
+    protected void VoidOrderButton_Click(object sender, EventArgs e)
     {
         if (CreditNoteID != null)
         {
@@ -216,12 +220,22 @@ public partial class Controls_OrderCreditNoteHeader : System.Web.UI.UserControl
             AuditEventsUI.LogEvent("Deleting Order Credit Note", orderCreditNote.Reference, Page.ToString(),
                      AuditEventsUI.AuditEventType.Deleting);
 
-            OrderCreditNoteUI.DeleteOrderCreditNote(this.CreditNoteID.Value);
+            // OrderCreditNoteUI.DeleteOrderCreditNote(this.CreditNoteID.Value);
+            orderCreditNote.ReasonForVoiding = ReasonforVoidingTextBox.Text;
+            orderCreditNote.IsVoid = true;
+
+            OrderCreditNoteUI.UpdateOrderCreditNote(orderCreditNote);
             if (this.CancelEventHandler != null)
             {
                 this.CancelEventHandler(this, new EventArgs());
             }
         }
+    }
+
+    protected void DeleteButton_Click(object sender, EventArgs e)
+    {
+        ReasonforVoidingTextBox.Text = String.Empty;
+        ReasonForVoidingPopupExtenderInvoice.Show();
     }
 
     #endregion

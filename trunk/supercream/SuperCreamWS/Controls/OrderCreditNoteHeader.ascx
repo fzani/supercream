@@ -80,5 +80,37 @@
                 </tr>
             </table>
         </asp:Panel>
+        
+        <asp:Button ID="btnTrigger1" runat="server" Style="display: none" />
+        <ajaxToolkit:ModalPopupExtender ID="ReasonForVoidingPopupExtenderInvoice" DropShadow="true"
+                                runat="server" TargetControlID="btnTrigger1" PopupControlID="ReasonForVoidingPanelMessage"
+                                CancelControlID="CancelReasonorVoidingButton" BackgroundCssClass="XPopUpBackGround" />
+       
+        <asp:Panel Style="display: none" DefaultButton="ReasonforVoidingButton" Width="700px"
+            ID="ReasonForVoidingPanelMessage" runat="server" CssClass="modalPopup">
+            <table>
+                <tr>
+                    <td style="width: 30%">
+                        <h3>
+                            Reason for Voiding Credit Note</h3>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="ReasonforVoidingTextBox" Width="100%" Height="300px" TextMode="MultiLine"
+                            runat="server" ValidationGroup="VoidOrderDetailsGroup"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1ReasonForVoiding" Display="Dynamic"
+                            ValidationGroup="VoidOrderDetailsGroup" ControlToValidate="ReasonforVoidingTextBox"
+                            InitialValue="" ErrorMessage="Invoice to is a required Field" Text="*" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Button ID="ReasonforVoidingButton" CommandArgument='<%# OrderID %>' Text="Void Order"
+                            runat="server" OnClick="VoidOrderButton_Click" ValidationGroup="VoidOrderDetailsGroup" />
+                        <asp:Button ID="CancelReasonorVoidingButton" Text="Cancel" CausesValidation="false"
+                            runat="server" />
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
     </fieldset>
 </div>
