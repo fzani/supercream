@@ -26,30 +26,45 @@ namespace SP.Data.LTS
 
         public bool CheckIfOrderLineAlreadyExists(int orderLineId)
         {
-            var p = db.OrderCreditNoteLine
-                .Where(q => q.OrderLineID == orderLineId).FirstOrDefault();
-            return p != null;           
+            var p = (from ocrnl in db.OrderCreditNoteLine
+                     join ocn in db.OrderCreditNote on ocrnl.OrderCreditNoteID equals ocn.ID
+                     where (ocrnl.OrderLineID) == orderLineId && (ocn.IsVoid == false)
+                     select ocrnl
+                         ).FirstOrDefault();
+            return p != null;
         }
 
         public List<OrderCreditNoteLine> GetOrderCreditNoteLinesByCreditNoteId(int creditNoteId)
         {
             var p = db.OrderCreditNoteLine
                .Where(q => q.OrderCreditNoteID == creditNoteId).ToList();
-            return p; 
-        }        
+            return p;
+        }
 
         public bool CheckIfCreditNoteLineExists(int creditNoteid, int orderLineId)
         {
-            var p = db.OrderCreditNoteLine
-                .Where(q => q.OrderCreditNoteID == creditNoteid && q.OrderLineID == orderLineId).SingleOrDefault();
-            return p != null;                  
+            //var p = db.OrderCreditNoteLine
+            //    .Where(q => q.OrderCreditNoteID == creditNoteid && q.OrderLineID == orderLineId).SingleOrDefault();
+
+            var creditNoteLine = (from ocrnl in db.OrderCreditNoteLine
+                                  join ocn in db.OrderCreditNote on ocrnl.OrderCreditNoteID equals ocn.ID
+                                  where (ocrnl.OrderCreditNoteID) == creditNoteid && (ocrnl.OrderLineID == orderLineId) && (ocn.IsVoid == false)
+                                  select ocrnl).SingleOrDefault();
+
+            return creditNoteLine != null;
         }
 
         public OrderCreditNoteLine GetCreditNoteLineByOrderIdAndOrderLineId(int creditNoteid, int orderLineId)
         {
-            return db.OrderCreditNoteLine
-                .Where(q => q.OrderCreditNoteID == creditNoteid && q.OrderLineID == orderLineId)
-                .SingleOrDefault();
+            return (from ocrnl in db.OrderCreditNoteLine
+                    join ocn in db.OrderCreditNote on ocrnl.OrderCreditNoteID equals ocn.ID
+                    where (ocrnl.OrderCreditNoteID) == creditNoteid && (ocrnl.OrderLineID == orderLineId) && (ocn.IsVoid == false)
+                    select ocrnl
+                                 ).SingleOrDefault();
+
+            //return db.OrderCreditNoteLine
+            //    .Where(q => q.OrderCreditNoteID == creditNoteid && q.OrderLineID == orderLineId)
+            //    .SingleOrDefault();
         }
 
         public override OrderCreditNoteLine GetById(int id)
@@ -62,14 +77,20 @@ namespace SP.Data.LTS
             var orderLine = db.OrderLine.SingleOrDefault(ol => ol.ID == orderLineId);
 
             var noOfCreditNoteUnits = 0;
-            var creditNoteLines = db.OrderCreditNoteLine.Where(q => q.OrderLineID == orderLineId);
-            if(creditNoteLines.Count() != 0)
+            var creditNoteLines = (from ocrnl in db.OrderCreditNoteLine
+                                   join ocn in db.OrderCreditNote on ocrnl.OrderCreditNoteID equals ocn.ID
+                                   where (ocrnl.OrderLineID) == orderLineId && (ocn.IsVoid == false)
+                                   select ocrnl
+                                  );
+
+            //  db.OrderCreditNoteLine.Where(q => q.OrderLineID == orderLineId);
+            if (creditNoteLines.Count() != 0)
             {
                 noOfCreditNoteUnits = creditNoteLines.Sum(q => q.NoOfUnits);
             }
 
             return orderLine.NoOfUnits - noOfCreditNoteUnits;
 
-        }       
+        }
     }
 }

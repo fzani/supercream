@@ -166,13 +166,14 @@ namespace SP.Data.LTS
 
             var orderCreditNotes = (from oh in db.OrderCreditNote
                                     join ol in db.OrderCreditNoteLine on oh.ID equals ol.OrderCreditNoteID
-                                    where oh.OrderID == orderNo
+                                    where (oh.OrderID == orderNo) && (oh.IsVoid == false)
                                     select oh).DefaultIfEmpty<OrderCreditNote>();
             if (orderCreditNotes.First() != null)
             {
                 creditTotal += Math.Round((from oh in db.OrderCreditNote
                                            join ol in db.OrderCreditNoteLine on oh.ID equals ol.OrderCreditNoteID
                                            join p in db.Product on ol.ProductID equals p.ID
+                                           where (oh.OrderID == orderNo) && oh.IsVoid == false
                                            select ((p.VatExempt) ? ol.Price * ol.NoOfUnits : ol.Price * ol.NoOfUnits * vatRate)).Sum(), 2);
             }
 
