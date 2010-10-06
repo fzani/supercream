@@ -77,16 +77,32 @@
       <FullPath>17 - PaymentsOutstandingSummaryByCustomer.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>19 - Ledger Totals.rdl</Name>
-      <FullPath>19 - Ledger Totals.rdl</FullPath>
+      <Name>18 - SpecialInvoiceSummary.rdl</Name>
+      <FullPath>18 - SpecialInvoiceSummary.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>19 - Void Credit Notes Items.rdl</Name>
+      <FullPath>19 - Void Credit Notes Items.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>20 - Void Special Invoices Items.rdl</Name>
+      <FullPath>20 - Void Special Invoices Items.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>21 - Void Special Invoice Credit Note Items.rdl</Name>
+      <FullPath>21 - Void Special Invoice Credit Note Items.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>23 - Ledger Totals.rdl</Name>
+      <FullPath>23 - Ledger Totals.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>SpecialInvoicePrintReport.rdl</Name>
       <FullPath>SpecialInvoicePrintReport.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>18 - SpecialInvoiceSummary.rdl</Name>
-      <FullPath>18 - SpecialInvoiceSummary.rdl</FullPath>
+      <Name>22 - Void Order CreditNote Lines.rdl</Name>
+      <FullPath>22 - Void Order CreditNote Lines.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
