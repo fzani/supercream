@@ -86,309 +86,386 @@
                             &nbsp | &nbsp;
                             <asp:LinkButton ID="CancelNewOrderButton" CausesValidation="false" runat="server"
                                 Text="Cancel Order Details" OnClick="CancelNewOrderButton_Click" />
+                            &nbsp;
+                            <asp:LinkButton ID="ShowCustomerDetailsButton" Text="| Show Customer Details" runat="server"
+                                OnClick="ShowCustomerDetailsButton_Click" Visible="False" />
                         </td>
                     </tr>
                 </table>
             </asp:Panel>
-            <asp:Panel ID="ProductSearchPanel" Visible="false" runat="server">
-                <uc1:ProductSearch ID="ProductSearch" runat="server" />
+            <asp:Button ID="btnTrigger6" runat="server" Style="display: none" />
+            <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtenderShowCustomer" DropShadow="true"
+                runat="server" TargetControlID="btnTrigger6" PopupControlID="ShowCustomerDetailsPanel"
+                BackgroundCssClass="XPopUpBackGround" />
+            <asp:Panel Style="display: none" Width="700px" Height="350px" ScrollBars="Auto" DefaultButton="ShowComplete_Button"
+                ID="ShowCustomerDetailsPanel" runat="server" CssClass="modalPopup">
+                <table style="width: 100%; margin: 0px 0px 20px 0px;" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width: 20%;">
+                            <h3>
+                                Customer Name
+                            </h3>
+                        </td>
+                        <td style="width: 80%;">
+                            <asp:Label ID="CustomerNameTextBoxLabel" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <asp:Repeater ID="ContactDetailsRepeater" OnItemDataBound="OrderDetailsContact_ItemDataBound"
+                                runat="server">
+                                <ItemTemplate>
+                                    <ul>
+                                        <li>Contact &nbsp;
+                                            <%#Eval("FirstName") %>&nbsp;<%#Eval("LastName") %>
+                                            <ul>
+                                                <asp:Repeater ID="PhoneDetailsRepeater" runat="server">
+                                                    <ItemTemplate>
+                                                        <li>
+                                                            <%#Eval("PhoneType") %>
+                                                            - <i>
+                                                                <%#Eval("PhoneNumber") %>
+                                                            </i></li>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <asp:Repeater ID="ShopDetailsRepeater" OnItemDataBound="ShopDetails_ItemDataBound"
+                                runat="server">
+                                <ItemTemplate>
+                                    <ul>
+                                        <li>Shop Name &nbsp;
+                                            <%#Eval("Name") %>
+                                            <ul>
+                                                <li>
+                                                    <%#Eval("Address")%>
+                                                </li>
+                                                <li>
+                                                    <%#Eval("OpeningHoursNotes")%>
+                                                </li>
+                                                <li>
+                                                    <%#Eval("Note")%>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </td>
+                    </tr>
+                </table>
+                <asp:Button ID="ShowComplete_Button" Width="100%" Text="OK" CausesValidation="false"
+                    runat="server" />
             </asp:Panel>
-            <asp:Panel ID="AddOrderDetailsPanel" Visible="false" runat="server">
-                <table style="width: 100%">
+        </fieldset>
+</asp:Panel>
+<asp:Panel ID="ProductSearchPanel" Visible="false" runat="server">
+    <uc1:ProductSearch ID="ProductSearch" runat="server" />
+</asp:Panel>
+<asp:Panel ID="AddOrderDetailsPanel" Visible="false" runat="server">
+    <table style="width: 100%">
+        <tr>
+            <td class="emphasise" style="width: 30%">
+                <b>Product Code</b>
+            </td>
+            <td style="width: 20%">
+                <asp:Label ID="ProductCodeLabel" runat="server"></asp:Label>
+            </td>
+            <td class="emphasise" style="width: 20%">
+                <b>Product Name</b>
+            </td>
+            <td style="width: 30%">
+                <asp:Label ID="ProductDescriptionLabel" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Qty/unit
+            </td>
+            <td>
+                <asp:Label ID="QtyPerUnitLabel" runat="server"></asp:Label>
+            </td>
+            <td>
+                <i>Original Unit Price</i>
+            </td>
+            <td>
+                <asp:Label ID="ProductPriceLabel" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                R.R.P
+            </td>
+            <td>
+                <asp:Label ID="RRPLabel" runat="server"></asp:Label>
+            </td>
+            <td colspan="1">
+                <asp:Label ID="PriceDiscountNameLabel" runat="server"></asp:Label>
+            </td>
+            <td>
+                <asp:Label ID="PriceListDiscountLabel" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td class="emphasise">
+                No Of Units
+            </td>
+            <td>
+                <asp:TextBox ID="NoOfUnitsTextBox" MaxLength="3" Width="60px" runat="server" AutoPostBack="True"
+                    OnTextChanged="NoOfUnitsTextBox_TextChanged"></asp:TextBox>
+                <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server"
+                    TargetControlID="NoOfUnitsTextBox" FilterType="Numbers" />
+            </td>
+            <td class="emphasise">
+                <asp:Label ID="PriceLabel" Text="Price" runat="server"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="PriceTextBox" MaxLength="7" Width="60px" runat="server" OnTextChanged="PriceTextBox_TextChanged"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ValidationGroup="NewOutletGroup"
+                    ControlToValidate="PriceTextBox" ErrorMessage="Price is required" InitialValue=""
+                    Text="*" runat="server" />
+                <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server"
+                    TargetControlID="PriceTextBox" FilterType="Custom,Numbers" ValidChars="£." />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <asp:Label ID="PriceListDefined" Visible="false" runat="server"></asp:Label>
+            </td>
+            <td class="emphasise">
+                <asp:Label ID="TotalPriceLabel" Text="Total Price (Ex. Vat)" runat="server"></asp:Label>
+            </td>
+            <td>
+                <asp:Label ID="TotalPriceValueLabel" Font-Size="Medium" ForeColor="Red" MaxLength="7"
+                    Width="60px" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <table>
                     <tr>
-                        <td class="emphasise" style="width: 30%">
-                            <b>Product Code</b>
-                        </td>
-                        <td style="width: 20%">
-                            <asp:Label ID="ProductCodeLabel" runat="server"></asp:Label>
-                        </td>
-                        <td class="emphasise" style="width: 20%">
-                            <b>Product Name</b>
-                        </td>
                         <td style="width: 30%">
-                            <asp:Label ID="ProductDescriptionLabel" runat="server"></asp:Label>
+                            <asp:Button ID="CalculateButton" Text="Calculate" CausesValidation="false" runat="server"
+                                OnClick="CalculateButton_Click" />
+                            <asp:Button ID="AddOrderLineButton" Text="Add Line" runat="server" Visible="false"
+                                OnClick="AddOrderLineButton_Click" />
+                            <asp:Button ID="CancelButton" Text="Cancel" CausesValidation="false" runat="server"
+                                OnClick="CancelButton_Click" />
                         </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Qty/unit
-                        </td>
-                        <td>
-                            <asp:Label ID="QtyPerUnitLabel" runat="server"></asp:Label>
-                        </td>
-                        <td>
-                            <i>Original Unit Price</i>
-                        </td>
-                        <td>
-                            <asp:Label ID="ProductPriceLabel" runat="server"></asp:Label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            R.R.P
-                        </td>
-                        <td>
-                            <asp:Label ID="RRPLabel" runat="server"></asp:Label>
-                        </td>
-                        <td colspan="1">
-                            <asp:Label ID="PriceDiscountNameLabel" runat="server"></asp:Label>
-                        </td>
-                        <td colspan="3">
-                            <asp:Label ID="PriceListDiscountLabel" runat="server"></asp:Label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="emphasise">
-                            No Of Units
-                        </td>
-                        <td>
-                            <asp:TextBox ID="NoOfUnitsTextBox" MaxLength="3" Width="60px" runat="server" AutoPostBack="True"
-                                OnTextChanged="NoOfUnitsTextBox_TextChanged"></asp:TextBox>
-                            <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server"
-                                TargetControlID="NoOfUnitsTextBox" FilterType="Numbers" />
-                        </td>
-                        <td class="emphasise">
-                            <asp:Label ID="PriceLabel" Text="Price" runat="server"></asp:Label>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="PriceTextBox" MaxLength="7" Width="60px" runat="server" OnTextChanged="PriceTextBox_TextChanged"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ValidationGroup="NewOutletGroup"
-                                ControlToValidate="PriceTextBox" ErrorMessage="Price is required" InitialValue=""
-                                Text="*" runat="server" />
-                            <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server"
-                                TargetControlID="PriceTextBox" FilterType="Custom,Numbers" ValidChars="£." />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <asp:Label ID="PriceListDefined" Visible="false" runat="server"></asp:Label>
-                        </td>
-                        <td class="emphasise">
-                            <asp:Label ID="TotalPriceLabel" Text="Total Price (Ex. Vat)" runat="server"></asp:Label>
-                        </td>
-                        <td>
-                            <asp:Label ID="TotalPriceValueLabel" Font-Size="Medium" ForeColor="Red" MaxLength="7"
-                                Width="60px" runat="server"></asp:Label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4">
+                        <td style="width: 70%">
                             <table>
                                 <tr>
-                                    <td style="width: 30%">
-                                        <asp:Button ID="CalculateButton" Text="Calculate" CausesValidation="false" runat="server"
-                                            OnClick="CalculateButton_Click" />
-                                        <asp:Button ID="AddOrderLineButton" Text="Add Line" runat="server" Visible="false"
-                                            OnClick="AddOrderLineButton_Click" />
-                                        <asp:Button ID="CancelButton" Text="Cancel" CausesValidation="false" runat="server"
-                                            OnClick="CancelButton_Click" />
+                                    <td>
+                                        <asp:CheckBox ID="ContinueCheckBox" runat="server" Text="<i>Do you want to continue</i>"
+                                            AutoPostBack="True" OnCheckedChanged="ContinueCheckBox_CheckedChanged" />
                                     </td>
-                                    <td style="width: 70%">
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <asp:CheckBox ID="ContinueCheckBox" runat="server" Text="<i>Do you want to continue</i>"
-                                                        AutoPostBack="True" OnCheckedChanged="ContinueCheckBox_CheckedChanged" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <asp:CheckBox ID="SpecialInstructionsCheckBox" runat="server" Text="<i>Do you have any Special Instructions on this Order Line</i>"
-                                                        AutoPostBack="True" OnCheckedChanged="SpecialInstructionsCheckBox_CheckedChanged" />
-                                                </td>
-                                            </tr>
-                                        </table>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:CheckBox ID="SpecialInstructionsCheckBox" runat="server" Text="<i>Do you have any Special Instructions on this Order Line</i>"
+                                            AutoPostBack="True" OnCheckedChanged="SpecialInstructionsCheckBox_CheckedChanged" />
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td colspan="3">
-                            <asp:TextBox ID="SpecialInstructionsTextBox" Width="90%" Height="60px" TextMode="MultiLine"
-                                Visible="false" runat="server"></asp:TextBox>
-                        </td>
-                    </tr>
                 </table>
-            </asp:Panel>
-            <asp:Panel ID="OrderDetailsGridPanel" runat="server">
-                <asp:GridView ID="OrderDetailsGridView" Width="97%" runat="server" AutoGenerateColumns="False"
-                    DataSourceID="ObjectDataSource1" OnRowDataBound="GridView1_RowDataBound" OnRowCommand="GridView1_RowCommand"
-                    ShowFooter="true">
-                    <Columns>
-                        <asp:TemplateField HeaderText="ID" SortExpression="ID" Visible="false">
-                            <ItemTemplate>
-                                <asp:Label ID="IDLabel" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Product" SortExpression="ProductID">
-                            <ItemTemplate>
-                                <asp:Label ID="ProductNameLabel" runat="server" Text='<%# Bind("ProductID") %>'></asp:Label>
-                            </ItemTemplate>
-                            <EditItemTemplate>
-                                <asp:TextBox ID="ProductNameLabel" runat="server" Text='<%# Bind("ProductID") %>'></asp:TextBox>
-                            </EditItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="No Of Units" SortExpression="NoOfUnits">
-                            <ItemTemplate>
-                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("NoOfUnits") %>'></asp:Label>
-                            </ItemTemplate>
-                            <EditItemTemplate>
-                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("NoOfUnits") %>'></asp:TextBox>
-                            </EditItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Discount" SortExpression="Discount">
-                            <ItemTemplate>
-                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("Discount") %>'></asp:Label>
-                            </ItemTemplate>
-                            <EditItemTemplate>
-                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Discount") %>'></asp:TextBox>
-                            </EditItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Price" SortExpression="Price">
-                            <ItemTemplate>
-                                <asp:Label ID="OrderLinePriceLabel" runat="server"></asp:Label>
-                            </ItemTemplate>
-                            <EditItemTemplate>
-                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Price") %>'></asp:TextBox>
-                            </EditItemTemplate>
-                            <FooterTemplate>
-                                Ex Vat. Total &nbsp;
-                                <asp:Label ID="priceLabelTotal" runat="server"></asp:Label>
-                            </FooterTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="SI" SortExpression="SpecialInstructions">
-                            <ItemTemplate>
-                                <asp:Image ID="SIImage" runat="server"></asp:Image>
-                            </ItemTemplate>
-                            <EditItemTemplate>
-                                <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("SpecialInstructions") %>'></asp:TextBox>
-                            </EditItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Edit" SortExpression="SpecialInstructions">
-                            <ItemTemplate>
-                                <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
-                                <asp:ImageButton ID="EditImage" ImageUrl="~/images/user6_(edit)_16x16.gif" CommandName="Select"
-                                    CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" runat="server" />
-                                <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender" DropShadow="true" runat="server"
-                                    TargetControlID="btnTrigger" PopupControlID="PanelMessage" CancelControlID="CancelButton"
-                                    BackgroundCssClass="XPopUpBackGround" />
-                                <asp:Panel Style="display: none" Width="700px" ID="PanelMessage" runat="server" CssClass="modalPopup">
-                                    <fieldset id="Fieldset2">
-                                        <legend>
-                                            <h3>
-                                                Invoice Address
-                                            </h3>
-                                        </legend>
-                                        <table style="width: 100%">
-                                            <tr>
-                                                <td>
-                                                    Product Name
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="PanelProductNameLabel" runat="server"></asp:Label>
-                                                    <asp:Label ID="ProductIDLabel" Visible="false" runat="server"></asp:Label>
-                                                </td>
-                                                <td>
-                                                    Order ID
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="AlphaIDLabel" runat="server"></asp:Label>
-                                                    <asp:Label ID="OrderIDLabel" Visible="false" runat="server"></asp:Label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Qty
-                                                </td>
-                                                <td>
-                                                    <asp:TextBox ID="QtyTextBox" runat="server"></asp:TextBox>
-                                                    <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server"
-                                                        TargetControlID="QtyTextBox" FilterType="Numbers" />
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ValidationGroup="NewPriceListGroup"
-                                                        ControlToValidate="QtyTextBox" ErrorMessage="Qty is a required Text Box" InitialValue=""
-                                                        Text="*" runat="server" />
-                                                </td>
-                                                <td>
-                                                    No of Units
-                                                </td>
-                                                <td>
-                                                    <asp:TextBox ID="NoOfUnitsTextBox" runat="server"></asp:TextBox>
-                                                    <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server"
-                                                        TargetControlID="NoOfUnitsTextBox" FilterType="Numbers" />
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ValidationGroup="NewPriceListGroup"
-                                                        ControlToValidate="NoOfUnitsTextBox" ErrorMessage="No of Units is a required Text Box"
-                                                        InitialValue="" Text="*" runat="server" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Discount
-                                                </td>
-                                                <td>
-                                                    <asp:TextBox ID="DiscountTextBox" runat="server"></asp:TextBox>
-                                                    <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server"
-                                                        TargetControlID="DiscountTextBox" FilterType="Custom,Numbers" ValidChars="%." />
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ValidationGroup="NewPriceListGroup"
-                                                        ControlToValidate="DiscountTextBox" ErrorMessage="Price List Name is a required Text Box"
-                                                        InitialValue="" Text="*" runat="server" />
-                                                </td>
-                                                <td>
-                                                    Price
-                                                </td>
-                                                <td>
-                                                    <asp:TextBox ID="PriceTextBox" MaxLength="7" runat="server"></asp:TextBox>
-                                                    <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server"
-                                                        TargetControlID="PriceTextBox" FilterType="Custom,Numbers" ValidChars="£." />
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="NewPriceListGroup"
-                                                        ControlToValidate="PriceTextBox" ErrorMessage="Price List Name is a required Text Box"
-                                                        InitialValue="" Text="*" runat="server" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Special Instructions
-                                                </td>
-                                                <td colspan="3">
-                                                    <asp:TextBox ID="SpecialInstructionsTextBox" Width="95%" Height="150px" TextMode="MultiLine"
-                                                        runat="server"></asp:TextBox>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <asp:Button ID="UpdateButton" Text="Update" OnClick="UpdateButton_Click" runat="server" />
-                                        <asp:Button ID="DeleteButton" Text="Delete" OnClick="DeleteButton_Click" CommandName="DeleteButton"
-                                            CommandArgument='<%# Bind("ID") %>' runat="server" />
-                                        <asp:Button ID="CancelButton" Text="Cancel" runat="server" />
-                                </asp:Panel>
-                            </ItemTemplate>
-                            <EditItemTemplate>
-                                <asp:ImageButton ID="EditImage" ImageUrl="~/images/user6_(edit)_16x16.gif" CommandName="Select"
-                                    runat="server" />
-                            </EditItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
-                <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" OnSelecting="ObjectDataSource1_Selecting"
-                    SelectMethod="GetOrderLines" TypeName="OrderLineUI">
-                    <SelectParameters>
-                        <asp:Parameter Name="id" Type="Int32" />
-                    </SelectParameters>
-                </asp:ObjectDataSource>
-            </asp:Panel>
-        </fieldset>
-        <asp:Panel ID="CancelPurchaseSearchPanel" Visible="false" runat="server">
-            <fieldset>
-                <table>
-                    <tr>
-                        <td>
-                            <asp:Button ID="CancelPurchaseSearchButton" Text="Complete Order" runat="server"
-                                OnClick="CancelPurchaseSearchButton_Click" />
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-        </asp:Panel>
-    </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td colspan="3">
+                <asp:TextBox ID="SpecialInstructionsTextBox" Width="90%" Height="60px" TextMode="MultiLine"
+                    Visible="false" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+    </table>
+</asp:Panel>
+<asp:Panel ID="OrderDetailsGridPanel" runat="server">
+    <asp:GridView ID="OrderDetailsGridView" Width="97%" runat="server" AutoGenerateColumns="False"
+        DataSourceID="ObjectDataSource1" OnRowDataBound="GridView1_RowDataBound" OnRowCommand="GridView1_RowCommand"
+        ShowFooter="true">
+        <Columns>
+            <asp:TemplateField HeaderText="ID" SortExpression="ID" Visible="false">
+                <ItemTemplate>
+                    <asp:Label ID="IDLabel" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Product" SortExpression="ProductID">
+                <ItemTemplate>
+                    <asp:Label ID="ProductNameLabel" runat="server" Text='<%# Bind("ProductID") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="ProductNameLabel" runat="server" Text='<%# Bind("ProductID") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="No Of Units" SortExpression="NoOfUnits">
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("NoOfUnits") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("NoOfUnits") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Discount" SortExpression="Discount">
+                <ItemTemplate>
+                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("Discount") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Discount") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Price" SortExpression="Price">
+                <ItemTemplate>
+                    <asp:Label ID="OrderLinePriceLabel" runat="server"></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Price") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <FooterTemplate>
+                    Ex Vat. Total &nbsp;
+                    <asp:Label ID="priceLabelTotal" runat="server"></asp:Label>
+                </FooterTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="SI" SortExpression="SpecialInstructions">
+                <ItemTemplate>
+                    <asp:Image ID="SIImage" runat="server"></asp:Image>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("SpecialInstructions") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Edit" SortExpression="SpecialInstructions">
+                <ItemTemplate>
+                    <asp:Button ID="btnTrigger" runat="server" Style="display: none" />
+                    <asp:ImageButton ID="EditImage" ImageUrl="~/images/user6_(edit)_16x16.gif" CommandName="Select"
+                        CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" runat="server" />
+                    <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender" DropShadow="true" runat="server"
+                        TargetControlID="btnTrigger" PopupControlID="PanelMessage" CancelControlID="CancelButton"
+                        BackgroundCssClass="XPopUpBackGround" />
+                    <asp:Panel Style="display: none" Width="700px" ID="PanelMessage" runat="server" CssClass="modalPopup">
+                        <fieldset id="Fieldset2">
+                            <legend>
+                                <h3>
+                                    Invoice Address
+                                </h3>
+                            </legend>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td>
+                                        Product Name
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="PanelProductNameLabel" runat="server"></asp:Label>
+                                        <asp:Label ID="ProductIDLabel" Visible="false" runat="server"></asp:Label>
+                                    </td>
+                                    <td>
+                                        Order ID
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="AlphaIDLabel" runat="server"></asp:Label>
+                                        <asp:Label ID="OrderIDLabel" Visible="false" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Qty
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="QtyTextBox" runat="server"></asp:TextBox>
+                                        <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server"
+                                            TargetControlID="QtyTextBox" FilterType="Numbers" />
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ValidationGroup="NewPriceListGroup"
+                                            ControlToValidate="QtyTextBox" ErrorMessage="Qty is a required Text Box" InitialValue=""
+                                            Text="*" runat="server" />
+                                    </td>
+                                    <td>
+                                        No of Units
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="NoOfUnitsTextBox" runat="server"></asp:TextBox>
+                                        <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server"
+                                            TargetControlID="NoOfUnitsTextBox" FilterType="Numbers" />
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ValidationGroup="NewPriceListGroup"
+                                            ControlToValidate="NoOfUnitsTextBox" ErrorMessage="No of Units is a required Text Box"
+                                            InitialValue="" Text="*" runat="server" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Discount
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="DiscountTextBox" runat="server"></asp:TextBox>
+                                        <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server"
+                                            TargetControlID="DiscountTextBox" FilterType="Custom,Numbers" ValidChars="%." />
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ValidationGroup="NewPriceListGroup"
+                                            ControlToValidate="DiscountTextBox" ErrorMessage="Price List Name is a required Text Box"
+                                            InitialValue="" Text="*" runat="server" />
+                                    </td>
+                                    <td>
+                                        Price
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="PriceTextBox" MaxLength="7" runat="server"></asp:TextBox>
+                                        <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server"
+                                            TargetControlID="PriceTextBox" FilterType="Custom,Numbers" ValidChars="£." />
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="NewPriceListGroup"
+                                            ControlToValidate="PriceTextBox" ErrorMessage="Price List Name is a required Text Box"
+                                            InitialValue="" Text="*" runat="server" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Special Instructions
+                                    </td>
+                                    <td colspan="3">
+                                        <asp:TextBox ID="SpecialInstructionsTextBox" Width="95%" Height="150px" TextMode="MultiLine"
+                                            runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </table>
+                            <asp:Button ID="UpdateButton" Text="Update" OnClick="UpdateButton_Click" runat="server" />
+                            <asp:Button ID="DeleteButton" Text="Delete" OnClick="DeleteButton_Click" CommandName="DeleteButton"
+                                CommandArgument='<%# Bind("ID") %>' runat="server" />
+                            <asp:Button ID="CancelButton" Text="Cancel" runat="server" />
+                    </asp:Panel>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:ImageButton ID="EditImage" ImageUrl="~/images/user6_(edit)_16x16.gif" CommandName="Select"
+                        runat="server" />
+                </EditItemTemplate>
+            </asp:TemplateField>
+        </Columns>
+    </asp:GridView>
+    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" OnSelecting="ObjectDataSource1_Selecting"
+        SelectMethod="GetOrderLines" TypeName="OrderLineUI">
+        <SelectParameters>
+            <asp:Parameter Name="id" Type="Int32" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+</asp:Panel>
+<asp:Panel ID="CancelPurchaseSearchPanel" Visible="false" runat="server">
+    <fieldset>
+        <table>
+            <tr>
+                <td>
+                    <asp:Button ID="CancelPurchaseSearchButton" Text="Complete Order" runat="server"
+                        OnClick="CancelPurchaseSearchButton_Click" />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
 </asp:Panel>
