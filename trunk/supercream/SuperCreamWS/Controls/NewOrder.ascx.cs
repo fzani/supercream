@@ -18,7 +18,7 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
     decimal priceTotal = 0;
     #endregion
 
-    #region public Event Handlers
+    #region Public Event Handlers
     public event ErrorMessageEventHandler ProductSearchError;
     public event PurchaseOrderEventHandler PurchaseOrderHandler;
     public event CancelEventHandler CancelHandler;
@@ -392,6 +392,41 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
         }
     }
 
+    protected void ShowCustomerDetailsButton_Click(object sender, EventArgs e)
+    {
+        #region ShowCustomerPanel
+
+        int customerId = Convert.ToInt32(CustomerDropDownList.SelectedValue);
+        if (customerId != -1)
+        {
+            CustomerUI customerUI = new CustomerUI();
+            var customer = customerUI.GetByID(customerId);
+            CustomerNameTextBoxLabel.Text = customer.Name;
+
+            var contactDetails = customerUI.GetContactDetailsByCustomerID(customerId);
+            ContactDetailsRepeater.DataSource = contactDetails;
+
+            var shopDetails = customerUI.GetOutletStoresByCustomerID(customerId);
+            ShopDetailsRepeater.DataSource = from shop in shopDetails
+                                             let address = SP.Util.Utils.ConvertAddressLinesFromXmlToCommaDelimited(shop.Address.AddressLines) + ","
+    + shop.Address.Town + "," + shop.Address.County + ", " + shop.Address.PostCode
+                                             let openingHoursNotes = shop.OpeningHoursNotes.Replace("\r\n", "<br />")
+                                             let note = shop.Note.Replace("\r\n", "<br />")
+                                             select new
+                                             {
+                                                 shop.Name,
+                                                 openingHoursNotes,
+                                                 note,
+                                                 Address = address
+                                             };
+            DataBind();
+
+            ModalPopupExtenderShowCustomer.Show();
+        }
+
+        #endregion
+    }
+
     protected void CalculateButton_Click(object sender, EventArgs e)
     {
         Calculate();
@@ -403,7 +438,14 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
 
     protected void CustomerDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        if (CustomerDropDownList.SelectedIndex == 0)
+        {
+            ShowCustomerDetailsButton.Visible = false;
+        }
+        else
+        {
+            ShowCustomerDetailsButton.Visible = true;
+        }
     }
 
     protected void PriceTextBox_TextChanged(object sender, EventArgs e)
@@ -462,7 +504,7 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
         ChangeState += new EventHandler<EventArgs>(AddOrderState);
         ChangeState(this, e);
     }
-    
+
     #endregion
 
     #region Page States
@@ -639,6 +681,38 @@ public partial class Controls_NewOrder : System.Web.UI.UserControl
             ModalPopupExtender extender = row.FindControl("ModalPopupExtender") as ModalPopupExtender;
             extender.Show();
         }
+    }
+
+    protected void OrderDetailsContact_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        if (e.Item.ItemType == ListItemType.Item)
+        {
+            var contactDetail = e.Item.DataItem as ContactDetail;
+            if (contactDetail != null)
+            {
+                if (contactDetail.Phone != null)
+                {
+                    var phones = contactDetail.Phone;
+                    var phoneDetails = from phone in phones
+                                       orderby phone.PhoneNoType.Description
+                                       select
+                                           new
+                                               {
+                                                   PhoneNumber = phone.Description,
+                                                   PhoneType = phone.PhoneNoType.Description
+                                               };
+
+
+                    Repeater phoneDetailsRepeater = (Repeater)e.Item.FindControl("PhoneDetailsRepeater");
+                    phoneDetailsRepeater.DataSource = phoneDetails;
+                    phoneDetailsRepeater.DataBind();
+                }
+            }
+        }
+    }
+
+    protected void ShopDetails_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
     }
 
     #endregion
