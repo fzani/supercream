@@ -28,6 +28,9 @@ Default skin template. The following skins are provided as examples only.
      <FooterStyle CssClass="row-footer" />               
 </asp:GridView>
 
+<asp:FormView CssClass="simplegrid" runat="server">
+</asp:FormView>
+
  <asp:DataList Width="100%" CssClass="simplegrid" runat="server" AutoGenerateColumns="False">
  </asp:DataList>
  

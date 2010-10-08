@@ -2,13 +2,14 @@
     CodeFile="BundledOrders.aspx.cs" StylesheetTheme="SuperCream" Inherits="Ordering_Orders" %>
 
 <%@ Register Src="~/Controls/ErrorView.ascx" TagName="ErrorView" TagPrefix="Alterax" %>
+<%@ Register Src="../Controls/EditBundledOrder.ascx" TagName="MaintainBundledOrder"
+    TagPrefix="uc1" %>
+    
 <asp:Content ID="Content1" ContentPlaceHolderID="MainPlaceholder" runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <asp:UpdatePanel ID="ErrorUpdatePanel" runat="server" UpdateMode="Conditional">
         <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="NewBundledOrderButton" />
-            <asp:AsyncPostBackTrigger ControlID="MaintainBundledOrdersButton" />
-            <asp:AsyncPostBackTrigger ControlID="MaintainBundledOrdersButton" />
+            <asp:AsyncPostBackTrigger ControlID="MaintainBundledOrder" />
         </Triggers>
         <ContentTemplate>
             <div class="ErrorOutput">
@@ -17,8 +18,7 @@
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:UpdatePanel ID="OrderUpdatePanel" runat="server" UpdateMode="Conditional">
-        <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="NewBundledOrderButton" />
+        <Triggers>            
         </Triggers>
         <ContentTemplate>
             <asp:Panel ID="BundledOrderMenuPanel" Visible="true" runat="server">
@@ -27,21 +27,13 @@
                         <table class="ContentHeader" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="Right">
-                                    <asp:Panel ID="GeneralPanel" DefaultButton="NewBundledOrderButton" runat="server"
-                                        Width="100%" Visible="true">
+                                    <asp:Panel ID="GeneralPanel" runat="server" Width="100%" Visible="true">
                                         <table class="ContentHeader" cellpadding="0">
                                             <tr>
                                                 <td style="width: 30%; text-align: left;">
                                                     <span class="RequiredFieldMessage">*</span> <i>indicates a required field</i>
                                                 </td>
                                                 <td class="Right" style="width: 70%;">
-                                                    <asp:LinkButton ID="MaintainOfferLinkButton" Text="Maintain Offers" runat="server" />
-                                                    &nbsp; |
-                                                    <asp:LinkButton ID="NewBundledOrderButton" Text="New Bundled Order" runat="server"
-                                                        OnClick="NewBundledOrderButton_Click" />
-                                                    &nbsp; |
-                                                    <asp:LinkButton ID="MaintainBundledOrdersButton" Text="Modify Bundled Order" runat="server"
-                                                        OnClick="MaintainBundledOrdersButton_Click" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -54,22 +46,11 @@
             </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <asp:UpdatePanel ID="NewBundledOrderUpdatePanel" runat="server" UpdateMode="Conditional">
+    <asp:UpdatePanel ID="MaintainBundledOrderUpdatePanel" runat="server" UpdateMode="Conditional">
         <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="NewBundledOrderButton" />
-            <asp:AsyncPostBackTrigger ControlID="MaintainBundledOrdersButton" />
         </Triggers>
         <ContentTemplate>
-        </ContentTemplate>
-    </asp:UpdatePanel>
-    <asp:UpdatePanel ID="ModifyOrderUpdatePanel" runat="server" UpdateMode="Conditional">
-        <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="NewBundledOrderButton" />
-            <asp:AsyncPostBackTrigger ControlID="MaintainBundledOrdersButton" />
-            <asp:AsyncPostBackTrigger ControlID="NewBundledOrderButton" />
-        </Triggers>
-        <ContentTemplate>
-            <Alterax:ErrorView ID="ErrorView2" Visible="false" runat="server" />
+            <uc1:MaintainBundledOrder ID="MaintainBundledOrder" runat="server" />
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

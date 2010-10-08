@@ -158,6 +158,12 @@
   <ItemGroup>
     <None Include="test.pfx" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AlteraxWebControls\AlteraxWebControls\AlteraxWebControls.csproj">
+      <Project>{95669874-D934-42BD-96E2-5C317F2EFEFF}</Project>
+      <Name>AlteraxWebControls</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
