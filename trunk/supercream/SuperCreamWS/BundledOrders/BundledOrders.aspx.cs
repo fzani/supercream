@@ -18,6 +18,8 @@ public partial class Ordering_Orders : System.Web.UI.Page
         {
             ChangeState += new EventHandler<EventArgs>(PageLoadState);
             ChangeState(this, e);
+
+            DataBind();
         }
         else
         {
@@ -56,45 +58,22 @@ public partial class Ordering_Orders : System.Web.UI.Page
     #endregion
 
     #region General Button Event Handlers
-    protected void NewBundledOrderButton_Click(object sender, EventArgs e)
-    {
-        DataBind();
-
-        try
-        {
-            //ChangeState += new EventHandler<EventArgs>(EnterNewProductState);
-            //ChangeState(this, e);
-            //NewOrder.ProductID = null;
-            //NewOrder.OrderID = null;
-            //ModifyOrder.Reset();
-            //NewOrder.Reset();
-
-            //////OrderHeaderUI ui = new OrderHeaderUI();
-            //////NewOrder.AlphaID = ui.GenerateOrderNo();
-
-            //DataBind();
-        }
-        catch (Exception ex)
-        {
-            ErrorViewControl.AddError(ex.Message);
-            ErrorViewControl.Visible = true;
-        }
-    }
 
     protected void MaintainBundledOrdersButton_Click(object sender, EventArgs e)
     {
-        ChangeState += new EventHandler<EventArgs>(ModifyOrderState);
+        ChangeState += new EventHandler<EventArgs>(ModifyBundledOrderState);
         ChangeState(this, e);
         // NewOrder.Reset();
         DataBind();
     }
+
     #endregion
 
     #region Page States
+
     protected void PageLoadState(object sender, EventArgs e)
     {
-        //NewOrder.Visible = false;
-        //ModifyOrder.Visible = false;
+
     }
 
     protected void EnterNewProductState(object sender, EventArgs e)
@@ -103,9 +82,9 @@ public partial class Ordering_Orders : System.Web.UI.Page
         //ModifyOrder.Visible = false;
     }
 
-    protected void ModifyOrderState(object sender, EventArgs e)
+    protected void ModifyBundledOrderState(object sender, EventArgs e)
     {
-        //NewOrder.Visible = false;
+        MaintainBundledOrder.Visible = true;
         //ModifyOrder.Visible = true;
     }
 
@@ -115,5 +94,5 @@ public partial class Ordering_Orders : System.Web.UI.Page
         //NewOrder.Visible = false;
         //NewOrder.OrderDate = DateTime.Now;
     }
-    #endregion    
+    #endregion
 }

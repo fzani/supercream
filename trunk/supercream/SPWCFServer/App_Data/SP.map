@@ -186,7 +186,7 @@
   </Table>
   <Table Name="dbo.Offer" Member="Offer">
     <Type Name="Offer">
-      <Column Name="ID" Member="ID" DbType="Int NOT NULL" IsPrimaryKey="true" />
+      <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
       <Column Name="Name" Member="Name" Storage="_Name" DbType="VarChar(50)" />
       <Column Name="ValidFrom" Member="ValidFrom" Storage="_ValidFrom" DbType="DateTime" />
       <Column Name="ValidTo" Member="ValidTo" Storage="_ValidTo" DbType="DateTime" />
@@ -196,7 +196,7 @@
   </Table>
   <Table Name="dbo.OfferItem" Member="OfferItem">
     <Type Name="OfferItem">
-      <Column Name="ID" Member="ID" DbType="Int NOT NULL" IsPrimaryKey="true" />
+      <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
       <Column Name="OfferId" Member="OfferId" Storage="_OfferId" DbType="Int" />
       <Column Name="ProductId" Member="ProductId" Storage="_ProductId" DbType="Int" />
       <Column Name="VatCodeId" Member="VatCodeId" Storage="_VatCodeId" DbType="Int" />
@@ -211,7 +211,7 @@
   </Table>
   <Table Name="dbo.OfferQualificationItem" Member="OfferQualificationItem">
     <Type Name="OfferQualificationItem">
-      <Column Name="ID" Member="ID" DbType="Int NOT NULL" IsPrimaryKey="true" />
+      <Column Name="ID" Member="ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert" />
       <Column Name="OfferId" Member="OfferId" Storage="_OfferId" DbType="Int" />
       <Column Name="ProductId" Member="ProductId" Storage="_ProductId" DbType="Int" />
       <Column Name="Qty" Member="Qty" Storage="_Qty" DbType="Int" />
