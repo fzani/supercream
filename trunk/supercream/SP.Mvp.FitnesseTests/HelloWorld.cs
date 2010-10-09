@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HRMossFitnesseTest
+﻿namespace SP.Mvp.FitnesseTests
 {
     public class OurFirstTest : fit.ColumnFixture
     {
