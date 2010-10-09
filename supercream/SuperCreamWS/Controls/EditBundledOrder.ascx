@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="EditBundledOrder.ascx.cs"
     Inherits="EditBundledOrder" %>
+
 <asp:FormView ID="FormView1" runat="server" AllowPaging="True" DataKeyNames="ID"
     DataSourceID="SqlDataSource" Width="100%">
     <EditItemTemplate>
@@ -105,5 +106,14 @@
             There are no Bundled Items Defined</h3>
     </EmptyDataTemplate>
 </asp:FormView>
-<asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:SuperCreamDBConnectionString %>"
-    SelectCommand="SELECT [ID], [ValidFrom], [Name], [ValidTo] FROM [Offer]"></asp:SqlDataSource>
+<mvp:PageDataSource ID="widgetDataSource" runat="server" EnablePaging="true" 
+    DataObjectTypeName="SP.Core.Domain.Offer"
+    ConflictDetection="CompareAllValues" 
+    OldValuesParameterFormatString="original{0}"
+    SelectMethod="GetOffers" 
+    SelectCountMethod="GetOffersCount" 
+    UpdateMethod="UpdateOffer"
+    InsertMethod="InsertOffer" 
+    DeleteMethod="DeleteOffer">
+</mvp:PageDataSource>
+

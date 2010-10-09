@@ -51,6 +51,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebFormsMvp.Unity", "WebFor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Mvp", "SP.Mvp\SP.Mvp.csproj", "{491F113C-BB55-4839-BC49-7B56AD4D92F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Mvp.FitnesseTests", "SP.Mvp.FitnesseTests\SP.Mvp.FitnesseTests.csproj", "{450B5DA8-EFC6-42A4-A134-D86A1C100E9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Mvp.UnitTests", "SP.Mvp.UnitTests\SP.Mvp.UnitTests.csproj", "{E20779CE-147D-4DA3-A3D7-9F79DBB4C23E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +117,14 @@ Global
 		{491F113C-BB55-4839-BC49-7B56AD4D92F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{491F113C-BB55-4839-BC49-7B56AD4D92F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{491F113C-BB55-4839-BC49-7B56AD4D92F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{450B5DA8-EFC6-42A4-A134-D86A1C100E9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{450B5DA8-EFC6-42A4-A134-D86A1C100E9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{450B5DA8-EFC6-42A4-A134-D86A1C100E9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{450B5DA8-EFC6-42A4-A134-D86A1C100E9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E20779CE-147D-4DA3-A3D7-9F79DBB4C23E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E20779CE-147D-4DA3-A3D7-9F79DBB4C23E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E20779CE-147D-4DA3-A3D7-9F79DBB4C23E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E20779CE-147D-4DA3-A3D7-9F79DBB4C23E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
