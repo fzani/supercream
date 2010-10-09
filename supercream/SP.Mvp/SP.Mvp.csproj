@@ -84,7 +84,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Repository\OfferRepository.cs" />
+    <Compile Include="Repository\LinqRepository.cs" />
     <Compile Include="Views\IEditBundledOrderView.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Offers.cs" />
