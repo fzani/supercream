@@ -22,7 +22,7 @@ public class EditBundledOrderPresenter : Presenter<IEditBundledOrderView>
         View.Load += View_Load;
     }
 
-    public EditBundledOrderPresenter(IEditBundledOrderView view, IOrderBundleRepository widgetRepository)
+    public EditBundledOrderPresenter(IEditBundledOrderView view, IRepository<SP.Mvp.Offer> offerRepository)
         : base(view)
     {
 
@@ -38,7 +38,7 @@ public class EditBundledOrderPresenter : Presenter<IEditBundledOrderView>
     // and binded to the view
     private void View_Load(object sender, EventArgs e)
     {
-        
+
     }
 }
 

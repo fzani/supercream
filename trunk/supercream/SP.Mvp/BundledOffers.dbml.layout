@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="BundledOffers">
+  <DataContextMoniker Name="/BundledOffersDataContext" />
+  <nestedChildShapes>
+    <classShape Id="1b318558-7ae5-4dde-96f5-a6843d821347" absoluteBounds="1.25, 1.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/BundledOffersDataContext/Offer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9cd0554b-c7a7-4e14-bf6e-04674651c573" absoluteBounds="1.2650000000000001, 2.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c6c3acd5-6089-47ee-ba65-edea06c51477" absoluteBounds="4.375, 1.125, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/BundledOffersDataContext/OfferItem" />
+      <nestedChildShapes>
+        <elementListCompartment Id="43dff78d-7901-4bed-9d29-5c9f01626cea" absoluteBounds="4.39, 1.585, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.25 : 2.41429768880208); (4.375 : 2.41429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BundledOffersDataContext/Offer/Offer_OfferItem" />
+      <nodes>
+        <classShapeMoniker Id="1b318558-7ae5-4dde-96f5-a6843d821347" />
+        <classShapeMoniker Id="c6c3acd5-6089-47ee-ba65-edea06c51477" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="8b43551d-0143-4479-9245-f943be2f3817" absoluteBounds="2, 3.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/BundledOffersDataContext/OfferQualificationItem" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e14abfd7-e79a-4c7f-9a23-f789f8357f4f" absoluteBounds="2.015, 4.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.625 : 3.20359537760417); (2.625 : 3.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BundledOffersDataContext/Offer/Offer_OfferQualificationItem" />
+      <nodes>
+        <classShapeMoniker Id="1b318558-7ae5-4dde-96f5-a6843d821347" />
+        <classShapeMoniker Id="8b43551d-0143-4479-9245-f943be2f3817" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
