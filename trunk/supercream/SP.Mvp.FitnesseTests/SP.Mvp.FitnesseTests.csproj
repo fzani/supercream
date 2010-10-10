@@ -40,7 +40,11 @@
       <HintPath>.\fitSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml.Linq">
@@ -54,7 +58,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HelloWorld.cs" />
+    <Compile Include="OfferDoFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Connection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fit.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fitSharp.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Runner.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Runner.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SP.Mvp\SP.Mvp.csproj">
+      <Project>{491F113C-BB55-4839-BC49-7B56AD4D92F6}</Project>
+      <Name>SP.Mvp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\SP.Mvp\App.Config">
+      <Link>App.Config</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="Fitnesse\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -64,4 +99,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy $(SolutionDir)SP.Mvp/App.Config $(TargetDir)Runner.exe.config</PostBuildEvent>
+  </PropertyGroup>
 </Project>
