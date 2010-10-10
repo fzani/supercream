@@ -17,7 +17,7 @@ namespace SP.Mvp.Repository
         }
 
         #region IRepository<TEntity> Members
-        
+
         public TEntity Find(int id)
         {
             var table = _dataContext.GetTable(typeof(TEntity)) as Table<TEntity>;
@@ -67,6 +67,11 @@ namespace SP.Mvp.Repository
                             select w).ToList();
             rdr.Close();
             return entities;
+        }
+
+        public TEntity Save(TEntity newEntity)
+        {
+            return Save(newEntity, null);           
         }
 
         public TEntity Save(TEntity newEntity, TEntity originalEntity)
