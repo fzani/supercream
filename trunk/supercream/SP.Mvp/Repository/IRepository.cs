@@ -16,5 +16,6 @@ namespace SP.Mvp
         IAsyncResult BeginFindAll(AsyncCallback callback, Object asyncState);
         IEnumerable<TEntity> EndFindAll(IAsyncResult result);
         TEntity Save(TEntity entity, TEntity originalEntity);
+        void Delete(TEntity entity);
     }
 }

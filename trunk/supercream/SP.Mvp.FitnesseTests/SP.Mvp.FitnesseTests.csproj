@@ -39,6 +39,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\fitSharp.dll</HintPath>
     </Reference>
+    <Reference Include="FxCopSdk, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WebFormsMvp\bin\Debug\FxCopSdk.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Cci, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WebFormsMvp\bin\Debug\Microsoft.Cci.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -55,6 +63,10 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebFormsMvp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WebFormsMvp\bin\Debug\WebFormsMvp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HelloWorld.cs" />
@@ -81,6 +93,10 @@
       <Project>{491F113C-BB55-4839-BC49-7B56AD4D92F6}</Project>
       <Name>SP.Mvp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SP.Utils\SP.Utils.csproj">
+      <Project>{D446DCEC-2802-4948-8B14-CC7198E1A0DF}</Project>
+      <Name>SP.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SP.Mvp\App.Config">
@@ -100,6 +116,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy $(SolutionDir)SP.Mvp/App.Config $(TargetDir)Runner.exe.config</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

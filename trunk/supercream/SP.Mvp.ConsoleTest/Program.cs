@@ -12,7 +12,7 @@ namespace SP.Mvp.ConsoleTest
         static void Main(string[] args)
         {
             var offerDoFixture = new OfferDoFixture();
-            offerDoFixture.SaveOffer();
+            offerDoFixture.FindByIdAsync(3);
         }
     }
 }
