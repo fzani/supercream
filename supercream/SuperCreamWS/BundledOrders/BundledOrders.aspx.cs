@@ -23,11 +23,20 @@ public partial class Ordering_Orders : System.Web.UI.Page
         }
         else
         {
-            ErrorViewControl.Visible = false;
-            //NewOrder.ProductSearchError += ProductSearch_Error;
-            //NewOrder.CancelHandler += new CancelEventHandler(NewOrder_CancelHandler);
-            //ModifyOrder.ErrorMessageEventHandler += new ErrorMessageEventHandler(ModifyOrder_ErrorMessageEventHandler);
+            ErrorViewControl.Visible = false;                    
         }
+        EditBundledOrder.ErrorMessageEventHandler += new ErrorMessageEventHandler(EditBundledOrder_ErrorMessageEventHandler);
+    }
+
+    void EditBundledOrder_ErrorMessageEventHandler(object sender, ErrorMessageEventArgs e)
+    {
+        foreach (string error in e.ErrorMessages)
+        {
+            ErrorViewControl.AddError(error);
+        }
+
+        ErrorViewControl.DataBind();
+        ErrorViewControl.Visible = true;
     }
 
     #endregion
@@ -84,7 +93,7 @@ public partial class Ordering_Orders : System.Web.UI.Page
 
     protected void ModifyBundledOrderState(object sender, EventArgs e)
     {
-        MaintainBundledOrder.Visible = true;
+        //MaintainBundledOrder.Visible = true;
         //ModifyOrder.Visible = true;
     }
 

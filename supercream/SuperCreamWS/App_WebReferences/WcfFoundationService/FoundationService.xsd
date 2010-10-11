@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SPWCFServer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SPWCFServer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:56391/FoundationService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Linq" />
-  <xs:complexType name="ArrayOfVan">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Van" nillable="true" type="tns:Van" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfVan" nillable="true" type="tns:ArrayOfVan" />
   <xs:complexType name="Van">
     <xs:sequence>
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
@@ -15,6 +9,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Van" nillable="true" type="tns:Van" />
+  <xs:complexType name="ArrayOfVan">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Van" nillable="true" type="tns:Van" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVan" nillable="true" type="tns:ArrayOfVan" />
+  <xs:complexType name="ArrayOfSpecialInvoiceHeader">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SpecialInvoiceHeader" nillable="true" type="tns:SpecialInvoiceHeader" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSpecialInvoiceHeader" nillable="true" type="tns:ArrayOfSpecialInvoiceHeader" />
   <xs:complexType name="SpecialInvoiceHeader">
     <xs:sequence>
       <xs:element minOccurs="0" name="AccountID" type="xs:int" />
@@ -37,12 +43,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SpecialInvoiceHeader" nillable="true" type="tns:SpecialInvoiceHeader" />
-  <xs:complexType name="ArrayOfSpecialInvoiceHeader">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="SpecialInvoiceHeader" nillable="true" type="tns:SpecialInvoiceHeader" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfSpecialInvoiceHeader" nillable="true" type="tns:ArrayOfSpecialInvoiceHeader" />
   <xs:complexType name="ArrayOfSpecialInvoiceLine">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="SpecialInvoiceLine" nillable="true" type="tns:SpecialInvoiceLine" />

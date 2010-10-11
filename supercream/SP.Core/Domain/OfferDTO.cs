@@ -11,21 +11,22 @@ using System.Text;
 namespace SP.Core.Domain
 {
    [Serializable]
-   public class Offer : BaseEntity
+   public class Offer // : BaseEntity
    {     
       private string	_Name;
       private DateTime	_ValidFrom;
       private DateTime	_ValidTo;
+       private int _ID;
 
-      public override int ID
+      public int ID
       {
          get
          {
-            return base.ID;
+             return _ID;
          }
          set
          {
-            base.ID = value;
+             _ID = value;
          }
       }
 

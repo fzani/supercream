@@ -102,6 +102,7 @@ namespace SP.Core.ManagerInterfaces
         List<Offer> GetAllOffers();
         Offer SaveOffer(Offer offer);
         Offer UpdateOffer(Offer newOffer, Offer origOffer);
+        bool OfferExistsByName(string name);
 
         #endregion
 

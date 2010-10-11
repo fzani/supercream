@@ -603,6 +603,13 @@ namespace SP.Worker
 
         #region Offer
 
+        public bool OfferExistsByName(string name)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferDao offerDao = factory.GetOfferDao();
+            return offerDao.ExistsByName(name);
+        }
+
         public void DeleteOffer(Offer offer)
         {
             IDaoFactory factory = new LTSDaoFactory();
@@ -2056,6 +2063,6 @@ namespace SP.Worker
             return Convert.ToDecimal(vatCode.PercentageValue);
         }
 
-        #endregion
+        #endregion            
     }
 }
