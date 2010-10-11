@@ -12,6 +12,7 @@ public partial class Ordering_Orders : System.Web.UI.Page
     #endregion
 
     #region Page Load Event
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
