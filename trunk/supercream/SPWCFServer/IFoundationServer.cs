@@ -252,6 +252,9 @@ namespace SPWCFServer
         #region Offer
 
         [OperationContract]
+        bool OfferExistsByName(string name);
+
+        [OperationContract]
         [ReferencePreservingDataContractFormat]
         void DeleteOffer(Offer offer);
 

@@ -14,5 +14,6 @@ namespace SP.Core.DataInterfaces
 {
    public interface IOfferDao : IDao<Offer, int>
    {
+       bool ExistsByName(string name);
    }
 }

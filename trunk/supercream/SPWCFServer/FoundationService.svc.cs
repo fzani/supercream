@@ -1142,6 +1142,23 @@ namespace SPWCFServer
 
         #region Offer
 
+        public bool OfferExistsByName(string name)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                return mgr.OfferExistsByName(name);
+            }
+            catch (SqlException)
+            {
+                throw new FaultException("SPWCF Service error : " + "Cannot delete, it is likely that there are dependent items still linked to it");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public void DeleteOffer(Offer offer)
         {
             try
@@ -1164,7 +1181,7 @@ namespace SPWCFServer
             try
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
-                List<SP.Core.Domain.Offer> offerList = mgr.GetAllOffers();
+                List<SP.Core.Domain.Offer> offerList = mgr.GetAllOffers().OrderBy(q => q.Name).ToList();
                 return ObjectExtension.CloneList<SP.Core.Domain.Offer, SPWCFServer.Offer>(offerList);
             }
             catch (Exception ex)

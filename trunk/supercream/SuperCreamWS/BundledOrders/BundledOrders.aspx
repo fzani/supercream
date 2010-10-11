@@ -2,14 +2,14 @@
     CodeFile="BundledOrders.aspx.cs" StylesheetTheme="SuperCream" Inherits="Ordering_Orders" %>
 
 <%@ Register Src="~/Controls/ErrorView.ascx" TagName="ErrorView" TagPrefix="Alterax" %>
-<%@ Register Src="../Controls/EditBundledOrder.ascx" TagName="MaintainBundledOrder"
-    TagPrefix="uc1" %>
+    
+<%@ Register src="../Controls/EditBundledOrder.ascx" tagname="EditBundledOrder" tagprefix="uc1" %>
     
 <asp:Content ID="Content1" ContentPlaceHolderID="MainPlaceholder" runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <asp:UpdatePanel ID="ErrorUpdatePanel" runat="server" UpdateMode="Conditional">
         <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="MaintainBundledOrder" />
+            <asp:AsyncPostBackTrigger ControlID="EditBundledOrder" />
         </Triggers>
         <ContentTemplate>
             <div class="ErrorOutput">
@@ -50,7 +50,9 @@
         <Triggers>
         </Triggers>
         <ContentTemplate>
-            <uc1:MaintainBundledOrder ID="MaintainBundledOrder" runat="server" />
+           
+            <uc1:EditBundledOrder ID="EditBundledOrder" runat="server" />
+           
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

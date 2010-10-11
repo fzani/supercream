@@ -52,6 +52,15 @@ table td.emphasise
     font-style: italic;
 }
 
+table.formgrid
+{
+}
+
+table.formgrid td
+{
+    padding-left: 2px;
+}
+
 /* Simple Grid Note use of Contextual Selector*/
 table.simplegrid
 {

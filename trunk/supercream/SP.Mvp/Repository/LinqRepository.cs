@@ -77,7 +77,6 @@ namespace SP.Mvp.Repository
 
                 throw;
             }
-
         }
 
         public TEntity Save(TEntity newEntity)

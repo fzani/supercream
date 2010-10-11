@@ -28,5 +28,12 @@ namespace SP.Data.LTS
       {
          return db.Offer.Single<Offer>(q => q.ID == id);
       }
+
+      public bool ExistsByName(string name)
+      {
+          var offer = db.Offer.SingleOrDefault<Offer>(q => q.Name == name);
+          return (offer == null) ? false : true;
+
+      }
    }
 }
