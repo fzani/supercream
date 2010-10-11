@@ -2,14 +2,13 @@
     CodeFile="BundledOrders.aspx.cs" StylesheetTheme="SuperCream" Inherits="Ordering_Orders" %>
 
 <%@ Register Src="~/Controls/ErrorView.ascx" TagName="ErrorView" TagPrefix="Alterax" %>
-    
-<%@ Register src="../Controls/EditBundledOrder.ascx" tagname="EditBundledOrder" tagprefix="uc1" %>
-    
+<%@ Register Src="../Controls/EditBundledOrder.ascx" TagName="EditBundledOrder" TagPrefix="uc1" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainPlaceholder" runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <asp:UpdatePanel ID="ErrorUpdatePanel" runat="server" UpdateMode="Conditional">
         <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="EditBundledOrder" />
+            <asp:AsyncPostBackTrigger ControlID="TabContainer" />
         </Triggers>
         <ContentTemplate>
             <div class="ErrorOutput">
@@ -18,7 +17,7 @@
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:UpdatePanel ID="OrderUpdatePanel" runat="server" UpdateMode="Conditional">
-        <Triggers>            
+        <Triggers>
         </Triggers>
         <ContentTemplate>
             <asp:Panel ID="BundledOrderMenuPanel" Visible="true" runat="server">
@@ -50,9 +49,17 @@
         <Triggers>
         </Triggers>
         <ContentTemplate>
-           
-            <uc1:EditBundledOrder ID="EditBundledOrder" runat="server" />
-           
+            <cc1:TabContainer ID="TabContainer" runat="server" ActiveTabIndex="0">
+                <cc1:TabPanel ID="TabPanel1" runat="server" HeaderText="Create Bundled Order">
+                    <ContentTemplate>
+                        <uc1:EditBundledOrder ID="EditBundledOrder" runat="server" />
+                    </ContentTemplate>
+                </cc1:TabPanel>
+                <cc1:TabPanel ID="TabPanel2" runat="server" HeaderText="Maintain Bundled Orders/Items">
+                </cc1:TabPanel>
+                <cc1:TabPanel ID="TabPanel3" runat="server" HeaderText="TabPanel3">
+                </cc1:TabPanel>
+            </cc1:TabContainer>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

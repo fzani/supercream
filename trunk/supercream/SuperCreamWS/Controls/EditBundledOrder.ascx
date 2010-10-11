@@ -5,7 +5,7 @@
     <fieldset id="Fieldset3">
         <legend>
             <h3>
-                Modify Orders</h3>
+                Modify Offers</h3>
         </legend>
         <asp:FormView ID="FormView1" runat="server" Width="100%" DataKeyNames="Id" AllowPaging="True"
             DataSourceID="OffersObjectDataSource" 
