@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Data.Linq;
+using System.Threading;
 
 namespace SP.Mvp.Repository
 {
@@ -62,32 +63,50 @@ namespace SP.Mvp.Repository
 
         public IEnumerable<TEntity> EndFindAll(IAsyncResult result)
         {
-            var rdr = _beginFindAllCmd.EndExecuteReader(result);
-            var entities = (from w in _dataContext.Translate<TEntity>(rdr)
-                            select w).ToList();
-            rdr.Close();
-            return entities;
+            try
+            {
+                var rdr = _beginFindAllCmd.EndExecuteReader(result);
+                var entities = (from w in _dataContext.Translate<TEntity>(rdr)
+                                select w).ToList();
+                rdr.Close();
+                return entities;
+
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+
         }
 
         public TEntity Save(TEntity newEntity)
         {
-            return Save(newEntity, null);           
-        }
-
-        public TEntity Save(TEntity newEntity, TEntity originalEntity)
-        {
-            if (newEntity.ID > 0)
-            {
-                // Update
-                ITable table = _dataContext.GetTable(newEntity.GetType());
-                table.Attach(newEntity, originalEntity);
-            }
-            else
+            if (newEntity.ID <= 0)
             {
                 ITable table = _dataContext.GetTable(newEntity.GetType());
                 table.InsertOnSubmit(newEntity);
             }
+            else
+            {
+                throw new ApplicationException("Cannot save entity that already exists");
+            }
             return newEntity;
+        }
+
+        public TEntity Save(TEntity newEntity, TEntity originalEntity)
+        {
+            ITable table = _dataContext.GetTable(newEntity.GetType());
+            table.Attach(newEntity, originalEntity);
+            
+            return newEntity;
+        }
+
+        public void Delete(TEntity entity)
+        {
+            ITable tab = _dataContext.GetTable(entity.GetType());
+            tab.Attach(entity);
+            tab.DeleteOnSubmit(entity);
         }
 
         #endregion
