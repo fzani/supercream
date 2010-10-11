@@ -7,33 +7,62 @@ using System.Web.UI.WebControls;
 using SP.Core;
 using SP.Core.Domain;
 
-//[PresenterBinding(typeof(EditBundledOrderPresenter), BindingMode = BindingMode.Default, ViewType = typeof(IView<Offer>))]
 public partial class EditBundledOrder : System.Web.UI.UserControl
 {
+    #region Public Events
+
     public event ErrorMessageEventHandler ErrorMessageEventHandler;
+
+    #endregion
+
+    #region Page Load Event
 
     protected void Page_Load(object sender, EventArgs e)
     {
     }
 
-    public EditBundledOrder()
-    {
+    #endregion
 
-    }
+    #region Form Events
 
     protected void FormView1_ItemInserted(object sender, FormViewInsertedEventArgs e)
     {
         Exception ex = e.Exception;
         if (ex != null)
+        {
+            e.ExceptionHandled = true;
             HandleException(ex, e);
+        }
     }
+
+    protected void FormView1_ItemUpdated(object sender, FormViewUpdatedEventArgs e)
+    {
+        Exception ex = e.Exception;
+        if (ex != null)
+        {
+            e.ExceptionHandled = true;
+            HandleException(ex, e);
+        }
+    }
+    protected void FormView1_ItemDeleted(object sender, FormViewDeletedEventArgs e)
+    {
+        Exception ex = e.Exception;
+        if (ex != null)
+        {
+            e.ExceptionHandled = true;
+            HandleException(ex, e);
+        }
+    }
+
+    #endregion
+
+    #region Error Handling
 
     /**************************************************************************
     * General Exception handlers
     ***************************************************************************/
-    private void HandleException(Exception ex, FormViewInsertedEventArgs e)
+    private void HandleException(Exception ex, EventArgs e)
     {
-        e.ExceptionHandled = true;
         var errorMessageEventArgs = new ErrorMessageEventArgs();
 
         if (ex.InnerException != null)
@@ -50,4 +79,6 @@ public partial class EditBundledOrder : System.Web.UI.UserControl
             this.ErrorMessageEventHandler(this, errorMessageEventArgs);
         }
     }
+
+    #endregion
 }

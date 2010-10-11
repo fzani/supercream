@@ -9,7 +9,8 @@
         </legend>
         <asp:FormView ID="FormView1" runat="server" Width="100%" DataKeyNames="Id" AllowPaging="True"
             DataSourceID="OffersObjectDataSource" 
-            oniteminserted="FormView1_ItemInserted">
+            onitemdeleted="FormView1_ItemDeleted" oniteminserted="FormView1_ItemInserted" 
+            onitemupdated="FormView1_ItemUpdated">
             <EditItemTemplate>
                 <table style="width: 80%" class="formgrid">
                     <tr class="row-a">
