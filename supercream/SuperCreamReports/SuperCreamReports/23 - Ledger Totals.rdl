@@ -117,11 +117,13 @@ as
 	left join ordercreditnote och on
 		oh.ID = och.OrderID
 	left join OrderCreditNoteLine ocnl on
-		ol.ID = ocnl.OrderLineID		
+		ol.ID = ocnl.OrderLineID	
+		and ocnl.OrderCreditNoteID = och.ID
 	where p.VatExempt = 0
 	and (oh.InvoiceDate &gt;= @StartDate and oh.InvoiceDate &lt;= @EndDate)
 	and (oh.OrderStatus = dbo.ConstInvoice() or oh.OrderStatus = dbo.ConstInvoicePrinted())
 	and os.InvoicePaymentComplete = 1
+	and och.IsVoid = 0
 	group by och.DueDate, v.PercentageValue
 ),
 CreditVatableAmount(DueDate, VatableAmount)
@@ -140,10 +142,12 @@ as
 		oh.id = och.OrderID
 	left join OrderCreditNoteLine ocnl on
 		ol.ID = ocnl.OrderLineID		
+		and ocnl.OrderCreditNoteID = och.ID
 	where p.VatExempt = 0
 	and (oh.InvoiceDate &gt;= @StartDate and oh.InvoiceDate &lt;= @EndDate)
 	and (oh.OrderStatus = dbo.ConstInvoice() or oh.OrderStatus = dbo.ConstInvoicePrinted())
 	and os.InvoicePaymentComplete = 1
+	and och.IsVoid = 0
 	group by och.DueDate, v.PercentageValue
 ),
 CreditNonVatableAmount(DueDate, NonVatableAmount)
@@ -162,10 +166,12 @@ as
 		oh.ID = ocn.OrderID
 	left join OrderCreditNoteLine ocnl on
 		ol.ID = ocnl.OrderLineID		
+		and ocnl.OrderCreditNoteID = ocn.ID
 	where p.VatExempt = 1
 	and (oh.InvoiceDate &gt;= @StartDate and oh.InvoiceDate &lt;= @EndDate)
 	and (oh.OrderStatus = dbo.ConstInvoice() or oh.OrderStatus = dbo.ConstInvoicePrinted())
 	and os.InvoicePaymentComplete = 1
+	and ocn.IsVoid = 0
 	group by ocn.DueDate
 ),
 ArbitraryCreditNoteVat(DueDate, VatAmount) as
@@ -180,6 +186,7 @@ ArbitraryCreditNoteVat(DueDate, VatAmount) as
 		where cr.VatExempt = 0
 		and (oh.InvoiceDate &gt;= @StartDate and oh.InvoiceDate &lt;= @EndDate)
 		and os.InvoicePaymentComplete = 1
+		and cr.IsVoid = 0
 		group by cr.DueDate, v.PercentageValue
 ),
 ArbitraryCreditNoteVatableAmount(DueDate, VatableAmount) as
@@ -194,6 +201,7 @@ ArbitraryCreditNoteVatableAmount(DueDate, VatableAmount) as
 		where cr.VatExempt = 0
 		and (oh.InvoiceDate &gt;= @StartDate and oh.InvoiceDate &lt;= @EndDate)
 		and os.InvoicePaymentComplete = 1
+		and cr.IsVoid = 0
 		group by cr.DueDate, v.PercentageValue
 ),
 ArbitraryCreditNoteNonVatableAmount(DueDate, NonVatableAmount) as
@@ -208,6 +216,7 @@ ArbitraryCreditNoteNonVatableAmount(DueDate, NonVatableAmount) as
 		where cr.VatExempt = 1
 		and (oh.InvoiceDate &gt;= @StartDate and oh.InvoiceDate &lt;= @EndDate)
 		and os.InvoicePaymentComplete = 1		
+		and cr.IsVoid = 0
 		group by cr.DueDate, v.PercentageValue, VatExemptible
 )
 select vat.InvoiceDate, isnull(vat.VatAmount, 0) Vat, 

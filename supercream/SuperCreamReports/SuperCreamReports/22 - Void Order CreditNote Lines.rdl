@@ -82,11 +82,11 @@ SELECT
   FROM [OrderCreditNote] ocn
   inner join OrderHeader oh on
 	oh.ID = ocn.OrderID
-  inner join OrderCreditNoteLine ocnl on
+  left join OrderCreditNoteLine ocnl on
 	ocn.ID  = ocnl.OrderCreditNoteID
-  inner join OrderLine ol on
+  left join OrderLine ol on
 	ocnl.OrderLineID = ol.ID
-  inner join Product p on
+  left join Product p on
 	ol.ProductID = p.ID
   inner join VatCode v on
 	oh.VatCodeID = v.ID
@@ -1509,7 +1509,7 @@ SELECT
         <DataSetName>DataSet1</DataSetName>
         <Top>0.36in</Top>
         <Height>0.64in</Height>
-        <Width>16.70833in</Width>
+        <Width>16.70835in</Width>
         <Style />
       </Tablix>
       <Textbox Name="textbox1">
@@ -1588,7 +1588,7 @@ SELECT
       <Prompt>Due Date To</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>16.70833in</Width>
+  <Width>16.70835in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
