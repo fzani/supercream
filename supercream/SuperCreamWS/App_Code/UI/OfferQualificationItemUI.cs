@@ -44,8 +44,8 @@ public class OfferQualificationItemUI
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            OfferQualificationItem OfferQualificationItem = proxy.GetOfferQualificationItem(offerQualificationItem.ID);
-            proxy.DeleteOfferQualificationItem(offerQualificationItem);
+            OfferQualificationItem deleteQualificationItem = proxy.GetOfferQualificationItem(offerQualificationItem.ID);
+            proxy.DeleteOfferQualificationItem(deleteQualificationItem);
         }
     }
 
@@ -53,15 +53,15 @@ public class OfferQualificationItemUI
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            //var originalOfferQualificationItem = proxy.GetOfferQualificationItem(id);
-            //var updatedOfferQualificationItem = new OfferQualificationItem
-            //                {
-            //                    ID = id,
-            //                    Name = name,
-            //                    ValidFrom = validFrom,
-            //                    ValidTo = validTo
-            //                };
-            //proxy.UpdateOfferQualificationItem(updatedOfferQualificationItem, originalOfferQualificationItem);
+            var originalOfferQualificationItem = proxy.GetOfferQualificationItem(offerQualificationItem.ID);
+            var updatedOfferQualificationItem = new OfferQualificationItem
+                            {
+                                ID = offerQualificationItem.ID,
+                                ProductId = offerQualificationItem.ProductId,
+                                OfferId = offerQualificationItem.OfferId,
+                                Qty = offerQualificationItem.Qty
+                            };
+            proxy.UpdateOfferQualificationItem(updatedOfferQualificationItem, originalOfferQualificationItem);
         }
     }
 

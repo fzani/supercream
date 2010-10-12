@@ -113,18 +113,19 @@ namespace SP.Core.ManagerInterfaces
         List<OfferItem> GetAllOfferItems();
         OfferItem SaveOfferItem(OfferItem offeritem);
         OfferItem UpdateOfferItem(OfferItem newOfferItem, OfferItem origOfferItem);
-        
+
         #endregion
 
         #region OfferQualificationItem
-        
+
         void DeleteOfferQualificationItem(OfferQualificationItem offerqualificationitem);
         OfferQualificationItem GetOfferQualificationItem(int id);
         List<OfferQualificationItem> GetAllOfferQualificationItems();
         OfferQualificationItem SaveOfferQualificationItem(OfferQualificationItem offerqualificationitem);
         OfferQualificationItem UpdateOfferQualificationItem(OfferQualificationItem newOfferQualificationItem, OfferQualificationItem origOfferQualificationItem);
-        
-        #endregion 
+        List<OfferQualificationItem> GetOfferQualificationByOfferId(int id);
+
+        #endregion
 
         #region OrderCreditNote
 

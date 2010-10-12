@@ -18,38 +18,40 @@
     <fieldset>
         <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAllOffers"
             TypeName="OfferUI"></asp:ObjectDataSource>
-        <asp:ListView ID="ListView1" runat="server" DataSourceID="ObjectDataSource2" Style="width: 100%"
-            GroupItemCount="3" OnItemDataBound="ListView1_ItemDataBound" InsertItemPosition="FirstItem"
-            OnItemInserting="ListView1_ItemInserting">
+        <asp:ListView ID="ListView1" DataKeyNames="ID" runat="server" DataSourceID="ObjectDataSource2" Style="width: 100%"
+            GroupItemCount="2" OnItemDataBound="ListView1_ItemDataBound" InsertItemPosition="FirstItem"
+            OnItemInserting="ListView1_ItemInserting" OnItemUpdating="ListView1_ItemUpdating"
+            OnItemDeleting="ListView1_ItemDeleting">
             <EmptyItemTemplate>
                 <td runat="server" />
             </EmptyItemTemplate>
             <ItemTemplate>
                 <td runat="server" style="width: 30%">
-                    <asp:Label ID="IDLabel" Visible="false" runat="server" Text='<%# Eval("ID") %>' />
-                    <asp:Label ID="OfferIdLabel" Visible="false" runat="server" Text='<%# Eval("OfferId") %>' />
+                    <asp:Label ID="IDLabel" Visible="false" runat="server" Text='<%# Bind("ID") %>' />
+                    <asp:Label ID="OfferIdLabel" Visible="false" runat="server" Text='<%# Bind("OfferId") %>' />
                     Product:
                     <asp:Label ID="ProductDescriptionLabel" runat="server" />
                     <br />
-                    Qty:
-                    <asp:Label ID="QtyLabel" runat="server" Text='<%# Eval("Qty") %>' />
+                    Bind Qty:
+                    <asp:Label ID="QtyLabel" runat="server" Text='<%# Bind("Qty") %>' />
                     <br />
                     <br />
                     <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" />
-                    <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Delete" />
+                    <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" CommandArgument='<%# Bind("ID") %>'
+                        Text="Delete" />
                     <br />
                     <br />
                 </td>
             </ItemTemplate>
             <AlternatingItemTemplate>
                 <td id="Td1" runat="server" style="width: 30%">
-                    <asp:Label ID="IDLabel" Visible="false" runat="server" Text='<%# Eval("ID") %>' />
-                    <asp:Label ID="OfferIdLabel" Visible="false" runat="server" Text='<%# Eval("OfferId") %>' />
+                    <asp:Label ID="IDLabel" Visible="false" runat="server" Text='<%# Bind("ID") %>' />
+                    <asp:Label ID="OfferIdLabel" Visible="false" runat="server" Text='<%# Bind("OfferId") %>' />
                     Product:
                     <asp:Label ID="ProductDescriptionLabel" runat="server" />
                     <br />
                     Qty:
-                    <asp:Label ID="QtyLabel" runat="server" Text='<%# Eval("Qty") %>' />
+                    <asp:Label ID="QtyLabel" runat="server" Text='<%# Bind("Qty") %>' />
                     <br />
                     <br />
                     <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" />
@@ -139,20 +141,26 @@
             </LayoutTemplate>
             <EditItemTemplate>
                 <td runat="server" style="">
-                    <asp:TextBox ID="IDTextBox" Visible="false" runat="server" Text='<%# Bind("ID") %>' />
+                    <asp:Label ID="IDLabel" Visible="false" runat="server" Text='<%# Bind("ID") %>' />
+                    Product:
                     <br />
-                    OfferId:
-                    <asp:TextBox ID="OfferIdTextBox" runat="server" Text='<%# Bind("OfferId") %>' />
+                    <asp:DropDownList ID="ProductDropDownList" Enabled="false" DataTextField="Description"
+                        DataValueField="ID" DataSourceID="ProductsObjectDataSource" SelectedValue='<%#Bind("ProductId") %>'
+                        runat="server" />
+                    <asp:ObjectDataSource ID="ProductsObjectDataSource" runat="server" SelectMethod="GetAllProducts"
+                        TypeName="ProductUI"></asp:ObjectDataSource>
                     <br />
-                    ProductId:
-                    <asp:TextBox ID="ProductIdTextBox" runat="server" Text='<%# Bind("ProductId") %>' />
+                    Quantity:
+                    <asp:TextBox ID="QtyTextBox" Width="40" MaxLength="4" runat="server" Text='<%# Bind("Qty") %>' />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="UpdateQualificationOffer"
+                        ControlToValidate="QtyTextBox" ErrorMessage="Quantity must be entered" InitialValue=""
+                        Text="*" runat="server" />
                     <br />
-                    Qty:
-                    <asp:TextBox ID="QtyTextBox" runat="server" Text='<%# Bind("Qty") %>' />
                     <br />
-                    <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Update" />
-                    <br />
+                    <asp:Button ID="UpdateButton" runat="server" ValidationGroup="UpdateQualificationOffer"
+                        CommandName="Update" Text="Update" />
                     <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancel" />
+                    <br />
                     <br />
                 </td>
             </EditItemTemplate>
@@ -187,8 +195,8 @@
             </SelectedItemTemplate>
         </asp:ListView>
         <asp:ObjectDataSource ID="ObjectDataSource2" runat="server" DataObjectTypeName="WcfFoundationService.OfferQualificationItem"
-            DeleteMethod="Save" InsertMethod="Save" OldValuesParameterFormatString="original_{0}"
-            SelectMethod="FindAllByOfferId" TypeName="OfferQualificationItemUI" UpdateMethod="UpdateOfferQualificationItem">
+            DeleteMethod="Delete" InsertMethod="Save" SelectMethod="FindAllByOfferId" TypeName="OfferQualificationItemUI"
+            UpdateMethod="UpdateOfferQualificationItem" OldValuesParameterFormatString="original_{0}">
             <SelectParameters>
                 <asp:ControlParameter ControlID="OfferBundleDropDownList" Name="id" PropertyName="SelectedValue"
                     Type="Int32" />

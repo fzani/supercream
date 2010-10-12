@@ -1352,6 +1352,20 @@ namespace SPWCFServer
             }
         }
 
+        public List<OfferQualificationItem> GetOfferQualificationByOfferId(int id)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.OfferQualificationItem> offerQualificationItemList = mgr.GetOfferQualificationByOfferId(id);
+                return ObjectExtension.CloneList<SP.Core.Domain.OfferQualificationItem, SPWCFServer.OfferQualificationItem>(offerQualificationItemList);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
+
         public OfferQualificationItem GetOfferQualificationItem(int id)
         {
             try
