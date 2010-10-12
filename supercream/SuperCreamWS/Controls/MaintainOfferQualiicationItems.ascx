@@ -19,7 +19,8 @@
         <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAllOffers"
             TypeName="OfferUI"></asp:ObjectDataSource>
         <asp:ListView ID="ListView1" runat="server" DataSourceID="ObjectDataSource2" Style="width: 100%"
-            GroupItemCount="3" OnItemDataBound="ListView1_ItemDataBound" InsertItemPosition="FirstItem">
+            GroupItemCount="3" OnItemDataBound="ListView1_ItemDataBound" 
+            InsertItemPosition="FirstItem" oniteminserting="ListView1_ItemInserting">
             <EmptyItemTemplate>
                 <td runat="server" />
             </EmptyItemTemplate>
@@ -70,10 +71,10 @@
                 <td runat="server" style="">
                     <table class="BundledOrder">
                         <tr>
-                            <td style="width:20%">
+                            <td style="width: 20%">
                                 Select Product
                             </td>
-                               <td style="width:80%">
+                            <td style="width: 80%">
                                 <asp:DropDownList ID="ProductDropDownList" DataTextField="Description" DataValueField="ID"
                                     DataSourceID="ProductsObjectDataSource" runat="server" />
                                 <asp:ObjectDataSource ID="ProductsObjectDataSource" runat="server" SelectMethod="GetAllProducts"
@@ -86,13 +87,17 @@
                             </td>
                             <td>
                                 <asp:TextBox ID="QtyTextBox" Width="50" MaxLength="4" runat="server" Text='<%# Bind("Qty") %>' />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="InsertQualificationOffer"
+                                    ControlToValidate="QtyTextBox" ErrorMessage="Quantity must be entered" InitialValue=""
+                                    Text="*" runat="server" />
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
                                 <br />
                                 <br />
-                                <asp:Button ID="InsertButton" Width="48%" runat="server" CommandName="Insert" Text="Insert" />
+                                <asp:Button ID="InsertButton" Width="48%" runat="server" CommandName="Insert" ValidationGroup="InsertQualificationOffer"
+                                    Text="Insert" />
                                 <asp:Button ID="CancelButton" Width="48%" runat="server" CommandName="Cancel" Text="Clear" />
                                 <br />
                                 <br />
