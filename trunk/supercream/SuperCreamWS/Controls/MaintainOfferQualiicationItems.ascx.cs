@@ -50,6 +50,17 @@ public partial class Controls_MaintainOfferQualiicationItems : System.Web.UI.Use
 
     }
 
+    protected void ListView1_ItemInserting(object sender, ListViewInsertEventArgs e)
+    {
+        DropDownList productDropDownList = e.Item.FindControl("ProductDropDownList") as DropDownList;
+        if (productDropDownList != null)
+        {
+            e.Values["ProductId"] = (Convert.ToInt32(productDropDownList.SelectedValue));
+        }
+        
+        e.Values["OfferId"] = (Convert.ToInt32(OfferBundleDropDownList.SelectedValue));
+
+    }
+
     #endregion
-   
 }

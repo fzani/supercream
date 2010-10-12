@@ -26,16 +26,7 @@ public class OfferQualificationItemUI
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            //if (proxy.OfferQualificationItemExistsByName(name))
-            //    throw new ApplicationException("OfferQualificationItem " + name + " is already used");
-
-            //var OfferQualificationItem = new OfferQualificationItem
-            //                {
-            //                    ID = -1,
-            //                    Name = name,
-            //                    ValidFrom = validFrom,
-            //                    ValidTo = validTo
-            //                };
+            offerQualificationItem.ID = -1;
             proxy.SaveOfferQualificationItem(offerQualificationItem);
         }
     }
