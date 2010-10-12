@@ -12,6 +12,7 @@ public partial class EditBundledOrder : System.Web.UI.UserControl
     #region Public Events
 
     public event ErrorMessageEventHandler ErrorMessageEventHandler;
+    public event DataBindEventHandler DataBindEventHandler;
 
     #endregion
 
@@ -33,6 +34,11 @@ public partial class EditBundledOrder : System.Web.UI.UserControl
             e.ExceptionHandled = true;
             HandleException(ex, e);
         }
+
+        if (this.DataBindEventHandler != null)
+        {
+            DataBindEventHandler(this, new DataBindEventArgs());
+        }
     }
 
     protected void FormView1_ItemUpdated(object sender, FormViewUpdatedEventArgs e)
@@ -43,6 +49,11 @@ public partial class EditBundledOrder : System.Web.UI.UserControl
             e.ExceptionHandled = true;
             HandleException(ex, e);
         }
+
+        if (this.DataBindEventHandler != null)
+        {
+            DataBindEventHandler(this, new DataBindEventArgs());
+        }
     }
     protected void FormView1_ItemDeleted(object sender, FormViewDeletedEventArgs e)
     {
@@ -51,6 +62,11 @@ public partial class EditBundledOrder : System.Web.UI.UserControl
         {
             e.ExceptionHandled = true;
             HandleException(ex, e);
+        }
+
+        if (this.DataBindEventHandler != null)
+        {
+            DataBindEventHandler(this, new DataBindEventArgs());
         }
     }
 

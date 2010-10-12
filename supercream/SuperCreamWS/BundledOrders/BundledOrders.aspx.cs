@@ -24,9 +24,17 @@ public partial class Ordering_Orders : System.Web.UI.Page
         }
         else
         {
-            ErrorViewControl.Visible = false;                    
+            ErrorViewControl.Visible = false;
         }
         EditBundledOrder.ErrorMessageEventHandler += new ErrorMessageEventHandler(EditBundledOrder_ErrorMessageEventHandler);
+        EditBundledOrder.DataBindEventHandler += new DataBindEventHandler(EditBundledOrder_DataBindEventHandler);
+    }
+
+    void EditBundledOrder_DataBindEventHandler(object sender, DataBindEventArgs e)
+    {
+        DataBind();
+        //EditBundledOrder.DataBind();
+        //MaintainOfferQualiicationItems.DataBind();
     }
 
     void EditBundledOrder_ErrorMessageEventHandler(object sender, ErrorMessageEventArgs e)

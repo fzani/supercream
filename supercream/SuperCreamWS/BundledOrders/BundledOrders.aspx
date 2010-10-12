@@ -4,6 +4,8 @@
 <%@ Register Src="~/Controls/ErrorView.ascx" TagName="ErrorView" TagPrefix="Alterax" %>
 <%@ Register Src="../Controls/EditBundledOrder.ascx" TagName="EditBundledOrder" TagPrefix="uc1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<%@ Register Src="../Controls/MaintainOfferQualiicationItems.ascx" TagName="MaintainOfferQualiicationItems"
+    TagPrefix="uc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainPlaceholder" runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <asp:UpdatePanel ID="ErrorUpdatePanel" runat="server" UpdateMode="Conditional">
@@ -55,7 +57,10 @@
                         <uc1:EditBundledOrder ID="EditBundledOrder" runat="server" />
                     </ContentTemplate>
                 </cc1:TabPanel>
-                <cc1:TabPanel ID="TabPanel2" runat="server" HeaderText="Maintain Bundled Orders/Items">
+                <cc1:TabPanel ID="TabPanel2" runat="server" HeaderText="Maintain Offer Qualification Items">
+                    <ContentTemplate>
+                        <uc2:MaintainOfferQualiicationItems ID="MaintainOfferQualiicationItems" runat="server" />
+                    </ContentTemplate>
                 </cc1:TabPanel>
                 <cc1:TabPanel ID="TabPanel3" runat="server" HeaderText="TabPanel3">
                 </cc1:TabPanel>
