@@ -10,8 +10,8 @@
     </fieldset>
     <fieldset>
         <div style="text-align: right">
-            <asp:DropDownList ID="OfferBundleDropDownList" runat="server" DataSourceID="ObjectDataSource1"
-                DataTextField="Name" DataValueField="ID" Width="40%">
+            <asp:DropDownList ID="OfferBundleDropDownList" runat="server" AutoPostBack="true"
+                DataSourceID="ObjectDataSource1" DataTextField="Name" DataValueField="ID" Width="40%">
             </asp:DropDownList>
         </div>
     </fieldset>
@@ -19,8 +19,8 @@
         <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAllOffers"
             TypeName="OfferUI"></asp:ObjectDataSource>
         <asp:ListView ID="ListView1" runat="server" DataSourceID="ObjectDataSource2" Style="width: 100%"
-            GroupItemCount="3" OnItemDataBound="ListView1_ItemDataBound" 
-            InsertItemPosition="FirstItem" oniteminserting="ListView1_ItemInserting">
+            GroupItemCount="3" OnItemDataBound="ListView1_ItemDataBound" InsertItemPosition="FirstItem"
+            OnItemInserting="ListView1_ItemInserting">
             <EmptyItemTemplate>
                 <td runat="server" />
             </EmptyItemTemplate>
@@ -71,6 +71,12 @@
                 <td runat="server" style="">
                     <table class="BundledOrder">
                         <tr>
+                            <td colspan="2">
+                                <h3>
+                                    Insert</h3>
+                            </td>
+                        </tr>
+                        <tr>
                             <td style="width: 20%">
                                 Select Product
                             </td>
@@ -97,7 +103,7 @@
                                 <br />
                                 <br />
                                 <asp:Button ID="InsertButton" Width="48%" runat="server" CommandName="Insert" ValidationGroup="InsertQualificationOffer"
-                                    Text="Insert" />
+                                    Text="Save" />
                                 <asp:Button ID="CancelButton" Width="48%" runat="server" CommandName="Cancel" Text="Clear" />
                                 <br />
                                 <br />
@@ -182,7 +188,11 @@
         </asp:ListView>
         <asp:ObjectDataSource ID="ObjectDataSource2" runat="server" DataObjectTypeName="WcfFoundationService.OfferQualificationItem"
             DeleteMethod="Save" InsertMethod="Save" OldValuesParameterFormatString="original_{0}"
-            SelectMethod="FindAll" TypeName="OfferQualificationItemUI" UpdateMethod="UpdateOfferQualificationItem">
+            SelectMethod="FindAllByOfferId" TypeName="OfferQualificationItemUI" UpdateMethod="UpdateOfferQualificationItem">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="OfferBundleDropDownList" Name="id" PropertyName="SelectedValue"
+                    Type="Int32" />
+            </SelectParameters>
         </asp:ObjectDataSource>
     </fieldset>
 </div>
