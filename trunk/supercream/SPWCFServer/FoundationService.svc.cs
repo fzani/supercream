@@ -2652,7 +2652,7 @@ namespace SPWCFServer
             {
                 IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
 
-                List<SP.Core.Domain.Product> productList = mgr.GetAllProducts();
+                List<SP.Core.Domain.Product> productList = mgr.GetAllProducts().OrderBy(q => q.Description).ToList();
                 return ObjectExtension.CloneList<SP.Core.Domain.Product, SPWCFServer.Product>(productList);
             }
             catch (Exception ex)
