@@ -6,6 +6,8 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Src="../Controls/MaintainOfferQualiicationItems.ascx" TagName="MaintainOfferQualiicationItems"
     TagPrefix="uc2" %>
+<%@ Register Src="../Controls/MaintainOfferItems.ascx" TagName="MaintainOfferItems"
+    TagPrefix="uc3" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainPlaceholder" runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <asp:UpdatePanel ID="ErrorUpdatePanel" runat="server" UpdateMode="Conditional">
@@ -51,18 +53,49 @@
         <Triggers>
         </Triggers>
         <ContentTemplate>
-            <cc1:TabContainer ID="TabContainer" runat="server" ActiveTabIndex="0">
-                <cc1:TabPanel ID="TabPanel1" runat="server" HeaderText="Create Bundled Order">
+            <cc1:TabContainer ID="TabContainer" CssClass="CustomTabStyle" runat="server" ActiveTabIndex="0">
+                <cc1:TabPanel ID="TabPanel1" runat="server">
+                    <HeaderTemplate>
+                        <table style="background-color: #93BC0C; color: White; font-size: medium; padding: 10px;">
+                            <tr>
+                                <td style="padding: 10px;">
+                                    <b>Create Bundled Offer</b>
+                                </td>
+                            </tr>
+                        </table>
+                    </HeaderTemplate>
                     <ContentTemplate>
                         <uc1:EditBundledOrder ID="EditBundledOrder" runat="server" />
                     </ContentTemplate>
                 </cc1:TabPanel>
-                <cc1:TabPanel ID="TabPanel2" runat="server" HeaderText="Maintain Offer Qualification Items">
+                <cc1:TabPanel ID="TabPanel2" runat="server">
+                    <HeaderTemplate>
+                        <table style="background-color: #93BC0C; color: White; font-size: medium;">
+                            <tr>
+                                <td style="padding: 10px;">
+                                    <b>Maintain Offer Qualification Items</b>
+                                </td>
+                            </tr>
+                        </table>
+                    </HeaderTemplate>
                     <ContentTemplate>
                         <uc2:MaintainOfferQualiicationItems ID="MaintainOfferQualiicationItems" runat="server" />
                     </ContentTemplate>
                 </cc1:TabPanel>
-                <cc1:TabPanel ID="TabPanel3" runat="server" HeaderText="TabPanel3">
+                <cc1:TabPanel ID="TabPanel3" runat="server">
+                    <HeaderTemplate>
+                        <table style="background-color: #93BC0C; color: White; font-size: medium; padding: 10px;">
+                            <tr>
+                                <td style="padding: 10px;">
+                                    <b>Maintain Offer Items</b>
+                                </td>
+                            </tr>
+                        </table>
+                    </HeaderTemplate>
+                    
+                    <ContentTemplate>
+                        <uc3:MaintainOfferItems ID="MaintainOfferItems1" runat="server" />
+                    </ContentTemplate>
                 </cc1:TabPanel>
             </cc1:TabContainer>
         </ContentTemplate>
