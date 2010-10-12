@@ -24,12 +24,11 @@ table th
 }
 table tr
 {
-   height: 23px;
+    height: 23px;
 }
 table td
-{   
-    /* padding-left: 11px;
-    padding-right: 11px; */
+{
+    /* padding-left: 11px;     padding-right: 11px; */
     vertical-align: middle;
 }
 table td.first, th.first
@@ -212,4 +211,17 @@ table.ContentHeader
     width: 100%;
     margin: 0px;
     padding: 0px;
+}
+
+table.BundledOrder
+{
+    width: 95%;
+    margin: 5px;
+    padding: 5px;
+    background-color: #eaeaea;
+}
+
+table.BundledOrder td
+{    
+    padding: 5px; 
 }

@@ -19,7 +19,7 @@
         <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAllOffers"
             TypeName="OfferUI"></asp:ObjectDataSource>
         <asp:ListView ID="ListView1" runat="server" DataSourceID="ObjectDataSource2" Style="width: 100%"
-            GroupItemCount="3" OnItemDataBound="ListView1_ItemDataBound">
+            GroupItemCount="3" OnItemDataBound="ListView1_ItemDataBound" InsertItemPosition="FirstItem">
             <EmptyItemTemplate>
                 <td runat="server" />
             </EmptyItemTemplate>
@@ -68,25 +68,37 @@
             </EmptyDataTemplate>
             <InsertItemTemplate>
                 <td runat="server" style="">
-                    ExtensionData:
-                    <asp:TextBox ID="ExtensionDataTextBox" runat="server" Text='<%# Bind("ExtensionData") %>' />
-                    <br />
-                    ID:
-                    <asp:TextBox ID="IDTextBox" runat="server" Text='<%# Bind("ID") %>' />
-                    <br />
-                    OfferId:
-                    <asp:TextBox ID="OfferIdTextBox" runat="server" Text='<%# Bind("OfferId") %>' />
-                    <br />
-                    ProductId:
-                    <asp:TextBox ID="ProductIdTextBox" runat="server" Text='<%# Bind("ProductId") %>' />
-                    <br />
-                    Qty:
-                    <asp:TextBox ID="QtyTextBox" runat="server" Text='<%# Bind("Qty") %>' />
-                    <br />
-                    <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insert" />
-                    <br />
-                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Clear" />
-                    <br />
+                    <table class="BundledOrder">
+                        <tr>
+                            <td style="width:20%">
+                                Select Product
+                            </td>
+                               <td style="width:80%">
+                                <asp:DropDownList ID="ProductDropDownList" DataTextField="Description" DataValueField="ID"
+                                    DataSourceID="ProductsObjectDataSource" runat="server" />
+                                <asp:ObjectDataSource ID="ProductsObjectDataSource" runat="server" SelectMethod="GetAllProducts"
+                                    TypeName="ProductUI"></asp:ObjectDataSource>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Quantity
+                            </td>
+                            <td>
+                                <asp:TextBox ID="QtyTextBox" Width="50" MaxLength="4" runat="server" Text='<%# Bind("Qty") %>' />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <br />
+                                <br />
+                                <asp:Button ID="InsertButton" Width="48%" runat="server" CommandName="Insert" Text="Insert" />
+                                <asp:Button ID="CancelButton" Width="48%" runat="server" CommandName="Cancel" Text="Clear" />
+                                <br />
+                                <br />
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </InsertItemTemplate>
             <LayoutTemplate>
