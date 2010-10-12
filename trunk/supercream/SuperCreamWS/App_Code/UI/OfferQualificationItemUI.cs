@@ -22,6 +22,15 @@ public class OfferQualificationItemUI
         }
     }
 
+    [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
+    public List<OfferQualificationItem> FindAllByOfferId(int id)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            return proxy.GetOfferQualificationByOfferId(id);
+        }
+    }
+
     public void Save(OfferQualificationItem offerQualificationItem)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
