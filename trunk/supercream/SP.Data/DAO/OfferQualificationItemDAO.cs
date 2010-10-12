@@ -28,5 +28,10 @@ namespace SP.Data.LTS
       {
          return db.OfferQualificationItem.Single<OfferQualificationItem>(q => q.ID == id);
       }
+
+      public List<OfferQualificationItem> GetByOfferId(int id)
+      {
+          return db.OfferQualificationItem.Where(q => q.OfferId == id).ToList();
+      }
    }
 }

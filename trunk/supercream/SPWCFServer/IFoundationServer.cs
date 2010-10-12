@@ -303,6 +303,9 @@ namespace SPWCFServer
         #region OfferQualificationItem
 
         [OperationContract]
+        List<OfferQualificationItem> GetOfferQualificationByOfferId(int id);
+
+        [OperationContract]
         [ReferencePreservingDataContractFormat]
         void DeleteOfferQualificationItem(OfferQualificationItem offerQualificationItem);
 

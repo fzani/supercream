@@ -690,6 +690,13 @@ namespace SP.Worker
 
         #region OfferQualificationItem
 
+        public List<OfferQualificationItem> GetOfferQualificationByOfferId(int id)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferQualificationItemDao offerQualificationItemDao = factory.GetOfferQualificationItemDao();
+            return offerQualificationItemDao.GetByOfferId(id);
+        }
+
         public void DeleteOfferQualificationItem(OfferQualificationItem offerqualificationitem)
         {
             IDaoFactory factory = new LTSDaoFactory();
@@ -2063,6 +2070,6 @@ namespace SP.Worker
             return Convert.ToDecimal(vatCode.PercentageValue);
         }
 
-        #endregion            
+        #endregion                       
     }
 }

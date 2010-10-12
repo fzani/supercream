@@ -47,7 +47,6 @@ public partial class Controls_MaintainOfferQualiicationItems : System.Web.UI.Use
             //    }
             //}
         }
-
     }
 
     protected void ListView1_ItemInserting(object sender, ListViewInsertEventArgs e)
@@ -57,9 +56,19 @@ public partial class Controls_MaintainOfferQualiicationItems : System.Web.UI.Use
         {
             e.Values["ProductId"] = (Convert.ToInt32(productDropDownList.SelectedValue));
         }
-        
+
         e.Values["OfferId"] = (Convert.ToInt32(OfferBundleDropDownList.SelectedValue));
 
+    }
+
+    protected void ListView1_ItemUpdating(object sender, ListViewUpdateEventArgs e)
+    {
+        e.NewValues["OfferId"] = (Convert.ToInt32(OfferBundleDropDownList.SelectedValue));
+    }
+
+    protected void ListView1_ItemDeleting(object sender, ListViewDeleteEventArgs e)
+    {                
+      // e.Values["ID"] = (Convert.ToInt32(OfferBundleDropDownList.SelectedValue));
     }
 
     #endregion

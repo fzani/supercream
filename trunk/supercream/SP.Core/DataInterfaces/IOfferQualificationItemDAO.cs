@@ -14,5 +14,6 @@ namespace SP.Core.DataInterfaces
 {
    public interface IOfferQualificationItemDao : IDao<OfferQualificationItem, int>
    {
+       List<OfferQualificationItem> GetByOfferId(int id);
    }
 }
