@@ -213,6 +213,43 @@ table.ContentHeader
     padding: 0px;
 }
 
+table#BundledItem
+{
+    width: 95%;
+    margin: 5px;
+    padding: 5px;
+}
+
+table#BundledItem td
+{
+    padding: 5px;
+}
+
+table#AlternateBundledItem
+{
+    width: 95%;
+    margin: 5px;
+    padding: 5px;
+    background-color: Yellow;
+}
+
+table#AlternateBundledItem td
+{
+    padding: 5px;
+}
+
+table#EditingBundledItem
+{
+    width: 95%;
+    margin: 5px;
+    padding: 5px;
+}
+
+table#EditingBundledItem td
+{
+    padding: 5px;
+}
+
 table.BundledOrder
 {
     width: 95%;
@@ -222,6 +259,6 @@ table.BundledOrder
 }
 
 table.BundledOrder td
-{    
-    padding: 5px; 
+{
+    padding: 5px;
 }

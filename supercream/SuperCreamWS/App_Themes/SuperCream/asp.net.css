@@ -115,3 +115,13 @@
     padding: 5px;
     margin: 5px;
 }
+
+
+.CustomTabStyle .ajax__tab_active
+{
+    font-family: verdana,tahoma,helvetica;
+    font-size: 11px; /* background: url(images/tab-line.gif) repeat-x bottom; */
+    background-color: black;
+    height: 100px;
+    color: White; /* padding: 5px;     margin: 5px; */
+}
