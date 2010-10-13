@@ -4,7 +4,7 @@
     <fieldset id="Fieldset3">
         <legend><span>
             <h3>
-                Modify Offer Qualification Items
+                Maintain Offer Qualification Items
             </h3>
         </span></legend>
     </fieldset>
