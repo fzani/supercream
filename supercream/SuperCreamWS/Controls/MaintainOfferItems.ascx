@@ -226,7 +226,10 @@
                                 NoOfUnits
                             </td>
                             <td>
-                                <asp:TextBox ID="NoOfUnitsTextBox" runat="server" Text='<%# Bind("NoOfUnits") %>' />
+                                <asp:TextBox ID="NoOfUnitsTextBox" runat="server" Width="40" MaxLength="4" Text='<%# Bind("NoOfUnits") %>' />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="EditQualificationOffer"
+                                    ControlToValidate="NoOfUnitsTextBox" ErrorMessage="Quantity must be entered"
+                                    InitialValue="" Text="*" runat="server" />
                             </td>
                         </tr>
                         <tr>
@@ -245,7 +248,8 @@
                             </td>
                         </tr>
                     </table>
-                    <asp:Button ID="UpdateButton" Width="48%" runat="server" CommandName="Update" Text="Update" />
+                    <asp:Button ID="UpdateButton" Width="48%" ValidationGroup="EditQualificationOffer"
+                        runat="server" CommandName="Update" Text="Update" />
                     <asp:Button ID="CancelButton" Width="48%" runat="server" CommandName="Cancel" Text="Cancel" />
                 </td>
             </EditItemTemplate>
