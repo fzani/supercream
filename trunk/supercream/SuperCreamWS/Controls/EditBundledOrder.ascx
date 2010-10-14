@@ -5,12 +5,11 @@
     <fieldset id="Fieldset3">
         <legend>
             <h3>
-                Modify Offers</h3>
+                Maintain Offers</h3>
         </legend>
-        <asp:FormView ID="FormView1" runat="server" Width="100%" DataKeyNames="Id" AllowPaging="True"
-            DataSourceID="OffersObjectDataSource" 
-            onitemdeleted="FormView1_ItemDeleted" oniteminserted="FormView1_ItemInserted" 
-            onitemupdated="FormView1_ItemUpdated">
+        <asp:FormView ID="FormView1" style="padding:5px;" runat="server" Width="100%" DataKeyNames="Id" AllowPaging="True"
+            PagerSettings-Mode="NumericFirstLast" DataSourceID="OffersObjectDataSource" OnItemDeleted="FormView1_ItemDeleted"
+            OnItemInserted="FormView1_ItemInserted" OnItemUpdated="FormView1_ItemUpdated">
             <EditItemTemplate>
                 <table style="width: 80%" class="formgrid">
                     <tr class="row-a">
