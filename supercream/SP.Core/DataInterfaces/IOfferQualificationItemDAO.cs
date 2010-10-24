@@ -12,8 +12,9 @@ using SP.Core.Domain;
 
 namespace SP.Core.DataInterfaces
 {
-   public interface IOfferQualificationItemDao : IDao<OfferQualificationItem, int>
-   {
-       List<OfferQualificationItem> GetByOfferId(int id);
-   }
+    public interface IOfferQualificationItemDao : IDao<OfferQualificationItem, int>
+    {
+        List<OfferQualificationItem> GetByOfferId(int id);
+        bool Exists(int offerId, int productId);
+    }
 }

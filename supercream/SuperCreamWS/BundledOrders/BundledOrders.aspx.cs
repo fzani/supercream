@@ -28,6 +28,12 @@ public partial class Ordering_Orders : System.Web.UI.Page
         }
         EditBundledOrder.ErrorMessageEventHandler += new ErrorMessageEventHandler(EditBundledOrder_ErrorMessageEventHandler);
         EditBundledOrder.DataBindEventHandler += new DataBindEventHandler(EditBundledOrder_DataBindEventHandler);
+
+        MaintainOfferQualiicationItems.ErrorMessageEventHandler += new ErrorMessageEventHandler(EditBundledOrder_ErrorMessageEventHandler);
+        MaintainOfferQualiicationItems.DataBindEventHandler += new DataBindEventHandler(EditBundledOrder_DataBindEventHandler);
+
+        MaintainOfferItems.ErrorMessageEventHandler += new ErrorMessageEventHandler(EditBundledOrder_ErrorMessageEventHandler);
+        MaintainOfferItems.DataBindEventHandler += new DataBindEventHandler(EditBundledOrder_DataBindEventHandler);
     }
 
     void EditBundledOrder_DataBindEventHandler(object sender, DataBindEventArgs e)

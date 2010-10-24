@@ -27,17 +27,23 @@ public class OfferItemUI
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            return null;
-           // return proxy.GetOfferQualificationByOfferId(id);
+            return proxy.GetOfferItemByOfferId(id);
         }
     }
 
-    public void Save(OfferItem OfferItem)
+    public void Save(OfferItem offerItem)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            OfferItem.ID = -1;
-            proxy.SaveOfferItem(OfferItem);
+            offerItem.ID = -1;
+            var product = new ProductUI().GetProductByID(offerItem.ProductId);
+
+            offerItem.UnitPrice = product.UnitPrice;
+            offerItem.VatExempt = product.VatExempt;
+            var standardVatRate = new StandardVatCodeUI().GetStandardVatCode();
+            offerItem.VatCodeId = standardVatRate.VatCodeID;
+                
+            proxy.SaveOfferItem(offerItem);
         }
     }
 
@@ -50,17 +56,21 @@ public class OfferItemUI
         }
     }
 
-    public void UpdateOfferItem(OfferItem OfferItem)
+    public void UpdateOfferItem(OfferItem offerItem)
     {
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
-            var originalOfferItem = proxy.GetOfferItem(OfferItem.ID);
+            var originalOfferItem = proxy.GetOfferItem(offerItem.ID);
+
             var updatedOfferItem = new OfferItem
                             {
-                                ID = OfferItem.ID,
-                                ProductId = OfferItem.ProductId,
-                                OfferId = OfferItem.OfferId,
-                                
+                                ID = offerItem.ID,
+                                ProductId = originalOfferItem.ProductId,
+                                OfferId = originalOfferItem.OfferId,
+                                VatCodeId = originalOfferItem.VatCodeId,
+                                VatExempt = originalOfferItem.VatExempt,
+                                UnitPrice = originalOfferItem.UnitPrice,
+                                NoOfUnits = offerItem.NoOfUnits
                             };
             proxy.UpdateOfferItem(updatedOfferItem, originalOfferItem);
         }

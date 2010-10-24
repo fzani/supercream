@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="geka0ytcAbjoip6wvhU13guP614=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="bd97kA40HKb5ey1IgLvBtyq49Ls=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IFoundationService">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IFoundationService" contract="WcfFoundationService.IFoundationService" bindingType="basicHttpBinding" address="http://localhost:56391/FoundationService.svc" bindingConfiguration="BasicHttpBinding_IFoundationService">
+    <endpoint name="BasicHttpBinding_IFoundationService" contract="WcfFoundationService.IFoundationService" bindingType="basicHttpBinding" address="http://localhost:2893/FoundationService.svc" bindingConfiguration="BasicHttpBinding_IFoundationService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:56391/FoundationService.svc</serializedValue>
+          <serializedValue>http://localhost:2893/FoundationService.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

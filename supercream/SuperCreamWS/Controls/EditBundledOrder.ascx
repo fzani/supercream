@@ -7,9 +7,30 @@
             <h3>
                 Maintain Offers</h3>
         </legend>
-        <asp:FormView ID="FormView1" style="padding:5px;" runat="server" Width="100%" DataKeyNames="Id" AllowPaging="True"
-            PagerSettings-Mode="NumericFirstLast" DataSourceID="OffersObjectDataSource" OnItemDeleted="FormView1_ItemDeleted"
-            OnItemInserted="FormView1_ItemInserted" OnItemUpdated="FormView1_ItemUpdated">
+        <div style="text-align: left">
+            <table class="search" style="width: 80%">
+                <tr>
+                    <td style="width: 20%">
+                        Search
+                    </td>
+                    <td style="width: 0%">
+                        <asp:TextBox ID="SearchTextBox" Width="200" runat="server">
+                        </asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <asp:Button ID="SearchButton" Text="Search" runat="server" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <asp:FormView ID="FormView1" Style="padding: 5px;" runat="server" Width="100%" DataKeyNames="Id"
+            AllowPaging="True" PagerSettings-Mode="NumericFirstLast" DataSourceID="OffersObjectDataSource"
+            OnItemDeleted="FormView1_ItemDeleted" OnItemInserted="FormView1_ItemInserted"
+            OnItemUpdated="FormView1_ItemUpdated">
             <EditItemTemplate>
                 <table style="width: 80%" class="formgrid">
                     <tr class="row-a">
@@ -159,7 +180,12 @@
             </EmptyDataTemplate>
         </asp:FormView>
         <asp:ObjectDataSource ID="OffersObjectDataSource" runat="server" SelectMethod="GetAllOffers"
-            TypeName="OfferUI" InsertMethod="SaveOffer" UpdateMethod="UpdateOffer" DeleteMethod="DeleteOffer">
+            TypeName="OfferUI" InsertMethod="SaveOffer" UpdateMethod="UpdateOffer" 
+            DeleteMethod="DeleteOffer">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="SearchTextBox" Name="offer" 
+                    PropertyName="Text" Type="String" />
+            </SelectParameters>
             <InsertParameters>
                 <asp:Parameter Name="name" Type="String" />
                 <asp:Parameter Name="validFrom" Type="DateTime" />

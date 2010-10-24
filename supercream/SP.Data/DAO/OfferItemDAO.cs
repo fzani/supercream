@@ -28,5 +28,15 @@ namespace SP.Data.LTS
         {
             return db.OfferItem.Single<OfferItem>(q => q.ID == id);
         }
+
+        public List<OfferItem> GetByOfferId(int offerId)
+        {
+            return db.OfferItem.Where(q => q.OfferId == offerId).ToList();
+        }
+
+        public bool Exists(int offerId, int productId)
+        {
+            return (db.OfferItem.Where(q => ((q.OfferId == offerId) && (q.ProductId == productId))).SingleOrDefault() == null) ? false : true;
+        }
     }
 }

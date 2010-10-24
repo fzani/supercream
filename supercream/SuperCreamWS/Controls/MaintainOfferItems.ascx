@@ -20,7 +20,9 @@
             TypeName="OfferUI"></asp:ObjectDataSource>
         <asp:ListView ID="ListView1" runat="server" DataKeyNames="ID" Style="width: 100%"
             DataSourceID="OfferItemDataSource" GroupItemCount="2" InsertItemPosition="FirstItem"
-            OnItemDataBound="ListView1_ItemDataBound">
+            OnItemUpdating="ListView1_ItemUpdating" OnItemDataBound="ListView1_ItemDataBound"
+            OnItemInserting="ListView1_ItemInserting" 
+            onitemdeleted="ListView1_ItemDeleted" oniteminserted="ListView1_ItemInserted">
             <EmptyItemTemplate>
                 <td runat="server" />
             </EmptyItemTemplate>
@@ -35,15 +37,8 @@
                             </td>
                             <td style="width: 80%">
                                 <asp:Label ID="IDLabel" Visible="false" runat="server" Text='<%# Eval("ID") %>' />
+                                <asp:Label ID="VatCodeIdLabel" Visible="false" runat="server" Text='<%# Bind("VatCodeId") %>' />
                                 <asp:Label ID="ProductDescriptionLabel" runat="server" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Discount
-                            </td>
-                            <td>
-                                <asp:Label ID="DiscountLabel" runat="server" Text='<%# Eval("Discount") %>' />
                             </td>
                         </tr>
                         <tr>
@@ -65,7 +60,7 @@
                                 UnitPrice
                             </td>
                             <td>
-                                <asp:Label ID="UnitPriceLabel" runat="server" Text='<%# Eval("UnitPrice") %>' />
+                                <asp:Label ID="UnitPriceLabel" runat="server" Text='<%# Eval("UnitPrice","{0:c}") %>' />
                             </td>
                         </tr>
                     </table>
@@ -84,15 +79,8 @@
                             </td>
                             <td style="width: 80%">
                                 <asp:Label ID="IDLabel" Visible="false" runat="server" Text='<%# Eval("ID") %>' />
+                                <asp:Label ID="VatCodeIdLabel" Visible="false" runat="server" Text='<%# Bind("VatCodeId") %>' />
                                 <asp:Label ID="ProductDescriptionLabel" runat="server" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Discount
-                            </td>
-                            <td>
-                                <asp:Label ID="DiscountLabel" runat="server" Text='<%# Eval("Discount") %>' />
                             </td>
                         </tr>
                         <tr>
@@ -114,7 +102,7 @@
                                 UnitPrice
                             </td>
                             <td>
-                                <asp:Label ID="UnitPriceLabel" runat="server" Text='<%# Eval("UnitPrice") %>' />
+                                <asp:Label ID="UnitPriceLabel" runat="server" Text='<%# Eval("UnitPrice","{0:c}") %>' />
                             </td>
                         </tr>
                     </table>
@@ -160,11 +148,6 @@
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="InsertQualificationOffer"
                                     ControlToValidate="NoOfUnitsTextBox" ErrorMessage="Quantity must be entered"
                                     InitialValue="" Text="*" runat="server" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                &nbsp;
                             </td>
                         </tr>
                         <tr>
@@ -242,11 +225,6 @@
                                 &nbsp;
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan="2">
-                                &nbsp;
-                            </td>
-                        </tr>
                     </table>
                     <asp:Button ID="UpdateButton" Width="48%" ValidationGroup="EditQualificationOffer"
                         runat="server" CommandName="Update" Text="Update" />
@@ -261,7 +239,12 @@
             </GroupTemplate>
         </asp:ListView>
         <asp:ObjectDataSource ID="OfferItemDataSource" runat="server" DataObjectTypeName="WcfFoundationService.OfferItem"
-            DeleteMethod="Delete" InsertMethod="Save" SelectMethod="FindAll" TypeName="OfferItemUI"
-            UpdateMethod="UpdateOfferItem"></asp:ObjectDataSource>
+            DeleteMethod="Delete" InsertMethod="Save" SelectMethod="FindAllByOfferId" TypeName="OfferItemUI"
+            UpdateMethod="UpdateOfferItem">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="OfferBundleDropDownList" Name="id" PropertyName="SelectedValue"
+                    Type="Int32" />
+            </SelectParameters>
+        </asp:ObjectDataSource>
     </fieldset>
 </div>

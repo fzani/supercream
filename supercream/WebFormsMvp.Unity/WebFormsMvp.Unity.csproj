@@ -65,12 +65,6 @@
     <Compile Include="UnityPresenterFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WebFormsMvp\WebFormsMvp.csproj">
-      <Project>{E265BF3E-8CCB-4C22-8C15-263735227A3D}</Project>
-      <Name>WebFormsMvp</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

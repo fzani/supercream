@@ -8,6 +8,13 @@ using SP.Core.Domain;
 
 public partial class Controls_MaintainOfferQualiicationItems : System.Web.UI.UserControl
 {
+    #region Public Events
+
+    public event ErrorMessageEventHandler ErrorMessageEventHandler;
+    public event DataBindEventHandler DataBindEventHandler;
+
+    #endregion
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -69,6 +76,62 @@ public partial class Controls_MaintainOfferQualiicationItems : System.Web.UI.Use
     protected void ListView1_ItemDeleting(object sender, ListViewDeleteEventArgs e)
     {
         // e.Values["ID"] = (Convert.ToInt32(OfferBundleDropDownList.SelectedValue));
+    }
+
+    #endregion
+
+    protected void ListView1_ItemInserted(object sender, ListViewInsertedEventArgs e)
+    {
+        Exception ex = e.Exception;
+        if (ex != null)
+        {
+            e.ExceptionHandled = true;
+            HandleException(ex, e);
+        }
+
+        if (this.DataBindEventHandler != null)
+        {
+            DataBindEventHandler(this, new DataBindEventArgs());
+        }
+    }
+
+    protected void ListView1_ItemDeleted(object sender, ListViewDeletedEventArgs e)
+    {
+        Exception ex = e.Exception;
+        if (ex != null)
+        {
+            e.ExceptionHandled = true;
+            HandleException(ex, e);
+        }
+
+        if (this.DataBindEventHandler != null)
+        {
+            DataBindEventHandler(this, new DataBindEventArgs());
+        }
+    }
+
+    #region Error Handling
+
+    /**************************************************************************
+    * General Exception handlers
+    ***************************************************************************/
+    private void HandleException(Exception ex, EventArgs e)
+    {
+        var errorMessageEventArgs = new ErrorMessageEventArgs();
+
+        if (ex.InnerException != null)
+        {
+            errorMessageEventArgs.AddErrorMessages(ex.InnerException.Message);
+        }
+        else
+        {
+            errorMessageEventArgs.AddErrorMessages(ex.Message);
+        }
+
+        if (this.ErrorMessageEventHandler != null)
+        {
+            this.ErrorMessageEventHandler(this, errorMessageEventArgs);
+        }
     }
 
     #endregion

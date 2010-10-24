@@ -650,6 +650,14 @@ namespace SP.Worker
 
         #region OfferItem
 
+        public List<OfferItem> GetOfferItemsByOfferId(int offerId)
+        {
+            IDaoFactory factory = new LTSDaoFactory();
+            IOfferItemDao offerItemDao = factory.GetOfferItemDao();
+
+            return offerItemDao.GetByOfferId(offerId);
+        }
+
         public void DeleteOfferItem(OfferItem offeritem)
         {
             IDaoFactory factory = new LTSDaoFactory();
@@ -676,6 +684,9 @@ namespace SP.Worker
         {
             IDaoFactory factory = new LTSDaoFactory();
             IOfferItemDao offerItemDao = factory.GetOfferItemDao();
+            if (offerItemDao.Exists(offeritem.OfferId, offeritem.ProductId))
+                throw new ApplicationException("Product already exists for offer");
+
             return offerItemDao.Save(offeritem);
         }
 
@@ -723,6 +734,9 @@ namespace SP.Worker
         {
             IDaoFactory factory = new LTSDaoFactory();
             IOfferQualificationItemDao offerQualificationItemDao = factory.GetOfferQualificationItemDao();
+            if (offerQualificationItemDao.Exists(offerqualificationitem.OfferId, offerqualificationitem.ProductId))
+                throw new ApplicationException("Product has already been added to this offer");
+
             return offerQualificationItemDao.Save(offerqualificationitem);
         }
 
@@ -2070,6 +2084,6 @@ namespace SP.Worker
             return Convert.ToDecimal(vatCode.PercentageValue);
         }
 
-        #endregion                       
+        #endregion
     }
 }
