@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Data.Linq;
 
 using WcfFoundationService;
 
@@ -19,6 +21,22 @@ public class OfferUI
         using (var proxy = new WcfFoundationService.FoundationServiceClient())
         {
             return proxy.GetAllOffers();
+        }
+    }
+
+    [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
+    public List<Offer> GetAllOffers(string offer)
+    {
+        using (var proxy = new WcfFoundationService.FoundationServiceClient())
+        {
+            if (string.IsNullOrEmpty(offer))
+            {
+                return proxy.GetAllOffers();
+            }
+            else
+            {
+                return proxy.GetAllOffers().Where(q => q.Name.Contains(offer)).ToList();
+            }
         }
     }
 

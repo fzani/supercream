@@ -1239,6 +1239,19 @@ namespace SPWCFServer
         #endregion
 
         #region OfferItem
+        public List<OfferItem> GetOfferItemByOfferId(int offerId)
+        {
+            try
+            {
+                IFoundationFacilitiesManager mgr = new FoundationFacilitiesManager();
+                List<SP.Core.Domain.OfferItem> offerItemList = mgr.GetOfferItemsByOfferId(offerId);
+                return offerItemList.CloneList<SP.Core.Domain.OfferItem, OfferItem>();
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("SPWCF Service error : " + ex.Message);
+            }
+        }
 
         public void DeleteOfferItem(OfferItem offerItem)
         {
@@ -3568,7 +3581,9 @@ namespace SPWCFServer
                 throw new FaultException("SPWCF Service error : " + ex.Message);
             }
         }
+
         #endregion
+
     }
 }
 

@@ -113,6 +113,7 @@ namespace SP.Core.ManagerInterfaces
         List<OfferItem> GetAllOfferItems();
         OfferItem SaveOfferItem(OfferItem offeritem);
         OfferItem UpdateOfferItem(OfferItem newOfferItem, OfferItem origOfferItem);
+        List<OfferItem> GetOfferItemsByOfferId(int offerId);
 
         #endregion
 

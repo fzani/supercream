@@ -21,7 +21,8 @@
         <asp:ListView ID="ListView1" DataKeyNames="ID" runat="server" DataSourceID="ObjectDataSource2"
             Style="width: 100%" GroupItemCount="2" OnItemDataBound="ListView1_ItemDataBound"
             InsertItemPosition="FirstItem" OnItemInserting="ListView1_ItemInserting" OnItemUpdating="ListView1_ItemUpdating"
-            OnItemDeleting="ListView1_ItemDeleting">
+            OnItemDeleting="ListView1_ItemDeleting" 
+            onitemdeleted="ListView1_ItemDeleted" oniteminserted="ListView1_ItemInserted">
             <EmptyItemTemplate>
                 <td runat="server" />
             </EmptyItemTemplate>
@@ -113,9 +114,9 @@
                                 Quantity
                             </td>
                             <td>
-                                <asp:TextBox ID="QtyTextBox" Width="50" MaxLength="4" runat="server" Text='<%# Bind("Qty") %>' />
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="InsertQualificationOffer"
-                                    ControlToValidate="QtyTextBox" ErrorMessage="Quantity must be entered" InitialValue=""
+                                <asp:TextBox ID="QuantityTextBox" Width="50" MaxLength="4" runat="server" Text='<%# Bind("Qty") %>' />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="SaveQualificationOffer"
+                                    ControlToValidate="QuantityTextBox" ErrorMessage="Quantity must be entered" InitialValue=""
                                     Text="*" runat="server" />
                             </td>
                         </tr>
@@ -123,7 +124,7 @@
                             <td colspan="2">
                                 <br />
                                 <br />
-                                <asp:Button ID="InsertButton" Width="48%" runat="server" CommandName="Insert" ValidationGroup="InsertQualificationOffer"
+                                <asp:Button ID="InsertButton" Width="48%" runat="server" ValidationGroup="SaveQualificationOffer" CommandName="Insert" 
                                     Text="Save" />
                                 <asp:Button ID="CancelButton" Width="48%" runat="server" CommandName="Cancel" Text="Clear" />
                                 <br />
@@ -223,7 +224,7 @@
         </asp:ListView>
         <asp:ObjectDataSource ID="ObjectDataSource2" runat="server" DataObjectTypeName="WcfFoundationService.OfferQualificationItem"
             DeleteMethod="Delete" InsertMethod="Save" SelectMethod="FindAllByOfferId" TypeName="OfferQualificationItemUI"
-            UpdateMethod="UpdateOfferQualificationItem" OldValuesParameterFormatString="original_{0}">
+            UpdateMethod="UpdateOfferQualificationItem">
             <SelectParameters>
                 <asp:ControlParameter ControlID="OfferBundleDropDownList" Name="id" PropertyName="SelectedValue"
                     Type="Int32" />

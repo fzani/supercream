@@ -94,7 +94,7 @@
                     </HeaderTemplate>
                     
                     <ContentTemplate>
-                        <uc3:MaintainOfferItems ID="MaintainOfferItems1" runat="server" />
+                        <uc3:MaintainOfferItems ID="MaintainOfferItems" runat="server" />
                     </ContentTemplate>
                 </cc1:TabPanel>
             </cc1:TabContainer>

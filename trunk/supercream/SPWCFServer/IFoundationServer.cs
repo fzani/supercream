@@ -279,6 +279,9 @@ namespace SPWCFServer
         #region OfferItem
 
         [OperationContract]
+        List<OfferItem> GetOfferItemByOfferId(int offerId);
+
+        [OperationContract]
         [ReferencePreservingDataContractFormat]
         void DeleteOfferItem(OfferItem offerItem);
 
