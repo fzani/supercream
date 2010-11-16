@@ -93,16 +93,20 @@
       <FullPath>21 - Void Special Invoice Credit Note Items.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>23 - Ledger Totals.rdl</Name>
-      <FullPath>23 - Ledger Totals.rdl</FullPath>
+      <Name>22 - Void Order CreditNote Lines.rdl</Name>
+      <FullPath>22 - Void Order CreditNote Lines.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>24 - Ledger Totals.rdl</Name>
+      <FullPath>24 - Ledger Totals.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>SpecialInvoicePrintReport.rdl</Name>
       <FullPath>SpecialInvoicePrintReport.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>22 - Void Order CreditNote Lines.rdl</Name>
-      <FullPath>22 - Void Order CreditNote Lines.rdl</FullPath>
+      <Name>23 - ProductsBoughtByCustomers.rdl</Name>
+      <FullPath>23 - ProductsBoughtByCustomers.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
